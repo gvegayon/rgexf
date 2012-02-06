@@ -85,7 +85,8 @@ gexf <- function(
   edgesAtt=NA,
   nodesAtt=NA,
   nodeDynamic=NA,
-  output = NA
+  output = NA,
+  tFormat='double'
   ) {
   require(XML, quietly = T)
   
@@ -94,8 +95,8 @@ gexf <- function(
   nLinks <- length(edges)
   nLinksAtt <- ifelse(all(is.na(edgesAtt)),NA,NROW(edgesAtt))
   nNodesAtt <- ifelse(all(is.na(nodesAtt)),NA,NROW(nodesAtt))
-  if (all(is.na(nodeDynamic))) mode <- 'static' else mode <- 'dinamic'
-  
+  if (all(is.na(nodeDynamic))) mode <- 'static' else mode <- 'dynamic'
+
   # Starting xml
   xmlFile <- newXMLDoc(addFinalizer=T)
   gexf <- newXMLNode(name='gexf', doc = xmlFile)
@@ -116,6 +117,13 @@ gexf <- function(
   
   # graph
   xmlGraph <- newXMLNode(name='graph', parent=gexf)
+  if (mode == 'dynamic') {
+    strTime <- min(nodeDynamic)
+    endTime <- max(nodeDynamic)
+    xmlAttrs(xmlGraph) <- c(mode=mode, start=strTime, end=endTime, timeformat=tFormat)
+  } else {
+    xmlAttrs(xmlGraph) <- c(mode=mode)
+  }
 
   # nodes att
   if (!is.na(nNodesAtt)) {
@@ -150,5 +158,5 @@ gexf <- function(
 library(compiler)
 gexf <- cmpfun(gexf)
 #printGexf(edgesAtt=NA,nodesAtt=NA,output=salida)
-z<-matrix(c(10.0,13.0,2.0,2.0,12.0,rep(NA,3)), nrow=4, ncol=2)
-gexf(nodeDynamic=z,output=salida)
+#z<-matrix(c(10.0,13.0,2.0,2.0,12.0,rep(NA,3)), nrow=4, ncol=2)
+#gexf(nodeDynamic=z)#,output=salida)
