@@ -1,7 +1,7 @@
 #rm(list = ls())
 
 #load('C:/Users/George/Documents/Investigacion/Red Publicaciones/2011/ejemplo.RData')
-salida <- paste(getwd(),'/printgext.gexf',sep='')
+#salida <- paste(getwd(),'/printgext.gexf',sep='')
 people <- matrix(c(1:4, 'juan', 'pedro', 'mathew', 'carlos'),ncol=2)
 relations <- matrix(c(1,4,1,2,1,3,2,3,3,4,4,2), ncol=2, byrow=T)
 
@@ -86,7 +86,8 @@ gexf <- function(
   nodesAtt=NA,
   nodeDynamic=NA,
   output = NA,
-  tFormat='double'
+  tFormat='double',
+  defaultedgetype = 'undirected'
   ) {
   require(XML, quietly = T)
   
@@ -118,9 +119,12 @@ gexf <- function(
   # graph
   xmlGraph <- newXMLNode(name='graph', parent=gexf)
   if (mode == 'dynamic') {
-    strTime <- min(nodeDynamic)
-    endTime <- max(nodeDynamic)
-    xmlAttrs(xmlGraph) <- c(mode=mode, start=strTime, end=endTime, timeformat=tFormat)
+    strTime <- min(nodeDynamic, na.rm=T)
+    endTime <- max(nodeDynamic, na.rm=T)
+    xmlAttrs(xmlGraph) <- c(mode=mode, start=strTime, end=endTime,
+                            timeformat=tFormat, defaultedgetype=defaultedgetype)
+    
+    
   } else {
     xmlAttrs(xmlGraph) <- c(mode=mode)
   }
@@ -153,10 +157,11 @@ gexf <- function(
     output <- file(description=output,encoding='UTF-8')
     cat(saveXML(xmlFile, encoding='UTF-8'),file=output)
     close.connection(output)
+    cat('GEXF graph written successfuly\n')
   }
 }
-library(compiler)
-gexf <- cmpfun(gexf)
+#library(compiler)
+#gexf <- cmpfun(gexf)
 #printGexf(edgesAtt=NA,nodesAtt=NA,output=salida)
-#z<-matrix(c(10.0,13.0,2.0,2.0,12.0,rep(NA,3)), nrow=4, ncol=2)
-#gexf(nodeDynamic=z)#,output=salida)
+z<-matrix(c(10.0,13.0,2.0,2.0,12.0,rep(NA,3)), nrow=4, ncol=2)
+gexf(nodeDynamic=z)#,output=salida)
