@@ -1,11 +1,4 @@
-#rm(list = ls())
-
-#load('C:/Users/George/Documents/Investigacion/Red Publicaciones/2011/ejemplo.RData')
-#salida <- paste(getwd(),'/printgext.gexf',sep='')
-people <- matrix(c(1:4, 'juan', 'pedro', 'mathew', 'carlos'),ncol=2)
-relations <- matrix(c(1,4,1,2,1,3,2,3,3,4,4,2), ncol=2, byrow=T)
-
-
+require(XML)
 
 defNodesAtt <- function(x, parent, ...) {
 ################################################################################
@@ -80,8 +73,8 @@ gexf <- function(
 ################################################################################  
 # Prints the gexf file
 ################################################################################
-  nodes=people,
-  edges=relations,
+  nodes,
+  edges,
   edgesAtt=NA,
   nodesAtt=NA,
   nodeDynamic=NA,
@@ -160,8 +153,3 @@ gexf <- function(
     cat('GEXF graph written successfuly\n')
   }
 }
-#library(compiler)
-#gexf <- cmpfun(gexf)
-#printGexf(edgesAtt=NA,nodesAtt=NA,output=salida)
-z<-matrix(c(10.0,13.0,2.0,2.0,12.0,rep(NA,3)), nrow=4, ncol=2)
-gexf(nodeDynamic=z)#,output=salida)
