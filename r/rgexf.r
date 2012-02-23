@@ -145,7 +145,9 @@ gexf <- function(
   addEdges(edges, xmlEdges, edgesAtt)
   
   if (is.na(output)) {
-    return(cat(saveXML(xmlFile, encoding='UTF-8')))
+    results <- saveXML(xmlFile, encoding='UTF-8')
+    class(results) <- 'gexf'
+    return(results)
   } else {
     output <- file(description=output,encoding='UTF-8')
     cat(saveXML(xmlFile, encoding='UTF-8'),file=output)
