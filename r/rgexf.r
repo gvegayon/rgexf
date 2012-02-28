@@ -1,5 +1,3 @@
-require(XML)
-
 defNodesAtt <- function(x, parent, ...) {
 ################################################################################
 # Prints the nodes att definition
