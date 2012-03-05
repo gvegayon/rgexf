@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gexf xmlns="http://www.gexf.net/1.2draft" xmlns:viz="http://www.gexf.net/1.1draft/viz" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.2draft http://www.gexf.net/1.2draft/gexf.xsd" version="1.2">
+  <graph mode="static">
+    <nodes>
+      <node id="1" label="juan"/>
+      <node id="2" label="pedro"/>
+      <node id="3" label="matthew"/>
+      <node id="4" label="carlos"/>
+    </nodes>
+    <edges>
+      <edge source="1" target="4"/>
+      <edge source="1" target="2"/>
+      <edge source="1" target="3"/>
+      <edge source="2" target="3"/>
+      <edge source="3" target="4"/>
+      <edge source="4" target="2"/>
+    </edges>
+  </graph>
+</gexf>

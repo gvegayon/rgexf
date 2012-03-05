@@ -1,0 +1,8 @@
+importFrom(XML)
+
+export(addNodesEdges, defAtt)
+export(checkTimes)
+export(gexf)
+
+# Methods
+S3method(print, gexf)
