@@ -170,15 +170,13 @@ gexf <- function(
   # EDGES
   xmlEdges <- newXMLNode(name='edges', parent=xmlGraph)
   addNodesEdges(edges, xmlEdges, 'edge')  
+  results <- saveXML(xmlFile, encoding='UTF-8')
+  class(results) <- 'gexf'
   
   if (is.na(output)) {
-    results <- saveXML(xmlFile, encoding='UTF-8')
-    class(results) <- 'gexf'
     return(results)
   } else {
-    output <- file(description=output,encoding='UTF-8')
-    cat(saveXML(xmlFile, encoding='UTF-8'),file=output)
-    close.connection(output)
+    print(results, file=output)
     cat('GEXF graph written successfuly\n')
   }
 }
