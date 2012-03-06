@@ -1,12 +1,13 @@
 \name{rgexf-package}
 \alias{rgexf-package}
 \alias{rgexf}
+\alias{gephi}
 \docType{package}
 \title{
   An R library to build GEXF graph files
 }
 \description{
-  rgexf packages provides of a collection of functions to generate GEXF files.
+  rgexf packages provides of a collection of functions to generate GEXF graph files supported on GEPHI.
   
   It supports building dynamic graphs and adding attributes to edges and nodes.
   

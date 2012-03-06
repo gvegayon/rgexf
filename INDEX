@@ -1,8 +1,0 @@
-addEdges                Function to add edges to the GEXF object
-addNodes                Function to add nodes to the GEXF object
-checkTimes              Checks for correct time format
-defEdgesAtt             Defines edges att
-defNodesAtt             Add nodes attributes
-gexf                    Exports to GEXF
-print.gexf              Printing method for gexf class
-rgexf-package           An R library tu build GEXF graph files
