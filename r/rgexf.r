@@ -71,9 +71,9 @@ gexf <- function(
   nLinks <- length(edges)
   nEdgesAtt <- length(edgesAtt)
   nNodesAtt <- length(nodesAtt)
-  dynamic <- length(nodeDynamic) > 0 | length(edgeDynamic) > 0
+  dynamic <- c(length(nodeDynamic) > 0 , length(edgeDynamic) > 0)
   
-  if (!dynamic) mode <- 'static' else mode <- 'dynamic'
+  if (!any(dynamic)) mode <- 'static' else mode <- 'dynamic'
 
   # Starting xml
   xmlFile <- newXMLDoc(addFinalizer=T)
@@ -144,8 +144,9 @@ gexf <- function(
   ##############################################################################
   # The basic dataframe definition  for nodes
   
-  if (dynamic) nodes <- cbind(nodes, nodeDynamic, nodesAtt)
-  if (!dynamic) nodes <- cbind(nodes, nodesAtt)
+  if (dynamic[1] & nNodesAtt > 0) {nodes <- cbind(nodes, nodeDynamic, nodesAtt)}
+  if (dynamic[1] & nNodesAtt == 0) {nodes <- cbind(nodes, nodeDynamic)}
+  if (!dynamic[1] & nNodesAtt > 0) {nodes <- cbind(nodes, nodesAtt)}
   
   # Naming the columns
   attNames <- nodesAttDf['id']
@@ -159,8 +160,9 @@ gexf <- function(
 
   ##############################################################################
   # The basic dataframe definition  for edges
-  if (dynamic) edges <- cbind(edges, edgeDynamic, edgesAtt)
-  if (!dynamic) edges <- cbind(edges, edgesAtt)
+  if (dynamic[2] & nEdgesAtt > 0) {edges <- cbind(edges, edgeDynamic, edgesAtt)}
+  if (dynamic[2] & nEdgesAtt == 0) {edges <- cbind(edges, edgeDynamic)}
+  if (!dynamic[2] & nEdgesAtt > 0) {edges <- cbind(edges, edgesAtt)}
   
   # Naming the columns
   attNames <- edgesAttDf['id']
