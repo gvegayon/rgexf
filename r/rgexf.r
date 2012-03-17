@@ -18,6 +18,7 @@ addNodesEdges <- function(x, parent, type='node') {
   # Local function that prints each node
   FUN <- function(x, PAR, type) {
     if (type=='node') {
+      x['id'] <- gsub("^[ \t]*", "", x['id'])
       tempnode0 <-
         newXMLNode(name=type, parent=PAR, attrs=c(x[c('id','label')]))
     }
