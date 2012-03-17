@@ -1,1 +1,6 @@
 ^\.Rproj\.user$
+^[.]git.*$
+^TODO[.]txt$
+^[.]RData$
+^.*[.]Rproj$
+^wiki$
