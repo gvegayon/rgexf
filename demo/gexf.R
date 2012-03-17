@@ -38,7 +38,7 @@ edge.att
 ################################################################################
 # First example: a simple net
 pause()
-gexf(nodes=people, edges=relations, output='mygexf')
+gexf(nodes=people, edges=relations)
 
 ################################################################################
 # Second example: a simple net with nodes attributes
