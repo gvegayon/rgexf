@@ -68,10 +68,10 @@ gexf <- function(
   require(XML, quietly = T)
   
   # Defining paramters
-  nNodes <- length(nodes)
-  nLinks <- length(edges)
-  nEdgesAtt <- length(edgesAtt)
-  nNodesAtt <- length(nodesAtt)
+  #nNodes <- length(nodes)
+  #nLinks <- length(edges)
+  nEdgesAtt <- ifelse(length(edgesAtt) > 0, NCOL(edgesAtt), 0)
+  nNodesAtt <- ifelse(length(nodesAtt) > 0, NCOL(nodesAtt), 0)
   dynamic <- c(length(nodeDynamic) > 0 , length(edgeDynamic) > 0)
   
   if (!any(dynamic)) mode <- 'static' else mode <- 'dynamic'
@@ -111,8 +111,8 @@ gexf <- function(
   if (nNodesAtt > 0) {
     nodesAttDf <- data.frame(
       id = paste('att',1:nNodesAtt,sep=''),
-      title = colnames(nodesAtt),
-      format = sapply(nodesAtt, typeof),
+      title = ifelse(nNodesAtt == 1, 'att1', colnames(nodesAtt)),
+      format = ifelse(nNodesAtt==1,typeof(nodesAtt),sapply(nodesAtt, typeof)),
       stringsAsFactors=F
     )
     
@@ -129,8 +129,8 @@ gexf <- function(
   if (nEdgesAtt > 0) {
     edgesAttDf <- data.frame(
       id = paste('att',1:nEdgesAtt,sep=''),
-      title = colnames(edgesAtt),
-      format = sapply(edgesAtt, typeof),
+      title = ifelse(nEdgesAtt==1, 'att1',colnames(edgesAtt)),
+      format = ifelse(nEdgesAtt == 1, typeof(edgesAtt),sapply(edgesAtt, typeof)),
       stringsAsFactors=F
       )
     
