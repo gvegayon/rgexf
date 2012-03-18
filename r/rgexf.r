@@ -23,6 +23,8 @@ addNodesEdges <- function(x, parent, type='node') {
         newXMLNode(name=type, parent=PAR, attrs=c(x[c('id','label')]))
     }
     else if (type=='edge') {
+      x['source'] <- gsub("^[ \t]*", "", x['source'])
+      x['target'] <- gsub("^[ \t]*", "", x['target'])
       tempnode0 <-
         newXMLNode(name=type, parent=PAR, attrs=c(x[c('source','target')]))
     }
@@ -43,7 +45,7 @@ addNodesEdges <- function(x, parent, type='node') {
       
       # Local function that prints attributes
       FUN2 <- function(x) {
-        newXMLNode(name='att', parent=tempnode1, attrs=x)
+        newXMLNode(name='attvalue', parent=tempnode1, attrs=x)
       }
       apply(tempDF, MARGIN = 1, FUN2)
     }
@@ -107,14 +109,27 @@ gexf <- function(
     xmlAttrs(xmlGraph) <- c(mode=mode)
   }
 
+  datatypes <- matrix(
+    c(
+      'string', 'character',
+      'integer', 'integer',
+      'float', 'double',
+      'boolean', 'logical'
+      ), byrow=T, ncol =2)
+  
   # nodes att definitions
   if (nNodesAtt > 0) {
     nodesAttDf <- data.frame(
       id = paste('att',1:nNodesAtt,sep=''),
       title = ifelse(nNodesAtt == 1, 'att1', colnames(nodesAtt)),
-      format = ifelse(nNodesAtt==1,typeof(nodesAtt),sapply(nodesAtt, typeof)),
+      type = ifelse(nNodesAtt==1,typeof(nodesAtt),sapply(nodesAtt, typeof)),
       stringsAsFactors=F
     )
+    
+    # Fixing datatype
+    for (i in 1:NROW(datatypes)) {
+      nodesAttDf$type <- gsub(datatypes[i,2], datatypes[i,1], nodesAttDf$type)
+    }
     
     xmlAttNodes <- newXMLNode(name='attributes', parent=xmlGraph)
     xmlAttrs(xmlAttNodes) <- c(class='node', mode='static')
@@ -130,9 +145,14 @@ gexf <- function(
     edgesAttDf <- data.frame(
       id = paste('att',1:nEdgesAtt,sep=''),
       title = ifelse(nEdgesAtt==1, 'att1',colnames(edgesAtt)),
-      format = ifelse(nEdgesAtt == 1, typeof(edgesAtt),sapply(edgesAtt, typeof)),
+      type = ifelse(nEdgesAtt == 1, typeof(edgesAtt),sapply(edgesAtt, typeof)),
       stringsAsFactors=F
       )
+    
+    # Fixing datatype
+    for (i in 1:NROW(datatypes)) {
+      edgesAttDf$type <- gsub(datatypes[i,2], datatypes[i,1], edgesAttDf$type)
+    }
     
     xmlAttEdges <- newXMLNode(name='attributes', parent=xmlGraph)
     xmlAttrs(xmlAttEdges) <- c(class='edge', mode='static')
