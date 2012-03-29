@@ -98,8 +98,8 @@ gexf <- function(
   # graph
   xmlGraph <- newXMLNode(name='graph', parent=gexf)
   if (mode == 'dynamic') {
-    strTime <- min(c(nodeDynamic, edgeDynamic), na.rm=T)
-    endTime <- max(c(nodeDynamic, edgeDynamic), na.rm=T)
+    strTime <- min(c(unlist(nodeDynamic), unlist(edgeDynamic)), na.rm=T)
+    endTime <- max(c(unlist(nodeDynamic), unlist(edgeDynamic)), na.rm=T)
     xmlAttrs(xmlGraph) <- c(mode=mode, start=strTime, end=endTime,
                             timeformat=tFormat, defaultedgetype=defaultedgetype)
     
