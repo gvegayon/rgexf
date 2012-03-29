@@ -2,7 +2,6 @@ defAtt <- function(x, parent) {
 ################################################################################
 # Prints the nodes and edges att definition
 ################################################################################  
-  
   FUN <- function(x, PAR) {
     newXMLNode(name='attribute', parent=PAR,
                attrs=x)
@@ -119,10 +118,19 @@ gexf <- function(
   
   # nodes att definitions
   if (nNodesAtt > 0) {
+    if (nNodesAtt == 1) {
+      TIT <- 'att1' 
+      TYPE <- typeof(nodesAtt) 
+    }
+    else {
+      TIT <- colnames(nodesAtt)
+      TYPE <- sapply(nodesAtt, typeof)
+    }
+    
     nodesAttDf <- data.frame(
       id = paste('att',1:nNodesAtt,sep=''),
-      title = ifelse(nNodesAtt == 1, 'att1', colnames(nodesAtt)),
-      type = ifelse(nNodesAtt==1,typeof(nodesAtt),sapply(nodesAtt, typeof)),
+      title = TIT,
+      type = TYPE,
       stringsAsFactors=F
     )
     
@@ -142,10 +150,19 @@ gexf <- function(
 
   # edges att
   if (nEdgesAtt > 0) {
+    if (nEdgesAtt == 1) {
+      TIT <- 'att1' 
+      TYPE <- typeof(edgesAtt) 
+    }
+    else {
+      TIT <- colnames(edgesAtt)
+      TYPE <- sapply(edgesAtt, typeof)
+    }
+    
     edgesAttDf <- data.frame(
       id = paste('att',1:nEdgesAtt,sep=''),
-      title = ifelse(nEdgesAtt==1, 'att1',colnames(edgesAtt)),
-      type = ifelse(nEdgesAtt == 1, typeof(edgesAtt),sapply(edgesAtt, typeof)),
+      title = TIT,
+      type = TYPE,
       stringsAsFactors=F
       )
     

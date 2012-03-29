@@ -1,6 +1,6 @@
 \name{gexf}
 \alias{gexf}
-\title{Exports to GEXF}
+\title{Generates GEXF graph file}
 \description{Based on nodes and edges data frames builds XML format GEXF file}
 \usage{
 gexf(nodes, edges, edgesAtt = NULL, nodesAtt = NULL, nodeDynamic = NULL, 
@@ -17,4 +17,19 @@ gexf(nodes, edges, edgesAtt = NULL, nodesAtt = NULL, nodeDynamic = NULL,
   \item{tFormat}{Time format for dynamic graphs}
   \item{defaultedgetype}{'directed' or 'undirected'}
 }
+\details{
+  When defining any kind of att values, gexf reads the data and, using the same
+  column names, defines and prints each att value.
+}
+\value{
+  A GEXF (xml) graph object.
+}
 \author{George Vega Yon <george.vega@nodoschile.org>}
+
+\references{
+  The GEXF project website:
+  \url{http://gexf.net} 
+}
+\examples{
+  demo(dspl)
+}
