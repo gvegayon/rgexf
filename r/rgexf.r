@@ -1,4 +1,4 @@
-defAtt <- function(x, parent) {
+.defAtt <- function(x, parent) {
 ################################################################################
 # Prints the nodes and edges att definition
 ################################################################################  
@@ -10,7 +10,7 @@ defAtt <- function(x, parent) {
   apply(x, MARGIN=1, FUN, PAR=parent)
 }
 
-addNodesEdges <- function(x, parent, type='node') {
+.addNodesEdges <- function(x, parent, type='node') {
 ################################################################################
 # Prints the nodes and edges
 ################################################################################  
@@ -141,7 +141,7 @@ gexf <- function(
     
     xmlAttNodes <- newXMLNode(name='attributes', parent=xmlGraph)
     xmlAttrs(xmlAttNodes) <- c(class='node', mode='static')
-    defAtt(nodesAttDf, parent=xmlAttNodes)
+    .defAtt(nodesAttDf, parent=xmlAttNodes)
     
   } 
   else {
@@ -173,7 +173,7 @@ gexf <- function(
     
     xmlAttEdges <- newXMLNode(name='attributes', parent=xmlGraph)
     xmlAttrs(xmlAttEdges) <- c(class='edge', mode='static')
-    defAtt(edgesAttDf, parent=xmlAttEdges)
+    .defAtt(edgesAttDf, parent=xmlAttEdges)
   } 
   else {
     edgesAttDf <- NULL
@@ -194,7 +194,7 @@ gexf <- function(
   
   # NODES
   xmlNodes <- newXMLNode(name='nodes', parent=xmlGraph)
-  addNodesEdges(nodes, xmlNodes, 'node')
+  .addNodesEdges(nodes, xmlNodes, 'node')
 
   ##############################################################################
   # The basic dataframe definition  for edges
@@ -209,7 +209,7 @@ gexf <- function(
 
   # EDGES
   xmlEdges <- newXMLNode(name='edges', parent=xmlGraph)
-  addNodesEdges(edges, xmlEdges, 'edge')  
+  .addNodesEdges(edges, xmlEdges, 'edge')  
   results <- saveXML(xmlFile, encoding='UTF-8')
   class(results) <- 'gexf'
   

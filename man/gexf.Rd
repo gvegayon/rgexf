@@ -24,12 +24,14 @@ gexf(nodes, edges, edgesAtt = NULL, nodesAtt = NULL, nodeDynamic = NULL,
 \value{
   A GEXF (xml) graph object.
 }
-\author{George Vega Yon <george.vega@nodoschile.org>}
+\author{George Vega Yon \email{george.vega@nodoschile.org}}
 
 \references{
   The GEXF project website:
   \url{http://gexf.net} 
 }
 \examples{
+  \dontrun{
   demo(dspl)
+  }
 }

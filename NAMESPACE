@@ -1,6 +1,6 @@
 importFrom(XML)
 
-export(addNodesEdges, defAtt)
+export(.addNodesEdges, .defAtt)
 export(checkTimes)
 export(gexf)
 
