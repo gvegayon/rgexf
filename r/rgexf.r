@@ -2,54 +2,44 @@
 ################################################################################
 # Prints the nodes and edges att definition
 ################################################################################  
-  FUN <- function(x, PAR) {
-    newXMLNode(name='attribute', parent=PAR,
-               attrs=x)
-  }
-  
-  apply(x, MARGIN=1, FUN, PAR=parent)
+  apply(x, MARGIN=1,
+        function(x, PAR) {
+          newXMLNode(name='attribute', parent=PAR, attrs=x)
+        }, PAR=parent)
 }
 
 .addNodesEdges <- function(x, parent, type='node') {
 ################################################################################
 # Prints the nodes and edges
 ################################################################################  
-  # Local function that prints each node
-  FUN <- function(x, PAR, type) {
-    if (type=='node') {
-      x['id'] <- gsub("^[ \t]*", "", x['id'])
-      tempnode0 <-
-        newXMLNode(name=type, parent=PAR, attrs=c(x[c('id','label')]))
-    }
-    else if (type=='edge') {
-      x['source'] <- gsub("^[ \t]*", "", x['source'])
-      x['target'] <- gsub("^[ \t]*", "", x['target'])
-      tempnode0 <-
-        newXMLNode(name=type, parent=PAR, attrs=c(x[c('source','target')]))
-    }
-    
-    # In the case there is a dynamic attributes defined
-    if (!is.na(x['start'])) {xmlAttrs(tempnode0)['start'] <- as.character(x['start'])}
-    if (!is.na(x['end'])) {xmlAttrs(tempnode0)['end'] <- as.character(x['end'])}
-      
-    # Attributes printing
-    attributes <- length(grep('^att', names(x))) > 0
-    if (attributes) att <- x[grep('^att', names(x))]
+  apply(x, MARGIN = 1, 
+        function(x, PAR, type) {
+          x <- as.data.frame(t(x), stringsAsFactors=F)
+          xvars <- names(x)
+          
+          attributes <- length(grep('^att', xvars)) > 0
+          if (attributes) {
+            att <- x[,grep('^att', xvars)]            
+            attnames <- names(att)
+          }
+          else attnames <- ""
+          print(x[,!(xvars %in% attnames) & !is.na(x)])
+          tempnode0 <- newXMLNode(name=type, parent=PAR, cdata=T,
+                                  attrs=x[,!(xvars %in% attnames) & !is.na(x)])
+          
+          # Attributes printing        
+          if (attributes) {      
+            tempDF <- data.frame(names(att), value=t(att), stringsAsFactors=F)
 
-    if (attributes) {      
-      tempDF <- data.frame(names(att), att, stringsAsFactors=F)
-      colnames(tempDF) <- c('for', 'value')
-      
-      tempnode1 <- newXMLNode('attvalues', parent=tempnode0)
-      
-      # Local function that prints attributes
-      FUN2 <- function(x) {
-        newXMLNode(name='attvalue', parent=tempnode1, attrs=x)
-      }
-      apply(tempDF, MARGIN = 1, FUN2)
-    }
-  }
-  apply(x, MARGIN = 1, FUN, PAR=parent, type=type)
+            colnames(tempDF) <- c('for', 'value')
+            
+            tempnode1 <- newXMLNode('attvalues', parent=tempnode0)
+            
+            apply(tempDF, MARGIN = 1, function(x) {
+              newXMLNode(name='attvalue', parent=tempnode1, attrs=x)
+            })
+          }
+        }, PAR=parent, type=type)
 }
 
 gexf <- function(
@@ -59,6 +49,7 @@ gexf <- function(
   nodes,
   edges,
   edgesAtt=NULL,
+  edgesWeight=NULL,
   nodesAtt=NULL,
   nodeDynamic=NULL,
   edgeDynamic=NULL,
@@ -69,8 +60,6 @@ gexf <- function(
   require(XML, quietly = T)
   
   # Defining paramters
-  #nNodes <- length(nodes)
-  #nLinks <- length(edges)
   nEdgesAtt <- ifelse(length(edgesAtt) > 0, NCOL(edgesAtt), 0)
   nNodesAtt <- ifelse(length(nodesAtt) > 0, NCOL(nodesAtt), 0)
   dynamic <- c(length(nodeDynamic) > 0 , length(edgeDynamic) > 0)
@@ -205,11 +194,25 @@ gexf <- function(
   # Naming the columns
   attNames <- edgesAttDf['id']
   if (!is.null(edgeDynamic)) tmeNames <- c('start', 'end') else tmeNames <- NULL
-  colnames(edges) <- unlist(c('source', 'target', tmeNames, attNames))
+  
+  # Generating weights
+  if (all(is.null(edgesWeight))) {
+    pastededges <- apply(edges[,c(2,1)], 1, paste, collapse="")
+    for (i in 1:NROW(edges)) {
+       edgesWeight <- c(
+         edgesWeight, 
+         sum(paste(edges[i,1:2], collapse="") %in% pastededges))
+    }
+  }
+  else edgesWeight <- 0
+  edges <- cbind(edgesWeight+1, edges)
+  
+  # Seting colnames
+  colnames(edges) <- unlist(c('weight','source', 'target', tmeNames, attNames))
 
   # EDGES
   xmlEdges <- newXMLNode(name='edges', parent=xmlGraph)
-  .addNodesEdges(edges, xmlEdges, 'edge')  
+  .addNodesEdges(edges, xmlEdges, 'edge')
   results <- saveXML(xmlFile, encoding='UTF-8')
   class(results) <- 'gexf'
   
