@@ -29,7 +29,7 @@ time.edges
 # Defining a data frame of attributes for nodes and edges
 pause()
 
-node.att <- data.frame(letrafavorita=letters[1:4], numbers=1:4, stringsAsFactors=F)
+node.att <- data.frame(letrafavorita=c(letters[1:3],"hola"), numbers=1:4, stringsAsFactors=F)
 node.att
 
 edge.att <- data.frame(letrafavorita=letters[1:9], numbers=1:9, stringsAsFactors=F)

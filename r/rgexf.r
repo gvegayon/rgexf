@@ -12,31 +12,54 @@
 ################################################################################
 # Prints the nodes and edges
 ################################################################################  
-  apply(x, MARGIN = 1, 
+apply(x, MARGIN = 1, 
         function(x, PAR, type) {
-          x <- as.data.frame(t(x), stringsAsFactors=F)
+          x <- data.frame(t(x), stringsAsFactors=F)
+
           xvars <- names(x)
           
+          noattnames <- xvars[grep('^att', xvars, invert=T)]
+          
+          # Parsing user-define attributes
           attributes <- length(grep('^att', xvars)) > 0
           if (attributes) {
             att <- x[,grep('^att', xvars)]            
             attnames <- names(att)
           }
           else attnames <- ""
-          print(x[,!(xvars %in% attnames) & !is.na(x)])
-          tempnode0 <- newXMLNode(name=type, parent=PAR, cdata=T,
-                                  attrs=x[,!(xvars %in% attnames) & !is.na(x)])
           
+          # Parsing VIZ attributes
+          vizattributes <- length(grep('^viz[:]', xvars)) > 0
+          if (attributes) {
+            vizatt <- x[,grep('^vizatt', xvars)]            
+            vizattnames <- names(vizatt)
+          }
+          else vizattnames <- ""
+          
+          tempnode0 <- newXMLNode(name=type, parent=PAR)
+          
+          # Adds every attribute removing leading and ending spaces
+          for (i in noattnames) {
+            tempatt <- x[,c(i)]
+            if (!is.na(tempatt)) xmlAttrs(tempnode0)[i] <-
+              gsub("[\t ]*$", "", gsub("^[\t ]*", "", tempatt))
+          }
+          
+          # Viz Att printing
+          if (vizattributes) {
+            tempDF <- data.frame(names(vizatt), value=t(vizatt), stringsAsFactors=F)
+            tempnode1 <- newXMLNode(name=1)
+          }
           # Attributes printing        
           if (attributes) {      
             tempDF <- data.frame(names(att), value=t(att), stringsAsFactors=F)
 
             colnames(tempDF) <- c('for', 'value')
             
-            tempnode1 <- newXMLNode('attvalues', parent=tempnode0)
+            tempnode2 <- newXMLNode('attvalues', parent=tempnode0)
             
             apply(tempDF, MARGIN = 1, function(x) {
-              newXMLNode(name='attvalue', parent=tempnode1, attrs=x)
+              newXMLNode(name='attvalue', parent=tempnode2, attrs=x)
             })
           }
         }, PAR=parent, type=type)
@@ -50,7 +73,9 @@ gexf <- function(
   edges,
   edgesAtt=NULL,
   edgesWeight=NULL,
+  edgesVizAtt = NULL,
   nodesAtt=NULL,
+  nodesVizAtt = NULL,
   nodeDynamic=NULL,
   edgeDynamic=NULL,
   output = NA,
@@ -62,6 +87,8 @@ gexf <- function(
   # Defining paramters
   nEdgesAtt <- ifelse(length(edgesAtt) > 0, NCOL(edgesAtt), 0)
   nNodesAtt <- ifelse(length(nodesAtt) > 0, NCOL(nodesAtt), 0)
+  nNodesVizAtt <- ifelse(length(nodesVizAtt) > 0, NCOL(nodesVizAtt), 0)
+  nEdgesVizAtt <- ifelse(length(edgesVizAtt) > 0, NCOL(edgesVizAtt), 0)
   dynamic <- c(length(nodeDynamic) > 0 , length(edgeDynamic) > 0)
   
   if (!any(dynamic)) mode <- 'static' else mode <- 'dynamic'
@@ -108,18 +135,14 @@ gexf <- function(
   # nodes att definitions
   if (nNodesAtt > 0) {
     if (nNodesAtt == 1) {
-      TIT <- 'att1' 
-      TYPE <- typeof(nodesAtt) 
+      TIT <- 'att1'; TYPE <- typeof(nodesAtt) 
     }
     else {
-      TIT <- colnames(nodesAtt)
-      TYPE <- sapply(nodesAtt, typeof)
+      TIT <- colnames(nodesAtt); TYPE <- sapply(nodesAtt, typeof)
     }
     
     nodesAttDf <- data.frame(
-      id = paste('att',1:nNodesAtt,sep=''),
-      title = TIT,
-      type = TYPE,
+      id = paste('att',1:nNodesAtt,sep=''), title = TIT, type = TYPE,
       stringsAsFactors=F
     )
     
@@ -140,18 +163,14 @@ gexf <- function(
   # edges att
   if (nEdgesAtt > 0) {
     if (nEdgesAtt == 1) {
-      TIT <- 'att1' 
-      TYPE <- typeof(edgesAtt) 
+      TIT <- 'att1'; TYPE <- typeof(edgesAtt) 
     }
     else {
-      TIT <- colnames(edgesAtt)
-      TYPE <- sapply(edgesAtt, typeof)
+      TIT <- colnames(edgesAtt); TYPE <- sapply(edgesAtt, typeof)
     }
     
     edgesAttDf <- data.frame(
-      id = paste('att',1:nEdgesAtt,sep=''),
-      title = TIT,
-      type = TYPE,
+      id = paste('att',1:nEdgesAtt,sep=''), title = TIT, type = TYPE,
       stringsAsFactors=F
       )
     
@@ -168,12 +187,19 @@ gexf <- function(
     edgesAttDf <- NULL
   }
   
-  ##############################################################################
-  # The basic dataframe definition  for nodes
+  # nodes vizatt
+  if (nNodesVizAtt > 0) {
+    colnames(nodesVizAtt) <- paste(viz,colnames(nodesVizAtt),sep=":")
+  }
   
-  if (dynamic[1] & nNodesAtt > 0) {nodes <- cbind(nodes, nodeDynamic, nodesAtt)}
-  if (dynamic[1] & nNodesAtt == 0) {nodes <- cbind(nodes, nodeDynamic)}
-  if (!dynamic[1] & nNodesAtt > 0) {nodes <- cbind(nodes, nodesAtt)}
+  ##############################################################################
+  # The basic char matrix definition  for nodes
+  nodes <- as.matrix(nodes)
+  if (dynamic[1]) nodeDynamic <- as.matrix(nodeDynamic)
+  if (nNodesAtt > 0) nodesAtt <- as.matrix(nodesAtt)
+  if (nNodesVizAtt > 0) nodesVizAtt <- as.matrix(nodesVizAtt)
+  
+  nodes <- cbind(nodes, nodeDynamic, nodesAtt, nodesVizAtt)
   
   # Naming the columns
   attNames <- nodesAttDf['id']
@@ -187,10 +213,12 @@ gexf <- function(
 
   ##############################################################################
   # The basic dataframe definition  for edges
-  if (dynamic[2] & nEdgesAtt > 0) {edges <- cbind(edges, edgeDynamic, edgesAtt)}
-  if (dynamic[2] & nEdgesAtt == 0) {edges <- cbind(edges, edgeDynamic)}
-  if (!dynamic[2] & nEdgesAtt > 0) {edges <- cbind(edges, edgesAtt)}
-  
+  if (dynamic[2]) edgeDynamic <- as.matrix(edgeDynamic)
+  if (nEdgesAtt > 0) edgesAtt <- as.matrix(edgesAtt)
+  if (nEdgesVizAtt > 0) edgesVizAtt < as.matrix(edgesVizAtt) 
+    
+  edges <- cbind(edges, edgeDynamic, edgesAtt, edgesVizAtt)
+    
   # Naming the columns
   attNames <- edgesAttDf['id']
   if (!is.null(edgeDynamic)) tmeNames <- c('start', 'end') else tmeNames <- NULL
@@ -205,10 +233,10 @@ gexf <- function(
     }
   }
   else edgesWeight <- 0
-  edges <- cbind(edgesWeight+1, edges)
+  edges <- cbind(edges, edgesWeight+1)
   
   # Seting colnames
-  colnames(edges) <- unlist(c('weight','source', 'target', tmeNames, attNames))
+  colnames(edges) <- unlist(c("source", "target", tmeNames, attNames, "weight"))
 
   # EDGES
   xmlEdges <- newXMLNode(name='edges', parent=xmlGraph)
