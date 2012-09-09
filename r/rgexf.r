@@ -12,26 +12,27 @@
 ################################################################################
 # Prints the nodes and edges
 ################################################################################  
+
 apply(x, MARGIN = 1, 
         function(x, PAR, type) {
           x <- data.frame(t(x), stringsAsFactors=F)
-
+          
           xvars <- names(x)
           
-          noattnames <- xvars[grep('^att', xvars, invert=T)]
+          noattnames <- xvars[grep('^(att[0-9])|(viz[.])', xvars, invert=T)]
           
           # Parsing user-define attributes
           attributes <- length(grep('^att', xvars)) > 0
           if (attributes) {
-            att <- x[,grep('^att', xvars)]            
+            att <- x[,grep('^att', xvars), drop=F]
             attnames <- names(att)
           }
           else attnames <- ""
           
           # Parsing VIZ attributes
-          vizattributes <- length(grep('^viz[:]', xvars)) > 0
-          if (attributes) {
-            vizatt <- x[,grep('^vizatt', xvars)]            
+          vizattributes <- length(grep('^viz[.]', xvars)) > 0
+          if (vizattributes) {
+            vizatt <- x[,grep('^viz[.]', xvars), drop=F]
             vizattnames <- names(vizatt)
           }
           else vizattnames <- ""
@@ -47,9 +48,38 @@ apply(x, MARGIN = 1,
           
           # Viz Att printing
           if (vizattributes) {
-            tempDF <- data.frame(names(vizatt), value=t(vizatt), stringsAsFactors=F)
-            tempnode1 <- newXMLNode(name=1)
+            # Colors
+            if (any(grepl("^viz[.]color",vizattnames))) {
+              tempvizatt <- vizatt[grep("^viz[.]color[.]", vizattnames)]
+              colnames(tempvizatt) <- gsub("^viz[.]color[.]", "", colnames(tempvizatt))
+              tempnode1 <- newXMLNode("viz:color", parent=tempnode0, attrs=tempvizatt)
+            }
+            # Position
+            if (any(grepl("^viz[.]position",vizattnames))) {
+              tempvizatt <- vizatt[grep("^viz[.]position[.]", vizattnames)]
+              colnames(tempvizatt) <- gsub("^viz[.]position[.]", "", colnames(tempvizatt))
+              tempnode1 <- newXMLNode("viz:position", parent=tempnode0, attrs=tempvizatt)
+            }
+            # Size
+            if (any(grepl("^viz[.]size",vizattnames))) {
+              tempvizatt <- vizatt[grep("^viz[.]size[.]", vizattnames)]
+              colnames(tempvizatt) <- gsub("^viz[.]size[.]", "", colnames(tempvizatt))
+              tempnode1 <- newXMLNode("viz:size", parent=tempnode0, attrs=tempvizatt)
+            }
+            # Shape
+            if (any(grepl("^viz[.]shape",vizattnames))) {
+              tempvizatt <- vizatt[grep("^viz[.]shape[.]", vizattnames)]
+              colnames(tempvizatt) <- gsub("^viz[.]shape[.]", "", colnames(tempvizatt))
+              tempnode1 <- newXMLNode("viz:shape", parent=tempnode0, attrs=tempvizatt)
+            }
+            # Thickness
+            if (any(grepl("^viz[.]thickness",vizattnames))) {
+              tempvizatt <- vizatt[grep("^viz[.]thickness[.]", vizattnames)]
+              colnames(tempvizatt) <- gsub("^viz[.]thickness[.]", "", colnames(tempvizatt))
+              tempnode1 <- newXMLNode("viz:thickness", parent=tempnode0, attrs=tempvizatt)
+            }
           }
+          
           # Attributes printing        
           if (attributes) {      
             tempDF <- data.frame(names(att), value=t(att), stringsAsFactors=F)
@@ -73,9 +103,9 @@ gexf <- function(
   edges,
   edgesAtt=NULL,
   edgesWeight=NULL,
-  edgesVizAtt = NULL,
+  edgesVizAtt = list(color=NULL, thickness=NULL, shape=NULL),
   nodesAtt=NULL,
-  nodesVizAtt = NULL,
+  nodesVizAtt = list(color=NULL, position=NULL, size=NULL, shape=NULL),
   nodeDynamic=NULL,
   edgeDynamic=NULL,
   output = NA,
@@ -87,9 +117,17 @@ gexf <- function(
   # Defining paramters
   nEdgesAtt <- ifelse(length(edgesAtt) > 0, NCOL(edgesAtt), 0)
   nNodesAtt <- ifelse(length(nodesAtt) > 0, NCOL(nodesAtt), 0)
-  nNodesVizAtt <- ifelse(length(nodesVizAtt) > 0, NCOL(nodesVizAtt), 0)
-  nEdgesVizAtt <- ifelse(length(edgesVizAtt) > 0, NCOL(edgesVizAtt), 0)
-  dynamic <- c(length(nodeDynamic) > 0 , length(edgeDynamic) > 0)
+  dynamic <- c(length(nodeDynamic) > 0 , length(edgeDynamic) > 0)  
+  
+  # ID vizatt
+  nNodesVizAtt <- unlist(lapply(nodesVizAtt, is.null))
+  nEdgesVizAtt <- unlist(lapply(edgesVizAtt, is.null))
+  
+  nodesVizAtt <- nodesVizAtt[!nNodesVizAtt]
+  edgesVizAtt <- edgesVizAtt[!nEdgesVizAtt]
+  
+  nNodesVizAtt <- ifelse(sum(nNodesVizAtt==F), length(nodesVizAtt), 0)
+  nEdgesVizAtt <- ifelse(sum(nEdgesVizAtt==F), length(edgesVizAtt), 0)
   
   if (!any(dynamic)) mode <- 'static' else mode <- 'dynamic'
 
@@ -188,24 +226,55 @@ gexf <- function(
   }
   
   # nodes vizatt
+  ListNodesVizAtt <- NULL
   if (nNodesVizAtt > 0) {
-    colnames(nodesVizAtt) <- paste(viz,colnames(nodesVizAtt),sep=":")
+    tempNodesVizAtt <- names(nodesVizAtt)
+    
+    for (i in tempNodesVizAtt) {      
+      assign(paste("nodes",i,sep=""), as.matrix(nodesVizAtt[[c(i)]]))
+      
+      if (i == "colors") colnames(nodescolors) <- 
+        paste("viz.color", c("r","g","b","a"), sep=".")
+      else if (i == "position") colnames(nodesposition) <- 
+        paste("viz.position", c("x","y","z"), sep=".")
+      else if (i == "size") colnames(nodessize) <- "viz.size.value"
+      else if (i == "shape") colnames(nodesshape) <- "viz.shape.value"
+      
+      ListNodesVizAtt <- cbind(ListNodesVizAtt, get(paste("nodes",i,sep="")))
+    }
+  }
+  
+  # edges vizatt
+  ListEdgesVizAtt <- NULL
+  if (nEdgesVizAtt > 0) {
+    tempEdgesVizAtt <- names(edgesVizAtt)
+    
+    for (i in tempEdgesVizAtt) {
+      assign(paste("edges",i,sep=""), as.matrix(edgesVizAtt[[c(i)]]))
+      
+      if (i == "colors") colnames(edgescolors) <- 
+        paste("viz.color", c("r","g","b","a"), sep=".")
+      else if (i == "thickness") colnames(edgesthickness) <- 
+        paste("viz.thickness", c("value"), sep=".")
+      else if (i == "shape") colnames(edgesshape) <- "value"
+      
+      ListEdgesVizAtt <- cbind(ListEdgesVizAtt, get(paste("edges",i,sep="")))
+    }
   }
   
   ##############################################################################
   # The basic char matrix definition  for nodes
   nodes <- as.matrix(nodes)
+  
   if (dynamic[1]) nodeDynamic <- as.matrix(nodeDynamic)
   if (nNodesAtt > 0) nodesAtt <- as.matrix(nodesAtt)
-  if (nNodesVizAtt > 0) nodesVizAtt <- as.matrix(nodesVizAtt)
-  
-  nodes <- cbind(nodes, nodeDynamic, nodesAtt, nodesVizAtt)
-  
+  nodes <- cbind(nodes, nodeDynamic, nodesAtt, ListNodesVizAtt)
+
   # Naming the columns
   attNames <- nodesAttDf['id']
   if (!is.null(nodeDynamic)) tmeNames <- c('start', 'end') else tmeNames <- NULL
-    
-  colnames(nodes) <- unlist(c('id', 'label', tmeNames, attNames))
+  
+  colnames(nodes) <- unlist(c('id', 'label', tmeNames, attNames, colnames(ListNodesVizAtt)))
   
   # NODES
   xmlNodes <- newXMLNode(name='nodes', parent=xmlGraph)
@@ -213,11 +282,12 @@ gexf <- function(
 
   ##############################################################################
   # The basic dataframe definition  for edges
+  edges <- as.matrix(edges)
+  
   if (dynamic[2]) edgeDynamic <- as.matrix(edgeDynamic)
   if (nEdgesAtt > 0) edgesAtt <- as.matrix(edgesAtt)
-  if (nEdgesVizAtt > 0) edgesVizAtt < as.matrix(edgesVizAtt) 
     
-  edges <- cbind(edges, edgeDynamic, edgesAtt, edgesVizAtt)
+  edges <- cbind(edges, edgeDynamic, edgesAtt, ListEdgesVizAtt)
     
   # Naming the columns
   attNames <- edgesAttDf['id']
@@ -236,7 +306,7 @@ gexf <- function(
   edges <- cbind(edges, edgesWeight+1)
   
   # Seting colnames
-  colnames(edges) <- unlist(c("source", "target", tmeNames, attNames, "weight"))
+  colnames(edges) <- unlist(c("source", "target", tmeNames, attNames, colnames(ListEdgesVizAtt),"weight"))
 
   # EDGES
   xmlEdges <- newXMLNode(name='edges', parent=xmlGraph)

@@ -65,3 +65,5 @@ gexf(nodes=people, edges=relations, edgeDynamic=time.edges, edgesAtt=edge.att)
 pause()
 gexf(nodes=people, edges=relations, edgeDynamic=time.edges, edgesAtt=edge.att,
      nodeDynamic=time.nodes, nodesAtt=node.att)
+
+# gexf(nodes=people, edges=relations, nodesVizAtt=list(shape=c("disk", "square", "triangle", "diamond"),colors=cbind(t(col2rgb(1:4)), 1), position=matrix(1:12,nrow=4)), edgesVizAtt=list(thickness=1:9), output="concarac.gexf")
