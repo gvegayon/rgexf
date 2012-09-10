@@ -1,7 +1,29 @@
+.gexf.edgelist <- function(x) {
+################################################################################
+# Translate a edgelist to two objects list (nodes + edges)
+################################################################################
+  objClass <- class(x)
+  nEdges <- NROW(x)
+  nCols <- NCOL(x) == 2
+  
+  if (objClass %in% c("matrix", "data.frame")) {
+    if (nCols) {
+      x <- factor(c(x[,1], x[,2]))
+      edges <- matrix(unclass(x), byrow=F, ncol=2)
+      nodes <- data.frame(id=1:nlevels(x), label=levels(x), stringsAsFactors=F)
+    
+      return(list(nodes=nodes, edges=edges))
+    }
+    else stop("Insuficcient number of columns")
+  }
+  else stop(paste(objClass, 
+                  "class not allowed, try with a \"matrix\" or a \"data.frame\""))
+}
+
 .defAtt <- function(x, parent) {
 ################################################################################
 # Prints the nodes and edges att definition
-################################################################################  
+################################################################################
   apply(x, MARGIN=1,
         function(x, PAR) {
           newXMLNode(name='attribute', parent=PAR, attrs=x)

@@ -3,14 +3,22 @@
 \title{Generates GEXF graph file}
 \description{Based on nodes and edges data frames builds XML format GEXF file}
 \usage{
-gexf(nodes, edges, edgesAtt = NULL, nodesAtt = NULL, nodeDynamic = NULL, 
-  edgeDynamic = NULL, output = NA, tFormat = "double", defaultedgetype = "undirected")
+gexf(nodes, edges, edgesAtt = NULL, edgesWeight = NULL, 
+  edgesVizAtt = list(color=NULL, thickness=NULL, shape=NULL),
+  nodesAtt = NULL,
+  nodesVizAtt = list(color=NULL, position=NULL, size=NULL, shape=NULL),
+  nodeDynamic = NULL, 
+  edgeDynamic = NULL, output = NA, tFormat = "double",
+  defaultedgetype = "undirected")
 }
 \arguments{
   \item{nodes}{Two columns matrix or data frame including 'label' and 'id'}
   \item{edges}{Two columns matrix or data frame including 'source' and 'target' based on nodes ids}
   \item{edgesAtt}{One or more columns data frame with number of rows equal to the number of edges}
+  \item{edgesWeight}{Two columns matrix or data frame including 'source' and 'target' based on nodes ids}
+  \item{edgesVizAtt}{One or more columns data frame with number of rows equal to the number of edges}
   \item{nodesAtt}{One or more columns data frame with number of rows equal to the number of nodes}
+  \item{nodesVizAtt}{One or more columns data frame with number of rows equal to the number of edges}
   \item{nodeDynamic}{Two columns matrix or data frame including 'start' and 'end' with number of rows equal to the number of nodes according to the format specified at tFormat}
   \item{edgeDynamic}{Two columns matrix or data frame including 'start' and 'end' with number of rows equal to the number of edges according to the format specified at tFormat}
   \item{output}{Complet path (including file name) where to print the GEXF file}

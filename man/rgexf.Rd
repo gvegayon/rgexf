@@ -18,12 +18,13 @@
   \tabular{ll}{
     Package: \tab rgexf\cr
     Type: \tab Package\cr
-    Version: \tab 0.12.06\cr
-    Date: \tab 2012-06-19\cr
+    Version: \tab 0.12.09\cr
+    Date: \tab 2012-09-11\cr
     License: \tab GPL version 2 or later\cr
   }
 }
-\author{George Vega Yon \email{george.vega@nodoschile.org}, Jorge Fabrega Lacoa \email{jorge.fabrega@nodoschile.org}}
+\author{George Vega Yon \email{george.vega@nodoschile.org},
+Jorge Fabrega Lacoa \email{jorge.fabrega@nodoschile.org}}
 \note{
   See the GEXF primer for details on the GEXF graph format:
   \url{http://gexf.net/1.2draft/gexf-12draft-primer.pdf}
