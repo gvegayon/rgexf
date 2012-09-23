@@ -66,4 +66,19 @@ pause()
 gexf(nodes=people, edges=relations, edgeDynamic=time.edges, edgesAtt=edge.att,
      nodeDynamic=time.nodes, nodesAtt=node.att)
 
-gexf(nodes=people, edges=relations, nodesVizAtt=list(shape=c("disk", "square", "triangle", "diamond"),colors=cbind(t(col2rgb(1:4)), 1), position=matrix(1:12,nrow=4)), edgesVizAtt=list(thickness=1:9), output="concarac.gexf")
+################################################################################
+# Seventh example: a simple net with dynamic edges and nodes with attributes
+pause()
+imagee <- data.frame(image=rbind(
+  "Yellow_solid_sphere.png",
+  "Yellow_solid_sphere.png",
+  "Yellow_solid_sphere.png",
+  "Yellow_solid_sphere.png"), stringsAsFactors=F)
+
+grafo <- gexf(nodes=people, edges=relations, nodesAtt=imagee,
+              nodesVizAtt=list(
+                #shape=c("rectangle", "square", "triangle", "diamond"),
+                #position=matrix(1:12,nrow=4),
+                image=imagee, colors=cbind(t(col2rgb(1:4)), 1) 
+                ), 
+              edgesVizAtt=list(thickness=1:9), output="grafo.gexf")

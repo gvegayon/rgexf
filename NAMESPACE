@@ -3,6 +3,7 @@ importFrom(XML)
 export(.addNodesEdges, .defAtt)
 export(checkTimes)
 export(gexf)
+export(processEdgeList)
 
 # Methods
-S3method(print, gexf)
+S3method(print, gexffile)

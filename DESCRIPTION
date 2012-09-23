@@ -2,10 +2,10 @@ Package: rgexf
 Type: Package
 Title: An R library to build GEXF network files
 Version: 0.12.09
-Date: 2012-09-11
+Date: 2012-09-22
 Author: George Vega Yon <george.vega@nodoschile.org>, Jorge Fabrega Lacoa <jorge.fabrega@nodoschile.org>
 Maintainer: George Vega Yon <george.vega@nodoschile.org>
-Description: Using data frames with nodes, edges, attributes and date/time data, builds dynamic GEXF graph files.
+Description: The first R library to create GEXF graph files. Using XML library, it allows the user to easely build graph files including attributes, GEXF viz attributes (such as color, size, and position), network dynamics (edges and nodes) and edges weighting.
 Depends: XML
 License: GPL (>= 3)
 LazyLoad: yes

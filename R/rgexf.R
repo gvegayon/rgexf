@@ -1,4 +1,4 @@
-.gexf.edgelist <- function(x) {
+processEdgeList <- function(x) {
 ################################################################################
 # Translate a edgelist to two objects list (nodes + edges)
 ################################################################################
@@ -7,11 +7,13 @@
   nCols <- NCOL(x) == 2
   
   if (objClass %in% c("matrix", "data.frame")) {
+    
     if (nCols) {
-      x <- factor(c(x[,1], x[,2]))
+      # If it is not a factor
+      if (!is.factor(x)) x <- factor(c(x[,1], x[,2]))
       edges <- matrix(unclass(x), byrow=F, ncol=2)
       nodes <- data.frame(id=1:nlevels(x), label=levels(x), stringsAsFactors=F)
-    
+      
       return(list(nodes=nodes, edges=edges))
     }
     else stop("Insuficcient number of columns")
@@ -94,6 +96,13 @@ apply(x, MARGIN = 1,
               colnames(tempvizatt) <- gsub("^viz[.]shape[.]", "", colnames(tempvizatt))
               tempnode1 <- newXMLNode("viz:shape", parent=tempnode0, attrs=tempvizatt)
             }
+            # Image
+            if (any(grepl("^viz[.]image",vizattnames))) {
+              tempvizatt <- vizatt[grep("^viz[.]image[.]", vizattnames)]
+              colnames(tempvizatt) <- c("viz.image.value", "viz.image.uri")
+              colnames(tempvizatt) <- gsub("^viz[.]image[.]", "", colnames(tempvizatt))
+              tempnode1 <- newXMLNode("viz:shape", parent=tempnode0, attrs=tempvizatt)
+            }
             # Thickness
             if (any(grepl("^viz[.]thickness",vizattnames))) {
               tempvizatt <- vizatt[grep("^viz[.]thickness[.]", vizattnames)]
@@ -127,12 +136,13 @@ gexf <- function(
   edgesWeight=NULL,
   edgesVizAtt = list(color=NULL, thickness=NULL, shape=NULL),
   nodesAtt=NULL,
-  nodesVizAtt = list(color=NULL, position=NULL, size=NULL, shape=NULL),
+  nodesVizAtt = list(color=NULL, position=NULL, size=NULL, shape=NULL, image=NULL),
   nodeDynamic=NULL,
   edgeDynamic=NULL,
   output = NA,
   tFormat='double',
-  defaultedgetype = 'undirected'
+  defaultedgetype = 'undirected',
+  meta = list(creator='NodosChile', description='A graph file writing in R using \'rgexf\'',keywords='gexf graph, NodosChile, R, rgexf')
   ) {
   require(XML, quietly = T)
   
@@ -172,6 +182,13 @@ gexf <- function(
     version=1.2)
   
   # graph
+  xmlMeta <- newXMLNode(name='meta', 
+                        attrs=list(lastmodifieddate=as.character(Sys.Date())), 
+                        parent=gexf)
+  newXMLNode(name='creator', meta$creator, parent=xmlMeta)
+  newXMLNode(name='description', meta$description, parent=xmlMeta)
+  newXMLNode(name='keywords', meta$keywords, parent=xmlMeta)
+  
   xmlGraph <- newXMLNode(name='graph', parent=gexf)
   if (mode == 'dynamic') {
     strTime <- min(c(unlist(nodeDynamic), unlist(edgeDynamic)), na.rm=T)
@@ -194,18 +211,14 @@ gexf <- function(
   
   # nodes att definitions
   if (nNodesAtt > 0) {
-    if (nNodesAtt == 1) {
-      TIT <- 'att1'; TYPE <- typeof(nodesAtt) 
-    }
-    else {
-      TIT <- colnames(nodesAtt); TYPE <- sapply(nodesAtt, typeof)
-    }
+    TIT <- colnames(nodesAtt)
+    TYPE <- unlist(lapply(nodesAtt, typeof))
     
     nodesAttDf <- data.frame(
       id = paste('att',1:nNodesAtt,sep=''), title = TIT, type = TYPE,
       stringsAsFactors=F
     )
-    
+  
     # Fixing datatype
     for (i in 1:NROW(datatypes)) {
       nodesAttDf$type <- gsub(datatypes[i,2], datatypes[i,1], nodesAttDf$type)
@@ -222,12 +235,8 @@ gexf <- function(
 
   # edges att
   if (nEdgesAtt > 0) {
-    if (nEdgesAtt == 1) {
-      TIT <- 'att1'; TYPE <- typeof(edgesAtt) 
-    }
-    else {
-      TIT <- colnames(edgesAtt); TYPE <- sapply(edgesAtt, typeof)
-    }
+    TIT <- colnames(edgesAtt)
+    TYPE <- sapply(edgesAtt, typeof)
     
     edgesAttDf <- data.frame(
       id = paste('att',1:nEdgesAtt,sep=''), title = TIT, type = TYPE,
@@ -261,6 +270,10 @@ gexf <- function(
         paste("viz.position", c("x","y","z"), sep=".")
       else if (i == "size") colnames(nodessize) <- "viz.size.value"
       else if (i == "shape") colnames(nodesshape) <- "viz.shape.value"
+      else if (i == "image") {
+        nodesimage <- cbind(rep("image",NROW(nodes)), viz.image.uri=nodesimage)
+        colnames(nodesimage) <- c("viz.image.value","viz.image.uri")
+      }
       
       ListNodesVizAtt <- cbind(ListNodesVizAtt, get(paste("nodes",i,sep="")))
     }
@@ -333,13 +346,13 @@ gexf <- function(
   # EDGES
   xmlEdges <- newXMLNode(name='edges', parent=xmlGraph)
   .addNodesEdges(edges, xmlEdges, 'edge')
-  results <- saveXML(xmlFile, encoding='UTF-8')
-  class(results) <- 'gexf'
+  results <- list(graph=saveXML(xmlFile, encoding='UTF-8'))
+  class(results) <- 'gexffile'
   
   if (is.na(output)) {
     return(results)
   } else {
     print(results, file=output)
-    cat('GEXF graph written successfuly\n')
+    message('GEXF graph successfully written at:\n',output)
   }
 }
