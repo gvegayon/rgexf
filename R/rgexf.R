@@ -32,21 +32,32 @@ processEdgeList <- function(x) {
         }, PAR=parent)
 }
 
-.addNodesEdges <- function(x, parent, type='node') {
+.addNodesEdges <- function(data, parent, type='node') {
 ################################################################################
 # Prints the nodes and edges
 ################################################################################  
 
-apply(x, MARGIN = 1, 
-        function(x, PAR, type) {
+  x <- 1:NROW(data)
+  xvars <- colnames(data)
+
+  noattnames <- xvars[grep('^(att[0-9])|(viz[.])', xvars, invert=T)]
+  attributes <- length(grep('^att', xvars)) > 0
+  vizattributes <- length(grep('^viz[.]', xvars)) > 0
+
+  vizattnames <- colnames(data[,grep('^viz[.]', xvars)])
+  vizcolors <- any(grepl("^viz[.]color",vizattnames))
+  vizposition <- any(grepl("^viz[.]position",vizattnames))
+  vizsize <- any(grepl("^viz[.]size",vizattnames))
+  vizshape <- any(grepl("^viz[.]shape",vizattnames))
+  vizimage <- any(grepl("^viz[.]image",vizattnames))
+  vizthickness <- any(grepl("^viz[.]thickness",vizattnames))
+
+  lapply(X=x, 
+        function(X, PAR, type) {
+          x <- data[X,]
           x <- data.frame(t(x), stringsAsFactors=F)
           
-          xvars <- names(x)
-          
-          noattnames <- xvars[grep('^(att[0-9])|(viz[.])', xvars, invert=T)]
-          
           # Parsing user-define attributes
-          attributes <- length(grep('^att', xvars)) > 0
           if (attributes) {
             att <- x[,grep('^att', xvars), drop=F]
             attnames <- names(att)
@@ -54,7 +65,6 @@ apply(x, MARGIN = 1,
           else attnames <- ""
           
           # Parsing VIZ attributes
-          vizattributes <- length(grep('^viz[.]', xvars)) > 0
           if (vizattributes) {
             vizatt <- x[,grep('^viz[.]', xvars), drop=F]
             vizattnames <- names(vizatt)
@@ -65,46 +75,45 @@ apply(x, MARGIN = 1,
           
           # Adds every attribute removing leading and ending spaces
           for (i in noattnames) {
-            tempatt <- x[,c(i)]
-            if (!is.na(tempatt)) xmlAttrs(tempnode0)[i] <-
+            if (!is.na((tempatt <- x[,c(i)]))) xmlAttrs(tempnode0)[i] <-
               gsub("[\t ]*$", "", gsub("^[\t ]*", "", tempatt))
           }
           
           # Viz Att printing
           if (vizattributes) {
             # Colors
-            if (any(grepl("^viz[.]color",vizattnames))) {
+            if (vizcolors) {
               tempvizatt <- vizatt[grep("^viz[.]color[.]", vizattnames)]
               colnames(tempvizatt) <- gsub("^viz[.]color[.]", "", colnames(tempvizatt))
               tempnode1 <- newXMLNode("viz:color", parent=tempnode0, attrs=tempvizatt)
             }
             # Position
-            if (any(grepl("^viz[.]position",vizattnames))) {
+            if (vizposition) {
               tempvizatt <- vizatt[grep("^viz[.]position[.]", vizattnames)]
               colnames(tempvizatt) <- gsub("^viz[.]position[.]", "", colnames(tempvizatt))
               tempnode1 <- newXMLNode("viz:position", parent=tempnode0, attrs=tempvizatt)
             }
             # Size
-            if (any(grepl("^viz[.]size",vizattnames))) {
+            if (vizsize) {
               tempvizatt <- vizatt[grep("^viz[.]size[.]", vizattnames)]
               colnames(tempvizatt) <- gsub("^viz[.]size[.]", "", colnames(tempvizatt))
               tempnode1 <- newXMLNode("viz:size", parent=tempnode0, attrs=tempvizatt)
             }
             # Shape
-            if (any(grepl("^viz[.]shape",vizattnames))) {
+            if (vizshape) {
               tempvizatt <- vizatt[grep("^viz[.]shape[.]", vizattnames)]
               colnames(tempvizatt) <- gsub("^viz[.]shape[.]", "", colnames(tempvizatt))
               tempnode1 <- newXMLNode("viz:shape", parent=tempnode0, attrs=tempvizatt)
             }
             # Image
-            if (any(grepl("^viz[.]image",vizattnames))) {
+            if (vizimage) {
               tempvizatt <- vizatt[grep("^viz[.]image[.]", vizattnames)]
               colnames(tempvizatt) <- c("viz.image.value", "viz.image.uri")
               colnames(tempvizatt) <- gsub("^viz[.]image[.]", "", colnames(tempvizatt))
               tempnode1 <- newXMLNode("viz:shape", parent=tempnode0, attrs=tempvizatt)
             }
             # Thickness
-            if (any(grepl("^viz[.]thickness",vizattnames))) {
+            if (vizthickness) {
               tempvizatt <- vizatt[grep("^viz[.]thickness[.]", vizattnames)]
               colnames(tempvizatt) <- gsub("^viz[.]thickness[.]", "", colnames(tempvizatt))
               tempnode1 <- newXMLNode("viz:thickness", parent=tempnode0, attrs=tempvizatt)
@@ -119,9 +128,9 @@ apply(x, MARGIN = 1,
             
             tempnode2 <- newXMLNode('attvalues', parent=tempnode0)
             
-            apply(tempDF, MARGIN = 1, function(x) {
-              newXMLNode(name='attvalue', parent=tempnode2, attrs=x)
-            })
+            for (i in 1:NROW(tempDF)) {
+              newXMLNode(name='attvalue', parent=tempnode2, attrs=tempDF[i,])
+            }
           }
         }, PAR=parent, type=type)
 }
@@ -330,12 +339,13 @@ gexf <- function(
   
   # Generating weights
   if (all(is.null(edgesWeight))) {
-    pastededges <- apply(edges[,c(2,1)], 1, paste, collapse="")
-    for (i in 1:NROW(edges)) {
-       edgesWeight <- c(
-         edgesWeight, 
-         sum(paste(edges[i,1:2], collapse="") %in% pastededges))
-    }
+    #pastededges <- apply(edges[,c(2,1)], 1, paste, collapse="")
+    #for (i in 1:NROW(edges)) {
+    #   edgesWeight <- c(
+    #     edgesWeight, 
+    #     sum(paste(edges[i,1:2], collapse="") %in% pastededges))
+    #}
+    edgesWeight <- 0
   }
   else edgesWeight <- 0
   edges <- cbind(edges, edgesWeight+1)
