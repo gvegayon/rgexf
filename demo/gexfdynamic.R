@@ -33,6 +33,12 @@ time.edges
 
 ################################################################################
 # Dynamic network in gexf:
+# you create a .gexf archive by adding the expression:
+#
+#                       ,output="yourgraph.gexf" 
+#
+# before the last closing 
+# parenthesis in the following function
 
 pause()
 gexf(nodes=people, edges=relations, nodeDynamic=time.nodes)

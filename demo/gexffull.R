@@ -66,10 +66,20 @@ thick<-1:9
 
 ################################################################################
 # Dynamic network with nodes and edges attributes
+
+# you create a .gexf archive by adding the expression:
+#
+#                       ,output="yourgraph.gexf" 
+#
+# before the last closing 
+# parenthesis in the following function
+
 pause()
+
 gexf(nodes=people, edges=relations, edgeDynamic=time.edges, edgesAtt=edge.att,
      nodeDynamic=time.nodes, nodesAtt=node.att,
      nodesVizAtt=list(shape=shapes, position=pos, image=imagee, colors=color),
      edgesVizAtt=list(thickness=thick))
+
 
 ################################################################################

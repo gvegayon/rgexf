@@ -30,6 +30,13 @@ edge.att
 
 ################################################################################
 # Network with nodes attributes
+# you create a .gexf archive by adding the expression:
+#
+#                       ,output="yourgraph.gexf" 
+#
+# before the last closing 
+# parenthesis in the following function
+
 gexf(nodes=people, edges=relations, nodesAtt=node.att, edgesAtt=edge.att)
 
 ################################################################################
