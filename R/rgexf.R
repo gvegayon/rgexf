@@ -339,13 +339,13 @@ gexf <- function(
   
   # Generating weights
   if (all(is.null(edgesWeight))) {
-    #pastededges <- apply(edges[,c(2,1)], 1, paste, collapse="")
-    #for (i in 1:NROW(edges)) {
-    #   edgesWeight <- c(
-    #     edgesWeight, 
-    #     sum(paste(edges[i,1:2], collapse="") %in% pastededges))
-    #}
-    edgesWeight <- 0
+    pastededges <- apply(edges[,c(2,1)], 1, paste, collapse="")
+    for (i in 1:NROW(edges)) {
+       edgesWeight <- c(
+         edgesWeight, 
+         sum(paste(edges[i,1:2], collapse="") %in% pastededges))
+    }
+    #edgesWeight <- 0
   }
   else edgesWeight <- 0
   edges <- cbind(edges, edgesWeight+1)
@@ -356,6 +356,7 @@ gexf <- function(
   # EDGES
   xmlEdges <- newXMLNode(name='edges', parent=xmlGraph)
   .addNodesEdges(edges, xmlEdges, 'edge')
+  
   results <- list(graph=saveXML(xmlFile, encoding='UTF-8'))
   class(results) <- 'gexffile'
   
