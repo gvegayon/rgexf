@@ -1,7 +1,7 @@
 \name{gexf}
 \alias{gexf}
-\title{Creates GEXF graph file}
-\description{\code{gexf} takes as basic arguments a \code{node} and \code{edge} matrices or data frames   with which writes a GEXF graph file}
+\title{Creates graph in GEXF format}
+\description{\code{gexf} takes a \code{node} matrix (or dataframe) and an \code{edge} matrix (or dataframe) and creates a graph in GEXF format and save it into a new file}
 \usage{
 gexf(
   nodes, edges, 
@@ -19,29 +19,29 @@ gexf(
   )
 }
 \arguments{
-  \item{nodes}{Two columns, nodes 'id' and 'label', matrix or data frame.}
-  \item{edges}{Two columns, namely 'source' and 'target', matrix or data frame based on nodes ids}
-  \item{edgesAtt}{One or more columns data frame representing edges attributes}
-  \item{edgesWeight}{Numeric vector containing edges weights}
-  \item{edgesVizAtt}{List of three or less viz attributues such as color, thickness and shape of the edges (see details)}
-  \item{nodesAtt}{One or more columns data frame representing nodes attributes}
+  \item{nodes}{It contains two columns. First column contains nodes's id and the second one its 'label' (class: matrix or data frame).}
+  \item{edges}{It contains two columns. The first one has the 'source' and the second one has the 'target' (class: (matrix or data frame both based on nodes ids))}
+  \item{edgesAtt}{A dataframe with one or more columns representing edges attributes}
+  \item{edgesWeight}{A numeric vector containing edges weights}
+  \item{edgesVizAtt}{List of three or less viz attributes such as color, thickness and shape of the edges (see details)}
+  \item{nodesAtt}{A dataframe with one or more columns representing nodes attributes}
   \item{nodesVizAtt}{List of four or less viz attributes such as color, position, size and shape of the nodes (see details)}
-  \item{nodeDynamic}{Two columns matrix or data frame including 'start' and 'end' with number of rows equal to the number of nodes}
-  \item{edgeDynamic}{Two columns matrix or data frame including 'start' and 'end' with number of rows equal to the number of edges}
-  \item{output}{Character, complet path (including file name) where to print the GEXF file}
-  \item{tFormat}{Character, time format for dynamic graphs}
+  \item{nodeDynamic}{A two columns matrix or dataframe. The first column indicates the time at which a given node starts; the second one shows when it ends. The matrix or dataframe must have the same number of rows than the number of nodes}
+  \item{edgeDynamic}{A two columns matrix or dataframe. The fist column indicates the time at which a given edge stars; the second one shows when it ends. The matrix or dataframe must have the same number of rows than the number of edges}
+  \item{output}{character, complete path (including file name) where to print the GEXF file}
+  \item{tFormat}{character, time format for dynamic graphs}
   \item{defaultedgetype}{'directed' or 'undirected'}
   \item{meta}{Meta data describing the graph}
 }
 \details{  
-  \code{nodesAtt} and \code{edgesAtt} can be optionally include and must have the same number of rows as nodes and edges are respectively. In order to fully take advantage of \code{gexf}, using data frames is needed as these preserve vectors datatypes, which are identified by the function.
+  \code{nodesAtt} and \code{edgesAtt} can be also include. They must have the same number of rows as nodes and edges, respectively. In order to fully take advantage of \code{gexf}, using data frames is needed as these preserve vectors datatypes, which are identified by the function.
   
-  \code{nodesVizAtt} and \code{edgesVizAtt} allow to stablish visual attributes such as color, position (nodes only), size (nodes only), thickness (edges only) shape and image (nodes only). 
+  \code{nodesVizAtt} and \code{edgesVizAtt} allow to establish visual attributes such as color, position (nodes only), size (nodes only), thickness (edges only) shape and image (nodes only). 
   \itemize{
   \item Color is defined by the RGBA color model, thus for every node/edge the color should be with \emph{r}, \emph{g}, \emph{b} with integers between 0 and 256 and \emph{alpha} as a float between 0.0 and 1.0.
-  \item Position, for every node, is a three component vector including \emph{x}, \emph{y} and \emph{z} coordinates. The three as float.
+  \item Position, for every node, is a three components vector including \emph{x}, \emph{y} and \emph{z} coordinates. The three components must be float.
   \item Size should be denoted as a float.
-  \item Thickness works the same as size.
+  \item Thickness works as size.
   \item Node Shape (character), currently unsuported by Gephi, can take the values of \emph{disk}, \emph{square}, \emph{triangle}, \emph{diamond} and \emph{image}.
   \item Edge Shape (character), currently unsuported by Gephi, can take the values of \emph{solid}, \emph{dotted}, \emph{dashed} and \emph{double}.
   \item Image (character), currently unsuported by Gephi, consists on a character vector of URIs.
@@ -57,7 +57,8 @@ gexf(
 \value{
   A GEXF (xml) graph object.
 }
-\author{George Vega Yon \email{george.vega@nodoschile.org}}
+\author{George Vega Yon \email{george.vega@nodoschile.org}, 
+        Jorge Fabrega \email{jorge.fabrega@nodoschile.org}}
 
 \references{
   The GEXF project website:

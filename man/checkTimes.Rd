@@ -9,4 +9,5 @@ checkTimes(x, format = "date")
   \item{x}{A string char}
   \item{format}{format, could be "date", "dateTime", "float"}
 }
-\author{George Vega Yon \email{george.vega@nodoschile.org}}
+\author{George Vega Yon \email{george.vega@nodoschile.org}, 
+        Jorge Fabrega \email{jorge.fabrega@nodoschile.org}
