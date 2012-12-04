@@ -1,7 +1,8 @@
-^\.gitignore$
-^.\.RData$
-^\.Rhistory$
-^.\.Rprojt$
-^\.git/
-^./.git
 ^\.Rproj\.user$
+^[.]git.*$
+^TODO[.]txt$
+^[.]RData$
+^.*[.]Rproj$
+^wiki$
+^playground$
+

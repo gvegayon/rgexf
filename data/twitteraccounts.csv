@@ -1,4 +1,4 @@
-Label;cargo;partido;sector;categoria
+label;cargo;partido;sector;categoria
 Antoniohorvath;Senador;Renovacion Nacional;Coalicion;Politico
 C_Ballesteros_;;;;educacion
 Curvaspoliticas;;;;periodistas
@@ -111,7 +111,7 @@ magdalenamatte;Ministro;Union Democrata Independiente;Coalicion;Politico
 marcelobrunet;;;;sociedad civil
 marcelodiazd;Diputado;Partido Socialista;Concertacion;Politico
 marconunez;Diputado;Partido Por la Democracia;Concertacion;Politico
-marcoporchile;LÐder;Partido Progresista;Independiente;Politico
+marcoporchile;L?der;Partido Progresista;Independiente;Politico
 marisolturres;Diputado;Union Democrata Independiente;Coalicion;Politico
 matiaswalkerp;Diputado;Partido Democrata Cristiano;Concertacion;Politico
 mauriciohofmann;;;;periodistas

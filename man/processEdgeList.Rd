@@ -14,7 +14,9 @@ processEdgeList(x)
 \value{
   A list containing two data frames.
 }
-\author{George Vega Yon \email{george.vega@nodoschile.org}, Jorge Fabrega \email{jorge.fabrega@nodoschile.org}}
+\author{George Vega Yon \email{george.vega@nodoschile.org},
+
+Jorge Fabrega Lacoa \email{jorge.fabrega@nodoschile.org}}
 \examples{
   edgelist <- matrix(
     c("matthew","john",
@@ -24,3 +26,4 @@ processEdgeList(x)
   
   processEdgeList(edgelist)
 }
+\keyword{ misc }

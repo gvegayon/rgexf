@@ -24,6 +24,7 @@
   }
 }
 \author{George Vega Yon \email{george.vega@nodoschile.org},
+
 Jorge Fabrega Lacoa \email{jorge.fabrega@nodoschile.org}}
 \note{
   See the GEXF primer for details on the GEXF graph format:

@@ -6,9 +6,19 @@
 gexf(
   nodes, edges, 
   edgesAtt = NULL, edgesWeight = NULL, 
-  edgesVizAtt = list(color=NULL, thickness=NULL, shape=NULL),
+  edgesVizAtt = list(
+    color=NULL, 
+    thickness=NULL, 
+    shape=NULL
+  ),
   nodesAtt = NULL,
-  nodesVizAtt = list(color=NULL, position=NULL, size=NULL, shape=NULL, image=NULL),
+  nodesVizAtt = list(
+    color=NULL, 
+    position=NULL, 
+    size=NULL, 
+    shape=NULL, 
+    image=NULL
+  ),
   nodeDynamic = NULL, 
   edgeDynamic = NULL, 
   output = NA, tFormat = "double", defaultedgetype = "undirected",
@@ -57,8 +67,9 @@ gexf(
 \value{
   A GEXF (xml) graph object.
 }
-\author{George Vega Yon \email{george.vega@nodoschile.org}, 
-        Jorge Fabrega \email{jorge.fabrega@nodoschile.org}}
+\author{George Vega Yon \email{george.vega@nodoschile.org},
+
+Jorge Fabrega Lacoa \email{jorge.fabrega@nodoschile.org}}
 
 \references{
   The GEXF project website:
@@ -69,3 +80,4 @@ gexf(
   demo(dspl)
   }
 }
+\keyword{ IO }
