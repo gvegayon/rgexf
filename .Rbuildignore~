@@ -1,7 +1,0 @@
-^\.gitignore$
-^.\.RData$
-^\.Rhistory$
-^.\.Rprojt$
-^\.git/
-^./.git
-^\.Rproj\.user$

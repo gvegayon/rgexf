@@ -364,6 +364,6 @@ gexf <- function(
     return(results)
   } else {
     print(results, file=output)
-    message('GEXF graph successfully written at:\n',output)
+    message('GEXF graph successfully written at:\n',normalizePath(output))
   }
 }

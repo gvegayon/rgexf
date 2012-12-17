@@ -6,8 +6,6 @@ pause <- function() {
   invisible(readline("\nPress <return> to continue: ")) 
 }
 
-require(foreign)
-
 # Example to be used as a demo for rgexf
 # This example uses follower-following relationships among chilean politicians,
 # journalists and political analysists on Twitter (sample) by december 2011. 
@@ -20,27 +18,26 @@ pause()
 # among them in the online social network Twitter.
 # for more information about Twitter, please visit: www.twitter.com
 
-nodes_att<-read.csv("C:/Users/Jorge/Desktop/Investigacion/rgexf/red_followers_atributos_06012012_nodes.csv", sep=";")
-relations_att<-read.csv("C:/Users/Jorge/Desktop/Investigacion/rgexf/red_followers_atributos_06012012_edges.csv", sep="\t")
+data(twitteraccounts)
+data(followers)
 
 # preparing data 
-nodos<-as.matrix(nodes_att$Label)
+nodos<-as.matrix(twitteraccounts$label)
 num<-length(nodos)
 nodos<-cbind(seq(1:num),nodos)
 colnames(nodos)<-c("id",'label')
 
-cargo<-as.data.frame(nodes_att$cargo)
-partido<-as.data.frame(nodes_att$partido)
-sector<-as.data.frame(nodes_att$sector)
-categoria<-as.data.frame(nodes_att$categoria)
+cargo<-as.data.frame(twitteraccounts$cargo)
+partido<-as.data.frame(twitteraccounts$partido)
+sector<-as.data.frame(twitteraccounts$sector)
+categoria<-as.data.frame(twitteraccounts$categoria)
 
-nodos.att<-cbind(nodes_att$cargo,nodes_att$partido,nodes_att$sector,nodes_att$categoria)
-nodos.att<-as.data.frame(nodos.att)
-relations<-cbind(relations_att$Source,relations_att$Target)
+nodos.att <- subset(twitteraccounts, select=c(cargo, partido, sector, categoria))
+relations<- subset(followers, select=c(source, target))
 
 # Creating the follower-following network in gexf format with some nodes' attribute
 pause()
 
-tw_politics_cl<-gexf(nodos,relations,nodesAtt=nodos.att)
+tw_politics_cl <- gexf(nodos,relations,nodesAtt=nodos.att)
 
 print.gexffile(tw_politics_cl, file='example.gexf', replace=T)
