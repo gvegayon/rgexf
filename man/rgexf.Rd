@@ -9,7 +9,7 @@
 \description{
   rgexf packages provides of a collection of functions to generate GEXF graph files supported on GEPHI.
   
-  It supports building dynamic graphs and adding attributes to edges and nodes.
+  It supports building dynamic graphs and adding attributes to edges and nodes, including visual attributes such as color, shape and size.
   
   Please visit the project home for more information:
     \url{https://bitbucket.org/gvegayon/rgexf}.
@@ -18,8 +18,8 @@
   \tabular{ll}{
     Package: \tab rgexf\cr
     Type: \tab Package\cr
-    Version: \tab 0.12.09\cr
-    Date: \tab 2012-09-11\cr
+    Version: \tab 0.12.12\cr
+    Date: \tab 2012-12-17\cr
     License: \tab GPL version 2 or later\cr
   }
 }
@@ -41,6 +41,8 @@ Jorge Fabrega Lacoa \email{jorge.fabrega@nodoschile.org}}
 \examples{
   \dontrun{
     demo(gexf)
+    demo(gexffull)
+    demo(gexftwitter)
   }
 }
 \keyword{ package }

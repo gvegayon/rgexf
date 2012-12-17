@@ -149,9 +149,9 @@ gexf <- function(
   nodeDynamic=NULL,
   edgeDynamic=NULL,
   output = NA,
-  tFormat='double',
-  defaultedgetype = 'undirected',
-  meta = list(creator='NodosChile', description='A graph file writing in R using \'rgexf\'',keywords='gexf graph, NodosChile, R, rgexf')
+  tFormat="double",
+  defaultedgetype = "undirected",
+  meta = list(creator="NodosChile", description="A graph file writing in R using \'rgexf\'",keywords="gexf graph, NodosChile, R, rgexf")
   ) {
   require(XML, quietly = T)
   
@@ -363,7 +363,6 @@ gexf <- function(
   if (is.na(output)) {
     return(results)
   } else {
-    print(results, file=output)
-    message('GEXF graph successfully written at:\n',normalizePath(output))
+    print(results, file=output, replace=T)
   }
 }

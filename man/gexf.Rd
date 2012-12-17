@@ -21,11 +21,12 @@ gexf(
   ),
   nodeDynamic = NULL, 
   edgeDynamic = NULL, 
-  output = NA, tFormat = "double", defaultedgetype = "undirected",
+  output = NA, tFormat = "double", 
+  defaultedgetype = "undirected",
   meta = list(
-    creator='NodosChile', 
-    description='A graph file writing in R using \'rgexf\'',
-    keywords='gexf graph, NodosChile, R, rgexf')
+    creator="NodosChile", 
+    description="A graph file writing in R using \'rgexf\'",
+    keywords="gexf graph, NodosChile, R, rgexf")
   )
 }
 \arguments{
@@ -77,7 +78,14 @@ Jorge Fabrega Lacoa \email{jorge.fabrega@nodoschile.org}}
 }
 \examples{
   \dontrun{
-  demo(dspl)
+  demo(gexf)
+  demo(gexfattributes)
+  demo(gexfbasic)
+  demo(gexfdynamic)
+  demo(processEdgeList)
+  demo(gexffull)
+  demo(gexftwitter)
+  demo(gexfdynamicandatt)
   }
 }
 \keyword{ IO }

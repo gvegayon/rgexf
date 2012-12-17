@@ -7,7 +7,8 @@ print.gexffile <- function(x, file=NA, replace=F, ...) {
   }
   else {
     output <- file(description=file,open="w",encoding='UTF-8')
-    write(x[[1]], file=output,...)
+    write(x$graph, file=output,...)
     close.connection(output)
+    message('GEXF graph successfully written at:\n',normalizePath(file))
   }
 }

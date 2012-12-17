@@ -40,4 +40,4 @@ pause()
 
 tw_politics_cl <- gexf(nodos,relations,nodesAtt=nodos.att)
 
-print.gexffile(tw_politics_cl, file='example.gexf', replace=T)
+# print(tw_politics_cl, file='example.gexf', replace=T)

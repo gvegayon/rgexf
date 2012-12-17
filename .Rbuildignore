@@ -5,5 +5,7 @@
 ^.*[.]Rproj$
 ^wiki$
 ^playground$
-*~
-.git
+.*~
+\.git
+.*\.png
+.*\.gexf

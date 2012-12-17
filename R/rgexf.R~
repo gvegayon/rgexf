@@ -345,6 +345,7 @@ gexf <- function(
          edgesWeight, 
          sum(paste(edges[i,1:2], collapse="") %in% pastededges))
     }
+    #edgesWeight <- 0
   }
   else edgesWeight <- 0
   edges <- cbind(edges, edgesWeight+1)
@@ -355,13 +356,13 @@ gexf <- function(
   # EDGES
   xmlEdges <- newXMLNode(name='edges', parent=xmlGraph)
   .addNodesEdges(edges, xmlEdges, 'edge')
+  
   results <- list(graph=saveXML(xmlFile, encoding='UTF-8'))
   class(results) <- 'gexffile'
   
   if (is.na(output)) {
     return(results)
   } else {
-    print(results, file=output)
-    message('GEXF graph successfully written at:\n',output)
+    print(results, file=output, replace=T)
   }
 }
