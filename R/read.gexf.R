@@ -1,9 +1,9 @@
-read.gexf <- function(gexffile) {
+read.gexf <- function(x) {
 ################################################################################
 # Read gexf graph files
 ################################################################################
   # Reads the graph
-  gfile <- xmlParse(gexffile)
+  gfile <- xmlParse(x)
   
   # Gets the namespace
   ns <- xmlNamespace(xmlRoot(gfile))
@@ -13,40 +13,40 @@ read.gexf <- function(gexffile) {
 
   ################################################################################
   # Creator
-  if (length(x<-getNodeSet(gfile,"/r:gexf/r:meta/r:creator", c(r=ns))) > 0) {
-    graph$meta[["creator"]] <- xmlValue(x[[1]])
+  if (length(y<-getNodeSet(gfile,"/r:gexf/r:meta/r:creator", c(r=ns))) > 0) {
+    graph$meta[["creator"]] <- xmlValue(y[[1]])
   }
   else graph$meta[["creator"]] <- NA
   # Description
-  if (length(x<-getNodeSet(gfile,"/r:gexf/r:meta/r:description", c(r=ns))) > 0) {
-    graph$meta[["description"]] <- xmlValue(x[[1]])
+  if (length(y<-getNodeSet(gfile,"/r:gexf/r:meta/r:description", c(r=ns))) > 0) {
+    graph$meta[["description"]] <- xmlValue(y[[1]])
   }
   else graph$meta[["description"]] <- NA
   # Keywords
-  if (length(x<-getNodeSet(gfile,"/r:gexf/r:meta/r:keywords", c(r=ns))) > 0) {
-    graph$meta[["keywords"]] <- xmlValue(x[[1]])
+  if (length(y<-getNodeSet(gfile,"/r:gexf/r:meta/r:keywords", c(r=ns))) > 0) {
+    graph$meta[["keywords"]] <- xmlValue(y[[1]])
   }
   else graph$meta[["keywords"]] <- NA
   ################################################################################
 
   # Attributes list
-  if (length(x<-getNodeSet(gfile,"/r:gexf/r:graph/r:attributes", c(r=ns))) > 0) {
-    while (length(x) > 0) {
+  if (length(y<-getNodeSet(gfile,"/r:gexf/r:graph/r:attributes", c(r=ns))) > 0) {
+    while (length(y) > 0) {
       
       # Gets the class
-      attclass <- paste(xmlAttrs(x[[1]])[["class"]],"att", sep=".")
-      y <- getNodeSet(
-        x[[1]], "/r:gexf/r:graph/r:attributes/r:attribute", c(r=ns))
+      attclass <- paste(xmlAttrs(y[[1]])[["class"]],"att", sep=".")
+      z <- getNodeSet(
+        y[[1]], "/r:gexf/r:graph/r:attributes/r:attribute", c(r=ns))
       
       # Builds a dataframe
       graph[[attclass]] <- data.frame(
-        id=sapply(y, xmlGetAttr, name="id"),
-        title=sapply(y, xmlGetAttr, name="title"),
-        type=sapply(y, xmlGetAttr, name="type")
+        id=sapply(z, xmlGetAttr, name="id"),
+        title=sapply(z, xmlGetAttr, name="title"),
+        type=sapply(z, xmlGetAttr, name="type")
         )
       
       # Removes the already analyzed
-      x <- x[-1]
+      y <- y[-1]
     }
   }
   else { # If no other att is
@@ -94,7 +94,7 @@ add.gexf.node <- function(id=NA, label=NA, start=NA, end=NA, graph) {
 }
 
 #grafo <- read.gexf("lesmiserables.gexf")
-#grafo <- add.node(id=999, label="test", grafo)
+#grafo <- add.gexf.node(id=999, label="test", graph=grafo)
 
 # Examples
 # ---------
@@ -106,6 +106,6 @@ add.gexf.node <- function(id=NA, label=NA, start=NA, end=NA, graph) {
 
 # lapply(b, head)
 
-#x <- gexf(nodes=grafo$nodes, edges=grafo$edges)
+#x <- write.gexf(nodes=grafo$nodes, edges=grafo$edges)
 #lapply(x[-5], head)
 #lapply(grafo[-6], head)

@@ -38,32 +38,32 @@ edge.att
 ################################################################################
 # First example: a simple net
 pause()
-gexf(nodes=people, edges=relations)
+write.gexf(nodes=people, edges=relations)
 
 ################################################################################
 # Second example: a simple net with nodes attributes
 pause()
-gexf(nodes=people, edges=relations, nodesAtt=node.att)
+write.gexf(nodes=people, edges=relations, nodesAtt=node.att)
 
 ################################################################################
 # Third example: a simple net with dynamic nodes
 pause()
-gexf(nodes=people, edges=relations, nodeDynamic=time.nodes)
+write.gexf(nodes=people, edges=relations, nodeDynamic=time.nodes)
 
 ################################################################################
 # Fourth example: a simple net with dynamic nodes with attributes
 pause()
-gexf(nodes=people, edges=relations, nodeDynamic=time.nodes, nodesAtt=node.att)
+write.gexf(nodes=people, edges=relations, nodeDynamic=time.nodes, nodesAtt=node.att)
 
 ################################################################################
 # Fifth example: a simple net with dynamic edges with attributes
 pause()
-gexf(nodes=people, edges=relations, edgeDynamic=time.edges, edgesAtt=edge.att)
+write.gexf(nodes=people, edges=relations, edgeDynamic=time.edges, edgesAtt=edge.att)
 
 ################################################################################
 # Sixth example: a simple net with dynamic edges and nodes with attributes
 pause()
-gexf(nodes=people, edges=relations, edgeDynamic=time.edges, edgesAtt=edge.att,
+write.gexf(nodes=people, edges=relations, edgeDynamic=time.edges, edgesAtt=edge.att,
      nodeDynamic=time.nodes, nodesAtt=node.att)
 
 ################################################################################
@@ -75,7 +75,7 @@ imagee <- data.frame(image=rbind(
   "Yellow_solid_sphere.png",
   "Yellow_solid_sphere.png"), stringsAsFactors=F)
 
-grafo <- gexf(nodes=people, edges=relations, nodesAtt=imagee,
+grafo <- write.gexf(nodes=people, edges=relations, nodesAtt=imagee,
               nodesVizAtt=list(
                 #shape=c("rectangle", "square", "triangle", "diamond"),
                 #position=matrix(1:12,nrow=4),

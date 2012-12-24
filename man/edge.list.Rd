@@ -1,9 +1,9 @@
-\name{processEdgeList}
-\alias{processEdgeList}
+\name{edge.list}
+\alias{edge.list}
 \title{Decompose an edge list}
 \description{Generates two data frames (nodes and edges) from a list of edges}
 \usage{
-processEdgeList(x)
+edge.list(x)
 }
 \arguments{
   \item{x}{A matrix or data frame structured as a list of edges}
@@ -24,6 +24,6 @@ Jorge Fabrega Lacoa \email{jorge.fabrega@nodoschile.org}}
       "matthew","stephen"),
     byrow=TRUE, ncol=2)
   
-  processEdgeList(edgelist)
+  edge.list(edgelist)
 }
 \keyword{ misc }

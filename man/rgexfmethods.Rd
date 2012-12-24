@@ -1,6 +1,5 @@
 \name{rgexf Methods}
-\alias{print.rgexf}
-
+\alias{print.gexf}
 \title{
   Print and write gexf objects
 }
@@ -23,7 +22,7 @@
 \author{George Vega Yon \email{george.vega@nodoschile.org}}
 
 \seealso{
-  See also \code{\link{gexf}}
+  See also \code{\link{write.gexf}}
 }
 \examples{
   \dontrun{

@@ -26,5 +26,5 @@ relations
 
 pause()
 
-processEdgeList(relations)
+edge.list(relations)
 

@@ -8,5 +8,5 @@
 .*~
 \.git
 .*\.png
-.*\.gexf
+.*\.gexf$
 ^.*\.Rproj$

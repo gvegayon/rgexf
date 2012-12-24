@@ -137,7 +137,7 @@ edge.list <- function(x) {
         }, PAR=parent, type=type)
 }
 
-gexf <- function(
+write.gexf <- function(
 ################################################################################  
 # Prints the gexf file
 ################################################################################
@@ -364,8 +364,8 @@ gexf <- function(
     mode=unlist(c(defaultedgetype=defaultedgetype, mode=mode)),
     nodes.att = nodesAttDf,
     edges.att = edgesAttDf,
-    nodes=as.data.frame(subset(nodes, select=c(id, label))),
-    edges=as.data.frame(subset(edges, select=c(source, target))),
+    nodes=as.data.frame(nodes["id"], nodes["label"]),
+    edges=as.data.frame(edges["source"],edges["target"]),
     graph=saveXML(xmlFile, encoding='UTF-8'))
   class(results) <- "gexf"
   
