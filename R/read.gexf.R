@@ -1,31 +1,32 @@
-read.gexf <- function(x) {
+read.gexf <- function(gexffile) {
 ################################################################################
 # Read gexf graph files
 ################################################################################
   # Reads the graph
-  gfile <- xmlParse(x)
+  gfile <- xmlParse(gexffile)
   
   # Gets the namespace
   ns <- xmlNamespace(xmlRoot(gfile))
   
   graph <- NULL
+  graph$meta <- NULL
 
   ################################################################################
   # Creator
   if (length(x<-getNodeSet(gfile,"/r:gexf/r:meta/r:creator", c(r=ns))) > 0) {
-    graph$creator <- xmlValue(x[[1]])
+    graph$meta[["creator"]] <- xmlValue(x[[1]])
   }
-  else graph$creator <- NA
+  else graph$meta[["creator"]] <- NA
   # Description
   if (length(x<-getNodeSet(gfile,"/r:gexf/r:meta/r:description", c(r=ns))) > 0) {
-    graph$description <- xmlValue(x[[1]])
+    graph$meta[["description"]] <- xmlValue(x[[1]])
   }
-  else graph$description <- NA
+  else graph$meta[["description"]] <- NA
   # Keywords
   if (length(x<-getNodeSet(gfile,"/r:gexf/r:meta/r:keywords", c(r=ns))) > 0) {
-    graph$keywords <- xmlValue(x[[1]])
+    graph$meta[["keywords"]] <- xmlValue(x[[1]])
   }
-  else graph$keywords <- NA
+  else graph$meta[["keywords"]] <- NA
   ################################################################################
 
   # Attributes list
@@ -69,9 +70,31 @@ read.gexf <- function(x) {
     source=sapply(edges, xmlGetAttr, name="source"), 
     target=sapply(edges, xmlGetAttr, name="target"), stringsAsFactors=F)
   rm(edges)
-  
+
+  graph$graph <- saveXML(gfile, encoding="UTF-8")
+
   graph
 }
+
+add.gexf.node <- function(id=NA, label=NA, start=NA, end=NA, graph) {
+  # Parses the graph file
+  graph$graph <- xmlTreeParse(graph$graph)
+  
+  # Gets the number of nodes
+  n <- length(graph$graph$doc$children$gexf[["graph"]][["nodes"]])
+  
+  # Adds the new node
+  graph$graph$doc$children$gexf[["graph"]][["nodes"]][[n+1]] <- 
+    asXMLNode(x=xmlNode("node", attrs=c(id=id, label=label)))
+  
+  graph$nodes <- rbind(graph$nodes, cbind(id=id, label=label))
+  
+  # Saves and returns as char XML
+  saveXML(graph, encoding="UTF-8")
+}
+
+#grafo <- read.gexf("lesmiserables.gexf")
+#grafo <- add.node(id=999, label="test", grafo)
 
 # Examples
 # ---------
@@ -82,3 +105,7 @@ read.gexf <- function(x) {
 # b <- read.gexf("http://gexf.net/data/WebAtlas_EuroSiS.gexf")
 
 # lapply(b, head)
+
+#x <- gexf(nodes=grafo$nodes, edges=grafo$edges)
+#lapply(x[-5], head)
+#lapply(grafo[-6], head)

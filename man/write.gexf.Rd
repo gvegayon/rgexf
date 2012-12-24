@@ -1,9 +1,9 @@
-\name{gexf}
+\name{write.gexf}
 \alias{gexf}
 \title{Creates graph in GEXF format}
-\description{\code{gexf} takes a \code{node} matrix (or dataframe) and an \code{edge} matrix (or dataframe) and creates a graph in GEXF format and save it into a new file}
+\description{\code{write.gexf} takes a \code{node} matrix (or dataframe) and an \code{edge} matrix (or dataframe) and creates a graph in GEXF format and save it into a new file}
 \usage{
-gexf(
+write.gexf(
   nodes, edges, 
   edgesAtt = NULL, edgesWeight = NULL, 
   edgesVizAtt = list(

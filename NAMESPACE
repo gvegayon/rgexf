@@ -2,8 +2,11 @@ importFrom(XML)
 
 export(.addNodesEdges, .defAtt)
 export(checkTimes)
-export(gexf)
-export(processEdgeList)
+export(write.gexf)
+export(read.gexf)
+export(add.gexf.node)
+export(edge.list)
 
 # Methods
-S3method(print, gexffile)
+S3method(print, gexf)
+S3method(write.gexf, gexf)

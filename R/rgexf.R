@@ -1,4 +1,4 @@
-processEdgeList <- function(x) {
+edge.list <- function(x) {
 ################################################################################
 # Translate a edgelist to two objects list (nodes + edges)
 ################################################################################
@@ -14,7 +14,9 @@ processEdgeList <- function(x) {
       edges <- matrix(unclass(x), byrow=F, ncol=2)
       nodes <- data.frame(id=1:nlevels(x), label=levels(x), stringsAsFactors=F)
       
-      return(list(nodes=nodes, edges=edges))
+      edgelist <- list(nodes=nodes, edges=edges)
+      class(edgelist) <- "edgelist"
+      return(edgelist)
     }
     else stop("Insuficcient number of columns")
   }
@@ -357,8 +359,15 @@ gexf <- function(
   xmlEdges <- newXMLNode(name='edges', parent=xmlGraph)
   .addNodesEdges(edges, xmlEdges, 'edge')
   
-  results <- list(graph=saveXML(xmlFile, encoding='UTF-8'))
-  class(results) <- 'gexffile'
+  results <- list(
+    meta=unlist(meta),
+    mode=unlist(c(defaultedgetype=defaultedgetype, mode=mode)),
+    nodes.att = nodesAttDf,
+    edges.att = edgesAttDf,
+    nodes=as.data.frame(subset(nodes, select=c(id, label))),
+    edges=as.data.frame(subset(edges, select=c(source, target))),
+    graph=saveXML(xmlFile, encoding='UTF-8'))
+  class(results) <- "gexf"
   
   if (is.na(output)) {
     return(results)

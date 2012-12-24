@@ -9,8 +9,8 @@ pause <- function() {
 # Example to be used as a demo for rgexf
 # This example uses follower-following relationships among chilean politicians,
 # journalists and political analysists on Twitter (sample) by december 2011. 
-# Source: Fabrega and Paredes (2012): "La política en 140 caracteres"
-# en Intermedios: medios de comunicación y democracia en Chile. Ediciones UDP
+# Source: Fabrega and Paredes (2012): 'La politica en 140 caracteres'
+# en Intermedios: medios de comunicacion y democracia en Chile. Ediciones UDP
 
 pause()
 
@@ -22,10 +22,10 @@ data(twitteraccounts)
 data(followers)
 
 # preparing data 
-nodos<-as.matrix(twitteraccounts$label)
-num<-length(nodos)
-nodos<-cbind(seq(1:num),nodos)
-colnames(nodos)<-c("id",'label')
+nodos <- as.matrix(twitteraccounts$label)
+num <- length(nodos)
+nodos <- cbind(seq(1:num),nodos)
+colnames(nodos) <- c("id","label")
 
 cargo<-as.data.frame(twitteraccounts$cargo)
 partido<-as.data.frame(twitteraccounts$partido)
