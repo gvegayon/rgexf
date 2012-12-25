@@ -15,7 +15,7 @@ edge.list <- function(x) {
       nodes <- data.frame(id=1:nlevels(x), label=levels(x), stringsAsFactors=F)
       
       edgelist <- list(nodes=nodes, edges=edges)
-      class(edgelist) <- "edgelist"
+      
       return(edgelist)
     }
     else stop("Insuficcient number of columns")
@@ -362,10 +362,12 @@ write.gexf <- function(
   results <- list(
     meta=unlist(meta),
     mode=unlist(c(defaultedgetype=defaultedgetype, mode=mode)),
-    nodes.att = nodesAttDf,
-    edges.att = edgesAttDf,
-    nodes=as.data.frame(nodes["id"], nodes["label"]),
-    edges=as.data.frame(edges["source"],edges["target"]),
+    node.att = nodesAttDf,
+    edge.att = edgesAttDf,
+    nodes=data.frame(id=nodes[,"id"], label=nodes[,"label"], stringsAsFactors=F
+                     , row.names=NULL),
+    edges=data.frame(source=edges[,"source"],target=edges[,"target"], stringsAsFactors=F
+                     , row.names=NULL),
     graph=saveXML(xmlFile, encoding='UTF-8'))
   class(results) <- "gexf"
   

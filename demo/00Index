@@ -1,8 +1,9 @@
-gexf              Example of gexf command using fictional data.
-gexfattributes    Working with attributes.
-gexfbasic         Basic net.
-gexfdynamic       Dynamic net.
-edge.list         Working with edges lists.
-gexffull          All the package.
-gexftwitter       Example with real data of chilean twitter accounts.
-gexfdynamicandatt Dynamic net with static attributes.
+gexf                 Example of gexf command using fictional data.
+gexfattributes       Working with attributes.
+gexfbasic            Basic net.
+gexfdynamic          Dynamic net.
+edge.list            Working with edges lists.
+gexffull             All the package.
+gexftwitter          Example with real data of chilean twitter accounts.
+gexfdynamicandatt    Dynamic net with static attributes.
+gexfbuildfromscratch Example building a net from scratch.

@@ -7,7 +7,7 @@ read.gexf(x)
 }
 \arguments{\item{x}{String. Path to the gexf file.}}
 \value{
-  A gexf object.
+  A \code{gexf} object.
 }
 \author{George Vega Yon \email{george.vega@nodoschile.org},
 

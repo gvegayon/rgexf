@@ -7,7 +7,7 @@
   An R library to build GEXF graph files
 }
 \description{
-  rgexf packages provides of a collection of functions to generate GEXF graph files supported on GEPHI.
+  rgexf packages provides of a collection of functions to generate GEXF and read graph files supported on GEPHI.
   
   It supports building dynamic graphs and adding attributes to edges and nodes, including visual attributes such as color, shape and size.
   
@@ -19,7 +19,7 @@
     Package: \tab rgexf\cr
     Type: \tab Package\cr
     Version: \tab 0.12.12\cr
-    Date: \tab 2012-12-17\cr
+    Date: \tab 2012-12-26\cr
     License: \tab GPL version 2 or later\cr
   }
 }

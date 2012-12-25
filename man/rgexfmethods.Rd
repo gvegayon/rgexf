@@ -1,5 +1,6 @@
 \name{rgexf Methods}
 \alias{print.gexf}
+\alias{summary.gexf}
 \title{
   Print and write gexf objects
 }
@@ -8,9 +9,11 @@
 }
 \usage{  
   \method{print}{gexf}(x, file=NA, replace=F, ...)
+  \method{summary}{gexf}(object, ...)
 }
 \arguments{
   \item{x}{An object of class \code{gexf} to be printed.}
+  \item{object}{An object of class \code{gexf} to be printed.}
   \item{file}{String. Output path where to save the GEXF file.}  
   \item{replace}{Logical. If \code{path} exists, \code{TRUE} would replace the file.}
   \item{\dots}{arguments passed on to \code{\link{cat}} (\code{print.rgexf})}
@@ -18,6 +21,7 @@
                            
 \value{
 \item{\code{print.gexf}}{ None (invisible \code{NULL}).}
+\item{\code{summary.gexf}}{ List containing some \code{gexf} object statistics.}
 }
 \author{George Vega Yon \email{george.vega@nodoschile.org}}
 

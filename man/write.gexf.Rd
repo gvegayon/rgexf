@@ -30,8 +30,8 @@ write.gexf(
   )
 }
 \arguments{
-  \item{nodes}{It contains two columns. First column contains nodes's id and the second one its 'label' (class: matrix or data frame).}
-  \item{edges}{It contains two columns. The first one has the 'source' and the second one has the 'target' (class: (matrix or data frame both based on nodes ids))}
+  \item{nodes}{It contains two columns. First column contains nodes's id and the second one its \dQuote{label} (class: matrix or data frame).}
+  \item{edges}{It contains two columns. The first one has the \dQuote{source} and the second one has the \dQuote{target} (class: (matrix or data frame both based on nodes ids))}
   \item{edgesAtt}{A dataframe with one or more columns representing edges attributes}
   \item{edgesWeight}{A numeric vector containing edges weights}
   \item{edgesVizAtt}{List of three or less viz attributes such as color, thickness and shape of the edges (see details)}
@@ -41,7 +41,7 @@ write.gexf(
   \item{edgeDynamic}{A two columns matrix or dataframe. The fist column indicates the time at which a given edge stars; the second one shows when it ends. The matrix or dataframe must have the same number of rows than the number of edges}
   \item{output}{character, complete path (including file name) where to print the GEXF file}
   \item{tFormat}{character, time format for dynamic graphs}
-  \item{defaultedgetype}{'directed' or 'undirected'}
+  \item{defaultedgetype}{\dQuote{directed}, \dQuote{undirected}, \dQuote{mutual}}
   \item{meta}{Meta data describing the graph}
 }
 \details{  
@@ -58,7 +58,7 @@ write.gexf(
   \item Image (character), currently unsuported by Gephi, consists on a character vector of URIs.
   }
   
-  \code{nodeDynamic} and \code{edgeDynamic} allow to draw dynamic graphs. It should contain two columns \emph{start} and \emph{end}, both allowing \code{NA} value. It can be use jointly with \code{tFormat} which by default is setted as 'double'. Currently accepted time formats are:
+  \code{nodeDynamic} and \code{edgeDynamic} allow to draw dynamic graphs. It should contain two columns \emph{start} and \emph{end}, both allowing \code{NA} value. It can be use jointly with \code{tFormat} which by default is setted as \dQuote{double}. Currently accepted time formats are:
   \itemize{
   \item Integer or double.
   \item International standard \emph{date} yyyy-mm-dd.
@@ -66,7 +66,7 @@ write.gexf(
   }
 }
 \value{
-  A GEXF (xml) graph object.
+  A \code{gexf} object.
 }
 \author{George Vega Yon \email{george.vega@nodoschile.org},
 
