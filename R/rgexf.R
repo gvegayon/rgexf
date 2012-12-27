@@ -78,7 +78,7 @@ edge.list <- function(x) {
           # Adds every attribute removing leading and ending spaces
           for (i in noattnames) {
             if (!is.na((tempatt <- x[,c(i)]))) xmlAttrs(tempnode0)[i] <-
-              gsub("[\t ]*$", "", gsub("^[\t ]*", "", tempatt))
+              tempatt # gsub("[\t ]*$", "", gsub("^[\t ]*", "", 
           }
           
           # Viz Att printing
@@ -312,9 +312,12 @@ write.gexf <- function(
   # The basic char matrix definition  for nodes
   nodes <- as.matrix(nodes)
   
-  if (dynamic[1]) nodeDynamic <- as.matrix(nodeDynamic)
-  if (nNodesAtt > 0) nodesAtt <- as.matrix(nodesAtt)
-  nodes <- cbind(nodes, nodeDynamic, nodesAtt, ListNodesVizAtt)
+  if (dynamic[1]) nodeDynamic <- data.frame(nodeDynamic, stringsAsFactors=F)
+  if (nNodesAtt > 0) nodesAtt <- data.frame(nodesAtt, stringsAsFactors=F)
+  
+  for (set in c(nodeDynamic, nodesAtt, ListNodesVizAtt)) {
+    try(nodes <- cbind(nodes, set), silent=T)
+  }
 
   # Naming the columns
   attNames <- nodesAttDf['id']
@@ -330,10 +333,12 @@ write.gexf <- function(
   # The basic dataframe definition  for edges
   edges <- as.matrix(edges)
   
-  if (dynamic[2]) edgeDynamic <- as.matrix(edgeDynamic)
-  if (nEdgesAtt > 0) edgesAtt <- as.matrix(edgesAtt)
+  if (dynamic[2]) edgeDynamic <- data.frame(edgeDynamic, stringsAsFactors=F)
+  if (nEdgesAtt > 0) edgesAtt <- data.frame(edgesAtt, stringsAsFactors=F)
     
-  edges <- cbind(edges, edgeDynamic, edgesAtt, ListEdgesVizAtt)
+  for (set in c(edgeDynamic, edgesAtt, ListEdgesVizAtt)) {
+    try(edges <- cbind(edges, set), silent=T)
+  }
     
   # Naming the columns
   attNames <- edgesAttDf['id']

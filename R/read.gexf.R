@@ -58,16 +58,16 @@ read.gexf <- function(x) {
     id=sapply(nodes, xmlGetAttr, name="id"), 
     label=sapply(nodes, xmlGetAttr, name="label"), stringsAsFactors=F)
 
-  nodes <- getNodeSet(gfile,"/r:gexf/r:graph/r:nodes/r:node", c(r=ns))
-  if (NROW(y <- graph$node.att) > 0) {
-    while (NROW(y) > 0) {
-      message(names(nodes))
-      graph$nodes <- cbind(graph$nodes, sapply(nodes[["attributes"]], xmlGetAttr, name=y[1,1]),
-                           stringsAsFactors=F)
-      y <- y[-1,]
-    }
-    names(graph$node) <- c("id","label",graph$node.att[,1])
-  }
+  #nodes <- getNodeSet(gfile,"/r:gexf/r:graph/r:nodes/r:node", c(r=ns))
+  #if (NROW(y <- graph$node.att) > 0) {
+  #  while (NROW(y) > 0) {
+  #    message(names(nodes))
+  #    graph$nodes <- cbind(graph$nodes, sapply(nodes[["attributes"]], xmlGetAttr, name=y[1,1]),
+  #                         stringsAsFactors=F)
+  #    y <- y[-1,]
+  #  }
+  #  names(graph$node) <- c("id","label",graph$node.att[,1])
+  #}
   rm(nodes)
   
   # Edges
