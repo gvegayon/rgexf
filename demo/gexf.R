@@ -8,22 +8,26 @@ pause()
 
 # Defining a matrix of nodes
 pause()
-people <- matrix(c(1:4, 'juan', 'pedro', 'matthew', 'carlos'),ncol=2)
+people <- data.frame(id=1:4, label=c("juan", "pedro", "matthew", "carlos"),
+                     stringsAsFactors=F)
 people
 
 # Defining a matrix of edges
 pause()
 
-relations <- matrix(c(1,4,1,2,1,3,2,3,3,4,4,2,2,4,4,1,4,1), ncol=2, byrow=T)
+relations <- data.frame(source=c(1,1,1,2,3,4,2,4,4), 
+                        target=c(4,2,3,3,4,2,4,1,1))
 relations
 
 # Defining a matrix of dynamics (start, end) for nodes and edges
 pause()
 
-time.nodes<-matrix(c(10.0,13.0,2.0,2.0,12.0,rep(NA,3)), nrow=4, ncol=2)
+time.nodes <- data.frame(matrix(c(10.0,13.0,2.0,2.0,12.0,rep(NA,3)),
+                                nrow=4, ncol=2))
 time.nodes
 
-time.edges<-matrix(c(10.0,13.0,2.0,2.0,12.0,1,5,rep(NA,5),rep(c(0,1),3)), ncol=2)
+time.edges<- data.frame(matrix(c(10.0,13.0,2.0,2.0,12.0,1,5,rep(NA,5),
+                                 rep(c(0,1),3)), ncol=2))
 time.edges
 
 # Defining a data frame of attributes for nodes and edges
@@ -75,10 +79,18 @@ imagee <- data.frame(image=rbind(
   "Yellow_solid_sphere.png",
   "Yellow_solid_sphere.png"), stringsAsFactors=F)
 
+nodecolors <- col2rgb("blue")
+nodecolors <- cbind(t(cbind(nodecolors, nodecolors, nodecolors, nodecolors)),1)
+colnames(nodecolors) <- c("r", "b", "g", "a")
+
+edgecolors <- rbind(nodecolors, nodecolors, nodecolors[1,])
+
 grafo <- write.gexf(nodes=people, edges=relations, nodesAtt=imagee,
               nodesVizAtt=list(
-                #shape=c("rectangle", "square", "triangle", "diamond"),
-                #position=matrix(1:12,nrow=4),
-                image=imagee, colors=cbind(t(col2rgb(1:4)), 1) 
+                shape=c("rectangle", "square", "triangle", "diamond"),
+                position=matrix(1:12,nrow=4),
+                image=imagee, 
+                color=nodecolors
                 ), 
-              edgesVizAtt=list(thickness=1:9), output="grafo.gexf")
+              edgesVizAtt=list(thickness=1:9, color=edgecolors), 
+              edgesAtt=data.frame(free=c(T,T,T,F,F,F,T,T,F)),output="grafo.gexf")
