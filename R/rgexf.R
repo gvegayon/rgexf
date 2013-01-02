@@ -34,105 +34,99 @@ edge.list <- function(x) {
         }, PAR=parent)
 }
 
-.addNodesEdges <- function(data, parent, type="node") {
-################################################################################
-# Prints the nodes and edges
-################################################################################  
-
-  n <- NROW(data)
-  x <- 1:n
-  xvars <- colnames(data)
-
+.addNodesEdges <- function(dataset, parent, type="node") {
+  ################################################################################
+  # Prints the nodes and edges
+  ################################################################################  
+  
+  n <- NROW(dataset)
+  vec <- 1:n
+  xvars <- colnames(dataset)
+  
   noattnames <- xvars[grep("(^att[0-9])|(^viz[.])", xvars, invert=T)]
   attributes <- length(grep("^att", xvars)) > 0
   vizattributes <- length(grep("^viz[.]", xvars)) > 0
-
-  vizattnames <- colnames(data)[grep("^viz[.]", xvars)]
+  
+  vizattnames <- colnames(dataset)[grep("^viz[.]", xvars)]
   vizcolors <- any(grepl("^viz[.]color",vizattnames))
   vizposition <- any(grepl("^viz[.]position",vizattnames))
   vizsize <- any(grepl("^viz[.]size",vizattnames))
   vizshape <- any(grepl("^viz[.]shape",vizattnames))
   vizimage <- any(grepl("^viz[.]image",vizattnames))
   vizthickness <- any(grepl("^viz[.]thickness",vizattnames))
-
-  lapply(X=x, 
-        function(X, PAR, type) {
-          x <- subset(data, 1:n == X)
-          
-          # Parsing user-define attributes
-          if (attributes) {
-            att <- x[1,grep("^att", xvars), drop=F]
-            attnames <- names(att)
-          }
-          else attnames <- ""
-          
-          # Parsing VIZ attributes
-          if (vizattributes) {
-            vizatt <- x[1,grep("^viz[.]", xvars), drop=F]
-            vizattnames <- names(vizatt)
-          }
-          else vizattnames <- ""
-          
-          tempnode0 <- newXMLNode(name=type, parent=PAR)
-          
-          # Adds every attribute removing leading and ending spaces
-          for (i in noattnames) {
-            if (!is.na((tempatt <- x[,c(i)]))) xmlAttrs(tempnode0)[i] <- tempatt
-          }
-          
-          # Attributes printing        
-          if (attributes) {
-            tempDF <- data.frame(names(att), value=t(att), stringsAsFactors=F)
-            
-            colnames(tempDF) <- c("for", "value")
-            
-            tempnode2 <- newXMLNode("attvalues", parent=tempnode0)
-            
-            for (i in 1:NROW(tempDF)) {
-              newXMLNode(name="attvalue", parent=tempnode2, attrs=tempDF[i,])
-            }
-          }
-          
-          # Viz Att printing
-          if (vizattributes) {
-            # Colors
-            if (vizcolors) {
-              tempvizatt <- vizatt[,grep("^viz[.]color[.]", vizattnames), drop=F]
-              colnames(tempvizatt) <- gsub("^viz[.]color[.]", "", colnames(tempvizatt))
-              tempnode1 <- newXMLNode("viz:color", parent=tempnode0, attrs=tempvizatt)
-            }
-            # Position
-            if (vizposition) {
-              tempvizatt <- vizatt[,grep("^viz[.]position[.]", vizattnames), drop=F]
-              colnames(tempvizatt) <- gsub("^viz[.]position[.]", "", colnames(tempvizatt))
-              tempnode1 <- newXMLNode("viz:position", parent=tempnode0, attrs=tempvizatt)
-            }
-            # Size
-            if (vizsize) {
-              tempvizatt <- vizatt[,grep("^viz[.]size[.]", vizattnames), drop=F]
-              colnames(tempvizatt) <- gsub("^viz[.]size[.]", "", colnames(tempvizatt))
-              tempnode1 <- newXMLNode("viz:size", parent=tempnode0, attrs=tempvizatt)
-            }
-            # Shape
-            if (vizshape) {
-              tempvizatt <- vizatt[,grep("^viz[.]shape[.]", vizattnames), drop=F]
-              colnames(tempvizatt) <- gsub("^viz[.]shape[.]", "", colnames(tempvizatt))
-              tempnode1 <- newXMLNode("viz:shape", parent=tempnode0, attrs=tempvizatt,cdata=T)
-            }
-            # Image
-            if (vizimage) {
-              tempvizatt <- vizatt[,grep("^viz[.]image[.]", vizattnames), drop=F]
-              colnames(tempvizatt) <- c("value", "uri")
-              tempnode1 <- newXMLNode("viz:shape", parent=tempnode0, attrs=tempvizatt)
-            }
-            # Thickness
-            if (vizthickness) {
-              tempvizatt <- vizatt[,grep("^viz[.]thickness[.]", vizattnames), drop=F]
-              colnames(tempvizatt) <- gsub("^viz[.]thickness[.]", "", colnames(tempvizatt))
-              tempnode1 <- newXMLNode("viz:thickness", parent=tempnode0, attrs=tempvizatt)
-            }
-          }
-        }, PAR=parent, type=type)
+  
+  # Parsing user-define attributes
+  if (attributes) attnames <- colnames(dataset)[grep("^att", xvars)]
+  else attnames <- NULL
+  
+  # Parsing VIZ attributes
+  if (vizattributes) vizattnames <- colnames(dataset)[grep("^viz[.]", xvars)]
+  else vizattnames <- NULL
+  
+  lapply(vec, 
+         function(x, PAR, type) {
+           
+           x <- subset(dataset, vec == x)
+           
+           if (length(attnames) > 0) att <- x[,attnames, drop=F]
+           if (length(vizattnames) > 0) vizatt <- x[,vizattnames, drop=F]
+           
+           tempnode0 <- newXMLNode(name=type, parent=PAR, 
+                                   attrs=x[,noattnames, drop=F][,!is.na(x[noattnames]), drop=F])
+           
+           # Attributes printing        
+           if (attributes) {
+             tempDF <- data.frame(names(att), t(att))
+             
+             colnames(tempDF) <- c("for","value")
+             
+             tempnode2 <- newXMLNode("attvalues", parent=tempnode0)
+             
+             for (i in 1:NROW(tempDF)) {
+               newXMLNode(name="attvalue", parent=tempnode2, attrs=tempDF[i,])
+             }
+           }
+           
+           # Viz Att printing
+           if (vizattributes) {
+             # Colors
+             if (vizcolors) {
+               tempvizatt <- vizatt[,grep("^viz[.]color[.]", vizattnames)]
+               names(tempvizatt) <- gsub("^viz[.]color[.]", "", names(tempvizatt))
+               tempnode1 <- newXMLNode("viz:color", parent=tempnode0, attrs=tempvizatt)
+             }
+             # Position
+             if (vizposition) {
+               tempvizatt <- vizatt[,grep("^viz[.]position[.]", vizattnames), drop=F]
+               colnames(tempvizatt) <- gsub("^viz[.]position[.]", "", colnames(tempvizatt))
+               tempnode1 <- newXMLNode("viz:position", parent=tempnode0, attrs=tempvizatt)
+             }
+             # Size
+             if (vizsize) {
+               tempvizatt <- vizatt[,grep("^viz[.]size[.]", vizattnames), drop=F]
+               colnames(tempvizatt) <- gsub("^viz[.]size[.]", "", colnames(tempvizatt))
+               tempnode1 <- newXMLNode("viz:size", parent=tempnode0, attrs=tempvizatt)
+             }
+             # Shape
+             if (vizshape) {
+               tempvizatt <- vizatt[,grep("^viz[.]shape[.]", vizattnames), drop=F]
+               colnames(tempvizatt) <- gsub("^viz[.]shape[.]", "", colnames(tempvizatt))
+               tempnode1 <- newXMLNode("viz:shape", parent=tempnode0, attrs=tempvizatt,cdata=T)
+             }
+             # Image
+             if (vizimage) {
+               tempvizatt <- vizatt[,grep("^viz[.]image[.]", vizattnames), drop=F]
+               colnames(tempvizatt) <- c("value", "uri")
+               tempnode1 <- newXMLNode("viz:shape", parent=tempnode0, attrs=tempvizatt)
+             }
+             # Thickness
+             if (vizthickness) {
+               tempvizatt <- vizatt[,grep("^viz[.]thickness[.]", vizattnames), drop=F]
+               colnames(tempvizatt) <- gsub("^viz[.]thickness[.]", "", colnames(tempvizatt))
+               tempnode1 <- newXMLNode("viz:thickness", parent=tempnode0, attrs=tempvizatt)
+             }
+           }
+         }, PAR=parent, type=type)
 }
 
 write.gexf <- function(
@@ -153,6 +147,11 @@ write.gexf <- function(
   defaultedgetype = "undirected",
   meta = list(creator="NodosChile", description="A graph file writing in R using \"rgexf\"",keywords="gexf graph, NodosChile, R, rgexf")
   ) {
+  
+  # Strings
+  old.strAF <- getOption("stringsAsFactors")
+  options(stringsAsFactors = FALSE)
+  
   require(XML, quietly = T)
   
   # Defining paramters
@@ -224,9 +223,10 @@ write.gexf <- function(
     TYPE <- unlist(lapply(nodesAtt, typeof))
     
     nodesAttDf <- data.frame(
-      id = paste("att",1:nNodesAtt,sep=""), title = TIT, type = TYPE,
-      stringsAsFactors=F
-    )
+      id = paste("att",1:nNodesAtt,sep=""), 
+      title = TIT, 
+      type = TYPE
+      )
   
     # Fixing datatype
     for (i in 1:NROW(datatypes)) {
@@ -248,8 +248,9 @@ write.gexf <- function(
     TYPE <- sapply(edgesAtt, typeof)
     
     edgesAttDf <- data.frame(
-      id = paste("att",1:nEdgesAtt,sep=""), title = TIT, type = TYPE,
-      stringsAsFactors=F
+      id = paste("att",1:nEdgesAtt,sep=""), 
+      title = TIT, 
+      type = TYPE
       )
     
     # Fixing datatype
@@ -270,19 +271,18 @@ write.gexf <- function(
   if (nNodesVizAtt > 0) {
     tempNodesVizAtt <- names(nodesVizAtt)
     for (i in tempNodesVizAtt) {      
-      tmpAtt <- data.frame(nodesVizAtt[[i]], stringsAsFactors=F)
+      tmpAtt <- data.frame(nodesVizAtt[[i]])
       
       if (i == "color") colnames(tmpAtt) <- paste("viz.color", c("r","g","b","a"), sep=".")
       else if (i == "position") colnames(tmpAtt) <- paste("viz.position", c("x","y","z"), sep=".")
       else if (i == "size") colnames(tmpAtt) <- "viz.size.value"
       else if (i == "shape") colnames(tmpAtt) <- "viz.shape.value"
       else if (i == "image") {
-        tmpAtt <- data.frame(x=rep("image",NROW(nodes)), viz.image.uri=tmpAtt,
-                        stringsAsFactors=F)
+        tmpAtt <- data.frame(x=rep("image",NROW(nodes)), viz.image.uri=tmpAtt)
         colnames(tmpAtt) <- c("viz.image.value","viz.image.uri")
       }
       if (length(ListNodesVizAtt) == 0) ListNodesVizAtt <- tmpAtt
-      else ListNodesVizAtt <- data.frame(ListNodesVizAtt, tmpAtt, stringsAsFactors=F)
+      else ListNodesVizAtt <- data.frame(ListNodesVizAtt, tmpAtt)
     }
   }
   
@@ -292,24 +292,24 @@ write.gexf <- function(
     tempEdgesVizAtt <- names(edgesVizAtt)
     
     for (i in tempEdgesVizAtt) {
-      tmpAtt <- data.frame(edgesVizAtt[[i]], stringsAsFactors=F)
+      tmpAtt <- data.frame(edgesVizAtt[[i]])
       
       if (i == "color") colnames(tmpAtt) <- paste("viz.color", c("r","g","b","a"), sep=".")
       else if (i == "thickness") colnames(tmpAtt) <- "viz.thickness.value"
       else if (i == "shape") colnames(tmpAtt) <- "value"
       
       if (length(ListEdgesVizAtt) == 0) ListEdgesVizAtt <- tmpAtt
-      else ListEdgesVizAtt <- data.frame(ListEdgesVizAtt, tmpAtt, stringsAsFactors=F)
+      else ListEdgesVizAtt <- data.frame(ListEdgesVizAtt, tmpAtt)
     }
   }
   
   ##############################################################################
   # The basic char matrix definition  for nodes
-  if (dynamic[1]) nodeDynamic <- data.frame(nodeDynamic, stringsAsFactors=F)
-  if (nNodesAtt > 0) nodesAtt <- data.frame(nodesAtt, stringsAsFactors=F)
+  if (dynamic[1]) nodeDynamic <- data.frame(nodeDynamic)
+  if (nNodesAtt > 0) nodesAtt <- data.frame(nodesAtt)
   
   for (set in c(nodeDynamic, nodesAtt, ListNodesVizAtt)) {
-    try(nodes <- data.frame(nodes, set, stringsAsFactors=F), silent=T)
+    try(nodes <- data.frame(nodes, set), silent=T)
   }
 
   # Naming the columns
@@ -320,16 +320,15 @@ write.gexf <- function(
   
   # NODES
   xmlNodes <- newXMLNode(name="nodes", parent=xmlGraph)
-  
   .addNodesEdges(nodes, xmlNodes, "node")
 
   ##############################################################################
   # The basic dataframe definition  for edges  
-  if (dynamic[2]) edgeDynamic <- data.frame(edgeDynamic, stringsAsFactors=F)
-  if (nEdgesAtt > 0) edgesAtt <- data.frame(edgesAtt, stringsAsFactors=F)
+  if (dynamic[2]) edgeDynamic <- data.frame(edgeDynamic)
+  if (nEdgesAtt > 0) edgesAtt <- data.frame(edgesAtt)
     
   for (set in c(edgeDynamic, edgesAtt, ListEdgesVizAtt)) {
-    try(edges <- data.frame(edges, set, stringsAsFactors=F), silent=T)
+    try(edges <- data.frame(edges, set), silent=T)
   }
     
   # Naming the columns
@@ -338,10 +337,11 @@ write.gexf <- function(
   
   # Generating weights
   if (length(edgesWeight) == 0)  edgesWeight <- 1
-  edges <- data.frame(edges, x=edgesWeight, stringsAsFactors=F)
+  edges <- data.frame(edges, x=edgesWeight)
   
   # Seting colnames
-  colnames(edges) <- unlist(c("source", "target", tmeNames, attNames, colnames(ListEdgesVizAtt),"weight"))
+  colnames(edges) <- unlist(c("source", "target", tmeNames, attNames, 
+                              colnames(ListEdgesVizAtt),"weight"))
 
   # EDGES
   xmlEdges <- newXMLNode(name="edges", parent=xmlGraph)
@@ -353,13 +353,15 @@ write.gexf <- function(
     mode=unlist(c(defaultedgetype=defaultedgetype, mode=mode)),
     node.att = nodesAttDf,
     edge.att = edgesAttDf,
-    nodes=data.frame(id=nodes[,"id"], label=nodes[,"label"], stringsAsFactors=F
-                     , row.names=NULL),
-    edges=data.frame(source=edges[,"source"],target=edges[,"target"], stringsAsFactors=F
-                     , row.names=NULL),
+    nodes=data.frame(id=nodes[,"id"], label=nodes[,"label"], row.names=NULL),
+    edges=data.frame(source=edges[,"source"],target=edges[,"target"], row.names=NULL),
     graph=saveXML(xmlFile, encoding="UTF-8"))
   class(results) <- "gexf"
   
+  # Strings As Factors
+  options(stringsAsFactors = old.strAF)
+  
+  # Returns
   if (is.na(output)) {
     return(results)
   } else {

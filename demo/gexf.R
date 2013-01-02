@@ -79,18 +79,27 @@ imagee <- data.frame(image=rbind(
   "Yellow_solid_sphere.png",
   "Yellow_solid_sphere.png"), stringsAsFactors=F)
 
-nodecolors <- col2rgb("blue")
-nodecolors <- cbind(t(cbind(nodecolors, nodecolors, nodecolors, nodecolors)),1)
+# Colors
+nodecolors <- cbind(t(col2rgb(colors()[1:NROW(people)])),alpha=1)
 colnames(nodecolors) <- c("r", "b", "g", "a")
 
-edgecolors <- rbind(nodecolors, nodecolors, nodecolors[1,])
+edgecolors <- cbind(t(col2rgb(colors()[1:NROW(relations)])),alpha=1)
+colnames(edgecolors) <- c("r", "b", "g", "a")
 
-grafo <- write.gexf(nodes=people, edges=relations, nodesAtt=imagee,
+# TRUE/FALSE attributes
+nodetruefalse <- data.frame(nodetrue=rnorm(NROW(people)) > 0)
+edgetruefalse <- data.frame(edgetrue=rnorm(NROW(relations)) > 0)
+
+grafo <- write.gexf(nodes=people, edges=relations, 
+              nodesAtt=cbind(imagee,nodetruefalse),
               nodesVizAtt=list(
                 shape=c("rectangle", "square", "triangle", "diamond"),
                 position=matrix(1:12,nrow=4),
                 image=imagee, 
                 color=nodecolors
                 ), 
-              edgesVizAtt=list(thickness=1:9, color=edgecolors), 
-              edgesAtt=data.frame(free=c(T,T,T,F,F,F,T,T,F)),output="grafo.gexf")
+              edgesVizAtt=list(
+                thickness=1:9, 
+                color=edgecolors
+                ), 
+              edgesAtt=edgetruefalse,output="grafo.gexf")
