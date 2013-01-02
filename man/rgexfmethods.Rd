@@ -2,7 +2,7 @@
 \alias{print.gexf}
 \alias{summary.gexf}
 \title{
-  Print and write gexf objects
+  Print and write \code{gexf} objects
 }
 \description{
   Methods to print and summarize \code{gexf} class objects
@@ -30,14 +30,21 @@
 }
 \examples{
   \dontrun{
-    # Parsing some xlsx files at "my stats folder"
-    mydspl <- dspl(path="my stats folder/", ext="xls")
+    # Data frame of nodes
+    people <- data.frame(id=1:4, label=c("juan", "pedro", "matthew", "carlos"),
+                     stringsAsFactors=F)
     
-    # Checking the summary of the data bundle
-    summary(mydspl)
+    # Data frame of edges
+    relations <- data.frame(source=c(1,1,1,2,3,4,2,4,4), 
+                        target=c(4,2,3,3,4,2,4,1,1))
     
-    # Writing the DSPL XML definition into a file
-    print(mydspl, path="my stats folder/mydspl.xml")
+    # Building gexf graph
+    mygraph <- write.gexf(nodes=people, edges=relations)
+    
+    # Summary and pring
+    summary(mygraph)
+    
+    print(mygraph, file="mygraph.gexf", replace=T)
     
   }
 }

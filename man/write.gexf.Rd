@@ -1,7 +1,7 @@
 \name{write.gexf}
 \alias{write.gexf}
-\title{Creates graph in GEXF format}
-\description{\code{write.gexf} takes a \code{node} matrix (or dataframe) and an \code{edge} matrix (or dataframe) and creates a graph in GEXF format and save it into a new file}
+\title{Builds a graph of \code{gexf} class}
+\description{\code{write.gexf} takes a \code{node} matrix (or dataframe) and an \code{edge} matrix (or dataframe) and creates a \code{gexf} object containing a data-frame representation and a gexf representation of a graph.}
 \usage{
 write.gexf(
   nodes, edges, 
@@ -42,7 +42,7 @@ write.gexf(
   \item{output}{character, complete path (including file name) where to print the GEXF file}
   \item{tFormat}{character, time format for dynamic graphs}
   \item{defaultedgetype}{\dQuote{directed}, \dQuote{undirected}, \dQuote{mutual}}
-  \item{meta}{Meta data describing the graph}
+  \item{meta}{A List. Meta data describing the graph}
 }
 \details{  
   \code{nodesAtt} and \code{edgesAtt} can be also include. They must have the same number of rows as nodes and edges, respectively. In order to fully take advantage of \code{gexf}, using data frames is needed as these preserve vectors datatypes, which are identified by the function.

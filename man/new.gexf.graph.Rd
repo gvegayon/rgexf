@@ -1,8 +1,8 @@
 \name{new.gexf.graph}
 \alias{new.gexf.graph}
-\title{Build an empty gexf graph}
+\title{Build an empty \code{gexf} graph}
 \description{
-Builds an empty gexf object containing all the class's attributes.
+Builds an empty \code{gexf} object containing all the class's attributes.
 }
 \usage{
 new.gexf.graph(defaultedgetype = "undirected", 
@@ -14,8 +14,8 @@ new.gexf.graph(defaultedgetype = "undirected",
     )
 }
 \arguments{
-  \item{defaultedgetype}{hola}
-  \item{meta}{meta}
+  \item{defaultedgetype}{\dQuote{directed}, \dQuote{undirected}, \dQuote{mutual}}
+  \item{meta}{A List. Meta data describing the graph}
 }
 \value{
 A \code{gexf} object.
@@ -27,3 +27,9 @@ Jorge Fabrega Lacoa \email{jorge.fabrega@nodoschile.org}}
   The GEXF project website:
   \url{http://gexf.net} 
 }
+\examples{
+  \dontrun{
+  demo(gexfbuildfromscratch)
+  }
+}
+\keyword{ manip }

@@ -26,4 +26,4 @@ Jorge Fabrega Lacoa \email{jorge.fabrega@nodoschile.org}}
   
   edge.list(edgelist)
 }
-\keyword{ misc }
+\keyword{ manip }

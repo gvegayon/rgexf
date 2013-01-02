@@ -20,4 +20,4 @@ Jorge Fabrega Lacoa \email{jorge.fabrega@nodoschile.org}}
   checkTimes(test, format="dateTime")
   checkTimes("2012-02-01T00:00:00", "dateTime")
 }
-\keyword{ misc }
+\keyword{ utilities }

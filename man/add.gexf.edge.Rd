@@ -3,8 +3,8 @@
 \alias{add.gexf.edge}
 \alias{rm.gexf.node}
 \alias{rm.gexf.edge}
-\title{Creates graph in GEXF format}
-\description{\code{write.gexf} takes a \code{node} matrix (or dataframe) and an \code{edge} matrix (or dataframe) and creates a graph in GEXF format and save it into a new file}
+\title{Adding and removing nodes/edges from \code{gexf} objects}
+\description{Manipulates \code{gexf} objects adding and removing nodes and edges from both, its dataframe representation and its XML representation.}
 \usage{
 add.gexf.node(graph, id=NA, label=NA, start=NULL, end=NULL,
    vizAtt=list(color=NULL, position=NULL, size=NULL, shape=NULL, image=NULL))
@@ -30,6 +30,9 @@ rm.gexf.edge(graph, number=NULL)
   \item{end}{End}
   \item{rm.edges}{Whether to remove or not existing edges.}
 }
+\details{
+  In the case of \code{rm.gexf.node}, by default every edge linked to the node that is been removed will also be removed (\code{rm.edges = TRUE}).
+}
 \value{
   A \code{gexf} object.
 }
@@ -43,14 +46,7 @@ Jorge Fabrega Lacoa \email{jorge.fabrega@nodoschile.org}}
 }
 \examples{
   \dontrun{
-  demo(gexf)
-  demo(gexfattributes)
-  demo(gexfbasic)
-  demo(gexfdynamic)
-  demo(processEdgeList)
-  demo(gexffull)
-  demo(gexftwitter)
-  demo(gexfdynamicandatt)
+  demo(gexfbuildfromscratch)
   }
 }
-\keyword{ IO }
+\keyword{ manip }

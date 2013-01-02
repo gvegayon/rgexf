@@ -2,13 +2,16 @@
 \title{rgexf NEWS}
 \encoding{UTF-8}
 
-\section{CHANGES IN rgexf version 0.12.12 [2012-12-17]}{
+\section{CHANGES IN rgexf version 0.13.01 [2013-01-04]}{
   \subsection{NEW FEATURES}{
     \itemize{
+      \item New functions \code{new.gexf.graph}, \code{add.gexf.node}, \code{add.gexf.edge}, \code{rm.gexf.node} and \code{rm.gexf.edge} allow to build and manipulate \code{gexf} objects from scratch.
+      \item New function \code{read.gexf} allows to import gexf files as \code{gexf} class objects.
+      \item \code{gexf} function now it is called \code{write.gexf}.
       \item Edges allow weighting.
       \item Viz Attributes (color, shape, size, etc.) can be included in both, nodes and edges.
       \item Real-life datasets have been includded.
-      \item New function \code{processEdgeList} builds a dataframe of nodes from an edge list.
+      \item New function \code{edge.list} builds a dataframe of nodes from an edge list.
     }
   }
   \subsection{DEVELOPMENT}{

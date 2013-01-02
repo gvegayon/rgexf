@@ -102,4 +102,6 @@ grafo <- write.gexf(nodes=people, edges=relations,
                 thickness=1:9, 
                 color=edgecolors
                 ), 
-              edgesAtt=edgetruefalse,output="grafo.gexf")
+              edgesAtt=edgetruefalse)
+
+# print(grafo, output="grafo.gexf")
