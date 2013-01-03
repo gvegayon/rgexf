@@ -25,7 +25,7 @@ write.gexf(
   defaultedgetype = "undirected",
   meta = list(
     creator="NodosChile", 
-    description="A graph file writing in R using \'rgexf\'",
+    description="A graph file writing in R using \"rgexf\"",
     keywords="gexf graph, NodosChile, R, rgexf")
   )
 }
