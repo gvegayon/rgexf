@@ -38,6 +38,6 @@ relations<- subset(followers, select=c(source, target))
 # Creating the follower-following network in gexf format with some nodes' attribute
 pause()
 
-tw_politics_cl <- write.gexf(nodos,relations,nodesAtt=nodos.att)
+tw_politics_cl <- write.gexf(nodos,relations,nodesAtt=nodos.att, keepFactors=F)
 
 # print(tw_politics_cl, file='example.gexf', replace=T)

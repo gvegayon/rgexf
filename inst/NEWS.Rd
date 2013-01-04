@@ -8,14 +8,17 @@
       \item New functions \code{new.gexf.graph}, \code{add.gexf.node}, \code{add.gexf.edge}, \code{rm.gexf.node} and \code{rm.gexf.edge} allow to build and manipulate \code{gexf} objects from scratch.
       \item New function \code{read.gexf} allows to import gexf files as \code{gexf} class objects.
       \item \code{gexf} function now it is called \code{write.gexf}.
-      \item Edges allow weighting.
+      \item Edges now allow weighting.
       \item Viz Attributes (color, shape, size, etc.) can be included in both, nodes and edges.
       \item Real-life datasets have been includded.
       \item New function \code{edge.list} builds a dataframe of nodes from an edge list.
+      \item New methods for \code{gexf} objects: \code{print.gexf} and \code{summary.gexf}.
     }
   }
   \subsection{DEVELOPMENT}{
     \itemize{
+      \item \code{gexf} class objects are now a standard.
+      \item Function \code{gexf} is now named \code{write.gexf}.
       \item Faster net build.
       \item More demos + improve ones.
       \item Cleaner code.

@@ -13,11 +13,13 @@ pause()
 ## 2. A matrix of edges
 
 # Defining a matrix of nodes
-people <- matrix(c(1:4, 'juan', 'pedro', 'matthew', 'carlos'),ncol=2)
+people <- data.frame(matrix(c(1:4, 'juan', 'pedro', 'matthew', 'carlos'),
+                            ncol=2))
 people
 
 # Defining a matrix of edges
-relations <- matrix(c(1,4,1,2,1,3,2,3,3,4,4,2,2,4,4,1,4,1), ncol=2, byrow=T)
+relations <- data.frame(matrix(c(1,4,1,2,1,3,2,3,3,4,4,2,2,4,4,1,4,1), 
+                               ncol=2, byrow=T))
 relations
 
 pause()
@@ -32,4 +34,4 @@ pause()
 
 write.gexf(nodes=people, edges=relations)
 
-################################################################################
+################################################################################  

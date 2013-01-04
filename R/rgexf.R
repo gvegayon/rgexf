@@ -145,7 +145,8 @@ write.gexf <- function(
   output = NA,
   tFormat="double",
   defaultedgetype = "undirected",
-  meta = list(creator="NodosChile", description="A graph file writing in R using \"rgexf\"",keywords="gexf graph, NodosChile, R, rgexf")
+  meta = list(creator="NodosChile", description="A graph file writing in R using \"rgexf\"",keywords="gexf graph, NodosChile, R, rgexf"),
+  keepFactors = TRUE
   ) {
   
   # Strings
@@ -220,7 +221,12 @@ write.gexf <- function(
   # nodes att definitions
   if (nNodesAtt > 0) {
     TIT <- colnames(nodesAtt)
-    TYPE <- unlist(lapply(nodesAtt, typeof))
+    TYPE <- sapply(nodesAtt, typeof)
+    CLASS <- sapply(nodesAtt, class)
+    
+    # Checks for factors (factor replacing is done later)
+    if (keepFactors) TYPE[CLASS == "factor"] <- "integer"
+    else TYPE[CLASS == "factor"] <- "string"
     
     nodesAttDf <- data.frame(
       id = paste("att",1:nNodesAtt,sep=""), 
@@ -246,6 +252,11 @@ write.gexf <- function(
   if (nEdgesAtt > 0) {
     TIT <- colnames(edgesAtt)
     TYPE <- sapply(edgesAtt, typeof)
+    CLASS <- sapply(edgesAtt, class)
+    
+    # Checks for factors (factor replacing is done later)
+    if (keepFactors) TYPE[CLASS == "factor"] <- "integer"
+    else TYPE[CLASS == "factor"] <- "string"
     
     edgesAttDf <- data.frame(
       id = paste("att",1:nEdgesAtt,sep=""), 
@@ -318,6 +329,18 @@ write.gexf <- function(
   
   colnames(nodes) <- unlist(c("id", "label", tmeNames, attNames, colnames(ListNodesVizAtt)))
   
+  # Fixing factors
+  if (keepFactors) {
+    for (i in colnames(nodes)) {
+      if (class(nodes[[i]]) == "factor") nodes[[i]] <- as.numeric(nodes[[i]])
+    }
+  }
+  else {
+    for (i in colnames(nodes)) {
+      if (class(nodes[[i]]) == "factor") nodes[[i]] <- as.character(nodes[[i]])
+    } 
+  }
+  
   # NODES
   xmlNodes <- newXMLNode(name="nodes", parent=xmlGraph)
   .addNodesEdges(nodes, xmlNodes, "node")
@@ -345,6 +368,18 @@ write.gexf <- function(
 
   # EDGES
   xmlEdges <- newXMLNode(name="edges", parent=xmlGraph)
+  
+  # Fixing factors
+  if (keepFactors) {
+    for (i in colnames(edges)) {
+      if (class(edges[[i]]) == "factor") edges[[i]] <- as.numeric(edges[[i]])
+    }
+  }
+  else {
+    for (i in colnames(edges)) {
+      if (class(edges[[i]]) == "factor") edges[[i]] <- as.character(edges[[i]])
+    } 
+  }
   
   .addNodesEdges(edges, xmlEdges, "edge")
   

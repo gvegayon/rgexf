@@ -26,7 +26,8 @@ write.gexf(
   meta = list(
     creator="NodosChile", 
     description="A graph file writing in R using \"rgexf\"",
-    keywords="gexf graph, NodosChile, R, rgexf")
+    keywords="gexf graph, NodosChile, R, rgexf"),
+  keepFactors = TRUE
   )
 }
 \arguments{
@@ -43,6 +44,7 @@ write.gexf(
   \item{tFormat}{character, time format for dynamic graphs}
   \item{defaultedgetype}{\dQuote{directed}, \dQuote{undirected}, \dQuote{mutual}}
   \item{meta}{A List. Meta data describing the graph}
+  \item{keepFactors}{Logical, whether to manage factors as numeric values (\code{TRUE}) or as character (\code{FALSE})}
 }
 \details{  
   \code{nodesAtt} and \code{edgesAtt} can be also include. They must have the same number of rows as nodes and edges, respectively. In order to fully take advantage of \code{gexf}, using data frames is needed as these preserve vectors datatypes, which are identified by the function.
@@ -76,16 +78,20 @@ Jorge Fabrega Lacoa \email{jorge.fabrega@nodoschile.org}}
   The GEXF project website:
   \url{http://gexf.net} 
 }
+\seealso{
+  \code{\link{new.gexf.graph}}
+}
 \examples{
   \dontrun{
-  demo(gexf)
-  demo(gexfattributes)
-  demo(gexfbasic)
-  demo(gexfdynamic)
-  demo(processEdgeList)
-  demo(gexffull)
-  demo(gexftwitter)
-  demo(gexfdynamicandatt)
+  demo(gexf) # Example of gexf command using fictional data.
+  demo(gexfattributes) # Working with attributes.
+  demo(gexfbasic) # Basic net.
+  demo(gexfdynamic) # Dynamic net.
+  demo(edge.list) # Working with edges lists.
+  demo(gexffull) # All the package.
+  demo(gexftwitter) # Example with real data of chilean twitter accounts.
+  demo(gexfdynamicandatt) # Dynamic net with static attributes.
+  demo(gexfbuildfromscratch) # Example building a net from scratch.
   }
 }
 \keyword{ IO }
