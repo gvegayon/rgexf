@@ -59,13 +59,19 @@ read.gexf <- function(x) {
     label=sapply(nodes, xmlGetAttr, name="label"), stringsAsFactors=F)
 
   #nodes <- getNodeSet(gfile,"/r:gexf/r:graph/r:nodes/r:node", c(r=ns))
+  #graph$nodesatt <- NULL
   #if (NROW(y <- graph$node.att) > 0) {
+  #  print(nodes)
+  #  print(getNodeSet(gfile,"/r:gexf/r:graph/r:nodes/r:node/r:attvalues/r:attvalue[@for='att1']", c(r=ns)))
+  #  print(getNodeSet(gfile,"/r:gexf/r:graph/r:nodes/r:node/r:attvalues/r:attvalue[@for='att2']", c(r=ns)))
+  #  
   #  while (NROW(y) > 0) {
   #    message(names(nodes))
-  #    graph$nodes <- cbind(graph$nodes, sapply(nodes[["attributes"]], xmlGetAttr, name=y[1,1]),
+  #    graph$nodesatt <- cbind(graph$nodesatt, sapply(nodes[["attributes"]], xmlGetAttr, name=y[1,1]),
   #                         stringsAsFactors=F)
   #    y <- y[-1,]
   #  }
+#    print(gfile)
   #  names(graph$node) <- c("id","label",graph$node.att[,1])
   #}
   rm(nodes)

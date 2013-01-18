@@ -104,4 +104,4 @@ grafo <- write.gexf(nodes=people, edges=relations,
                 ), 
               edgesAtt=edgetruefalse)
 
-# print(grafo, output="grafo.gexf")
+#print(grafo, file="grafo.gexf")

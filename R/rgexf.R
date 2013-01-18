@@ -89,41 +89,49 @@ edge.list <- function(x) {
            
            # Viz Att printing
            if (vizattributes) {
+             fns <- c(dummy = FALSE, default = FALSE)
+             
              # Colors
              if (vizcolors) {
                tempvizatt <- vizatt[,grep("^viz[.]color[.]", vizattnames)]
                names(tempvizatt) <- gsub("^viz[.]color[.]", "", names(tempvizatt))
-               tempnode1 <- newXMLNode("viz:color", parent=tempnode0, attrs=tempvizatt)
+               tempnode1 <- newXMLNode("viz:color", parent=tempnode0, attrs=tempvizatt,
+                                       fixNamespaces = fns)
              }
              # Position
              if (vizposition) {
                tempvizatt <- vizatt[,grep("^viz[.]position[.]", vizattnames), drop=F]
                colnames(tempvizatt) <- gsub("^viz[.]position[.]", "", colnames(tempvizatt))
-               tempnode1 <- newXMLNode("viz:position", parent=tempnode0, attrs=tempvizatt)
+               tempnode1 <- newXMLNode("viz:position", parent=tempnode0, attrs=tempvizatt,
+                                       fixNamespaces = fns)
              }
              # Size
              if (vizsize) {
                tempvizatt <- vizatt[,grep("^viz[.]size[.]", vizattnames), drop=F]
                colnames(tempvizatt) <- gsub("^viz[.]size[.]", "", colnames(tempvizatt))
-               tempnode1 <- newXMLNode("viz:size", parent=tempnode0, attrs=tempvizatt)
+               tempnode1 <- newXMLNode("viz:size", parent=tempnode0, attrs=tempvizatt,
+                                       fixNamespaces = fns)
              }
              # Shape
              if (vizshape) {
                tempvizatt <- vizatt[,grep("^viz[.]shape[.]", vizattnames), drop=F]
                colnames(tempvizatt) <- gsub("^viz[.]shape[.]", "", colnames(tempvizatt))
-               tempnode1 <- newXMLNode("viz:shape", parent=tempnode0, attrs=tempvizatt)
+               tempnode1 <- newXMLNode("viz:shape", parent=tempnode0, attrs=tempvizatt,
+                                       fixNamespaces = fns)
              }
              # Image
              if (vizimage) {
                tempvizatt <- vizatt[,grep("^viz[.]image[.]", vizattnames), drop=F]
                colnames(tempvizatt) <- c("value", "uri")
-               tempnode1 <- newXMLNode("viz:shape", parent=tempnode0, attrs=tempvizatt)
+               tempnode1 <- newXMLNode("viz:shape", parent=tempnode0, attrs=tempvizatt,
+                                       fixNamespaces = fns)
              }
              # Thickness
              if (vizthickness) {
                tempvizatt <- vizatt[,grep("^viz[.]thickness[.]", vizattnames), drop=F]
                colnames(tempvizatt) <- gsub("^viz[.]thickness[.]", "", colnames(tempvizatt))
-               tempnode1 <- newXMLNode("viz:thickness", parent=tempnode0, attrs=tempvizatt)
+               tempnode1 <- newXMLNode("viz:thickness", parent=tempnode0, attrs=tempvizatt,
+                                       fixNamespaces = fns)
              }
            }
          }, PAR=parent, type=type)
