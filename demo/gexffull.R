@@ -78,7 +78,7 @@ pause()
 
 write.gexf(nodes=people, edges=relations, edgeDynamic=time.edges, edgesAtt=edge.att,
      nodeDynamic=time.nodes, nodesAtt=node.att,
-     nodesVizAtt=list(shape=shapes, position=pos, image=imagee, colors=color),
+     nodesVizAtt=list(shape=shapes, position=pos, image=imagee, color=color),
      edgesVizAtt=list(thickness=thick))
 
 

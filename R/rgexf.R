@@ -157,27 +157,113 @@ write.gexf <- function(
   keepFactors = TRUE
   ) {
   
+  ##############################################################################
+  # CLASS CHECKS AND OTHERS CHECKS
+  
+  # Nodes
+  if (is.data.frame(nodes) | is.matrix(nodes)) {
+    if (NCOL(nodes) != 2) stop(paste("\"nodes\" should have two columns not", NCOL(nodes)))
+  }
+  else stop("Invalid object type: \"nodes\" should be a two column data.frame or a matrix")
+  
+  # Edges
+  if (is.data.frame(edges) | is.matrix(edges)) {
+    if (NCOL(edges) != 2) stop(paste("edges should have two columns not", NCOL(edges)))
+  }
+  else stop("Invalid object type: \"edges\" should be a two column data.frame or a matrix")
+  
+  # Edges Att
+  if ((nEdgesAtt <- length(edgesAtt)) > 0) {
+    if (is.data.frame(edgesAtt) | is.matrix(edgesAtt) | is.vector(edgesAtt)) {
+      if (NROW(edgesAtt) != NROW(edges)) stop(paste("\"edgesAtt\" should have the same number of rows than edges there are (", NROW(edges),")",sep=""))
+    }
+    else stop("Invalid object type: \"edgesAtt\" should be a data.frame, a matrix or a vector")
+  }
+  
+  # Edges Weight
+  if (length(edgesWeight) > 0) {
+    if (is.vector(edgesWeight) | is.data.frame(edgesWeight) | is.matrix(edgesWeight)) {
+      if (NROW(edgesWeight) != NROW(edges)) stop("\"edgesWeight\" should have the same number of rows than edges there are (", NROW(edges),")")
+    }
+    else stop("Invalid object type: \"edgesWeight\" should be a one column data.frame, a matrix or a vector")
+  }
+  
+  # Edges Viz Att
+  if (any(lapply(edgesVizAtt, length) > 0)) {
+    supportedEdgeVizAtt <- c("color", "thickness", "shape")
+    if (all(names(edgesVizAtt) %in% supportedEdgeVizAtt)) {
+      if (all(lapply(edgesVizAtt, NROW) == NROW(edges))) {
+        nEdgesVizAtt <- length(edgesVizAtt)
+      }
+      else {
+        edgesVizAtt <- lapply(edgesVizAtt, NROW)
+        edgesVizAtt <- edgesVizAtt[edgesVizAtt != NROW(edges)]
+        stop("Insuficient number of \"edgeVizAtt\" rows: The atts ",
+             paste(names(edgesVizAtt), unlist(edgesVizAtt), sep=" (", collapse=" rows), "),")\n",
+             "Every att should have the same number of rows than edges there are (",NROW(edges),")")
+      }
+    }
+    else {
+      noviz <- names(edgesVizAtt)
+      noviz <- noviz[!(noviz %in% supportedEdgeVizAtt)]
+      stop("Invalid \"edgesVizAtt\": ",noviz,"\nOnly \"color\", \"thickness\" and \"shape\" are supported")
+    }
+  }
+  else nEdgesVizAtt <- 0
+
+  # Nodes Att
+  if ((nNodesAtt <- length(nodesAtt)) > 0) {
+    if (is.data.frame(nodesAtt) | is.matrix(nodesAtt) | is.vector(nodesAtt)) {
+      if (NROW(nodesAtt) != NROW(nodes)) stop("Insuficient number of rows: \"nodesAtt\" (", NROW(nodesAtt)," rows) should have the same number of rows than nodes there are (", NROW(nodes),")")
+    }
+    else stop("Invalid object type: \"nodesAtt\" should be a data.frame, a matrix or a vector")
+  }
+  
+  # Nodes Viz Att
+  if (any(lapply(nodesVizAtt, length) > 0)) {
+    supportedNodesVizAtt <- c("color", "position", "size", "shape", "image")
+    if (all(names(nodesVizAtt) %in% supportedNodesVizAtt)) {
+      if (all(lapply(nodesVizAtt, NROW) == NROW(nodes))) {
+        nNodesVizAtt <- length(nodesVizAtt)
+      }
+      else {
+        nodesVizAtt <- lapply(nodesVizAtt, NROW)
+        nodesVizAtt <- nodesVizAtt[nodesVizAtt != NROW(nodes)]
+        stop("Insuficient number of \"nodeVizAtt\" rows: The atts ",
+             paste(names(nodesVizAtt), unlist(nodesVizAtt), sep=" (", collapse=" rows), "),")\n",
+             "Every att should have the same number of rows than nodes there are (",NROW(nodes),")")
+      }
+    }
+    else {
+      noviz <- names(nodesVizAtt)
+      noviz <- noviz[!(noviz %in% supportedNodesVizAtt)]
+      stop("Invalid \"nodeVizAtt\": ",noviz,"\nOnly \"color\", \"position\", \"size\", \"shape\" and \"image\" are supported")
+    }
+  }
+  else nNodesVizAtt <- 0
+  
+  # Dynamics
+  dynamic <- c(FALSE, FALSE)
+  
+  if (length(nodeDynamic) > 0) {
+    if (is.data.frame(nodeDynamic) | is.matrix(nodeDynamic)) {
+      if (NROW(nodeDynamic) == NROW(nodes)) dynamic[1] <- TRUE
+      else stop("Insuficient number of rows: \"nodeDynamic\" (",NROW(nodeDynamic), " rows) should have the same number of rows than nodes there are (", NROW(nodes),")")
+    } else stop("Invalid object type: \"nodeDynamic\" should be a two columns data.frame or a matrix")
+  }
+  
+  if (length(edgeDynamic) > 0) {
+    if (is.data.frame(edgeDynamic) | is.matrix(edgeDynamic)) {
+      if (NROW(edgeDynamic) == NROW(edges)) dynamic[2] <- TRUE
+      else stop("Insuficient number of rows: \"edgeDynamic\" (",NROW(edgeDynamic), " rows) should have the same number of rows than edges there are (", NROW(edges),")")
+    } else stop("Invalid object type: \"edgeDynamic\" should be a two columns data.frame or a matrix")
+  }
+  
+  ##############################################################################
   # Strings
   old.strAF <- getOption("stringsAsFactors")
   options(stringsAsFactors = FALSE)
-  
-  require(XML, quietly = T)
-  
-  # Defining paramters
-  nEdgesAtt <- ifelse(length(edgesAtt) > 0, NCOL(edgesAtt), 0)
-  nNodesAtt <- ifelse(length(nodesAtt) > 0, NCOL(nodesAtt), 0)
-  dynamic <- c(length(nodeDynamic) > 0 , length(edgeDynamic) > 0)  
-  
-  # ID vizatt
-  nNodesVizAtt <- unlist(lapply(nodesVizAtt, is.null))
-  nEdgesVizAtt <- unlist(lapply(edgesVizAtt, is.null))
-  
-  nodesVizAtt <- nodesVizAtt[!nNodesVizAtt]
-  edgesVizAtt <- edgesVizAtt[!nEdgesVizAtt]
-  
-  nNodesVizAtt <- ifelse(sum(nNodesVizAtt==F), length(nodesVizAtt), 0)
-  nEdgesVizAtt <- ifelse(sum(nEdgesVizAtt==F), length(edgesVizAtt), 0)
-  
+    
   if (!any(dynamic)) mode <- "static" else mode <- "dynamic"
 
   # Starting xml
