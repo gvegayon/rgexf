@@ -90,6 +90,7 @@ colnames(edgecolors) <- c("r", "b", "g", "a")
 nodetruefalse <- data.frame(nodetrue=rnorm(NROW(people)) > 0)
 edgetruefalse <- data.frame(edgetrue=rnorm(NROW(relations)) > 0)
 
+g1 <- system.time(for (i in 1:100)
 grafo <- write.gexf(nodes=people, edges=relations, 
               nodesAtt=cbind(imagee,nodetruefalse),
               nodesVizAtt=list(
@@ -103,5 +104,25 @@ grafo <- write.gexf(nodes=people, edges=relations,
                 color=edgecolors
                 ), 
               edgesAtt=edgetruefalse)
+)
 
-#print(grafo, file="grafo.gexf")
+g2 <- system.time(for (i in 1:100)
+  grafo2 <- write.gexf2(nodes=people, edges=relations, 
+                      nodesAtt=cbind(imagee,nodetruefalse),
+                      nodesVizAtt=list(
+                        shape=c("rectangle", "square", "triangle", "diamond"),
+                        position=matrix(1:12,nrow=4),
+                        image=imagee, 
+                        color=nodecolors
+                      ), 
+                      edgesVizAtt=list(
+                        thickness=1:9, 
+                        color=edgecolors
+                      ), 
+                      edgesAtt=edgetruefalse)
+)
+g1;g2
+g1[3]/g2[3]
+
+print(grafo, file="example.gexf")
+print(grafo2, file="example2.gexf")
