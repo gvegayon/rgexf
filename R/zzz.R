@@ -1,9 +1,9 @@
 .onLoad <- function(libname, pkgname, ...) {
-  packageStartupMessage("Welcome to rgexf v", packageDescription("rgexf")$Version)
-  packageStartupMessage("\nFor more information on the prohect please visit")
-  packageStartupMessage("\thttp://www.bitbucket.org/gvegayon/rgexf")
-  packageStartupMessage("\thttp://www.nodoschile.org")
-  packageStartupMessage("\nFor questions or bugs reports: <george.vega@nodoschile.org>")
+  packageStartupMessage("Welcome to rgexf V", packageDescription("rgexf")$Version,"!")
+  packageStartupMessage("\nFor more information on the project please visit:")
+  packageStartupMessage(" http://www.bitbucket.org/gvegayon/rgexf/")
+  packageStartupMessage(" http://gexf.net/")
+  packageStartupMessage(" http://www.nodoschile.org/")
+  packageStartupMessage("\nFor questions or bugs reports:\n <george.vega@nodoschile.org>")
 }
 
-.onLoad()

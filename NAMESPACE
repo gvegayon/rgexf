@@ -1,4 +1,5 @@
 importFrom(XML)
+importFrom(utils, packageDescription)
 
 export(.addNodesEdges, .defAtt)
 export(checkTimes)

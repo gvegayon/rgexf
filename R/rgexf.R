@@ -10,11 +10,11 @@ edge.list <- function(x) {
     
     if (nCols) {
       # If it is not a factor
-      if (!is.factor(x)) x <- factor(c(x[,1], x[,2]))
-      edges <- matrix(unclass(x), byrow=F, ncol=2)
-      nodes <- data.frame(id=1:nlevels(x), label=levels(x), stringsAsFactors=F)
+      if (!is.factor(x)) x <- factor(c(x[,1], x[,2]), )
+      edges <- matrix(unclass(x), byrow=FALSE, ncol=2)
+      nodes <- data.frame(id=0:(nlevels(x)-1), label=levels(x), stringsAsFactors=FALSE)
       
-      edgelist <- list(nodes=nodes, edges=edges)
+      edgelist <- list(nodes=nodes, edges=edges-1)
       
       return(edgelist)
     }
@@ -43,7 +43,7 @@ edge.list <- function(x) {
   vec <- 1:n
   xvars <- colnames(dataset)
   
-  noattnames <- xvars[grep("(^att[0-9])|(^viz[.])", xvars, invert=T)]
+  noattnames <- xvars[grep("(^att[0-9])|(^viz[.])", xvars, invert=TRUE)]
   attributes <- length(grep("^att", xvars)) > 0
   vizattributes <- length(grep("^viz[.]", xvars)) > 0
   
@@ -68,11 +68,11 @@ edge.list <- function(x) {
            
            x <- subset(dataset, vec == x)
            
-           if (length(attnames) > 0) att <- x[,attnames, drop=F]
-           if (length(vizattnames) > 0) vizatt <- x[,vizattnames, drop=F]
+           if (length(attnames) > 0) att <- x[,attnames, drop=FALSE]
+           if (length(vizattnames) > 0) vizatt <- x[,vizattnames, drop=FALSE]
            
            tempnode0 <- newXMLNode(name=type, parent=PAR, 
-                                   attrs=x[,noattnames, drop=F][,!is.na(x[noattnames]), drop=F])
+                                   attrs=x[,noattnames, drop=FALSE][,!is.na(x[noattnames]), drop=FALSE])
            
            # Attributes printing        
            if (attributes) {
@@ -100,35 +100,35 @@ edge.list <- function(x) {
              }
              # Position
              if (vizposition) {
-               tempvizatt <- vizatt[,grep("^viz[.]position[.]", vizattnames), drop=F]
+               tempvizatt <- vizatt[,grep("^viz[.]position[.]", vizattnames), drop=FALSE]
                colnames(tempvizatt) <- gsub("^viz[.]position[.]", "", colnames(tempvizatt))
                tempnode1 <- newXMLNode("viz:position", parent=tempnode0, attrs=tempvizatt,
                                        fixNamespaces = fns)
              }
              # Size
              if (vizsize) {
-               tempvizatt <- vizatt[,grep("^viz[.]size[.]", vizattnames), drop=F]
+               tempvizatt <- vizatt[,grep("^viz[.]size[.]", vizattnames), drop=FALSE]
                colnames(tempvizatt) <- gsub("^viz[.]size[.]", "", colnames(tempvizatt))
                tempnode1 <- newXMLNode("viz:size", parent=tempnode0, attrs=tempvizatt,
                                        fixNamespaces = fns)
              }
              # Shape
              if (vizshape) {
-               tempvizatt <- vizatt[,grep("^viz[.]shape[.]", vizattnames), drop=F]
+               tempvizatt <- vizatt[,grep("^viz[.]shape[.]", vizattnames), drop=FALSE]
                colnames(tempvizatt) <- gsub("^viz[.]shape[.]", "", colnames(tempvizatt))
                tempnode1 <- newXMLNode("viz:shape", parent=tempnode0, attrs=tempvizatt,
                                        fixNamespaces = fns)
              }
              # Image
              if (vizimage) {
-               tempvizatt <- vizatt[,grep("^viz[.]image[.]", vizattnames), drop=F]
+               tempvizatt <- vizatt[,grep("^viz[.]image[.]", vizattnames), drop=FALSE]
                colnames(tempvizatt) <- c("value", "uri")
                tempnode1 <- newXMLNode("viz:shape", parent=tempnode0, attrs=tempvizatt,
                                        fixNamespaces = fns)
              }
              # Thickness
              if (vizthickness) {
-               tempvizatt <- vizatt[,grep("^viz[.]thickness[.]", vizattnames), drop=F]
+               tempvizatt <- vizatt[,grep("^viz[.]thickness[.]", vizattnames), drop=FALSE]
                colnames(tempvizatt) <- gsub("^viz[.]thickness[.]", "", colnames(tempvizatt))
                tempnode1 <- newXMLNode("viz:thickness", parent=tempnode0, attrs=tempvizatt,
                                        fixNamespaces = fns)
@@ -143,6 +143,8 @@ write.gexf <- function(
 ################################################################################
   nodes,
   edges,
+  edgesLabel=NULL,
+  edgesId=NULL,
   edgesAtt=NULL,
   edgesWeight=NULL,
   edgesVizAtt = list(color=NULL, thickness=NULL, shape=NULL),
@@ -162,15 +164,32 @@ write.gexf <- function(
   
   # Nodes
   if (is.data.frame(nodes) | is.matrix(nodes)) {
-    if (NCOL(nodes) != 2) stop(paste("\"nodes\" should have two columns not", NCOL(nodes)))
+    if (NCOL(nodes) != 2) stop("\"nodes\" should have two columns not ", NCOL(nodes))
   }
   else stop("Invalid object type: \"nodes\" should be a two column data.frame or a matrix")
   
   # Edges
   if (is.data.frame(edges) | is.matrix(edges)) {
-    if (NCOL(edges) != 2) stop(paste("edges should have two columns not", NCOL(edges)))
+    if (NCOL(edges) != 2) stop("\"edges\" should have two columns not ", NCOL(edges))
   }
   else stop("Invalid object type: \"edges\" should be a two column data.frame or a matrix")
+  
+  # Edges Label
+  if (length(edgesLabel) > 0) {
+    if (is.data.frame(edgesLabel) | is.matrix(edgesLabel) | is.vector(edgesLabel)) {
+      if (NCOL(edgesLabel) != 1) stop("\"edgesLabel\" should have one column not ", NCOL(edgesLabel))
+    }
+    else stop("Invalid object type: \"edgesLabel\" should be a one column data.frame or a matrix")
+  }
+  
+  # Edges Id
+  if (length(edgesId) > 0) {
+    if (is.data.frame(edgesId) | is.matrix(edgesId) | is.vector(edgesId)) {
+      if (NCOL(edgesId) != 1) stop("\"edgesId\" should have one column not ", NCOL(edgesId))
+    }
+    else stop("Invalid object type: \"edgesId\" should be a one column data.frame or a matrix")
+  }
+  else edgesId <- data.frame(id=0:(NROW(edges) - 1))
   
   # Edges Att
   if ((nEdgesAtt <- length(edgesAtt)) > 0) {
@@ -184,6 +203,7 @@ write.gexf <- function(
   if (length(edgesWeight) > 0) {
     if (is.vector(edgesWeight) | is.data.frame(edgesWeight) | is.matrix(edgesWeight)) {
       if (NROW(edgesWeight) != NROW(edges)) stop("\"edgesWeight\" should have the same number of rows than edges there are (", NROW(edges),")")
+      if (NCOL(edgesWeight) > 1) stop("\"edgesWeight should have only one column\"")
     }
     else stop("Invalid object type: \"edgesWeight\" should be a one column data.frame, a matrix or a vector")
   }
@@ -267,7 +287,7 @@ write.gexf <- function(
   if (!any(dynamic)) mode <- "static" else mode <- "dynamic"
 
   # Starting xml
-  xmlFile <- newXMLDoc(addFinalizer=T)
+  xmlFile <- newXMLDoc(addFinalizer=TRUE)
   gexf <- newXMLNode(name="gexf", doc = xmlFile)
   
   # gexf att
@@ -294,8 +314,8 @@ write.gexf <- function(
   
   xmlGraph <- newXMLNode(name="graph", parent=gexf)
   if (mode == "dynamic") {
-    strTime <- min(c(unlist(nodeDynamic), unlist(edgeDynamic)), na.rm=T)
-    endTime <- max(c(unlist(nodeDynamic), unlist(edgeDynamic)), na.rm=T)
+    strTime <- min(c(unlist(nodeDynamic), unlist(edgeDynamic)), na.rm=TRUE)
+    endTime <- max(c(unlist(nodeDynamic), unlist(edgeDynamic)), na.rm=TRUE)
     xmlAttrs(xmlGraph) <- c(mode=mode, start=strTime, end=endTime,
                             timeformat=tFormat, defaultedgetype=defaultedgetype)
     
@@ -310,7 +330,7 @@ write.gexf <- function(
       "integer", "integer",
       "float", "double",
       "boolean", "logical"
-      ), byrow=T, ncol =2)
+      ), byrow=TRUE, ncol =2)
   
   # nodes att definitions
   if (nNodesAtt > 0) {
@@ -414,7 +434,7 @@ write.gexf <- function(
   if (nNodesAtt > 0) nodesAtt <- data.frame(nodesAtt)
   
   for (set in c(nodeDynamic, nodesAtt, ListNodesVizAtt)) {
-    try(nodes <- data.frame(nodes, set), silent=T)
+    try(nodes <- data.frame(nodes, set), silent=TRUE)
   }
 
   # Naming the columns
@@ -444,8 +464,11 @@ write.gexf <- function(
   if (dynamic[2]) edgeDynamic <- data.frame(edgeDynamic)
   if (nEdgesAtt > 0) edgesAtt <- data.frame(edgesAtt)
     
+  # Adding edge id
+  try(edgesId <- cbind(edgesId, edgesLabel), silent=TRUE)
+  edges <- cbind(edgesId, edges)
   for (set in c(edgeDynamic, edgesAtt, ListEdgesVizAtt)) {
-    try(edges <- data.frame(edges, set), silent=T)
+    try(edges <- data.frame(edges, set), silent=TRUE)
   }
     
   # Naming the columns
@@ -457,8 +480,11 @@ write.gexf <- function(
   edges <- data.frame(edges, x=edgesWeight)
   
   # Seting colnames
-  colnames(edges) <- unlist(c("source", "target", tmeNames, attNames, 
-                              colnames(ListEdgesVizAtt),"weight"))
+  if (length(edgesLabel) > 0) edgesLabelCName <- "label"
+  else edgesLabelCName <- NULL
+  colnames(edges) <- unlist(c("id", edgesLabelCName, "source", "target", 
+                              tmeNames, attNames, colnames(ListEdgesVizAtt),
+                              "weight"))
 
   # EDGES
   xmlEdges <- newXMLNode(name="edges", parent=xmlGraph)
@@ -494,6 +520,6 @@ write.gexf <- function(
   if (is.na(output)) {
     return(results)
   } else {
-    print(results, file=output, replace=T)
+    print(results, file=output, replace=TRUE)
   }
 }

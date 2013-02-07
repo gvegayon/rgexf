@@ -10,3 +10,4 @@
 .*\.png
 .*\.gexf$
 ^.*\.Rproj$
+R/rgexf_cmp.R
