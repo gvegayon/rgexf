@@ -528,7 +528,9 @@ write.gexf2 <- function(
     print(results, file=output, replace=T)
   }
 }
+
 library(XML)
+
 .addAtts <- compiler::cmpfun(.addAtts)
 .addNodesEdges2 <- compiler::cmpfun(.addNodesEdges2)
 write.gexf2 <- compiler::cmpfun(write.gexf2)
