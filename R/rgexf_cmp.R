@@ -34,27 +34,40 @@ edge.list <- function(x) {
         }, PAR=parent)
 }
 
-.addAtts <- function(attnames, att, parent, attvec, doc) {
-    
-  newXMLNode("attvalues", parent=parent, doc=doc, 
-             lapply(
-               attvec, 
-               function(x, ...) newXMLNode(name="attvalue", attrs=c("for"=attnames[x],value=att[x]))
-               )
-             )
+.addAtts <- function(attnames, tmpatt, attvec) {
+################################################################################
+# Builds app proper XML attrs statement to be parsed by parseXMLAndAdd
+################################################################################
+  tmpatt <- data.frame(colnames(tmpatt), unlist(tmpatt))
+  colnames(tmpatt) <- c("for","value")
 
+  tmpdoc <- NULL
+  for (i in attvec) 
+    tmpdoc <- c(tmpdoc, .writeXMLLine("attvalue", tmpatt[i, ]) , sep="") 
+
+  paste(c("<attvalues>", tmpdoc, "</attvalues>"), sep="", collapse="")
+}
+
+.writeXMLLine <- function(type, obj, finalizer=TRUE) {
+################################################################################
+# Builds as character whatever XML line is needed
+################################################################################
+  paste("<", type, " " ,
+        paste(colnames(obj)[!is.na(obj)],obj[!is.na(obj)], sep="=\"", collapse="\" "),
+        ifelse(finalizer, "\"/>","\">"), sep="")
 }
 
 .addNodesEdges2 <- function(dataset, PAR, type="node", doc) {
-  ################################################################################
-  # Prints the nodes and edges
-  ################################################################################  
+################################################################################
+# Prints the nodes and edges
+################################################################################  
   
   n <- NROW(dataset)
   vec <- 1:n
   xvars <- colnames(dataset)
   
   noattnames <- xvars[grep("(^att[0-9])|(^viz[.])", xvars, invert=T)]
+  datasetnoatt <- dataset[, noattnames, drop=FALSE]
   
   # Parsing user-define attributes
   if (attributes <- length(grep("^att", xvars)) > 0) {
@@ -90,90 +103,105 @@ edge.list <- function(x) {
       vizshp.df <- dataset[,grep("^viz[.]shape[.]", vizattnames, value=TRUE), drop=FALSE]
       colnames(vizshp.df) <- gsub("^viz[.]shape[.]", "", colnames(vizshp.df))
     }
-    vizimage <- any(grepl("^viz[.]image",vizattnames))
-    vizthickness <- any(grepl("^viz[.]thickness",vizattnames))
     
-    vizatt <- dataset[,vizattnames, drop=FALSE]
+    # Image att
+    if ((vizimage <- any(grepl("^viz[.]image",vizattnames)))) {
+      vizimg.df <- dataset[,grep("^viz[.]image[.]", vizattnames, value=TRUE), drop=FALSE]
+      colnames(vizimg.df) <- c("value", "uri")
+    }
+    
+    # Thickness att
+    if ((viztness <- any(grepl("^viz[.]thickness",vizattnames)))) {
+      vizthk.df <- dataset[,grep("^viz[.]thickness[.]", vizattnames, value=TRUE), drop=FALSE]
+      colnames(vizthk.df) <- gsub("^viz[.]thickness[.]", "", colnames(vizthk.df))
+    }
   }
+
+  # Free memory
+  rm(dataset)
   
   # Loop if there are not any attributes
   if (!attributes && !vizattributes) {
-    for (i in vec) {
-      tempnode0 <- newXMLNode(name=type, parent=PAR, doc=doc,
-                              attrs=dataset[i,noattnames, drop=FALSE][,!is.na(dataset[i,noattnames]), drop=FALSE])
-    }
-    return(NULL)
+    for (i in vec) 
+      parseXMLAndAdd(.writeXMLLine(type, datasetnoatt[i,]),parent=PAR)
+    NULL
   }
   
   # Loop if only there are attributes
   if (attributes && !vizattributes) {
+    
     for (i in vec) {
-      tempnode0 <- newXMLNode(name=type, parent=PAR, doc=doc,
-                              attrs=dataset[i,noattnames, drop=FALSE][,!is.na(dataset[i,noattnames]), drop=FALSE])
       
-      # Attributes printing        
-      .addAtts(attnames, as.character(att[i,]), tempnode0, attvec, doc)
+      # Adding directly
+      parseXMLAndAdd(
+        paste(.writeXMLLine(type, datasetnoatt[i,], finalizer=FALSE), 
+              .addAtts(attnames, ifelse(NCOL(att)>1,att[i,], att[i,drop=FALSE]), attvec), # Builds atts definition
+              "</",type,">",sep=""),
+        parent=PAR)
     }
-    return(NULL)
+    NULL
   }
   
   # Loop if there are attributes and viz attributes
   if (attributes && vizattributes) {
     fns <- c(dummy = FALSE, default = FALSE)
     for (i in vec) {
-      
-      tempnode0 <- newXMLNode(name=type, parent=PAR, doc=doc,
-                              attrs=dataset[i,noattnames, drop=FALSE][,!is.na(dataset[i,noattnames]), drop=FALSE])
-      
-      # Attributes printing        
-      .addAtts(attnames, as.character(att[i,]), tempnode0, attvec, doc)
+      # Node/Edge + Atts 
+      tempnode0 <- paste(
+        .writeXMLLine(type, datasetnoatt[i,]),
+        .addAtts(attnames, att[i,], attvec), sep="")
       
       # Viz Att printing
       # Colors
       if (vizcolors) {
-        tempnode1 <- newXMLNode("viz:color", parent=tempnode0, attrs=vizcol.df[i,],
-                                fixNamespaces = fns, doc=doc)
+        tempnode0 <- paste(tempnode0, .writeXMLLine("viz:color", vizcol.df[i,]),
+                           sep="")
       }
+      else
       # Position
       if (vizposition) {
-        tempnode1 <- newXMLNode("viz:position", parent=tempnode0, attrs=vizpos.df[i,],
-                                fixNamespaces = fns, doc=doc)
+        tempnode0 <- paste(tempnode0, .writeXMLLine("viz:position", vizpos.df[i,]),
+                           sep="")
       }
       # Size
       if (vizsize) {
-        tempnode1 <- newXMLNode("viz:size", parent=tempnode0, attrs=vizsiz.df[i,1, drop=FALSE],
-                                fixNamespaces = fns, doc=doc)
+        tempnode0 <- paste(tempnode0, .writeXMLLine("viz:size", vizsiz.df[i,1,drop=FALSE]),
+                           sep="")
       }
       # Shape
       if (vizshape) {
-        tempnode1 <- newXMLNode("viz:shape", parent=tempnode0, attrs=vizshp.df[i,1, drop=FALSE],
-                                fixNamespaces = fns, doc=doc)
+        tempnode0 <- paste(tempnode0, .writeXMLLine("viz:shape", vizshp.df[i,1,drop=FALSE]),
+                           sep="")
       }
       # Image
       if (vizimage) {
-        tempvizatt <- vizatt[i,grep("^viz[.]image[.]", vizattnames), drop=FALSE]
-        colnames(tempvizatt) <- c("value", "uri")
-        tempnode1 <- newXMLNode("viz:shape", parent=tempnode0, attrs=tempvizatt,
-                                fixNamespaces = fns, doc=doc)
+        tempnode0 <- paste(tempnode0, .writeXMLLine("viz:shape", vizimg.df[i,]),
+                           sep="")
       }
       # Thickness
-      if (vizthickness) {
-        tempvizatt <- vizatt[i,grep("^viz[.]thickness[.]", vizattnames), drop=FALSE]
-        colnames(tempvizatt) <- gsub("^viz[.]thickness[.]", "", colnames(tempvizatt))
-        tempnode1 <- newXMLNode("viz:thickness", parent=tempnode0, attrs=tempvizatt,
-                                fixNamespaces = fns, doc=doc)
+      if (viztness) {
+        tempnode0 <- paste(tempnode0, .writeXMLLine("viz:thickness", vizthk.df[i,1,drop=FALSE]),
+                           sep="")
       }
+      doc = xmlTreeParse(paste("<p>",tempnode0, "<",type,"/></p>",sep=""), asText = TRUE, 
+                     fullNamespaceInfo=FALSE)
+      print("aqui")
+      invisible(.Call("R_insertXMLNode", xmlChildren(xmlRoot(doc)), 
+                      PAR, -1L, FALSE, PACKAGE = "XML"))
+      #parseXMLAndAdd(paste(tempnode0, "<",type,"/>",sep=""), parent=PAR)
     }
-    return(NULL)
+    NULL
   }
 }
 
 write.gexf2 <- function(
-################################################################################  
-# Prints the gexf file
-################################################################################
+  ################################################################################  
+  # Prints the gexf file
+  ################################################################################
   nodes,
   edges,
+  edgesLabel=NULL,
+  edgesId=NULL,
   edgesAtt=NULL,
   edgesWeight=NULL,
   edgesVizAtt = list(color=NULL, thickness=NULL, shape=NULL),
@@ -186,22 +214,39 @@ write.gexf2 <- function(
   defaultedgetype = "undirected",
   meta = list(creator="NodosChile", description="A graph file writing in R using \"rgexf\"",keywords="gexf graph, NodosChile, R, rgexf"),
   keepFactors = TRUE
-  ) {
+) {
   
   ##############################################################################
   # CLASS CHECKS AND OTHERS CHECKS
   
   # Nodes
   if (is.data.frame(nodes) | is.matrix(nodes)) {
-    if (NCOL(nodes) != 2) stop(paste("\"nodes\" should have two columns not", NCOL(nodes)))
+    if (NCOL(nodes) != 2) stop("\"nodes\" should have two columns not ", NCOL(nodes))
   }
   else stop("Invalid object type: \"nodes\" should be a two column data.frame or a matrix")
   
   # Edges
   if (is.data.frame(edges) | is.matrix(edges)) {
-    if (NCOL(edges) != 2) stop(paste("edges should have two columns not", NCOL(edges)))
+    if (NCOL(edges) != 2) stop("\"edges\" should have two columns not ", NCOL(edges))
   }
   else stop("Invalid object type: \"edges\" should be a two column data.frame or a matrix")
+  
+  # Edges Label
+  if (length(edgesLabel) > 0) {
+    if (is.data.frame(edgesLabel) | is.matrix(edgesLabel) | is.vector(edgesLabel)) {
+      if (NCOL(edgesLabel) != 1) stop("\"edgesLabel\" should have one column not ", NCOL(edgesLabel))
+    }
+    else stop("Invalid object type: \"edgesLabel\" should be a one column data.frame or a matrix")
+  }
+  
+  # Edges Id
+  if (length(edgesId) > 0) {
+    if (is.data.frame(edgesId) | is.matrix(edgesId) | is.vector(edgesId)) {
+      if (NCOL(edgesId) != 1) stop("\"edgesId\" should have one column not ", NCOL(edgesId))
+    }
+    else stop("Invalid object type: \"edgesId\" should be a one column data.frame or a matrix")
+  }
+  else edgesId <- data.frame(id=0:(NROW(edges) - 1))
   
   # Edges Att
   if ((nEdgesAtt <- length(edgesAtt)) > 0) {
@@ -215,6 +260,7 @@ write.gexf2 <- function(
   if (length(edgesWeight) > 0) {
     if (is.vector(edgesWeight) | is.data.frame(edgesWeight) | is.matrix(edgesWeight)) {
       if (NROW(edgesWeight) != NROW(edges)) stop("\"edgesWeight\" should have the same number of rows than edges there are (", NROW(edges),")")
+      if (NCOL(edgesWeight) > 1) stop("\"edgesWeight should have only one column\"")
     }
     else stop("Invalid object type: \"edgesWeight\" should be a one column data.frame, a matrix or a vector")
   }
@@ -241,7 +287,7 @@ write.gexf2 <- function(
     }
   }
   else nEdgesVizAtt <- 0
-
+  
   # Nodes Att
   if ((nNodesAtt <- length(nodesAtt)) > 0) {
     if (is.data.frame(nodesAtt) | is.matrix(nodesAtt) | is.vector(nodesAtt)) {
@@ -294,15 +340,15 @@ write.gexf2 <- function(
   # Strings
   old.strAF <- getOption("stringsAsFactors")
   options(stringsAsFactors = FALSE)
-    
+  
   if (!any(dynamic)) mode <- "static" else mode <- "dynamic"
-
+  
   # Starting xml
-  xmlFile <- newXMLDoc(addFinalizer=T)
+  xmlFile <- newXMLDoc(addFinalizer=TRUE)
   gexf <- newXMLNode(name="gexf", doc = xmlFile)
   
   # gexf att
-
+  
   newXMLNamespace(node=gexf, namespace="http://www.gexf.net/1.2draft")
   newXMLNamespace(
     node=gexf, namespace="http://www.gexf.net/1.1draft/viz", prefix="viz")
@@ -325,8 +371,8 @@ write.gexf2 <- function(
   
   xmlGraph <- newXMLNode(name="graph", parent=gexf)
   if (mode == "dynamic") {
-    strTime <- min(c(unlist(nodeDynamic), unlist(edgeDynamic)), na.rm=T)
-    endTime <- max(c(unlist(nodeDynamic), unlist(edgeDynamic)), na.rm=T)
+    strTime <- min(c(unlist(nodeDynamic), unlist(edgeDynamic)), na.rm=TRUE)
+    endTime <- max(c(unlist(nodeDynamic), unlist(edgeDynamic)), na.rm=TRUE)
     xmlAttrs(xmlGraph) <- c(mode=mode, start=strTime, end=endTime,
                             timeformat=tFormat, defaultedgetype=defaultedgetype)
     
@@ -334,14 +380,14 @@ write.gexf2 <- function(
   } else {
     xmlAttrs(xmlGraph) <- c(mode=mode)
   }
-
+  
   datatypes <- matrix(
     c(
       "string", "character",
       "integer", "integer",
       "float", "double",
       "boolean", "logical"
-      ), byrow=T, ncol =2)
+    ), byrow=TRUE, ncol =2)
   
   # nodes att definitions
   if (nNodesAtt > 0) {
@@ -357,8 +403,8 @@ write.gexf2 <- function(
       id = paste("att",1:nNodesAtt,sep=""), 
       title = TIT, 
       type = TYPE
-      )
-  
+    )
+    
     # Fixing datatype
     for (i in 1:NROW(datatypes)) {
       nodesAttDf$type <- gsub(datatypes[i,2], datatypes[i,1], nodesAttDf$type)
@@ -372,7 +418,7 @@ write.gexf2 <- function(
   else {
     nodesAttDf <- NULL
   }
-
+  
   # edges att
   if (nEdgesAtt > 0) {
     TIT <- colnames(edgesAtt)
@@ -387,7 +433,7 @@ write.gexf2 <- function(
       id = paste("att",1:nEdgesAtt,sep=""), 
       title = TIT, 
       type = TYPE
-      )
+    )
     
     # Fixing datatype
     for (i in 1:NROW(datatypes)) {
@@ -445,9 +491,9 @@ write.gexf2 <- function(
   if (nNodesAtt > 0) nodesAtt <- data.frame(nodesAtt)
   
   for (set in c(nodeDynamic, nodesAtt, ListNodesVizAtt)) {
-    try(nodes <- data.frame(nodes, set), silent=T)
+    try(nodes <- data.frame(nodes, set), silent=TRUE)
   }
-
+  
   # Naming the columns
   attNames <- nodesAttDf["id"]
   if (!is.null(nodeDynamic)) tmeNames <- c("start", "end") else tmeNames <- NULL
@@ -468,17 +514,20 @@ write.gexf2 <- function(
   
   # NODES
   xmlNodes <- newXMLNode(name="nodes", parent=xmlGraph)
-  .addNodesEdges2(nodes, xmlNodes, "node", doc=xmlFile)
-
+  .addNodesEdges2(nodes, xmlNodes, "node")
+  
   ##############################################################################
   # The basic dataframe definition  for edges  
   if (dynamic[2]) edgeDynamic <- data.frame(edgeDynamic)
   if (nEdgesAtt > 0) edgesAtt <- data.frame(edgesAtt)
-    
+  
+  # Adding edge id
+  try(edgesId <- cbind(edgesId, edgesLabel), silent=TRUE)
+  edges <- cbind(edgesId, edges)
   for (set in c(edgeDynamic, edgesAtt, ListEdgesVizAtt)) {
-    try(edges <- data.frame(edges, set), silent=T)
+    try(edges <- data.frame(edges, set), silent=TRUE)
   }
-    
+  
   # Naming the columns
   attNames <- edgesAttDf["id"]
   if (!is.null(edgeDynamic)) tmeNames <- c("start", "end") else tmeNames <- NULL
@@ -488,9 +537,12 @@ write.gexf2 <- function(
   edges <- data.frame(edges, x=edgesWeight)
   
   # Seting colnames
-  colnames(edges) <- unlist(c("source", "target", tmeNames, attNames, 
-                              colnames(ListEdgesVizAtt),"weight"))
-
+  if (length(edgesLabel) > 0) edgesLabelCName <- "label"
+  else edgesLabelCName <- NULL
+  colnames(edges) <- unlist(c("id", edgesLabelCName, "source", "target", 
+                              tmeNames, attNames, colnames(ListEdgesVizAtt),
+                              "weight"))
+  
   # EDGES
   xmlEdges <- newXMLNode(name="edges", parent=xmlGraph)
   
@@ -506,7 +558,7 @@ write.gexf2 <- function(
     } 
   }
   
-  .addNodesEdges2(edges, xmlEdges, "edge", doc=xmlFile)
+  .addNodesEdges2(edges, xmlEdges, "edge")
   
   results <- list(
     meta=unlist(meta),
@@ -525,9 +577,10 @@ write.gexf2 <- function(
   if (is.na(output)) {
     return(results)
   } else {
-    print(results, file=output, replace=T)
+    print(results, file=output, replace=TRUE)
   }
 }
+
 
 library(XML)
 
