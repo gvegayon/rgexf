@@ -34,14 +34,15 @@ edge.list <- function(x) {
         }, PAR=parent)
 }
 
-.addAtts <- function(attnames, tmpatt, attvec) {
+.addAtts <- function(attnames, tmpatt, attvec, tmpdoc=NULL) {
 ################################################################################
 # Builds app proper XML attrs statement to be parsed by parseXMLAndAdd
 ################################################################################
-  tmpatt <- data.frame(colnames(tmpatt), unlist(tmpatt))
-  colnames(tmpatt) <- c("for","value")
+  tmpatt <- data.frame(
+    "for"=colnames(tmpatt), 
+    value=unlist(tmpatt, recursive=FALSE), check.names=FALSE
+    )
 
-  tmpdoc <- NULL
   for (i in attvec) 
     tmpdoc <- c(tmpdoc, .writeXMLLine("attvalue", tmpatt[i, ]) , sep="") 
 
@@ -130,12 +131,11 @@ edge.list <- function(x) {
   # Loop if only there are attributes
   if (attributes && !vizattributes) {
     
-    for (i in vec) {
-      
+    for (i in vec) {      
       # Adding directly
       parseXMLAndAdd(
         paste(.writeXMLLine(type, datasetnoatt[i,], finalizer=FALSE), 
-              .addAtts(attnames, ifelse(NCOL(att)>1,att[i,], att[i,drop=FALSE]), attvec), # Builds atts definition
+              .addAtts(attnames, att[i,], attvec), # Builds atts definition
               "</",type,">",sep=""),
         parent=PAR)
     }
@@ -185,7 +185,7 @@ edge.list <- function(x) {
       }
       doc = xmlTreeParse(paste("<p>",tempnode0, "<",type,"/></p>",sep=""), asText = TRUE, 
                      fullNamespaceInfo=FALSE)
-      print("aqui")
+      
       invisible(.Call("R_insertXMLNode", xmlChildren(xmlRoot(doc)), 
                       PAR, -1L, FALSE, PACKAGE = "XML"))
       #parseXMLAndAdd(paste(tempnode0, "<",type,"/>",sep=""), parent=PAR)

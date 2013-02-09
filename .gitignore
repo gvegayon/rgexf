@@ -10,3 +10,4 @@
 
 *.(R|r)html
 *.pdf
+.Rproj.user
