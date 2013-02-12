@@ -11,7 +11,7 @@ edge.list <- function(x) {
     if (nCols) {
       # If it is not a factor
       if (!is.factor(x)) x <- factor(c(x[,1], x[,2]))
-      edges <- matrix(unclass(x), byrow=F, ncol=2)
+      edges <- matrix(unclass(x), byrow=FALSE, ncol=2)
       nodes <- data.frame(id=1:nlevels(x), label=levels(x), stringsAsFactors=F)
       
       edgelist <- list(nodes=nodes, edges=edges)
@@ -22,6 +22,22 @@ edge.list <- function(x) {
   }
   else stop(paste(objClass, 
                   "class not allowed, try with a \"matrix\" or a \"data.frame\""))
+}
+
+rm.pll.edges <- function(x, attrs=NULL, stringsAsFactors = default.stringsAsFactors()) {
+################################################################################
+# Removes parallel edges
+################################################################################  
+  if (length(attrs) == 0) x <- lapply(1:NROW(x), function(y) unlist(sort(x[y,])))
+  else {
+    if (NCOL(attrs) == 1) x <- lapply(1:NROW(x), function(y) c(unlist(sort(x[y,])), attrs[y]))
+    else x <- lapply(1:NROW(x), function(y) c(unlist(sort(x[y,])), attrs[y,]))
+  }
+  x <- do.call("rbind", x)
+  #colnames(x) <- nms
+  x <- as.data.frame(x, stringsAsFactors=stringsAsFactors)
+  return(unique(x))
+  
 }
 
 .defAtt <- function(x, parent) {
@@ -112,9 +128,9 @@ edge.list <- function(x) {
     }
     
     # Thickness att
-    if ((viztness <- any(grepl("^viz[.]thickness",vizattnames)))) {
-      vizthk.df <- dataset[,grep("^viz[.]thickness[.]", vizattnames, value=TRUE), drop=FALSE]
-      colnames(vizthk.df) <- gsub("^viz[.]thickness[.]", "", colnames(vizthk.df))
+    if ((viztness <- any(grepl("^viz[.]size",vizattnames)))) {
+      vizthk.df <- dataset[,grep("^viz[.]size[.]", vizattnames, value=TRUE), drop=FALSE]
+      colnames(vizthk.df) <- gsub("^viz[.]size[.]", "", colnames(vizthk.df))
     }
   }
 
@@ -123,8 +139,9 @@ edge.list <- function(x) {
   
   # Loop if there are not any attributes
   if (!attributes && !vizattributes) {
-    for (i in vec) 
+    for (i in vec) {
       parseXMLAndAdd(.writeXMLLine(type, datasetnoatt[i,]),parent=PAR)
+    }
     NULL
   }
   
@@ -148,7 +165,7 @@ edge.list <- function(x) {
     for (i in vec) {
       # Node/Edge + Atts 
       tempnode0 <- paste(
-        .writeXMLLine(type, datasetnoatt[i,]),
+        .writeXMLLine(type, datasetnoatt[i,], finalizer=FALSE),
         .addAtts(attnames, att[i,], attvec), sep="")
       
       # Viz Att printing
@@ -157,7 +174,6 @@ edge.list <- function(x) {
         tempnode0 <- paste(tempnode0, .writeXMLLine("viz:color", vizcol.df[i,]),
                            sep="")
       }
-      else
       # Position
       if (vizposition) {
         tempnode0 <- paste(tempnode0, .writeXMLLine("viz:position", vizpos.df[i,]),
@@ -178,17 +194,11 @@ edge.list <- function(x) {
         tempnode0 <- paste(tempnode0, .writeXMLLine("viz:shape", vizimg.df[i,]),
                            sep="")
       }
-      # Thickness
-      if (viztness) {
-        tempnode0 <- paste(tempnode0, .writeXMLLine("viz:thickness", vizthk.df[i,1,drop=FALSE]),
-                           sep="")
-      }
-      doc = xmlTreeParse(paste("<p>",tempnode0, "<",type,"/></p>",sep=""), asText = TRUE, 
-                     fullNamespaceInfo=FALSE)
-      
-      invisible(.Call("R_insertXMLNode", xmlChildren(xmlRoot(doc)), 
+      #parseXMLAndAdd(paste(tempnode0, "</",type,">",sep=""), parent=PAR, top=NULL)
+      tempnode0 <- xmlParseDoc(paste("<p>",tempnode0, "</",type,"></p>",sep=""), 
+                               c(NOERROR, HUGE), asText = TRUE)
+      invisible(.Call("R_insertXMLNode", xmlChildren(xmlRoot(tempnode0)), 
                       PAR, -1L, FALSE, PACKAGE = "XML"))
-      #parseXMLAndAdd(paste(tempnode0, "<",type,"/>",sep=""), parent=PAR)
     }
     NULL
   }
@@ -204,7 +214,7 @@ write.gexf2 <- function(
   edgesId=NULL,
   edgesAtt=NULL,
   edgesWeight=NULL,
-  edgesVizAtt = list(color=NULL, thickness=NULL, shape=NULL),
+  edgesVizAtt = list(color=NULL, size=NULL, shape=NULL),
   nodesAtt=NULL,
   nodesVizAtt = list(color=NULL, position=NULL, size=NULL, shape=NULL, image=NULL),
   nodeDynamic=NULL,
@@ -267,7 +277,7 @@ write.gexf2 <- function(
   
   # Edges Viz Att
   if (any(lapply(edgesVizAtt, length) > 0)) {
-    supportedEdgeVizAtt <- c("color", "thickness", "shape")
+    supportedEdgeVizAtt <- c("color", "size", "shape")
     if (all(names(edgesVizAtt) %in% supportedEdgeVizAtt)) {
       if (all(lapply(edgesVizAtt, NROW) == NROW(edges))) {
         nEdgesVizAtt <- length(edgesVizAtt)
@@ -283,7 +293,7 @@ write.gexf2 <- function(
     else {
       noviz <- names(edgesVizAtt)
       noviz <- noviz[!(noviz %in% supportedEdgeVizAtt)]
-      stop("Invalid \"edgesVizAtt\": ",noviz,"\nOnly \"color\", \"thickness\" and \"shape\" are supported")
+      stop("Invalid \"edgesVizAtt\": ",noviz,"\nOnly \"color\", \"size\" and \"shape\" are supported")
     }
   }
   else nEdgesVizAtt <- 0
@@ -371,12 +381,20 @@ write.gexf2 <- function(
   
   xmlGraph <- newXMLNode(name="graph", parent=gexf)
   if (mode == "dynamic") {
-    strTime <- min(c(unlist(nodeDynamic), unlist(edgeDynamic)), na.rm=TRUE)
-    endTime <- max(c(unlist(nodeDynamic), unlist(edgeDynamic)), na.rm=TRUE)
+    strTime <- min(nodeDynamic, edgeDynamic, na.rm=TRUE)
+    endTime <- max(nodeDynamic, edgeDynamic, na.rm=TRUE)
     xmlAttrs(xmlGraph) <- c(mode=mode, start=strTime, end=endTime,
                             timeformat=tFormat, defaultedgetype=defaultedgetype)
     
-    
+    # Replacing NAs
+    if (length(nodeDynamic) > 0) {
+      nodeDynamic[is.na(nodeDynamic[,1]),1] <- strTime
+      nodeDynamic[is.na(nodeDynamic[,2]),2] <- endTime
+    }
+    if (length(edgeDynamic) > 0) {
+      edgeDynamic[is.na(edgeDynamic[,1]),1] <- strTime
+      edgeDynamic[is.na(edgeDynamic[,2]),2] <- endTime
+    }
   } else {
     xmlAttrs(xmlGraph) <- c(mode=mode)
   }
@@ -457,7 +475,10 @@ write.gexf2 <- function(
       
       if (i == "color") colnames(tmpAtt) <- paste("viz.color", c("r","g","b","a"), sep=".")
       else if (i == "position") colnames(tmpAtt) <- paste("viz.position", c("x","y","z"), sep=".")
-      else if (i == "size") colnames(tmpAtt) <- "viz.size.value"
+      else if (i == "size") {
+          colnames(tmpAtt) <- "viz.size.value"
+          tmpAtt[,1] <- sprintf("%.3f", tmpAtt[,1])
+      }
       else if (i == "shape") colnames(tmpAtt) <- "viz.shape.value"
       else if (i == "image") {
         tmpAtt <- data.frame(x=rep("image",NROW(nodes)), viz.image.uri=tmpAtt)
@@ -477,7 +498,10 @@ write.gexf2 <- function(
       tmpAtt <- data.frame(edgesVizAtt[[i]])
       
       if (i == "color") colnames(tmpAtt) <- paste("viz.color", c("r","g","b","a"), sep=".")
-      else if (i == "thickness") colnames(tmpAtt) <- "viz.thickness.value"
+      else if (i == "size") {
+        colnames(tmpAtt) <- "viz.size.value"
+        tmpAtt[,1] <- sprintf("%.3f", tmpAtt[,1])
+      }
       else if (i == "shape") colnames(tmpAtt) <- "value"
       
       if (length(ListEdgesVizAtt) == 0) ListEdgesVizAtt <- tmpAtt
@@ -487,7 +511,10 @@ write.gexf2 <- function(
   
   ##############################################################################
   # The basic char matrix definition  for nodes
-  if (dynamic[1]) nodeDynamic <- data.frame(nodeDynamic)
+  if (dynamic[1]) 
+    nodeDynamic <- data.frame(
+      sprintf("%.3f",nodeDynamic[,1]), sprintf("%.3f",nodeDynamic[,2])
+      )
   if (nNodesAtt > 0) nodesAtt <- data.frame(nodesAtt)
   
   for (set in c(nodeDynamic, nodesAtt, ListNodesVizAtt)) {
@@ -518,7 +545,9 @@ write.gexf2 <- function(
   
   ##############################################################################
   # The basic dataframe definition  for edges  
-  if (dynamic[2]) edgeDynamic <- data.frame(edgeDynamic)
+  if (dynamic[2]) edgeDynamic <- data.frame(
+    sprintf("%.3f",edgeDynamic[,1]), sprintf("%.3f", edgeDynamic[,2])
+    )
   if (nEdgesAtt > 0) edgesAtt <- data.frame(edgesAtt)
   
   # Adding edge id
@@ -580,10 +609,3 @@ write.gexf2 <- function(
     print(results, file=output, replace=TRUE)
   }
 }
-
-
-library(XML)
-
-.addAtts <- compiler::cmpfun(.addAtts)
-.addNodesEdges2 <- compiler::cmpfun(.addNodesEdges2)
-write.gexf2 <- compiler::cmpfun(write.gexf2)

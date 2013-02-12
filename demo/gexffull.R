@@ -76,10 +76,10 @@ thick<-1:9
 
 pause()
 
-write.gexf2(nodes=people, edges=relations, edgeDynamic=time.edges, edgesAtt=edge.att,
-     nodeDynamic=time.nodes, nodesAtt=node.att,
-     nodesVizAtt=list(shape=shapes, position=pos, image=imagee, color=color),
-     edgesVizAtt=list(thickness=thick))
+write.gexf2(nodes=people, edgesWeight=thick, edges=relations, edgeDynamic=time.edges, 
+            edgesAtt=edge.att, nodeDynamic=time.nodes, nodesAtt=node.att,
+            nodesVizAtt=list(shape=shapes, position=pos, image=imagee, color=color))#,
+            output="x.gexf")
 
 
 ################################################################################

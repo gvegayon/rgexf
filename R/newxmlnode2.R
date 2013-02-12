@@ -1,7 +1,7 @@
 # New function
 newXMLNode2 <- function(tmp, parent) {
   doc = xmlParse(tmp, asText = TRUE)
-  
+  print(class(doc))
   invisible(.Call("R_insertXMLNode", xmlChildren(xmlRoot(doc)), 
                   parent, -1L, FALSE, PACKAGE = "XML"))
 }
@@ -9,7 +9,7 @@ newXMLNode2 <- function(tmp, parent) {
 # New way
 mynode <- "<Placemark><Point><coordinates>%.3f,%.3f,0</coordinates></Point></Placemark>"
 f <- newXMLNode("Folder")
-system.time(for (i in 1:5000) newXMLNode2(mynode, f))
+system.time(for (i in 1:2) newXMLNode2(mynode, f))
 #user  system elapsed 
 #1.89    0.02    1.90 
 
@@ -22,3 +22,19 @@ system.time(for (i in 1:5000) newXMLNode("Point", parent=f2, newXMLNode("coordin
 # Are the same?
 saveXML(f) == saveXML(f2)
 # TRUE
+
+library(XML)
+
+x <- newXMLDoc()
+x.1 <- newXMLNode("grafo", parent=x, namespace=c(viz="http://h.c"))
+newXMLNode("hijo", parent=x.1, newXMLNode("att", namespace="viz","hola"))
+
+x <- newXMLDoc()
+texto <- "<grafo xmlns:viz=\"http://h.c\"><hijo><atts><viz:shape value=\"hola\"/></atts></hijo></grafo>"
+parseXMLAndAdd(texto, parent=x)
+
+"paste2<-" <- function (x, value) paste(x, value, sep="")
+
+x <- "hola";class(x) <- "subgraph"
+paste2(x) <- "si"
+x
