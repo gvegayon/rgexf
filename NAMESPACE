@@ -8,7 +8,11 @@ export(read.gexf)
 export(new.gexf.graph)
 export(add.gexf.node, rm.gexf.node, add.gexf.edge, rm.gexf.edge)
 export(edge.list)
+export(ordAndCheckDplEdges)
 
 # Methods
 S3method(print, gexf)
 S3method(summary, gexf)
+
+# Source code
+useDynLib(rgexf)
