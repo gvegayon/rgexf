@@ -12,4 +12,5 @@
 ^.*\.Rproj$
 R/rgexf_cmp.R
 R/newxmlnode2.R
+demo/gexfplot.R
 

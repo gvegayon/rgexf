@@ -1,40 +1,38 @@
 #include <R.h>
 #include <Rmath.h>
+#include "rgexf.h"
 
-void ROrderAndCheckDplEdges(
-  int *nedges,       // Number of edges
-  double *in_source, // Input Source
-  double *in_target, // Input Target
-  int *undirected,   // Weather to switch columns or not
-  double *out_source,// Output Source
-  double *out_target,// Output Target
-  double *n_repeat   // Output Num of repeat
+
+void RCheckDplEdges(
+/*##############################################################################
+# Checks for duplicated edges
+##############################################################################*/
+  double *in_source,  // Input Source
+  double *in_target,  // Input Target
+  int    *undirected, // Weather to switch columns or not
+  double *out_source, // Output Source
+  double *out_target, // Output Target
+  double *n_repeat    // Output Num of repeat
   )
 {
+  int nedges = sizeof(*in_source);
+  int * n = &nedges;
+  
   // Switchs sources and target
-  if (*undirected) {
-    for(int i=0; i<*nedges; i++) {
-      
-      // If source < target
-      if (in_source[i] < in_target[i]) {
-        out_source[i] = in_source[i];
-        out_target[i] = in_target[i];
-      }
-      else { // Otherwhise
-        out_target[i] = in_source[i];
-        out_source[i] = in_target[i];
-      }
-    }
+  if (*undirected == 1) {
+    
+    RSwitchEdges(n, in_source, in_target,
+      out_source, out_target);
   }
   else {
-    for(int i=0; i<*nedges; i++) {
+    for(int i=0; i<nedges; i++) {
       out_source[i] = in_source[i];
       out_target[i] = in_target[i];
     }
   }
   
   // Counts the number of repetitions
-  for(int i=0; i<*nedges; i++) {
+  for(int i=0; i<nedges; i++) {
         
     // n_repat = -1 if the loop hasnt pass through it
     if (n_repeat[i] != -1) {
@@ -43,7 +41,7 @@ void ROrderAndCheckDplEdges(
       int tmp_source=out_source[i];
       int tmp_target=out_target[i];
       
-      for(int j = 0; j<*nedges; j++) {
+      for(int j = 0; j<nedges; j++) {
         
         // Should not compare the same link with it self
         if (i != j) {
