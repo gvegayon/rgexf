@@ -1,5 +1,6 @@
 ################################################################################
 # Demo of gexf function - Network with nodes and edges attributes
+# Author: Jorge Fabrega
 ################################################################################
 
 pause <- function() {  

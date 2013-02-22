@@ -1,5 +1,6 @@
 ################################################################################
 # Demo of gexf function - Input: a list of edges  
+# Author: Jorge Fabrega
 ################################################################################
 pause <- function() {  
   invisible(readline("\nPress <return> to continue: ")) 

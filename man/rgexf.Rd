@@ -1,6 +1,7 @@
 \name{rgexf-package}
 \alias{rgexf-package}
 \alias{rgexf}
+\alias{gexf}
 \alias{gephi}
 \docType{package}
 \title{

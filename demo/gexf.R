@@ -1,5 +1,6 @@
 ################################################################################
 # Demo of gexf function
+# Author: Jorge Fabrega
 ################################################################################
 pause <- function() {  
   invisible(readline("\nPress <return> to continue: ")) 
@@ -99,7 +100,7 @@ grafo <- write.gexf(nodes=people, edges=relations,
                 color=nodecolors
                 ), 
               edgesVizAtt=list(
-                thickness=1:9, 
+                size=1:9, 
                 color=edgecolors
                 ), 
               edgesAtt=edgetruefalse)

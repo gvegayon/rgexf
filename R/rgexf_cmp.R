@@ -55,7 +55,7 @@ rm.pll.edges <- function(x, attrs=NULL, stringsAsFactors = default.stringsAsFact
 # Builds app proper XML attrs statement to be parsed by parseXMLAndAdd
 ################################################################################
   tmpatt <- data.frame(
-    "for"=colnames(tmpatt), 
+    "for"=paste("att",attvec,sep=""), 
     value=unlist(tmpatt, recursive=FALSE), check.names=FALSE
     )
 
@@ -74,7 +74,7 @@ rm.pll.edges <- function(x, attrs=NULL, stringsAsFactors = default.stringsAsFact
         ifelse(finalizer, "\"/>","\">"), sep="")
 }
 
-.addNodesEdges2 <- function(dataset, PAR, type="node", doc) {
+.addNodesEdges <- function(dataset, PAR, type="node", doc) {
 ################################################################################
 # Prints the nodes and edges
 ################################################################################  
@@ -171,40 +171,40 @@ rm.pll.edges <- function(x, attrs=NULL, stringsAsFactors = default.stringsAsFact
       # Viz Att printing
       # Colors
       if (vizcolors) {
-        tempnode0 <- paste(tempnode0, .writeXMLLine("viz:color", vizcol.df[i,]),
+        tempnode0 <- paste(tempnode0, .writeXMLLine("color", vizcol.df[i,]),
                            sep="")
       }
       # Position
       if (vizposition) {
-        tempnode0 <- paste(tempnode0, .writeXMLLine("viz:position", vizpos.df[i,]),
+        tempnode0 <- paste(tempnode0, .writeXMLLine("position", vizpos.df[i,]),
                            sep="")
       }
       # Size
       if (vizsize) {
-        tempnode0 <- paste(tempnode0, .writeXMLLine("viz:size", vizsiz.df[i,1,drop=FALSE]),
+        tempnode0 <- paste(tempnode0, .writeXMLLine("size", vizsiz.df[i,1,drop=FALSE]),
                            sep="")
       }
       # Shape
       if (vizshape) {
-        tempnode0 <- paste(tempnode0, .writeXMLLine("viz:shape", vizshp.df[i,1,drop=FALSE]),
+        tempnode0 <- paste(tempnode0, .writeXMLLine("shape", vizshp.df[i,1,drop=FALSE]),
                            sep="")
       }
       # Image
       if (vizimage) {
-        tempnode0 <- paste(tempnode0, .writeXMLLine("viz:shape", vizimg.df[i,]),
+        tempnode0 <- paste(tempnode0, .writeXMLLine("shape", vizimg.df[i,]),
                            sep="")
       }
-      #parseXMLAndAdd(paste(tempnode0, "</",type,">",sep=""), parent=PAR, top=NULL)
-      tempnode0 <- xmlParseDoc(paste("<p>",tempnode0, "</",type,"></p>",sep=""), 
-                               c(NOERROR, HUGE), asText = TRUE)
-      invisible(.Call("R_insertXMLNode", xmlChildren(xmlRoot(tempnode0)), 
-                      PAR, -1L, FALSE, PACKAGE = "XML"))
+      parseXMLAndAdd(paste(tempnode0, "</",type,">",sep=""), parent=PAR, top=NULL)
+      #tempnode0 <- xmlParseDoc(paste("<p>",tempnode0, "</",type,"></p>",sep=""), 
+      #                         c(NOERROR, HUGE), asText = TRUE)
+      #invisible(.Call("R_insertXMLNode", xmlChildren(xmlRoot(tempnode0)), 
+      #                PAR, -1L, FALSE, PACKAGE = "XML"))
     }
     NULL
   }
 }
 
-write.gexf2 <- function(
+write.gexf <- function(
   ################################################################################  
   # Prints the gexf file
   ################################################################################
@@ -381,8 +381,8 @@ write.gexf2 <- function(
   
   xmlGraph <- newXMLNode(name="graph", parent=gexf)
   if (mode == "dynamic") {
-    strTime <- min(nodeDynamic, edgeDynamic, na.rm=TRUE)
-    endTime <- max(nodeDynamic, edgeDynamic, na.rm=TRUE)
+    strTime <- min(c(unlist(nodeDynamic), unlist(edgeDynamic)), na.rm=TRUE)
+    endTime <- max(c(unlist(nodeDynamic), unlist(edgeDynamic)), na.rm=TRUE)
     xmlAttrs(xmlGraph) <- c(mode=mode, start=strTime, end=endTime,
                             timeformat=tFormat, defaultedgetype=defaultedgetype)
     
@@ -477,7 +477,7 @@ write.gexf2 <- function(
       else if (i == "position") colnames(tmpAtt) <- paste("viz.position", c("x","y","z"), sep=".")
       else if (i == "size") {
           colnames(tmpAtt) <- "viz.size.value"
-          tmpAtt[,1] <- sprintf("%.3f", tmpAtt[,1])
+          tmpAtt[,1] <- sprintf("%.1f", tmpAtt[,1])
       }
       else if (i == "shape") colnames(tmpAtt) <- "viz.shape.value"
       else if (i == "image") {
@@ -500,7 +500,7 @@ write.gexf2 <- function(
       if (i == "color") colnames(tmpAtt) <- paste("viz.color", c("r","g","b","a"), sep=".")
       else if (i == "size") {
         colnames(tmpAtt) <- "viz.size.value"
-        tmpAtt[,1] <- sprintf("%.3f", tmpAtt[,1])
+        tmpAtt[,1] <- sprintf("%.1f", tmpAtt[,1])
       }
       else if (i == "shape") colnames(tmpAtt) <- "value"
       
@@ -513,7 +513,7 @@ write.gexf2 <- function(
   # The basic char matrix definition  for nodes
   if (dynamic[1]) 
     nodeDynamic <- data.frame(
-      sprintf("%.3f",nodeDynamic[,1]), sprintf("%.3f",nodeDynamic[,2])
+      sprintf("%.1f",nodeDynamic[,1]), sprintf("%.1f",nodeDynamic[,2])
       )
   if (nNodesAtt > 0) nodesAtt <- data.frame(nodesAtt)
   
@@ -541,12 +541,12 @@ write.gexf2 <- function(
   
   # NODES
   xmlNodes <- newXMLNode(name="nodes", parent=xmlGraph)
-  .addNodesEdges2(nodes, xmlNodes, "node")
+  .addNodesEdges(nodes, xmlNodes, "node")
   
   ##############################################################################
   # The basic dataframe definition  for edges  
   if (dynamic[2]) edgeDynamic <- data.frame(
-    sprintf("%.3f",edgeDynamic[,1]), sprintf("%.3f", edgeDynamic[,2])
+    sprintf("%.1f",edgeDynamic[,1]), sprintf("%.1f", edgeDynamic[,2])
     )
   if (nEdgesAtt > 0) edgesAtt <- data.frame(edgesAtt)
   
@@ -564,6 +564,7 @@ write.gexf2 <- function(
   # Generating weights
   if (length(edgesWeight) == 0)  edgesWeight <- 1
   edges <- data.frame(edges, x=edgesWeight)
+  edges$x <- sprintf("%.1f", edges$x)
   
   # Seting colnames
   if (length(edgesLabel) > 0) edgesLabelCName <- "label"
@@ -587,7 +588,7 @@ write.gexf2 <- function(
     } 
   }
   
-  .addNodesEdges2(edges, xmlEdges, "edge")
+  .addNodesEdges(edges, xmlEdges, "edge")
   
   results <- list(
     meta=unlist(meta),
@@ -601,6 +602,11 @@ write.gexf2 <- function(
   
   # Strings As Factors
   options(stringsAsFactors = old.strAF)
+  
+  # Fixing 
+  for (viz in c("color", "size", "shape", "position")) 
+    results$graph <- gsub(paste("<",viz, sep=""), paste("<viz", viz, sep=":"), results$graph)
+  
   
   # Returns
   if (is.na(output)) {

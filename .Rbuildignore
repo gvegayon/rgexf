@@ -10,7 +10,7 @@
 .*\.png
 .*\.gexf$
 ^.*\.Rproj$
-R/rgexf_cmp.R
+R/rgexf.R
 R/newxmlnode2.R
 demo/gexfplot.R
 

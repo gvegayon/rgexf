@@ -8,7 +8,7 @@ write.gexf(
   edgesAtt = NULL, edgesWeight = NULL, 
   edgesVizAtt = list(
     color=NULL, 
-    thickness=NULL, 
+    size=NULL, 
     shape=NULL
   ),
   nodesAtt = NULL,
@@ -37,7 +37,7 @@ write.gexf(
   \item{edgesLabel}{One column data.frame/matrix or vector.}
   \item{edgesAtt}{A dataframe with one or more columns representing edges attributes}
   \item{edgesWeight}{A numeric vector containing edges weights}
-  \item{edgesVizAtt}{List of three or less viz attributes such as color, thickness and shape of the edges (see details)}
+  \item{edgesVizAtt}{List of three or less viz attributes such as color, size (thickness) and shape of the edges (see details)}
   \item{nodesAtt}{A dataframe with one or more columns representing nodes attributes}
   \item{nodesVizAtt}{List of four or less viz attributes such as color, position, size and shape of the nodes (see details)}
   \item{nodeDynamic}{A two columns matrix or dataframe. The first column indicates the time at which a given node starts; the second one shows when it ends. The matrix or dataframe must have the same number of rows than the number of nodes}
