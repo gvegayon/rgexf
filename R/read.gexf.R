@@ -100,7 +100,11 @@ add.gexf.node <- function(
 ################################################################################
 # Add nodes to gexf class object
 ################################################################################
-  graph, id=NA, label=NA, start=NULL, end=NULL,
+  graph, 
+  id=NA, 
+  label=NA, 
+  start=NULL, 
+  end=NULL,
   vizAtt=list(color=NULL, position=NULL, size=NULL, shape=NULL, image=NULL)) {
   # Parses the graph file
   graph$graph <- xmlTreeParse(graph$graph)
@@ -132,8 +136,17 @@ add.gexf.edge <- function(
 ################################################################################
 # Add edges to gexf class object
 ################################################################################
-  graph, source, target, id=NULL, type=NULL, label=NULL, start=NULL, end=NULL, 
-  weight=1, vizAtt = list(color=NULL, thickness=NULL, shape=NULL)) {
+  graph, 
+  source, 
+  target, 
+  id=NULL, 
+  type=NULL, 
+  label=NULL, 
+  start=NULL, 
+  end=NULL, 
+  weight=1, 
+  vizAtt = list(color=NULL, thickness=NULL, shape=NULL)) {
+  
   # Parses the graph file
   graph$graph <- xmlTreeParse(graph$graph)
   

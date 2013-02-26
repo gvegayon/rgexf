@@ -2,7 +2,11 @@ importFrom(XML)
 importFrom(utils, packageDescription)
 
 export(.addNodesEdges, .defAtt)
-export(checkTimes)
+
+# Parsing functions
+export(checkTimes, .parseEdgesVizAtt, .parseNodesVizAtt, .parseEdgesWeight, 
+       .parseEdgesAtt, .parseEdgesId, .parseNodesAtt, .parseEdgesLabel)
+
 export(write.gexf)
 export(read.gexf)
 export(new.gexf.graph)
