@@ -521,7 +521,11 @@ write.gexf <- function(
     } 
   }
   
+  # Adding edges
   .addNodesEdges(edges, xmlEdges, "edge")
+  
+  # Edges Label (for data frame)
+  if (length(edgesLabel) == 0) edgesLabel <- edges[,"id"]
   
   results <- list(
     meta=unlist(meta),
@@ -529,7 +533,7 @@ write.gexf <- function(
     node.att = nodesAttDf,
     edge.att = edgesAttDf,
     nodes=data.frame(id=nodes[,"id"], label=nodes[,"label"], row.names=NULL),
-    edges=data.frame(source=edges[,"source"],target=edges[,"target"], row.names=NULL),
+    edges=data.frame(id=edges[,"id"], label=edgesLabel, source=edges[,"source"],target=edges[,"target"], row.names=NULL),
     graph=saveXML(xmlFile, encoding="UTF-8"))
   class(results) <- "gexf"
   

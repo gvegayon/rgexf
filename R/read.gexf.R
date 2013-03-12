@@ -153,6 +153,8 @@ add.gexf.edge <- function(
   # Gets the number of edges
   n <- length(graph$graph$doc$children$gexf[["graph"]][["edges"]])
   
+  if (length(id) == 0) id <- n + 1
+  
   edge <- xmlNode("edge", attrs=c(id=id, type=type, label=label, source=source, 
                                   target=target, start=start, end=end, 
                                   weight=weight))
@@ -166,7 +168,8 @@ add.gexf.edge <- function(
   # Adds the new edge
   graph$graph$doc$children$gexf[["graph"]][["edges"]][[n+1]] <- asXMLNode(x=edge)
   
-  graph$edges <- rbind(graph$edges, data.frame(source=source, target=target,
+  if (length(label) == 0) label <- id
+  graph$edges <- rbind(graph$edges, data.frame(id=id, label=label, source=source, target=target,
                                                stringsAsFactors=F))
   
   # Saves and returns as char XML
@@ -225,18 +228,17 @@ new.gexf.graph <- function(
     node.att = NULL,
     edge.att = NULL,
     nodes=data.frame(id=NULL, label=NULL),
-    edges=data.frame(source=NULL, target=NULL),
+    edges=data.frame(id=NULL, label=NULL, source=NULL, target=NULL),
     graph=saveXML(xmlFile, encoding='UTF-8'))
   class(results) <- "gexf"
   
   return(results)
 }
 
-
 rm.gexf.node <- function(
-  ################################################################################
-  # Add nodes to gexf class object
-  ################################################################################
+################################################################################
+# Add nodes to gexf class object
+################################################################################
   graph, id=NULL, number=NULL, rm.edges = TRUE
   ) {
   
@@ -244,12 +246,12 @@ rm.gexf.node <- function(
   if (length(number)==0) {
     if (length(id)==0) stop("No nodes specified.")
     else {
-      number <- as.numeric(rownames(graph$nodes)[id == graph$nodes["id"]])
+      number <- which(graph$nodes$id == id)
     }
     if (length(number) == 0) stop("No such node.")
   }
   else {
-    id <- graph$nodes[number,]$id
+    id <- graph$nodes$id[number]
   }
   
   # Gets the number of nodes
@@ -259,24 +261,21 @@ rm.gexf.node <- function(
     graph$graph <- xmlTreeParse(graph$graph)
   
     # Removes nodes from XML
-    graph$graph$doc$children$gexf[["graph"]][["nodes"]] <- 
-      removeChildren(graph$graph$doc$children$gexf[["graph"]][["nodes"]], 
-                   kids=c(number))
+    graph$graph$doc$children$gexf[["graph"]][["nodes"]][[number]] <- 
+      graph$graph$doc$children$gexf[["graph"]][["nodes"]][[-number]]
     
     # If removing edges is true
     if (rm.edges) {
       if (length(graph$graph$doc$children$gexf[["graph"]][["edges"]]) > 0) {
-        edges.to.rm <- rownames(subset(graph$edges, 
-                                       graph$edges["source"] == id |
-                                         graph$edges["target"]  == id))
-        
-        if (length(edges.to.rm) > 0) {
-          edges.to.rm <- as.numeric(edges.to.rm)
-          
+        edges.to.rm <- which(graph$edges$source == id | graph$edges$target == id)
+
+        if (length(edges.to.rm) > 0) {          
           # Removing from xml
-          graph$graph$doc$children$gexf[["graph"]][["edges"]] <- 
-            removeChildren(graph$graph$doc$children$gexf[["graph"]][["edges"]], 
-                         kids=as.list(edges.to.rm))
+          for (i in edges.to.rm) {
+            print(class(graph$graph$doc$children$gexf[["graph"]][["edges"]]))
+            graph$graph$doc$children$gexf[["graph"]][["edges"]] <- 
+              graph$graph$doc$children$gexf[["graph"]][["edges"]][[-i]]
+          }
           
           # Removing from data frame
           graph$edges <- graph$edges[-edges.to.rm,]
@@ -304,8 +303,20 @@ rm.gexf.edge <- function(
 ################################################################################
 # Add edges to gexf class object
 ################################################################################
-  graph, number=NULL
+  graph, 
+  id=NULL, 
+  number=NULL
   ) {
+  
+  # Checking the edge to add to
+  if (length(number)==0) {
+    if (length(id)==0) stop("No edges specified.")
+    else {
+      number <- which(graph$edges$id == id)
+    }
+    if (length(number) == 0) stop("No such edge.")
+  }
+  
   # Checking the node to delete
   if (length(number) == 0)  stop("No edge especified.")
   
@@ -316,8 +327,7 @@ rm.gexf.edge <- function(
     graph$graph <- xmlTreeParse(graph$graph)
     
     graph$graph$doc$children$gexf[["graph"]][["edges"]] <- 
-      removeChildren(graph$graph$doc$children$gexf[["graph"]][["edges"]], 
-                     kids=c(number))
+      graph$graph$doc$children$gexf[["graph"]][["edges"]][[-number]]
     
     graph$edges <- graph$edges[-number,]
     
@@ -329,3 +339,96 @@ rm.gexf.edge <- function(
     stop("No edges to be removed.")
   }
 }
+
+add.gexf.node.spell <- function(
+################################################################################
+# Add nodes to gexf class object
+################################################################################
+  graph, 
+  id=NULL,
+  number=NULL,
+  start=NULL, 
+  end=NULL
+  ) {
+  
+  # Checking the node to add to
+  if (length(number)==0) {
+    if (length(id)==0) stop("No nodes specified.")
+    else {
+      number <- which(graph$nodes$id == id)
+    }
+    if (length(number) == 0) stop("No such node.")
+  }
+  
+  # Parses the graph file
+  graph$graph <- xmlTreeParse(graph$graph)
+  
+  # Gets the number of nodes
+  n <- length(graph$graph$doc$children$gexf[["graph"]][["nodes"]][[number]][["spells"]])
+  if (n == 0) {
+    natts <- length(graph$graph$doc$children$gexf[["graph"]][["nodes"]][[number]])
+    graph$graph$doc$children$gexf[["graph"]][["nodes"]][[number]][[natts + 1]] <-
+      asXMLNode(xmlNode("spells"))
+  }
+    
+  nodespell <- xmlNode("spell", attrs=c(start=start, end=end))
+  
+  graph$graph$doc$children$gexf[["graph"]][["nodes"]][[number]][["spells"]][[n+1]] <- 
+    asXMLNode(x=nodespell)
+    
+  # Saves and returns as char XML
+  graph$graph <- saveXML(xmlRoot(graph$graph), encoding="UTF-8")
+  return(graph)
+}
+
+add.gexf.edge.spell <- function(
+  ################################################################################
+  # Add nodes to gexf class object
+  ################################################################################
+  graph, 
+  id=NULL,
+  number=NULL,
+  start=NULL, 
+  end=NULL
+) {
+  
+  # Checking the edge to add to
+  if (length(number)==0) {
+    if (length(id)==0) stop("No edges specified.")
+    else {
+      number <- which(graph$edges$id == id)
+    }
+    if (length(number) == 0) stop("No such edge.")
+  }
+  
+  # Parses the graph file
+  graph$graph <- xmlTreeParse(graph$graph)
+  
+  # Gets the number of edges
+  n <- length(graph$graph$doc$children$gexf[["graph"]][["edges"]][[number]][["spells"]])
+  if (n == 0) {
+    natts <- length(graph$graph$doc$children$gexf[["graph"]][["edges"]][[number]])
+    graph$graph$doc$children$gexf[["graph"]][["edges"]][[number]][[natts + 1]] <-
+      asXMLNode(xmlNode("spells"))
+  }
+  
+  edgespell <- xmlNode("spell", attrs=c(start=start, end=end))
+  
+  graph$graph$doc$children$gexf[["graph"]][["edges"]][[number]][["spells"]][[n+1]] <- 
+    asXMLNode(x=edgespell)
+  
+  # Saves and returns as char XML
+  graph$graph <- saveXML(xmlRoot(graph$graph), encoding="UTF-8")
+  return(graph)
+}
+
+x <- new.gexf.graph()
+x <- add.gexf.node(x, 0, "ge")
+x <- add.gexf.node(x, 2, "ge2")
+x <- add.gexf.edge(x, 0,2,1)
+x <- add.gexf.edge(x, 1,3,2)
+x
+x <- add.gexf.node.spell(x, 0, start=2, end=4)
+x <- add.gexf.edge.spell(x, 1, end=4)
+
+rm.gexf.node(x, id=0)

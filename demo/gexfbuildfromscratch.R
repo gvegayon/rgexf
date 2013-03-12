@@ -20,6 +20,11 @@ mygraph <- add.gexf.node(mygraph,3,"pedro")
 mygraph <- add.gexf.node(mygraph,4,"diego")
 
 pause()
+# Adding spells
+mygraph <- add.gexf.node.spell(mygraph, 2, start="0.0", end="10.0")
+mygraph <- add.gexf.node.spell(mygraph, 2, start="15.0")
+
+pause()
 # Adding edges
 mygraph <- add.gexf.edge(mygraph,1,2)
 mygraph <- add.gexf.edge(mygraph,3,1)
@@ -37,5 +42,6 @@ mygraph <- rm.gexf.node(mygraph, id="1", rm.edges=T)
 
 mygraph
 pause()
+
 # Removing edge number two
 mygraph <- rm.gexf.edge(mygraph, number=2)

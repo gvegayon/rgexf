@@ -11,6 +11,7 @@ export(write.gexf)
 export(read.gexf)
 export(new.gexf.graph)
 export(add.gexf.node, rm.gexf.node, add.gexf.edge, rm.gexf.edge)
+export(add.gexf.node.spell, add.gexf.edge.spell)
 export(edge.list)
 
 # Analysis functions
