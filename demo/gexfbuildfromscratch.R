@@ -14,15 +14,15 @@ mygraph
 
 pause()
 # Adding nodes
-mygraph <- add.gexf.node(mygraph,1,"george")
-mygraph <- add.gexf.node(mygraph,2,"valita")
+mygraph <- add.gexf.node(mygraph,1,"george", vizAtt=list(size=10))
+mygraph <- add.gexf.node(mygraph,2,"valita", vizAtt=list(color=data.frame(20,20,20,1)))
 mygraph <- add.gexf.node(mygraph,3,"pedro")
 mygraph <- add.gexf.node(mygraph,4,"diego")
 
 pause()
 # Adding spells
-mygraph <- add.gexf.node.spell(mygraph, 2, start="0.0", end="10.0")
-mygraph <- add.gexf.node.spell(mygraph, 2, start="15.0")
+mygraph <- add.node.spell(mygraph, 2, start=0, end=10)
+mygraph <- add.node.spell(mygraph, 2, start=15)
 
 pause()
 # Adding edges
@@ -44,4 +44,4 @@ mygraph
 pause()
 
 # Removing edge number two
-mygraph <- rm.gexf.edge(mygraph, number=2)
+rm.gexf.edge(mygraph, number=2)

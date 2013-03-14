@@ -3,6 +3,8 @@
 \alias{add.gexf.edge}
 \alias{rm.gexf.node}
 \alias{rm.gexf.edge}
+\alias{add.node.spell}
+\alias{add.edge.spell}
 \title{Adding and removing nodes/edges from \code{gexf} objects}
 \description{Manipulates \code{gexf} objects adding and removing nodes and edges from both, its dataframe representation and its XML representation.}
 \usage{
@@ -14,7 +16,11 @@ add.gexf.edge(graph, source, target, id=NULL, type=NULL, label=NULL, start=NULL,
 
 rm.gexf.node(graph, id=NULL, number=NULL, rm.edges = TRUE)
 
-rm.gexf.edge(graph, number=NULL)
+rm.gexf.edge(graph, id=NULL, number=NULL)
+
+add.node.spell(graph, id=NULL, number=NULL, start=NULL, end=NULL)
+
+add.edge.spell(graph, id=NULL, number=NULL, start=NULL, end=NULL)
 }
 \arguments{
   \item{graph}{A gexf class object to which the new node is to be added.}
@@ -31,7 +37,13 @@ rm.gexf.edge(graph, number=NULL)
   \item{rm.edges}{Whether to remove or not existing edges.}
 }
 \details{
+  \code{new.gexf.graph} Creates a new \code{gexf} empty object (0 nodes 0 edges).
+  
+  \code{add.gexf.node} and \code{add.gexf.edge} allow adding nodes and edges to a \code{gexf} object (graph) one at a time. \code{rm.gexf.node} and \code{rm.gexf.edges} remove nodes and edges respectively.
+  
   In the case of \code{rm.gexf.node}, by default every edge linked to the node that is been removed will also be removed (\code{rm.edges = TRUE}).
+  
+  \code{add.node.spell} and \code{add.edge.spell} allow to include spells to specific nodes or edges in a \code{gexf} object.
 }
 \value{
   A \code{gexf} object.

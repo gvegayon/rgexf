@@ -2,6 +2,31 @@
 \title{rgexf NEWS}
 \encoding{UTF-8}
 
+\section{CHANGES IN rgexf version 0.13.03 [2013-03-14]}{
+  \subsection{NEW FEATURES}{
+    \itemize{
+      \item New functions \code{add.node.spell} and \code{add.edge.spell} now allow to work with nodes and edges time spells.
+      \item New function \code{check.dpl.edges}, written in C, analyzes links and reports duplicates (marking them) and number of times the same link is repeated considering if the graph is directed or not.
+      \item New function \code{switch.edges}, also written in C, allows to order links representations (source and target) in order to set the smallest id as source and the highest as target.
+      \item Function \code{write.gexf} now has an improved error handler. Now parses objects before even opening the XML graph.
+      \item Edges support id assignment and labeling.
+    }
+  }
+  \subsection{FIXES}{
+    \itemize{
+      \item Small bug detected in viz attributes fixed.
+      \item Edges thickness viz att XML representation (\code{viz:thickness}) was replaced by \code{viz:size} (as it should be).
+      \item \dQuote{Library} replaced by \dQuote{Package} everywhere (\code{ups!})
+    }
+  }
+  \subsection{DEVELOPMENT}{
+    \itemize{
+      \item \code{.addNodesEdges} rewritten now works faster in most of CPUs (some of them with very high speedups) (Thanks to Duncan Temple Lang, RXML author)
+      \item Several code routines have been extracted from \dQuote{bigger functions} and written as functions themselves.
+    }
+  }
+}
+
 \section{CHANGES IN rgexf version 0.13.01 [2013-01-04]}{
   \subsection{NEW FEATURES}{
     \itemize{

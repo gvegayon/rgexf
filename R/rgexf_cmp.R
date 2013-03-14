@@ -161,7 +161,6 @@ rm.pll.edges <- function(x, attrs=NULL, stringsAsFactors = default.stringsAsFact
   
   # Loop if there are attributes and viz attributes
   if (attributes && vizattributes) {
-    fns <- c(dummy = FALSE, default = FALSE)
     for (i in vec) {
       # Node/Edge + Atts 
       tempnode0 <- paste(
@@ -194,11 +193,7 @@ rm.pll.edges <- function(x, attrs=NULL, stringsAsFactors = default.stringsAsFact
         tempnode0 <- paste(tempnode0, .writeXMLLine("shape", vizimg.df[i,]),
                            sep="")
       }
-      parseXMLAndAdd(paste(tempnode0, "</",type,">",sep=""), parent=PAR, top=NULL)
-      #tempnode0 <- xmlParseDoc(paste("<p>",tempnode0, "</",type,"></p>",sep=""), 
-      #                         c(NOERROR, HUGE), asText = TRUE)
-      #invisible(.Call("R_insertXMLNode", xmlChildren(xmlRoot(tempnode0)), 
-      #                PAR, -1L, FALSE, PACKAGE = "XML"))
+      parseXMLAndAdd(sprintf("%s</%s>",tempnode0, type), parent=PAR)
     }
     NULL
   }
@@ -410,7 +405,7 @@ write.gexf <- function(
       else if (i == "position") colnames(tmpAtt) <- paste("viz.position", c("x","y","z"), sep=".")
       else if (i == "size") {
           colnames(tmpAtt) <- "viz.size.value"
-          tmpAtt[,1] <- sprintf("%.1f", tmpAtt[,1])
+          tmpAtt[,1] <- sprintf("%.2f", tmpAtt[,1])
       }
       else if (i == "shape") colnames(tmpAtt) <- "viz.shape.value"
       else if (i == "image") {
@@ -542,7 +537,8 @@ write.gexf <- function(
   
   # Fixing 
   for (viz in c("color", "size", "shape", "position")) 
-    results$graph <- gsub(paste("<",viz, sep=""), paste("<viz", viz, sep=":"), results$graph)
+    results$graph <- gsub(sprintf("<%s",viz), sprintf("<viz:%s", viz), 
+                          results$graph, fixed=TRUE)
   
   
   # Returns
