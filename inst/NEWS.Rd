@@ -2,6 +2,15 @@
 \title{rgexf NEWS}
 \encoding{UTF-8}
 
+\section{CHANGES IN rgexf version 0.13.05 [2013-05-09]}{
+  \subsection{BUG FIX}{
+    \itemize{
+      \item \code{sprintf} error when using other formats rather than double (issue 10).
+      \item in \code{.addNodesEdges}, add support to case ``!attributes && vizattributes'' (issue 9).
+    }
+  }
+}
+
 \section{CHANGES IN rgexf version 0.13.03 [2013-03-14]}{
   \subsection{NEW FEATURES}{
     \itemize{
