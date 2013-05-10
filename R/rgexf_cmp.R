@@ -142,7 +142,7 @@ rm.pll.edges <- function(x, attrs=NULL, stringsAsFactors = default.stringsAsFact
     for (i in vec) {
       parseXMLAndAdd(.writeXMLLine(type, datasetnoatt[i,]),parent=PAR)
     }
-    NULL
+    return(NULL)
   }
   
   # Loop if only there are attributes
@@ -156,47 +156,48 @@ rm.pll.edges <- function(x, attrs=NULL, stringsAsFactors = default.stringsAsFact
               "</",type,">",sep=""),
         parent=PAR)
     }
-    NULL
+    return(NULL)
   }
   
   # Loop if there are attributes and viz attributes
-  if (attributes && vizattributes) {
-    for (i in vec) {
-      # Node/Edge + Atts 
+  for (i in vec) {
+    # Node/Edge + Atts 
+    if (attributes) {
       tempnode0 <- paste(
         .writeXMLLine(type, datasetnoatt[i,], finalizer=FALSE),
         .addAtts(attnames, att[i,], attvec), sep="")
-      
-      # Viz Att printing
-      # Colors
-      if (vizcolors) {
-        tempnode0 <- paste(tempnode0, .writeXMLLine("color", vizcol.df[i,]),
-                           sep="")
-      }
-      # Position
-      if (vizposition) {
-        tempnode0 <- paste(tempnode0, .writeXMLLine("position", vizpos.df[i,]),
-                           sep="")
-      }
-      # Size
-      if (vizsize) {
-        tempnode0 <- paste(tempnode0, .writeXMLLine("size", vizsiz.df[i,1,drop=FALSE]),
-                           sep="")
-      }
-      # Shape
-      if (vizshape) {
-        tempnode0 <- paste(tempnode0, .writeXMLLine("shape", vizshp.df[i,1,drop=FALSE]),
-                           sep="")
-      }
-      # Image
-      if (vizimage) {
-        tempnode0 <- paste(tempnode0, .writeXMLLine("shape", vizimg.df[i,]),
-                           sep="")
-      }
-      parseXMLAndAdd(sprintf("%s</%s>",tempnode0, type), parent=PAR)
     }
-    NULL
+    else tempnode0 <- .writeXMLLine(type, datasetnoatt[i,], finalizer=FALSE)
+    
+    # Viz Att printing
+    # Colors
+    if (vizcolors) {
+      tempnode0 <- paste(tempnode0, .writeXMLLine("color", vizcol.df[i,]),
+                         sep="")
+    }
+    # Position
+    if (vizposition) {
+      tempnode0 <- paste(tempnode0, .writeXMLLine("position", vizpos.df[i,]),
+                         sep="")
+    }
+    # Size
+    if (vizsize) {
+      tempnode0 <- paste(tempnode0, .writeXMLLine("size", vizsiz.df[i,1, drop=FALSE]),
+                         sep="")
+    }
+    # Shape
+    if (vizshape) {
+      tempnode0 <- paste(tempnode0, .writeXMLLine("shape", vizshp.df[i,1,drop=FALSE]),
+                         sep="")
+    }
+    # Image
+    if (vizimage) {
+      tempnode0 <- paste(tempnode0, .writeXMLLine("shape", vizimg.df[i,]),
+                         sep="")
+    }
+    parseXMLAndAdd(sprintf("%s</%s>",tempnode0, type), parent=PAR)
   }
+  return(NULL)
 }
 
 write.gexf <- function(
@@ -439,7 +440,7 @@ write.gexf <- function(
   
   ##############################################################################
   # The basic char matrix definition  for nodes
-  if (dynamic[1]) 
+  if (dynamic[1] & tFormat=="double") 
     nodeDynamic <- data.frame(
       sprintf("%.1f",nodeDynamic[,1]), sprintf("%.1f",nodeDynamic[,2])
       )

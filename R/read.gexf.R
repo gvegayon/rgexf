@@ -3,7 +3,7 @@ read.gexf <- function(x) {
 # Read gexf graph files
 ################################################################################
   # Reads the graph
-  gfile <- xmlParse(x)
+  gfile <- xmlParse(x, encoding="UTF-8")
   
   # Gets the namespace
   ns <- xmlNamespace(xmlRoot(gfile))
@@ -107,7 +107,7 @@ add.gexf.node <- function(
   end=NULL,
   vizAtt=list(color=NULL, position=NULL, size=NULL, shape=NULL, image=NULL)) {
   # Parses the graph file
-  graph$graph <- xmlTreeParse(graph$graph, error=NULL)
+  graph$graph <- xmlTreeParse(graph$graph, encoding="UTF-8")
   
   # Gets the number of nodes
   n <- length(graph$graph$doc$children$gexf[["graph"]][["nodes"]])
@@ -156,7 +156,7 @@ add.gexf.edge <- function(
   vizAtt = list(color=NULL, thickness=NULL, shape=NULL)) {
   
   # Parses the graph file
-  graph$graph <- xmlTreeParse(graph$graph)
+  graph$graph <- xmlTreeParse(graph$graph, encoding="UTF-8")
   
   # Gets the number of edges
   n <- length(graph$graph$doc$children$gexf[["graph"]][["edges"]])
@@ -272,7 +272,7 @@ rm.gexf.node <- function(
   
   if (NROW(graph$nodes) > 0) {
     # Parses the graph file
-    graph$graph <- xmlTreeParse(graph$graph)
+    graph$graph <- xmlTreeParse(graph$graph, encoding="UTF-8")
   
     # Removes nodes from XML
     #node$children = unclass(node)$children[-w]
@@ -338,7 +338,7 @@ rm.gexf.edge <- function(
   if (NROW(graph$edges) > 0) {
     
     # Parses the graph file
-    graph$graph <- xmlTreeParse(graph$graph)
+    graph$graph <- xmlTreeParse(graph$graph, encoding="UTF-8")
     
     graph$graph$doc$children$gexf[["graph"]][["edges"]]$children <- 
       unclass(graph$graph$doc$children$gexf[["graph"]][["edges"]])$children[-number]
@@ -375,7 +375,7 @@ add.node.spell <- function(
   }
   
   # Parses the graph file
-  graph$graph <- xmlTreeParse(graph$graph)
+  graph$graph <- xmlTreeParse(graph$graph, encoding="UTF-8")
   
   # Gets the number of nodes
   n <- length(graph$graph$doc$children$gexf[["graph"]][["nodes"]][[number]][["spells"]])
@@ -422,7 +422,7 @@ add.edge.spell <- function(
   }
   
   # Parses the graph file
-  graph$graph <- xmlTreeParse(graph$graph)
+  graph$graph <- xmlTreeParse(graph$graph, encoding="UTF-8")
   
   # Gets the number of edges
   n <- length(graph$graph$doc$children$gexf[["graph"]][["edges"]][[number]][["spells"]])

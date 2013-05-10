@@ -31,8 +31,8 @@ write.gexf(
   )
 }
 \arguments{
-  \item{nodes}{It contains two columns. First column contains nodes's id and the second one its \dQuote{label} (class: matrix or data frame).}
-  \item{edges}{It contains two columns. The first one has the \dQuote{source} and the second one has the \dQuote{target} (class: (matrix or data frame both based on nodes ids))}
+  \item{nodes}{It contains two columns. First column contains nodes's id and the second one its \dQuote{label} (class: data frame).}
+  \item{edges}{It contains two columns. The first one has the \dQuote{source} and the second one has the \dQuote{target} (class: (data frame based on nodes ids))}
   \item{edgesId}{One column data.frame/matrix or vector.}
   \item{edgesLabel}{One column data.frame/matrix or vector.}
   \item{edgesAtt}{A dataframe with one or more columns representing edges attributes}
