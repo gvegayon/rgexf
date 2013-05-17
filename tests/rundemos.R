@@ -1,0 +1,11 @@
+library(rgexf)
+
+demo(edge.list)
+demo(gexf)
+demo(gexfattributes)
+demo(gexfbasic)
+demo(gexfbuildfromscratch)
+demo(gexfdynamic)
+demo(gexfdynamicandatt)
+demo(gexffull)
+demo(gexftwitter)
