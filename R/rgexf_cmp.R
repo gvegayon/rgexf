@@ -24,22 +24,6 @@ edge.list <- function(x) {
                   "class not allowed, try with a \"matrix\" or a \"data.frame\""))
 }
 
-rm.pll.edges <- function(x, attrs=NULL, stringsAsFactors = default.stringsAsFactors()) {
-################################################################################
-# Removes parallel edges
-################################################################################  
-  if (length(attrs) == 0) x <- lapply(1:NROW(x), function(y) unlist(sort(x[y,])))
-  else {
-    if (NCOL(attrs) == 1) x <- lapply(1:NROW(x), function(y) c(unlist(sort(x[y,])), attrs[y]))
-    else x <- lapply(1:NROW(x), function(y) c(unlist(sort(x[y,])), attrs[y,]))
-  }
-  x <- do.call("rbind", x)
-  #colnames(x) <- nms
-  x <- as.data.frame(x, stringsAsFactors=stringsAsFactors)
-  return(unique(x))
-  
-}
-
 .defAtt <- function(x, parent) {
 ################################################################################
 # Prints the nodes and edges att definition
@@ -339,8 +323,8 @@ write.gexf <- function(
   # nodes att definitions
   if (nNodesAtt > 0) {
     TIT <- colnames(nodesAtt)
-    TYPE <- sapply(nodesAtt, typeof)
-    CLASS <- sapply(nodesAtt, class)
+    TYPE <- unlist(lapply(nodesAtt, typeof))
+    CLASS <- unlist(lapply(nodesAtt, class))
     
     # Checks for factors (factor replacing is done later)
     if (keepFactors) TYPE[CLASS == "factor"] <- "integer"
@@ -369,8 +353,8 @@ write.gexf <- function(
   # edges att
   if (nEdgesAtt > 0) {
     TIT <- colnames(edgesAtt)
-    TYPE <- sapply(edgesAtt, typeof)
-    CLASS <- sapply(edgesAtt, class)
+    TYPE <- unlist(lapply(edgesAtt, typeof))
+    CLASS <- unlist(lapply(edgesAtt, class))
     
     # Checks for factors (factor replacing is done later)
     if (keepFactors) TYPE[CLASS == "factor"] <- "integer"
@@ -398,10 +382,11 @@ write.gexf <- function(
   # nodes vizatt
   ListNodesVizAtt <- NULL
   if (nNodesVizAtt > 0) {
+    nodesVizAtt <- lapply(nodesVizAtt, data.frame)
     tempNodesVizAtt <- names(nodesVizAtt)
-    for (i in tempNodesVizAtt) {      
-      tmpAtt <- data.frame(nodesVizAtt[[i]])
-      
+    for (i in tempNodesVizAtt) {
+      tmpAtt <- nodesVizAtt$i
+      print(tmpAtt)
       if (i == "color") colnames(tmpAtt) <- paste("viz.color", c("r","g","b","a"), sep=".")
       else if (i == "position") colnames(tmpAtt) <- paste("viz.position", c("x","y","z"), sep=".")
       else if (i == "size") {
@@ -421,10 +406,11 @@ write.gexf <- function(
   # edges vizatt
   ListEdgesVizAtt <- NULL
   if (nEdgesVizAtt > 0) {
+    edgesVizAtt <- lapply(edgesVizAtt, as.data.frame)
     tempEdgesVizAtt <- names(edgesVizAtt)
     
     for (i in tempEdgesVizAtt) {
-      tmpAtt <- data.frame(edgesVizAtt[[i]])
+      tmpAtt <- edgesVizAtt$i
       
       if (i == "color") colnames(tmpAtt) <- paste("viz.color", c("r","g","b","a"), sep=".")
       else if (i == "size") {
@@ -458,14 +444,12 @@ write.gexf <- function(
   
   # Fixing factors
   if (keepFactors) {
-    for (i in colnames(nodes)) {
-      if (class(nodes[[i]]) == "factor") nodes[[i]] <- as.numeric(nodes[[i]])
-    }
+    tofix <- unlist(lapply(nodes, class)) %in% "factor"
+    nodes[,tofix] <- lapply(nodes[,tofix], as.numeric)
   }
   else {
-    for (i in colnames(nodes)) {
-      if (class(nodes[[i]]) == "factor") nodes[[i]] <- as.character(nodes[[i]])
-    } 
+    tofix <- unlist(lapply(nodes, class)) %in% "factor"
+    nodes[,tofix] <- lapply(nodes[,tofix], as.character)
   }
   
   # NODES
@@ -523,11 +507,24 @@ write.gexf <- function(
   # Edges Label (for data frame)
   if (length(edgesLabel) == 0) edgesLabel <- edges[,"id"]
   
+  # Fixing vizatt list
+  if (nNodesVizAtt) {
+    colnames(ListNodesVizAtt) <- grep("^viz\\.", colnames(ListNodesVizAtt), "")
+    for (i in names(nodesVizAtt)) nodesVizAtt$i <- ListNodesVizAtt[,grepl(i, colnames(ListNodesVizAtt))]
+  }
+  
+  # Fixing vizatt list
+  if (nEdgesVizAtt) {
+    colnames(ListEdgesVizAtt) <- grep("^viz\\.", colnames(ListEdgesVizAtt), "")
+    for (i in names(edgesVizAtt)) nodesVizAtt$i <- ListEdgesVizAtt[,grepl(i, colnames(ListEdgesVizAtt))]
+  }
+    
   results <- list(
     meta=unlist(meta),
     mode=unlist(c(defaultedgetype=defaultedgetype, mode=mode)),
-    node.att = nodesAttDf,
-    edge.att = edgesAttDf,
+    atts.definitions = list(nodes = nodesAttDf, edges = edgesAttDf),
+    nodesVizAtt = nodesVizAtt,
+    edgesVizAtt = edgesVizAtt,
     nodes=data.frame(id=nodes[,"id"], label=nodes[,"label"], row.names=NULL),
     edges=data.frame(id=edges[,"id"], label=edgesLabel, source=edges[,"source"],target=edges[,"target"], row.names=NULL),
     graph=saveXML(xmlFile, encoding="UTF-8"))
