@@ -18,36 +18,38 @@
 # # gexf.object <- gexf.object2
 # 
 
+# plot.gexf(gexf.object)
+
 plot.gexf <- function(gexf.object, EdgeType = c("line", "curve")){
   
   library(Rook)
   
-  if(!is.null(gexg.object$positions)){
-    library(sna)
-    nNodes <- nrow(gexf.object$nodes)
-    links <- matrix(rep(0, nNodes*nNodes), ncol = nNodes)
-    relations <- gexf.object$edges[,c(3,4)]
-    
-    for(edge in 1:ncol(relations)){
-      links[(relations[edge,]$target), (relations[edge,]$source)] <- 1
-    }
-    
-    positions <- gplot.layout.kamadakawai(links, layout.par=list())
-    positions <- cbind(positions, 0) # needs a z axis
-  }
-  
-  nodecolors <- data.frame(r = rep(255, nNodes),
-                           g = rep(255, nNodes),
-                           b = rep(255, nNodes),
-                           a = rep(255, nNodes))
-  
-  gexf.object <-  write.gexf(nodes=gexf.object$nodes,
-                             edges=gexf.object$edges[,c("source","target")],
-                             nodesVizAtt=list(
-                               color=nodecolors,
-                               position=positions
-                             ))
-  
+#   if(!is.null(gexf.object$positions)){
+#     library(sna)
+#     nNodes <- nrow(gexf.object$nodes)
+#     links <- matrix(rep(0, nNodes*nNodes), ncol = nNodes)
+#     relations <- gexf.object$edges[,c(3,4)]
+#     
+#     for(edge in 1:ncol(relations)){
+#       links[(relations[edge,]$target), (relations[edge,]$source)] <- 1
+#     }
+#     
+#     positions <- gplot.layout.kamadakawai(links, layout.par=list())
+#     positions <- cbind(positions, 0) # needs a z axis
+#   }
+#   
+#   nodecolors <- data.frame(r = rep(255, nNodes),
+#                            g = rep(255, nNodes),
+#                            b = rep(255, nNodes),
+#                            a = rep(255, nNodes))
+#   
+#   gexf.object <-  write.gexf(nodes=gexf.object$nodes,
+#                              edges=gexf.object$edges[,c("source","target")],
+#                              nodesVizAtt=list(
+#                                color=nodecolors,
+#                                position=positions
+#                              ))
+#   
   if(!is.null(gexf.object$node.att)){
     # dev
     html <- readLines("../inst/sigmajs/index_att.html", warn=FALSE)
@@ -79,30 +81,27 @@ plot.gexf <- function(gexf.object, EdgeType = c("line", "curve")){
   s$add(app=my.app2, name='data')
   
   # jquery
-  jquery <- readLines("../inst/sigmajs/jquery.min.js", warn=FALSE)
   my.app3 <- function(env){
     res <- Response$new()
-    res$write(paste(jquery , collapse="\n "))
+    res$write(paste(readLines("../inst/sigmajs/jquery.min.js", warn=FALSE), collapse="\n "))
     res$finish()
   }
   s$add(app=my.app3, name='jquery.js')
   
   
   # sigmajs
-  sigmajs <- readLines("../inst/sigmajs/sigma.min.js", warn=FALSE)
   my.app4 <- function(env){
     res <- Response$new()
-    res$write(paste(sigmajs , collapse="\n "))
+    res$write(paste(readLines("../inst/sigmajs/sigma.min.js", warn=FALSE) , collapse="\n "))
     res$finish()
   }
   s$add(app=my.app4, name='sigmajs')
   
   
   # sigmajs
-  sigma.parseGexf <- readLines("../inst/sigmajs/sigma.parseGexf.js", warn=FALSE)
   my.app5 <- function(env){
     res <- Response$new()
-    res$write(paste(sigma.parseGexf , collapse="\n "))
+    res$write(paste(readLines("../inst/sigmajs/sigma.parseGexf.js", warn=FALSE), collapse="\n "))
     res$finish()
   }
   s$add(app=my.app5, name='sigmaparseGexfjs')
