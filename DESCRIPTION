@@ -1,8 +1,8 @@
 Package: rgexf
 Type: Package
 Title: An R package to build GEXF graph files
-Version: 0.13.03
-Date: 2013-03-14
+Version: 0.13.05
+Date: 2013-05-09
 Author: George Vega Yon <george.vega@nodoschile.org> [aut], Jorge Fabrega Lacoa <jorge.fabrega@nodoschile.org> [ctb]
 Maintainer: George Vega Yon <george.vega@nodoschile.org>
 Description: The first R package to work with GEXF graph files (used in Gephi and others). Using XML library, it allows the user to easily build/read graph files including attributes, GEXF viz attributes (such as colour, size, and position), network dynamics (for both edges and nodes, including spells) and edges weighting. Users can build/handle graphs element-by-element or massively through data-frames.

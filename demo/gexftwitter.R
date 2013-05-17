@@ -32,3 +32,5 @@ relations<- subset(followers, select=c(source, target))
 pause()
 
 x1 <- write.gexf(nodos, relations, keepFactors=F, nodesAtt=nodos.att)
+
+summary(x1)
