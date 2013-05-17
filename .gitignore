@@ -10,7 +10,7 @@
 *.dll
 *.rds
 *.o
-R\.Rhistory
+
 
 *.(R|r)html
 *.pdf

@@ -1,26 +1,11 @@
 # library(devtools)
 # install_bitbucket(repo="rgexf", username="gvegayon")
 # library(rgexf)
-# rm(list=ls())
+rm(list=ls())
 
-# 
-# gexf.object <- write.gexf(nodes=data.frame(id=1:4, label=c("juan", "pedro", "matthew", "carlos"), stringsAsFactors=F),
-#                           edges=data.frame(source=c(1,1,1,2,3,4,2,4,4), target=c(4,2,3,3,4,2,4,1,1)))
-# 
-# gexf.object2 <- write.gexf(nodes=data.frame(id=1:4, label=c("juan", "pedro", "matthew", "carlos"), stringsAsFactors=F),
-#                            edges=data.frame(source=c(1,1,1,2,3,4,2,4,4), target=c(4,2,3,3,4,2,4,1,1)),
-#                            edgesAtt=data.frame(letrafavorita=letters[1:9], numbers=1:9, stringsAsFactors=F),
-#                            nodesAtt=data.frame(letrafavorita=c(letters[1:3],"hola"), numbers=1:4, stringsAsFactors=F))
-# 
-# gexf.object <- read.gexf("http://sigmajs.org/data/les_miserables.gexf")
-# 
-# EdgeType <- "line"
-# # gexf.object <- gexf.object2
-# 
 
-# plot.gexf(gexf.object)
 
-plot.gexf <- function(gexf.object, EdgeType = c("line", "curve")){
+plot.gexf <- function(gexf.object, EdgeType = c("curve", "line")){
   
   library(Rook)
   
@@ -52,11 +37,11 @@ plot.gexf <- function(gexf.object, EdgeType = c("line", "curve")){
 #   
   if(!is.null(gexf.object$node.att)){
     # dev
-    html <- readLines("../inst/sigmajs/index_att.html", warn=FALSE)
-    system.file("/inst/sigmajs/index_att.html", package="rgexf")
+    # html <- readLines("../inst/sigmajs/index_att.html", warn=FALSE)
+    html <- readLines(system.file("sigmajs/index_att.html", package="rgexf"), warn=FALSE)
   } else {
     # dev
-    html <- readLines("../inst/sigmajs/index.html", warn=FALSE)    
+    html <- readLines(system.file("sigmajs/index.html", package="rgexf"), warn=FALSE)    
   }
 
   html <- gsub("EdgeTypePar", EdgeType, html)
@@ -73,39 +58,66 @@ plot.gexf <- function(gexf.object, EdgeType = c("line", "curve")){
   s$add(app=my.app, name='plot')
   
   # graph
-  my.app2 <- function(env){
+  graph <- function(env){
     res <- Response$new()
     res$write(gexf.object$graph)
     res$finish()
   }
-  s$add(app=my.app2, name='data')
+  s$add(app=graph, name='data')
   
   # jquery
-  my.app3 <- function(env){
+  jquery <- function(env){
     res <- Response$new()
-    res$write(paste(readLines("../inst/sigmajs/jquery.min.js", warn=FALSE), collapse="\n "))
+    res$write(paste(readLines(system.file("sigmajs/jquery.min.js", package="rgexf"), warn=FALSE), collapse="\n "))
     res$finish()
   }
-  s$add(app=my.app3, name='jquery.js')
+  s$add(app=jquery, name='jquery.js')
   
   
   # sigmajs
-  my.app4 <- function(env){
+  sigmajs <- function(env){
     res <- Response$new()
-    res$write(paste(readLines("../inst/sigmajs/sigma.min.js", warn=FALSE) , collapse="\n "))
+    res$write(paste(readLines(system.file("sigmajs/sigma.min.js", package="rgexf"), warn=FALSE) , collapse="\n "))
     res$finish()
   }
-  s$add(app=my.app4, name='sigmajs')
+  s$add(app=sigmajs, name='sigmajs')
   
   
-  # sigmajs
-  my.app5 <- function(env){
+  # parseGexf
+  parseGexf <- function(env){
     res <- Response$new()
-    res$write(paste(readLines("../inst/sigmajs/sigma.parseGexf.js", warn=FALSE), collapse="\n "))
+    res$write(paste(readLines(system.file("sigmajs/sigma.parseGexf.js", package="rgexf"), warn=FALSE), collapse="\n "))
     res$finish()
   }
-  s$add(app=my.app5, name='sigmaparseGexfjs')
+  s$add(app=parseGexf, name='sigmaparseGexfjs')
   s$browse('plot')
-  
-
 }
+
+
+# gexf.object <- write.gexf(nodes=data.frame(id=1:4, label=c("juan", "pedro", "matthew", "carlos"), stringsAsFactors=F),
+#                           edges=data.frame(source=c(1,1,1,2,3,4,2,4,4), target=c(4,2,3,3,4,2,4,1,1)))
+# 
+# 
+
+# 
+# 
+# gexf.object2 <- write.gexf(nodes=data.frame(id=1:4, label=c("juan", "pedro", "matthew", "carlos"), stringsAsFactors=F),
+#                            edges=data.frame(source=c(1,1,1,2,3,4,2,4,4), target=c(4,2,3,3,4,2,4,1,1)),
+#                            edgesAtt=data.frame(letrafavorita=letters[1:9], numbers=1:9, stringsAsFactors=F),
+#                            nodesAtt=data.frame(letrafavorita=c(letters[1:3],"hola"), numbers=1:4, stringsAsFactors=F))
+# 
+# gexf.object2$
+# gexf.object2$nodesVizAtt
+# gexf.object2$nodesVizAtt
+# gexf.object2$edgesVizAtt
+# gexf.object2$nodes.Att
+# 
+# 
+# 
+# gexf.object <- read.gexf("http://sigmajs.org/data/les_miserables.gexf")
+#
+# EdgeType <- "line"
+# # gexf.object <- gexf.object2
+# 
+# 
+# plot.gexf(gexf.object)
