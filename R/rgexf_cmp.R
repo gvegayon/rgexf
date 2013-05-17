@@ -382,45 +382,67 @@ write.gexf <- function(
   # nodes vizatt
   ListNodesVizAtt <- NULL
   if (nNodesVizAtt > 0) {
-    nodesVizAtt <- lapply(nodesVizAtt, data.frame)
-    tempNodesVizAtt <- names(nodesVizAtt)
-    for (i in tempNodesVizAtt) {
-      tmpAtt <- nodesVizAtt$i
-      print(tmpAtt)
-      if (i == "color") colnames(tmpAtt) <- paste("viz.color", c("r","g","b","a"), sep=".")
-      else if (i == "position") colnames(tmpAtt) <- paste("viz.position", c("x","y","z"), sep=".")
-      else if (i == "size") {
-          colnames(tmpAtt) <- "viz.size.value"
-          tmpAtt[,1] <- sprintf("%.2f", tmpAtt[,1])
+    
+    # Cohersing into data.frames
+    nodesVizAtt <- lapply(nodesVizAtt, as.data.frame)
+    
+    for (i in names(nodesVizAtt)) {
+      tmpAtt <- nodesVizAtt[[i]]
+      
+      if (i == "color") {
+        colnames(tmpAtt) <- paste("viz.color", c("r","g","b","a"), sep=".")
       }
-      else if (i == "shape") colnames(tmpAtt) <- "viz.shape.value"
+      else if (i == "position") {
+        colnames(tmpAtt) <- paste("viz.position", c("x","y","z"), sep=".")
+      }
+      else if (i == "size") {
+        colnames(tmpAtt) <- "viz.size.value"
+        tmpAtt[,1] <- sprintf("%.2f", tmpAtt[,1])
+      }
+      else if (i == "shape") {
+        colnames(tmpAtt) <- "viz.shape.value"
+      }
       else if (i == "image") {
         tmpAtt <- data.frame(x=rep("image",NROW(nodes)), viz.image.uri=tmpAtt)
         colnames(tmpAtt) <- c("viz.image.value","viz.image.uri")
       }
+      
       if (length(ListNodesVizAtt) == 0) ListNodesVizAtt <- tmpAtt
       else ListNodesVizAtt <- data.frame(ListNodesVizAtt, tmpAtt)
+      
+      # Saving changes
+      colnames(tmpAtt) <- gsub(sprintf("viz.%s.",i),"", colnames(tmpAtt))
+      nodesVizAtt[[i]] <- tmpAtt
     }
   }
   
   # edges vizatt
   ListEdgesVizAtt <- NULL
   if (nEdgesVizAtt > 0) {
-    edgesVizAtt <- lapply(edgesVizAtt, as.data.frame)
-    tempEdgesVizAtt <- names(edgesVizAtt)
     
-    for (i in tempEdgesVizAtt) {
-      tmpAtt <- edgesVizAtt$i
+    # Cohersing into data.frames
+    edgesVizAtt <- lapply(edgesVizAtt, as.data.frame)
+    
+    for (i in names(edgesVizAtt)) {
+      tmpAtt <- edgesVizAtt[[i]]
       
-      if (i == "color") colnames(tmpAtt) <- paste("viz.color", c("r","g","b","a"), sep=".")
+      if (i == "color") {
+        colnames(tmpAtt) <- paste("viz.color", c("r","g","b","a"), sep=".")
+      }
       else if (i == "size") {
         colnames(tmpAtt) <- "viz.size.value"
         tmpAtt[,1] <- sprintf("%.1f", tmpAtt[,1])
       }
-      else if (i == "shape") colnames(tmpAtt) <- "value"
+      else if (i == "shape") {
+        colnames(tmpAtt) <- "value"
+      }
       
       if (length(ListEdgesVizAtt) == 0) ListEdgesVizAtt <- tmpAtt
       else ListEdgesVizAtt <- data.frame(ListEdgesVizAtt, tmpAtt)
+      
+      # Saving changes
+      colnames(tmpAtt) <- gsub(sprintf("viz.%s.",i),"", colnames(tmpAtt))
+      edgesVizAtt[[i]] <- tmpAtt
     }
   }
   
@@ -506,18 +528,6 @@ write.gexf <- function(
   
   # Edges Label (for data frame)
   if (length(edgesLabel) == 0) edgesLabel <- edges[,"id"]
-  
-  # Fixing vizatt list
-  if (nNodesVizAtt) {
-    colnames(ListNodesVizAtt) <- grep("^viz\\.", colnames(ListNodesVizAtt), "")
-    for (i in names(nodesVizAtt)) nodesVizAtt$i <- ListNodesVizAtt[,grepl(i, colnames(ListNodesVizAtt))]
-  }
-  
-  # Fixing vizatt list
-  if (nEdgesVizAtt) {
-    colnames(ListEdgesVizAtt) <- grep("^viz\\.", colnames(ListEdgesVizAtt), "")
-    for (i in names(edgesVizAtt)) nodesVizAtt$i <- ListEdgesVizAtt[,grepl(i, colnames(ListEdgesVizAtt))]
-  }
     
   results <- list(
     meta=unlist(meta),
