@@ -21,8 +21,8 @@
   \tabular{ll}{
     Package: \tab rgexf\cr
     Type: \tab Package\cr
-    Version: \tab 0.13.03\cr
-    Date: \tab 2013-03-13\cr
+    Version: \tab 0.13.05\cr
+    Date: \tab 2013-05-09\cr
     License: \tab GPL version 2 or later\cr
   }
 }
