@@ -1,14 +1,11 @@
 # library(devtools)
 # install_bitbucket(repo="rgexf", username="gvegayon")
 # library(rgexf)
-rm(list=ls())
+#rm(list=ls())
 
 
 
-plot.gexf <- function(gexf.object, EdgeType = c("curve", "line")){
-  
-  library(Rook)
-  
+plot.gexf <- function(x, EdgeType = c("curve", "line"), ...){  
 #   if(!is.null(gexf.object$positions)){
 #     library(sna)
 #     nNodes <- nrow(gexf.object$nodes)
@@ -35,7 +32,7 @@ plot.gexf <- function(gexf.object, EdgeType = c("curve", "line")){
 #                                position=positions
 #                              ))
 #   
-  if(!is.null(gexf.object$node.att)){
+  if(length(x$node.att)){
     # dev
     # html <- readLines("../inst/sigmajs/index_att.html", warn=FALSE)
     html <- readLines(system.file("sigmajs/index_att.html", package="rgexf"), warn=FALSE)
@@ -60,7 +57,7 @@ plot.gexf <- function(gexf.object, EdgeType = c("curve", "line")){
   # graph
   graph <- function(env){
     res <- Response$new()
-    res$write(gexf.object$graph)
+    res$write(x$graph)
     res$finish()
   }
   s$add(app=graph, name='data')

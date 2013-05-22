@@ -7,6 +7,6 @@ Author: George Vega Yon <george.vega@nodoschile.org> [aut], Jorge Fabrega Lacoa 
 Maintainer: George Vega Yon <george.vega@nodoschile.org>
 Description: The first R package to work with GEXF graph files (used in Gephi and others). Using XML library, it allows the user to easily build/read graph files including attributes, GEXF viz attributes (such as colour, size, and position), network dynamics (for both edges and nodes, including spells) and edges weighting. Users can build/handle graphs element-by-element or massively through data-frames.
 URL: http://bitbucket.org/gvegayon/rgexf, http://www.nodoschile.org
-Depends: XML
+Depends: XML, Rook
 License: GPL (>= 3)
 LazyLoad: yes

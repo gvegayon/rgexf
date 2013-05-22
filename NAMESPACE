@@ -1,4 +1,5 @@
 importFrom(XML)
+importFrom(Rook)
 importFrom(utils, packageDescription)
 
 export(.addNodesEdges, .defAtt)
@@ -20,6 +21,7 @@ export(check.dpl.edges, switch.edges)
 # Methods
 S3method(print, gexf)
 S3method(summary, gexf)
+S3method(plot, gexf)
 
 # Source code
 useDynLib(rgexf)
