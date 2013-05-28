@@ -27,11 +27,8 @@ plot.gexf <- function(x, EdgeType = c("curve", "line"), ...){
 #                              ))
 #   
   if(length(x$node.att)){
-    # dev
-    # html <- readLines("../inst/sigmajs/index_att.html", warn=FALSE)
     html <- readLines(system.file("sigmajs/index_att.html", package="rgexf"), warn=FALSE)
   } else {
-    # dev
     html <- readLines(system.file("sigmajs/index.html", package="rgexf"), warn=FALSE)    
   }
 
@@ -41,7 +38,7 @@ plot.gexf <- function(x, EdgeType = c("curve", "line"), ...){
   s$start(listen='127.0.0.1')
   
   # html
-  my.app <- function(env){  
+  my.app <- function(env) {  
     res <- Response$new()
     res$write(paste(html, collapse="\n"))
     res$finish()

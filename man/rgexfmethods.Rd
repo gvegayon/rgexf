@@ -1,5 +1,6 @@
 \name{rgexf Methods}
 \alias{print.gexf}
+\alias{plot.gexf}
 \alias{summary.gexf}
 \title{
   Print and write \code{gexf} objects
@@ -10,13 +11,16 @@
 \usage{  
   \method{print}{gexf}(x, file=NA, replace=F, ...)
   \method{summary}{gexf}(object, ...)
+  \method{plot}{gexf}(x, EdgeType = c("curve", "line"), ...)
 }
 \arguments{
   \item{x}{An object of class \code{gexf} to be printed.}
+  %\item{y}{Ignored.}
   \item{object}{An object of class \code{gexf} to be printed.}
   \item{file}{String. Output path where to save the GEXF file.}  
   \item{replace}{Logical. If \code{path} exists, \code{TRUE} would replace the file.}
-  \item{\dots}{arguments passed on to \code{\link{cat}} (\code{print.rgexf})}
+  \item{EdgeType}{For the visualization}
+  \item{\dots}{Ignored}
 }
                            
 \value{

@@ -235,15 +235,16 @@ new.gexf.graph <- function(
   # Edges
   newXMLNode(name='edges', parent=xmlGraph)
   
-  # Return
+  # Return  
   results <- list(
     meta=unlist(meta),
     mode=unlist(c(defaultedgetype=defaultedgetype, mode=mode)),
-    node.att = NULL,
-    edge.att = NULL,
-    nodes=data.frame(id=NULL, label=NULL),
-    edges=data.frame(id=NULL, label=NULL, source=NULL, target=NULL),
-    graph=saveXML(xmlFile, encoding='UTF-8'))
+    atts.definitions = list(nodes = NULL, edges = NULL),
+    nodesVizAtt = NULL,
+    edgesVizAtt = NULL,
+    nodes=data.frame(id=NULL, label=NULL, row.names=NULL),
+    edges=data.frame(id=NULL, label=NULL, source=NULL,target=NULL, row.names=NULL),
+    graph=saveXML(xmlFile, encoding="UTF-8"))
   class(results) <- "gexf"
   
   return(results)
