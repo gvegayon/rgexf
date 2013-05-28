@@ -1,9 +1,3 @@
-# library(devtools)
-# install_bitbucket(repo="rgexf", username="gvegayon")
-# library(rgexf)
-#rm(list=ls())
-
-
 
 plot.gexf <- function(x, EdgeType = c("curve", "line"), ...){  
 #   if(!is.null(gexf.object$positions)){
@@ -41,7 +35,7 @@ plot.gexf <- function(x, EdgeType = c("curve", "line"), ...){
     html <- readLines(system.file("sigmajs/index.html", package="rgexf"), warn=FALSE)    
   }
 
-  html <- gsub("EdgeTypePar", EdgeType, html)
+  html <- gsub("EdgeTypePar", EdgeType[1], html)
   
   s <- Rhttpd$new()
   s$start(listen='127.0.0.1')
@@ -89,32 +83,3 @@ plot.gexf <- function(x, EdgeType = c("curve", "line"), ...){
   s$add(app=parseGexf, name='sigmaparseGexfjs')
   s$browse('plot')
 }
-
-
-# gexf.object <- write.gexf(nodes=data.frame(id=1:4, label=c("juan", "pedro", "matthew", "carlos"), stringsAsFactors=F),
-#                           edges=data.frame(source=c(1,1,1,2,3,4,2,4,4), target=c(4,2,3,3,4,2,4,1,1)))
-# 
-# 
-
-# 
-# 
-# gexf.object2 <- write.gexf(nodes=data.frame(id=1:4, label=c("juan", "pedro", "matthew", "carlos"), stringsAsFactors=F),
-#                            edges=data.frame(source=c(1,1,1,2,3,4,2,4,4), target=c(4,2,3,3,4,2,4,1,1)),
-#                            edgesAtt=data.frame(letrafavorita=letters[1:9], numbers=1:9, stringsAsFactors=F),
-#                            nodesAtt=data.frame(letrafavorita=c(letters[1:3],"hola"), numbers=1:4, stringsAsFactors=F))
-# 
-# gexf.object2$
-# gexf.object2$nodesVizAtt
-# gexf.object2$nodesVizAtt
-# gexf.object2$edgesVizAtt
-# gexf.object2$nodes.Att
-# 
-# 
-# 
-# gexf.object <- read.gexf("http://sigmajs.org/data/les_miserables.gexf")
-#
-# EdgeType <- "line"
-# # gexf.object <- gexf.object2
-# 
-# 
-# plot.gexf(gexf.object)
