@@ -17,8 +17,8 @@ summary.gexf <- function(object, ...) {
   ################################################################################
   # Printing method
   ################################################################################
-  result <- list("N of nodes"=NROW(object$nodes), 
-                 "N of edges"=NROW(object$edges),
+  result <- list("N of nodes"=NROW(object$atts.definitions$nodes), 
+                 "N of edges"=NROW(object$atts.definitions$edges),
                  "Node Attrs"=head(object$node.att),
                  "Edge Attrs"=head(object$edge.att))
   #class(result) <- "table"

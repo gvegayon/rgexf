@@ -243,7 +243,7 @@ new.gexf.graph <- function(
     nodesVizAtt = NULL,
     edgesVizAtt = NULL,
     nodes=data.frame(id=NULL, label=NULL, row.names=NULL),
-    edges=data.frame(id=NULL, label=NULL, source=NULL,target=NULL, row.names=NULL),
+    edges=data.frame(id=NULL, label=NULL, source=NULL,target=NULL, weight=NULL, row.names=NULL),
     graph=saveXML(xmlFile, encoding="UTF-8"))
   class(results) <- "gexf"
   

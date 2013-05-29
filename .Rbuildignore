@@ -13,5 +13,4 @@
 R/rgexf\.R
 R/newxmlnode2\.R
 R/zzz\.R
-R/igraph\.R
 demo/gexfplot\.R

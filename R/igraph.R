@@ -1,11 +1,13 @@
 
-
-igraph.to.gexf <- function(g) {
+igraph.to.gexf <- function(igraph.obj) {
+  
+  g <- igraph.obj
+  rm(igraph.obj)
   
   # Retrive elements from igraph object
-  g <- get.data.frame(g, what="both")
-  tmpedges <- g$edges
-  tmpnodes <- g$vertices
+  gdata <- get.data.frame(g, what="both")
+  tmpedges <- gdata$edges
+  tmpnodes <- gdata$vertices
   
   # Nodes and edges list
   edges <- tmpedges[,c("from","to")]
@@ -15,44 +17,75 @@ igraph.to.gexf <- function(g) {
     nodes <- data.frame(id=nodes,label=nodes,stringsAsFactors=FALSE)
   }
   
-  # Attributes
-  if (!length( tmpedges[,!(colnames(tmpedges) %in% c("from","to"))] )) eAtt <- NULL
-  else eAtt <- subset(tmpedges, select=c(-from,-to))
+  # Nodes Attributes
+  if (length(x <- list.vertex.attributes(g))) nAtt <- NULL
+  else nAtt <- subset(tmpedges, select=x)
+  
+  # Edges Attributes
+  if (length(x <- list.edge.attributes(g))) eAtt <- NULL
+  else eAtt <- subset(tmpedges, select=x)
+  
+  # Edges Weights
+  if (length(E(g)$weight)) eW <- E(g)$weight
+  else eW <- NULL
+  
+  # Nodes Viz att
+  if (length(tmpnodes$color)) {
+    nVizAtt <- list(color=t(col2rgb(tmpnodes$color, alpha=T)))
+  }
+  else nVizAtt <- NULL
+  
+  # Edges Viz att
+  if (length(tmpedges$color)) {
+    eVizAtt <- list(color=t(col2rgb(tmpedges$color, alpha=T)))
+  }
+  else eVizAtt <- NULL
 
   if (length(tmpnodes)) { # If there are any nodes
     if (length(tmpnodes$name)) { # If these have a name
-      if (!length( tmpnodes[,!(colnames(tmpnodes) %in% c("name"))] )) nAtt <- NULL
-      else nAtt <- subset(tmpnodes, select=c(-name))
+      if (!length(x <- list.vertex.attributes(g))) nAtt <- NULL
+      else nAtt <- subset(tmpnodes, select=x)
     }
     else nAtt <- tmpnodes
   }
     
-  
-  
   # Building graph
   return(
     write.gexf(
-      nodes, 
-      edges, 
-      edgesAtt=eAtt,
-      nodesAtt=nAtt,
-      defaultedgetype="directed"
+      nodes = nodes, 
+      edges = edges, 
+      edgesAtt = eAtt,
+      nodesAtt = nAtt,
+      defaultedgetype = "directed",
+      nodesVizAtt = nVizAtt,
+      edgesVizAtt = eVizAtt,
+      edgesWeight = eW
       )
     )
 }
 
-#gexf.to.igraph <- function() {
-#  
-#}
-require(rgexf)
-require(igraph)
-g <- graph.ring(10)
-g <- set.graph.attribute(g, "name", "RING")
-# It is the same as
-g$name <- "RING"
-g$name
-
-g <- set.vertex.attribute(g, "color", value=c("red", "green"))
-get.vertex.attribute(g, "color")
-
-plot(igraph.to.gexf(g))
+gexf.to.igraph <- function(gexf.obj) {
+  
+  g <- gexf.obj
+  rm(gexf.obj)
+  
+  g2 <- graph.edgelist(as.matrix(g$edges[,c("source","target")]))
+  
+  # Labels
+  E(g2)$name <- g$nodes$label
+  
+  # Nodes Viz atts
+  if (length(x <- g$nodesVizAtt$color)) {
+    V(g2)$color <- rgb(x$r/255,x$g/255,x$b/255,x$a/255)
+  }
+  
+  # Edges Viz atts
+  if (length(x <- g$edgesVizAtt$color)) {
+    E(g2)$color <- rgb(x$r/255,x$g/255,x$b/255,x$a/255)
+  }
+  
+  # Edges weights
+  E(g2)$weights <- g$edges$weight
+  
+  return(g2)
+}

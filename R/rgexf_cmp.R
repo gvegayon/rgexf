@@ -536,7 +536,9 @@ write.gexf <- function(
     nodesVizAtt = nodesVizAtt,
     edgesVizAtt = edgesVizAtt,
     nodes=data.frame(id=nodes[,"id"], label=nodes[,"label"], row.names=NULL),
-    edges=data.frame(id=edges[,"id"], label=edgesLabel, source=edges[,"source"],target=edges[,"target"], row.names=NULL),
+    edges=data.frame(
+      id=edges[,"id"], label=edgesLabel, source=edges[,"source"],
+      target=edges[,"target"], weight=as.numeric(edges[,"weight"]), row.names=NULL),
     graph=saveXML(xmlFile, encoding="UTF-8"))
   class(results) <- "gexf"
   
