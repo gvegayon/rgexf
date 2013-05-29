@@ -1,5 +1,5 @@
 
-plot.gexf <- function(x, EdgeType = c("curve", "line"), ...){  
+plot.gexf <- function(x, EdgeType = c("curve", "line"), export.files = FALSE, output.dir = getwd(), ...){  
 #   if(!is.null(gexf.object$positions)){
 #     library(sna)
 #     nNodes <- nrow(gexf.object$nodes)
@@ -79,4 +79,29 @@ plot.gexf <- function(x, EdgeType = c("curve", "line"), ...){
   }
   s$add(app=parseGexf, name='sigmaparseGexfjs')
   s$browse('plot')
+  
+  if(export.files){
+    
+    wd <- getwd()
+    setwd(output.dir)
+    
+    html2 <- gsub("custom", "js", html)
+    html2 <- gsub("js\">", ".js\">", html2)
+    html2 <- gsub("/js/data", "graph.gexf", html2)
+    
+    writeLines(html2, "index.html")
+    writeLines(x$graph, "graph.gexf")
+    
+    if(!file.exists("js")) dir.create("js")
+    
+    writeLines(paste(readLines(system.file("sigmajs/jquery.min.js", package="rgexf"), warn=FALSE), collapse="\n "),
+               file.path("js", "jquery.js"))
+    writeLines(paste(readLines(system.file("sigmajs/sigma.min.js", package="rgexf"), warn=FALSE), collapse="\n "),
+               file.path("js", "sigma.js"))
+    writeLines(paste(readLines(system.file("sigmajs/sigma.parseGexf.js", package="rgexf"), warn=FALSE), collapse="\n "),
+               file.path("js", "sigmaparseGexf.js"))
+    
+    setwd(wd)
+  }
+  
 }
