@@ -497,7 +497,7 @@ write.gexf <- function(
   if (!is.null(edgeDynamic)) tmeNames <- c("start", "end") else tmeNames <- NULL
   
   # Generating weights
-  if (length(edgesWeight) == 0)  edgesWeight <- 1
+  if (!length(edgesWeight))  edgesWeight <- 1
   edges <- data.frame(edges, x=edgesWeight)
   edges$x <- sprintf("%.1f", edges$x)
   

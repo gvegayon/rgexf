@@ -72,7 +72,7 @@ gexf.to.igraph <- function(gexf.obj) {
   g2 <- graph.edgelist(as.matrix(g$edges[,c("source","target")]))
   
   # Labels
-  E(g2)$name <- g$nodes$label
+  V(g2)$name <- g$nodes$label
   
   # Nodes Viz atts
   if (length(x <- g$nodesVizAtt$color)) {
@@ -84,8 +84,11 @@ gexf.to.igraph <- function(gexf.obj) {
     E(g2)$color <- rgb(x$r/255,x$g/255,x$b/255,x$a/255)
   }
   
-  # Edges weights
-  E(g2)$weights <- g$edges$weight
+  # Edges weights 
+  if (length(x <- g$edges$weight)) {
+   E(g2)$weight <- x
+  }
   
   return(g2)
 }
+

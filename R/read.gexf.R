@@ -56,7 +56,8 @@ read.gexf <- function(x) {
   nodes <- getNodeSet(gfile,"/r:gexf/r:graph/r:nodes/r:node", c(r=ns))
   graph$nodes <- data.frame(
     id=sapply(nodes, xmlGetAttr, name="id"), 
-    label=sapply(nodes, xmlGetAttr, name="label"), stringsAsFactors=F)
+    label=sapply(nodes, xmlGetAttr, name="label"), 
+    stringsAsFactors=F)
 
   #nodes <- getNodeSet(gfile,"/r:gexf/r:graph/r:nodes/r:node", c(r=ns))
   #graph$nodesatt <- NULL
@@ -81,13 +82,17 @@ read.gexf <- function(x) {
   
   # Edges
   edges <- getNodeSet(gfile,"/r:gexf/r:graph/r:edges/r:edge", c(r=ns))
+
   graph$edges <- data.frame(
     source=sapply(edges, xmlGetAttr, name="source"), 
-    target=sapply(edges, xmlGetAttr, name="target"), stringsAsFactors=F)
+    target=sapply(edges, xmlGetAttr, name="target"), 
+    weight=as.numeric(sapply(edges, xmlGetAttr, name="weight", default="1.0")),
+    stringsAsFactors=F)
   rm(edges)
 
-  if (length(graph$node.att) == 0) graph$node.att <- NA
-  if (length(graph$edge.att) == 0) graph$edge.att <- NA
+  graph$atts.definitions <- NULL
+  if (!length(graph$node.att)) graph$atts.definitions$nodes <- NULL
+  if (!length(graph$edge.att)) graph$atts.definitions$edges <- NULL
 
   graph$graph <- saveXML(gfile, encoding="UTF-8")
 
@@ -448,3 +453,5 @@ add.edge.spell <- function(
   graph$graph <- saveXML(xmlRoot(graph$graph), encoding="UTF-8")
   return(graph)
 }
+
+

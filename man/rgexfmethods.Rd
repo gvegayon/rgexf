@@ -11,7 +11,8 @@
 \usage{  
   \method{print}{gexf}(x, file=NA, replace=F, ...)
   \method{summary}{gexf}(object, ...)
-  \method{plot}{gexf}(x, EdgeType = c("curve", "line"), ...)
+  \method{plot}{gexf}(x, EdgeType = c("curve", "line"), export.files =
+                 FALSE, output.dir = getwd(), ...)
 }
 \arguments{
   \item{x}{An object of class \code{gexf} to be printed.}
