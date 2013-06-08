@@ -64,7 +64,6 @@ read.gexf <- function(x) {
   #if (NROW(y <- graph$node.att) > 0) {
   #  print(nodes)
   
-
 #    x <- getNodeSet(gfile,"/r:gexf/r:graph/r:nodes/r:node/r:attvalues/r:attvalue[@for='att1']", c(r=ns))
 #  print(sapply(x, xmlGetAttr, name="value"))
 #stop()
@@ -110,7 +109,10 @@ add.gexf.node <- function(
   label=NA, 
   start=NULL, 
   end=NULL,
-  vizAtt=list(color=NULL, position=NULL, size=NULL, shape=NULL, image=NULL)) {
+  vizAtt=list(color=NULL, position=NULL, size=NULL, shape=NULL, image=NULL),
+  atts=NULL
+  ) 
+  {
   # Parses the graph file
   graph$graph <- xmlTreeParse(graph$graph, encoding="UTF-8")
   

@@ -10,6 +10,7 @@ demo(gexfdynamic)
 demo(gexfdynamicandatt)
 demo(gexffull)
 demo(gexftwitter)
+demo(gexfigraph)
 
 g <- graph.ring(10)
 g <- set.graph.attribute(g, "name", "RING")

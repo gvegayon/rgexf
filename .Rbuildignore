@@ -8,7 +8,6 @@
 .*~
 ^\.git
 .*\.png
-.*\.gexf$
 ^.*\.Rproj$
 R/rgexf\.R
 R/newxmlnode2\.R

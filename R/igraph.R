@@ -10,19 +10,30 @@ igraph.to.gexf <- function(igraph.obj) {
   tmpnodes <- gdata$vertices
   
   # Nodes and edges list
-  edges <- tmpedges[,c("from","to")]
-  if (length(tmpnodes$name)) nodes <- tmpnodes[,c("name","name")]
-  else {
-    nodes <- unique(unlist(edges))
-    nodes <- data.frame(id=nodes,label=nodes,stringsAsFactors=FALSE)
+  nodes <- edge.list(tmpedges[,c(1,2)])
+  edges <- nodes$edges
+  nodes <- nodes$nodes
+  
+  # Building nodes
+  if (length(tmpnodes)) {
+    nodes <-merge(tmpnodes,nodes, by.x="name", by.y="label")
+    nodes <- cbind(nodes, label=nodes$name, stringsAsFactors=FALSE)
+    tmpnodes <- subset(nodes, select=c(-id,-label))
+    print(tmpnodes)
+    nodes <- subset(nodes, select=c(id, label))
+    print(nodes)
   }
   
   # Nodes Attributes
-  if (length(x <- list.vertex.attributes(g))) nAtt <- NULL
+  x <- list.vertex.attributes(g)
+  x <- x[!(x %in% "name")]
+  if (length(x)) nAtt <- NULL
   else nAtt <- subset(tmpedges, select=x)
   
   # Edges Attributes
-  if (length(x <- list.edge.attributes(g))) eAtt <- NULL
+  x <- list.vertex.attributes(g)
+  x <- x[!(x %in% "weight")]
+  if (length(x)) eAtt <- NULL
   else eAtt <- subset(tmpedges, select=x)
   
   # Edges Weights
@@ -48,7 +59,11 @@ igraph.to.gexf <- function(igraph.obj) {
     }
     else nAtt <- tmpnodes
   }
-    
+  
+  # Edge type
+  if (is.directed(g)) defaultedgetype <- "directed"
+  else defaultedgetype <- "undirected"
+  
   # Building graph
   return(
     write.gexf(
@@ -56,7 +71,7 @@ igraph.to.gexf <- function(igraph.obj) {
       edges = edges, 
       edgesAtt = eAtt,
       nodesAtt = nAtt,
-      defaultedgetype = "directed",
+      defaultedgetype = defaultedgetype,
       nodesVizAtt = nVizAtt,
       edgesVizAtt = eVizAtt,
       edgesWeight = eW
@@ -69,7 +84,11 @@ gexf.to.igraph <- function(gexf.obj) {
   g <- gexf.obj
   rm(gexf.obj)
   
-  g2 <- graph.edgelist(as.matrix(g$edges[,c("source","target")]))
+  # Starting igraph object
+  g2 <- graph.edgelist(
+    as.matrix(g$edges[,c("source","target")]),
+    directed=(g$mode[[1]] != "undirected")
+    )
   
   # Labels
   V(g2)$name <- g$nodes$label
