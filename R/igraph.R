@@ -19,9 +19,7 @@ igraph.to.gexf <- function(igraph.obj) {
     nodes <-merge(tmpnodes,nodes, by.x="name", by.y="label")
     nodes <- cbind(nodes, label=nodes$name, stringsAsFactors=FALSE)
     tmpnodes <- subset(nodes, select=c(-id,-label))
-    print(tmpnodes)
     nodes <- subset(nodes, select=c(id, label))
-    print(nodes)
   }
   
   # Nodes Attributes
@@ -31,7 +29,7 @@ igraph.to.gexf <- function(igraph.obj) {
   else nAtt <- subset(tmpedges, select=x)
   
   # Edges Attributes
-  x <- list.vertex.attributes(g)
+  x <- list.edge.attributes(g)
   x <- x[!(x %in% "weight")]
   if (length(x)) eAtt <- NULL
   else eAtt <- subset(tmpedges, select=x)
@@ -51,14 +49,6 @@ igraph.to.gexf <- function(igraph.obj) {
     eVizAtt <- list(color=t(col2rgb(tmpedges$color, alpha=T)))
   }
   else eVizAtt <- NULL
-
-  if (length(tmpnodes)) { # If there are any nodes
-    if (length(tmpnodes$name)) { # If these have a name
-      if (!length(x <- list.vertex.attributes(g))) nAtt <- NULL
-      else nAtt <- subset(tmpnodes, select=x)
-    }
-    else nAtt <- tmpnodes
-  }
   
   # Edge type
   if (is.directed(g)) defaultedgetype <- "directed"

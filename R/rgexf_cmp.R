@@ -18,10 +18,10 @@ edge.list <- function(x) {
       
       return(edgelist)
     }
-    else stop("Insuficcient number of columns")
+    else stop("Insuficcient number of columns (", nCols,")")
   }
-  else stop(paste(objClass, 
-                  "class not allowed, try with a \"matrix\" or a \"data.frame\""))
+  else stop(objClass, 
+                  " class not allowed, try with a \"matrix\" or a \"data.frame\"")
 }
 
 .defAtt <- function(x, parent) {

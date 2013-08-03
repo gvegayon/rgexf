@@ -31,35 +31,35 @@ write.gexf(
   )
 }
 \arguments{
-  \item{nodes}{It contains two columns. First column contains nodes's id and the second one its \dQuote{label} (class: data frame).}
-  \item{edges}{It contains two columns. The first one has the \dQuote{source} and the second one has the \dQuote{target} (class: (data frame based on nodes ids))}
-  \item{edgesId}{One column data.frame/matrix or vector.}
-  \item{edgesLabel}{One column data.frame/matrix or vector.}
-  \item{edgesAtt}{A dataframe with one or more columns representing edges attributes}
-  \item{edgesWeight}{A numeric vector containing edges weights}
+  \item{nodes}{A two-column data-frame or matrix of \dQuote{id}s and \dQuote{label}s representing nodes.}
+  \item{edges}{A two-column data-frame or matrix containing \dQuote{source} and \dQuote{target} for each edge. Source and target values are based on the nodes ids.}
+  \item{edgesId}{A one-column data-frame, matrix or vector.}
+  \item{edgesLabel}{A one-column data-frame, matrix or vector.}
+  \item{edgesAtt}{A data-frame with one or more columns representing edges' attributes.}
+  \item{edgesWeight}{A numeric vector containing edges' weights.}
   \item{edgesVizAtt}{List of three or less viz attributes such as color, size (thickness) and shape of the edges (see details)}
-  \item{nodesAtt}{A dataframe with one or more columns representing nodes attributes}
+  \item{nodesAtt}{A data-frame with one or more columns representing nodes' attributes}
   \item{nodesVizAtt}{List of four or less viz attributes such as color, position, size and shape of the nodes (see details)}
-  \item{nodeDynamic}{A two columns matrix or dataframe. The first column indicates the time at which a given node starts; the second one shows when it ends. The matrix or dataframe must have the same number of rows than the number of nodes}
-  \item{edgeDynamic}{A two columns matrix or dataframe. The fist column indicates the time at which a given edge stars; the second one shows when it ends. The matrix or dataframe must have the same number of rows than the number of edges}
-  \item{output}{character, complete path (including file name) where to print the GEXF file}
-  \item{tFormat}{character, time format for dynamic graphs}
+  \item{nodeDynamic}{A two-column matrix or data-frame. The first column indicates the time at which a given node starts; the second one shows when it ends. The matrix or data-frame must have the same number of rows than the number of nodes in the graph.}
+  \item{edgeDynamic}{A two-column matrix or data-frame. The fist column indicates the time at which a given edge stars; the second one shows when it ends. The matrix or dataframe must have the same number of rows than the number of edges in the graph.}
+  \item{output}{String. The complete path (including filename) where to export the graph as a GEXF file.}
+  \item{tFormat}{String. Time format for dynamic graphs (see details)}
   \item{defaultedgetype}{\dQuote{directed}, \dQuote{undirected}, \dQuote{mutual}}
   \item{meta}{A List. Meta data describing the graph}
-  \item{keepFactors}{Logical, whether to manage factors as numeric values (\code{TRUE}) or as character (\code{FALSE})}
+  \item{keepFactors}{Logical, whether to handle factors as numeric values (\code{TRUE}) or as strings (\code{FALSE}) by using \code{as.character}.}
 }
 \details{  
-  \code{nodesAtt} and \code{edgesAtt} can be also include. They must have the same number of rows as nodes and edges, respectively. In order to fully take advantage of \code{gexf}, using data frames is needed as these preserve vectors datatypes, which are identified by the function.
+  Just like \code{nodesVizAtt} and \code{edgesVizAtt}, \code{nodesAtt} and \code{edgesAtt} must have the same number of rows as nodes and edges, respectively. Using data frames is necessary as in this way data types are preserved.
   
-  \code{nodesVizAtt} and \code{edgesVizAtt} allow to establish visual attributes such as color, position (nodes only), size (nodes only), thickness (edges only) shape and image (nodes only). 
+  \code{nodesVizAtt} and \code{edgesVizAtt} allow using visual attributes such as color, position (nodes only), size (nodes only), thickness (edges only) shape and image (nodes only). 
   \itemize{
-  \item Color is defined by the RGBA color model, thus for every node/edge the color should be with \emph{r}, \emph{g}, \emph{b} with integers between 0 and 256 and \emph{alpha} as a float between 0.0 and 1.0.
-  \item Position, for every node, is a three components vector including \emph{x}, \emph{y} and \emph{z} coordinates. The three components must be float.
-  \item Size should be denoted as a float.
-  \item Thickness works as size.
-  \item Node Shape (character), currently unsuported by Gephi, can take the values of \emph{disk}, \emph{square}, \emph{triangle}, \emph{diamond} and \emph{image}.
-  \item Edge Shape (character), currently unsuported by Gephi, can take the values of \emph{solid}, \emph{dotted}, \emph{dashed} and \emph{double}.
-  \item Image (character), currently unsuported by Gephi, consists on a character vector of URIs.
+  \item Color is defined by the RGBA color model, thus for every node/edge the color should be specified through a data-frame with columns \emph{r} (red), \emph{g} (green), \emph{b} (blue) with integers between 0 and 256 and a last column with \emph{alpha} values as a float between 0.0 and 1.0.
+  \item Position, for every node, it is a three-column data-frame including \emph{x}, \emph{y} and \emph{z} coordinates. The three components must be float.
+  \item Size as a numeric colvector (float values).
+  \item Thickness (see size).
+  \item Node Shape (string), currently unsupported by Gephi, can take the values of \emph{disk}, \emph{square}, \emph{triangle}, \emph{diamond} and \emph{image}.
+  \item Edge Shape (string), currently unsuported by Gephi, can take the values of \emph{solid}, \emph{dotted}, \emph{dashed} and \emph{double}.
+  \item Image (string), currently unsupported by Gephi, consists on a vector of strings representing URIs.
   }
   
   \code{nodeDynamic} and \code{edgeDynamic} allow to draw dynamic graphs. It should contain two columns \emph{start} and \emph{end}, both allowing \code{NA} value. It can be use jointly with \code{tFormat} which by default is setted as \dQuote{double}. Currently accepted time formats are:
@@ -70,7 +70,18 @@ write.gexf(
   }
 }
 \value{
-  A \code{gexf} object.
+  A \code{gexf-class} object (list). Contains the following:
+  \itemize{
+  \item \code{meta} : (list) Meta data describing the graph.
+  \item \code{mode} : (list) Sets the default edge type and the graph mode.
+  \item \code{atts.definitions}: (list) Two data-frames describing nodes and edges
+  attributes.
+  \item \code{nodesVizAtt}
+  \item \code{edgesVizAtt}
+  \item \code{nodes}
+  \item \code{edges}
+  \item \code{graph}
+  }
 }
 \author{George Vega Yon \email{george.vega@nodoschile.org},
 

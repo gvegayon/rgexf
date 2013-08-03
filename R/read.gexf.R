@@ -30,7 +30,8 @@ read.gexf <- function(x) {
   ################################################################################
 
   # Attributes list
-  if (length(y<-getNodeSet(gfile,"/r:gexf/r:graph/r:attributes", c(r=ns))) > 0) {
+  graph$atts.definitions <- list(nodes=NULL,edges = NULL)
+  if (length(y<-getNodeSet(gfile,"/r:gexf/r:graph/r:attributes", c(r=ns)))) {
     while (length(y) > 0) {
       
       # Gets the class
@@ -39,7 +40,7 @@ read.gexf <- function(x) {
         y[[1]], "/r:gexf/r:graph/r:attributes/r:attribute", c(r=ns))
       
       # Builds a dataframe
-      graph[[attclass]] <- data.frame(
+      graph$atts.definitions[[attclass]] <- data.frame(
         id=sapply(z, xmlGetAttr, name="id"),
         title=sapply(z, xmlGetAttr, name="title"),
         type=sapply(z, xmlGetAttr, name="type")
@@ -48,7 +49,14 @@ read.gexf <- function(x) {
       # Removes the already analyzed
       y <- y[-1]
     }
-  }  
+    
+    # Nodes Atts
+    #atts.val <- NULL
+    #for (att in graph$atts.definitions$nodes) {
+    #  x <- getNodeSet(gfile, "/r:gexf/r:graph/r:nodes/r:node/r:attvalues", c(r=ns))
+    #  atts.val <- list(atts.val, sapply(x, xmlGetAttr))
+    #}
+  }
   
   graph$mode <- xmlAttrs(getNodeSet(gfile,"/r:gexf/r:graph", c(r=ns))[[1]])
   
@@ -58,25 +66,6 @@ read.gexf <- function(x) {
     id=sapply(nodes, xmlGetAttr, name="id"), 
     label=sapply(nodes, xmlGetAttr, name="label"), 
     stringsAsFactors=F)
-
-  #nodes <- getNodeSet(gfile,"/r:gexf/r:graph/r:nodes/r:node", c(r=ns))
-  #graph$nodesatt <- NULL
-  #if (NROW(y <- graph$node.att) > 0) {
-  #  print(nodes)
-  
-#    x <- getNodeSet(gfile,"/r:gexf/r:graph/r:nodes/r:node/r:attvalues/r:attvalue[@for='att1']", c(r=ns))
-#  print(sapply(x, xmlGetAttr, name="value"))
-#stop()
-  #  
-  #  while (NROW(y) > 0) {
-  #    message(names(nodes))
-  #    graph$nodesatt <- cbind(graph$nodesatt, sapply(nodes[["attributes"]], xmlGetAttr, name=y[1,1]),
-  #                         stringsAsFactors=F)
-  #    y <- y[-1,]
-  #  }
-  #  print(gfile)
-  #  names(graph$node) <- c("id","label",graph$node.att[,1])
-  #}
   rm(nodes)
   
   # Edges
@@ -88,10 +77,6 @@ read.gexf <- function(x) {
     weight=as.numeric(sapply(edges, xmlGetAttr, name="weight", default="1.0")),
     stringsAsFactors=F)
   rm(edges)
-
-  graph$atts.definitions <- NULL
-  if (!length(graph$node.att)) graph$atts.definitions$nodes <- NULL
-  if (!length(graph$edge.att)) graph$atts.definitions$edges <- NULL
 
   graph$graph <- saveXML(gfile, encoding="UTF-8")
 
