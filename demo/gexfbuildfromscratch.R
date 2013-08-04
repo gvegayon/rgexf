@@ -17,12 +17,15 @@ pause()
 mygraph <- add.gexf.node(mygraph,1,"george", vizAtt=list(size=10))
 mygraph <- add.gexf.node(mygraph,2,"valita", vizAtt=list(color=data.frame(20,20,20,1)))
 mygraph <- add.gexf.node(mygraph,3,"pedro")
-mygraph <- add.gexf.node(mygraph,4,"diego")
+
+# Adding a node with node with attributes
+mygraph <- add.gexf.node(mygraph,4,"diego", atts=list(age=27, country="CL"))
 
 pause()
 # Adding spells
 mygraph <- add.node.spell(mygraph, 2, start=0, end=10)
 mygraph <- add.node.spell(mygraph, 2, start=15)
+mygraph <- add.node.spell(mygraph, 4, start=18)
 
 pause()
 # Adding edges

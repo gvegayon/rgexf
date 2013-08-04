@@ -1,5 +1,4 @@
 library(rgexf)
-library(igraph)
 
 demo(edge.list)
 demo(gexf)

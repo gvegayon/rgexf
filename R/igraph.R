@@ -1,5 +1,5 @@
 
-igraph.to.gexf <- function(igraph.obj) {
+igraph.to.gexf <- function(igraph.obj, position=NULL) {
   
   g <- igraph.obj
   rm(igraph.obj)
@@ -23,7 +23,7 @@ igraph.to.gexf <- function(igraph.obj) {
     nodes <-merge(tmpnodes,nodes, by.x="name", by.y="label")
     nodes <- cbind(nodes, label=nodes$name, stringsAsFactors=FALSE)
     #tmpnodes <- subset(nodes, select=c(-id,-label))
-    nodes <- subset(nodes, select=c(id, label))
+    nodes <- nodes[,c("id", "label")]
   }
   
   # Nodes Attributes
@@ -47,6 +47,8 @@ igraph.to.gexf <- function(igraph.obj) {
     nVizAtt <- list(color=t(col2rgb(tmpnodes$color, alpha=T)))
   }
   else nVizAtt <- NULL
+  
+  nVizAtt$position <- position
   
   # Edges Viz att
   if (length(tmpedges$color)) {

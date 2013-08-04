@@ -16,7 +16,7 @@
   
   Through the javascript library sigmajs, rgexf allows exploring graph in the web browser.
   
-  Finally, the functions \code{igraph.to.gexf} and \code{gexf.to.igraph} convert objects from \code{igraph} to \code{gexf} and viceversa keeping attributes, positions and colors.
+  Finally, the functions \code{igraph.to.gexf} and \code{gexf.to.igraph} convert objects from \code{igraph} to \code{gexf} and viceversa keeping attributes and colors.
   
   Please visit the project home for more information:
     \url{https://bitbucket.org/gvegayon/rgexf}.
@@ -26,13 +26,13 @@
     Package: \tab rgexf\cr
     Type: \tab Package\cr
     Version: \tab 0.13.08\cr
-    Date: \tab 2013-08-03\cr
+    Date: \tab 2013-08-04\cr
     License: \tab GPL version 2 or later\cr
   }
 }
 \author{George Vega Yon \email{george.vega@nodoschile.org} [aut],
 
-Jorge Fabrega Lacoa \email{jorge.fabrega@nodoschile.org} [cnt]},
+Jorge Fabrega Lacoa \email{jorge.fabrega@nodoschile.org} [cnt),
 
 Joshua B. Kunst \email{jbkunst@gmail.com} [cnt]}
 \note{

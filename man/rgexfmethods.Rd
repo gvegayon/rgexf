@@ -4,7 +4,7 @@
 \alias{plot.gexf}
 \alias{summary.gexf}
 \title{
-  Print and write \code{gexf} objects
+  S3 methods for \code{gexf} objects
 }
 \description{
   Methods to print and summarize \code{gexf} class objects
@@ -47,7 +47,8 @@
 \item{\code{summary.gexf}}{ List containing some \code{gexf} object statistics.}
 \item{\code{plot.gexf}}{ None (invisible \code{NULL}).}
 }
-\author{George Vega Yon \email{george.vega@nodoschile.org}
+\author{George Vega Yon \email{george.vega@nodoschile.org},
+
 Joshua B. Kunst \email{jbkunst@nodoschile.org}
 }
 \references{
@@ -73,6 +74,9 @@ Joshua B. Kunst \email{jbkunst@nodoschile.org}
     summary(mygraph)
     
     print(mygraph, file="mygraph.gexf", replace=T)
+    
+    # Plotting
+    plot(mygraph)
     
   }
 }

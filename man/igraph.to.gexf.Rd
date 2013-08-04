@@ -2,26 +2,32 @@
 \alias{igraph.to.gexf}
 \alias{gexf.to.igraph}
 \title{Converting between \code{gexf} and \code{igraph} classes}
-\description{Direct way to do so}
+\description{Converts objects between \code{gexf} and \code{igraph} objects keeping attributes, edge weights and colors.}
 \usage{
-igraph.to.gexf(igraph.obj)
+igraph.to.gexf(igraph.obj, position=NULL)
 
 gexf.to.igraph(gexf.obj)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{igraph.obj}{An object of class \code{igraph}}
-  \item{gexf.obj}{An object of class \code{gexf}}
+  \item{igraph.obj}{An object of class \code{igraph}.}
+  \item{gexf.obj}{An object of class \code{gexf}.}
+  \item{position}{A three-column data-frame with XYZ coords.}
+}
+\details{
+  If the position argument is not \code{NULL}, the new \code{gexf} object will include the \code{position} viz-attribute.
 }
 \value{
-For \code{igraph.to.gexf} : \code{gexf} object
-For \code{gexf.to.igraph} : \code{igraph} object
+\itemize{
+\item For \code{igraph.to.gexf} : \code{gexf} class object
+\item For \code{gexf.to.igraph} : \code{igraph} class object
+}
 }
 \author{
 George Vega Yon \email{george.vega@nodoschile.org}
 }
-\note{
-These functions will receive some minor changes
+\seealso{
+  \code{\link{layout}}
 }
 \examples{
  \dontrun{
@@ -33,5 +39,4 @@ These functions will receive some minor changes
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+\keyword{ manip }

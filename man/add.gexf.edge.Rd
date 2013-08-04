@@ -9,10 +9,12 @@
 \description{Manipulates \code{gexf} objects adding and removing nodes and edges from both, its dataframe representation and its XML representation.}
 \usage{
 add.gexf.node(graph, id=NA, label=NA, start=NULL, end=NULL,
-   vizAtt=list(color=NULL, position=NULL, size=NULL, shape=NULL, image=NULL))
+   vizAtt=list(color=NULL, position=NULL, size=NULL, shape=NULL, image=NULL),
+   atts=NULL)
 
 add.gexf.edge(graph, source, target, id=NULL, type=NULL, label=NULL, start=NULL,
-   end=NULL, weight=1, vizAtt = list(color=NULL, thickness=NULL, shape=NULL))
+   end=NULL, weight=1, vizAtt = list(color=NULL, thickness=NULL, shape=NULL),
+   atts=NULL)
 
 rm.gexf.node(graph, id=NULL, number=NULL, rm.edges = TRUE)
 
@@ -30,6 +32,7 @@ add.edge.spell(graph, id=NULL, number=NULL, start=NULL, end=NULL)
   \item{number}{Index number(s) of a single or a group of nodes or edges.}
   \item{weight}{Edge weight.}
   \item{vizAtt}{A list of node/edge viz attributes (see \code{\link{write.gexf}}).}
+  \item{atts}{List of attributes.}
   \item{source}{Source node's id.}
   \item{target}{Target node's id.}
   \item{start}{Starting time period }

@@ -108,8 +108,14 @@ add.gexf.node <- function(
   
   # Adds the atts
   if (length(atts)) {
-    atts <- .addAtts(unlist(atts),names(atts))
-    parseXMLAndAdd(sprintf("%s",atts), parent=node)
+    atts.node <- xmlNode("attvalues")
+    for (i in 1:length(atts)) {
+      atts.node <- 
+        addChildren(
+          atts.node, 
+          xmlNode("attvalue", attrs=c("for"=names(atts)[i], value=atts[[i]])))
+    }
+    node <- addChildren(node, atts.node)
   }
   
   # Adds the viz atts
@@ -151,7 +157,8 @@ add.gexf.edge <- function(
   start=NULL, 
   end=NULL, 
   weight=1, 
-  vizAtt = list(color=NULL, thickness=NULL, shape=NULL)) {
+  vizAtt = list(color=NULL, thickness=NULL, shape=NULL),
+  atts=NULL) {
   
   # Parses the graph file
   graph$graph <- xmlTreeParse(graph$graph, encoding="UTF-8")
@@ -164,7 +171,19 @@ add.gexf.edge <- function(
   edge <- xmlNode("edge", attrs=c(id=id, type=type, label=label, source=source, 
                                   target=target, start=start, end=end, 
                                   weight=sprintf("%.2f",weight)))
-    # Adds the viz atts
+  # Adds the atts
+  if (length(atts)) {
+    atts.edge <- xmlNode("attvalues")
+    for (i in 1:length(atts)) {
+      atts.edge <- 
+        addChildren(
+          atts.edge, 
+          xmlNode("attvalue", attrs=c("for"=names(atts)[i], value=atts[[i]])))
+    }
+    edge <- addChildren(edge, atts.edge)
+  }
+  
+  # Adds the viz atts
   if (length(unlist(vizAtt)) > 0) {
     if (length(vizAtt$color) > 0) {
       edge <- addChildren(edge, xmlNode("viz:color", attrs=vizAtt$color))
