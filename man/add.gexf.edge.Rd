@@ -23,17 +23,17 @@ add.node.spell(graph, id=NULL, number=NULL, start=NULL, end=NULL)
 add.edge.spell(graph, id=NULL, number=NULL, start=NULL, end=NULL)
 }
 \arguments{
-  \item{graph}{A gexf class object to which the new node is to be added.}
-  \item{id}{A node id.}
+  \item{graph}{A gexf-class object.}
+  \item{id}{A node/edge id (normaly numeric value).}
   \item{label}{A node/edge label.}
-  \item{type}{Type of conection.}
-  \item{number}{Indexing number of node(s)/edge(s).}
+  \item{type}{Type of conection (edge).}
+  \item{number}{Index number(s) of a single or a group of nodes or edges.}
   \item{weight}{Edge weight.}
-  \item{vizAtt}{A list of node/edge viz attributes.}
-  \item{source}{String. Source node's id.}
-  \item{target}{String. Target node's id.}
-  \item{start}{Start}
-  \item{end}{End}
+  \item{vizAtt}{A list of node/edge viz attributes (see \code{\link{write.gexf}}).}
+  \item{source}{Source node's id.}
+  \item{target}{Target node's id.}
+  \item{start}{Starting time period }
+  \item{end}{Ending time period}
   \item{rm.edges}{Whether to remove or not existing edges.}
 }
 \details{
@@ -46,7 +46,7 @@ add.edge.spell(graph, id=NULL, number=NULL, start=NULL, end=NULL)
   \code{add.node.spell} and \code{add.edge.spell} allow to include spells to specific nodes or edges in a \code{gexf} object.
 }
 \value{
-  A \code{gexf} object.
+  A \code{gexf} object (see \code{\link{write.gexf}}).
 }
 \author{George Vega Yon \email{george.vega@nodoschile.org},
 

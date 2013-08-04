@@ -1,5 +1,5 @@
 
-plot.gexf <- function(x, EdgeType = c("curve", "line"), export.files = FALSE, output.dir = getwd(), ...){  
+plot.gexf <- function(x, EdgeType = c("curve", "line"), output.dir = NULL, ...){  
 #   if(!is.null(gexf.object$positions)){
 #     library(sna)
 #     nNodes <- nrow(gexf.object$nodes)
@@ -80,7 +80,7 @@ plot.gexf <- function(x, EdgeType = c("curve", "line"), export.files = FALSE, ou
   s$add(app=parseGexf, name='sigmaparseGexfjs')
   s$browse('plot')
   
-  if(export.files){
+  if(length(output.dir)){
     
     wd <- getwd()
     setwd(output.dir)

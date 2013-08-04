@@ -106,6 +106,12 @@ add.gexf.node <- function(
   
   node <- xmlNode("node", attrs=c(id=id, label=label, start=start, end=end))
   
+  # Adds the atts
+  if (length(atts)) {
+    atts <- .addAtts(unlist(atts),names(atts))
+    parseXMLAndAdd(sprintf("%s",atts), parent=node)
+  }
+  
   # Adds the viz atts
   if (length(unlist(vizAtt)) > 0) {
     if (length(vizAtt$color) > 0) {

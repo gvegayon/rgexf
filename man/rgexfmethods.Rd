@@ -1,5 +1,6 @@
 \name{rgexf Methods}
 \alias{print.gexf}
+\alias{export-gexf}
 \alias{plot.gexf}
 \alias{summary.gexf}
 \title{
@@ -11,25 +12,47 @@
 \usage{  
   \method{print}{gexf}(x, file=NA, replace=F, ...)
   \method{summary}{gexf}(object, ...)
-  \method{plot}{gexf}(x, EdgeType = c("curve", "line"), export.files =
-                 FALSE, output.dir = getwd(), ...)
+  \method{plot}{gexf}(x, EdgeType = c("curve", "line"), output.dir = NULL, ...)
 }
 \arguments{
-  \item{x}{An object of class \code{gexf} to be printed.}
+  \item{x}{An \code{gexf} class object.}
   %\item{y}{Ignored.}
-  \item{object}{An object of class \code{gexf} to be printed.}
+  \item{object}{An \code{gexf} class object.}
   \item{file}{String. Output path where to save the GEXF file.}  
-  \item{replace}{Logical. If \code{path} exists, \code{TRUE} would replace the file.}
+  \item{replace}{Logical. If \code{file} exists, \code{TRUE} would replace the file.}
   \item{EdgeType}{For the visualization}
+  \item{output.dir}{String. The complete path where to export the sigmajs visualization}
   \item{\dots}{Ignored}
+}
+
+\details{
+  \code{print.gexf} displays the graph (XML) in the console. If \code{file} is
+  not \code{NA}, a GEXF file will be exported to the indicated filepath.
+  
+  \code{summay.gexf} prints summary statistics and information about the graph.
+  
+  \code{plot.gexf} plots the graph object in the web browser using sigma-js
+  javascript library. Generated files are stored at the OS's \dQuote{temp}
+  folder. If \code{output.dir} is not \code{NULL}, then all files required
+  to display the graph in the web browser will be saved in the \code{output.dir}.
+  
+  Users must note that \code{plot.gexf} starts a server using the \code{Rook}
+  package, otherwise it will not be possible to see the visualization (sigmajs
+  requires this).
+  to 
 }
                            
 \value{
 \item{\code{print.gexf}}{ None (invisible \code{NULL}).}
 \item{\code{summary.gexf}}{ List containing some \code{gexf} object statistics.}
+\item{\code{plot.gexf}}{ None (invisible \code{NULL}).}
 }
-\author{George Vega Yon \email{george.vega@nodoschile.org}}
-
+\author{George Vega Yon \email{george.vega@nodoschile.org}
+Joshua B. Kunst \email{jbkunst@nodoschile.org}
+}
+\references{
+  sigmajs project website \url{http://sigmajs.org/}.
+}
 \seealso{
   See also \code{\link{write.gexf}}
 }

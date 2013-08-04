@@ -9,6 +9,10 @@ igraph.to.gexf <- function(igraph.obj) {
   tmpedges <- gdata$edges
   tmpnodes <- gdata$vertices
   
+  # If nodes have no name
+  if (!length(tmpnodes$vertices["name"])) 
+    tmpnodes <- data.frame(tmpnodes, name=1:nrow(tmpnodes))
+  
   # Nodes and edges list
   nodes <- edge.list(tmpedges[,c(1,2)])
   edges <- nodes$edges
@@ -18,7 +22,7 @@ igraph.to.gexf <- function(igraph.obj) {
   if (length(tmpnodes)) {
     nodes <-merge(tmpnodes,nodes, by.x="name", by.y="label")
     nodes <- cbind(nodes, label=nodes$name, stringsAsFactors=FALSE)
-    tmpnodes <- subset(nodes, select=c(-id,-label))
+    #tmpnodes <- subset(nodes, select=c(-id,-label))
     nodes <- subset(nodes, select=c(id, label))
   }
   

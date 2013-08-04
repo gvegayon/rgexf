@@ -14,9 +14,6 @@ demo(gexfigraph)
 
 g <- graph.ring(10)
 g <- set.graph.attribute(g, "name", "RING")
-# It is the same as
-g$name <- "RING"
-g$name
 
 # Colors
 g <- set.vertex.attribute(g, "color", value=c("red", "green"))

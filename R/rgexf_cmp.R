@@ -34,7 +34,7 @@ edge.list <- function(x) {
         }, PAR=parent)
 }
 
-.addAtts <- function(attnames, tmpatt, attvec, tmpdoc=NULL) {
+.addAtts <- function(tmpatt, attvec, tmpdoc=NULL) {
 ################################################################################
 # Builds app proper XML attrs statement to be parsed by parseXMLAndAdd
 ################################################################################
@@ -136,7 +136,7 @@ edge.list <- function(x) {
       # Adding directly
       parseXMLAndAdd(
         paste(.writeXMLLine(type, datasetnoatt[i,], finalizer=FALSE), 
-              .addAtts(attnames, att[i,], attvec), # Builds atts definition
+              .addAtts(att[i,], attvec), # Builds atts definition
               "</",type,">",sep=""),
         parent=PAR)
     }
@@ -149,7 +149,7 @@ edge.list <- function(x) {
     if (attributes) {
       tempnode0 <- paste(
         .writeXMLLine(type, datasetnoatt[i,], finalizer=FALSE),
-        .addAtts(attnames, att[i,], attvec), sep="")
+        .addAtts(att[i,], attvec), sep="")
     }
     else tempnode0 <- .writeXMLLine(type, datasetnoatt[i,], finalizer=FALSE)
     

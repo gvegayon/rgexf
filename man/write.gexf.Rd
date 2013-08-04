@@ -70,17 +70,18 @@ write.gexf(
   }
 }
 \value{
-  A \code{gexf-class} object (list). Contains the following:
+  A \code{gexf} class object (list). Contains the following:
   \itemize{
   \item \code{meta} : (list) Meta data describing the graph.
   \item \code{mode} : (list) Sets the default edge type and the graph mode.
   \item \code{atts.definitions}: (list) Two data-frames describing nodes and edges
   attributes.
-  \item \code{nodesVizAtt}
-  \item \code{edgesVizAtt}
-  \item \code{nodes}
-  \item \code{edges}
-  \item \code{graph}
+  \item \code{nodesVizAtt} : (data-frame) A multi-column data-frame with the nodes' visual attributes.
+  \item \code{edgesVizAtt} : (data-frame) A multi-column data-frame with the edges' visual attributes.
+  \item \code{nodes} : (data-frame) A two-column data-frame with nodes' ids and labels.
+  \item \code{edges} : (data-frame) A five-column data-frame with edges' ids, labels,
+  sources, targets and weights.
+  \item \code{graph} : (String) GEXF (XML) representation of the graph.
   }
 }
 \author{George Vega Yon \email{george.vega@nodoschile.org},

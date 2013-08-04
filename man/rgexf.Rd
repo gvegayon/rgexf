@@ -14,6 +14,10 @@
   
   Users can chose to build graph from \code{data.frame}s (using \code{write.gexf}) or element-by-element (using several other functions to handle \code{gexf} objects.)
   
+  Through the javascript library sigmajs, rgexf allows exploring graph in the web browser.
+  
+  Finally, the functions \code{igraph.to.gexf} and \code{gexf.to.igraph} convert objects from \code{igraph} to \code{gexf} and viceversa keeping attributes, positions and colors.
+  
   Please visit the project home for more information:
     \url{https://bitbucket.org/gvegayon/rgexf}.
 } 
@@ -21,14 +25,16 @@
   \tabular{ll}{
     Package: \tab rgexf\cr
     Type: \tab Package\cr
-    Version: \tab 0.13.05\cr
-    Date: \tab 2013-05-09\cr
+    Version: \tab 0.13.08\cr
+    Date: \tab 2013-08-03\cr
     License: \tab GPL version 2 or later\cr
   }
 }
-\author{George Vega Yon \email{george.vega@nodoschile.org},
+\author{George Vega Yon \email{george.vega@nodoschile.org} [aut],
 
-Jorge Fabrega Lacoa \email{jorge.fabrega@nodoschile.org}}
+Jorge Fabrega Lacoa \email{jorge.fabrega@nodoschile.org} [cnt]},
+
+Joshua B. Kunst \email{jbkunst@gmail.com} [cnt]}
 \note{
   See the GEXF primer for details on the GEXF graph format:
   \url{http://gexf.net/1.2draft/gexf-12draft-primer.pdf}
@@ -39,6 +45,7 @@ Jorge Fabrega Lacoa \email{jorge.fabrega@nodoschile.org}}
     \item Gephi project site: \url{https://gephi.org/}
     \item GEXF project site: \url{http://gexf.net/}
     \item Nodos Chile project site (real life examples): \url{http://nodoschile.org/}
+    \item Sigmasj project site : \url{http://sigmajs.org/}
   }
 }
 \examples{
