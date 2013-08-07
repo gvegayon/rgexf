@@ -529,18 +529,30 @@ write.gexf <- function(
   # Edges Label (for data frame)
   if (length(edgesLabel) == 0) edgesLabel <- edges[,"id"]
     
-  results <- list(
-    meta=unlist(meta),
-    mode=unlist(c(defaultedgetype=defaultedgetype, mode=mode)),
-    atts.definitions = list(nodes = nodesAttDf, edges = edgesAttDf),
-    nodesVizAtt = nodesVizAtt,
-    edgesVizAtt = edgesVizAtt,
-    nodes=data.frame(id=nodes[,"id"], label=nodes[,"label"], row.names=NULL),
-    edges=data.frame(
-      id=edges[,"id"], label=edgesLabel, source=edges[,"source"],
-      target=edges[,"target"], weight=as.numeric(edges[,"weight"]), row.names=NULL),
-    graph=saveXML(xmlFile, encoding="UTF-8"))
-  class(results) <- "gexf"
+  results <- .build.and.validate.gexf(
+    meta=meta,
+    mode=list(defaultedgetype=defaultedgetype, mode=mode),
+    atts.definitions=list(nodes = nodesAttDf, edges = edgesAttDf),
+    nodesVizAtt=nodesVizAtt,
+    edgesVizAtt=edgesVizAtt,
+    nodes=nodes,
+    edges=cbind(edges,edgesLabel),
+    graph=saveXML(xmlFile, encoding="UTF-8")
+    )
+#   results <- list(
+#     meta=unlist(meta),
+#     mode=unlist(c(defaultedgetype=defaultedgetype, mode=mode)),
+#     atts.definitions = list(nodes = nodesAttDf, edges = edgesAttDf),
+#     nodesVizAtt = nodesVizAtt,
+#     edgesVizAtt = edgesVizAtt,
+#     nodes=data.frame( # nodes[, unique(c("id","label"))]
+#       id=nodes[,"id"], label=nodes[,"label"], row.names=NULL
+#       ),
+#     edges=data.frame( #edges[, unique(c("id","source","target","weigth"))]
+#       id=edges[,"id"], label=edgesLabel, source=edges[,"source"],
+#       target=edges[,"target"], weight=as.numeric(edges[,"weight"]), row.names=NULL),
+#     graph=saveXML(xmlFile, encoding="UTF-8"))
+#   class(results) <- "gexf"
   
   # Strings As Factors
   options(stringsAsFactors = old.strAF)

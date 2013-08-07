@@ -25,8 +25,8 @@
   \tabular{ll}{
     Package: \tab rgexf\cr
     Type: \tab Package\cr
-    Version: \tab 0.13.08\cr
-    Date: \tab 2013-08-04\cr
+    Version: \tab 0.13.8\cr
+    Date: \tab 2013-08-06\cr
     License: \tab GPL version 2 or later\cr
   }
 }
@@ -59,6 +59,7 @@ Joshua B. Kunst \email{jbkunst@gmail.com} [cnt]}
     demo(gexftwitter) # Example with real data of chilean twitter accounts.
     demo(gexfdynamicandatt) # Dynamic net with static attributes.
     demo(gexfbuildfromscratch) # Example building a net from scratch.
+    demo(gexfigraph) # Two-way gexf-igraph conversion
   }
 }
 \keyword{ package }

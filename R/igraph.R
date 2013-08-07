@@ -81,9 +81,11 @@ gexf.to.igraph <- function(gexf.obj) {
   rm(gexf.obj)
   
   # Starting igraph object
-  g2 <- graph.edgelist(
-    as.matrix(g$edges[,c("source","target")]),
-    directed=(g$mode[[1]] != "undirected")
+  colnames(g$nodes)[colnames(g$nodes) == "name"]
+  g2 <- graph.data.frame(
+    g$edges[,unique(c("source","target",names(g$edges)))],
+    directed=(g$mode[[1]] != "undirected"),
+    vertices=g$nodes
     )
   
   # Labels

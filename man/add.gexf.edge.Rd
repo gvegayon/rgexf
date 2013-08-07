@@ -32,7 +32,7 @@ add.edge.spell(graph, id=NULL, number=NULL, start=NULL, end=NULL)
   \item{number}{Index number(s) of a single or a group of nodes or edges.}
   \item{weight}{Edge weight.}
   \item{vizAtt}{A list of node/edge viz attributes (see \code{\link{write.gexf}}).}
-  \item{atts}{List of attributes.}
+  \item{atts}{List of attributes, currently ignored.}
   \item{source}{Source node's id.}
   \item{target}{Target node's id.}
   \item{start}{Starting time period }

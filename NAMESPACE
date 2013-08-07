@@ -7,7 +7,8 @@ export(.addNodesEdges, .defAtt)
 
 # Parsing functions
 export(checkTimes, .parseEdgesVizAtt, .parseNodesVizAtt, .parseEdgesWeight, 
-       .parseEdgesAtt, .parseEdgesId, .parseNodesAtt, .parseEdgesLabel)
+       .parseEdgesAtt, .parseEdgesId, .parseNodesAtt, .parseEdgesLabel,
+       .parseDataTypes, .build.and.validate.gexf)
 
 export(write.gexf)
 export(read.gexf)

@@ -19,7 +19,7 @@ mygraph <- add.gexf.node(mygraph,2,"valita", vizAtt=list(color=data.frame(20,20,
 mygraph <- add.gexf.node(mygraph,3,"pedro")
 
 # Adding a node with node with attributes
-mygraph <- add.gexf.node(mygraph,4,"diego", atts=list(age=27, country="CL"))
+mygraph <- add.gexf.node(mygraph,4,"diego")
 
 pause()
 # Adding spells

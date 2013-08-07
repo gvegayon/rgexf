@@ -148,3 +148,19 @@ checkTimes <- function(x, format='date') {
     else stop("Invalid object type: \"edgesLabel\" should be a one column data.frame or a matrix")
   }
 }
+
+.parseDataTypes <- function(x, keepFactors=TRUE) {
+################################################################################
+# Parses edges labels checking dimentions
+################################################################################
+  # Whether to keep factors as numeric values or not
+  if (keepFactors) x <- as.numeric(x)
+  else x <- as.character(x)
+  
+  # Data
+  type <- typeof(x)
+  if (type == "character") return("string")
+  else if (type == "double") return("float")
+  else if (type == "logical") return("boolean")
+  else return(type)        
+}

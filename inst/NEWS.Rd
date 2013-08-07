@@ -2,6 +2,21 @@
 \title{rgexf NEWS}
 \encoding{UTF-8}
 
+\section{CHANGES IN rgexf version 0.13.8 [2013-08-06]}{
+  \subsection{NEW FEATURES}{
+    \itemize{
+      \item New S3 method \code{plot.gexf}, implemented by Joshua B Kunst, shows the graph in the web browser by means of Sigma.js (!). 
+      \item New functions \code{igraph.to.gexf} and \code{gexf.to.igraph} converts objects between \code{igraph} and \code{gexf} clases. Colors and attributes are preserved.
+    }
+  }
+  \subsection{DEVELOPMENT}{
+    \itemize{
+      \item Improving general documentation.
+      \item Just starting to add new options to \code{add.gexf.node/edge}, more precisely, passing attributes.
+    }
+  }
+}
+
 \section{CHANGES IN rgexf version 0.13.05 [2013-05-09]}{
   \subsection{BUG FIX}{
     \itemize{

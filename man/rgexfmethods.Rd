@@ -16,7 +16,6 @@
 }
 \arguments{
   \item{x}{An \code{gexf} class object.}
-  %\item{y}{Ignored.}
   \item{object}{An \code{gexf} class object.}
   \item{file}{String. Output path where to save the GEXF file.}  
   \item{replace}{Logical. If \code{file} exists, \code{TRUE} would replace the file.}

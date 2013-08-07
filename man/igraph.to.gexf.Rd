@@ -31,10 +31,19 @@ George Vega Yon \email{george.vega@nodoschile.org}
 }
 \examples{
  \dontrun{
+ 
+  # Running demo
+  demo(gexfigraph)
+ 
+  # A simple graph without
   gexf1 <- read.gexf("http://gephi.org/datasets/LesMiserables.gexf")
   igraph1 <- gexf.to.igraph(gexf1)
   gexf2 <- igraph.to.gexf(igraph1)
   
+  # A graph with attributes  
+  gexf3 <- read.gexf("http://gexf.net/data/data.gexf")
+  igraph2 <- gexf.to.igraph(gexf3)
+  gexf4 <- igraph.to.gexf(igraph2)
  }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
