@@ -27,7 +27,8 @@ write.gexf(
     creator="NodosChile", 
     description="A graph file writing in R using \"rgexf\"",
     keywords="gexf graph, NodosChile, R, rgexf"),
-  keepFactors = TRUE
+  keepFactors = TRUE,
+  encoding = "UTF-8"
   )
 }
 \arguments{
@@ -47,6 +48,7 @@ write.gexf(
   \item{defaultedgetype}{\dQuote{directed}, \dQuote{undirected}, \dQuote{mutual}}
   \item{meta}{A List. Meta data describing the graph}
   \item{keepFactors}{Logical, whether to handle factors as numeric values (\code{TRUE}) or as strings (\code{FALSE}) by using \code{as.character}.}
+  \item{encoding}{Encoding of the graph.}
 }
 \details{  
   Just like \code{nodesVizAtt} and \code{edgesVizAtt}, \code{nodesAtt} and \code{edgesAtt} must have the same number of rows as nodes and edges, respectively. Using data frames is necessary as in this way data types are preserved.

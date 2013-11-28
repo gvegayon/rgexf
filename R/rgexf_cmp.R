@@ -203,7 +203,8 @@ write.gexf <- function(
   tFormat="double",
   defaultedgetype = "undirected",
   meta = list(creator="NodosChile", description="A graph file writing in R using \"rgexf\"",keywords="gexf graph, NodosChile, R, rgexf"),
-  keepFactors = TRUE
+  keepFactors = TRUE,
+  encoding="UTF-8"
 ) {
   
   ##############################################################################
@@ -448,7 +449,7 @@ write.gexf <- function(
   
   ##############################################################################
   # The basic char matrix definition  for nodes
-  if (dynamic[1] & tFormat=="double") 
+  if (dynamic[1] & tFormat=="double")
     nodeDynamic <- data.frame(
       sprintf("%.1f",nodeDynamic[,1]), sprintf("%.1f",nodeDynamic[,2])
       )
@@ -480,7 +481,7 @@ write.gexf <- function(
   
   ##############################################################################
   # The basic dataframe definition  for edges  
-  if (dynamic[2]) edgeDynamic <- data.frame(
+  if (dynamic[2] & tFormat == "double") edgeDynamic <- data.frame(
     sprintf("%.1f",edgeDynamic[,1]), sprintf("%.1f", edgeDynamic[,2])
     )
   if (nEdgesAtt > 0) edgesAtt <- data.frame(edgesAtt)
@@ -498,7 +499,7 @@ write.gexf <- function(
   
   # Generating weights
   if (!length(edgesWeight))  edgesWeight <- 1
-  edges <- data.frame(edges, x=edgesWeight)
+  edges <- data.frame(edges, x=as.numeric(edgesWeight))
   edges$x <- sprintf("%.1f", edges$x)
   
   # Seting colnames
@@ -537,22 +538,8 @@ write.gexf <- function(
     edgesVizAtt=edgesVizAtt,
     nodes=nodes,
     edges=cbind(edges,edgesLabel),
-    graph=saveXML(xmlFile, encoding="UTF-8")
+    graph=saveXML(xmlFile, encoding=encoding)
     )
-#   results <- list(
-#     meta=unlist(meta),
-#     mode=unlist(c(defaultedgetype=defaultedgetype, mode=mode)),
-#     atts.definitions = list(nodes = nodesAttDf, edges = edgesAttDf),
-#     nodesVizAtt = nodesVizAtt,
-#     edgesVizAtt = edgesVizAtt,
-#     nodes=data.frame( # nodes[, unique(c("id","label"))]
-#       id=nodes[,"id"], label=nodes[,"label"], row.names=NULL
-#       ),
-#     edges=data.frame( #edges[, unique(c("id","source","target","weigth"))]
-#       id=edges[,"id"], label=edgesLabel, source=edges[,"source"],
-#       target=edges[,"target"], weight=as.numeric(edges[,"weight"]), row.names=NULL),
-#     graph=saveXML(xmlFile, encoding="UTF-8"))
-#   class(results) <- "gexf"
   
   # Strings As Factors
   options(stringsAsFactors = old.strAF)

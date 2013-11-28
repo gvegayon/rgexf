@@ -2,6 +2,17 @@
 \title{rgexf NEWS}
 \encoding{UTF-8}
 
+\section{CHANGES IN rgexf version 0.13.11 [2013-11-27]}{
+  \subsection{BUG FIX}{
+    \itemize{
+      \item Included class checks in -gexf- class functions (thanks to Samuel Finegold).
+      \item \code{write.gexf} does not fails when dynamics different from \code{double} are passed (thank you Samuel Finegold!).
+      \item Passing weights from igraph to gexf as now been fix (thank you Roberto Brunelli!).
+      \item Fixing encoding issues thanks to Yong Cha's suggestion (thank you!).
+    }
+  }
+}
+
 \section{CHANGES IN rgexf version 0.13.8 [2013-08-06]}{
   \subsection{NEW FEATURES}{
     \itemize{

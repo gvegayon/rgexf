@@ -94,6 +94,10 @@ add.gexf.node <- function(
   atts=NULL
   ) 
   {
+
+  # Checks the class
+  if (!inherits(graph,"gexf")) stop("-graph- is not of -gexf- class.")
+
   # Parses the graph file
   graph$graph <- xmlTreeParse(graph$graph, encoding="UTF-8")
   
@@ -194,6 +198,9 @@ add.gexf.edge <- function(
   vizAtt = list(color=NULL, thickness=NULL, shape=NULL),
   atts=NULL) {
   
+  # Checks the class
+  if (!inherits(graph,"gexf")) stop("-graph- is not of -gexf- class.")
+
   # Parses the graph file
   graph$graph <- xmlTreeParse(graph$graph, encoding="UTF-8")
   
@@ -316,7 +323,10 @@ rm.gexf.node <- function(
 ################################################################################
   graph, id=NULL, number=NULL, rm.edges = TRUE
   ) {
-  
+
+  # Checks the class
+  if (!inherits(graph,"gexf")) stop("-graph- is not of -gexf- class.") 
+ 
   # Checking the node to delete
   if (length(number)==0) {
     if (length(id)==0) stop("No nodes specified.")
@@ -382,7 +392,10 @@ rm.gexf.edge <- function(
   id=NULL, 
   number=NULL
   ) {
-  
+
+  # Checks the class
+  if (!inherits(graph,"gexf")) stop("-graph- is not of -gexf- class.") 
+
   # Checking the edge to add to
   if (length(number)==0) {
     if (length(id)==0) stop("No edges specified.")
@@ -425,7 +438,10 @@ add.node.spell <- function(
   start=NULL, 
   end=NULL
   ) {
-  
+ 
+  # Checks the class
+  if (!inherits(graph,"gexf")) stop("-graph- is not of -gexf- class.")
+
   # Checking the node to add to
   if (length(number)==0) {
     if (length(id)==0) stop("No nodes specified.")
@@ -472,7 +488,10 @@ add.edge.spell <- function(
   start=NULL, 
   end=NULL
 ) {
-  
+
+  # Checks the class
+  if (!inherits(graph,"gexf")) stop("-graph- is not of -gexf- class.") 
+
   # Checking the edge to add to
   if (length(number)==0) {
     if (length(id)==0) stop("No edges specified.")
