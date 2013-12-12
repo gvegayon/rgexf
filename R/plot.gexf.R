@@ -26,7 +26,7 @@ plot.gexf <- function(x, EdgeType = c("curve", "line"), output.dir = NULL, ...){
 #                                position=positions
 #                              ))
 #   
-  if(length(x$node.att)){
+  if(length(unlist(x$atts.definitions))){
     html <- readLines(system.file("sigmajs/index_att.html", package="rgexf"), warn=FALSE)
   } else {
     html <- readLines(system.file("sigmajs/index.html", package="rgexf"), warn=FALSE)    

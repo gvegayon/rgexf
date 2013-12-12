@@ -12,6 +12,7 @@ edge.list <- function(x) {
       # If it is not a factor
       if (!is.factor(x)) x <- factor(c(x[,1], x[,2]))
       edges <- matrix(unclass(x), byrow=FALSE, ncol=2)
+      colnames(edges) <- c("source","target")
       nodes <- data.frame(id=1:nlevels(x), label=levels(x), stringsAsFactors=F)
       
       edgelist <- list(nodes=nodes, edges=edges)
@@ -468,11 +469,13 @@ write.gexf <- function(
   # Fixing factors
   if (keepFactors) {
     tofix <- unlist(lapply(nodes, class)) %in% "factor"
-    nodes[,tofix] <- lapply(nodes[,tofix], as.numeric)
+    if (length(tofix)) 
+      nodes[,tofix] <- lapply(nodes[,tofix], as.numeric)
   }
   else {
     tofix <- unlist(lapply(nodes, class)) %in% "factor"
-    nodes[,tofix] <- lapply(nodes[,tofix], as.character)
+    if (length(tofix))
+      nodes[,tofix] <- lapply(nodes[,tofix], as.character)
   }
   
   # NODES

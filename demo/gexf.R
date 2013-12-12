@@ -81,10 +81,10 @@ imagee <- data.frame(image=rbind(
   "Yellow_solid_sphere.png"), stringsAsFactors=F)
 
 # Colors
-nodecolors <- cbind(t(col2rgb(colors()[1:NROW(people)])),alpha=1)
+nodecolors <- cbind(t(col2rgb(topo.colors(nrow(people)))),alpha=1)
 colnames(nodecolors) <- c("r", "b", "g", "a")
 
-edgecolors <- cbind(t(col2rgb(colors()[1:NROW(relations)])),alpha=1)
+edgecolors <- cbind(t(col2rgb(cm.colors(nrow(relations)))),alpha=1)
 colnames(edgecolors) <- c("r", "b", "g", "a")
 
 # TRUE/FALSE attributes
