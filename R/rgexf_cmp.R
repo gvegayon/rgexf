@@ -12,6 +12,7 @@ edge.list <- function(x) {
       # If it is not a factor
       if (!is.factor(x)) x <- factor(c(x[,1], x[,2]))
       edges <- matrix(unclass(x), byrow=FALSE, ncol=2)
+      colnames(edges) <- c("source","target")
       nodes <- data.frame(id=1:nlevels(x), label=levels(x), stringsAsFactors=F)
       
       edgelist <- list(nodes=nodes, edges=edges)
@@ -199,11 +200,12 @@ write.gexf <- function(
   nodesVizAtt = list(color=NULL, position=NULL, size=NULL, shape=NULL, image=NULL),
   nodeDynamic=NULL,
   edgeDynamic=NULL,
+  precision=3,
   output = NA,
   tFormat="double",
   defaultedgetype = "undirected",
   meta = list(creator="NodosChile", description="A graph file writing in R using \"rgexf\"",keywords="gexf graph, NodosChile, R, rgexf"),
-  keepFactors = TRUE,
+  keepFactors = FALSE,
   encoding="UTF-8"
 ) {
   
@@ -310,7 +312,7 @@ write.gexf <- function(
       edgeDynamic[is.na(edgeDynamic[,2]),2] <- endTime
     }
   } else {
-    xmlAttrs(xmlGraph) <- c(mode=mode)
+    xmlAttrs(xmlGraph) <- c(mode=mode, defaultedgetype=defaultedgetype)
   }
   
   datatypes <- matrix(
@@ -398,7 +400,8 @@ write.gexf <- function(
       }
       else if (i == "size") {
         colnames(tmpAtt) <- "viz.size.value"
-        tmpAtt[,1] <- sprintf("%.2f", tmpAtt[,1])
+        fmt <- sprintf("%%.%gf",precision)
+        tmpAtt[,1] <- sprintf(fmt, tmpAtt[,1])
       }
       else if (i == "shape") {
         colnames(tmpAtt) <- "viz.shape.value"
@@ -432,7 +435,8 @@ write.gexf <- function(
       }
       else if (i == "size") {
         colnames(tmpAtt) <- "viz.size.value"
-        tmpAtt[,1] <- sprintf("%.1f", tmpAtt[,1])
+        fmt <- sprintf("%%.%gf",precision)
+        tmpAtt[,1] <- sprintf(fmt, tmpAtt[,1])
       }
       else if (i == "shape") {
         colnames(tmpAtt) <- "value"
@@ -451,7 +455,7 @@ write.gexf <- function(
   # The basic char matrix definition  for nodes
   if (dynamic[1] & tFormat=="double")
     nodeDynamic <- data.frame(
-      sprintf("%.1f",nodeDynamic[,1]), sprintf("%.1f",nodeDynamic[,2])
+      sprintf("%.2f",nodeDynamic[,1]), sprintf("%.2f",nodeDynamic[,2])
       )
   if (nNodesAtt > 0) nodesAtt <- data.frame(nodesAtt)
   
@@ -467,12 +471,17 @@ write.gexf <- function(
   
   # Fixing factors
   if (keepFactors) {
-    tofix <- unlist(lapply(nodes, class)) %in% "factor"
-    nodes[,tofix] <- lapply(nodes[,tofix], as.numeric)
+    tofix <- which(lapply(nodes, class) %in% "factor")
+    if (length(tofix)) {
+      warning("Factor variables will be stored as -numeric-.",
+              "\nIf you don't want this behavior, set -keepFactors- as -FALSE-.")
+      nodes[,tofix] <- lapply(nodes[,tofix,drop=FALSE], as.numeric)
+    }
   }
   else {
-    tofix <- unlist(lapply(nodes, class)) %in% "factor"
-    nodes[,tofix] <- lapply(nodes[,tofix], as.character)
+    tofix <- which(lapply(nodes, class) %in% "factor")
+    if (length(tofix))
+      nodes[,tofix] <- lapply(nodes[,tofix,drop=FALSE], as.character)
   }
   
   # NODES
@@ -482,7 +491,7 @@ write.gexf <- function(
   ##############################################################################
   # The basic dataframe definition  for edges  
   if (dynamic[2] & tFormat == "double") edgeDynamic <- data.frame(
-    sprintf("%.1f",edgeDynamic[,1]), sprintf("%.1f", edgeDynamic[,2])
+    sprintf("%.2f",edgeDynamic[,1]), sprintf("%.2f", edgeDynamic[,2])
     )
   if (nEdgesAtt > 0) edgesAtt <- data.frame(edgesAtt)
   
@@ -500,7 +509,7 @@ write.gexf <- function(
   # Generating weights
   if (!length(edgesWeight))  edgesWeight <- 1
   edges <- data.frame(edges, x=as.numeric(edgesWeight))
-  edges$x <- sprintf("%.1f", edges$x)
+  edges$x <- sprintf("%.4f", edges$x)
   
   # Seting colnames
   if (length(edgesLabel) > 0) edgesLabelCName <- "label"

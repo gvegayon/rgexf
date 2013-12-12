@@ -10,7 +10,7 @@ igraph.to.gexf <- function(igraph.obj, position=NULL) {
   tmpnodes <- gdata$vertices
   
   # If nodes have no name
-  if (!length(tmpnodes$vertices["name"])) 
+  if (!("name" %in% colnames(tmpnodes))) 
     tmpnodes <- data.frame(tmpnodes, name=1:nrow(tmpnodes))
   
   # Nodes and edges list
@@ -21,28 +21,18 @@ igraph.to.gexf <- function(igraph.obj, position=NULL) {
   # Building nodes
   if (length(tmpnodes)) {
     nodes <-merge(tmpnodes,nodes, by.x="name", by.y="label")
-    if (!("label" %in% colnames(nodes))) 
-      nodes <- cbind(nodes, label=nodes$name, stringsAsFactors=FALSE)
-    #tmpnodes <- subset(nodes, select=c(-id,-label))
-    #nodes <- nodes[,c("id", "label")]
-  }
-  
-  # Building edges
-  if (length(tmpnodes)) {
-    edges <-merge(tmpedges,edges, by.x="name", by.y="label")
-    if (!("label" %in% colnames(nodes))) 
-      nodes <- cbind(nodes, label=nodes$name, stringsAsFactors=FALSE)
+#    nodes <- nodes[,!(colnames(nodes) %in% c("label"))]
   }
   
   # Nodes Attributes
   x <- list.vertex.attributes(g)
-  x <- x[!(x %in% "name")]
+  x <- x[!(x %in% c("label","color","size"))]
   if (!length(x)) nAtt <- NULL
   else nAtt <- subset(nodes, select=x)
   
   # Edges Attributes
   x <- list.edge.attributes(g)
-  x <- x[!(x %in% "weight")]
+  x <- x[!(x %in% c("weight","color","edgesLabel","width"))]
   if (!length(x)) eAtt <- NULL
   else eAtt <- subset(tmpedges, select=x)
   
@@ -71,7 +61,7 @@ igraph.to.gexf <- function(igraph.obj, position=NULL) {
   # Building graph
   return(
     write.gexf(
-      nodes = nodes, 
+      nodes = nodes[,c("id","name")], 
       edges = edges, 
       edgesAtt = eAtt,
       nodesAtt = nAtt,
@@ -90,13 +80,15 @@ gexf.to.igraph <- function(gexf.obj) {
  
   g <- gexf.obj
   rm(gexf.obj)
+  #colnames(g$nodes)[colnames(g$nodes)=="label"] <- "name"
   
   # Starting igraph object
-  colnames(g$nodes)[colnames(g$nodes) == "name"]
+  #colnames(g$nodes)[colnames(g$nodes) == "name"]
+  
   g2 <- graph.data.frame(
-    g$edges[,unique(c("source","target",names(g$edges)))],
+    g$edges[,c("source","target")],
     directed=(g$mode[[1]] != "undirected"),
-    vertices=g$nodes
+    vertices=g$nodes[,c("id"),drop=FALSE]
     )
   
   # Labels
@@ -108,12 +100,12 @@ gexf.to.igraph <- function(gexf.obj) {
   }
 
   # Nodes atts
-  if (length(x <- subset(g$nodes, select=c(-id, -label) )) ) {
+  if (length(x <- g$nodes[, !(colnames(g$nodes) %in% c("id", "label"))])) {
     for(i in names(x)) g2 <- set.vertex.attribute(g2, i, value=x[,c(i)])
   }
 
   # Edges atts
-  if (length(x <- subset(g$edges, select=c(-id, -source, -target, -weight)) )) {
+  if (length(x <- g$edges[, !(colnames(g$edges) %in% c("id", "source", "target", "weight") )])) {
     for(i in names(x)) g2 <- set.edge.attribute(g2, i, value=x[,c(i)])
   } 
   

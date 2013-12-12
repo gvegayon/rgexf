@@ -21,13 +21,14 @@ write.gexf(
   ),
   nodeDynamic = NULL, 
   edgeDynamic = NULL, 
+  precision = 2,
   output = NA, tFormat = "double", 
   defaultedgetype = "undirected",
   meta = list(
     creator="NodosChile", 
     description="A graph file writing in R using \"rgexf\"",
     keywords="gexf graph, NodosChile, R, rgexf"),
-  keepFactors = TRUE,
+  keepFactors = FALSE,
   encoding = "UTF-8"
   )
 }
@@ -43,6 +44,7 @@ write.gexf(
   \item{nodesVizAtt}{List of four or less viz attributes such as color, position, size and shape of the nodes (see details)}
   \item{nodeDynamic}{A two-column matrix or data-frame. The first column indicates the time at which a given node starts; the second one shows when it ends. The matrix or data-frame must have the same number of rows than the number of nodes in the graph.}
   \item{edgeDynamic}{A two-column matrix or data-frame. The fist column indicates the time at which a given edge stars; the second one shows when it ends. The matrix or dataframe must have the same number of rows than the number of edges in the graph.}
+  \item{precision}{Integer. Number of decimals to keep for nodes/edges sizes.}
   \item{output}{String. The complete path (including filename) where to export the graph as a GEXF file.}
   \item{tFormat}{String. Time format for dynamic graphs (see details)}
   \item{defaultedgetype}{\dQuote{directed}, \dQuote{undirected}, \dQuote{mutual}}

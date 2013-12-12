@@ -9,8 +9,7 @@ pause()
 
 # Defining a matrix of nodes
 pause()
-people <- data.frame(id=1:4, label=c("juan", "pedro", "matthew", "carlos"),
-                     stringsAsFactors=F)
+people <- data.frame(id=1:4, label=c("juan", "pedro", "matthew", "carlos"))
 people
 
 # Defining a matrix of edges
@@ -34,10 +33,10 @@ time.edges
 # Defining a data frame of attributes for nodes and edges
 pause()
 
-node.att <- data.frame(letrafavorita=c(letters[1:3],"hola"), numbers=1:4, stringsAsFactors=F)
+node.att <- data.frame(letrafavorita=c(letters[1:3],"hola"), numbers=1:4)
 node.att
 
-edge.att <- data.frame(letrafavorita=letters[1:9], numbers=1:9, stringsAsFactors=F)
+edge.att <- data.frame(letrafavorita=letters[1:9], numbers=1:9)
 edge.att
 
 ################################################################################
@@ -81,10 +80,10 @@ imagee <- data.frame(image=rbind(
   "Yellow_solid_sphere.png"), stringsAsFactors=F)
 
 # Colors
-nodecolors <- cbind(t(col2rgb(colors()[1:NROW(people)])),alpha=1)
+nodecolors <- cbind(t(col2rgb(topo.colors(nrow(people)))),alpha=1)
 colnames(nodecolors) <- c("r", "b", "g", "a")
 
-edgecolors <- cbind(t(col2rgb(colors()[1:NROW(relations)])),alpha=1)
+edgecolors <- cbind(t(col2rgb(cm.colors(nrow(relations)))),alpha=1)
 colnames(edgecolors) <- c("r", "b", "g", "a")
 
 # TRUE/FALSE attributes
@@ -97,7 +96,8 @@ grafo <- write.gexf(nodes=people, edges=relations,
                 shape=c("rectangle", "square", "triangle", "diamond"),
                 position=matrix(1:12,nrow=4),
                 image=imagee, 
-                color=nodecolors
+                color=nodecolors,
+                size=c(1,4,10,30)
                 ), 
               edgesVizAtt=list(
                 size=1:9, 
