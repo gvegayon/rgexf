@@ -200,7 +200,7 @@ write.gexf <- function(
   nodesVizAtt = list(color=NULL, position=NULL, size=NULL, shape=NULL, image=NULL),
   nodeDynamic=NULL,
   edgeDynamic=NULL,
-  precision=3,
+  digits=getOption("digits"),
   output = NA,
   tFormat="double",
   defaultedgetype = "undirected",
@@ -214,15 +214,15 @@ write.gexf <- function(
   
   # Nodes
   if (is.data.frame(nodes) | is.matrix(nodes)) {
-    if (NCOL(nodes) != 2) stop("\"nodes\" should have two columns not ", NCOL(nodes))
+    if (NCOL(nodes) != 2) stop("-nodes- should have two columns not ", NCOL(nodes))
   }
-  else stop("Invalid object type: \"nodes\" should be a two column data.frame or a matrix")
+  else stop("Invalid object type: -nodes- should be a two column data.frame or a matrix")
   
   # Edges
   if (is.data.frame(edges) | is.matrix(edges)) {
-    if (NCOL(edges) != 2) stop("\"edges\" should have two columns not ", NCOL(edges))
+    if (NCOL(edges) != 2) stop("-edges- should have two columns not ", NCOL(edges))
   }
-  else stop("Invalid object type: \"edges\" should be a two column data.frame or a matrix")
+  else stop("Invalid object type: -edges- should be a two column data.frame or a matrix")
   
   # Edges Label
   .parseEdgesLabel(edgesLabel, edges)
@@ -245,21 +245,26 @@ write.gexf <- function(
   # Parsing nodes Viz Atts
   nNodesVizAtt <- .parseNodesVizAtt(nodesVizAtt, nodes)
   
+  # Checking the number of digits
+  if (!is.integer(digits)) stop("Invalid number of digits ",digits,
+                                ".\n Must be a number between 0 and 22")
+  fmt <- sprintf("%%.%gg", digits)
+  
   # Dynamics
   dynamic <- c(FALSE, FALSE)
-  
+
   if (length(nodeDynamic) > 0) {
     if (is.data.frame(nodeDynamic) | is.matrix(nodeDynamic)) {
       if (NROW(nodeDynamic) == NROW(nodes)) dynamic[1] <- TRUE
-      else stop("Insuficient number of rows: \"nodeDynamic\" (",NROW(nodeDynamic), " rows) should have the same number of rows than nodes there are (", NROW(nodes),")")
-    } else stop("Invalid object type: \"nodeDynamic\" should be a two columns data.frame or a matrix")
+      else stop("Insuficient number of rows: -nodeDynamic- (",NROW(nodeDynamic), " rows) should have the same number of rows than nodes there are (", NROW(nodes),")")
+    } else stop("Invalid object type: -nodeDynamic- should be a two columns data.frame or a matrix")
   }
   
   if (length(edgeDynamic) > 0) {
     if (is.data.frame(edgeDynamic) | is.matrix(edgeDynamic)) {
       if (NROW(edgeDynamic) == NROW(edges)) dynamic[2] <- TRUE
-      else stop("Insuficient number of rows: \"edgeDynamic\" (",NROW(edgeDynamic), " rows) should have the same number of rows than edges there are (", NROW(edges),")")
-    } else stop("Invalid object type: \"edgeDynamic\" should be a two columns data.frame or a matrix")
+      else stop("Insuficient number of rows: -edgeDynamic- (",NROW(edgeDynamic), " rows) should have the same number of rows than edges there are (", NROW(edges),")")
+    } else stop("Invalid object type: -edgeDynamic- should be a two columns data.frame or a matrix")
   }
   
   ##############################################################################
@@ -297,17 +302,36 @@ write.gexf <- function(
   
   xmlGraph <- newXMLNode(name="graph", parent=gexf)
   if (mode == "dynamic") {
-    strTime <- min(c(unlist(nodeDynamic), unlist(edgeDynamic)), na.rm=TRUE)
-    endTime <- max(c(unlist(nodeDynamic), unlist(edgeDynamic)), na.rm=TRUE)
+    
+    # Fixing time factors
+    if (keepFactors)
+      for(i in 1:2) {
+        if (dynamic[1]) nodeDynamic[,i] <- as.numeric(nodeDynamic[,i])
+        if (dynamic[2]) edgeDynamic[,i] <- as.numeric(edgeDynamic[,i])
+      }
+    else
+      for(i in 1:2) {
+        if (dynamic[1]) nodeDynamic[,i] <- as.character(nodeDynamic[,i])
+        if (dynamic[2]) edgeDynamic[,i] <- as.character(edgeDynamic[,i])
+      }
+    
+    strTime <- c(unlist(nodeDynamic),unlist(edgeDynamic))
+
+    endTime <- strTime
+    
+    # Checking start and ends
+    strTime <- min(strTime, na.rm=TRUE)
+    endTime <- max(endTime, na.rm=TRUE)
+    
     xmlAttrs(xmlGraph) <- c(mode=mode, start=strTime, end=endTime,
                             timeformat=tFormat, defaultedgetype=defaultedgetype)
-    
+        
     # Replacing NAs
-    if (length(nodeDynamic) > 0) {
+    if (dynamic[1]) {
       nodeDynamic[is.na(nodeDynamic[,1]),1] <- strTime
       nodeDynamic[is.na(nodeDynamic[,2]),2] <- endTime
     }
-    if (length(edgeDynamic) > 0) {
+    if (dynamic[2]) {
       edgeDynamic[is.na(edgeDynamic[,1]),1] <- strTime
       edgeDynamic[is.na(edgeDynamic[,2]),2] <- endTime
     }
@@ -400,7 +424,6 @@ write.gexf <- function(
       }
       else if (i == "size") {
         colnames(tmpAtt) <- "viz.size.value"
-        fmt <- sprintf("%%.%gf",precision)
         tmpAtt[,1] <- sprintf(fmt, tmpAtt[,1])
       }
       else if (i == "shape") {
@@ -435,7 +458,6 @@ write.gexf <- function(
       }
       else if (i == "size") {
         colnames(tmpAtt) <- "viz.size.value"
-        fmt <- sprintf("%%.%gf",precision)
         tmpAtt[,1] <- sprintf(fmt, tmpAtt[,1])
       }
       else if (i == "shape") {
@@ -453,10 +475,9 @@ write.gexf <- function(
   
   ##############################################################################
   # The basic char matrix definition  for nodes
-  if (dynamic[1] & tFormat=="double")
-    nodeDynamic <- data.frame(
-      sprintf("%.2f",nodeDynamic[,1]), sprintf("%.2f",nodeDynamic[,2])
-      )
+  
+  if (dynamic[1]) nodeDynamic <- as.data.frame(nodeDynamic)
+  
   if (nNodesAtt > 0) nodesAtt <- data.frame(nodesAtt)
   
   for (set in c(nodeDynamic, nodesAtt, ListNodesVizAtt)) {
@@ -490,9 +511,9 @@ write.gexf <- function(
   
   ##############################################################################
   # The basic dataframe definition  for edges  
-  if (dynamic[2] & tFormat == "double") edgeDynamic <- data.frame(
-    sprintf("%.2f",edgeDynamic[,1]), sprintf("%.2f", edgeDynamic[,2])
-    )
+  
+  if (dynamic[2]) edgeDynamic <- as.data.frame(edgeDynamic)
+  
   if (nEdgesAtt > 0) edgesAtt <- data.frame(edgesAtt)
   
   # Adding edge id
@@ -509,7 +530,7 @@ write.gexf <- function(
   # Generating weights
   if (!length(edgesWeight))  edgesWeight <- 1
   edges <- data.frame(edges, x=as.numeric(edgesWeight))
-  edges$x <- sprintf("%.4f", edges$x)
+  edges$x <- sprintf(fmt, edges$x)
   
   # Seting colnames
   if (length(edgesLabel) > 0) edgesLabelCName <- "label"

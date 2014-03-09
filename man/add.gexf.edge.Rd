@@ -14,15 +14,17 @@ add.gexf.node(graph, id=NA, label=NA, start=NULL, end=NULL,
 
 add.gexf.edge(graph, source, target, id=NULL, type=NULL, label=NULL, start=NULL,
    end=NULL, weight=1, vizAtt = list(color=NULL, thickness=NULL, shape=NULL),
-   atts=NULL)
+   atts=NULL, digits = getOption("digits"))
 
 rm.gexf.node(graph, id=NULL, number=NULL, rm.edges = TRUE)
 
 rm.gexf.edge(graph, id=NULL, number=NULL)
 
-add.node.spell(graph, id=NULL, number=NULL, start=NULL, end=NULL)
+add.node.spell(graph, id=NULL, number=NULL, start=NULL, end=NULL,
+   digits = getOption("digits"))
 
-add.edge.spell(graph, id=NULL, number=NULL, start=NULL, end=NULL)
+add.edge.spell(graph, id=NULL, number=NULL, start=NULL, end=NULL,
+   digits = getOption("digits"))
 }
 \arguments{
   \item{graph}{A gexf-class object.}
@@ -38,6 +40,7 @@ add.edge.spell(graph, id=NULL, number=NULL, start=NULL, end=NULL)
   \item{start}{Starting time period }
   \item{end}{Ending time period}
   \item{rm.edges}{Whether to remove or not existing edges.}
+  \item{digits}{Integer. Number of decimals to keep for nodes/edges sizes. See \code{\link{print.default}}}
 }
 \details{
   \code{new.gexf.graph} Creates a new \code{gexf} empty object (0 nodes 0 edges).

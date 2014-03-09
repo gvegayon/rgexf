@@ -196,7 +196,9 @@ add.gexf.edge <- function(
   end=NULL, 
   weight=1, 
   vizAtt = list(color=NULL, thickness=NULL, shape=NULL),
-  atts=NULL) {
+  atts=NULL,
+  digits=getOption("digits")
+) {
   
   # Checks the class
   if (!inherits(graph,"gexf")) stop("-graph- is not of -gexf- class.")
@@ -209,9 +211,14 @@ add.gexf.edge <- function(
   
   if (length(id) == 0) id <- n + 1
   
+  # Checking the number of digits
+  if (!is.integer(digits)) stop("Invalid number of digits ",digits,
+                                ".\n Must be a number between 0 and 22")
+  fmt <- sprintf("%%.%gg", digits)
+  
   edge <- xmlNode("edge", attrs=c(id=id, type=type, label=label, source=source, 
                                   target=target, start=start, end=end, 
-                                  weight=sprintf("%.2f",weight)))
+                                  weight=sprintf(fmt,weight)))
   # Adds the atts
 #   if (length(atts)) {
 #     atts.edge <- xmlNode("attvalues")
@@ -436,7 +443,8 @@ add.node.spell <- function(
   id=NULL,
   number=NULL,
   start=NULL, 
-  end=NULL
+  end=NULL,
+  digits=getOption("digits")
   ) {
  
   # Checks the class
@@ -462,10 +470,15 @@ add.node.spell <- function(
       asXMLNode(xmlNode("spells"))
   }
     
+  # Checking the number of digits
+  if (!is.integer(digits)) stop("Invalid number of digits ",digits,
+                                ".\n Must be a number between 0 and 22")
+  fmt <- sprintf("%%.%gg", digits)
+  
   # Checking classes
   if (inherits(start, "numeric") && inherits(start, "numeric")) {
-    start <- sprintf("%.2f",start)
-    end <- sprintf("%.2f",end)
+    start <- sprintf(fmt,start)
+    end <- sprintf(fmt,end)
   } 
   
   nodespell <- xmlNode("spell", attrs=c(start=start, end=end))
@@ -486,7 +499,8 @@ add.edge.spell <- function(
   id=NULL,
   number=NULL,
   start=NULL, 
-  end=NULL
+  end=NULL,
+  digits=getOption("digits")
 ) {
 
   # Checks the class
@@ -512,10 +526,15 @@ add.edge.spell <- function(
       asXMLNode(xmlNode("spells"))
   }
   
+  # Checking the number of digits
+  if (!is.integer(digits)) stop("Invalid number of digits ",digits,
+                                ".\n Must be a number between 0 and 22")
+  fmt <- sprintf("%%.%gg", digits)
+  
   # Checking classes
   if (inherits(start, "numeric") && inherits(start, "numeric")) {
-    start <- sprintf("%.2f",start)
-    end <- sprintf("%.2f",end)
+    start <- sprintf(fmt,start)
+    end <- sprintf(fmt,end)
   } 
 
   edgespell <- xmlNode("spell", attrs=c(start=start, end=end))
