@@ -2,7 +2,7 @@ Package: rgexf
 Type: Package
 Encoding: UTF-8
 Title: An R package to build GEXF graph files
-Version: 0.14
+Version: 0.14.3
 Date: 2014-03-09
 Author: George Vega Yon <george.vega@nodoschile.org> [aut], Jorge Fábrega Lacoa <jorge.fabrega@nodoschile.org> [ctb], Joshua B. Kunst <jbkunst@gmail.com> [ctb]
 Maintainer: George Vega Yon <george.vega@nodoschile.org>

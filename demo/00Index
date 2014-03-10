@@ -8,3 +8,4 @@ gexftwitter          Example with real data of chilean twitter accounts.
 gexfdynamicandatt    Dynamic net with static attributes.
 gexfbuildfromscratch Example building a net from scratch.
 gexfigraph           Two-way gexf-igraph conversion
+gexfrandom           Creating a random (artistic) graph

@@ -2,6 +2,27 @@
 \title{rgexf NEWS}
 \encoding{UTF-8}
 
+\section{CHANGES IN rgexf version 0.14.3 [2014-03-09]}{
+  \subsection{NEW FEATURES}{
+    \itemize{
+      \item New option -digits- in several functions allow to control for printing precision.
+      \item Function -igraph.to.gexf- now imports attributes.
+    }
+  }
+  \subsection{BUG FIX}{
+    \itemize{
+      \item Option -defaultedgetype- in the -write.gexf- function now works for static graphs.
+      \item -datetime- time format in -write.gexf- now works for other formats different from numeric datetime types.
+      \item Correcting errors in -plot.gexf- method, now visual attributes are imported correctly.
+    }
+  }
+  \subsection{DEVELOPMENT}{
+    \itemize{
+     \item Option -keepFactors- default is now in -FALSE- (used to be in -TRUE-). When setted in -TRUE- and there are factors, a warning message will appear.
+    }
+  }
+}
+
 \section{CHANGES IN rgexf version 0.13.11 [2013-11-27]}{
   \subsection{BUG FIX}{
     \itemize{

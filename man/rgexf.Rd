@@ -25,8 +25,8 @@
   \tabular{ll}{
     Package: \tab rgexf\cr
     Type: \tab Package\cr
-    Version: \tab 0.13.12\cr
-    Date: \tab 2013-12-11\cr
+    Version: \tab 0.14.3\cr
+    Date: \tab 2014-03-09\cr
     License: \tab GPL version 2 or later\cr
   }
 }
@@ -60,6 +60,7 @@ Joshua B. Kunst \email{jbkunst@gmail.com} [cnt]}
     demo(gexfdynamicandatt) # Dynamic net with static attributes.
     demo(gexfbuildfromscratch) # Example building a net from scratch.
     demo(gexfigraph) # Two-way gexf-igraph conversion
+    demo(gexfrandom) # A nice routine creating a good looking graph
   }
 }
 \keyword{ package }
