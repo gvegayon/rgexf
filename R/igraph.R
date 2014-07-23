@@ -42,6 +42,7 @@ igraph.to.gexf <- function(igraph.obj, position=NULL) {
   # Nodes Viz att
   if (length(tmpnodes$color)) {
     nVizAtt <- list(color=t(col2rgb(tmpnodes$color, alpha=T)))
+    nVizAtt$color[,4] <- 1
   }
   else nVizAtt <- NULL
   
@@ -54,6 +55,7 @@ igraph.to.gexf <- function(igraph.obj, position=NULL) {
   # Edges Viz att
   if (length(tmpedges$color)) {
     eVizAtt <- list(color=t(col2rgb(tmpedges$color, alpha=T)))
+    eVizAtt$color[,4] <- 1 
   }
   else eVizAtt <- NULL
   
