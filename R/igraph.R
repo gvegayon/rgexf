@@ -1,4 +1,3 @@
-
 igraph.to.gexf <- function(igraph.obj, position=NULL) {
   
   g <- igraph.obj
@@ -45,6 +44,10 @@ igraph.to.gexf <- function(igraph.obj, position=NULL) {
     nVizAtt <- list(color=t(col2rgb(tmpnodes$color, alpha=T)))
   }
   else nVizAtt <- NULL
+  
+  if (length(tmpnodes$size)){
+    nVizAtt$size <- tmpnodes$size
+  }
   
   nVizAtt$position <- position
   
