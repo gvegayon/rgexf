@@ -1,7 +1,7 @@
-importFrom(XML)
-importFrom(Rook)
-importFrom(utils, packageDescription)
-importFrom(igraph)
+import(XML)
+import(Rook)
+import(utils)
+import(igraph)
 
 export(.addNodesEdges, .defAtt)
 

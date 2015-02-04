@@ -25,14 +25,14 @@
   \tabular{ll}{
     Package: \tab rgexf\cr
     Type: \tab Package\cr
-    Version: \tab 0.14.3\cr
-    Date: \tab 2014-03-09\cr
+    Version: \tab 0.15.2.3\cr
+    Date: \tab 2015-02-03\cr
     License: \tab GPL version 2 or later\cr
   }
 }
-\author{George Vega Yon \email{george.vega@nodoschile.org} [aut],
+\author{George Vega Yon \email{gvegayon@caltech.edu} [aut],
 
-Jorge Fabrega Lacoa \email{jorge.fabrega@nodoschile.org} [cnt),
+Jorge Fabrega Lacoa \email{jorge.fabrega@uai.cl} [cnt),
 
 Joshua B. Kunst \email{jbkunst@gmail.com} [cnt]}
 \note{

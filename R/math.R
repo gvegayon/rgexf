@@ -10,7 +10,7 @@ check.dpl.edges <- function(edges, undirected=FALSE, order.edgelist=TRUE) {
   srce <- edges[,1]
   trgt <- edges[,2]
 
-  if (any(is.na(edges) | is.null(edges) | is.nan(edges))) 
+  if (any(!is.finite(edges) | is.null(edges)))
     stop("No NA, NULL or NaN elements can be passed to this function.")
  
   nedges <- length(srce)

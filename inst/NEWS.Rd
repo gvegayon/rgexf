@@ -2,23 +2,28 @@
 \title{rgexf NEWS}
 \encoding{UTF-8}
 
+\section{CHANGES IN rgexf version 0.15.2.3 [2015-02-03]}{
+\itemize{
+  \item Updating emails.
+}
+}
 \section{CHANGES IN rgexf version 0.14.3 [2014-03-09]}{
   \subsection{NEW FEATURES}{
     \itemize{
-      \item New option -digits- in several functions allow to control for printing precision.
+      \item New option -digits- in several functions allow to control for printing precision (reported in issue 16, thanks Nico!).
       \item Function -igraph.to.gexf- now imports attributes.
     }
   }
   \subsection{BUG FIX}{
     \itemize{
-      \item Option -defaultedgetype- in the -write.gexf- function now works for static graphs.
-      \item -datetime- time format in -write.gexf- now works for other formats different from numeric datetime types.
+      \item Option -defaultedgetype- in the -write.gexf- function now works for static graphs (reported in issue 17, thanks Avitus!).
+      \item -datetime- time format in -write.gexf- now works for other formats different from numeric datetime types (reported as issue 15, thanks Thomas Ullmann!).
       \item Correcting errors in -plot.gexf- method, now visual attributes are imported correctly.
     }
   }
   \subsection{DEVELOPMENT}{
     \itemize{
-     \item Option -keepFactors- default is now in -FALSE- (used to be in -TRUE-). When setted in -TRUE- and there are factors, a warning message will appear.
+     \item Option -keepFactors- default is now in -FALSE- (used to be in -TRUE-). When setted in -TRUE- and there are factors, a warning message will appear (reported in issue 18, thanks Tim Smith!).
     }
   }
 }

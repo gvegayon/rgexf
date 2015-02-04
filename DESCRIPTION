@@ -2,10 +2,10 @@ Package: rgexf
 Type: Package
 Encoding: UTF-8
 Title: An R package to build GEXF graph files
-Version: 0.14.3
-Date: 2014-03-09
-Author: George Vega Yon <george.vega@nodoschile.org> [aut], Jorge Fábrega Lacoa <jorge.fabrega@nodoschile.org> [ctb], Joshua B. Kunst <jbkunst@gmail.com> [ctb]
-Maintainer: George Vega Yon <george.vega@nodoschile.org>
+Version: 0.15.2.3
+Date: 2015-02-03
+Author: George Vega Yon <gvegayon@caltech.edu> [aut], Jorge Fábrega Lacoa <jorge.fabrega@uai.cl> [ctb], Joshua B. Kunst <jbkunst@gmail.com> [ctb]
+Maintainer: George Vega Yon <gvegayon@caltech.edu>
 Description: The first R package to work with GEXF graph files (used in Gephi and others). Using XML library, it allows the user to easily build/read graph files including attributes, GEXF viz attributes (such as colour, size, and position), network dynamics (for both edges and nodes, including spells) and edges weighting. Users can build/handle graphs element-by-element or massively through data-frames, visualize the graph on a web browser through sigmajs javascript library and interact with the igraph package.
 URL: http://bitbucket.org/gvegayon/rgexf, http://www.nodoschile.org
 Depends: XML, Rook, igraph

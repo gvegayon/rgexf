@@ -38,8 +38,8 @@ void RCheckDplEdges(
     if (n_repeat[i] != -1) {
     
       // Current comparation
-      int tmp_source=out_source[i];
-      int tmp_target=out_target[i];
+      double tmp_source=out_source[i];
+      double tmp_target=out_target[i];
       
       for(int j = 0; j<nedges; j++) {
         
