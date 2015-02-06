@@ -14,7 +14,7 @@
   
   Users can chose to build graph from \code{data.frame}s (using \code{write.gexf}) or element-by-element (using several other functions to handle \code{gexf} objects.)
   
-  Through the javascript library sigmajs, rgexf allows exploring graph in the web browser.
+  Through the javascript library sigmajs, rgexf allows users to explore graph on the web browser.
   
   Finally, the functions \code{igraph.to.gexf} and \code{gexf.to.igraph} convert objects from \code{igraph} to \code{gexf} and viceversa keeping attributes and colors.
   
@@ -25,8 +25,8 @@
   \tabular{ll}{
     Package: \tab rgexf\cr
     Type: \tab Package\cr
-    Version: \tab 0.15.2.3\cr
-    Date: \tab 2015-02-03\cr
+    Version: \tab 0.15.2.5\cr
+    Date: \tab 2015-02-05\cr
     License: \tab GPL version 2 or later\cr
   }
 }
