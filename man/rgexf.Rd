@@ -5,16 +5,14 @@
 \alias{gephi}
 \docType{package}
 \title{
-  An R package to build GEXF graph files
+  Build, Import and Export GEXF Graph Files
 }
 \description{
-  rgexf package provides of a collection of functions to generate and read GEXF graph files supported on Gephi (and others).
+  Create, read and write GEXF (Graph Exchange XML Format) graph files (used in Gephi and others).
   
-  It supports building dynamic graphs (including spells) and adding attributes to edges and nodes, including visual attributes such as color, shape and size.
+  Using the XML package, it allows the user to easily build/read graph files including attributes, GEXF viz attributes (such as color, size, and position), network dynamics (for both edges and nodes) and edge weighting. 
   
-  Users can chose to build graph from \code{data.frame}s (using \code{write.gexf}) or element-by-element (using several other functions to handle \code{gexf} objects.)
-  
-  Through the javascript library sigmajs, rgexf allows users to explore graph on the web browser.
+  Users can build/handle graphs element-by-element or massively through data-frames, visualize the graph on a web browser through "sigmajs" (a javascript library) and interact with the igraph package.
   
   Finally, the functions \code{igraph.to.gexf} and \code{gexf.to.igraph} convert objects from \code{igraph} to \code{gexf} and viceversa keeping attributes and colors.
   
@@ -25,8 +23,8 @@
   \tabular{ll}{
     Package: \tab rgexf\cr
     Type: \tab Package\cr
-    Version: \tab 0.15.2.5\cr
-    Date: \tab 2015-02-05\cr
+    Version: \tab 0.15.3\cr
+    Date: \tab 2015-03-24\cr
     License: \tab GPL version 2 or later\cr
   }
 }
