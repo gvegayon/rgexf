@@ -13,9 +13,30 @@ igraph.to.gexf <- function(igraph.obj, position=NULL) {
     tmpnodes <- data.frame(tmpnodes, name=1:nrow(tmpnodes))
   
   # Nodes and edges list
-  nodes <- edge.list(tmpedges[,c(1,2)])
-  edges <- nodes$edges
-  nodes <- nodes$nodes
+  # these steps are dangerous as nodes that are not connected are dropped, creating a mismatched number of rows
+#   nodes <- edge.list(tmpedges[,c(1,2)])
+#   edges <- nodes$edges
+#   nodes <- nodes$nodes
+  
+  nodes <- tmpnodes
+  # change name to label
+  names(nodes) <- 'label'
+  # add a column to nodes to hold the IDs
+  nodes$id <- as.integer(as.factor(nodes$label))
+  # put them in the right order
+  nodes <- nodes[, c('id', 'label')]
+  
+  ## replace from and to in edges with their IDs
+  # first create a named vector of ids
+  nodesID <- nodes$id
+  names(nodesID) <- gdata$nodes$label
+  
+  edges <- tmpedges
+  # now in the edges create the id columns
+  edges$source <- nodesID[edges$from]
+  edges$target <- nodesID[edges$to]
+  # keep just source and target
+  edges <- edges[, c('source', 'target')]
   
   # Building nodes
   if (length(tmpnodes)) {
