@@ -1,5 +1,4 @@
 import(XML)
-import(Rook)
 import(utils)
 import(igraph)
 
