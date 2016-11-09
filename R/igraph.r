@@ -1,10 +1,45 @@
+#' Converting between \code{gexf} and \code{igraph} classes
+#' 
+#' Converts objects between \code{gexf} and \code{igraph} objects keeping
+#' attributes, edge weights and colors.
+#' 
+#' If the position argument is not \code{NULL}, the new \code{gexf} object will
+#' include the \code{position} viz-attribute.
+#' 
+#' @aliases igraph.to.gexf gexf.to.igraph
+#' @param igraph.obj An object of class \code{igraph}.
+#' @param gexf.obj An object of class \code{gexf}.
+#' @param position A three-column data-frame with XYZ coords.
+#' @return \itemize{ \item For \code{igraph.to.gexf} : \code{gexf} class object
+#' \item For \code{gexf.to.igraph} : \code{igraph} class object }
+#' @author George Vega Yon \email{g.vegayon@gmail.com}
+#' @seealso \code{\link{layout}}
+#' @keywords manip
+#' @examples
+#' 
+#'  \dontrun{
+#'  
+#'   # Running demo
+#'   demo(gexfigraph)
+#'  
+#'   # A simple graph without
+#'   gexf1 <- read.gexf("http://gephi.org/datasets/LesMiserables.gexf")
+#'   igraph1 <- gexf.to.igraph(gexf1)
+#'   gexf2 <- igraph.to.gexf(igraph1)
+#'   
+#'   # A graph with attributes  
+#'   gexf3 <- read.gexf("http://gexf.net/data/data.gexf")
+#'   igraph2 <- gexf.to.igraph(gexf3)
+#'   gexf4 <- igraph.to.gexf(igraph2)
+#'  }
+#' @export
 igraph.to.gexf <- function(igraph.obj, position=NULL) {
   
   g <- igraph.obj
   rm(igraph.obj)
   
   # Retrive elements from igraph object
-  gdata <- get.data.frame(g, what="both")
+  gdata <- igraph::get.data.frame(g, what="both")
   tmpedges <- gdata$edges
   tmpnodes <- gdata$vertices
   
@@ -45,24 +80,24 @@ igraph.to.gexf <- function(igraph.obj, position=NULL) {
   }
   
   # Nodes Attributes
-  x <- list.vertex.attributes(g)
+  x <- igraph::list.vertex.attributes(g)
   x <- x[!(x %in% c("label","color","size"))]
   if (!length(x)) nAtt <- NULL
   else nAtt <- subset(nodes, select=x)
   
   # Edges Attributes
-  x <- list.edge.attributes(g)
+  x <- igraph::list.edge.attributes(g)
   x <- x[!(x %in% c("weight","color","edgesLabel","width"))]
   if (!length(x)) eAtt <- NULL
   else eAtt <- subset(tmpedges, select=x)
   
   # Edges Weights
-  if (length(E(g)$weight)) eW <- E(g)$weight
+  if (length(igraph::E(g)$weight)) eW <- igraph::E(g)$weight
   else eW <- NULL
   
   # Nodes Viz att
   if (length(tmpnodes$color)) {
-    nVizAtt <- list(color=t(col2rgb(tmpnodes$color, alpha=T)))
+    nVizAtt <- list(color=t(grDevices::col2rgb(tmpnodes$color, alpha=T)))
     nVizAtt$color[,4] <- 1
   }
   else nVizAtt <- NULL
@@ -75,13 +110,13 @@ igraph.to.gexf <- function(igraph.obj, position=NULL) {
   
   # Edges Viz att
   if (length(tmpedges$color)) {
-    eVizAtt <- list(color=t(col2rgb(tmpedges$color, alpha=T)))
+    eVizAtt <- list(color=t(grDevices::col2rgb(tmpedges$color, alpha=T)))
     eVizAtt$color[,4] <- 1 
   }
   else eVizAtt <- NULL
   
   # Edge type
-  if (is.directed(g)) defaultedgetype <- "directed"
+  if (igraph::is.directed(g)) defaultedgetype <- "directed"
   else defaultedgetype <- "undirected"
   
   # Building graph
@@ -99,6 +134,8 @@ igraph.to.gexf <- function(igraph.obj, position=NULL) {
     )
 }
 
+#' @export
+#' @rdname igraph.to.gexf
 gexf.to.igraph <- function(gexf.obj) {
 
   # Checks the class
@@ -111,38 +148,38 @@ gexf.to.igraph <- function(gexf.obj) {
   # Starting igraph object
   #colnames(g$nodes)[colnames(g$nodes) == "name"]
   
-  g2 <- graph.data.frame(
+  g2 <- igraph::graph.data.frame(
     g$edges[,c("source","target")],
     directed=(g$mode[[1]] != "undirected"),
     vertices=g$nodes[,c("id"),drop=FALSE]
     )
   
   # Labels
-  V(g2)$name <- g$nodes$label
+  igraph::V(g2)$name <- g$nodes$label
   
   # Nodes Viz atts
   if (length(x <- g$nodesVizAtt$color)) {
-    V(g2)$color <- rgb(x$r/255,x$g/255,x$b/255,x$a/255)
+    igraph::V(g2)$color <- grDevices::rgb(x$r/255,x$g/255,x$b/255,x$a/255)
   }
 
   # Nodes atts
   if (length(x <- g$nodes[, !(colnames(g$nodes) %in% c("id", "label"))])) {
-    for(i in names(x)) g2 <- set.vertex.attribute(g2, i, value=x[,c(i)])
+    for(i in names(x)) g2 <- igraph::set.vertex.attribute(g2, i, value=x[,c(i)])
   }
 
   # Edges atts
   if (length(x <- g$edges[, !(colnames(g$edges) %in% c("id", "source", "target", "weight") )])) {
-    for(i in names(x)) g2 <- set.edge.attribute(g2, i, value=x[,c(i)])
+    for(i in names(x)) g2 <- igraph::set.edge.attribute(g2, i, value=x[,c(i)])
   } 
   
   # Edges Viz atts
   if (length(x <- g$edgesVizAtt$color)) {
-    E(g2)$color <- rgb(x$r/255,x$g/255,x$b/255,x$a/255)
+    igraph::E(g2)$color <- grDevices::rgb(x$r/255,x$g/255,x$b/255,x$a/255)
   }
   
   # Edges weights 
   if (length(x <- g$edges$weight)) {
-   E(g2)$weight <- x
+   igraph::E(g2)$weight <- x
   }
   
   return(g2)

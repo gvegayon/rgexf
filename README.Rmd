@@ -1,0 +1,89 @@
+---
+output: github_document
+---
+
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/rgexf)](https://cran.r-project.org/package=rgexf) [![Downloads](http://cranlogs.r-pkg.org/badges/rgexf?color=brightgreen)](http://cran.rstudio.com/package=rgexf)
+[![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/rgexf)](http://cran.rstudio.com/package=rgexf)
+[![Travis-CI Build Status](https://travis-ci.org/gvegayon/rgexfA.svg?branch=master)](https://travis-ci.org/gvegayon/rgexf)
+[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/gvegayon/rgexf?branch=master&svg=true)](https://ci.appveyor.com/project/gvegayon/rgexf)
+
+# rgexf: Build, Import and Export GEXF Graph Files
+
+The first R package to work with GEXF graph files (used in Gephi and others). Using XML library, it allows the user to easily build/read graph files including attributes, GEXF viz attributes (such as colour, size, and position), network dynamics (for both edges and nodes, including spells) and edges weighting. Users can build/handle graphs element-by-element or massively through data-frames, visualize the graph on a web browser through sigmajs javascript library and interact with the igraph package.
+
+## News ##
+[2016-11-08] Restarting the project.
+[2015-02-03] Version 0.15.2.3 of rgexf is on CRAN. Just updating emails...
+[2014-03-10] Version 0.14.9 of rgexf is on CRAN! solves issues 15-18. Thanks =).
+[2013-08-07] Version 0.13.8 of rgexf is on CRAN! New plot.gexf method and igraph integration working =).
+[2013-05-09] Version 0.13.05 of rgexf (transitory) solves issues N 9 & 10. Looking forward for the next CRAN version.
+[2013-03-14] Version 0.13.03 of rgexf is on its way to CRAN. It now supports working with spells!
+[2013-01-04] Version 0.13.01 of rgexf is on its way to CRAN. Significant improvements and new features!
+[2012-06-19] Version 0.12.06 of rgexf is on CRAN! Now it can be directly download from R.
+[2012-03-29] Version 0.12.03.29 of rgexf has been released including many bug fixes. Please download the lastest version to check it out.
+
+## Example 1: Static net ##
+```{r}
+# Loading the package
+library(rgexf)
+
+# Creating a group of individuals and their relations
+people <- data.frame(matrix(c(1:4, 'juan', 'pedro', 'matthew', 'carlos'),ncol=2))
+people
+```
+
+```{r}
+# Defining the relations structure
+relations <- data.frame(matrix(c(1,4,1,2,1,3,2,3,3,4,4,2), ncol=2, byrow=T))
+relations
+```
+
+```{r}
+# Getting things done
+write.gexf(people, relations)
+```
+
+
+## Example 2: Dynamic net ##
+
+```{r}
+# Defining the dynamic structure, note that there are some nodes that have NA at the end.
+time<-matrix(c(10.0,13.0,2.0,2.0,12.0,rep(NA,3)), nrow=4, ncol=2)
+time
+```
+
+```{r}
+# Getting things done
+write.gexf(people, relations, nodeDynamic=time)
+```
+
+
+
+## Example 3: More complex... Dynamic graph with attributes both for nodes and edges##
+
+First we define dynamics
+
+```{r}
+time.nodes<-matrix(c(10.0,13.0,2.0,2.0,12.0,rep(NA,3)), nrow=4, ncol=2)
+time.nodes
+
+time.edges<-matrix(c(10.0,13.0,2.0,2.0,12.0,1,5,rep(NA,5)), nrow=6, ncol=2)
+time.edges
+```
+
+Now we define the attribute values
+
+```{r}
+# Defining a data frame of attributes for nodes and edges
+node.att <- data.frame(letrafavorita=letters[1:4], numbers=1:4, stringsAsFactors=F)
+node.att
+
+edge.att <- data.frame(letrafavorita=letters[1:6], numbers=1:6, stringsAsFactors=F)
+edge.att
+
+# Getting the things done
+write.gexf(nodes=people, edges=relations, edgeDynamic=time.edges,
+           edgesAtt=edge.att, nodeDynamic=time.nodes, nodesAtt=node.att)
+```
+
+

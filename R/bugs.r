@@ -1,3 +1,22 @@
+#' Checks for correct time format
+#' 
+#' Checks time
+#' 
+#' 
+#' @param x A string or vector char
+#' @param format String, can be \dQuote{date}, \dQuote{dateTime},
+#' \dQuote{float}
+#' @return Logical.
+#' @author George Vega Yon 
+#' 
+#' Jorge Fabrega Lacoa 
+#' @keywords utilities
+#' @examples
+#' 
+#'   test <- c("2012-01-17T03:46:41", "2012-01-17T03:46:410")
+#'   checkTimes(test, format="dateTime")
+#'   checkTimes("2012-02-01T00:00:00", "dateTime")
+#' @export
 checkTimes <- function(x, format='date') {
   ################################################################################
   # A a function of format, checks that all data has the correct format

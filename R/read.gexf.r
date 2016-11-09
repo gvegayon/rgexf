@@ -1,3 +1,24 @@
+#' Reads gexf (.gexf) file
+#' 
+#' \code{read.gexf} reads gexf graph files and imports its elements as a
+#' \code{gexf} class object
+#' 
+#' 
+#' @param x String. Path to the gexf file.
+#' @return A \code{gexf} object.
+#' @note By the time attributes and viz-attributes aren't supported.
+#' @author George Vega Yon 
+#' 
+#' Jorge Fabrega Lacoa 
+#' @references The GEXF project website: \url{http://gexf.net}
+#' @keywords IO
+#' @examples
+#' 
+#'   \dontrun{
+#'   mygraph <- read.gexf("http://gephi.org/datasets/LesMiserables.gexf")
+#'   }
+#' 
+#' @export read.gexf
 read.gexf <- function(x) {
 ################################################################################
 # Read gexf graph files
@@ -81,6 +102,57 @@ read.gexf <- function(x) {
   graph
 }
 
+
+
+#' Adding and removing nodes/edges from \code{gexf} objects
+#' 
+#' Manipulates \code{gexf} objects adding and removing nodes and edges from
+#' both, its dataframe representation and its XML representation.
+#' 
+#' \code{new.gexf.graph} Creates a new \code{gexf} empty object (0 nodes 0
+#' edges).
+#' 
+#' \code{add.gexf.node} and \code{add.gexf.edge} allow adding nodes and edges
+#' to a \code{gexf} object (graph) one at a time. \code{rm.gexf.node} and
+#' \code{rm.gexf.edges} remove nodes and edges respectively.
+#' 
+#' In the case of \code{rm.gexf.node}, by default every edge linked to the node
+#' that is been removed will also be removed (\code{rm.edges = TRUE}).
+#' 
+#' \code{add.node.spell} and \code{add.edge.spell} allow to include spells to
+#' specific nodes or edges in a \code{gexf} object.
+#' 
+#' @aliases add.gexf.node add.gexf.edge rm.gexf.node rm.gexf.edge
+#' add.node.spell add.edge.spell
+#' @param graph A gexf-class object.
+#' @param id A node/edge id (normaly numeric value).
+#' @param label A node/edge label.
+#' @param type Type of conection (edge).
+#' @param number Index number(s) of a single or a group of nodes or edges.
+#' @param weight Edge weight.
+#' @param vizAtt A list of node/edge viz attributes (see
+#' \code{\link{write.gexf}}).
+#' @param atts List of attributes, currently ignored.
+#' @param source Source node's id.
+#' @param target Target node's id.
+#' @param start Starting time period
+#' @param end Ending time period
+#' @param rm.edges Whether to remove or not existing edges.
+#' @param digits Integer. Number of decimals to keep for nodes/edges sizes. See
+#' \code{\link{print.default}}
+#' @return A \code{gexf} object (see \code{\link{write.gexf}}).
+#' @author George Vega Yon 
+#' 
+#' Jorge Fabrega Lacoa 
+#' @references The GEXF project website: \url{http://gexf.net}
+#' @keywords manip
+#' @examples
+#' 
+#'   \dontrun{
+#'   demo(gexfbuildfromscratch)
+#'   }
+#' 
+#' @export add.gexf.node
 add.gexf.node <- function(
 ################################################################################
 # Add nodes to gexf class object
@@ -99,12 +171,12 @@ add.gexf.node <- function(
   if (!inherits(graph,"gexf")) stop("-graph- is not of -gexf- class.")
 
   # Parses the graph file
-  graph$graph <- xmlTreeParse(graph$graph, encoding="UTF-8")
+  graph$graph <- XML::xmlTreeParse(graph$graph, encoding="UTF-8")
   
   # Gets the number of nodes
   n <- length(graph$graph$doc$children$gexf[["graph"]][["nodes"]])
   
-  node <- xmlNode("node", attrs=c(id=id, label=label, start=start, end=end))
+  node <- XML::xmlNode("node", attrs=c(id=id, label=label, start=start, end=end))
   
   # Adds the atts
 #   if (length(atts)) {
@@ -153,19 +225,19 @@ add.gexf.node <- function(
   if (length(unlist(vizAtt)) > 0) {
     if (length(vizAtt$color) > 0) {
       colnames(vizAtt$color) <- c("r","g","b","a")
-      node <- addChildren(node, xmlNode("viz:color", attrs=vizAtt$color))
+      node <- XML::addChildren(node, XML::xmlNode("viz:color", attrs=vizAtt$color))
     }
     if (length(vizAtt$position) > 0) {
       colnames(vizAtt$position) <- c("x","y","z")
-      node <- addChildren(node, xmlNode("viz:position", attrs=vizAtt$position))
+      node <- XML::addChildren(node, XML::xmlNode("viz:position", attrs=vizAtt$position))
     }
     if (length(vizAtt$size) > 0) {
-      node <- addChildren(node, xmlNode("viz:size", attrs=list(value=vizAtt$size)))
+      node <- XML::addChildren(node, XML::xmlNode("viz:size", attrs=list(value=vizAtt$size)))
     }
-    if (length(vizAtt$image) > 0) node <- addChildren(node, xmlNode("viz:image", attrs=vizAtt$image))
+    if (length(vizAtt$image) > 0) node <- XML::addChildren(node, XML::xmlNode("viz:image", attrs=vizAtt$image))
   }
   
-  graph$graph$doc$children$gexf[["graph"]][["nodes"]][[n+1]] <- asXMLNode(x=node)
+  graph$graph$doc$children$gexf[["graph"]][["nodes"]][[n+1]] <- XML::asXMLNode(x=node)
   
   # Adding to data.frame
   tmpdf <- data.frame(id=id, label=label,stringsAsFactors=F)
@@ -178,10 +250,12 @@ add.gexf.node <- function(
   graph$nodes <- rbind(graph$nodes, tmpdf)
   
   # Saves and returns as char XML
-  graph$graph <- saveXML(xmlRoot(graph$graph), encoding="UTF-8")
+  graph$graph <- XML::saveXML(XML::xmlRoot(graph$graph), encoding="UTF-8")
   return(graph)
 }
 
+#' @export
+#' @rdname add.gexf.node
 add.gexf.edge <- function(
 ################################################################################
 # Add edges to gexf class object
@@ -204,7 +278,7 @@ add.gexf.edge <- function(
   if (!inherits(graph,"gexf")) stop("-graph- is not of -gexf- class.")
 
   # Parses the graph file
-  graph$graph <- xmlTreeParse(graph$graph, encoding="UTF-8")
+  graph$graph <- XML::xmlTreeParse(graph$graph, encoding="UTF-8")
   
   # Gets the number of edges
   n <- length(graph$graph$doc$children$gexf[["graph"]][["edges"]])
@@ -216,7 +290,7 @@ add.gexf.edge <- function(
                                 ".\n Must be a number between 0 and 22")
   fmt <- sprintf("%%.%gg", digits)
   
-  edge <- xmlNode("edge", attrs=c(id=id, type=type, label=label, source=source, 
+  edge <- XML::xmlNode("edge", attrs=c(id=id, type=type, label=label, source=source, 
                                   target=target, start=start, end=end, 
                                   weight=sprintf(fmt,weight)))
   # Adds the atts
@@ -234,18 +308,18 @@ add.gexf.edge <- function(
   # Adds the viz atts
   if (length(unlist(vizAtt)) > 0) {
     if (length(vizAtt$color) > 0) {
-      edge <- addChildren(edge, xmlNode("viz:color", attrs=vizAtt$color))
+      edge <- XML::addChildren(edge, XML::xmlNode("viz:color", attrs=vizAtt$color))
     }
     if (length(vizAtt$thickness) > 0) {
-      edge <- addChildren(edge, xmlNode("viz:thickness", attrs=vizAtt$position))
+      edge <- XML::addChildren(edge, XML::xmlNode("viz:thickness", attrs=vizAtt$position))
     }
     if (length(vizAtt$shape) > 0) {
-      edge <- addChildren(edge, xmlNode("viz:shape", attrs=vizAtt$size))
+      edge <- XML::addChildren(edge, XML::xmlNode("viz:shape", attrs=vizAtt$size))
     }
   }
   
   # Adds the new edge
-  graph$graph$doc$children$gexf[["graph"]][["edges"]][[n+1]] <- asXMLNode(x=edge)
+  graph$graph$doc$children$gexf[["graph"]][["edges"]][[n+1]] <- XML::asXMLNode(x=edge)
   
   if (length(label) == 0) label <- id
   
@@ -261,10 +335,33 @@ add.gexf.edge <- function(
   graph$edges <- rbind(graph$edges, tmpdf)
   
   # Saves and returns as char XML
-  graph$graph <- saveXML(xmlRoot(graph$graph), encoding="UTF-8")
+  graph$graph <- XML::saveXML(XML::xmlRoot(graph$graph), encoding="UTF-8")
   return(graph)
 }
 
+
+
+#' Build an empty \code{gexf} graph
+#' 
+#' Builds an empty \code{gexf} object containing all the class's attributes.
+#' 
+#' 
+#' @param defaultedgetype \dQuote{directed}, \dQuote{undirected},
+#' \dQuote{mutual}
+#' @param meta A List. Meta data describing the graph
+#' @return A \code{gexf} object.
+#' @author George Vega Yon 
+#' 
+#' Jorge Fabrega Lacoa 
+#' @references The GEXF project website: \url{http://gexf.net}
+#' @keywords manip
+#' @examples
+#' 
+#'   \dontrun{
+#'   demo(gexfbuildfromscratch)
+#'   }
+#' 
+#' @export new.gexf.graph
 new.gexf.graph <- function(
 ################################################################################
 # Creates an empty gexf class object
@@ -274,40 +371,40 @@ new.gexf.graph <- function(
   ) {
   
   # Building doc
-  xmlFile <- newXMLDoc(addFinalizer=T)
-  gexf <- newXMLNode(name='gexf', doc = xmlFile)
+  xmlFile <- XML::newXMLDoc(addFinalizer=T)
+  gexf <- XML::newXMLNode(name='gexf', doc = xmlFile)
   
   # Adding gexf attributes
-  newXMLNamespace(node=gexf, namespace='http://www.gexf.net/1.2draft')
-  newXMLNamespace(
+  XML::newXMLNamespace(node=gexf, namespace='http://www.gexf.net/1.2draft')
+  XML::newXMLNamespace(
     node=gexf, namespace='http://www.gexf.net/1.1draft/viz', prefix='viz')
-  newXMLNamespace(
+  XML::newXMLNamespace(
     node=gexf, namespace='http://www.w3.org/2001/XMLSchema-instance',
     prefix='xsi'
   ) 
   
-  xmlAttrs(gexf) <- c( 
+  XML::xmlAttrs(gexf) <- c( 
     'xsi:schemaLocation' = 'http://www.gexf.net/1.2draft http://www.gexf.net/1.2draft/gexf.xsd',
     version=1.2)
   
   # graph
-  xmlMeta <- newXMLNode(name="meta", 
+  xmlMeta <- XML::newXMLNode(name="meta", 
                         attrs=list(lastmodifieddate=as.character(Sys.Date())), 
                         parent=gexf)
-  newXMLNode(name='creator', meta$creator, parent=xmlMeta)
-  newXMLNode(name='description', meta$description, parent=xmlMeta)
-  newXMLNode(name='keywords', meta$keywords, parent=xmlMeta)
+  XML::newXMLNode(name='creator', meta$creator, parent=xmlMeta)
+  XML::newXMLNode(name='description', meta$description, parent=xmlMeta)
+  XML::newXMLNode(name='keywords', meta$keywords, parent=xmlMeta)
   
-  xmlGraph <- newXMLNode(name="graph", parent=gexf)
+  xmlGraph <- XML::newXMLNode(name="graph", parent=gexf)
   
   mode <- "static"
-  xmlAttrs(xmlGraph) <- c(mode=mode)
+  XML::xmlAttrs(xmlGraph) <- c(mode=mode)
   
   # Nodes
-  newXMLNode(name='nodes', parent=xmlGraph)
+  XML::newXMLNode(name='nodes', parent=xmlGraph)
   
   # Edges
-  newXMLNode(name='edges', parent=xmlGraph)
+  XML::newXMLNode(name='edges', parent=xmlGraph)
   
   # Return  
   return(
@@ -319,11 +416,13 @@ new.gexf.graph <- function(
       edgesVizAtt = NULL,
       nodes=data.frame(id=NULL, label=NULL, row.names=NULL),
       edges=data.frame(id=NULL, source=NULL,target=NULL, weight=NULL, row.names=NULL),
-      graph=saveXML(xmlFile, encoding="UTF-8")
+      graph=XML::saveXML(xmlFile, encoding="UTF-8")
       )
     )
 }
 
+#' @export
+#' @rdname add.gexf.node
 rm.gexf.node <- function(
 ################################################################################
 # Add nodes to gexf class object
@@ -350,7 +449,7 @@ rm.gexf.node <- function(
   
   if (NROW(graph$nodes) > 0) {
     # Parses the graph file
-    graph$graph <- xmlTreeParse(graph$graph, encoding="UTF-8")
+    graph$graph <- XML::xmlTreeParse(graph$graph, encoding="UTF-8")
   
     # Removes nodes from XML
     #node$children = unclass(node)$children[-w]
@@ -383,7 +482,7 @@ rm.gexf.node <- function(
     graph$nodes <- graph$nodes[-number,]
     
     # Saves and returns as char XML
-    graph$graph <- saveXML(xmlRoot(graph$graph), encoding="UTF-8")
+    graph$graph <- XML::saveXML(XML::xmlRoot(graph$graph), encoding="UTF-8")
     return(graph)
   }
   else {
@@ -391,6 +490,8 @@ rm.gexf.node <- function(
   }
 }
 
+#' @export
+#' @rdname add.gexf.node
 rm.gexf.edge <- function(
 ################################################################################
 # Add edges to gexf class object
@@ -419,7 +520,7 @@ rm.gexf.edge <- function(
   if (NROW(graph$edges) > 0) {
     
     # Parses the graph file
-    graph$graph <- xmlTreeParse(graph$graph, encoding="UTF-8")
+    graph$graph <- XML::xmlTreeParse(graph$graph, encoding="UTF-8")
     
     graph$graph$doc$children$gexf[["graph"]][["edges"]]$children <- 
       unclass(graph$graph$doc$children$gexf[["graph"]][["edges"]])$children[-number]
@@ -427,7 +528,7 @@ rm.gexf.edge <- function(
     graph$edges <- graph$edges[-number,]
     
     # Saves and returns as char XML
-    graph$graph <- saveXML(xmlRoot(graph$graph), encoding="UTF-8")
+    graph$graph <- XML::saveXML(XML::xmlRoot(graph$graph), encoding="UTF-8")
     return(graph)
   }
   else {
@@ -435,6 +536,8 @@ rm.gexf.edge <- function(
   }
 }
 
+#' @export
+#' @rdname add.gexf.node
 add.node.spell <- function(
 ################################################################################
 # Add nodes to gexf class object
@@ -460,14 +563,14 @@ add.node.spell <- function(
   }
   
   # Parses the graph file
-  graph$graph <- xmlTreeParse(graph$graph, encoding="UTF-8")
+  graph$graph <- XML::xmlTreeParse(graph$graph, encoding="UTF-8")
   
   # Gets the number of nodes
   n <- length(graph$graph$doc$children$gexf[["graph"]][["nodes"]][[number]][["spells"]])
   if (n == 0) {
     natts <- length(graph$graph$doc$children$gexf[["graph"]][["nodes"]][[number]])
     graph$graph$doc$children$gexf[["graph"]][["nodes"]][[number]][[natts + 1]] <-
-      asXMLNode(xmlNode("spells"))
+      XML::asXMLNode(XML::xmlNode("spells"))
   }
     
   # Checking the number of digits
@@ -481,16 +584,18 @@ add.node.spell <- function(
     end <- sprintf(fmt,end)
   } 
   
-  nodespell <- xmlNode("spell", attrs=c(start=start, end=end))
+  nodespell <- XML::xmlNode("spell", attrs=c(start=start, end=end))
   
   graph$graph$doc$children$gexf[["graph"]][["nodes"]][[number]][["spells"]][[n+1]] <- 
-    asXMLNode(x=nodespell)
+    XML::asXMLNode(x=nodespell)
     
   # Saves and returns as char XML
-  graph$graph <- saveXML(xmlRoot(graph$graph), encoding="UTF-8")
+  graph$graph <- XML::saveXML(XML::xmlRoot(graph$graph), encoding="UTF-8")
   return(graph)
 }
 
+#' @export
+#' @rdname add.gexf.node
 add.edge.spell <- function(
   ################################################################################
   # Add nodes to gexf class object
@@ -516,14 +621,14 @@ add.edge.spell <- function(
   }
   
   # Parses the graph file
-  graph$graph <- xmlTreeParse(graph$graph, encoding="UTF-8")
+  graph$graph <- XML::xmlTreeParse(graph$graph, encoding="UTF-8")
   
   # Gets the number of edges
   n <- length(graph$graph$doc$children$gexf[["graph"]][["edges"]][[number]][["spells"]])
   if (n == 0) {
     natts <- length(graph$graph$doc$children$gexf[["graph"]][["edges"]][[number]])
     graph$graph$doc$children$gexf[["graph"]][["edges"]][[number]][[natts + 1]] <-
-      asXMLNode(xmlNode("spells"))
+      XML::asXMLNode(XML::xmlNode("spells"))
   }
   
   # Checking the number of digits
@@ -537,13 +642,13 @@ add.edge.spell <- function(
     end <- sprintf(fmt,end)
   } 
 
-  edgespell <- xmlNode("spell", attrs=c(start=start, end=end))
+  edgespell <- XML::xmlNode("spell", attrs=c(start=start, end=end))
   
   graph$graph$doc$children$gexf[["graph"]][["edges"]][[number]][["spells"]][[n+1]] <- 
-    asXMLNode(x=edgespell)
+    XML::asXMLNode(x=edgespell)
   
   # Saves and returns as char XML
-  graph$graph <- saveXML(xmlRoot(graph$graph), encoding="UTF-8")
+  graph$graph <- XML::saveXML(XML::xmlRoot(graph$graph), encoding="UTF-8")
   return(graph)
 }
 

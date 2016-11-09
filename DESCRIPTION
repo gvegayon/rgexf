@@ -2,12 +2,24 @@ Package: rgexf
 Type: Package
 Encoding: UTF-8
 Title: Build, Import and Export GEXF Graph Files
-Version: 0.15.3
-Date: 2015-03-24
-Author: George Vega Yon <gvegayon@caltech.edu> [aut], Jorge Fábrega Lacoa <jorge.fabrega@uai.cl> [ctb], Joshua B. Kunst <jbkunst@gmail.com> [ctb]
-Maintainer: George Vega Yon <gvegayon@caltech.edu>
-Description: Create, read and write GEXF (Graph Exchange XML Format) graph files (used in Gephi and others). Using the XML package, it allows the user to easily build/read graph files including attributes, GEXF viz attributes (such as color, size, and position), network dynamics (for both edges and nodes) and edge weighting. Users can build/handle graphs element-by-element or massively through data-frames, visualize the graph on a web browser through "sigmajs" (a javascript library) and interact with the igraph package.
-URL: http://bitbucket.org/gvegayon/rgexf, http://www.ggvega.com
-Depends: XML, Rook, igraph
-License: GPL (>= 3)
+Version: 0.16.9000
+Date: 2016-11-08
+Authors@R: c(
+  person("George", "Vega Yon", email="g.vegayon@gmail.com", role=c("aut", "cre")),
+  person("Jorge", "Fábrega Lacoa", role=c("ctb")),
+  person("Joshua", "Kunst", role=c("ctb")))
+Description: Create, read and write GEXF (Graph Exchange XML Format) graph
+    files (used in Gephi and others). Using the XML package, it allows the user to
+    easily build/read graph files including attributes, GEXF viz attributes (such
+    as color, size, and position), network dynamics (for both edges and nodes) and
+    edge weighting. Users can build/handle graphs element-by-element or massively
+    through data-frames, visualize the graph on a web browser through "sigmajs" (a
+    javascript library) and interact with the igraph package.
+URL: http://github.com/gvegayon/rgexf
+Depends:
+    XML,
+    Rook,
+    igraph
+License: MIT + file LICENSE
 LazyLoad: yes
+RoxygenNote: 5.0.1

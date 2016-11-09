@@ -9,9 +9,11 @@
 ^\.git
 .*\.png
 ^.*\.Rproj$
-R/rgexf\.R
-R/newxmlnode2\.R
 R/zzz\.R
 demo/gexfplot\.R
 .*\.sh
 ^mygraph\.gexf
+^README\.Rmd$
+^README-.*\.png$
+^\.travis\.yml$
+^appveyor\.yml$

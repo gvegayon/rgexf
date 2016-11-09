@@ -11,16 +11,16 @@ demo(gexffull)
 demo(gexftwitter)
 demo(gexfigraph)
 
-g <- graph.ring(10)
-g <- set.graph.attribute(g, "name", "RING")
-
-# Colors
-g <- set.vertex.attribute(g, "color", value=c("red", "green"))
-
-# Weight
-g <- set.edge.attribute(g, "weight", value=runif(ecount(g)))
-
-g2 <- igraph.to.gexf(g)
-#plot(g)
-#plot(g2)
-g3 <- gexf.to.igraph(g2)
+# g <- graph.ring(10)
+# g <- set.graph.attribute(g, "name", "RING")
+# 
+# # Colors
+# g <- set.vertex.attribute(g, "color", value=c("red", "green"))
+# 
+# # Weight
+# g <- set.edge.attribute(g, "weight", value=runif(igraph::ecount(g)))
+# 
+# g2 <- igraph.to.gexf(g)
+# #plot(g)
+# #plot(g2)
+# g3 <- gexf.to.igraph(g2)
