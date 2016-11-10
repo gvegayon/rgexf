@@ -284,6 +284,8 @@ edge.list <- function(x) {
 #' @param keepFactors Logical, whether to handle factors as numeric values
 #' (\code{TRUE}) or as strings (\code{FALSE}) by using \code{as.character}.
 #' @param encoding Encoding of the graph.
+#' @param vers Character scalar. Version of the GEXF format to generate.
+#' By default \code{"1.3"}.
 #' @return A \code{gexf} class object (list). Contains the following: \itemize{
 #' \item \code{meta} : (list) Meta data describing the graph.  \item
 #' \code{mode} : (list) Sets the default edge type and the graph mode.  \item
@@ -337,11 +339,15 @@ write.gexf <- function(
   defaultedgetype = "undirected",
   meta = list(creator="NodosChile", description="A graph file writing in R using \"rgexf\"",keywords="gexf graph, NodosChile, R, rgexf"),
   keepFactors = FALSE,
-  encoding="UTF-8"
+  encoding="UTF-8",
+  vers = "1.3"
 ) {
   
   ##############################################################################
   # CLASS CHECKS AND OTHERS CHECKS
+  
+  # version
+  vers <- gexf_version(vers)
   
   # Nodes
   if (is.data.frame(nodes) | is.matrix(nodes)) {
@@ -411,17 +417,16 @@ write.gexf <- function(
   
   # gexf att
   
-  XML::newXMLNamespace(node=gexf, namespace="http://www.gexf.net/1.2draft")
+  XML::newXMLNamespace(node=gexf, namespace=vers$xmlns)
   XML::newXMLNamespace(
-    node=gexf, namespace="http://www.gexf.net/1.1draft/viz", prefix="viz")
+    node=gexf, namespace=vers$`xmlns:vis`, prefix="viz")
   XML::newXMLNamespace(
     node=gexf, namespace="http://www.w3.org/2001/XMLSchema-instance",
     prefix="xsi"
   ) 
   
   XML::xmlAttrs(gexf) <- c( 
-    "xsi:schemaLocation" = "http://www.gexf.net/1.2draft http://www.gexf.net/1.2draft/gexf.xsd",
-    version=1.2)
+    "xsi:schemaLocation" = vers$`xsi:schemaLocation`, version=vers$number)
   
   # graph
   xmlMeta <- XML::newXMLNode(name="meta", 

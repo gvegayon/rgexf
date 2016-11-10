@@ -13,7 +13,7 @@ write.gexf(nodes, edges, edgesLabel = NULL, edgesId = NULL,
   meta = list(creator = "NodosChile", description =
   "A graph file writing in R using \\"rgexf\\"", keywords =
   "gexf graph, NodosChile, R, rgexf"), keepFactors = FALSE,
-  encoding = "UTF-8")
+  encoding = "UTF-8", vers = "1.3")
 }
 \arguments{
 \item{nodes}{A two-column data-frame or matrix of \dQuote{id}s and
@@ -68,6 +68,9 @@ the graph as a GEXF file.}
 (\code{TRUE}) or as strings (\code{FALSE}) by using \code{as.character}.}
 
 \item{encoding}{Encoding of the graph.}
+
+\item{vers}{Character scalar. Version of the GEXF format to generate.
+By default \code{"1.3"}.}
 }
 \value{
 A \code{gexf} class object (list). Contains the following: \itemize{

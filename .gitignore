@@ -11,7 +11,7 @@
 *.rds
 *.o
 
-
 *.(R|r)html
 *.pdf
 .Rproj.user
+inst/doc

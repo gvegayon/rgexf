@@ -1,5 +1,5 @@
 
-[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/rgexf)](https://cran.r-project.org/package=rgexf) [![Downloads](http://cranlogs.r-pkg.org/badges/rgexf?color=brightgreen)](http://cran.rstudio.com/package=rgexf) [![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/rgexf)](http://cran.rstudio.com/package=rgexf) [![Travis-CI Build Status](https://travis-ci.org/gvegayon/rgexfA.svg?branch=master)](https://travis-ci.org/gvegayon/rgexf) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/gvegayon/rgexf?branch=master&svg=true)](https://ci.appveyor.com/project/gvegayon/rgexf)
+[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/rgexf)](https://cran.r-project.org/package=rgexf) [![Downloads](http://cranlogs.r-pkg.org/badges/rgexf?color=brightgreen)](http://cran.rstudio.com/package=rgexf) [![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/rgexf)](http://cran.rstudio.com/package=rgexf) [![Travis-CI Build Status](https://travis-ci.org/gvegayon/rgexf.svg?branch=master)](https://travis-ci.org/gvegayon/rgexf) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/gvegayon/rgexf?branch=master&svg=true)](https://ci.appveyor.com/project/gvegayon/rgexf)
 
 rgexf: Build, Import and Export GEXF Graph Files
 ================================================
@@ -17,26 +17,7 @@ Example 1: Static net
 ``` r
 # Loading the package
 library(rgexf)
-```
 
-    ## Loading required package: XML
-
-    ## Loading required package: Rook
-
-    ## Loading required package: igraph
-
-    ## 
-    ## Attaching package: 'igraph'
-
-    ## The following objects are masked from 'package:stats':
-    ## 
-    ##     decompose, spectrum
-
-    ## The following object is masked from 'package:base':
-    ## 
-    ##     union
-
-``` r
 # Creating a group of individuals and their relations
 people <- data.frame(matrix(c(1:4, 'juan', 'pedro', 'matthew', 'carlos'),ncol=2))
 people
@@ -68,7 +49,7 @@ write.gexf(people, relations)
 ```
 
     ## <?xml version="1.0" encoding="UTF-8"?>
-    ## <gexf xmlns="http://www.gexf.net/1.2draft" xmlns:viz="http://www.gexf.net/1.1draft/viz" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.2draft http://www.gexf.net/1.2draft/gexf.xsd" version="1.2">
+    ## <gexf xmlns="http://www.gexf.net/1.3" xmlns:viz="http://www.gexf.net/1.3/viz" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.3 http://www.gexf.net/1.3/gexf.xsd" version="1.3">
     ##   <meta lastmodifieddate="2016-11-09">
     ##     <creator>NodosChile</creator>
     ##     <description>A graph file writing in R using "rgexf"</description>
@@ -113,7 +94,7 @@ write.gexf(people, relations, nodeDynamic=time)
 ```
 
     ## <?xml version="1.0" encoding="UTF-8"?>
-    ## <gexf xmlns="http://www.gexf.net/1.2draft" xmlns:viz="http://www.gexf.net/1.1draft/viz" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.2draft http://www.gexf.net/1.2draft/gexf.xsd" version="1.2">
+    ## <gexf xmlns="http://www.gexf.net/1.3" xmlns:viz="http://www.gexf.net/1.3/viz" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.3 http://www.gexf.net/1.3/gexf.xsd" version="1.3">
     ##   <meta lastmodifieddate="2016-11-09">
     ##     <creator>NodosChile</creator>
     ##     <description>A graph file writing in R using "rgexf"</description>
@@ -200,7 +181,7 @@ write.gexf(nodes=people, edges=relations, edgeDynamic=time.edges,
 ```
 
     ## <?xml version="1.0" encoding="UTF-8"?>
-    ## <gexf xmlns="http://www.gexf.net/1.2draft" xmlns:viz="http://www.gexf.net/1.1draft/viz" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.2draft http://www.gexf.net/1.2draft/gexf.xsd" version="1.2">
+    ## <gexf xmlns="http://www.gexf.net/1.3" xmlns:viz="http://www.gexf.net/1.3/viz" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.3 http://www.gexf.net/1.3/gexf.xsd" version="1.3">
     ##   <meta lastmodifieddate="2016-11-09">
     ##     <creator>NodosChile</creator>
     ##     <description>A graph file writing in R using "rgexf"</description>
@@ -281,3 +262,41 @@ write.gexf(nodes=people, edges=relations, edgeDynamic=time.edges,
     ##     </edges>
     ##   </graph>
     ## </gexf>
+
+Session info
+============
+
+``` r
+devtools::session_info()
+```
+
+    ## Session info --------------------------------------------------------------
+
+    ##  setting  value                       
+    ##  version  R version 3.3.1 (2016-06-21)
+    ##  system   x86_64, darwin15.5.0        
+    ##  ui       unknown                     
+    ##  language (EN)                        
+    ##  collate  en_US.UTF-8                 
+    ##  tz       America/Los_Angeles         
+    ##  date     2016-11-09
+
+    ## Packages ------------------------------------------------------------------
+
+    ##  package   * version   date       source        
+    ##  devtools    1.12.0    2016-06-24 CRAN (R 3.3.1)
+    ##  digest      0.6.10    2016-08-02 CRAN (R 3.3.1)
+    ##  evaluate    0.9       2016-04-29 CRAN (R 3.3.1)
+    ##  htmltools   0.3.5     2016-03-21 CRAN (R 3.3.1)
+    ##  igraph      1.0.1     2015-06-26 CRAN (R 3.3.1)
+    ##  knitr       1.14      2016-08-13 CRAN (R 3.3.1)
+    ##  magrittr    1.5       2014-11-22 CRAN (R 3.3.1)
+    ##  memoise     1.0.0     2016-01-29 CRAN (R 3.3.1)
+    ##  Rcpp        0.12.7    2016-09-05 CRAN (R 3.3.1)
+    ##  rgexf     * 0.16.9000 2016-11-10 local         
+    ##  rmarkdown   1.0       2016-07-08 CRAN (R 3.3.1)
+    ##  stringi     1.1.1     2016-05-27 CRAN (R 3.3.1)
+    ##  stringr     1.1.0     2016-08-19 CRAN (R 3.3.1)
+    ##  withr       1.0.2     2016-06-20 CRAN (R 3.3.1)
+    ##  XML         3.98-1.4  2016-03-01 CRAN (R 3.3.1)
+    ##  yaml        2.1.13    2014-06-12 CRAN (R 3.3.1)

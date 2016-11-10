@@ -1,5 +1,39 @@
-#' @import XML
-#' @import Rook
+gexf_version <- function(vers="1.3") {
+  # List of versions
+  VERS <- list(
+    `1.3` = list(
+      number               = "1.3",
+      xmlns                = "http://www.gexf.net/1.3",
+      `xsi:schemaLocation` = "http://www.gexf.net/1.3 http://www.gexf.net/1.3/gexf.xsd",
+      `xmlns:vis`          = "http://www.gexf.net/1.3/viz"
+    ),
+    `1.2` = list(
+      number               = "1.2",
+      xmlns                = "http://www.gexf.net/1.2draft",
+      `xsi:schemaLocation` = "http://www.gexf.net/1.2draft http://www.gexf.net/1.2draft/gexf.xsd",
+      `xmlns:vis`          = "http://www.gexf.net/1.2draft/viz"
+    ),
+    `1.1` = list(
+      number               = "1.1",
+      xmlns                = "http://www.gexf.net/1.1draft",
+      `xsi:schemaLocation` = "http://www.gexf.net/1.1draft http://www.gexf.net/1.1draft/gexf.xsd",
+      `xmlns:vis`          = "http://www.gexf.net/1.1draft/viz"
+    )
+  )
+  
+  # Checking length
+  
+  
+  if (vers %in% names(VERS)) {
+    VERS[[vers]] 
+  } else {
+    stop("version GEXF ",vers," not supported. Currently supported are: ",
+         paste(names(VERS), collapse=", "))
+  }
+}
+
+#' @importFrom XML xmlTreeParse xmlNode addChildren asXMLNode saveXML newXMLDoc
+#'  newXMLNode newXMLNamespace xmlAttrs parseXMLAndAdd
 #' @useDynLib rgexf
 #' @importFrom igraph get.data.frame list.vertex.attributes list.edge.attributes
 #'   E is.directed V set.vertex.attribute set.edge.attribute
@@ -112,8 +146,6 @@ NULL
 #' Please visit the project home for more information:
 #' \url{https://github.com/gvegayon/rgexf}.
 #' 
-#' \tabular{ll}{ Package: \tab rgexf\cr Type: \tab Package\cr Version: \tab
-#' 0.16.9000\cr Date: \tab 2016-11-08\cr License: \tab MIT+file\cr }
 #' 
 #' @name rgexf-package
 #' @aliases rgexf-package rgexf gexf gephi

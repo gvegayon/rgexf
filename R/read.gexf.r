@@ -24,47 +24,47 @@ read.gexf <- function(x) {
 # Read gexf graph files
 ################################################################################
   # Reads the graph
-  gfile <- xmlParse(x, encoding="UTF-8")
+  gfile <- XML::xmlParse(x, encoding="UTF-8")
   
   # Gets the namespace
-  ns <- xmlNamespace(xmlRoot(gfile))
+  ns <- XML::xmlNamespace(XML::xmlRoot(gfile))
   
   graph <- NULL
   graph$meta <- NULL
 
   ################################################################################
   # Creator
-  if (length(y<-getNodeSet(gfile,"/r:gexf/r:meta/r:creator", c(r=ns))) > 0) {
-    graph$meta[["creator"]] <- xmlValue(y[[1]])
+  if (length(y<-XML::getNodeSet(gfile,"/r:gexf/r:meta/r:creator", c(r=ns))) > 0) {
+    graph$meta[["creator"]] <- XML::xmlValue(y[[1]])
   }
   else graph$meta[["creator"]] <- NA
   # Description
-  if (length(y<-getNodeSet(gfile,"/r:gexf/r:meta/r:description", c(r=ns))) > 0) {
-    graph$meta[["description"]] <- xmlValue(y[[1]])
+  if (length(y<-XML::getNodeSet(gfile,"/r:gexf/r:meta/r:description", c(r=ns))) > 0) {
+    graph$meta[["description"]] <- XML::xmlValue(y[[1]])
   }
   else graph$meta[["description"]] <- NA
   # Keywords
-  if (length(y<-getNodeSet(gfile,"/r:gexf/r:meta/r:keywords", c(r=ns))) > 0) {
-    graph$meta[["keywords"]] <- xmlValue(y[[1]])
+  if (length(y<-XML::getNodeSet(gfile,"/r:gexf/r:meta/r:keywords", c(r=ns))) > 0) {
+    graph$meta[["keywords"]] <- XML::xmlValue(y[[1]])
   }
   else graph$meta[["keywords"]] <- NA
   ################################################################################
 
   # Attributes list
   graph$atts.definitions <- list(nodes=NULL,edges = NULL)
-  if (length(y<-getNodeSet(gfile,"/r:gexf/r:graph/r:attributes", c(r=ns)))) {
+  if (length(y<-XML::getNodeSet(gfile,"/r:gexf/r:graph/r:attributes", c(r=ns)))) {
     while (length(y) > 0) {
       
       # Gets the class
-      attclass <- paste(xmlAttrs(y[[1]])[["class"]],"s", sep="")
-      z <- getNodeSet(
+      attclass <- paste(XML::xmlAttrs(y[[1]])[["class"]],"s", sep="")
+      z <- XML::getNodeSet(
         y[[1]], "/r:gexf/r:graph/r:attributes/r:attribute", c(r=ns))
       
       # Builds a dataframe
       graph$atts.definitions[[attclass]] <- data.frame(
-        id=sapply(z, xmlGetAttr, name="id"),
-        title=sapply(z, xmlGetAttr, name="title"),
-        type=sapply(z, xmlGetAttr, name="type")
+        id=sapply(z, XML::xmlGetAttr, name="id"),
+        title=sapply(z, XML::xmlGetAttr, name="title"),
+        type=sapply(z, XML::xmlGetAttr, name="type")
         )
       
       # Removes the already analyzed
@@ -72,30 +72,30 @@ read.gexf <- function(x) {
     }
   }
   
-  graph$mode <- xmlAttrs(getNodeSet(gfile,"/r:gexf/r:graph", c(r=ns))[[1]])
+  graph$mode <- XML::xmlAttrs(XML::getNodeSet(gfile,"/r:gexf/r:graph", c(r=ns))[[1]])
   
   # Nodes
-  nodes <- getNodeSet(gfile,"/r:gexf/r:graph/r:nodes/r:node", c(r=ns))
+  nodes <- XML::getNodeSet(gfile,"/r:gexf/r:graph/r:nodes/r:node", c(r=ns))
   graph$nodes <- data.frame(
-    id=sapply(nodes, xmlGetAttr, name="id"), 
-    label=sapply(nodes, xmlGetAttr, name="label"), 
+    id=sapply(nodes, XML::xmlGetAttr, name="id"), 
+    label=sapply(nodes, XML::xmlGetAttr, name="label"), 
     stringsAsFactors=F)
   rm(nodes)
   
   # Edges
-  edges <- getNodeSet(gfile,"/r:gexf/r:graph/r:edges/r:edge", c(r=ns))
+  edges <- XML::getNodeSet(gfile,"/r:gexf/r:graph/r:edges/r:edge", c(r=ns))
 
   graph$edges <- data.frame(
-    id=sapply(edges, xmlGetAttr, name="id", default=NA),
-    source=sapply(edges, xmlGetAttr, name="source"), 
-    target=sapply(edges, xmlGetAttr, name="target"), 
-    weight=as.numeric(sapply(edges, xmlGetAttr, name="weight", default="1.0")),
+    id=sapply(edges, XML::xmlGetAttr, name="id", default=NA),
+    source=sapply(edges, XML::xmlGetAttr, name="source"), 
+    target=sapply(edges, XML::xmlGetAttr, name="target"), 
+    weight=as.numeric(sapply(edges, XML::xmlGetAttr, name="weight", default="1.0")),
     stringsAsFactors=F)
 
   if (any(is.na(graph$edges[,1]))) graph$edges[,1] <- 1:NROW(graph$edges)
   rm(edges)
 
-  graph$graph <- saveXML(gfile, encoding="UTF-8")
+  graph$graph <- XML::saveXML(gfile, encoding="UTF-8")
 
   class(graph) <- "gexf"
 
