@@ -77,7 +77,7 @@ thick<-1:9
 
 pause()
 
-write.gexf(nodes=people, edgesWeight=thick, edges=relations,
+gexf(nodes=people, edgesWeight=thick, edges=relations,
            edgeDynamic=time.edges, edgesAtt=edge.att, nodeDynamic=time.nodes,
            nodesAtt=node.att,
            nodesVizAtt = list(

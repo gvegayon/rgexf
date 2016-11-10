@@ -7,7 +7,7 @@ relations <- data.frame(source = c(1,1,1,2,3,4), target = c(4,2,3,3,4,2))
 node.att <- data.frame(letrafavorita=letters[1:4], numbers=1:4)
 
 # No position arguments, so it will be random.
-simple.gexf <- write.gexf(nodes=people, edges=relations, nodesAtt=node.att)
+simple.gexf <- gexf(nodes=people, edges=relations, nodesAtt=node.att)
 gexf(simple.gexf)
 
 #### 'Les Miserable's example of Sigmajs ####
@@ -75,7 +75,7 @@ positions <- cbind(positions, 0) # needs a z axis
 
 
 
-graph <- write.gexf(nodes=nodes,
+graph <- gexf(nodes=nodes,
                     edges=relations,
                     nodesVizAtt=list(
                       color=nodecolors,

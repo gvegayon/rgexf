@@ -67,7 +67,7 @@ requires this).  to
                         target=c(4,2,3,3,4,2,4,1,1))
     
     # Building gexf graph
-    mygraph <- write.gexf(nodes=people, edges=relations)
+    mygraph <- gexf(nodes=people, edges=relations)
     
     # Summary and pring
     summary(mygraph)

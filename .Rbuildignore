@@ -17,3 +17,4 @@ demo/gexfplot\.R
 ^README-.*\.png$
 ^\.travis\.yml$
 ^appveyor\.yml$
+^codecov\.yml$

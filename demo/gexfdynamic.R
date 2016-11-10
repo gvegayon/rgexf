@@ -42,4 +42,4 @@ time.edges
 # parenthesis in the following function
 
 pause()
-write.gexf(nodes=people, edges=relations, nodeDynamic=time.nodes)
+gexf(nodes=people, edges=relations, nodeDynamic=time.nodes)

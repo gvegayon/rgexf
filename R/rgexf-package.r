@@ -108,7 +108,7 @@ NULL
 #'                         target=c(4,2,3,3,4,2,4,1,1))
 #'     
 #'     # Building gexf graph
-#'     mygraph <- write.gexf(nodes=people, edges=relations)
+#'     mygraph <- gexf(nodes=people, edges=relations)
 #'     
 #'     # Summary and pring
 #'     summary(mygraph)
@@ -148,7 +148,7 @@ NULL
 #' 
 #' 
 #' @name rgexf-package
-#' @aliases rgexf-package rgexf gexf gephi
+#' @aliases rgexf-package rgexf gephi
 #' @docType package
 #' @note See the GEXF primer for details on the GEXF graph format:
 #' \url{https://gephi.org/gexf/1.2draft/gexf-12draft-primer.pdf}

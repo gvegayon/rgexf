@@ -31,6 +31,6 @@ relations<- subset(followers, select=c(source, target))
 # Creating the follower-following network in gexf format with some nodes' attribute
 pause()
 
-x1 <- write.gexf(nodos, relations, keepFactors=F, nodesAtt=nodos.att)
+x1 <- gexf(nodos, relations, keepFactors=F, nodesAtt=nodos.att)
 
 summary(x1)

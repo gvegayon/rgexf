@@ -38,6 +38,6 @@ edge.att
 # before the last closing 
 # parenthesis in the following function
 
-write.gexf(nodes=people, edges=relations, nodesAtt=node.att, edgesAtt=edge.att)
+gexf(nodes=people, edges=relations, nodesAtt=node.att, edgesAtt=edge.att)
 
 ################################################################################

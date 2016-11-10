@@ -68,7 +68,7 @@ pos3[,1] <- pos3[,1] + max(pos2[,1])-min(pos[,1])
 pause()
 
 # Plotting
-graph <- write.gexf(
+graph <- gexf(
   rbind(vertex1,vertex2,vertex3), 
   rbind(edges1, edges2,edges3), 
   nodesVizAtt=list(

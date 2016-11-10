@@ -6,21 +6,28 @@ output: github_document
 [![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/rgexf)](http://cran.rstudio.com/package=rgexf)
 [![Travis-CI Build Status](https://travis-ci.org/gvegayon/rgexf.svg?branch=master)](https://travis-ci.org/gvegayon/rgexf)
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/gvegayon/rgexf?branch=master&svg=true)](https://ci.appveyor.com/project/gvegayon/rgexf)
+[![Coverage Status](https://img.shields.io/codecov/c/github/gvegayon/rgexf/master.svg)](https://codecov.io/github/gvegayon/rgexf?branch=master)
 
 # rgexf: Build, Import and Export GEXF Graph Files
 
 The first R package to work with GEXF graph files (used in Gephi and others). Using XML library, it allows the user to easily build/read graph files including attributes, GEXF viz attributes (such as colour, size, and position), network dynamics (for both edges and nodes, including spells) and edges weighting. Users can build/handle graphs element-by-element or massively through data-frames, visualize the graph on a web browser through sigmajs javascript library and interact with the igraph package.
 
 ## News ##
-[2016-11-08] Restarting the project.
-[2015-02-03] Version 0.15.2.3 of rgexf is on CRAN. Just updating emails...
-[2014-03-10] Version 0.14.9 of rgexf is on CRAN! solves issues 15-18. Thanks =).
-[2013-08-07] Version 0.13.8 of rgexf is on CRAN! New plot.gexf method and igraph integration working =).
-[2013-05-09] Version 0.13.05 of rgexf (transitory) solves issues N 9 & 10. Looking forward for the next CRAN version.
-[2013-03-14] Version 0.13.03 of rgexf is on its way to CRAN. It now supports working with spells!
-[2013-01-04] Version 0.13.01 of rgexf is on its way to CRAN. Significant improvements and new features!
-[2012-06-19] Version 0.12.06 of rgexf is on CRAN! Now it can be directly download from R.
-[2012-03-29] Version 0.12.03.29 of rgexf has been released including many bug fixes. Please download the lastest version to check it out.
+- [2016-11-08] Restarting the project.
+- [2015-02-03] Version 0.15.2.3 of rgexf is on CRAN. Just updating emails...
+- [2014-03-10] Version 0.14.9 of rgexf is on CRAN! solves issues 15-18. Thanks =).
+- [2013-08-07] Version 0.13.8 of rgexf is on CRAN! New plot.gexf method and igraph
+  integration working =).
+- [2013-05-09] Version 0.13.05 of rgexf (transitory) solves issues N 9 & 10. Looking
+  forward for the next CRAN version.
+- [2013-03-14] Version 0.13.03 of rgexf is on its way to CRAN. It now supports
+  working with spells!
+- [2013-01-04] Version 0.13.01 of rgexf is on its way to CRAN. Significant
+  improvements and new features!
+- [2012-06-19] Version 0.12.06 of rgexf is on CRAN! Now it can be directly download
+  from R.
+- [2012-03-29] Version 0.12.03.29 of rgexf has been released including many bug
+  fixes. Please download the lastest version to check it out.
 
 ## Example 1: Static net ##
 ```{r}

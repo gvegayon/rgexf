@@ -3,7 +3,6 @@
 \docType{package}
 \name{rgexf-package}
 \alias{gephi}
-\alias{gexf}
 \alias{rgexf}
 \alias{rgexf-package}
 \title{Build, Import and Export GEXF Graph Files}
@@ -26,9 +25,6 @@ attributes and colors.
 
 Please visit the project home for more information:
 \url{https://github.com/gvegayon/rgexf}.
-
-\tabular{ll}{ Package: \tab rgexf\cr Type: \tab Package\cr Version: \tab
-0.16.9000\cr Date: \tab 2016-11-08\cr License: \tab MIT+file\cr }
 }
 \note{
 See the GEXF primer for details on the GEXF graph format:

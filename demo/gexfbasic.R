@@ -33,6 +33,6 @@ pause()
 # before the last closing 
 # parenthesis in the following function
 
-write.gexf(nodes=people, edges=relations)
+gexf(nodes=people, edges=relations)
 
 ################################################################################  

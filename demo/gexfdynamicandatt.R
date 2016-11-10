@@ -52,5 +52,5 @@ time.edges
 # parenthesis in the following function
 
 pause()
-write.gexf(nodes=people, edges=relations, edgeDynamic=time.edges, edgesAtt=edge.att,
+gexf(nodes=people, edges=relations, edgeDynamic=time.edges, edgesAtt=edge.att,
      nodeDynamic=time.nodes, nodesAtt=node.att)

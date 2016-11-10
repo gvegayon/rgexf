@@ -1,3 +1,9 @@
+2016-11-10  George G. Vega Yon <g.vegayon@gmail.com>
+	* R/bugs.r: Creating a more generic method for checking viz attrs.
+	* R/rgexf.r: Started moving from write.gexf to gexf. In the 2.0
+	  version write.gexf should be for exporting gexf graphs only.
+	* demo/*.R: Replaced write.gexf with gexf.
+
 2016-11-09  George G. Vega Yon <g.vegayon@gmail.com>
 	* Added ChangeLog
 	* Change Depends to Imports and added namespace calls

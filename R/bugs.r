@@ -48,58 +48,49 @@ checkTimes <- function(x, format='date') {
 #checkTimes(test, format='dateTime')
 #checkTimes('2012-02-01T00:00:00', 'dateTime')
 
-.parseNodesVizAtt <- function(nodesVizAtt, nodes) {
-################################################################################
-# Parses nodes viz attributes checking dimentions, classes and names
-################################################################################
-  if (any(lapply(nodesVizAtt, length) > 0)) {
-    supportedNodesVizAtt <- c("color", "position", "size", "shape", "image")
-    if (all(names(nodesVizAtt) %in% supportedNodesVizAtt)) {
-      if (all(lapply(nodesVizAtt, NROW) == NROW(nodes))) {
-        return(length(nodesVizAtt))
-      }
-      else {
-        nodesVizAtt <- lapply(nodesVizAtt, NROW)
-        nodesVizAtt <- nodesVizAtt[nodesVizAtt != NROW(nodes)]
-        stop("Insuficient number of \"nodeVizAtt\" rows: The atts ",
-             paste(names(nodesVizAtt), unlist(nodesVizAtt), sep=" (", collapse=" rows), "),")\n",
-             "Every att should have the same number of rows than nodes there are (",NROW(nodes),")")
-      }
-    }
-    else {
-      noviz <- names(nodesVizAtt)
-      noviz <- noviz[!(noviz %in% supportedNodesVizAtt)]
-      stop("Invalid \"nodeVizAtt\": ",noviz,"\nOnly \"color\", \"position\", \"size\", \"shape\" and \"image\" are supported")
-    }
-  }
-  else return(0)
-}
+vizAttsSpecs <- list(
+  color = function(x) {
+    if (is.vector(x) || ncol(x) == 1) {
+      warning("Trying to coerce colors into RGBA")
+      return( cbind(t(col2rgb(x)), 1) )
+    } else if (ncol(x) != 4) # Must be 4-columns
+      stop("the color attribute must have 4 columns (RGBA).")
+    
+    # Must have the right range
+    if (max(x[,-4]) > 255 || min(x[,-4]) < 0) 
+      stop("The RGB colors must be in the range [0,255].")
+    
+    if (max(x[,4]) > 1 | min(x[,4]) < 0)
+      stop("The alpha part of the colors (4th column) must be within [0,1].")
+    
+    return(x)
+    
+  },
+  position = function(x) x,
+  size = function(x) x, 
+  shape = function(x) x,
+  image = function(x) x
+)
 
-.parseEdgesVizAtt <- function(edgesVizAtt, edges) {
-################################################################################
-# Parses edges viz attributes checking dimentions, classes and names
-################################################################################
-  if (any(lapply(edgesVizAtt, length) > 0)) {
-    supportedEdgeVizAtt <- c("color", "size", "shape")
-    if (all(names(edgesVizAtt) %in% supportedEdgeVizAtt)) {
-      if (all(lapply(edgesVizAtt, NROW) == NROW(edges))) {
-        return(length(edgesVizAtt))
-      }
-      else {
-        edgesVizAtt <- lapply(edgesVizAtt, NROW)
-        edgesVizAtt <- edgesVizAtt[edgesVizAtt != NROW(edges)]
-        stop("Insuficient number of \"edgeVizAtt\" rows: The atts ",
-             paste(names(edgesVizAtt), unlist(edgesVizAtt), sep=" (", collapse=" rows), "),")\n",
-             "Every att should have the same number of rows than edges there are (",NROW(edges),")")
-      }
-    }
-    else {
-      noviz <- names(edgesVizAtt)
-      noviz <- noviz[!(noviz %in% supportedEdgeVizAtt)]
-      stop("Invalid \"edgesVizAtt\": ",noviz,"\nOnly \"color\", \"size\" and \"shape\" are supported")
-    }
-  }
-  else return(0)
+parseVizAtt <- function(att, dat, n, type=c("nodes", "edges")) {
+  # Generic checks
+  if (is.vector(dat)) {
+    if (length(dat) < n)
+      stop("The attribute -",att,"- has incorrect length (has ",length(dat),
+           ", and must have ",n,").")
+  } else if (inherits(dat, c("data.frame", "matrix"))) {
+    if (nrow(dat) != n)
+      stop("The attribute -",att,"- has incorrect number of rows (has ",
+           nrow(dat)," and it must have ",n,").")
+  } else stop("The attribute -",att,"- of class -",class(dat),"- is not supported.")
+  
+  # What list of attrs
+  checks <- if (type=="nodes") c("color", "position", "size", "shape", "image")
+  else if (type=="edges") c("color", "size", "shape")
+  
+  if (att %in% checks) vizAttsSpecs[[att]](dat)
+  else stop("The attribute -", att,"- is not supported for -", type,"-. Only '",
+            paste(checks, collapse="', '"), " are currently supported.") 
 }
 
 .parseEdgesWeight <- function(edgesWeight, edges) {

@@ -29,26 +29,23 @@ edge.list <- function(x) {
 # Translate a edgelist to two objects list (nodes + edges)
 ################################################################################
   objClass <- class(x)
-  nEdges <- NROW(x)
-  nCols <- NCOL(x) == 2
+  k        <- ncol(x) == 2
   
-  if (objClass %in% c("matrix", "data.frame")) {
+  if (any(c("matrix", "data.frame") %in% objClass)) {
     
-    if (nCols) {
+    if (k == 2) {
       # If it is not a factor
       if (!is.factor(x)) x <- factor(c(x[,1], x[,2]))
       edges <- matrix(unclass(x), byrow=FALSE, ncol=2)
       colnames(edges) <- c("source","target")
-      nodes <- data.frame(id=1:nlevels(x), label=levels(x), stringsAsFactors=F)
+      nodes <- data.frame(id=1:nlevels(x), label=levels(x), stringsAsFactors=FALSE)
       
-      edgelist <- list(nodes=nodes, edges=edges)
-      
-      return(edgelist)
+      return(list(nodes=nodes, edges=edges))
     }
-    else stop("Insuficcient number of columns (", nCols,")")
+    else stop("Insufficient number of columns (", k,")")
   }
-  else stop(objClass, 
-                  " class not allowed, try with a \"matrix\" or a \"data.frame\"")
+  else stop("-", objClass, 
+                  "- class not supported, try with a \"matrix\" or a \"data.frame\"")
 }
 
 .defAtt <- function(x, parent) {
@@ -71,7 +68,7 @@ edge.list <- function(x) {
     )
 
   for (i in attvec) 
-    tmpdoc <- c(tmpdoc, .writeXMLLine("attvalue", tmpatt[i, ]) , sep="") 
+    tmpdoc <- c(tmpdoc, .writeXMLLine("attvalue", tmpatt[i,,drop=FALSE ]) , sep="") 
 
   paste(c("<attvalues>", tmpdoc, "</attvalues>"), sep="", collapse="")
 }
@@ -151,7 +148,7 @@ edge.list <- function(x) {
   # Loop if there are not any attributes
   if (!attributes && !vizattributes) {
     for (i in vec) {
-      XML::parseXMLAndAdd(.writeXMLLine(type, datasetnoatt[i,]),parent=PAR)
+      XML::parseXMLAndAdd(.writeXMLLine(type, datasetnoatt[i,,drop=FALSE]),parent=PAR)
     }
     return(NULL)
   }
@@ -162,7 +159,7 @@ edge.list <- function(x) {
     for (i in vec) {      
       # Adding directly
       XML::parseXMLAndAdd(
-        paste(.writeXMLLine(type, datasetnoatt[i,], finalizer=FALSE), 
+        paste(.writeXMLLine(type, datasetnoatt[i,,drop=FALSE], finalizer=FALSE), 
               .addAtts(att[i,], attvec), # Builds atts definition
               "</",type,">",sep=""),
         parent=PAR)
@@ -175,20 +172,20 @@ edge.list <- function(x) {
     # Node/Edge + Atts 
     if (attributes) {
       tempnode0 <- paste(
-        .writeXMLLine(type, datasetnoatt[i,], finalizer=FALSE),
+        .writeXMLLine(type, datasetnoatt[i,,drop=FALSE], finalizer=FALSE),
         .addAtts(att[i,], attvec), sep="")
     }
-    else tempnode0 <- .writeXMLLine(type, datasetnoatt[i,], finalizer=FALSE)
+    else tempnode0 <- .writeXMLLine(type, datasetnoatt[i,,drop=FALSE], finalizer=FALSE)
     
     # Viz Att printing
     # Colors
     if (vizcolors) {
-      tempnode0 <- paste(tempnode0, .writeXMLLine("color", vizcol.df[i,]),
+      tempnode0 <- paste(tempnode0, .writeXMLLine("color", vizcol.df[i,,drop=FALSE]),
                          sep="")
     }
     # Position
     if (vizposition) {
-      tempnode0 <- paste(tempnode0, .writeXMLLine("position", vizpos.df[i,]),
+      tempnode0 <- paste(tempnode0, .writeXMLLine("position", vizpos.df[i,,drop=FALSE]),
                          sep="")
     }
     # Size
@@ -203,7 +200,7 @@ edge.list <- function(x) {
     }
     # Image
     if (vizimage) {
-      tempnode0 <- paste(tempnode0, .writeXMLLine("shape", vizimg.df[i,]),
+      tempnode0 <- paste(tempnode0, .writeXMLLine("shape", vizimg.df[i,,drop=FALSE]),
                          sep="")
     }
     XML::parseXMLAndAdd(sprintf("%s</%s>",tempnode0, type), parent=PAR)
@@ -213,12 +210,13 @@ edge.list <- function(x) {
 
 
 
-#' Builds a graph of \code{gexf} class
+#' Creates an object of class \code{gexf}
 #' 
-#' \code{write.gexf} takes a \code{node} matrix (or dataframe) and an
+#' Takes a \code{node} matrix (or dataframe) and an
 #' \code{edge} matrix (or dataframe) and creates a \code{gexf} object
 #' containing a data-frame representation and a gexf representation of a graph.
 #' 
+#' @details
 #' Just like \code{nodesVizAtt} and \code{edgesVizAtt}, \code{nodesAtt} and
 #' \code{edgesAtt} must have the same number of rows as nodes and edges,
 #' respectively. Using data frames is necessary as in this way data types are
@@ -286,6 +284,7 @@ edge.list <- function(x) {
 #' @param encoding Encoding of the graph.
 #' @param vers Character scalar. Version of the GEXF format to generate.
 #' By default \code{"1.3"}.
+#' @param ... Passed to \code{gexf}.
 #' @return A \code{gexf} class object (list). Contains the following: \itemize{
 #' \item \code{meta} : (list) Meta data describing the graph.  \item
 #' \code{mode} : (list) Sets the default edge type and the graph mode.  \item
@@ -317,8 +316,12 @@ edge.list <- function(x) {
 #'   demo(gexfbuildfromscratch) # Example building a net from scratch.
 #'   }
 #' 
+#' @name gexf-class
+NULL
+
 #' @export
-write.gexf <- function(
+#' @rdname gexf-class
+gexf <- function(
   ################################################################################  
   # Prints the gexf file
   ################################################################################
@@ -346,20 +349,22 @@ write.gexf <- function(
   ##############################################################################
   # CLASS CHECKS AND OTHERS CHECKS
   
-  # version
-  vers <- gexf_version(vers)
-  
   # Nodes
-  if (is.data.frame(nodes) | is.matrix(nodes)) {
+  if (inherits(nodes, c("data.frame", "matrix"))) {
     if (NCOL(nodes) != 2) stop("-nodes- should have two columns not ", NCOL(nodes))
   }
   else stop("Invalid object type: -nodes- should be a two column data.frame or a matrix")
   
   # Edges
-  if (is.data.frame(edges) | is.matrix(edges)) {
+  if (inherits(edges, c("data.frame", "matrix"))) {
     if (NCOL(edges) != 2) stop("-edges- should have two columns not ", NCOL(edges))
   }
   else stop("Invalid object type: -edges- should be a two column data.frame or a matrix")
+  
+  # version
+  vers <- gexf_version(vers)
+  n <- nrow(nodes)
+  m <- nrow(edges)
   
   # Edges Label
   .parseEdgesLabel(edgesLabel, edges)
@@ -374,13 +379,24 @@ write.gexf <- function(
   .parseEdgesWeight(edgesWeight, edges)
   
   # Parsing edges Viz Att
-  nEdgesVizAtt <- .parseEdgesVizAtt(edgesVizAtt, edges)
+  edgesVizAtt  <- if (length(unlist(edgesVizAtt))) {
+    Map(function(a, b) parseVizAtt(a, b, m, "edges"), a=names(edgesVizAtt),
+        b=edgesVizAtt)
+  } else NULL
+  
+  nEdgesVizAtt <- length(edgesVizAtt)
+  # nEdgesVizAtt <- .parseEdgesVizAtt(edgesVizAtt, edges)
   
   # Nodes Att
   nNodesAtt <- .parseNodesAtt(nodesAtt, nodes)
   
   # Parsing nodes Viz Atts
-  nNodesVizAtt <- .parseNodesVizAtt(nodesVizAtt, nodes)
+  nodesVizAtt  <- if (length(unlist(nodesVizAtt))) {
+    Map(function(a, b) parseVizAtt(a, b, n, "nodes"), a=names(nodesVizAtt),
+                        b=nodesVizAtt)
+  } else NULL
+  
+  nNodesVizAtt <- length(nodesVizAtt)
   
   # Checking the number of digits
   if (!is.integer(digits)) stop("Invalid number of digits ",digits,
@@ -393,14 +409,16 @@ write.gexf <- function(
   if (length(nodeDynamic) > 0) {
     if (is.data.frame(nodeDynamic) | is.matrix(nodeDynamic)) {
       if (NROW(nodeDynamic) == NROW(nodes)) dynamic[1] <- TRUE
-      else stop("Insuficient number of rows: -nodeDynamic- (",NROW(nodeDynamic), " rows) should have the same number of rows than nodes there are (", NROW(nodes),")")
+      else stop("Insufficient number of rows: -nodeDynamic- (",NROW(nodeDynamic), 
+                " rows) should have the same number of rows than nodes there are (",
+                NROW(nodes),")")
     } else stop("Invalid object type: -nodeDynamic- should be a two columns data.frame or a matrix")
   }
   
   if (length(edgeDynamic) > 0) {
     if (is.data.frame(edgeDynamic) | is.matrix(edgeDynamic)) {
       if (NROW(edgeDynamic) == NROW(edges)) dynamic[2] <- TRUE
-      else stop("Insuficient number of rows: -edgeDynamic- (",NROW(edgeDynamic), " rows) should have the same number of rows than edges there are (", NROW(edges),")")
+      else stop("Insufficient number of rows: -edgeDynamic- (",NROW(edgeDynamic), " rows) should have the same number of rows than edges there are (", NROW(edges),")")
     } else stop("Invalid object type: -edgeDynamic- should be a two columns data.frame or a matrix")
   }
   
@@ -702,8 +720,8 @@ write.gexf <- function(
     atts.definitions=list(nodes = nodesAttDf, edges = edgesAttDf),
     nodesVizAtt=nodesVizAtt,
     edgesVizAtt=edgesVizAtt,
-    nodes=nodes,
-    edges=cbind(edges,edgesLabel),
+    nodes=as.data.frame(nodes),
+    edges=as.data.frame(cbind(edges,edgesLabel)),
     graph=XML::saveXML(xmlFile, encoding=encoding)
     )
   
@@ -722,4 +740,13 @@ write.gexf <- function(
   } else {
     print(results, file=output, replace=TRUE)
   }
+}
+
+
+#' @export
+#' @rdname gexf-class
+write.gexf <- function(...) {
+  warning("In future versions, rgexf 2.0, this function will be",
+          " the equivalent of -print(..., file=)-, and replaced by -gexf-")
+  gexf(...)
 }
