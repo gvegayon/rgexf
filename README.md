@@ -1,5 +1,5 @@
 
-[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/rgexf)](https://cran.r-project.org/package=rgexf) [![Downloads](http://cranlogs.r-pkg.org/badges/rgexf?color=brightgreen)](http://cran.rstudio.com/package=rgexf) [![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/rgexf)](http://cran.rstudio.com/package=rgexf) [![Travis-CI Build Status](https://travis-ci.org/gvegayon/rgexf.svg?branch=master)](https://travis-ci.org/gvegayon/rgexf) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/gvegayon/rgexf?branch=master&svg=true)](https://ci.appveyor.com/project/gvegayon/rgexf)
+[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/rgexf)](https://cran.r-project.org/package=rgexf) [![Downloads](http://cranlogs.r-pkg.org/badges/rgexf?color=brightgreen)](http://cran.rstudio.com/package=rgexf) [![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/rgexf)](http://cran.rstudio.com/package=rgexf) [![Travis-CI Build Status](https://travis-ci.org/gvegayon/rgexf.svg?branch=master)](https://travis-ci.org/gvegayon/rgexf) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/gvegayon/rgexf?branch=master&svg=true)](https://ci.appveyor.com/project/gvegayon/rgexf) [![Coverage Status](https://img.shields.io/codecov/c/github/gvegayon/rgexf/master.svg)](https://codecov.io/github/gvegayon/rgexf?branch=master)
 
 rgexf: Build, Import and Export GEXF Graph Files
 ================================================
@@ -9,7 +9,15 @@ The first R package to work with GEXF graph files (used in Gephi and others). Us
 News
 ----
 
-\[2016-11-08\] Restarting the project. \[2015-02-03\] Version 0.15.2.3 of rgexf is on CRAN. Just updating emails... \[2014-03-10\] Version 0.14.9 of rgexf is on CRAN! solves issues 15-18. Thanks =). \[2013-08-07\] Version 0.13.8 of rgexf is on CRAN! New plot.gexf method and igraph integration working =). \[2013-05-09\] Version 0.13.05 of rgexf (transitory) solves issues N 9 & 10. Looking forward for the next CRAN version. \[2013-03-14\] Version 0.13.03 of rgexf is on its way to CRAN. It now supports working with spells! \[2013-01-04\] Version 0.13.01 of rgexf is on its way to CRAN. Significant improvements and new features! \[2012-06-19\] Version 0.12.06 of rgexf is on CRAN! Now it can be directly download from R. \[2012-03-29\] Version 0.12.03.29 of rgexf has been released including many bug fixes. Please download the lastest version to check it out.
+-   \[2016-11-08\] Restarting the project.
+-   \[2015-02-03\] Version 0.15.2.3 of rgexf is on CRAN. Just updating emails...
+-   \[2014-03-10\] Version 0.14.9 of rgexf is on CRAN! solves issues 15-18. Thanks =).
+-   \[2013-08-07\] Version 0.13.8 of rgexf is on CRAN! New plot.gexf method and igraph integration working =).
+-   \[2013-05-09\] Version 0.13.05 of rgexf (transitory) solves issues N 9 & 10. Looking forward for the next CRAN version.
+-   \[2013-03-14\] Version 0.13.03 of rgexf is on its way to CRAN. It now supports working with spells!
+-   \[2013-01-04\] Version 0.13.01 of rgexf is on its way to CRAN. Significant improvements and new features!
+-   \[2012-06-19\] Version 0.12.06 of rgexf is on CRAN! Now it can be directly download from R.
+-   \[2012-03-29\] Version 0.12.03.29 of rgexf has been released including many bug fixes. Please download the lastest version to check it out.
 
 Example 1: Static net
 ---------------------
@@ -48,9 +56,13 @@ relations
 write.gexf(people, relations)
 ```
 
+    ## Warning in write.gexf(people, relations): In future versions, rgexf 2.0,
+    ## this function will be the equivalent of -print(..., file=)-, and replaced
+    ## by -gexf-
+
     ## <?xml version="1.0" encoding="UTF-8"?>
     ## <gexf xmlns="http://www.gexf.net/1.3" xmlns:viz="http://www.gexf.net/1.3/viz" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.3 http://www.gexf.net/1.3/gexf.xsd" version="1.3">
-    ##   <meta lastmodifieddate="2016-11-09">
+    ##   <meta lastmodifieddate="2016-11-10">
     ##     <creator>NodosChile</creator>
     ##     <description>A graph file writing in R using "rgexf"</description>
     ##     <keywords>gexf graph, NodosChile, R, rgexf</keywords>
@@ -93,9 +105,13 @@ time
 write.gexf(people, relations, nodeDynamic=time)
 ```
 
+    ## Warning in write.gexf(people, relations, nodeDynamic = time): In future
+    ## versions, rgexf 2.0, this function will be the equivalent of -print(...,
+    ## file=)-, and replaced by -gexf-
+
     ## <?xml version="1.0" encoding="UTF-8"?>
     ## <gexf xmlns="http://www.gexf.net/1.3" xmlns:viz="http://www.gexf.net/1.3/viz" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.3 http://www.gexf.net/1.3/gexf.xsd" version="1.3">
-    ##   <meta lastmodifieddate="2016-11-09">
+    ##   <meta lastmodifieddate="2016-11-10">
     ##     <creator>NodosChile</creator>
     ##     <description>A graph file writing in R using "rgexf"</description>
     ##     <keywords>gexf graph, NodosChile, R, rgexf</keywords>
@@ -180,9 +196,13 @@ write.gexf(nodes=people, edges=relations, edgeDynamic=time.edges,
            edgesAtt=edge.att, nodeDynamic=time.nodes, nodesAtt=node.att)
 ```
 
+    ## Warning in write.gexf(nodes = people, edges = relations, edgeDynamic =
+    ## time.edges, : In future versions, rgexf 2.0, this function will be the
+    ## equivalent of -print(..., file=)-, and replaced by -gexf-
+
     ## <?xml version="1.0" encoding="UTF-8"?>
     ## <gexf xmlns="http://www.gexf.net/1.3" xmlns:viz="http://www.gexf.net/1.3/viz" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.3 http://www.gexf.net/1.3/gexf.xsd" version="1.3">
-    ##   <meta lastmodifieddate="2016-11-09">
+    ##   <meta lastmodifieddate="2016-11-10">
     ##     <creator>NodosChile</creator>
     ##     <description>A graph file writing in R using "rgexf"</description>
     ##     <keywords>gexf graph, NodosChile, R, rgexf</keywords>
@@ -273,30 +293,32 @@ devtools::session_info()
     ## Session info --------------------------------------------------------------
 
     ##  setting  value                       
-    ##  version  R version 3.3.1 (2016-06-21)
-    ##  system   x86_64, darwin15.5.0        
-    ##  ui       unknown                     
-    ##  language (EN)                        
+    ##  version  R version 3.3.2 (2016-10-31)
+    ##  system   x86_64, linux-gnu           
+    ##  ui       X11                         
+    ##  language en_US                       
     ##  collate  en_US.UTF-8                 
-    ##  tz       America/Los_Angeles         
-    ##  date     2016-11-09
+    ##  tz       <NA>                        
+    ##  date     2016-11-10
 
     ## Packages ------------------------------------------------------------------
 
-    ##  package   * version   date       source        
-    ##  devtools    1.12.0    2016-06-24 CRAN (R 3.3.1)
-    ##  digest      0.6.10    2016-08-02 CRAN (R 3.3.1)
-    ##  evaluate    0.9       2016-04-29 CRAN (R 3.3.1)
-    ##  htmltools   0.3.5     2016-03-21 CRAN (R 3.3.1)
-    ##  igraph      1.0.1     2015-06-26 CRAN (R 3.3.1)
-    ##  knitr       1.14      2016-08-13 CRAN (R 3.3.1)
-    ##  magrittr    1.5       2014-11-22 CRAN (R 3.3.1)
-    ##  memoise     1.0.0     2016-01-29 CRAN (R 3.3.1)
-    ##  Rcpp        0.12.7    2016-09-05 CRAN (R 3.3.1)
-    ##  rgexf     * 0.16.9000 2016-11-10 local         
-    ##  rmarkdown   1.0       2016-07-08 CRAN (R 3.3.1)
-    ##  stringi     1.1.1     2016-05-27 CRAN (R 3.3.1)
-    ##  stringr     1.1.0     2016-08-19 CRAN (R 3.3.1)
-    ##  withr       1.0.2     2016-06-20 CRAN (R 3.3.1)
-    ##  XML         3.98-1.4  2016-03-01 CRAN (R 3.3.1)
-    ##  yaml        2.1.13    2014-06-12 CRAN (R 3.3.1)
+    ##  package    * version   date       source        
+    ##  assertthat   0.1       2013-12-06 CRAN (R 3.3.0)
+    ##  devtools     1.12.0    2016-06-24 CRAN (R 3.3.1)
+    ##  digest       0.6.10    2016-08-02 CRAN (R 3.3.1)
+    ##  evaluate     0.9       2016-04-29 CRAN (R 3.3.0)
+    ##  htmltools    0.3.5     2016-03-21 CRAN (R 3.3.0)
+    ##  igraph       1.0.1     2015-06-26 CRAN (R 3.3.1)
+    ##  knitr        1.14      2016-08-13 CRAN (R 3.3.1)
+    ##  magrittr     1.5       2014-11-22 CRAN (R 3.3.0)
+    ##  memoise      1.0.0     2016-01-29 CRAN (R 3.3.0)
+    ##  Rcpp         0.12.7    2016-09-05 CRAN (R 3.3.1)
+    ##  rgexf      * 0.16.9000 2016-11-10 local         
+    ##  rmarkdown    1.1       2016-10-16 CRAN (R 3.3.1)
+    ##  stringi      1.1.2     2016-10-01 CRAN (R 3.3.1)
+    ##  stringr      1.1.0     2016-08-19 CRAN (R 3.3.1)
+    ##  tibble       1.2       2016-08-26 CRAN (R 3.3.1)
+    ##  withr        1.0.2     2016-06-20 CRAN (R 3.3.0)
+    ##  XML          3.98-1.4  2016-03-01 CRAN (R 3.3.0)
+    ##  yaml         2.1.13    2014-06-12 CRAN (R 3.3.0)

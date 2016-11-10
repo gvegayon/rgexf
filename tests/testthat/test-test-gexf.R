@@ -3,6 +3,8 @@ context("gexf function")
 nodes <- cbind(a=1:10, b=letters[1:10])
 edges <- matrix(sample(1:10, 20, TRUE), ncol=2)
 
+# test_examples()
+
 # ------------------------------------------------------------------------------
 test_that("data.frame or matrix work OK", {
   

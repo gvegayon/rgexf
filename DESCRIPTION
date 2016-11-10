@@ -3,7 +3,7 @@ Type: Package
 Encoding: UTF-8
 Title: Build, Import and Export GEXF Graph Files
 Version: 0.16.9000
-Date: 2016-11-09
+Date: 2016-11-10
 Authors@R: c(
   person("George", "Vega Yon", email="g.vegayon@gmail.com", role=c("aut", "cre")),
   person("Jorge", "Fábrega Lacoa", role=c("ctb")),

@@ -3,6 +3,7 @@
 	* R/rgexf.r: Started moving from write.gexf to gexf. In the 2.0
 	  version write.gexf should be for exporting gexf graphs only.
 	* demo/*.R: Replaced write.gexf with gexf.
+	* tests/*: Adding testh_that.
 
 2016-11-09  George G. Vega Yon <g.vegayon@gmail.com>
 	* Added ChangeLog

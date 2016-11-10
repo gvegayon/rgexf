@@ -29,7 +29,7 @@ edge.list <- function(x) {
 # Translate a edgelist to two objects list (nodes + edges)
 ################################################################################
   objClass <- class(x)
-  k        <- ncol(x) == 2
+  k        <- ncol(x)
   
   if (any(c("matrix", "data.frame") %in% objClass)) {
     

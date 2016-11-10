@@ -1,12 +1,21 @@
-# Changes in rgexf version 0.16.9000 (2016-11-09)
+# Changes in rgexf version 0.16.9000 (2016-11-10)
 
 ## New features and changes
 
 * Modernization of the project (roxygen, new CRAN standards, etc.)
+
 * Updated emails
+
 * Remove broken links
+
 * Function `write.gexf` has a new argument for specifying the GEXF version
   for now it only changes the header.
+
+## New functions
+
+* The function `gexf` has been introduced as an eventual replacement of
+  `write.gexf` since it makes more sense. `write.gexf` should only be for
+  writing the gexf file on the disk. This will be effective starting vers 2.0.
 
 
 # Changes in rgexf version 0.15.2.3 (2015-02-03)
