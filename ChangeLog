@@ -1,3 +1,7 @@
+2016-11-11  George G. Vega Yon <g.vegayon@gmail.com>
+	* R/igraph.r: Removed example downloading data.
+	* R/write.gexf: idem.
+
 2016-11-10  George G. Vega Yon <g.vegayon@gmail.com>
 	* R/bugs.r: Creating a more generic method for checking viz attrs.
 	* R/rgexf.r: Started moving from write.gexf to gexf. In the 2.0

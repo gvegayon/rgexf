@@ -15,7 +15,8 @@
 #' @examples
 #' 
 #'   \dontrun{
-#'   mygraph <- read.gexf("http://gephi.org/datasets/LesMiserables.gexf")
+#'   fn <- system.file("gexf-graphs/lesmiserables.gexf", package = "rgexf")
+#'   mygraph <- read.gexf(fn)
 #'   }
 #' 
 #' @export read.gexf

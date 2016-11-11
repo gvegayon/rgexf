@@ -22,7 +22,8 @@ By the time attributes and viz-attributes aren't supported.
 \examples{
 
   \dontrun{
-  mygraph <- read.gexf("http://gephi.org/datasets/LesMiserables.gexf")
+  fn <- system.file("gexf-graphs/lesmiserables.gexf", package = "rgexf")
+  mygraph <- read.gexf(fn)
   }
 
 }

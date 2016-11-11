@@ -22,15 +22,10 @@
 #'   # Running demo
 #'   demo(gexfigraph)
 #'  
-#'   # A simple graph without
-#'   gexf1 <- read.gexf("http://gephi.org/datasets/LesMiserables.gexf")
+#'   fn <- system.file("gexf-graphs/lesmiserables.gexf", package = "rgexf")
+#'   gexf1 <- read.gexf(fn)
 #'   igraph1 <- gexf.to.igraph(gexf1)
 #'   gexf2 <- igraph.to.gexf(igraph1)
-#'   
-#'   # A graph with attributes  
-#'   gexf3 <- read.gexf("http://gexf.net/data/data.gexf")
-#'   igraph2 <- gexf.to.igraph(gexf3)
-#'   gexf4 <- igraph.to.gexf(igraph2)
 #'  }
 #' @export
 igraph.to.gexf <- function(igraph.obj, position=NULL) {
@@ -121,7 +116,7 @@ igraph.to.gexf <- function(igraph.obj, position=NULL) {
   
   # Building graph
   return(
-    write.gexf(
+    gexf(
       nodes = nodes[,c("id","name")], 
       edges = edges, 
       edgesAtt = eAtt,
