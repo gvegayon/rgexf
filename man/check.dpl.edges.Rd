@@ -9,9 +9,9 @@ check.dpl.edges(edges, undirected = FALSE, order.edgelist = TRUE)
 \arguments{
 \item{edges}{A matrix or data frame structured as a list of edges}
 
-\item{undirected}{Declares if the net is directed or not (does de diference)}
+\item{undirected}{Declares if the net is directed or not (does de difference)}
 
-\item{order.edgelist}{Wether to sort the resulting matrix or not}
+\item{order.edgelist}{Whether to sort the resulting matrix or not}
 }
 \value{
 A three column \code{data.frame} with colnames \dQuote{source},

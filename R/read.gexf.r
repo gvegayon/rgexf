@@ -126,9 +126,9 @@ read.gexf <- function(x) {
 #' @aliases add.gexf.node add.gexf.edge rm.gexf.node rm.gexf.edge
 #' add.node.spell add.edge.spell
 #' @param graph A gexf-class object.
-#' @param id A node/edge id (normaly numeric value).
+#' @param id A node/edge id (normally numeric value).
 #' @param label A node/edge label.
-#' @param type Type of conection (edge).
+#' @param type Type of connection (edge).
 #' @param number Index number(s) of a single or a group of nodes or edges.
 #' @param weight Edge weight.
 #' @param vizAtt A list of node/edge viz attributes (see

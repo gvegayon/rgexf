@@ -1,24 +1,26 @@
-# Changes in rgexf version 0.16.9000 (2016-11-10)
+# Changes in rgexf version 0.16.0 (2017-11-06)
 
 ## New features and changes
 
 * Modernization of the project (roxygen, new CRAN standards, etc.)
 
-* Updated emails
+* Updated emails.
 
-* Remove broken links
+* Remove broken links.
 
 * Function `write.gexf` has a new argument for specifying the GEXF version
   for now it only changes the header.
+  
+* `plot.gexf` method is now defunct. Future releases will include a replacement.
 
 ## New functions
 
 * The function `gexf` has been introduced as an eventual replacement of
   `write.gexf` since it makes more sense. `write.gexf` should only be for
-  writing the gexf file on the disk. This will be effective starting vers 2.0.
+  writing the gexf file on the disk. This will be effective starting vers 0.17.0
 
 
-# Changes in rgexf version 0.15.2.3 (2015-02-03)
+# Changes in rgexf version 0.15.3 (2015-03-24)
 
 -   Updating emails.
 
@@ -47,7 +49,7 @@
 ## Development
 
 -   Option -keepFactors- default is now in -FALSE- (used to be
-    in -TRUE-). When setted in -TRUE- and there are factors, a warning
+    in -TRUE-). When set to -TRUE- and there are factors, a warning
     message will appear (reported in issue 18, thanks Tim Smith!).
 
 # Changes in rgexf version 0.13.11 (2013-11-27)

@@ -19,8 +19,8 @@
 #' Function is mainly written in C, so speed gains are important.
 #' 
 #' @param edges A matrix or data frame structured as a list of edges
-#' @param undirected Declares if the net is directed or not (does de diference)
-#' @param order.edgelist Wether to sort the resulting matrix or not
+#' @param undirected Declares if the net is directed or not (does de difference)
+#' @param order.edgelist Whether to sort the resulting matrix or not
 #' @return A three column \code{data.frame} with colnames \dQuote{source},
 #' \dQuote{target} \dQuote{reps}.
 #' @author George Vega Yon 

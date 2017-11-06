@@ -234,7 +234,7 @@ edge.list <- function(x) {
 #' colvector (float values).  \item Thickness (see size).  \item Node Shape
 #' (string), currently unsupported by Gephi, can take the values of
 #' \emph{disk}, \emph{square}, \emph{triangle}, \emph{diamond} and
-#' \emph{image}.  \item Edge Shape (string), currently unsuported by Gephi, can
+#' \emph{image}.  \item Edge Shape (string), currently unsupported by Gephi, can
 #' take the values of \emph{solid}, \emph{dotted}, \emph{dashed} and
 #' \emph{double}.  \item Image (string), currently unsupported by Gephi,
 #' consists on a vector of strings representing URIs.  }
@@ -242,7 +242,7 @@ edge.list <- function(x) {
 #' \code{nodeDynamic} and \code{edgeDynamic} allow to draw dynamic graphs. It
 #' should contain two columns \emph{start} and \emph{end}, both allowing
 #' \code{NA} value. It can be use jointly with \code{tFormat} which by default
-#' is setted as \dQuote{double}. Currently accepted time formats are: \itemize{
+#' is set as \dQuote{double}. Currently accepted time formats are: \itemize{
 #' \item Integer or double.  \item International standard \emph{date}
 #' yyyy-mm-dd.  \item dateTime W3 XSD
 #' (\url{http://www.w3.org/TR/xmlschema-2/#dateTime}).  }

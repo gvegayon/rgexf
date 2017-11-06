@@ -18,3 +18,5 @@ demo/gexfplot\.R
 ^codecov\.yml$
 ^readme\.md$
 ^readme\.rmd$
+^dependencies$
+^makefile$

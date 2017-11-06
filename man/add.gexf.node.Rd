@@ -36,7 +36,7 @@ add.edge.spell(graph, id = NULL, number = NULL, start = NULL,
 \arguments{
 \item{graph}{A gexf-class object.}
 
-\item{id}{A node/edge id (normaly numeric value).}
+\item{id}{A node/edge id (normally numeric value).}
 
 \item{label}{A node/edge label.}
 
@@ -53,7 +53,7 @@ add.edge.spell(graph, id = NULL, number = NULL, start = NULL,
 
 \item{target}{Target node's id.}
 
-\item{type}{Type of conection (edge).}
+\item{type}{Type of connection (edge).}
 
 \item{weight}{Edge weight.}
 
