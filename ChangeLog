@@ -1,6 +1,11 @@
+2017-11-05  George G. Vega Yon <g.vegayon@gmail.com>
+	* Getting ready for next cran release.
+
+
 2016-11-11  George G. Vega Yon <g.vegayon@gmail.com>
 	* R/igraph.r: Removed example downloading data.
 	* R/write.gexf: idem.
+
 
 2016-11-10  George G. Vega Yon <g.vegayon@gmail.com>
 	* R/bugs.r: Creating a more generic method for checking viz attrs.
@@ -8,6 +13,7 @@
 	  version write.gexf should be for exporting gexf graphs only.
 	* demo/*.R: Replaced write.gexf with gexf.
 	* tests/*: Adding testh_that.
+
 
 2016-11-09  George G. Vega Yon <g.vegayon@gmail.com>
 	* Added ChangeLog

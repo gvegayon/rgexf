@@ -1,4 +1,5 @@
 #include <R.h>
+#include <Rdefines.h>
 #include <Rmath.h>
 #include "rgexf.h"
 
@@ -57,3 +58,24 @@ void RCheckDplEdges(
     }
   }
 }
+
+static R_NativePrimitiveArgType RCheckDplEdges_t[] = {
+  REALSXP, REALSXP, INTSXP, REALSXP, REALSXP, REALSXP
+};
+
+static R_NativePrimitiveArgType RSwitchEdges_t[] = {
+  INTSXP, REALSXP, REALSXP, REALSXP, REALSXP
+};
+
+
+static const R_CMethodDef cMethods[] = {
+  {"RCheckDplEdges", (DL_FUNC) &RCheckDplEdges, 6, RCheckDplEdges_t},
+  {"RSwitchEdges", (DL_FUNC) &RSwitchEdges, 5, RSwitchEdges_t},
+  {NULL, NULL, 0}
+};
+
+void R_init_rgexf(DllInfo *info) {
+  R_registerRoutines(info, cMethods, NULL, NULL, NULL);
+  R_useDynamicSymbols(info, FALSE);
+  // R_forceSymbols(info, TRUE);
+};

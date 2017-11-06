@@ -1,8 +1,7 @@
+rgexf: Build, Import and Export GEXF Graph Files
+================
 
 [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/rgexf)](https://cran.r-project.org/package=rgexf) [![Downloads](http://cranlogs.r-pkg.org/badges/rgexf?color=brightgreen)](http://cran.rstudio.com/package=rgexf) [![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/rgexf)](http://cran.rstudio.com/package=rgexf) [![Travis-CI Build Status](https://travis-ci.org/gvegayon/rgexf.svg?branch=master)](https://travis-ci.org/gvegayon/rgexf) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/gvegayon/rgexf?branch=master&svg=true)](https://ci.appveyor.com/project/gvegayon/rgexf) [![Coverage Status](https://img.shields.io/codecov/c/github/gvegayon/rgexf/master.svg)](https://codecov.io/github/gvegayon/rgexf?branch=master)
-
-rgexf: Build, Import and Export GEXF Graph Files
-================================================
 
 The first R package to work with GEXF graph files (used in Gephi and others). Using XML library, it allows the user to easily build/read graph files including attributes, GEXF viz attributes (such as colour, size, and position), network dynamics (for both edges and nodes, including spells) and edges weighting. Users can build/handle graphs element-by-element or massively through data-frames, visualize the graph on a web browser through sigmajs javascript library and interact with the igraph package.
 
@@ -62,7 +61,7 @@ write.gexf(people, relations)
 
     ## <?xml version="1.0" encoding="UTF-8"?>
     ## <gexf xmlns="http://www.gexf.net/1.3" xmlns:viz="http://www.gexf.net/1.3/viz" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.3 http://www.gexf.net/1.3/gexf.xsd" version="1.3">
-    ##   <meta lastmodifieddate="2016-11-10">
+    ##   <meta lastmodifieddate="2017-11-06">
     ##     <creator>NodosChile</creator>
     ##     <description>A graph file writing in R using "rgexf"</description>
     ##     <keywords>gexf graph, NodosChile, R, rgexf</keywords>
@@ -111,7 +110,7 @@ write.gexf(people, relations, nodeDynamic=time)
 
     ## <?xml version="1.0" encoding="UTF-8"?>
     ## <gexf xmlns="http://www.gexf.net/1.3" xmlns:viz="http://www.gexf.net/1.3/viz" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.3 http://www.gexf.net/1.3/gexf.xsd" version="1.3">
-    ##   <meta lastmodifieddate="2016-11-10">
+    ##   <meta lastmodifieddate="2017-11-06">
     ##     <creator>NodosChile</creator>
     ##     <description>A graph file writing in R using "rgexf"</description>
     ##     <keywords>gexf graph, NodosChile, R, rgexf</keywords>
@@ -202,7 +201,7 @@ write.gexf(nodes=people, edges=relations, edgeDynamic=time.edges,
 
     ## <?xml version="1.0" encoding="UTF-8"?>
     ## <gexf xmlns="http://www.gexf.net/1.3" xmlns:viz="http://www.gexf.net/1.3/viz" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.3 http://www.gexf.net/1.3/gexf.xsd" version="1.3">
-    ##   <meta lastmodifieddate="2016-11-10">
+    ##   <meta lastmodifieddate="2017-11-06">
     ##     <creator>NodosChile</creator>
     ##     <description>A graph file writing in R using "rgexf"</description>
     ##     <keywords>gexf graph, NodosChile, R, rgexf</keywords>
@@ -290,35 +289,45 @@ Session info
 devtools::session_info()
 ```
 
-    ## Session info --------------------------------------------------------------
+    ## Session info -------------------------------------------------------------
 
     ##  setting  value                       
-    ##  version  R version 3.3.2 (2016-10-31)
+    ##  version  R version 3.4.2 (2017-09-28)
     ##  system   x86_64, linux-gnu           
     ##  ui       X11                         
     ##  language en_US                       
     ##  collate  en_US.UTF-8                 
-    ##  tz       <NA>                        
-    ##  date     2016-11-10
+    ##  tz       America/Los_Angeles         
+    ##  date     2017-11-06
 
-    ## Packages ------------------------------------------------------------------
+    ## Packages -----------------------------------------------------------------
 
-    ##  package    * version   date       source        
-    ##  assertthat   0.1       2013-12-06 CRAN (R 3.3.0)
-    ##  devtools     1.12.0    2016-06-24 CRAN (R 3.3.1)
-    ##  digest       0.6.10    2016-08-02 CRAN (R 3.3.1)
-    ##  evaluate     0.9       2016-04-29 CRAN (R 3.3.0)
-    ##  htmltools    0.3.5     2016-03-21 CRAN (R 3.3.0)
-    ##  igraph       1.0.1     2015-06-26 CRAN (R 3.3.1)
-    ##  knitr        1.14      2016-08-13 CRAN (R 3.3.1)
-    ##  magrittr     1.5       2014-11-22 CRAN (R 3.3.0)
-    ##  memoise      1.0.0     2016-01-29 CRAN (R 3.3.0)
-    ##  Rcpp         0.12.7    2016-09-05 CRAN (R 3.3.1)
-    ##  rgexf      * 0.16.9000 2016-11-10 local         
-    ##  rmarkdown    1.1       2016-10-16 CRAN (R 3.3.1)
-    ##  stringi      1.1.2     2016-10-01 CRAN (R 3.3.1)
-    ##  stringr      1.1.0     2016-08-19 CRAN (R 3.3.1)
-    ##  tibble       1.2       2016-08-26 CRAN (R 3.3.1)
-    ##  withr        1.0.2     2016-06-20 CRAN (R 3.3.0)
-    ##  XML          3.98-1.4  2016-03-01 CRAN (R 3.3.0)
-    ##  yaml         2.1.13    2014-06-12 CRAN (R 3.3.0)
+    ##  package   * version   date       source        
+    ##  backports   1.1.1     2017-09-25 CRAN (R 3.4.2)
+    ##  base      * 3.4.2     2017-10-27 local         
+    ##  compiler    3.4.2     2017-10-27 local         
+    ##  datasets  * 3.4.2     2017-10-27 local         
+    ##  devtools    1.13.3    2017-08-02 CRAN (R 3.4.1)
+    ##  digest      0.6.12    2017-01-27 CRAN (R 3.4.0)
+    ##  evaluate    0.10.1    2017-06-24 cran (@0.10.1)
+    ##  graphics  * 3.4.2     2017-10-27 local         
+    ##  grDevices * 3.4.2     2017-10-27 local         
+    ##  htmltools   0.3.6     2017-04-28 CRAN (R 3.4.0)
+    ##  igraph      1.1.2     2017-07-21 cran (@1.1.2) 
+    ##  knitr       1.17      2017-08-10 cran (@1.17)  
+    ##  magrittr    1.5       2014-11-22 CRAN (R 3.3.2)
+    ##  memoise     1.1.0     2017-04-21 CRAN (R 3.4.0)
+    ##  methods   * 3.4.2     2017-10-27 local         
+    ##  pkgconfig   2.0.1     2017-03-21 cran (@2.0.1) 
+    ##  Rcpp        0.12.13   2017-09-28 CRAN (R 3.4.2)
+    ##  rgexf     * 0.16.9000 2017-11-06 local         
+    ##  rmarkdown   1.6       2017-06-15 CRAN (R 3.4.1)
+    ##  rprojroot   1.2       2017-01-16 CRAN (R 3.3.2)
+    ##  stats     * 3.4.2     2017-10-27 local         
+    ##  stringi     1.1.5     2017-04-07 CRAN (R 3.4.0)
+    ##  stringr     1.2.0     2017-02-18 CRAN (R 3.4.0)
+    ##  tools       3.4.2     2017-10-27 local         
+    ##  utils     * 3.4.2     2017-10-27 local         
+    ##  withr       2.0.0     2017-07-28 cran (@2.0.0) 
+    ##  XML         3.98-1.9  2017-06-19 CRAN (R 3.4.1)
+    ##  yaml        2.1.14    2016-11-12 CRAN (R 3.3.2)

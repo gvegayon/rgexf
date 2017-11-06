@@ -13,4 +13,3 @@ en Intermedios: medios de comunicacion y democracia en Chile. Ediciones UDP
 Sample of accounts by december 2011.
 }
 \keyword{datasets}
-

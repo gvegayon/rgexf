@@ -38,4 +38,3 @@ George Vega Yon
 Jorge Fabrega Lacoa
 }
 \keyword{manip}
-

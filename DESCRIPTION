@@ -2,8 +2,8 @@ Package: rgexf
 Type: Package
 Encoding: UTF-8
 Title: Build, Import and Export GEXF Graph Files
-Version: 0.16.9000
-Date: 2016-11-10
+Version: 0.17.0
+Date: 2017-11-05
 Authors@R: c(
   person("George", "Vega Yon", email="g.vegayon@gmail.com", role=c("aut", "cre")),
   person("Jorge", "Fábrega Lacoa", role=c("ctb")),
@@ -24,7 +24,7 @@ Imports:
     utils
 License: MIT + file LICENSE
 LazyLoad: yes
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1
 Suggests: knitr,
     rmarkdown,
     testthat,

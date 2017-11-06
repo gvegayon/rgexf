@@ -1,4 +1,5 @@
 ---
+title: "rgexf: Build, Import and Export GEXF Graph Files"
 output: github_document
 ---
 
@@ -7,8 +8,6 @@ output: github_document
 [![Travis-CI Build Status](https://travis-ci.org/gvegayon/rgexf.svg?branch=master)](https://travis-ci.org/gvegayon/rgexf)
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/gvegayon/rgexf?branch=master&svg=true)](https://ci.appveyor.com/project/gvegayon/rgexf)
 [![Coverage Status](https://img.shields.io/codecov/c/github/gvegayon/rgexf/master.svg)](https://codecov.io/github/gvegayon/rgexf?branch=master)
-
-# rgexf: Build, Import and Export GEXF Graph Files
 
 The first R package to work with GEXF graph files (used in Gephi and others). Using XML library, it allows the user to easily build/read graph files including attributes, GEXF viz attributes (such as colour, size, and position), network dynamics (for both edges and nodes, including spells) and edges weighting. Users can build/handle graphs element-by-element or massively through data-frames, visualize the graph on a web browser through sigmajs javascript library and interact with the igraph package.
 

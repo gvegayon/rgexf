@@ -27,13 +27,12 @@ By the time attributes and viz-attributes aren't supported.
   }
 
 }
+\references{
+The GEXF project website: \url{http://gexf.net}
+}
 \author{
 George Vega Yon 
 
 Jorge Fabrega Lacoa
 }
-\references{
-The GEXF project website: \url{http://gexf.net}
-}
 \keyword{IO}
-

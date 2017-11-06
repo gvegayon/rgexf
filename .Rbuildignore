@@ -13,8 +13,8 @@ R/zzz\.R
 demo/gexfplot\.R
 .*\.sh
 ^mygraph\.gexf
-^README\.Rmd$
-^README-.*\.png$
 ^\.travis\.yml$
 ^appveyor\.yml$
 ^codecov\.yml$
+^readme\.md$
+^readme\.rmd$

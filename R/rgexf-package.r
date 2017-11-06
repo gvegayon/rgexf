@@ -34,7 +34,7 @@ gexf_version <- function(vers="1.3") {
 
 #' @importFrom XML xmlTreeParse xmlNode addChildren asXMLNode saveXML newXMLDoc
 #'  newXMLNode newXMLNamespace xmlAttrs parseXMLAndAdd
-#' @useDynLib rgexf
+#' @useDynLib rgexf, .registration=TRUE, .fixes= "C_"
 #' @importFrom igraph get.data.frame list.vertex.attributes list.edge.attributes
 #'   E is.directed V set.vertex.attribute set.edge.attribute
 #' @importFrom grDevices rgb col2rgb

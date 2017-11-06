@@ -2,9 +2,9 @@
 % Please edit documentation in R/rgexf-package.r
 \docType{package}
 \name{rgexf-package}
-\alias{gephi}
-\alias{rgexf}
 \alias{rgexf-package}
+\alias{rgexf}
+\alias{gephi}
 \title{Build, Import and Export GEXF Graph Files}
 \description{
 Create, read and write GEXF (Graph Exchange XML Format) graph files (used in
@@ -55,4 +55,3 @@ See the GEXF primer for details on the GEXF graph format:
 \url{http://sigmajs.org/} }
 }
 \keyword{package}
-

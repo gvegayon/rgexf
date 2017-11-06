@@ -46,7 +46,7 @@ check.dpl.edges <- function(edges, undirected=FALSE, order.edgelist=TRUE) {
  
   nedges <- length(srce)
   
-  result <- .C("RCheckDplEdges", 
+  result <- .C(C_RCheckDplEdges, 
      as.double(srce),           # Input Source
      as.double(trgt),           # Input Target
      as.integer(undirected),    # Tells the function if the graph is undirected
@@ -58,7 +58,7 @@ check.dpl.edges <- function(edges, undirected=FALSE, order.edgelist=TRUE) {
      ),
      "reps" = as.double(        # Output Target
        vector("double", nedges)
-     ), PACKAGE="rgexf"
+     ) #, PACKAGE="rgexf"
      )
   
   result <- data.frame(source=result$source, target=result$target, 
@@ -100,7 +100,7 @@ switch.edges <- function(edges) {
     stop("No NA, NULL or NaN elements can be passed to this function.")
 
   result <- .C(
-    "RSwitchEdges",
+    C_RSwitchEdges,
     as.integer(NROW(edges)),
     as.double(edges[,1]),
     as.double(edges[,2]),
@@ -109,7 +109,7 @@ switch.edges <- function(edges) {
     ),
     "target" = as.double(              # Output Target
       vector("double", NROW(edges))
-    ), PACKAGE="rgexf"
+    ) # , PACKAGE="rgexf"
     )
   
   return(

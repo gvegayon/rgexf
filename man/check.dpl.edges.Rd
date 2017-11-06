@@ -43,4 +43,3 @@ Function is mainly written in C, so speed gains are important.
 George Vega Yon
 }
 \keyword{manip}
-
