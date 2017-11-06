@@ -5,3 +5,4 @@ plot.gexf <- function(x, EdgeType=NULL, output.dir=NULL,...){
 
   .Defunct("Gephi for visualizing")  
 }
+

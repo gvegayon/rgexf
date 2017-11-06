@@ -113,7 +113,7 @@ NULL
 #'     # Summary and pring
 #'     summary(mygraph)
 #'     
-#'     print(mygraph, file="mygraph.gexf", replace=T)
+#'     write.gexf(mygraph, output="mygraph.gexf", replace=TRUE)
 #'     
 #'     # Plotting
 #'     plot(mygraph)

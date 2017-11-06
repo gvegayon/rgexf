@@ -738,15 +738,30 @@ gexf <- function(
   if (is.na(output)) {
     return(results)
   } else {
-    print(results, file=output, replace=TRUE)
+    # warning("Starting version 0.17.0")
+    write.gexf(results, file=output, replace=TRUE)
   }
 }
 
 
 #' @export
 #' @rdname gexf-class
-write.gexf <- function(...) {
-  warning("In future versions, rgexf 2.0, this function will be",
-          " the equivalent of -print(..., file=)-, and replaced by -gexf-")
-  gexf(...)
+write.gexf <- function(nodes, ...) {
+  
+  if (!inherits(nodes, "gexf")) {
+    gexf(nodes, ...)
+    
+  } else if (length(list(...)$output)) {
+    
+    output <- list(...)$output
+    
+    f <- file(description = output, open="w",encoding='UTF-8')
+    write(nodes$graph, file=f)
+    close.connection(f)
+    message('GEXF graph successfully written at:\n',normalizePath(output))
+    return(invisible(nodes))
+    
+  }
 }
+
+

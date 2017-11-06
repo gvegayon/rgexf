@@ -3,7 +3,7 @@
 
 Checking the R package DiagrammeR version 0.9.2
 rgexf version 0.17.0
-2017-11-06 11:55:51
+2017-11-06 14:33:25
 
  -------------------------------------------------------------------------------- 
 
@@ -13,7 +13,7 @@ rgexf version 0.17.0
 * checking for LF line-endings in source and make files and shell scripts
 * checking for empty or unneeded directories
 * building ‘DiagrammeR_0.9.2.tar.gz’
-* using log directory ‘/tmp/RtmpHJOo31/DiagrammeR.Rcheck’
+* using log directory ‘/tmp/RtmpFYFjzL/DiagrammeR.Rcheck’
 * using R version 3.4.2 (2017-09-28)
 * using platform: x86_64-pc-linux-gnu (64-bit)
 * using session charset: UTF-8

@@ -73,5 +73,5 @@ graph <- gexf(
     position=rbind(pos,pos2,pos3))
   )
 
-print(graph)
+graph
 ```

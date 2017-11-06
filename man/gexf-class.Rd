@@ -16,7 +16,7 @@ gexf(nodes, edges, edgesLabel = NULL, edgesId = NULL, edgesAtt = NULL,
   keywords = "gexf graph, NodosChile, R, rgexf"), keepFactors = FALSE,
   encoding = "UTF-8", vers = "1.3")
 
-write.gexf(...)
+write.gexf(nodes, ...)
 }
 \arguments{
 \item{nodes}{A two-column data-frame or matrix of \dQuote{id}s and
