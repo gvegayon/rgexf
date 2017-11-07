@@ -73,6 +73,7 @@ vizAttsSpecs <- list(
 )
 
 parseVizAtt <- function(att, dat, n, type=c("nodes", "edges")) {
+
   # Generic checks
   if (is.vector(dat)) {
     if (length(dat) < n)

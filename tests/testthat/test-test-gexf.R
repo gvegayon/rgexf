@@ -8,8 +8,8 @@ edges <- matrix(sample(1:10, 20, TRUE), ncol=2)
 # ------------------------------------------------------------------------------
 test_that("data.frame or matrix work OK", {
   
-  ans0 <- gexf(as.data.frame(nodes), as.data.frame(edges))
-  ans1 <- gexf(nodes, edges)
+  set.seed(1);ans0 <- gexf(as.data.frame(nodes), as.data.frame(edges))
+  set.seed(1);ans1 <- gexf(nodes, edges)
   
   expect_equal(ans0,ans1)
 })

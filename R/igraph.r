@@ -59,7 +59,7 @@ igraph.to.gexf <- function(igraph.obj, position=NULL) {
   ## replace from and to in edges with their IDs
   # first create a named vector of ids
   nodesID <- nodes$id
-  names(nodesID) <- gdata$nodes$label
+  names(nodesID) <- gdata$vertices$name
   
   edges <- tmpedges
   # now in the edges create the id columns

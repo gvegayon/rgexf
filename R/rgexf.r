@@ -319,6 +319,37 @@ edge.list <- function(x) {
 #' @name gexf-class
 NULL
 
+default_nodeVizAtt <- list(
+  size     = function() 8.0,
+  position = function() structure(c(runif(2, -200, 200), 0), names = c("x", "y", "z")),
+  color    = function() c(
+    structure(as.vector(unname(col2rgb("steelblue"))), names = c("r", "g", "b")),
+    a = .8
+  )
+)
+
+set_default_nodeVizAtt <- function() {
+  
+  # Getting parameters
+  env <- parent.frame()
+  n <- nrow(env[["nodes"]])
+  
+  # Checking viz attributes
+  for (att in names(default_nodeVizAtt))
+    if (!length(env[["nodesVizAtt"]][[att]])) {
+      
+      env[["nodesVizAtt"]][[att]] <- do.call(
+        rbind,
+        lapply(1L:n, function(i) default_nodeVizAtt[[att]]())
+      )
+        
+    }
+  
+  
+      
+  
+}
+
 #' @export
 #' @rdname gexf-class
 gexf <- function(
@@ -391,10 +422,17 @@ gexf <- function(
   nNodesAtt <- .parseNodesAtt(nodesAtt, nodes)
   
   # Parsing nodes Viz Atts
+  set_default_nodeVizAtt()
+  
   nodesVizAtt  <- if (length(unlist(nodesVizAtt))) {
+    
+    # Removing empty ones
+    nodesVizAtt <- nodesVizAtt[sapply(nodesVizAtt, length) > 0]
+    
     Map(function(a, b) parseVizAtt(a, b, n, "nodes"), a=names(nodesVizAtt),
                         b=nodesVizAtt)
   } else NULL
+  
   
   nNodesVizAtt <- length(nodesVizAtt)
   
@@ -739,7 +777,7 @@ gexf <- function(
     return(results)
   } else {
     # warning("Starting version 0.17.0")
-    write.gexf(results, file=output, replace=TRUE)
+    write.gexf(results, output=output, replace=TRUE)
   }
 }
 

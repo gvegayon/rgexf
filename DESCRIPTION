@@ -2,7 +2,7 @@ Package: rgexf
 Type: Package
 Encoding: UTF-8
 Title: Build, Import and Export GEXF Graph Files
-Version: 0.17.0
+Version: 0.16.0
 Date: 2017-11-05
 Authors@R: c(
   person("George", "Vega Yon", email="g.vegayon@gmail.com", role=c("aut", "cre")),
@@ -13,7 +13,7 @@ Description: Create, read and write GEXF (Graph Exchange XML Format) graph
     easily build/read graph files including attributes, GEXF viz attributes (such
     as color, size, and position), network dynamics (for both edges and nodes) and
     edge weighting. Users can build/handle graphs element-by-element or massively
-    through data-frames, visualize the graph on a web browser through "sigmajs" (a
+    through data-frames, visualize the graph on a web browser through "gexf-js" (a
     javascript library) and interact with the igraph package.
 URL: http://github.com/gvegayon/rgexf
 BugReports: http://github.com/gvegayon/rgexf/issues
@@ -21,7 +21,8 @@ Imports:
     XML,
     igraph,
     grDevices,
-    utils
+    utils,
+    servr
 License: MIT + file LICENSE
 LazyLoad: yes
 RoxygenNote: 6.0.1

@@ -11,7 +11,7 @@
 * Function `write.gexf` has a new argument for specifying the GEXF version
   for now it only changes the header.
   
-* `plot.gexf` method is now defunct. Future releases will include a replacement.
+* `plot.gexf` method now uses `gexf-js` instead of `sigma.js`.
 
 ## New functions
 

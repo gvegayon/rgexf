@@ -1,6 +1,7 @@
 2017-11-06  George G. Vega Yon <g.vegayon@gmail.com>
 	* Working on next CRAN release. Checking that works with
 	  DiagrammeR, and spell checking.
+	* Plotting now is made through gexf-js.
 
 
 2017-11-05  George G. Vega Yon <g.vegayon@gmail.com>

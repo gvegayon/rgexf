@@ -39,6 +39,7 @@ gexf_version <- function(vers="1.3") {
 #'   E is.directed V set.vertex.attribute set.edge.attribute
 #' @importFrom grDevices rgb col2rgb
 #' @importFrom utils head
+#' @importFrom servr httd
 NULL
 
 #' Edge list with attributes
@@ -68,33 +69,22 @@ NULL
 #' \code{summay.gexf} prints summary statistics and information about the
 #' graph.
 #' 
-#' \code{plot.gexf} plots the graph object in the web browser using sigma-js
-#' javascript library. Generated files are stored at the OS's \dQuote{temp}
-#' folder. If \code{output.dir} is not \code{NULL}, then all files required to
-#' display the graph in the web browser will be saved in the \code{output.dir}.
 #' 
-#' Users must note that \code{plot.gexf} starts a server using the \code{Rook}
-#' package, otherwise it will not be possible to see the visualization (sigmajs
-#' requires this).  to
-#' 
-#' @aliases print.gexf export-gexf plot.gexf summary.gexf
+#' @aliases print.gexf export-gexf summary.gexf
 #' @param x An \code{gexf} class object.
 #' @param object An \code{gexf} class object.
 #' @param file String. Output path where to save the GEXF file.
 #' @param replace Logical. If \code{file} exists, \code{TRUE} would replace the
 #' file.
-#' @param EdgeType For the visualization
-#' @param output.dir String. The complete path where to export the sigmajs
-#' visualization
 #' @param \dots Ignored
 #' @return \item{list("print.gexf")}{ None (invisible \code{NULL}).}
 #' \item{list("summary.gexf")}{ List containing some \code{gexf} object
-#' statistics.} \item{list("plot.gexf")}{ None (invisible \code{NULL}).}
-#' @author George Vega Yon 
+#' statistics.} 
+#' 
+#' @author George G. Vega Yon 
 #' 
 #' Joshua B. Kunst 
-#' @seealso See also \code{\link{write.gexf}}
-#' @references sigmajs project website \url{http://sigmajs.org/}.
+#' @seealso See also \code{\link{write.gexf}}, \code{\link{plot.gexf}}
 #' @keywords methods
 #' @examples
 #' 
