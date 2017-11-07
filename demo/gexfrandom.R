@@ -59,13 +59,15 @@ for (i in 2:n) {
   pos[i,2] <- pos[i-1,2] + sin(2*pi*(i-1)/n)
 }
 
-pos <- pos/(max(pos)-min(pos))
+pos <- pos/(max(pos)-min(pos))*500
 pos2 <- pos
 pos2[,1] <- pos2[,1] + max(pos2[,1])-min(pos[,1])
 pos3 <- pos
 pos3[,1] <- pos3[,1] + max(pos2[,1])-min(pos[,1])
 
 pause()
+
+size <- (size - min(size) + .2)/(max(size) - min(size) + .2)*5
 
 # Plotting
 graph <- gexf(
