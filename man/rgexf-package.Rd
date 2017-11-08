@@ -16,7 +16,7 @@ including attributes, GEXF viz attributes (such as color, size, and
 position), network dynamics (for both edges and nodes) and edge weighting.
 
 Users can build/handle graphs element-by-element or massively through
-data-frames, visualize the graph on a web browser through "sigmajs" (a
+data-frames, visualize the graph on a web browser through "gexf-js" (a
 javascript library) and interact with the igraph package.
 
 Finally, the functions \code{igraph.to.gexf} and \code{gexf.to.igraph}
@@ -51,7 +51,8 @@ See the GEXF primer for details on the GEXF graph format:
 \itemize{ \item rgexf project site:
 \url{https://github.com/gvegayon/rgexf} \item Gephi project site:
 \url{https://gephi.org/} \item GEXF project site: \url{http://gexf.net/}
-\item Sigmasj project site :
-\url{http://sigmajs.org/} }
+\item gexf-js project website: \url{https://github.com/raphv/gexf-js} 
+\item Sigmasj project site: \url{http://sigmajs.org/}
+}
 }
 \keyword{package}

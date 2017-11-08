@@ -7,7 +7,9 @@ Date: 2017-11-05
 Authors@R: c(
   person("George", "Vega Yon", email="g.vegayon@gmail.com", role=c("aut", "cre")),
   person("Jorge", "Fábrega Lacoa", role=c("ctb")),
-  person("Joshua", "Kunst", role=c("ctb")))
+  person("Joshua", "Kunst", role=c("ctb")),
+  person("Raphaël", "Velt", role=c("ctb", "cph"), comment="gexf-js library"),
+  person(family="Gephi Consortium", role=c("ctb", "cph"), comment="GEXF language"))
 Description: Create, read and write GEXF (Graph Exchange XML Format) graph
     files (used in Gephi and others). Using the XML package, it allows the user to
     easily build/read graph files including attributes, GEXF viz attributes (such

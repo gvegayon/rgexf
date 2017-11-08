@@ -24,44 +24,112 @@ gexf_js_install <- function(path, overwrite = FALSE) {
   
 }
 
+
+
 #' @rdname plot.gexf
-#' @param config List of parameters to be written in \code{config.js}.
 #' @export
-gexf_js_make_config <- function(
+#' @param showEdges Logical scalar. Default state of the "show edges" button (nullable).
+#' @param useLens Logical scalar. Default state of the "use lens" button (nullable).
+#' @param zoomLevel Numeric scalar. Default zoom level. At zoom = 0, the graph
+#' should fill a 800x700px zone
+#' @param curvedEdges Logical scalar. False for curved edges, true for straight
+#' edges this setting can't be changed from the User Interface.
+#' @param edgeWidthFactor Numeric scalar. Change this parameter for wider or
+#' narrower edges this setting can't be changed from the User Interface.
+#' @param minEdgeWidth Numeric scalar.
+#' @param maxEdgeWidth Numeric scalar.
+#' @param textDisplayThreshold Numeric scalar.
+#' @param nodeSizeFactor Numeric scalar. Change this parameter for smaller or
+#' larger nodes this setting can't be changed from the User Interface.
+#' @param replaceUrls Logical scalar. Enable the replacement of Urls by
+#' Hyperlinks this setting can't be changed from the User Interface.
+#' @param showEdgeWeight Logical scalar. Show the weight of edges in the list
+#' this setting can't be changed from the User Interface.
+#' @param showEdgeLabel Logical scalar. 
+#' @param sortNodeAttributes Logical scalar. Alphabetically sort node attributes.
+#' @param showId Logical scalar. Show the id of the node in the list
+#' this setting can't be changed from the User Interface.
+#' @param showEdgeArrow Logical scalar. Show the edge arrows when the edge is
+#' directed this setting can't be changed from the User Interface.
+#' @param language Either \code{FALSE}, or a character scalar with any of the
+#' supported languages.
+#' 
+#' @details 
+#' Currently, the only languages supported are: 
+#' \Sexpr[results=text]{paste(names(rgexf:::gexf_js_languages), " (", rgexf:::gexf_js_languages, ")", sep="", collapse=", ")}.
+#'  
+gexf_js_config <- function(
   dir,
-  graphFile = "network.gexf",
-  config = list(
-    showEdges            = "true",
-    useLens              = "false",
-    zoomLevel            = "0",
-    curvedEdges          = "true",
-    edgeWidthFactor      = "1",
-    minEdgeWidth         = "1",
-    maxEdgeWidth         = "50",
-    textDisplayThreshold = "9",
-    nodeSizeFactor       = "1",
-    replaceUrls          = "true",
-    showEdgeWeight       = "true",
-    showEdgeLabel        = "true",
-    sortNodeAttributes   = "true",
-    showId               = "true",
-    showEdgeArrow        = "true",
-    language             = "false"
-  )
+  graphFile            = "network.gexf",
+  showEdges            = TRUE,
+  useLens              = FALSE,
+  zoomLevel            = 0,
+  curvedEdges          = TRUE,
+  edgeWidthFactor      = 1,
+  minEdgeWidth         = 1,
+  maxEdgeWidth         = 50,
+  textDisplayThreshold = 9,
+  nodeSizeFactor       = 1,
+  replaceUrls          = TRUE,
+  showEdgeWeight       = TRUE,
+  showEdgeLabel        = TRUE,
+  sortNodeAttributes   = TRUE,
+  showId               = TRUE,
+  showEdgeArrow        = TRUE,
+  language             = FALSE
+  
 ) {
   
   doc <- readLines(system.file("gexf-js/config.js.template", package="rgexf"))
-  
-  # Validating language
-  if (config$language != "false" && !(config$language %in% gexf_js_languages))
+
+  # Getting the name of the environment  
+  env    <- environment()
+
+  # Validating parameters ------------------------------------------------------
+  if (!is.logical(language) && !(language %in% gexf_js_languages))
     stop("The specified language is not available. See ?gexf_js")
+  else if (is.logical(language) && !language)
+    language <- "false"
+  else if (!is.logical(language))
+    language <- paste0("\"", language, "\"")
+  
+  # Logical values
+  bool <- c("curvedEdges", "replaceUrls", "showEdgeWeight",
+               "showEdgeLabel", "sortNodeAttributes", "showId", "showEdgeArrow")
+  
+  for (p in bool) {
+    if (!is.logical(env[[p]])) stop("The parameter -", p,"- should be logical scalar.")
+    env[[p]] <- if (env[[p]]) "true" else "false"
+  }
+  
+  # Nullable
+  null <- c("showEdges", "useLens")
+  
+  for (p in null) {
+    if (!length(env[[p]])) {
+      env[[p]] <- "null"
+    } else if (!is.logical(env[[p]])) stop("The parameter -", p,"- should be logical scalar or NULL.")
+    else
+      env[[p]] <- if (env[[p]]) "true" else "false"
+  }
+    
+  # Numeric values
+  num  <- c("zoomLevel", "edgeWidthFactor", "minEdgeWidth", "maxEdgeWidth",
+            "textDisplayThreshold", "nodeSizeFactor")
+  
+  for (p in num) {
+    env[[p]] <- as.character(env[[p]])
+    if (is.na(env[[p]])) stop("The parameter -", p,"- should be numeric.")
+  }
+  
+  
   
   # Name of the graph file
   doc <- gsub("$graphFile$", paste0("\"", graphFile, "\""), doc, fixed = TRUE)
   
   # Parameters
-  for (p in names(config))
-    doc <- gsub(paste0("$",p,"$"), config[[p]], doc, fixed = TRUE)
+  for (p in c(bool, num, null, "language"))
+    doc <- gsub(paste0("$",p,"$"), get(p), doc, fixed = TRUE)
   
   write(doc, file = paste0(dir,"/config.js"))
   
@@ -103,7 +171,10 @@ gexf_js_make_config <- function(
 #' 
 #' }
 #' 
-#' @references gexf-js project website \url{https://github.com/raphv/gexf-js}.
+#' @references
+#' gexf-js project website \url{https://github.com/raphv/gexf-js}.
+#' 
+#' 
 plot.gexf <- function(
   x, 
   y         = NULL,
@@ -120,7 +191,7 @@ plot.gexf <- function(
   gexf_js_install(dir, overwrite = overwrite)
   
   # Step 2: Setup file
-  gexf_js_make_config(dir, graphFile, ...)
+  gexf_js_config(dir, graphFile, ...)
   
   # Step 4: Lunch the server
   if (!copy.only)
