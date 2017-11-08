@@ -122,7 +122,7 @@ gexf_js_config <- function(
     if (is.na(env[[p]])) stop("The parameter -", p,"- should be numeric.")
   }
   
-  
+  # Writing parameters in the template -----------------------------------------
   
   # Name of the graph file
   doc <- gsub("$graphFile$", paste0("\"", graphFile, "\""), doc, fixed = TRUE)
@@ -131,6 +131,7 @@ gexf_js_config <- function(
   for (p in c(bool, num, null, "language"))
     doc <- gsub(paste0("$",p,"$"), get(p), doc, fixed = TRUE)
   
+  # Writing the file -----------------------------------------------------------
   write(doc, file = paste0(dir,"/config.js"))
   
 }
@@ -193,8 +194,8 @@ plot.gexf <- function(
   # Step 2: Setup file
   gexf_js_config(dir, graphFile, ...)
   
-  # Step 4: Lunch the server
+  # Step 3: Lunch the server (if needed)
   if (!copy.only)
-    servr::httd(dir)
+    do.call(servr::httd, c(list(dir = dir), httd.args))
   
 }

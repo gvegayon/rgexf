@@ -12,9 +12,9 @@ gexf(nodes, edges, edgesLabel = NULL, edgesId = NULL, edgesAtt = NULL,
   size = NULL, shape = NULL, image = NULL), nodeDynamic = NULL,
   edgeDynamic = NULL, digits = getOption("digits"), output = NA,
   tFormat = "double", defaultedgetype = "undirected", meta = list(creator
-  = "NodosChile", description = "A graph file writing in R using \\"rgexf\\"",
-  keywords = "gexf graph, NodosChile, R, rgexf"), keepFactors = FALSE,
-  encoding = "UTF-8", vers = "1.3")
+  = "NodosChile", description = "A GEXF file written in R with \\"rgexf\\"",
+  keywords = "GEXF, NodosChile, R, rgexf, Gephi"), keepFactors = FALSE,
+  encoding = "UTF-8", vers = "1.3", rescale.node.size = TRUE)
 
 write.gexf(nodes, ...)
 }
@@ -74,6 +74,10 @@ the graph as a GEXF file.}
 
 \item{vers}{Character scalar. Version of the GEXF format to generate.
 By default \code{"1.3"}.}
+
+\item{rescale.node.size}{Logical scalar. When \code{TRUE} it rescales the 
+size of the vertices such that the largest one is about \%5 of the plotting
+region.}
 
 \item{...}{Passed to \code{gexf}.}
 }

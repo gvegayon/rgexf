@@ -69,8 +69,6 @@ pos3[,1] <- pos3[,1] + max(pos2[,1])-min(pos[,1])
 
 pause()
 
-size <- (size - min(size) + .2)/(max(size) - min(size) + .2)*5
-
 # Plotting
 graph <- gexf(
   rbind(vertex1,vertex2,vertex3), 

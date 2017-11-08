@@ -14,8 +14,18 @@ New features and changes
 -   Function write.gexf has a new argument for specifying the GEXF
     version for now it only changes the header.
 
--   plot.gexf method is now defunct. Future releases will include
-    a replacement.
+-   plot.gexf method now uses gexf-js instead of sigma.js.
+
+-   Now igraph.to.gexf passes arguments to gexf. Before it was only
+    passing position. This way users have more flexibility specifying
+    attributes.
+
+-   gexf's nodesVizAtt now has defaults for color, size and position.
+    This is a requirement of gexf-js.
+
+-   gexf has a new argument, rescale.node.size. When set to TRUE, the
+    size vector in nodesVizAtt is rescaled such that when calling the
+    plot method the largest node spans roughly 5% of the plot.
 
 
 New functions
@@ -60,9 +70,9 @@ Bug fixes
 
 Development
 
--   Option -keepFactors- default is now in -FALSE- (used to be
-    in -TRUE-). When setted in -TRUE- and there are factors, a warning
-    message will appear (reported in issue 18, thanks Tim Smith!).
+-   Option -keepFactors- default is now in -FALSE- (used to be in
+    -TRUE-). When set to -TRUE- and there are factors, a warning message
+    will appear (reported in issue 18, thanks Tim Smith!).
 
 
 
@@ -71,8 +81,8 @@ CHANGES IN RGEXF VERSION 0.13.11 (2013-11-27)
 
 Bug fixes
 
--   Included class checks in -gexf- class functions (thanks to
-    Samuel Finegold).
+-   Included class checks in -gexf- class functions (thanks to Samuel
+    Finegold).
 
 -   write.gexf does not fails when dynamics different from double are
     passed (thank you Samuel Finegold!).
@@ -110,8 +120,8 @@ CHANGES IN RGEXF VERSION 0.13.05 (2013-05-09)
 
 Bug fixes
 
--   sprintf error when using other formats rather than double
-    (issue 10).
+-   sprintf error when using other formats rather than double (issue
+    10).
 
 -   in .addNodesEdges, add support to case “!attributes &&
     vizattributes” (issue 9).
@@ -153,8 +163,8 @@ Bug fixes
 Development
 
 -   .addNodesEdges rewritten now works faster in most of CPUs (some of
-    them with very high speedups) (Thanks to Duncan Temple Lang,
-    RXML author)
+    them with very high speedups) (Thanks to Duncan Temple Lang, RXML
+    author)
 
 -   Several code routines have been extracted from “bigger functions”
     and written as functions themselves.
@@ -170,8 +180,8 @@ New features and changes
     rm.gexf.node and rm.gexf.edge allow to build and manipulate gexf
     objects from scratch.
 
--   New function read.gexf allows to import gexf files as gexf
-    class objects.
+-   New function read.gexf allows to import gexf files as gexf class
+    objects.
 
 -   gexf function now it is called write.gexf.
 
@@ -182,8 +192,8 @@ New features and changes
 
 -   Real-life datasets have been includded.
 
--   New function edge.list builds a dataframe of nodes from an
-    edge list.
+-   New function edge.list builds a dataframe of nodes from an edge
+    list.
 
 -   New methods for gexf objects: print.gexf and summary.gexf.
 

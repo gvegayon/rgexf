@@ -285,6 +285,9 @@ edge.list <- function(x) {
 #' @param vers Character scalar. Version of the GEXF format to generate.
 #' By default \code{"1.3"}.
 #' @param ... Passed to \code{gexf}.
+#' @param rescale.node.size Logical scalar. When \code{TRUE} it rescales the 
+#' size of the vertices such that the largest one is about \%5 of the plotting
+#' region.
 #' @return A \code{gexf} class object (list). Contains the following: \itemize{
 #' \item \code{meta} : (list) Meta data describing the graph.  \item
 #' \code{mode} : (list) Sets the default edge type and the graph mode.  \item
@@ -371,10 +374,15 @@ gexf <- function(
   output = NA,
   tFormat="double",
   defaultedgetype = "undirected",
-  meta = list(creator="NodosChile", description="A graph file writing in R using \"rgexf\"",keywords="gexf graph, NodosChile, R, rgexf"),
+  meta = list(
+    creator     = "NodosChile",
+    description = "A GEXF file written in R with \"rgexf\"",
+    keywords    = "GEXF, NodosChile, R, rgexf, Gephi"
+    ),
   keepFactors = FALSE,
-  encoding="UTF-8",
-  vers = "1.3"
+  encoding = "UTF-8",
+  vers     = "1.3",
+  rescale.node.size = TRUE
 ) {
   
   ##############################################################################
@@ -424,6 +432,17 @@ gexf <- function(
   # Parsing nodes Viz Atts
   set_default_nodeVizAtt()
   
+  # Rescaling vertex sizes if required
+  if (rescale.node.size) {
+    
+    # Getting ranges
+    sscale <- apply(nodesVizAtt$position, 2, range)
+    sscale <- max(sscale[2 ,] - sscale[1 ,])*.01
+    
+    nodesVizAtt$size <- nodesVizAtt$size/max(nodesVizAtt$size)*sscale
+    
+  }
+  
   nodesVizAtt  <- if (length(unlist(nodesVizAtt))) {
     
     # Removing empty ones
@@ -432,6 +451,8 @@ gexf <- function(
     Map(function(a, b) parseVizAtt(a, b, n, "nodes"), a=names(nodesVizAtt),
                         b=nodesVizAtt)
   } else NULL
+  
+  
   
   
   nNodesVizAtt <- length(nodesVizAtt)

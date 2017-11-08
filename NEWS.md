@@ -13,6 +13,16 @@
   
 * `plot.gexf` method now uses `gexf-js` instead of `sigma.js`.
 
+* Now `igraph.to.gexf` passes arguments to `gexf`. Before it was only passing
+  `position`. This way users have more flexibility specifying attributes.
+
+* `gexf`'s `nodesVizAtt` now has defaults for color, size and position. This is
+  a requirement of `gexf-js`.
+
+* `gexf` has a new argument, `rescale.node.size`. When set to `TRUE`, the
+  `size` vector in `nodesVizAtt` is rescaled such that when calling the plot
+  method the largest node spans roughly 5% of the plot.
+
 ## New functions
 
 * The function `gexf` has been introduced as an eventual replacement of

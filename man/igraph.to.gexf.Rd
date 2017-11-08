@@ -6,14 +6,14 @@
 \alias{gexf.to.igraph}
 \title{Converting between \code{gexf} and \code{igraph} classes}
 \usage{
-igraph.to.gexf(igraph.obj, position = NULL)
+igraph.to.gexf(igraph.obj, ...)
 
 gexf.to.igraph(gexf.obj)
 }
 \arguments{
 \item{igraph.obj}{An object of class \code{igraph}.}
 
-\item{position}{A three-column data-frame with XYZ coords.}
+\item{...}{Further arguments passed to \code{\link{gexf}}.}
 
 \item{gexf.obj}{An object of class \code{gexf}.}
 }
@@ -40,6 +40,12 @@ include the \code{position} viz-attribute.
   gexf1 <- read.gexf(fn)
   igraph1 <- gexf.to.igraph(gexf1)
   gexf2 <- igraph.to.gexf(igraph1)
+  
+  # Now, let's do it with a layout!
+  pos <- igraph::layout_nicely(igraph1)
+  plot(
+    igraph.to.gexf(igraph1, nodesVizAtt = list(position=cbind(pos, 0))),
+    edgeWidthFactor = .01)
  }
 }
 \seealso{
