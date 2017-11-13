@@ -1,16 +1,16 @@
 #' Reads gexf (.gexf) file
 #' 
-#' \code{read.gexf} reads gexf graph files and imports its elements as a
-#' \code{gexf} class object
+#' `read.gexf` reads gexf graph files and imports its elements as a
+#' `gexf` class object
 #' 
 #' 
 #' @param x String. Path to the gexf file.
-#' @return A \code{gexf} object.
+#' @return A `gexf` object.
 #' @note By the time attributes and viz-attributes aren't supported.
 #' @author George Vega Yon 
 #' 
 #' Jorge Fabrega Lacoa 
-#' @references The GEXF project website: \url{http://gexf.net}
+#' @references The GEXF project website: http://gexf.net
 #' @keywords IO
 #' @examples
 #' 
@@ -105,23 +105,23 @@ read.gexf <- function(x) {
 
 
 
-#' Adding and removing nodes/edges from \code{gexf} objects
+#' Adding and removing nodes/edges from `gexf` objects
 #' 
-#' Manipulates \code{gexf} objects adding and removing nodes and edges from
+#' Manipulates `gexf` objects adding and removing nodes and edges from
 #' both, its dataframe representation and its XML representation.
 #' 
-#' \code{new.gexf.graph} Creates a new \code{gexf} empty object (0 nodes 0
+#' `new.gexf.graph` Creates a new `gexf` empty object (0 nodes 0
 #' edges).
 #' 
-#' \code{add.gexf.node} and \code{add.gexf.edge} allow adding nodes and edges
-#' to a \code{gexf} object (graph) one at a time. \code{rm.gexf.node} and
-#' \code{rm.gexf.edges} remove nodes and edges respectively.
+#' `add.gexf.node` and `add.gexf.edge` allow adding nodes and edges
+#' to a `gexf` object (graph) one at a time. `rm.gexf.node` and
+#' `rm.gexf.edges` remove nodes and edges respectively.
 #' 
-#' In the case of \code{rm.gexf.node}, by default every edge linked to the node
-#' that is been removed will also be removed (\code{rm.edges = TRUE}).
+#' In the case of `rm.gexf.node`, by default every edge linked to the node
+#' that is been removed will also be removed (`rm.edges = TRUE`).
 #' 
-#' \code{add.node.spell} and \code{add.edge.spell} allow to include spells to
-#' specific nodes or edges in a \code{gexf} object.
+#' `add.node.spell` and `add.edge.spell` allow to include spells to
+#' specific nodes or edges in a `gexf` object.
 #' 
 #' @aliases add.gexf.node add.gexf.edge rm.gexf.node rm.gexf.edge
 #' add.node.spell add.edge.spell
@@ -132,7 +132,7 @@ read.gexf <- function(x) {
 #' @param number Index number(s) of a single or a group of nodes or edges.
 #' @param weight Edge weight.
 #' @param vizAtt A list of node/edge viz attributes (see
-#' \code{\link{write.gexf}}).
+#' [write.gexf()]).
 #' @param atts List of attributes, currently ignored.
 #' @param source Source node's id.
 #' @param target Target node's id.
@@ -140,12 +140,12 @@ read.gexf <- function(x) {
 #' @param end Ending time period
 #' @param rm.edges Whether to remove or not existing edges.
 #' @param digits Integer. Number of decimals to keep for nodes/edges sizes. See
-#' \code{\link{print.default}}
-#' @return A \code{gexf} object (see \code{\link{write.gexf}}).
+#' [print.default()]
+#' @return A `gexf` object (see [write.gexf()]).
 #' @author George Vega Yon 
 #' 
 #' Jorge Fabrega Lacoa 
-#' @references The GEXF project website: \url{http://gexf.net}
+#' @references The GEXF project website: http://gexf.net
 #' @keywords manip
 #' @examples
 #' 
@@ -342,19 +342,19 @@ add.gexf.edge <- function(
 
 
 
-#' Build an empty \code{gexf} graph
+#' Build an empty `gexf` graph
 #' 
-#' Builds an empty \code{gexf} object containing all the class's attributes.
+#' Builds an empty `gexf` object containing all the class's attributes.
 #' 
 #' 
 #' @param defaultedgetype \dQuote{directed}, \dQuote{undirected},
 #' \dQuote{mutual}
 #' @param meta A List. Meta data describing the graph
-#' @return A \code{gexf} object.
+#' @return A `gexf` object.
 #' @author George Vega Yon 
 #' 
 #' Jorge Fabrega Lacoa 
-#' @references The GEXF project website: \url{http://gexf.net}
+#' @references The GEXF project website: http://gexf.net
 #' @keywords manip
 #' @examples
 #' 

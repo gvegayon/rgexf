@@ -70,13 +70,13 @@ supported languages.}
 will overwrite all files copied from the template on the destination directory
 as specified by \code{dir}.}
 
-\item{httd.args}{Further arguments to be passed to \code{\link[servr:httd]{httd}}
+\item{httd.args}{Further arguments to be passed to \link[servr:httd]{servr::httd}
 from the \CRANpkg{servr} package.}
 
 \item{copy.only}{Logical scalar. When FALSE, the default, the function
 will make a call to \code{servr::httd}.}
 
-\item{...}{Further arguments passed to \code{gexf_js_make_config}}
+\item{...}{Further arguments passed to \code{gexf_js_config}}
 }
 \description{
 Using the gexf-js, a JavaScript GEXF viewer, this function allows you to
@@ -85,13 +85,16 @@ website, the GEXF file, and sets up a configuration file. By default, the
 function then starts a webserver using the \code{servr} R package.
 }
 \details{
-Currently, the only languages supported are: 
-\Sexpr[results=text]{paste(names(rgexf:::gexf_js_languages), " (", rgexf:::gexf_js_languages, ")", sep="", collapse=", ")}.
+Currently, the only languages supported are:
+\Sexpr{paste(names(rgexf:::gexf_js_languages), " (", rgexf:::gexf_js_languages, ")", sep="", collapse=", ")}.
 
 The files are copied directly from
-\Sexpr[results=text]{system.file("gexf-js", package="rgexf")}. And the 
+\Sexpr{system.file("gexf-js", package="rgexf")}. And the
 parameters are set up by modifying the following template file:
-\Sexpr[results=text]{system.file("gexf-js/config.js.template", package="rgexf")}
+
+\Sexpr{system.file("gexf-js/config.js.template", package="rgexf")}
+
+The server is lunched if and only if \code{interactive() == TRUE}.
 }
 \examples{
 \dontrun{
@@ -104,5 +107,5 @@ plot(graph)
 
 }
 \references{
-gexf-js project website \url{https://github.com/raphv/gexf-js}.
+gexf-js project website https://github.com/raphv/gexf-js.
 }

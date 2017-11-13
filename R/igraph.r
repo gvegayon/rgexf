@@ -1,19 +1,19 @@
-#' Converting between \code{gexf} and \code{igraph} classes
+#' Converting between `gexf` and `igraph` classes
 #' 
-#' Converts objects between \code{gexf} and \code{igraph} objects keeping
+#' Converts objects between `gexf` and `igraph` objects keeping
 #' attributes, edge weights and colors.
 #' 
-#' If the position argument is not \code{NULL}, the new \code{gexf} object will
-#' include the \code{position} viz-attribute.
+#' If the position argument is not `NULL`, the new `gexf` object will
+#' include the `position` viz-attribute.
 #' 
 #' @aliases igraph.to.gexf gexf.to.igraph
-#' @param igraph.obj An object of class \code{igraph}.
-#' @param gexf.obj An object of class \code{gexf}.
-#' @param ... Further arguments passed to \code{\link{gexf}}.
-#' @return \itemize{ \item For \code{igraph.to.gexf} : \code{gexf} class object
-#' \item For \code{gexf.to.igraph} : \code{igraph} class object }
+#' @param igraph.obj An object of class `igraph`.
+#' @param gexf.obj An object of class `gexf`.
+#' @param ... Further arguments passed to [gexf()].
+#' @return \itemize{ \item For `igraph.to.gexf` : `gexf` class object
+#' \item For `gexf.to.igraph` : `igraph` class object }
 #' @author George Vega Yon \email{g.vegayon@gmail.com}
-#' @seealso \code{\link{layout}}
+#' @seealso [layout()]
 #' @keywords manip
 #' @examples
 #' 

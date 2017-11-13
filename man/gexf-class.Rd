@@ -55,7 +55,7 @@ ends. The matrix or dataframe must have the same number of rows than the
 number of edges in the graph.}
 
 \item{digits}{Integer. Number of decimals to keep for nodes/edges sizes. See
-\code{\link{print.default}}}
+\code{\link[=print.default]{print.default()}}}
 
 \item{output}{String. The complete path (including filename) where to export
 the graph as a GEXF file.}
@@ -75,7 +75,7 @@ the graph as a GEXF file.}
 \item{vers}{Character scalar. Version of the GEXF format to generate.
 By default \code{"1.3"}.}
 
-\item{rescale.node.size}{Logical scalar. When \code{TRUE} it rescales the 
+\item{rescale.node.size}{Logical scalar. When \code{TRUE} it rescales the
 size of the vertices such that the largest one is about \%5 of the plotting
 region.}
 
@@ -128,7 +128,7 @@ should contain two columns \emph{start} and \emph{end}, both allowing
 is set as \dQuote{double}. Currently accepted time formats are: \itemize{
 \item Integer or double.  \item International standard \emph{date}
 yyyy-mm-dd.  \item dateTime W3 XSD
-(\url{http://www.w3.org/TR/xmlschema-2/#dateTime}).  }
+(http://www.w3.org/TR/xmlschema-2/#dateTime).  }
 }
 \examples{
 
@@ -146,13 +146,13 @@ yyyy-mm-dd.  \item dateTime W3 XSD
 
 }
 \references{
-The GEXF project website: \url{http://gexf.net}
+The GEXF project website: http://gexf.net
 }
 \seealso{
-\code{\link{new.gexf.graph}}
+\code{\link[=new.gexf.graph]{new.gexf.graph()}}
 }
 \author{
-George Vega Yon 
+George Vega Yon
 
 Jorge Fabrega Lacoa
 }

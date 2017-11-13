@@ -134,7 +134,7 @@ summary.gexf <- function(object, ...) {
   }  
   
   # Returns the output
-  output <- list(
+  structure(list(
     meta=unlist(meta),
     mode=unlist(mode),
     atts.definitions=atts.definitions,
@@ -143,10 +143,6 @@ summary.gexf <- function(object, ...) {
     nodes=nodes,
     edges=edges,
     graph=graph
-    )
-  
-  class(output) <- "gexf"
-  
-  return(output)
+    ), class = "gexf")
 }
 

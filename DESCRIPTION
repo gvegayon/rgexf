@@ -27,9 +27,10 @@ Imports:
     servr
 License: MIT + file LICENSE
 LazyLoad: yes
-RoxygenNote: 6.0.1
+RoxygenNote: 6.0.1.9000
 Suggests: knitr,
     rmarkdown,
     testthat,
     covr
 VignetteBuilder: knitr
+Roxygen: list(markdown = TRUE)

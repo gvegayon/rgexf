@@ -3,7 +3,6 @@
 \name{igraph.to.gexf}
 \alias{igraph.to.gexf}
 \alias{gexf.to.igraph}
-\alias{gexf.to.igraph}
 \title{Converting between \code{gexf} and \code{igraph} classes}
 \usage{
 igraph.to.gexf(igraph.obj, ...)
@@ -13,7 +12,7 @@ gexf.to.igraph(gexf.obj)
 \arguments{
 \item{igraph.obj}{An object of class \code{igraph}.}
 
-\item{...}{Further arguments passed to \code{\link{gexf}}.}
+\item{...}{Further arguments passed to \code{\link[=gexf]{gexf()}}.}
 
 \item{gexf.obj}{An object of class \code{gexf}.}
 }
@@ -49,7 +48,7 @@ include the \code{position} viz-attribute.
  }
 }
 \seealso{
-\code{\link{layout}}
+\code{\link[=layout]{layout()}}
 }
 \author{
 George Vega Yon \email{g.vegayon@gmail.com}

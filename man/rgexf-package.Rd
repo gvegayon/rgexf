@@ -51,7 +51,7 @@ See the GEXF primer for details on the GEXF graph format:
 \itemize{ \item rgexf project site:
 \url{https://github.com/gvegayon/rgexf} \item Gephi project site:
 \url{https://gephi.org/} \item GEXF project site: \url{http://gexf.net/}
-\item gexf-js project website: \url{https://github.com/raphv/gexf-js} 
+\item gexf-js project website: \url{https://github.com/raphv/gexf-js}
 \item Sigmasj project site: \url{http://sigmajs.org/}
 }
 }

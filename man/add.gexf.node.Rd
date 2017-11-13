@@ -7,11 +7,6 @@
 \alias{rm.gexf.edge}
 \alias{add.node.spell}
 \alias{add.edge.spell}
-\alias{add.gexf.edge}
-\alias{rm.gexf.node}
-\alias{rm.gexf.edge}
-\alias{add.node.spell}
-\alias{add.edge.spell}
 \title{Adding and removing nodes/edges from \code{gexf} objects}
 \usage{
 add.gexf.node(graph, id = NA, label = NA, start = NULL, end = NULL,
@@ -45,7 +40,7 @@ add.edge.spell(graph, id = NULL, number = NULL, start = NULL,
 \item{end}{Ending time period}
 
 \item{vizAtt}{A list of node/edge viz attributes (see
-\code{\link{write.gexf}}).}
+\code{\link[=write.gexf]{write.gexf()}}).}
 
 \item{atts}{List of attributes, currently ignored.}
 
@@ -58,14 +53,14 @@ add.edge.spell(graph, id = NULL, number = NULL, start = NULL,
 \item{weight}{Edge weight.}
 
 \item{digits}{Integer. Number of decimals to keep for nodes/edges sizes. See
-\code{\link{print.default}}}
+\code{\link[=print.default]{print.default()}}}
 
 \item{number}{Index number(s) of a single or a group of nodes or edges.}
 
 \item{rm.edges}{Whether to remove or not existing edges.}
 }
 \value{
-A \code{gexf} object (see \code{\link{write.gexf}}).
+A \code{gexf} object (see \code{\link[=write.gexf]{write.gexf()}}).
 }
 \description{
 Manipulates \code{gexf} objects adding and removing nodes and edges from
@@ -93,10 +88,10 @@ specific nodes or edges in a \code{gexf} object.
 
 }
 \references{
-The GEXF project website: \url{http://gexf.net}
+The GEXF project website: http://gexf.net
 }
 \author{
-George Vega Yon 
+George Vega Yon
 
 Jorge Fabrega Lacoa
 }

@@ -3,12 +3,8 @@
 \name{gexf-methods}
 \alias{gexf-methods}
 \alias{print.gexf}
-\alias{gexf-methods}
 \alias{summary.gexf}
-\alias{gexf-methods}
-\alias{print.gexf}
 \alias{export-gexf}
-\alias{summary.gexf}
 \title{S3 methods for \code{gexf} objects}
 \usage{
 \method{print}{gexf}(x, file = NA, replace = F, ...)
@@ -70,7 +66,7 @@ graph.
 See also \code{\link{write.gexf}}, \code{\link{plot.gexf}}
 }
 \author{
-George G. Vega Yon 
+George G. Vega Yon
 
 Joshua B. Kunst
 }

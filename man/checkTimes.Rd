@@ -25,7 +25,7 @@ Checks time
   checkTimes("2012-02-01T00:00:00", "dateTime")
 }
 \author{
-George Vega Yon 
+George Vega Yon
 
 Jorge Fabrega Lacoa
 }

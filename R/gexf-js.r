@@ -51,12 +51,12 @@ gexf_js_install <- function(path, overwrite = FALSE) {
 #' this setting can't be changed from the User Interface.
 #' @param showEdgeArrow Logical scalar. Show the edge arrows when the edge is
 #' directed this setting can't be changed from the User Interface.
-#' @param language Either \code{FALSE}, or a character scalar with any of the
+#' @param language Either `FALSE`, or a character scalar with any of the
 #' supported languages.
 #' 
 #' @details 
 #' Currently, the only languages supported are: 
-#' \Sexpr[results=text]{paste(names(rgexf:::gexf_js_languages), " (", rgexf:::gexf_js_languages, ")", sep="", collapse=", ")}.
+#' \Sexpr{paste(names(rgexf:::gexf_js_languages), " (", rgexf:::gexf_js_languages, ")", sep="", collapse=", ")}.
 #'  
 gexf_js_config <- function(
   dir,
@@ -141,26 +141,29 @@ gexf_js_config <- function(
 #' Using the gexf-js, a JavaScript GEXF viewer, this function allows you to
 #' visualize your GEXF on the browser. The function essentially copies a template
 #' website, the GEXF file, and sets up a configuration file. By default, the
-#' function then starts a webserver using the \code{servr} R package.
+#' function then starts a webserver using the `servr` R package.
 #' 
-#' @param x An object of class \code{gexf}.
+#' @param x An object of class `gexf`.
 #' @param y Ignored.
 #' @param graphFile Name of the gexf file.
 #' @param dir Directory where the files will be copied (tempdir() by default).
-#' @param ... Further arguments passed to \code{gexf_js_make_config}
-#' @param httd.args Further arguments to be passed to \code{\link[servr:httd]{httd}}
+#' @param ... Further arguments passed to `gexf_js_config`
+#' @param httd.args Further arguments to be passed to [servr::httd]
 #' from the \CRANpkg{servr} package.
 #' @param copy.only Logical scalar. When FALSE, the default, the function
-#' will make a call to \code{servr::httd}.
-#' @param overwrite Logical scalar. When \code{TRUE}, the default, the function
+#' will make a call to `servr::httd`.
+#' @param overwrite Logical scalar. When `TRUE`, the default, the function
 #' will overwrite all files copied from the template on the destination directory
-#' as specified by \code{dir}.
+#' as specified by `dir`.
 #' 
 #' @details 
 #' The files are copied directly from
-#' \Sexpr[results=text]{system.file("gexf-js", package="rgexf")}. And the 
+#' \Sexpr{system.file("gexf-js", package="rgexf")}. And the 
 #' parameters are set up by modifying the following template file:
-#' \Sexpr[results=text]{system.file("gexf-js/config.js.template", package="rgexf")}
+#' 
+#' \Sexpr{system.file("gexf-js/config.js.template", package="rgexf")}
+#' 
+#' The server is lunched if and only if `interactive() == TRUE`.
 #' 
 #' @export
 #' @examples 
@@ -173,8 +176,7 @@ gexf_js_config <- function(
 #' }
 #' 
 #' @references
-#' gexf-js project website \url{https://github.com/raphv/gexf-js}.
-#' 
+#' gexf-js project website https://github.com/raphv/gexf-js.
 #' 
 plot.gexf <- function(
   x, 
@@ -195,7 +197,7 @@ plot.gexf <- function(
   gexf_js_config(dir, graphFile, ...)
   
   # Step 3: Lunch the server (if needed)
-  if (!copy.only)
+  if (interactive() && !copy.only)
     do.call(servr::httd, c(list(dir = dir), httd.args))
   
 }
