@@ -2,12 +2,6 @@
 
 ## New features and changes
 
-* Modernization of the project (roxygen, new CRAN standards, etc.)
-
-* Updated emails.
-
-* Remove broken links.
-
 * Function `write.gexf` has a new argument for specifying the GEXF version
   for now it only changes the header.
   
@@ -19,6 +13,10 @@
 * `gexf`'s `nodesVizAtt` now has defaults for color, size and position. This is
   a requirement of `gexf-js`.
 
+* `gexf`'s `nodesVizAtt` color and size now support passing a default for all
+  the nodes. Also, color can be specified as a character scalar (name of the)
+  color, or as an integer (number in `colors()`).
+
 * `gexf` has a new argument, `rescale.node.size`. When set to `TRUE`, the
   `size` vector in `nodesVizAtt` is rescaled such that when calling the plot
   method the largest node spans roughly 5% of the plot.
@@ -28,6 +26,14 @@
 * The function `gexf` has been introduced as an eventual replacement of
   `write.gexf` since it makes more sense. `write.gexf` should only be for
   writing the gexf file on the disk. This will be effective starting vers 0.17.0
+
+## Misc changes
+
+* Modernization of the project (roxygen, new CRAN standards, etc.)
+
+* Updated emails.
+
+* Remove broken links.
 
 
 # Changes in rgexf version 0.15.3 (2015-03-24)
