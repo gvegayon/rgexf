@@ -1,3 +1,11 @@
+2017-11-13  George G. Vega Yon <g.vegayon@gmail.com>
+	* R/bugs.r: New functions to check and coerce attributes
+	  viz attributes mostly.
+
+	* R/rgexf.r: Making the code nicer. Implementing
+	  new viz attribute checks.
+
+
 2017-11-08  George G. Vega Yon <g.vegayon@gmail.com>
 	* R/igraph.r: Now receives ...
 	* R/gexf-js.r: Passing httd.args

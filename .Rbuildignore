@@ -20,3 +20,4 @@ demo/gexfplot\.R
 ^readme\.rmd$
 ^dependencies$
 ^makefile$
+^LICENSE\.md$

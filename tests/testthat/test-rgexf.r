@@ -1,12 +1,10 @@
 context("gexf function")
 
-nodes <- cbind(a=1:10, b=letters[1:10])
-edges <- matrix(sample(1:10, 20, TRUE), ncol=2)
-
-# test_examples()
-
 # ------------------------------------------------------------------------------
 test_that("data.frame or matrix work OK", {
+
+  nodes <- cbind(a=1:10, b=letters[1:10])
+  edges <- matrix(sample(1:10, 20, TRUE), ncol=2)
   
   set.seed(1);ans0 <- gexf(as.data.frame(nodes), as.data.frame(edges))
   set.seed(1);ans1 <- gexf(nodes, edges)
@@ -16,6 +14,9 @@ test_that("data.frame or matrix work OK", {
 
 # ------------------------------------------------------------------------------
 test_that("errors", {
+  nodes <- cbind(a=1:10, b=letters[1:10])
+  edges <- matrix(sample(1:10, 20, TRUE), ncol=2)
+  
   # edge.list
   expect_error(edge.list(cbind(1:10)), "number of columns")
   expect_error(edge.list(list), "class not supported")

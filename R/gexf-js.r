@@ -21,7 +21,9 @@ gexf_js_install <- function(path, overwrite = FALSE) {
   file.copy(gexf_js_files, to = path, overwrite = overwrite, recursive = TRUE)
   file.remove(paste(path, "config.js.template", sep="/"))
   file.remove(paste(path, "README.md", sep="/"))
-  
+  file.remove(paste(path, "miserables.gexf", sep="/"))
+  file.remove(paste(path, "celegans.gexf", sep="/"))
+
 }
 
 

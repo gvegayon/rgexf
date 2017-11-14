@@ -39,15 +39,12 @@ pause()
 size <- runif(n,max=100)
 color <- terrain.colors(n)
 color <- color[order(runif(n))][1:n]
-color <- cbind(t(col2rgb(color)),1)
 
 color2 <- heat.colors(n)
 color2 <- color2[order(runif(n))][1:n]
-color2 <- cbind(t(col2rgb(color2)),1)
 
 color3 <- topo.colors(n)
 color3<- color3[order(runif(n))][1:n]
-color3 <- cbind(t(col2rgb(color3)),1)
 
 pause()
 

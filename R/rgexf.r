@@ -325,10 +325,7 @@ NULL
 default_nodeVizAtt <- list(
   size     = function() 8.0,
   position = function() structure(c(runif(2, -200, 200), 0), names = c("x", "y", "z")),
-  color    = function() c(
-    structure(as.vector(unname(col2rgb("steelblue"))), names = c("r", "g", "b")),
-    a = .8
-  )
+  color    = function() "tomato"
 )
 
 set_default_nodeVizAtt <- function() {
@@ -347,10 +344,7 @@ set_default_nodeVizAtt <- function() {
       )
         
     }
-  
-  
-      
-  
+
 }
 
 #' @export
@@ -390,15 +384,19 @@ gexf <- function(
   
   # Nodes
   if (inherits(nodes, c("data.frame", "matrix"))) {
-    if (NCOL(nodes) != 2) stop("-nodes- should have two columns not ", NCOL(nodes))
+    if (ncol(nodes) != 2)
+      stop("-nodes- should have two columns not ", ncol(nodes))
   }
-  else stop("Invalid object type: -nodes- should be a two column data.frame or a matrix")
+  else
+    stop("Invalid object type: -nodes- should be a two column data.frame or a matrix")
   
   # Edges
   if (inherits(edges, c("data.frame", "matrix"))) {
-    if (NCOL(edges) != 2) stop("-edges- should have two columns not ", NCOL(edges))
+    if (ncol(edges) != 2)
+      stop("-edges- should have two columns not ", ncol(edges))
   }
-  else stop("Invalid object type: -edges- should be a two column data.frame or a matrix")
+  else
+    stop("Invalid object type: -edges- should be a two column data.frame or a matrix")
   
   # version
   vers <- gexf_version(vers)
@@ -419,6 +417,7 @@ gexf <- function(
   
   # Parsing edges Viz Att
   edgesVizAtt  <- if (length(unlist(edgesVizAtt))) {
+    nodesVizAtt <- nodesVizAtt[sapply(edgesVizAtt, length) > 0]
     Map(function(a, b) parseVizAtt(a, b, m, "edges"), a=names(edgesVizAtt),
         b=edgesVizAtt)
   } else NULL
@@ -445,9 +444,8 @@ gexf <- function(
   
   nodesVizAtt  <- if (length(unlist(nodesVizAtt))) {
     
-    # Removing empty ones
+    # # Removing empty ones
     nodesVizAtt <- nodesVizAtt[sapply(nodesVizAtt, length) > 0]
-    
     Map(function(a, b) parseVizAtt(a, b, n, "nodes"), a=names(nodesVizAtt),
                         b=nodesVizAtt)
   } else NULL
@@ -518,16 +516,31 @@ gexf <- function(
   if (mode == "dynamic") {
     
     # Fixing time factors
-    if (keepFactors)
+    if (keepFactors) {
+      
       for(i in 1:2) {
-        if (dynamic[1]) nodeDynamic[,i] <- as.numeric(nodeDynamic[,i])
-        if (dynamic[2]) edgeDynamic[,i] <- as.numeric(edgeDynamic[,i])
+        
+        if (dynamic[1])
+          nodeDynamic[,i] <- as.numeric(nodeDynamic[,i])
+        
+        if (dynamic[2])
+          edgeDynamic[,i] <- as.numeric(edgeDynamic[,i])
+        
       }
-    else
+      
+    } else {
+      
       for(i in 1:2) {
-        if (dynamic[1]) nodeDynamic[,i] <- as.character(nodeDynamic[,i])
-        if (dynamic[2]) edgeDynamic[,i] <- as.character(edgeDynamic[,i])
+        
+        if (dynamic[1])
+          nodeDynamic[,i] <- as.character(nodeDynamic[,i])
+        
+        if (dynamic[2])
+          edgeDynamic[,i] <- as.character(edgeDynamic[,i])
+        
       }
+      
+    }
     
     strTime <- c(unlist(nodeDynamic),unlist(edgeDynamic))
 
@@ -542,16 +555,21 @@ gexf <- function(
         
     # Replacing NAs
     if (dynamic[1]) {
+      
       nodeDynamic[is.na(nodeDynamic[,1]),1] <- strTime
       nodeDynamic[is.na(nodeDynamic[,2]),2] <- endTime
+      
     }
+    
     if (dynamic[2]) {
+      
       edgeDynamic[is.na(edgeDynamic[,1]),1] <- strTime
       edgeDynamic[is.na(edgeDynamic[,2]),2] <- endTime
+      
     }
-  } else {
+    
+  } else 
     XML::xmlAttrs(xmlGraph) <- c(mode=mode, defaultedgetype=defaultedgetype)
-  }
   
   datatypes <- matrix(
     c(
@@ -620,79 +638,37 @@ gexf <- function(
     edgesAttDf <- NULL
   }
   
-  # nodes vizatt
-  ListNodesVizAtt <- NULL
-  if (nNodesVizAtt > 0) {
-    
-    # Cohersing into data.frames
-    nodesVizAtt <- lapply(nodesVizAtt, as.data.frame)
-    
-    for (i in names(nodesVizAtt)) {
-      tmpAtt <- nodesVizAtt[[i]]
-      
-      if (i == "color") {
-        colnames(tmpAtt) <- paste("viz.color", c("r","g","b","a"), sep=".")
-      }
-      else if (i == "position") {
-        colnames(tmpAtt) <- paste("viz.position", c("x","y","z"), sep=".")
-      }
-      else if (i == "size") {
-        colnames(tmpAtt) <- "viz.size.value"
-        tmpAtt[,1] <- sprintf(fmt, tmpAtt[,1])
-      }
-      else if (i == "shape") {
-        colnames(tmpAtt) <- "viz.shape.value"
-      }
-      else if (i == "image") {
-        tmpAtt <- data.frame(x=rep("image",NROW(nodes)), viz.image.uri=tmpAtt)
-        colnames(tmpAtt) <- c("viz.image.value","viz.image.uri")
-      }
-      
-      if (length(ListNodesVizAtt) == 0) ListNodesVizAtt <- tmpAtt
-      else ListNodesVizAtt <- data.frame(ListNodesVizAtt, tmpAtt)
-      
-      # Saving changes
-      colnames(tmpAtt) <- gsub(sprintf("viz.%s.",i),"", colnames(tmpAtt))
-      nodesVizAtt[[i]] <- tmpAtt
-    }
-  }
+  # nodes vizatt ---------------------------------------------------------------
+  ListNodesVizAtt <- if (nNodesVizAtt > 0)
+    do.call(cbind, unname(nodesVizAtt))
+  else
+    NULL
   
-  # edges vizatt
-  ListEdgesVizAtt <- NULL
-  if (nEdgesVizAtt > 0) {
-    
-    # Cohersing into data.frames
-    edgesVizAtt <- lapply(edgesVizAtt, as.data.frame)
-    
-    for (i in names(edgesVizAtt)) {
-      tmpAtt <- edgesVizAtt[[i]]
-      
-      if (i == "color") {
-        colnames(tmpAtt) <- paste("viz.color", c("r","g","b","a"), sep=".")
-      }
-      else if (i == "size") {
-        colnames(tmpAtt) <- "viz.size.value"
-        tmpAtt[,1] <- sprintf(fmt, tmpAtt[,1])
-      }
-      else if (i == "shape") {
-        colnames(tmpAtt) <- "value"
-      }
-      
-      if (length(ListEdgesVizAtt) == 0) ListEdgesVizAtt <- tmpAtt
-      else ListEdgesVizAtt <- data.frame(ListEdgesVizAtt, tmpAtt)
-      
-      # Saving changes
-      colnames(tmpAtt) <- gsub(sprintf("viz.%s.",i),"", colnames(tmpAtt))
-      edgesVizAtt[[i]] <- tmpAtt
-    }
-  }
+  nodesVizAtt     <- lapply(nodesVizAtt, function(x) {
+    colnames(x) <- gsub("^viz[.][a-zA-Z]+[.]", "", colnames(x))
+    x
+  })
+  
+  
+  # edges vizatt ---------------------------------------------------------------
+  ListEdgesVizAtt <- if (nEdgesVizAtt >0) 
+    do.call(cbind, unname(edgesVizAtt))
+  else
+    NULL
+  
+  edgesVizAtt <- lapply(edgesVizAtt, function(x) {
+    colnames(x) <- gsub("^viz[.][a-zA-Z]+[.]", "", colnames(x))
+    x
+  })
   
   ##############################################################################
   # The basic char matrix definition  for nodes
   
-  if (dynamic[1]) nodeDynamic <- as.data.frame(nodeDynamic)
+  if (dynamic[1])
+    nodeDynamic <- as.data.frame(nodeDynamic)
   
-  if (nNodesAtt > 0) nodesAtt <- data.frame(nodesAtt)
+  if (nNodesAtt > 0)
+    nodesAtt <- data.frame(nodesAtt)
   
   for (set in c(nodeDynamic, nodesAtt, ListNodesVizAtt)) {
     try(nodes <- data.frame(nodes, set), silent=TRUE)
@@ -700,23 +676,34 @@ gexf <- function(
   
   # Naming the columns
   attNames <- nodesAttDf["id"]
-  if (!is.null(nodeDynamic)) tmeNames <- c("start", "end") else tmeNames <- NULL
+  if (!is.null(nodeDynamic))
+    tmeNames <- c("start", "end")
+  else
+    tmeNames <- NULL
   
-  colnames(nodes) <- unlist(c("id", "label", tmeNames, attNames, colnames(ListNodesVizAtt)))
+  colnames(nodes) <- unlist(
+    c("id", "label", tmeNames, attNames, colnames(ListNodesVizAtt))
+    )
   
   # Fixing factors
   if (keepFactors) {
+    
     tofix <- which(lapply(nodes, class) %in% "factor")
     if (length(tofix)) {
+      
       warning("Factor variables will be stored as -numeric-.",
               "\nIf you don't want this behavior, set -keepFactors- as -FALSE-.")
+      
       nodes[,tofix] <- lapply(nodes[,tofix,drop=FALSE], as.numeric)
+      
     }
-  }
-  else {
+    
+  } else {
+    
     tofix <- which(lapply(nodes, class) %in% "factor")
     if (length(tofix))
       nodes[,tofix] <- lapply(nodes[,tofix,drop=FALSE], as.character)
+    
   }
   
   # NODES
@@ -739,7 +726,10 @@ gexf <- function(
   
   # Naming the columns
   attNames <- edgesAttDf["id"]
-  if (!is.null(edgeDynamic)) tmeNames <- c("start", "end") else tmeNames <- NULL
+  if (!is.null(edgeDynamic))
+    tmeNames <- c("start", "end")
+  else
+    tmeNames <- NULL
   
   # Generating weights
   if (!length(edgesWeight))  edgesWeight <- 1
@@ -758,14 +748,23 @@ gexf <- function(
   
   # Fixing factors
   if (keepFactors) {
+    
     for (i in colnames(edges)) {
-      if (class(edges[[i]]) == "factor") edges[[i]] <- as.numeric(edges[[i]])
+      
+      if (class(edges[[i]]) == "factor")
+        edges[[i]] <- as.numeric(edges[[i]])
+      
     }
-  }
-  else {
+    
+  } else {
+    
     for (i in colnames(edges)) {
-      if (class(edges[[i]]) == "factor") edges[[i]] <- as.character(edges[[i]])
+      
+      if (class(edges[[i]]) == "factor")
+        edges[[i]] <- as.character(edges[[i]])
+      
     } 
+    
   }
   
   # Adding edges
@@ -775,29 +774,36 @@ gexf <- function(
   if (length(edgesLabel) == 0) edgesLabel <- edges[,"id"]
     
   results <- .build.and.validate.gexf(
-    meta=meta,
-    mode=list(defaultedgetype=defaultedgetype, mode=mode),
-    atts.definitions=list(nodes = nodesAttDf, edges = edgesAttDf),
-    nodesVizAtt=nodesVizAtt,
-    edgesVizAtt=edgesVizAtt,
-    nodes=as.data.frame(nodes),
-    edges=as.data.frame(cbind(edges,edgesLabel)),
-    graph=XML::saveXML(xmlFile, encoding=encoding)
+    meta             = meta,
+    mode             = list(defaultedgetype=defaultedgetype, mode=mode),
+    atts.definitions = list(nodes = nodesAttDf, edges = edgesAttDf),
+    nodesVizAtt      = nodesVizAtt,
+    edgesVizAtt      = edgesVizAtt,
+    nodes            = as.data.frame(nodes),
+    edges            = as.data.frame(cbind(edges,edgesLabel)),
+    graph            = XML::saveXML(xmlFile, encoding=encoding)
     )
   
   
   # Fixing 
   for (viz in c("color", "size", "shape", "position")) 
-    results$graph <- gsub(sprintf("<%s",viz), sprintf("<viz:%s", viz), 
-                          results$graph, fixed=TRUE)
+    results$graph <- gsub(
+      sprintf("<%s",viz),
+      sprintf("<viz:%s", viz), 
+      results$graph,
+      fixed=TRUE)
   
   
   # Returns
   if (is.na(output)) {
+    
     return(results)
+    
   } else {
     # warning("Starting version 0.17.0")
+    
     write.gexf(results, output=output, replace=TRUE)
+    
   }
 }
 

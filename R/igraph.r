@@ -103,8 +103,7 @@ igraph.to.gexf <- function(igraph.obj, ...) {
   # Nodes Viz att
   if (!length(dots$nodesVizAtt$color)) {
     if (length(tmpnodes$color)) {
-      dots$nodesVizAtt$color <- list(color=t(grDevices::col2rgb(tmpnodes$color, alpha=T)))
-      dots$nodesVizAtt$color[,4] <- 1
+      dots$nodesVizAtt$color <- list(color=tmpnodes$color)
     } else 
       dots$nodesVizAtt$color <- NULL
   }
@@ -117,8 +116,7 @@ igraph.to.gexf <- function(igraph.obj, ...) {
   # Edges Viz att
   if (!length(dots$edgexVizAtt$color)) {
     if (length(tmpedges$color)) {
-      dots$edgexVizAtt$color <- list(color=t(grDevices::col2rgb(tmpedges$color, alpha=T)))
-      dots$edgexVizAtt$color[,4] <- 1 
+      dots$edgexVizAtt$color <- list(color=tmpedges$color)
     } else
       dots$edgexVizAtt$color <- NULL
   }

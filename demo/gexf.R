@@ -5,6 +5,7 @@
 pause <- function() {  
   invisible(readline("\nPress <return> to continue: ")) 
 }
+pause <- function() NULL
 pause()
 
 # Defining a matrix of nodes

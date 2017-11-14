@@ -37,9 +37,10 @@ gexf_version <- function(vers="1.3") {
 #' @useDynLib rgexf, .registration=TRUE, .fixes= "C_"
 #' @importFrom igraph get.data.frame list.vertex.attributes list.edge.attributes
 #'   E is.directed V set.vertex.attribute set.edge.attribute
-#' @importFrom grDevices rgb col2rgb
+#' @importFrom grDevices rgb col2rgb colors
 #' @importFrom utils head
 #' @importFrom servr httd
+#' @importFrom stats complete.cases
 NULL
 
 #' Edge list with attributes
