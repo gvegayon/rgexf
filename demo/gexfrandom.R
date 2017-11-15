@@ -72,7 +72,7 @@ graph <- gexf(
   rbind(edges1, edges2,edges3), 
   nodesVizAtt=list(
     size=c(size,size,size),
-    color=rbind(color,color2,color3),
+    color=c(color,color2,color3),
     position=rbind(pos,pos2,pos3)),
   vers="1.2")
 
