@@ -39,10 +39,9 @@ igraph.to.gexf <- function(igraph.obj, ...) {
   dots <- list(...)
   
   g <- igraph.obj
-  rm(igraph.obj)
   
   # Retrive elements from igraph object
-  gdata <- igraph::get.data.frame(g, what="both")
+  gdata    <- igraph::get.data.frame(g, what="both")
   tmpedges <- gdata$edges
   tmpnodes <- gdata$vertices
   
@@ -103,20 +102,25 @@ igraph.to.gexf <- function(igraph.obj, ...) {
   # Nodes Viz att
   if (!length(dots$nodesVizAtt$color)) {
     if (length(tmpnodes$color)) {
-      dots$nodesVizAtt$color <- list(color=tmpnodes$color)
+      dots$nodesVizAtt$color <- tmpnodes$color
     } else 
       dots$nodesVizAtt$color <- NULL
   }
   
-  
-  if (length(dots$nodesVizAtt$size) && length(tmpnodes$size)){
+  if (!length(dots$nodesVizAtt$size) && length(tmpnodes$size))
     dots$nodesVizAtt$size <- tmpnodes$size
-  }
   
+  positions <- igraph::graph_attr(g, "layout")
+  
+  if (!length(dots$nodesVizAtt$position) && length(positions)) {
+    dots$nodesVizAtt$position <- check_positions(positions)
+    
+  }
+    
   # Edges Viz att
-  if (!length(dots$edgexVizAtt$color)) {
+  if (!length(dots$edgesVizAtt$color)) {
     if (length(tmpedges$color)) {
-      dots$edgexVizAtt$color <- list(color=tmpedges$color)
+      dots$edgesVizAtt$color <- tmpedges$color
     } else
       dots$edgexVizAtt$color <- NULL
   }
@@ -126,6 +130,9 @@ igraph.to.gexf <- function(igraph.obj, ...) {
     dots$defaultedgetype <- "directed"
   else 
     dots$defaultedgetype <- "undirected"
+  
+  if (!length(dots$rescale.node.size))
+    dots$rescale.node.size <- FALSE
   
   # Building graph
   do.call(gexf, c(
@@ -157,29 +164,35 @@ gexf.to.igraph <- function(gexf.obj) {
   igraph::V(g2)$name <- g$nodes$label
   
   # Nodes Viz atts
-  if (length(x <- g$nodesVizAtt$color)) {
-    igraph::V(g2)$color <- grDevices::rgb(x$r/255,x$g/255,x$b/255,x$a/255)
-  }
-
+  if (length(x <- g$nodesVizAtt$color)) 
+    igraph::V(g2)$color <- grDevices::rgb(x$r/255,x$g/255,x$b/255,x$a)
+  
+  if (length(x <- g$nodesVizAtt$size)) 
+    igraph::V(g2)$size <- x$value
+  
+  if (length(x <- g$nodesVizAtt$position))
+    g2 <- igraph::set_graph_attr(g2, "layout", unname(x))
+  
   # Nodes atts
-  if (length(x <- g$nodes[, !(colnames(g$nodes) %in% c("id", "label"))])) {
-    for(i in names(x)) g2 <- igraph::set.vertex.attribute(g2, i, value=x[,c(i)])
-  }
+  if (length(x <- g$nodes[, !(colnames(g$nodes) %in% c("id", "label"))])) 
+    for(i in names(x))
+      g2 <- igraph::set.vertex.attribute(g2, i, value=x[,c(i)])
+  
 
   # Edges atts
-  if (length(x <- g$edges[, !(colnames(g$edges) %in% c("id", "source", "target", "weight") )])) {
-    for(i in names(x)) g2 <- igraph::set.edge.attribute(g2, i, value=x[,c(i)])
-  } 
+  if (length(x <- g$edges[, !(colnames(g$edges) %in% c("id", "source", "target", "weight") )])) 
+    for(i in names(x))
+      g2 <- igraph::set.edge.attribute(g2, i, value=x[,c(i)])
+  
   
   # Edges Viz atts
-  if (length(x <- g$edgesVizAtt$color)) {
-    igraph::E(g2)$color <- grDevices::rgb(x$r/255,x$g/255,x$b/255,x$a/255)
-  }
+  if (length(x <- g$edgesVizAtt$color)) 
+    igraph::E(g2)$color <- grDevices::rgb(x$r/255,x$g/255,x$b/255,x$a)
   
   # Edges weights 
-  if (length(x <- g$edges$weight)) {
+  if (length(x <- g$edges$weight)) 
    igraph::E(g2)$weight <- x
-  }
+  
   
   return(g2)
 }

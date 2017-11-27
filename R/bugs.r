@@ -50,12 +50,68 @@ checkTimes <- function(x, format='date') {
 
 #' This function checks the color specification
 #' @noRd
+check_and_map_color <- function(x) {
+  
+  # If it is a single value
+  if (length(x) == 1) {
+    
+    if (is.numeric(x)) {
+      
+      if (x < 1)
+        stop("When specified as number, colors cannot be negative!", call. = FALSE)
+      
+      x <- grDevices::colors()[x]
+    }
+      
+    
+    # Coercing to RGBA
+    x <- t(grDevices::col2rgb(x, alpha=TRUE))
+    
+    # Rescaling the alpha
+    x[4] <- x[4]/255
+    
+  } else if (length(x) > 1) {
+    
+    if (!is.numeric(x))
+      stop("When specified as a matrix, colors should be passed as a numeric ",
+           "matrix.", call. = FALSE)
+    
+    # If only three columns
+    if (length(x) == 3) {
+      
+      x <- c(x, 1.0)
+      
+    } else if (length(x) == 4) {
+      
+      # Checking the range of colors
+      if ((x[-4] < 0)  | (x[-4] > 255))
+        stop("The color specification is out of range.", call. = FALSE)
+      if ((x[4] < 0) | (x[2, 4] > 1))
+        stop("The color specification  is out of range.", call. = FALSE)
+      
+    } else if (length(x) != 4) {
+      
+      stop("When specified as a matrix, colors should be specified as RGB using ",
+           " either 3 or 4 columns (including alpha) colors.", call. = FALSE)
+      
+    }
+    
+  } else
+    stop("Invalid color specification.", call. = FALSE)
+  
+  structure(x, .Names=c("r", "g", "b", "a"))
+  
+}
+
 check_and_map_colors <- function(x, type) {
   
   # If specified as a vector
   if (is.vector(x)) {
     
     # If it is integer/numeric, then map it to colors()
+    if (any(x < 1))
+      stop("When specified as number, colors cannot be negative!", call. = FALSE)
+    
     if (is.numeric(x))
       x <- grDevices::colors()[x]
     

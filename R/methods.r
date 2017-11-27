@@ -25,7 +25,7 @@ summary.gexf <- function(object, ...) {
   result
 }
 
-.build.and.validate.gexf <- function(
+build.and.validate.gexf <- function(
   meta=list(creator="NodosChile", description="A graph file writing in R using \'rgexf\'",keywords="gexf graph, NodosChile, R, rgexf"),
   mode=list(defaultedgetype="undirected", mode="static"),
   atts.definitions=list(nodes = NULL, edges = NULL),
@@ -135,14 +135,14 @@ summary.gexf <- function(object, ...) {
   
   # Returns the output
   structure(list(
-    meta=unlist(meta),
-    mode=unlist(mode),
-    atts.definitions=atts.definitions,
-    nodesVizAtt=nodesVizAtt,
-    edgesVizAtt=edgesVizAtt,
-    nodes=nodes,
-    edges=edges,
-    graph=graph
+    meta             = unlist(meta),
+    mode             = unlist(mode),
+    atts.definitions = atts.definitions,
+    nodesVizAtt      = nodesVizAtt,
+    edgesVizAtt      = edgesVizAtt,
+    nodes            = nodes,
+    edges            = edges,
+    graph            = graph
     ), class = "gexf")
 }
 

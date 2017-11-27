@@ -24,6 +24,11 @@ read.gexf <- function(x) {
 ################################################################################
 # Read gexf graph files
 ################################################################################
+  
+  oldstrf <- getOption("stringsAsFactors")
+  on.exit(options(stringsAsFactors = oldstrf))
+  options(stringsAsFactors = FALSE)
+  
   # Reads the graph
   gfile <- XML::xmlParse(x, encoding="UTF-8")
   
@@ -83,6 +88,62 @@ read.gexf <- function(x) {
     stringsAsFactors=F)
   rm(nodes)
   
+  # Viz attributes -------------------------------------------------------------
+  nodesVizAtt <- NULL
+  edgesVizAtt <- NULL
+  
+  # Extracting attributes
+  node.vizattr <- XML::xpathApply(
+    gfile, "/r:gexf/r:graph/r:nodes/r:node", namespaces = c(r=ns, v="viz"),
+    fun=XML::xmlChildren)
+  
+  node.vizattr <- lapply(node.vizattr, lapply, XML::xmlAttrs)
+  
+  # Colors
+  nodesVizAtt$color <- lapply(node.vizattr, function(a) {
+    
+    if (length(a$color)) 
+      return(check_and_map_color(as.numeric(a$color)))
+    
+    check_and_map_color(default_nodeVizAtt$color())
+    
+  })
+  
+  nodesVizAtt$color <- do.call(rbind, nodesVizAtt$color)
+  nodesVizAtt$color <- as.data.frame(nodesVizAtt$color)
+  dimnames(nodesVizAtt$color) <- list(
+    1L:nrow(nodesVizAtt$color), c("r", "g", "b", "a")
+  )
+  
+  # Size
+  nodesVizAtt$size <- lapply(node.vizattr, function(a) {
+    if (length(a$size)) 
+      return(check_size(as.numeric(a$size)))
+    
+    check_and_map_color(default_nodeVizAtt$size())
+  })
+  
+  nodesVizAtt$size <- do.call(rbind, nodesVizAtt$size)
+  nodesVizAtt$size <- as.data.frame(nodesVizAtt$size)
+  dimnames(nodesVizAtt$size) <- list(
+    1L:nrow(nodesVizAtt$size), "value"
+  )
+  
+  # Positions
+  nodesVizAtt$position <- lapply(node.vizattr, function(a) {
+    if (length(a$position)) 
+      return(check_positions(matrix(as.numeric(a$position), nrow = 1)))
+    
+    check_positions(default_nodeVizAtt$position())
+  })
+  
+  nodesVizAtt$position <- do.call(rbind, nodesVizAtt$position)
+  nodesVizAtt$position <- as.data.frame(nodesVizAtt$position)
+  dimnames(nodesVizAtt$position) <- list(
+    1L:nrow(nodesVizAtt$position), c("x", "y", "z")
+  )
+  
+  
   # Edges
   edges <- XML::getNodeSet(gfile,"/r:gexf/r:graph/r:edges/r:edge", c(r=ns))
 
@@ -100,7 +161,15 @@ read.gexf <- function(x) {
 
   class(graph) <- "gexf"
 
-  graph
+  build.and.validate.gexf(
+    nodes            = graph$nodes,
+    edges            = graph$edges,
+    atts.definitions = graph$atts.definitions,
+    nodesVizAtt      = nodesVizAtt,
+    edgesVizAtt      = edgesVizAtt,
+    graph            = graph$graph
+    )
+  
 }
 
 
@@ -368,7 +437,8 @@ new.gexf.graph <- function(
 # Creates an empty gexf class object
 ################################################################################
   defaultedgetype = "undirected",
-  meta = list(creator="NodosChile", description="A graph file writing in R using \'rgexf\'",keywords="gexf graph, NodosChile, R, rgexf")
+  meta = list(creator="NodosChile", description="A graph file writing in R using \'rgexf\'",
+              keywords="gexf graph, NodosChile, R, rgexf")
   ) {
   
   # Building doc
@@ -408,18 +478,18 @@ new.gexf.graph <- function(
   XML::newXMLNode(name='edges', parent=xmlGraph)
   
   # Return  
-  return(
-    .build.and.validate.gexf(
-      meta=meta,
-      mode=list(defaultedgetype=defaultedgetype, mode=mode),
-      atts.definitions = list(nodes = NULL, edges = NULL),
-      nodesVizAtt = NULL,
-      edgesVizAtt = NULL,
-      nodes=data.frame(id=NULL, label=NULL, row.names=NULL),
-      edges=data.frame(id=NULL, source=NULL,target=NULL, weight=NULL, row.names=NULL),
-      graph=XML::saveXML(xmlFile, encoding="UTF-8")
-      )
+  
+  build.and.validate.gexf(
+    meta=meta,
+    mode=list(defaultedgetype=defaultedgetype, mode=mode),
+    atts.definitions = list(nodes = NULL, edges = NULL),
+    nodesVizAtt = NULL,
+    edgesVizAtt = NULL,
+    nodes=data.frame(id=NULL, label=NULL, row.names=NULL),
+    edges=data.frame(id=NULL, source=NULL,target=NULL, weight=NULL, row.names=NULL),
+    graph=XML::saveXML(xmlFile, encoding="UTF-8")
     )
+    
 }
 
 #' @export
