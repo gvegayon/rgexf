@@ -773,7 +773,7 @@ gexf <- function(
   # Edges Label (for data frame)
   if (length(edgesLabel) == 0) edgesLabel <- edges[,"id"]
     
-  results <- .build.and.validate.gexf(
+  results <- build.and.validate.gexf(
     meta             = meta,
     mode             = list(defaultedgetype=defaultedgetype, mode=mode),
     atts.definitions = list(nodes = nodesAttDf, edges = edgesAttDf),

@@ -1,3 +1,10 @@
+2017-11-27  George G. Vega Yon <g.vegayon@gmail.com>
+	* R/bugs.r: Function to map colors of a single node.
+	
+	* R/igraph.r, R/read.gexf.r: Mapping positions, size and colors. Still a
+	  bit buggy. 
+
+
 2017-11-13  George G. Vega Yon <g.vegayon@gmail.com>
 	* R/bugs.r: New functions to check and coerce attributes
 	  viz attributes mostly.
