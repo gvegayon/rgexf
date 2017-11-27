@@ -21,3 +21,4 @@ demo/gexfplot\.R
 ^dependencies$
 ^makefile$
 ^LICENSE\.md$
+^tests/rundemos\.R$

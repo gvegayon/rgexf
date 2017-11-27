@@ -1,4 +1,4 @@
-# Changes in rgexf version 0.16.0 (2017-11-06)
+# Changes in rgexf version 0.16.0 (2017-11-27)
 
 ## New features and changes
 
@@ -20,6 +20,10 @@
 * `gexf` has a new argument, `rescale.node.size`. When set to `TRUE`, the
   `size` vector in `nodesVizAtt` is rescaled such that when calling the plot
   method the largest node spans roughly 5% of the plot.
+  
+* `read.gexf` now parses viz attributes (color, position and size).
+
+* `igraph.to.gexf` and vice versa now pass viz attributes and layout.
 
 ## New functions
 

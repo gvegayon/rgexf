@@ -40,7 +40,8 @@ include the \code{position} viz-attribute.
   igraph1 <- gexf.to.igraph(gexf1)
   gexf2 <- igraph.to.gexf(igraph1)
   
-  # Now, let's do it with a layout!
+  # Now, let's do it with a layout! (although we can just use
+  # the one that comes with lesmiserables :))
   pos <- igraph::layout_nicely(igraph1)
   plot(
     igraph.to.gexf(igraph1, nodesVizAtt = list(position=cbind(pos, 0))),

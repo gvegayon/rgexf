@@ -161,11 +161,13 @@ read.gexf <- function(x) {
 
   class(graph) <- "gexf"
 
+  order <- order(as.integer(graph$nodes$id))
+  
   build.and.validate.gexf(
-    nodes            = graph$nodes,
+    nodes            = graph$nodes[order, , drop=FALSE],
     edges            = graph$edges,
     atts.definitions = graph$atts.definitions,
-    nodesVizAtt      = nodesVizAtt,
+    nodesVizAtt      = lapply(nodesVizAtt, "[", i=order, j=, drop=FALSE),
     edgesVizAtt      = edgesVizAtt,
     graph            = graph$graph
     )

@@ -1,15 +1,9 @@
 
 
-CHANGES IN RGEXF VERSION 0.16.0 (2017-11-06)
+CHANGES IN RGEXF VERSION 0.16.0 (2017-11-27)
 
 
 New features and changes
-
--   Modernization of the project (roxygen, new CRAN standards, etc.)
-
--   Updated emails.
-
--   Remove broken links.
 
 -   Function write.gexf has a new argument for specifying the GEXF
     version for now it only changes the header.
@@ -17,15 +11,23 @@ New features and changes
 -   plot.gexf method now uses gexf-js instead of sigma.js.
 
 -   Now igraph.to.gexf passes arguments to gexf. Before it was only
-    passing position. This way users have more flexibility specifying
-    attributes.
+    passing position. This way users have more flexibility
+    specifying attributes.
 
 -   gexf's nodesVizAtt now has defaults for color, size and position.
     This is a requirement of gexf-js.
 
+-   gexf's nodesVizAtt color and size now support passing a default for
+    all the nodes. Also, color can be specified as a character scalar
+    (name of the) color, or as an integer (number in colors()).
+
 -   gexf has a new argument, rescale.node.size. When set to TRUE, the
     size vector in nodesVizAtt is rescaled such that when calling the
     plot method the largest node spans roughly 5% of the plot.
+
+-   read.gexf now parses viz attributes (color, position and size).
+
+-   igraph.to.gexf and vice versa now pass viz attributes and layout.
 
 
 New functions
@@ -34,6 +36,15 @@ New functions
     write.gexf since it makes more sense. write.gexf should only be for
     writing the gexf file on the disk. This will be effective starting
     vers 0.17.0
+
+
+Misc changes
+
+-   Modernization of the project (roxygen, new CRAN standards, etc.)
+
+-   Updated emails.
+
+-   Remove broken links.
 
 
 
@@ -70,9 +81,9 @@ Bug fixes
 
 Development
 
--   Option -keepFactors- default is now in -FALSE- (used to be in
-    -TRUE-). When set to -TRUE- and there are factors, a warning message
-    will appear (reported in issue 18, thanks Tim Smith!).
+-   Option -keepFactors- default is now in -FALSE- (used to be
+    in -TRUE-). When set to -TRUE- and there are factors, a warning
+    message will appear (reported in issue 18, thanks Tim Smith!).
 
 
 
@@ -81,8 +92,8 @@ CHANGES IN RGEXF VERSION 0.13.11 (2013-11-27)
 
 Bug fixes
 
--   Included class checks in -gexf- class functions (thanks to Samuel
-    Finegold).
+-   Included class checks in -gexf- class functions (thanks to
+    Samuel Finegold).
 
 -   write.gexf does not fails when dynamics different from double are
     passed (thank you Samuel Finegold!).
@@ -120,8 +131,8 @@ CHANGES IN RGEXF VERSION 0.13.05 (2013-05-09)
 
 Bug fixes
 
--   sprintf error when using other formats rather than double (issue
-    10).
+-   sprintf error when using other formats rather than double
+    (issue 10).
 
 -   in .addNodesEdges, add support to case “!attributes &&
     vizattributes” (issue 9).
@@ -163,8 +174,8 @@ Bug fixes
 Development
 
 -   .addNodesEdges rewritten now works faster in most of CPUs (some of
-    them with very high speedups) (Thanks to Duncan Temple Lang, RXML
-    author)
+    them with very high speedups) (Thanks to Duncan Temple Lang,
+    RXML author)
 
 -   Several code routines have been extracted from “bigger functions”
     and written as functions themselves.
@@ -180,8 +191,8 @@ New features and changes
     rm.gexf.node and rm.gexf.edge allow to build and manipulate gexf
     objects from scratch.
 
--   New function read.gexf allows to import gexf files as gexf class
-    objects.
+-   New function read.gexf allows to import gexf files as gexf
+    class objects.
 
 -   gexf function now it is called write.gexf.
 
@@ -192,8 +203,8 @@ New features and changes
 
 -   Real-life datasets have been includded.
 
--   New function edge.list builds a dataframe of nodes from an edge
-    list.
+-   New function edge.list builds a dataframe of nodes from an
+    edge list.
 
 -   New methods for gexf objects: print.gexf and summary.gexf.
 
