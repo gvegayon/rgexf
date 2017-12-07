@@ -1,0 +1,14 @@
+dependencies:
+  - name: gexf
+    version: 1.0
+    src: htmlwidgets/lib/gexfjs
+    stylesheet:
+      - styles/gexfjs.css
+      - styles/jquery-ui-1.10.3.custom.min.css
+    script:
+      - setup.js
+      - js/jquery-2.0.2.min.js
+      - js/jquery.mousewheel.min.js
+      - js/jquery-ui-1.10.3.custom.min.js
+      - js/gexfjs.js
+      - config.js
