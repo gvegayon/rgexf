@@ -205,13 +205,13 @@ plot.gexf <- function(
 #' @import htmlwidgets
 #' @export
 gexfjs <- function(
-  gexf=system.file("gexf-graphs/lesmiserables.gexf", package="rgexf"),
+  gexf   = "lib/gexf-1/lesmiserables.gexf" , # This is the onlyone that is working... for now
   width  = NULL,
   height = NULL
   ) {
   
   # read the gexf file
-  data <- paste(readLines(gexf), collapse="\n")
+  data <- paste(tryCatch(readLines(gexf), error = function(e) "e"), collapse="\n")
   
   # # create a list that contains the settings
   # settings <- list(
@@ -221,7 +221,8 @@ gexfjs <- function(
   
   # pass the data and settings using 'x'
   x <- list(
-    data = data #,
+    path = gexf,
+    data = data#,
     # settings = settings
   )
   

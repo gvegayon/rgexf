@@ -2,7 +2,7 @@ if (typeof jQuery == 'undefined') {
                 document.write(unescape("%3Cscript type='text/javascript' src='js/jquery-2.0.2.min.js'%3E%3C/script%3E"));
 }
 
-function setGexfDoc(id) {
+function setGexfDoc(id, width, height) {
 
   // Creating zonecentre -------------------------------------------------------
   var zonecentre   = document.createElement("div");
@@ -12,8 +12,8 @@ function setGexfDoc(id) {
     // Creating canvans
     var canvas    = document.createElement("canvas");
     canvas.id     = "carte";
-    canvas.width  = 0;
-    canvas.height = 0;
+    canvas.width  = width;
+    canvas.height = height;
     
       // Creating links
       var ctlzoom = document.createElement("ul");
@@ -140,9 +140,12 @@ function setGexfDoc(id) {
   
   
   // Putting all together ------------------------------------------------------
+  
+  
   document.getElementById(id).appendChild(zonecentre);
   document.getElementById(id).appendChild(overviewzone);
   document.getElementById(id).appendChild(leftcolumn);
   document.getElementById(id).appendChild(titlebar);
+  
 
 }

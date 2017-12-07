@@ -7,7 +7,8 @@ HTMLWidgets.widget({
   factory: function(el, width, height) {
   
     // create our sigma object and bind it to the element
-    var gf = new Object(el.id);
+    // The GexFJS object is created before hand.
+    // var gf = new GexfJS(el.id);
     
     return {
       renderValue: function(x) {
@@ -16,7 +17,10 @@ HTMLWidgets.widget({
         var parser = new DOMParser();
         var data = parser.parseFromString(x.data, "application/xml");
         
-        setGexfDoc(el.id);
+        // Setting parameters
+        GexfJS.setParams({graphFile: x.path});
+        
+        setGexfDoc(el.id, width, height);
       },
       
       resize: function(width, height) {
@@ -30,7 +34,7 @@ HTMLWidgets.widget({
       // instance we're returning from factory(). This is generally a
       // good idea for extensibility--it helps users of this widget
       // interact directly with sigma, if needed.
-      s: gf
+      s: GexfJS
     };
   }
 });

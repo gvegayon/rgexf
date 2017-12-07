@@ -1,0 +1,17 @@
+---
+title: "Untitled"
+author: "George G. Vega Yon"
+date: "November 25, 2017"
+output: html_document
+---
+
+<!-- <iframe src="/tmp/RtmpFHmD2h/index.html"></iframe> -->
+
+```{r}
+
+library(rgexf)
+fn <- system.file("gexf-graphs/lesmiserables.gexf", package = "rgexf")
+mygraph <- read.gexf(fn)
+plot(mygraph)
+```
+

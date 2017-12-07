@@ -1,0 +1,17 @@
+---
+title: "Untitled"
+author: "George G. Vega Yon"
+date: "December 6, 2017"
+output: html_document
+---
+
+Hola amigosgexf
+
+```{r}
+library(rgexf)
+```
+
+```{r}
+gexfjs()
+```
+
