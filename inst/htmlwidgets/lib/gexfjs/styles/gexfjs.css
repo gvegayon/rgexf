@@ -67,7 +67,10 @@ h1 a {
 /* AU CENTRE */
 
 #zonecentre {
-    position: fixed; top: 45px; bottom: 0; left: 0; right: 0; overflow: hidden;
+    /* position: fixed; 
+     width: 400px;
+    height: 400px ;*/
+    top: 45px; bottom: 0; left: 0; right: 0; overflow: hidden;
 }
 
 

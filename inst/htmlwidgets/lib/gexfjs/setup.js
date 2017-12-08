@@ -7,7 +7,12 @@ function setGexfDoc(id, width, height) {
   // Creating zonecentre -------------------------------------------------------
   var zonecentre   = document.createElement("div");
   zonecentre.id    = "zonecentre";
-  zonecentre.setAttribute("class", "gradient");
+  
+  zonecentre.setAttribute(
+      "style",
+      "top: 45px; margin:auto; overflow: hidden;" +
+      "width:" + width + "px; height:" + height +"px;"  
+    );
   
     // Creating canvans
     var canvas    = document.createElement("canvas");
@@ -147,5 +152,10 @@ function setGexfDoc(id, width, height) {
   document.getElementById(id).appendChild(leftcolumn);
   document.getElementById(id).appendChild(titlebar);
   
+  // Updating the CSS
+  
+  
+  // var st = "overflow:hidden;";
+  // document.getElementById(id).setAttribute("style", st);
 
 }
