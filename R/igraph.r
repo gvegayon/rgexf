@@ -49,13 +49,13 @@ igraph.to.gexf <- function(igraph.obj, ...) {
   # If nodes have no name
   namecol <- which(colnames(nodes) == "name")
   if (!length(namecol)) 
-    nodes <- data.frame(nodes, label=nodes$id)
+    nodes <- data.frame(nodes, label=rownames(nodes))
   else
     nodes$label <- nodes$name
   
 
-  edges$source <- nodes$id[match(edges$from, nodes$label)]
-  edges$target <- nodes$id[match(edges$to, nodes$label)]
+  edges$source <- rownames(nodes)[match(edges$from, rownames(nodes))]
+  edges$target <- rownames(nodes)[match(edges$to, rownames(nodes))]
   edges <- edges[, c('source', 'target')]
   
   # Nodes Attributes
@@ -90,7 +90,7 @@ igraph.to.gexf <- function(igraph.obj, ...) {
   positions <- igraph::graph_attr(g, "layout")
   
   if (!length(dots$nodesVizAtt$position) && length(positions)) {
-    dots$nodesVizAtt$position <- check_positions(positions)
+    dots$nodesVizAtt$position <- viz_att_checks$position(positions)
     
   }
     
@@ -109,12 +109,16 @@ igraph.to.gexf <- function(igraph.obj, ...) {
     dots$defaultedgetype <- "undirected"
   
   if (!length(dots$rescale.node.size))
-    dots$rescale.node.size <- FALSE
+    dots$rescale.node.size <- TRUE
   
   # Building graph
   do.call(gexf, c(
     list(
-      nodes = nodes[, c("id","name")],
+      nodes = data.frame(
+        id   = rownames(nodes),
+        name = nodes$label,
+        stringsAsFactors = FALSE
+        ),
       edges = edges[, c("source", "target")]
       ), dots)
   )
@@ -127,50 +131,47 @@ gexf.to.igraph <- function(gexf.obj) {
 
   # Checks the class
   if (!inherits(gexf.obj,"gexf")) stop("-graph- is not of -gexf- class.") 
- 
-  g <- gexf.obj
-  rm(gexf.obj)
-  
+
   g2 <- igraph::graph.data.frame(
-    g$edges[,c("source","target")],
-    directed=(g$mode[[1]] != "undirected"),
-    vertices=g$nodes[,c("id"),drop=FALSE]
+    gexf.obj$edges[,c("source","target")],
+    directed = gexf.obj$mode[[1]] != "undirected",
+    vertices = gexf.obj$nodes[,c("id"),drop=FALSE]
     )
   
   # Labels
-  igraph::V(g2)$name <- g$nodes$label
+  igraph::V(g2)$name <- gexf.obj$nodes$label
   
   # Nodes Viz atts
-  if (length(x <- g$nodesVizAtt$color)) 
+  if (length(x <- gexf.obj$nodesVizAtt$color)) 
     igraph::V(g2)$color <- grDevices::rgb(x$r/255,x$g/255,x$b/255,x$a)
   
-  if (length(x <- g$nodesVizAtt$size)) 
+  if (length(x <- gexf.obj$nodesVizAtt$size)) 
     igraph::V(g2)$size <- x$value
   
-  if (length(x <- g$nodesVizAtt$position))
+  if (length(x <- gexf.obj$nodesVizAtt$position))
     g2 <- igraph::set_graph_attr(
       g2, "layout", 
       unname(as.matrix(x))
       )
   
   # Nodes atts
-  if (length(x <- g$nodes[, !(colnames(g$nodes) %in% c("id", "label"))])) 
+  if (length(x <- gexf.obj$nodes[, !(colnames(gexf.obj$nodes) %in% c("id", "label")), drop=FALSE])) 
     for(i in names(x))
       g2 <- igraph::set.vertex.attribute(g2, i, value=x[,c(i)])
   
 
   # Edges atts
-  if (length(x <- g$edges[, !(colnames(g$edges) %in% c("id", "source", "target", "weight") )])) 
+  if (length(x <- gexf.obj$edges[, !(colnames(gexf.obj$edges) %in% c("id", "source", "target", "weight") )])) 
     for(i in names(x))
       g2 <- igraph::set.edge.attribute(g2, i, value=x[,c(i)])
   
   
   # Edges Viz atts
-  if (length(x <- g$edgesVizAtt$color)) 
+  if (length(x <- gexf.obj$edgesVizAtt$color)) 
     igraph::E(g2)$color <- grDevices::rgb(x$r/255,x$g/255,x$b/255,x$a)
   
   # Edges weights 
-  if (length(x <- g$edges$weight)) 
+  if (length(x <- gexf.obj$edges$weight)) 
    igraph::E(g2)$weight <- x
   
   

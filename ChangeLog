@@ -1,3 +1,14 @@
+2018-02-05  George G. Vega Yon <g.vegayon@gmail.com>
+	
+	* R/bugs.r: Moving checking functions to a single list.
+	
+	* R/igraph.r: Fixing bug when the id label was not present. Also cleaning code.
+
+	* R/rgexf.r: Better rescale for gexf-js.
+
+	* tests/testthat/*.r: New tests.
+
+
 2017-11-27  George G. Vega Yon <g.vegayon@gmail.com>
 	* R/bugs.r: Function to map colors of a single node.
 	

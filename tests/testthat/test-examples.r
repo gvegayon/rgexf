@@ -1,3 +1,3 @@
-context("Examples")
-
-test_examples()
+# context("Examples")
+# 
+# test_examples()

@@ -118,7 +118,7 @@ read.gexf <- function(x) {
   # Size
   nodesVizAtt$size <- lapply(node.vizattr, function(a) {
     if (length(a$size)) 
-      return(check_size(as.numeric(a$size)))
+      return(viz_att_checks$size(as.numeric(a$size)))
     
     check_and_map_color(default_nodeVizAtt$size())
   })
@@ -132,9 +132,9 @@ read.gexf <- function(x) {
   # Positions
   nodesVizAtt$position <- lapply(node.vizattr, function(a) {
     if (length(a$position)) 
-      return(check_positions(matrix(as.numeric(a$position), nrow = 1)))
+      return(viz_att_checks$position(matrix(as.numeric(a$position), nrow = 1)))
     
-    check_positions(default_nodeVizAtt$position())
+    viz_att_checks$position(default_nodeVizAtt$position())
   })
   
   nodesVizAtt$position <- do.call(rbind, nodesVizAtt$position)

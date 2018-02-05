@@ -7,7 +7,7 @@
 \usage{
 gexf_js_config(dir, graphFile = "network.gexf", showEdges = TRUE,
   useLens = FALSE, zoomLevel = 0, curvedEdges = TRUE,
-  edgeWidthFactor = 1, minEdgeWidth = 1, maxEdgeWidth = 50,
+  edgeWidthFactor = 1, minEdgeWidth = 1, maxEdgeWidth = 2,
   textDisplayThreshold = 9, nodeSizeFactor = 1, replaceUrls = TRUE,
   showEdgeWeight = TRUE, showEdgeLabel = TRUE, sortNodeAttributes = TRUE,
   showId = TRUE, showEdgeArrow = TRUE, language = FALSE)

@@ -67,7 +67,7 @@ gexf_js_config <- function(
   curvedEdges          = TRUE,
   edgeWidthFactor      = 1,
   minEdgeWidth         = 1,
-  maxEdgeWidth         = 50,
+  maxEdgeWidth         = 2,
   textDisplayThreshold = 9,
   nodeSizeFactor       = 1,
   replaceUrls          = TRUE,

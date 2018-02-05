@@ -48,6 +48,7 @@ checkTimes <- function(x, format='date') {
 #checkTimes(test, format='dateTime')
 #checkTimes('2012-02-01T00:00:00', 'dateTime')
 
+
 #' This function checks the color specification
 #' @noRd
 check_and_map_color <- function(x) {
@@ -103,7 +104,14 @@ check_and_map_color <- function(x) {
   
 }
 
-check_and_map_colors <- function(x, type) {
+
+# Visual specifications, functions that take the attribute and 
+# sets it according to GEXF standards. Currently the most complex one is
+# colors and positions.
+viz_att_checks <- list()
+
+
+viz_att_checks$color <- function(x, type) {
   
   # If specified as a vector
   if (is.vector(x)) {
@@ -143,7 +151,10 @@ check_and_map_colors <- function(x, type) {
       
       x <- cbind(x, 1.0)
       
-    } else if (ncol(x) == 4) {
+    } 
+    
+    # If it has a fourth column, then we can work this out...
+    if (ncol(x) == 4) {
       
       # Checking the range of colors
       ranges <- apply(x, 2, range)
@@ -168,7 +179,7 @@ check_and_map_colors <- function(x, type) {
 }
 
 # This function checks whether positions where correctly specified
-check_positions <- function(x) {
+viz_att_checks$position <- function(x, type) {
   
   # Must be able to be coerced to a matrix
   x <- as.matrix(x)
@@ -195,7 +206,7 @@ check_positions <- function(x) {
 
 
 # Checks the size of the nodes to be numeric values
-check_size <- function(x) {
+viz_att_checks$size <- function(x, type) {
   
   if (!is.numeric(x))
     stop("-nodesVizAtt$size- must be numeric.")
@@ -204,7 +215,7 @@ check_size <- function(x) {
   
 }
 
-check_image <- function(x) {
+viz_att_checks$image <- function(x, type) {
   
   x <- as.vector(x)
   
@@ -218,12 +229,12 @@ check_image <- function(x) {
 
 }
 
-check_shape <- function(x) {
+viz_att_checks$shape <- function(x, type) {
   
   x <- as.vector(x)
   
   if (!is.character(x))
-    stop("-(nodes/edges)VizAtt$shape- should be character.")
+    stop("-",type,"VizAtt$shape- should be character.")
   
   data.frame(
     viz.shape.value = unname(x)
@@ -231,16 +242,15 @@ check_shape <- function(x) {
   
 }
 
-# Visual specifications, functions that take the attribute and 
-# sets it according to GEXF standards. Currently the most complex one is
-# colors and positions.
-vizAttsSpecs <- list(
-  color = check_and_map_colors,
-  position = check_positions,
-  size = check_size, 
-  shape = check_shape,
-  image = check_image
-)
+
+# 
+# viz_att_checks <- list(
+#   color = check_and_map_colors,
+#   position = check_positions,
+#   size = check_size, 
+#   shape = check_shape,
+#   image = check_image
+# )
 
 # This function takes any set of visual attributes and checks them accordingly
 parseVizAtt <- function(att, dat, n, type=c("nodes", "edges")) {
@@ -289,7 +299,7 @@ parseVizAtt <- function(att, dat, n, type=c("nodes", "edges")) {
   # Applying specific checks
   if (att %in% checks) {
     
-    vizAttsSpecs[[att]](dat)
+    viz_att_checks[[att]](dat, type)
     
   } else 
     stop("The attribute -", att,"- is not supported for -", type,"-. Only '",

@@ -1,4 +1,4 @@
-# Changes in rgexf version 0.16.0 (2017-11-27)
+# Changes in rgexf version 0.16.0 (2018-02-05)
 
 ## New features and changes
 

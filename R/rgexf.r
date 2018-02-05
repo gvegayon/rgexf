@@ -434,9 +434,21 @@ gexf <- function(
   # Rescaling vertex sizes if required
   if (rescale.node.size) {
     
+    # Rescaling and centering position
+    for (i in 1:3) {
+      
+      pran <- range(nodesVizAtt$position[, i])
+      
+      if (pran[1] == pran[2])
+        next
+      
+      nodesVizAtt$position[, i] <- ((nodesVizAtt$position[, i] - pran[1])/
+        (pran[2] - pran[1]))*200 - 100
+      
+    }
+      
     # Getting ranges
-    sscale <- apply(nodesVizAtt$position, 2, range)
-    sscale <- max(sscale[2 ,] - sscale[1 ,])*.01
+    sscale <- 200*.05
     
     nodesVizAtt$size <- nodesVizAtt$size/max(nodesVizAtt$size)*sscale
     
