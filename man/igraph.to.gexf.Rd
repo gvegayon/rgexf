@@ -3,6 +3,7 @@
 \name{igraph.to.gexf}
 \alias{igraph.to.gexf}
 \alias{gexf.to.igraph}
+\alias{gexf.to.igraph}
 \title{Converting between \code{gexf} and \code{igraph} classes}
 \usage{
 igraph.to.gexf(igraph.obj, ...)

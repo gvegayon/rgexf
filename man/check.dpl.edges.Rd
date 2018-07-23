@@ -39,6 +39,9 @@ Function is mainly written in C, so speed gains are important.
   # Checking duplicated edges (undirected graph)
   check.dpl.edges(edges=relations, undirected=TRUE)
 }
+\seealso{
+Other manipulation: \code{\link{switch.edges}}
+}
 \author{
 George Vega Yon
 }

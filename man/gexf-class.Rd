@@ -142,6 +142,7 @@ yyyy-mm-dd.  \item dateTime W3 XSD
   demo(gexftwitter) # Example with real data of chilean twitter accounts.
   demo(gexfdynamicandatt) # Dynamic net with static attributes.
   demo(gexfbuildfromscratch) # Example building a net from scratch.
+  demo(gexfrandom)
   }
 
 }

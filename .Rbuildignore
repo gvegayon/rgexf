@@ -22,3 +22,5 @@ demo/gexfplot\.R
 ^makefile$
 ^LICENSE\.md$
 ^tests/rundemos\.R$
+^_pkgdown\.yml$
+^docs$

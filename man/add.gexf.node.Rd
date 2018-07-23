@@ -7,6 +7,11 @@
 \alias{rm.gexf.edge}
 \alias{add.node.spell}
 \alias{add.edge.spell}
+\alias{add.gexf.edge}
+\alias{rm.gexf.node}
+\alias{rm.gexf.edge}
+\alias{add.node.spell}
+\alias{add.edge.spell}
 \title{Adding and removing nodes/edges from \code{gexf} objects}
 \usage{
 add.gexf.node(graph, id = NA, label = NA, start = NULL, end = NULL,

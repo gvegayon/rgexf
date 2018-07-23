@@ -117,7 +117,7 @@ viz_att_checks$color <- function(x, type) {
   if (is.vector(x)) {
     
     # If it is integer/numeric, then map it to colors()
-    if (any(x < 1))
+    if (is.numeric(x) && any(x < 1))
       stop("When specified as number, colors cannot be negative!", call. = FALSE)
     
     if (is.numeric(x))

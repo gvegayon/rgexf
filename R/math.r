@@ -32,6 +32,7 @@
 #'   
 #'   # Checking duplicated edges (undirected graph)
 #'   check.dpl.edges(edges=relations, undirected=TRUE)
+#' @family manipulation
 #' @export
 check.dpl.edges <- function(edges, undirected=FALSE, order.edgelist=TRUE) {
 ################################################################################
@@ -92,6 +93,7 @@ check.dpl.edges <- function(edges, undirected=FALSE, order.edgelist=TRUE) {
 #'   
 #'   switch.edges(relations)
 #' @export
+#' @family manipulation
 switch.edges <- function(edges) {
 ################################################################################
 # Orders pairs of edges by putting the lowest id first as source

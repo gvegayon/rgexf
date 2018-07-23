@@ -317,6 +317,7 @@ edge.list <- function(x) {
 #'   demo(gexftwitter) # Example with real data of chilean twitter accounts.
 #'   demo(gexfdynamicandatt) # Dynamic net with static attributes.
 #'   demo(gexfbuildfromscratch) # Example building a net from scratch.
+#'   demo(gexfrandom)
 #'   }
 #' 
 #' @name gexf-class
