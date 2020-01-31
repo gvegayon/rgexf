@@ -182,7 +182,10 @@ viz_att_checks$color <- function(x, type) {
 viz_att_checks$position <- function(x, type) {
   
   # Must be able to be coerced to a matrix
-  x <- as.matrix(x)
+  if (is.vector(x))
+    x <- matrix(x, nrow = 1)
+  else
+    x <- as.matrix(x)
   
   # Is it numeric?
   if (!is.numeric(x))
@@ -197,6 +200,12 @@ viz_att_checks$position <- function(x, type) {
   # Adding z?
   if (ncol(x) == 2)
     x <- cbind(x, 0)
+  if (!(ncol(x) %in% c(2,3)))
+    stop(
+      "Positions should be specified with either 2 (X,Y) or 3 (X, Y, Z) coordinates.",
+      call. = FALSE
+      )
+  
   
   dimnames(x) <- list(NULL, paste0("viz.position.",c("x", "y", "z")))
   

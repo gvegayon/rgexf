@@ -463,10 +463,7 @@ gexf <- function(
                         b=nodesVizAtt)
   } else NULL
   
-  
-  
-  
-  nNodesVizAtt <- length(nodesVizAtt)
+    nNodesVizAtt <- length(nodesVizAtt)
   
   # Checking the number of digits
   if (!is.integer(digits)) stop("Invalid number of digits ",digits,

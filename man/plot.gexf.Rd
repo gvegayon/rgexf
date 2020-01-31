@@ -109,6 +109,18 @@ function then starts a webserver using the \code{servr} R package.
 Currently, the only languages supported are:
 \Sexpr{paste(names(rgexf:::gexf_js_languages), " (", rgexf:::gexf_js_languages, ")", sep="", collapse=", ")}.
 
+An important thing for the user to consider is the fact that the function
+only works if there are \code{viz} attributes, this is, color, size, and position.
+If the \link{gexf} object's XML document does not have viz attributes, users can
+use the following hack:\preformatted{# Turn the object ot igraph and go back
+x <- igraph.to.gexf(gexf.to.igraph(x))
+
+# And you are ready to plot!
+plot(x)
+}
+
+More details on this in the \link{igraph.to.gexf} function.
+
 The files are copied directly from
 \Sexpr{system.file("gexf-js", package="rgexf")}. And the
 parameters are set up by modifying the following template file:

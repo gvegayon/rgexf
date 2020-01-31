@@ -157,6 +157,22 @@ gexf_js_config <- function(
 #' as specified by `dir`.
 #' 
 #' @details 
+#' 
+#' An important thing for the user to consider is the fact that the function
+#' only works if there are `viz` attributes, this is, color, size, and position.
+#' If the [gexf] object's XML document does not have viz attributes, users can
+#' use the following hack:
+#' 
+#' ```
+#' # Turn the object ot igraph and go back
+#' x <- igraph.to.gexf(gexf.to.igraph(x))
+#' 
+#' # And you are ready to plot!
+#' plot(x)
+#' ```
+#' 
+#' More details on this in the [igraph.to.gexf] function.
+#' 
 #' The files are copied directly from
 #' \Sexpr{system.file("gexf-js", package="rgexf")}. And the 
 #' parameters are set up by modifying the following template file:

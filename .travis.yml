@@ -4,15 +4,20 @@ language: R
 sudo: false
 cache: packages
 
-r:
-  - release
-  - devel # Not working
+matrix:
+  include:
+    # - os: linux
+    #  r: oldrel
+    - os: linux
+      r: release
+      env:
+        - R_CODECOV=true
+        - BUILD_WWW_HERE=true
+    - os: linux
+      r: devel
+    - os: osx
+      osx_image: xcode10.2
 
-os:
-  - linux
-  - osx
-
-osx_image: xcode11
 
 env:
  global:
@@ -20,3 +25,14 @@ env:
 
 after_success:
   - if [ $TRAVIS_OS_NAME == "linux" ]; then Rscript -e 'covr::codecov()'; fi
+  
+  # For automatic deploy of the website
+before_deploy: Rscript -e 'remotes::install_cran("pkgdown")'
+deploy:
+  provider: script
+  script: Rscript -e 'pkgdown::deploy_site_github()'
+  skip_cleanup: true
+  on:
+    branch: master
+    condition: $BUILD_WWW_HERE = true
+

@@ -95,9 +95,18 @@ read.gexf <- function(x) {
   # Extracting attributes
   node.vizattr <- XML::xpathApply(
     gfile, "/r:gexf/r:graph/r:nodes/r:node", namespaces = c(r=ns, v="viz"),
-    fun=XML::xmlChildren)
+    fun=XML::xmlChildren
+    )
   
+  node.attr <- XML::xpathApply(
+    gfile, "/r:gexf/r:graph/r:nodes/r:node/r:attvalues", namespaces = c(r=ns),
+    fun=XML::xmlChildren
+  )
+  
+  node.attr <- lapply(node.attr, lapply, XML::xmlAttrs)
+
   node.vizattr <- lapply(node.vizattr, lapply, XML::xmlAttrs)
+  # node.vizattr <- lapply(node.viz)
   
   # Colors
   nodesVizAtt$color <- lapply(node.vizattr, function(a) {
@@ -110,24 +119,28 @@ read.gexf <- function(x) {
   })
   
   nodesVizAtt$color <- do.call(rbind, nodesVizAtt$color)
+  
   nodesVizAtt$color <- as.data.frame(nodesVizAtt$color)
   dimnames(nodesVizAtt$color) <- list(
     1L:nrow(nodesVizAtt$color), c("r", "g", "b", "a")
   )
+
   
   # Size
   nodesVizAtt$size <- lapply(node.vizattr, function(a) {
     if (length(a$size)) 
       return(viz_att_checks$size(as.numeric(a$size)))
     
-    check_and_map_color(default_nodeVizAtt$size())
+    viz_att_checks$size(default_nodeVizAtt$size())
   })
   
   nodesVizAtt$size <- do.call(rbind, nodesVizAtt$size)
+
   nodesVizAtt$size <- as.data.frame(nodesVizAtt$size)
   dimnames(nodesVizAtt$size) <- list(
     1L:nrow(nodesVizAtt$size), "value"
   )
+  
   
   # Positions
   nodesVizAtt$position <- lapply(node.vizattr, function(a) {

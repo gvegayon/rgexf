@@ -15,3 +15,4 @@
 *.pdf
 .Rproj.user
 inst/doc
+docs/
