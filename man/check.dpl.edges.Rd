@@ -26,15 +26,13 @@ counting how many times each edge is duplicated.
 
 For every group of duplicated edges only one will be accounted to report
 number of instances (which will be recognized with a value higher than 2 in
-the \code{reps} column), the other ones will be assigned a \code{-1} at the
+the \code{reps} column), the other ones will be assigned an \code{NA} at the
 \code{reps} value.
-
-Function is mainly written in C, so speed gains are important.
 }
 \examples{
 
   # An edgelist with duplicated dyads
-  relations <- cbind(c(1,1,3,4,2,5,6), c(2,3,1,2,4,1,1))
+  relations <- cbind(c(1,1,3,3,4,2,5,6), c(2,3,1,1,2,4,1,1))
   
   # Checking duplicated edges (undirected graph)
   check.dpl.edges(edges=relations, undirected=TRUE)

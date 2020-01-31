@@ -39,6 +39,8 @@
 
 * Remove broken links.
 
+* Some data management functions were fully ported to R.
+
 
 # Changes in rgexf version 0.15.3 (2015-03-24)
 

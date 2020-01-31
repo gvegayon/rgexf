@@ -13,10 +13,8 @@
 #' 
 #' For every group of duplicated edges only one will be accounted to report
 #' number of instances (which will be recognized with a value higher than 2 in
-#' the `reps` column), the other ones will be assigned a `-1` at the
+#' the `reps` column), the other ones will be assigned an `NA` at the
 #' `reps` value.
-#' 
-#' Function is mainly written in C, so speed gains are important.
 #' 
 #' @param edges A matrix or data frame structured as a list of edges
 #' @param undirected Declares if the net is directed or not (does de difference)
@@ -28,7 +26,7 @@
 #' @examples
 #' 
 #'   # An edgelist with duplicated dyads
-#'   relations <- cbind(c(1,1,3,4,2,5,6), c(2,3,1,2,4,1,1))
+#'   relations <- cbind(c(1,1,3,3,4,2,5,6), c(2,3,1,1,2,4,1,1))
 #'   
 #'   # Checking duplicated edges (undirected graph)
 #'   check.dpl.edges(edges=relations, undirected=TRUE)
@@ -39,36 +37,56 @@ check.dpl.edges <- function(edges, undirected=FALSE, order.edgelist=TRUE) {
 # Checks for duplicated edges, and switchs between source and target
 # (optionally).
 ################################################################################  
-  srce <- edges[,1]
-  trgt <- edges[,2]
-
+  
   if (any(!is.finite(edges) | is.null(edges)))
     stop("No NA, NULL or NaN elements can be passed to this function.")
  
-  nedges <- length(srce)
+  edges0 <- cbind(edges, id = 1:nrow(edges))
+  if (undirected)
+    edges <- switch.edges(edges)
   
-  result <- .C(C_RCheckDplEdges, 
-     as.double(srce),           # Input Source
-     as.double(trgt),           # Input Target
-     as.integer(undirected),    # Tells the function if the graph is undirected
-     "source" = as.double(      # Output Source
-       vector("double", nedges) 
-       ),
-     "target" = as.double(      # Output Target
-       vector("double", nedges)
-     ),
-     "reps" = as.double(        # Output Target
-       vector("double", nedges)
-     ) #, PACKAGE="rgexf"
-     )
+  # Unique dataset
+  edges_unique <- unique(edges)
   
-  result <- data.frame(source=result$source, target=result$target, 
-                       reps=result$reps, check.names=FALSE)
+  # Counting
+  edges <- cbind(edges, id = 1:nrow(edges))
+  edges <- edges[order(edges[,1], edges[,2]), ]
+  
+  # Binary of counts
+  counts <- c(
+    TRUE,
+    (edges[-1, 1] != edges[-nrow(edges), 1]) |
+      (edges[-1, 2] != edges[-nrow(edges), 2])
+  )
+  
+  counts <- cumsum(counts)
+  
+  # Now we say which to keep, we keep the thing if the count is either equal or smaller
+  to_keep <- which( c(counts[-1] > counts[-length(counts)], TRUE))
+  
+  dupls <- cumsum(
+    c(TRUE, (edges[-1, 1] == edges[-nrow(edges), 1]) &
+        (edges[-1, 2] == edges[-nrow(edges), 2])
+      ))
+  
+  edges <- cbind(edges, counts = dupls)[to_keep, , drop = FALSE]
+  edges[, "counts"] <- edges[, "counts"] - c(1, edges[-nrow(edges), "counts"]) + 1
+  edges <- edges[order(edges[, "id"]), , drop = FALSE]
+  
+  
+  result <- data.frame(id = edges[,"id"], reps=edges[,"counts"], check.names=FALSE)
+  
+  # Merging 
+  result <- merge(
+    data.frame(source = edges0[,1], target = edges0[,2], id = edges0[,3]),
+    subset(result), by = "id", all.x = TRUE
+  )
+  result <- result[order(result$id),]
 
   if (order.edgelist) 
     result <- result[order(result[,1], result[,2]),]
   
-  return(result)
+  return(result[, c("source", "target", "reps")])
 }
 
 
@@ -101,23 +119,13 @@ switch.edges <- function(edges) {
   if (any(is.na(edges) | is.null(edges) | is.nan(edges))) 
     stop("No NA, NULL or NaN elements can be passed to this function.")
 
-  result <- .C(
-    C_RSwitchEdges,
-    as.integer(NROW(edges)),
-    as.double(edges[,1]),
-    as.double(edges[,2]),
-    "source" = as.double(              # Output Source
-      vector("double", NROW(edges)) 
-    ),
-    "target" = as.double(              # Output Target
-      vector("double", NROW(edges))
-    ) # , PACKAGE="rgexf"
-    )
+  which_min <- which(max.col(edges) == 1)
+  edges[which_min, ] <- edges[which_min, 2:1]
   
   return(
     data.frame(
-      source=result$source, 
-      target=result$target,
+      source=edges[,1], 
+      target=edges[,2],
       check.names=FALSE)
   )
 }
