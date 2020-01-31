@@ -40,9 +40,11 @@ Function is mainly written in C, so speed gains are important.
   check.dpl.edges(edges=relations, undirected=TRUE)
 }
 \seealso{
-Other manipulation: \code{\link{switch.edges}}
+Other manipulation: 
+\code{\link{switch.edges}()}
 }
 \author{
 George Vega Yon
 }
+\concept{manipulation}
 \keyword{manip}

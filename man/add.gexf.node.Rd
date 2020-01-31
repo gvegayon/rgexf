@@ -7,31 +7,54 @@
 \alias{rm.gexf.edge}
 \alias{add.node.spell}
 \alias{add.edge.spell}
-\alias{add.gexf.edge}
-\alias{rm.gexf.node}
-\alias{rm.gexf.edge}
-\alias{add.node.spell}
-\alias{add.edge.spell}
 \title{Adding and removing nodes/edges from \code{gexf} objects}
 \usage{
-add.gexf.node(graph, id = NA, label = NA, start = NULL, end = NULL,
-  vizAtt = list(color = NULL, position = NULL, size = NULL, shape = NULL,
-  image = NULL), atts = NULL)
+add.gexf.node(
+  graph,
+  id = NA,
+  label = NA,
+  start = NULL,
+  end = NULL,
+  vizAtt = list(color = NULL, position = NULL, size = NULL, shape = NULL, image = NULL),
+  atts = NULL
+)
 
-add.gexf.edge(graph, source, target, id = NULL, type = NULL, label = NULL,
-  start = NULL, end = NULL, weight = 1, vizAtt = list(color = NULL,
-  thickness = NULL, shape = NULL), atts = NULL,
-  digits = getOption("digits"))
+add.gexf.edge(
+  graph,
+  source,
+  target,
+  id = NULL,
+  type = NULL,
+  label = NULL,
+  start = NULL,
+  end = NULL,
+  weight = 1,
+  vizAtt = list(color = NULL, thickness = NULL, shape = NULL),
+  atts = NULL,
+  digits = getOption("digits")
+)
 
 rm.gexf.node(graph, id = NULL, number = NULL, rm.edges = TRUE)
 
 rm.gexf.edge(graph, id = NULL, number = NULL)
 
-add.node.spell(graph, id = NULL, number = NULL, start = NULL,
-  end = NULL, digits = getOption("digits"))
+add.node.spell(
+  graph,
+  id = NULL,
+  number = NULL,
+  start = NULL,
+  end = NULL,
+  digits = getOption("digits")
+)
 
-add.edge.spell(graph, id = NULL, number = NULL, start = NULL,
-  end = NULL, digits = getOption("digits"))
+add.edge.spell(
+  graph,
+  id = NULL,
+  number = NULL,
+  start = NULL,
+  end = NULL,
+  digits = getOption("digits")
+)
 }
 \arguments{
 \item{graph}{A gexf-class object.}

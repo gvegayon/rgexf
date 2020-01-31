@@ -3,12 +3,8 @@
 \name{gexf-methods}
 \alias{gexf-methods}
 \alias{print.gexf}
-\alias{gexf-methods}
 \alias{summary.gexf}
-\alias{gexf-methods}
-\alias{print.gexf}
 \alias{export-gexf}
-\alias{summary.gexf}
 \title{S3 methods for \code{gexf} objects}
 \usage{
 \method{print}{gexf}(x, file = NA, replace = F, ...)

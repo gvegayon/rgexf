@@ -28,7 +28,7 @@ Imports:
     servr
 License: MIT + file LICENSE
 LazyLoad: yes
-RoxygenNote: 6.0.1
+RoxygenNote: 7.0.2
 Suggests: knitr,
     rmarkdown,
     testthat,

@@ -6,15 +6,31 @@
 \alias{write.gexf}
 \title{Creates an object of class \code{gexf}}
 \usage{
-gexf(nodes, edges, edgesLabel = NULL, edgesId = NULL, edgesAtt = NULL,
-  edgesWeight = NULL, edgesVizAtt = list(color = NULL, size = NULL, shape =
-  NULL), nodesAtt = NULL, nodesVizAtt = list(color = NULL, position = NULL,
-  size = NULL, shape = NULL, image = NULL), nodeDynamic = NULL,
-  edgeDynamic = NULL, digits = getOption("digits"), output = NA,
-  tFormat = "double", defaultedgetype = "undirected", meta = list(creator
-  = "NodosChile", description = "A GEXF file written in R with \\"rgexf\\"",
-  keywords = "GEXF, NodosChile, R, rgexf, Gephi"), keepFactors = FALSE,
-  encoding = "UTF-8", vers = "1.3", rescale.node.size = TRUE)
+gexf(
+  nodes,
+  edges,
+  edgesLabel = NULL,
+  edgesId = NULL,
+  edgesAtt = NULL,
+  edgesWeight = NULL,
+  edgesVizAtt = list(color = NULL, size = NULL, shape = NULL),
+  nodesAtt = NULL,
+  nodesVizAtt = list(color = NULL, position = NULL, size = NULL, shape = NULL, image =
+    NULL),
+  nodeDynamic = NULL,
+  edgeDynamic = NULL,
+  digits = getOption("digits"),
+  output = NA,
+  tFormat = "double",
+  defaultedgetype = "undirected",
+  meta = list(creator = "NodosChile", description =
+    "A GEXF file written in R with \\"rgexf\\"", keywords =
+    "GEXF, NodosChile, R, rgexf, Gephi"),
+  keepFactors = FALSE,
+  encoding = "UTF-8",
+  vers = "1.3",
+  rescale.node.size = TRUE
+)
 
 write.gexf(nodes, ...)
 }
@@ -76,7 +92,7 @@ the graph as a GEXF file.}
 By default \code{"1.3"}.}
 
 \item{rescale.node.size}{Logical scalar. When \code{TRUE} it rescales the
-size of the vertices such that the largest one is about \%5 of the plotting
+size of the vertices such that the largest one is about \\%5 of the plotting
 region.}
 
 \item{...}{Passed to \code{gexf}.}

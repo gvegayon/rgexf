@@ -4,9 +4,12 @@
 \alias{new.gexf.graph}
 \title{Build an empty \code{gexf} graph}
 \usage{
-new.gexf.graph(defaultedgetype = "undirected", meta = list(creator =
-  "NodosChile", description = "A graph file writing in R using 'rgexf'",
-  keywords = "gexf graph, NodosChile, R, rgexf"))
+new.gexf.graph(
+  defaultedgetype = "undirected",
+  meta = list(creator = "NodosChile", description =
+    "A graph file writing in R using 'rgexf'", keywords =
+    "gexf graph, NodosChile, R, rgexf")
+)
 }
 \arguments{
 \item{defaultedgetype}{\dQuote{directed}, \dQuote{undirected},
