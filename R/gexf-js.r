@@ -217,3 +217,79 @@ plot.gexf <- function(
     do.call(servr::httd, c(list(dir = dir), httd.args))
   
 }
+
+#' @import htmlwidgets
+#' @export
+gexfjs <- function(
+  gexf   = "lib/gexf-1/lesmiserables.gexf" , # This is the onlyone that is working... for now
+  width  = NULL,
+  height = NULL
+  ) {
+  
+  # read the gexf file
+  data <- paste(tryCatch(readLines(gexf), error = function(e) "e"), collapse="\n")
+  
+  # # create a list that contains the settings
+  # settings <- list(
+  #   drawEdges = drawEdges,
+  #   drawNodes = drawNodes
+  # )
+  
+  # pass the data and settings using 'x'
+  x <- list(
+    path = gexf,
+    data = data#,
+    # settings = settings
+  )
+  
+  # create the widget
+  htmlwidgets::createWidget(
+    "gexfjs", x, width = width, height = height, package="rgexf")
+  
+}
+
+
+#' @export
+gexfjsOutput <- function(outputId, width = "100%", height = "400px") {
+  shinyWidgetOutput(outputId, "gexfjs", width, height, package = "rgexf")
+}
+#' @export
+gexfjsSigma <- function(expr, env = parent.frame(), quoted = FALSE) {
+  if (!quoted) { expr <- substitute(expr) } # force quoted
+  shinyRenderWidget(expr, sigmaOutput, env, quoted = TRUE)
+}
+
+#' @import htmlwidgets
+#' @export
+test1 <- function(width=NULL, height=NULL) {
+  
+  # read the gexf file
+  # data <- paste(readLines(gexf), collapse="\n")
+  
+  # # create a list that contains the settings
+  # settings <- list(
+  #   drawEdges = drawEdges,
+  #   drawNodes = drawNodes
+  # )
+  
+  # pass the data and settings using 'x'
+  x <- list(
+    data = NULL #,
+    # settings = settings
+  )
+  
+  # create the widget
+  htmlwidgets::createWidget("test1", x, width = width, height = height, package="rgexf")
+  
+}
+
+
+#' @export
+test1Output <- function(outputId, width = "100%", height = "400px") {
+  shinyWidgetOutput(outputId, "test1", width, height, package = "rgexf")
+}
+#' @export
+renderTest1 <- function(expr, env = parent.frame(), quoted = FALSE) {
+  if (!quoted) { expr <- substitute(expr) } # force quoted
+  shinyRenderWidget(expr, test1Output, env, quoted = TRUE)
+}

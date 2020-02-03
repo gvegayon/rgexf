@@ -1,0 +1,6 @@
+dependencies:
+  - name: test1
+    version: 1.0
+    src: htmlwidgets/lib/test1
+    script:
+      - test1-0.0.js
