@@ -17,16 +17,17 @@
 #' @keywords manip
 #' @examples
 #' 
-#'  \dontrun{
-#'  
+#' if (interactive()) {
 #'   # Running demo
 #'   demo(gexfigraph)
+#' }
 #'  
 #'   fn <- system.file("gexf-graphs/lesmiserables.gexf", package = "rgexf")
 #'   gexf1 <- read.gexf(fn)
 #'   igraph1 <- gexf.to.igraph(gexf1)
 #'   gexf2 <- igraph.to.gexf(igraph1)
 #'   
+#' if (interactive()) {
 #'   # Now, let's do it with a layout! (although we can just use
 #'   # the one that comes with lesmiserables :))
 #'   pos <- igraph::layout_nicely(igraph1)

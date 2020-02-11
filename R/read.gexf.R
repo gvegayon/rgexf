@@ -14,10 +14,8 @@
 #' @keywords IO
 #' @examples
 #' 
-#'   \dontrun{
 #'   fn <- system.file("gexf-graphs/lesmiserables.gexf", package = "rgexf")
 #'   mygraph <- read.gexf(fn)
-#'   }
 #' 
 #' @export read.gexf
 read.gexf <- function(x) {
@@ -232,10 +230,10 @@ read.gexf <- function(x) {
 #' @references The GEXF project website: http://gexf.net
 #' @keywords manip
 #' @examples
-#' 
-#'   \dontrun{
+#'
+#' if (interactive()) {
 #'   demo(gexfbuildfromscratch)
-#'   }
+#' }
 #' 
 #' @export add.gexf.node
 add.gexf.node <- function(
@@ -442,9 +440,9 @@ add.gexf.edge <- function(
 #' @keywords manip
 #' @examples
 #' 
-#'   \dontrun{
+#' if (interactive()) {
 #'   demo(gexfbuildfromscratch)
-#'   }
+#' }
 #' 
 #' @export new.gexf.graph
 new.gexf.graph <- function(

@@ -183,7 +183,7 @@ gexf_js_config <- function(
 #' 
 #' @export
 #' @examples 
-#' \dontrun{
+#' if (interactive()) {
 #' 
 #' path <- system.file("gexf-graphs/lesmiserables.gexf", package="rgexf")
 #' graph <- read.gexf(path)

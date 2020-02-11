@@ -88,7 +88,7 @@ NULL
 #' @keywords methods
 #' @examples
 #' 
-#'   \dontrun{
+#'   if (interactive()) {
 #'     # Data frame of nodes
 #'     people <- data.frame(id=1:4, label=c("juan", "pedro", "matthew", "carlos"),
 #'                      stringsAsFactors=F)
@@ -151,7 +151,7 @@ NULL
 #' @keywords package
 #' @examples
 #' 
-#'   \dontrun{
+#' if (interactive()) {
 #'     demo(gexf) # Example of gexf command using fictional data.
 #'     demo(gexfattributes) # Working with attributes.
 #'     demo(gexfbasic) # Basic net.
@@ -163,7 +163,7 @@ NULL
 #'     demo(gexfbuildfromscratch) # Example building a net from scratch.
 #'     demo(gexfigraph) # Two-way gexf-igraph conversion
 #'     demo(gexfrandom) # A nice routine creating a good looking graph
-#'   }
+#' }
 #' 
 NULL
 

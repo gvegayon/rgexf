@@ -307,7 +307,7 @@ edge.list <- function(x) {
 #' @keywords IO
 #' @examples
 #' 
-#'   \dontrun{
+#' if (interactive()) {
 #'   demo(gexf) # Example of gexf command using fictional data.
 #'   demo(gexfattributes) # Working with attributes.
 #'   demo(gexfbasic) # Basic net.
@@ -318,7 +318,7 @@ edge.list <- function(x) {
 #'   demo(gexfdynamicandatt) # Dynamic net with static attributes.
 #'   demo(gexfbuildfromscratch) # Example building a net from scratch.
 #'   demo(gexfrandom)
-#'   }
+#' }
 #' 
 #' @name gexf-class
 NULL

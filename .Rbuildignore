@@ -24,4 +24,6 @@ demo/gexfplot\.R
 ^tests/rundemos\.R$
 ^_pkgdown\.yml$
 ^docs$
-^pkgdown$
+^pkgdown
+^rgexf\.tar\.gz$
+
