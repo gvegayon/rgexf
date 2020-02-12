@@ -9,3 +9,6 @@ check: rgexf.tar.gz
 	cd ..&&R CMD build rgexf/ && \
 		R CMD check --as-cran rgexf*.tar.gz
 
+README.md: README.Rmd
+	Rscript -e 'rmarkdown::render("README.Rmd")' && \
+		rm README.html

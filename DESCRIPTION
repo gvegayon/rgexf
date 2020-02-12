@@ -11,14 +11,14 @@ Authors@R: c(
   person("Joshua", "Kunst", role=c("ctb")),
   person("Raphaël", "Velt", role=c("cph"), comment="gexf-js library"),
   person(family="Gephi Consortium", role=c("cph"), comment="GEXF language"))
-Description: Create, read and write GEXF (Graph Exchange XML Format) graph
-    files (used in Gephi and others). Using the XML package, it allows the user to
-    easily build/read graph files including attributes, GEXF viz attributes (such
+Description: Create, read and write 'GEXF' (Graph Exchange 'XML' Format) graph
+    files (used in 'Gephi' and others). Using the 'XML' package, it allows the user to
+    easily build/read graph files including attributes, 'GEXF' visual attributes (such
     as color, size, and position), network dynamics (for both edges and nodes) and
     edge weighting. Users can build/handle graphs element-by-element or massively
-    through data-frames, visualize the graph on a web browser through "gexf-js" (a
-    javascript library) and interact with the igraph package.
-URL: http://github.com/gvegayon/rgexf, https://gvegayon.github.io/rgexf
+    through data-frames, visualize the graph on a web browser through 'gexf-js' (a
+    'javascript' library) and interact with the 'igraph' package.
+URL: https://gvegayon.github.io/rgexf
 BugReports: http://github.com/gvegayon/rgexf/issues
 Imports:
     XML,

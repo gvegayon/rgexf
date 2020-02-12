@@ -15,7 +15,7 @@ The first R package to work with GEXF graph files (used in Gephi and others). Us
 
 ## News ##
 
-- [2020-02-11] Getting ready to put the package on CRAN again.
+- [2020-02-11] Getting ready to put the package on CRAN again (was taken out in the last version).
 - [2016-11-08] Restarting the project.
 - [2015-02-03] Version 0.15.2.3 of rgexf is on CRAN. Just updating emails...
 - [2014-03-10] Version 0.14.9 of rgexf is on CRAN! solves issues 15-18. Thanks =).
