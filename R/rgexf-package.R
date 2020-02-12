@@ -44,7 +44,7 @@ NULL
 
 #' Edge list with attributes
 #' 
-#' Sample of accounts by december 2011.
+#' Sample of accounts by December 2011.
 #' 
 #' 
 #' @name followers
@@ -173,7 +173,7 @@ NULL
 
 #' Twitter accounts of Chilean Politicians and Journalists (sample)
 #' 
-#' Sample of accounts by december 2011.
+#' Sample of accounts by December 2011.
 #' 
 #' 
 #' @name twitteraccounts

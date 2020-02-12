@@ -97,7 +97,7 @@
     graph in the web browser by means of Sigma.js (!).
 
 -   New functions `igraph.to.gexf` and `gexf.to.igraph` converts objects
-    between `igraph` and `gexf` clases. Colors and attributes
+    between `igraph` and `gexf` classes. Colors and attributes
     are preserved.
 
 ## Development
@@ -173,7 +173,7 @@
 -   Viz Attributes (color, shape, size, etc.) can be included in both,
     nodes and edges.
 
--   Real-life datasets have been includded.
+-   Real-life datasets have been included.
 
 -   New function `edge.list` builds a dataframe of nodes from an
     edge list.
@@ -196,10 +196,10 @@
 
 ## Bug fixes
 
--   Fixing big misscoding at attvalues XML tag: it was replaced from
+-   Fixing big issue at attvalues XML tag: it was replaced from
     "att" to "attvalue".
 
--   Fixing problem with XML value printing: Leading speces where removed
+-   Fixing problem with XML value printing: Leading spaces where removed
     from XML values at ids, source, target, etc.
 
 # Changes in rgexf version 0.12.03 (2012-03-05)
@@ -210,6 +210,6 @@
 
 ## Development
 
--   Development repository more ordered acording to R package building.
+-   Development repository more ordered according to R package building.
 
 

@@ -16,8 +16,7 @@ demo/gexfplot\.R
 ^\.travis\.yml$
 ^appveyor\.yml$
 ^codecov\.yml$
-^readme\.md$
-^readme\.rmd$
+^README\.Rmd$
 ^dependencies$
 ^makefile$
 ^LICENSE\.md$
@@ -26,4 +25,5 @@ demo/gexfplot\.R
 ^docs$
 ^pkgdown
 ^rgexf\.tar\.gz$
+^cran-comments\.md$
 

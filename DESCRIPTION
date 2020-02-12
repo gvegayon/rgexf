@@ -35,3 +35,4 @@ Suggests: knitr,
     covr
 VignetteBuilder: knitr
 Roxygen: list(markdown = TRUE)
+

@@ -16,7 +16,7 @@ News
 -   \[2013-03-14\] Version 0.13.03 of rgexf is on its way to CRAN. It now supports working with spells!
 -   \[2013-01-04\] Version 0.13.01 of rgexf is on its way to CRAN. Significant improvements and new features!
 -   \[2012-06-19\] Version 0.12.06 of rgexf is on CRAN! Now it can be directly download from R.
--   \[2012-03-29\] Version 0.12.03.29 of rgexf has been released including many bug fixes. Please download the lastest version to check it out.
+-   \[2012-03-29\] Version 0.12.03.29 of rgexf has been released including many bug fixes. Please download the latest version to check it out.
 
 Installation
 ------------

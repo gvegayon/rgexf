@@ -10,6 +10,6 @@ Fabrega and Paredes (2012): \dQuote{La politica en 140 caracteres}
 en Intermedios: medios de comunicacion y democracia en Chile. Ediciones UDP
 }
 \description{
-Sample of accounts by december 2011.
+Sample of accounts by December 2011.
 }
 \keyword{datasets}
