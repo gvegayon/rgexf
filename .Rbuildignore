@@ -24,6 +24,6 @@ demo/gexfplot\.R
 ^_pkgdown\.yml$
 ^docs$
 ^pkgdown
-^rgexf\.tar\.gz$
+.+\.tar\.gz$
 ^cran-comments\.md$
 
