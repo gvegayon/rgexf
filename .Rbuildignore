@@ -18,7 +18,7 @@ demo/gexfplot\.R
 ^codecov\.yml$
 ^README\.Rmd$
 ^dependencies$
-^makefile$
+^Makefile$
 ^LICENSE\.md$
 ^tests/rundemos\.R$
 ^_pkgdown\.yml$
@@ -26,4 +26,7 @@ demo/gexfplot\.R
 ^pkgdown
 .+\.tar\.gz$
 ^cran-comments\.md$
-
+inst/htmlwidgets
+^docker$
+^\.github.*
+^paper$

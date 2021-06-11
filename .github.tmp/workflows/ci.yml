@@ -1,0 +1,45 @@
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+#
+# See https://github.com/r-lib/actions/tree/master/examples#readme for
+# additional example workflows available for the R community.
+
+name: R CI 
+
+on: [push, pull_request]
+
+env:
+  REPO: uscbiostats/aphylo
+
+
+jobs:
+  build:
+    runs-on: Ubuntu-latest
+    strategy:
+      matrix:
+        include:
+        - name: release
+          cmd : R
+          cntr: ${REPO}:release
+ 
+        - name: dev
+          cmd : R
+          cntr: ${REPO}:devel
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Container
+        run: docker pull ${{ matrix.cntr }}
+
+      - name: SessionInfo
+        run: docker run --rm -i -v ${PWD}:/mnt -w /mnt ${{ matrix.cntr }} ${{ matrix.cmd }} -q -e 'sessionInfo()'
+
+      - name: Build
+        run: docker run --rm -i -v ${PWD}:/mnt -w /mnt ${{ matrix.cntr }} ${{ matrix.cmd }} CMD build --no-build-vignettes --no-manual .
+
+      - name: Check
+        run: docker run --rm -i -v ${PWD}:/mnt -w /mnt -e CI=true ${{ matrix.cntr }} ${{ matrix.cmd }} CMD check --no-vignettes --no-manual aphylo_*.tar.gz
+
