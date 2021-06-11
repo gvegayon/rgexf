@@ -80,11 +80,17 @@ read.gexf <- function(x) {
   
   # Nodes
   nodes <- XML::getNodeSet(gfile,"/r:gexf/r:graph/r:nodes/r:node", c(r=ns))
+  ids <- sapply(nodes, XML::xmlGetAttr, name="id")
+  labels <- lapply(nodes, XML::xmlGetAttr, name="label")
+  labels <- sapply(labels, function(x) if (is.null(x)) "" else x)
+  if (all(labels == "")) labels <- ids
   graph$nodes <- data.frame(
-    id=sapply(nodes, XML::xmlGetAttr, name="id"), 
-    label=sapply(nodes, XML::xmlGetAttr, name="label"), 
+    id=ids, 
+    label=labels, 
     stringsAsFactors=F)
   rm(nodes)
+  rm(ids)
+  rm(labels)
   
   # Viz attributes -------------------------------------------------------------
   nodesVizAtt <- NULL
