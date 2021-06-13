@@ -1,5 +1,5 @@
 ---
-title: 'Building, Importing and Export GEXF Graph Files with rgexf'
+title: 'Building, Importing, and Exporting GEXF Graph Files with rgexf'
 authors:
 - affiliation: 1
   name: George G Vega Yon
