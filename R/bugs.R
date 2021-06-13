@@ -87,7 +87,7 @@ check_and_map_color <- function(x) {
       # Checking the range of colors
       if ((x[-4] < 0)  | (x[-4] > 255))
         stop("The color specification is out of range.", call. = FALSE)
-      if ((x[4] < 0) | (x[2, 4] > 1))
+      if ((x[4] < 0) | (x[4] > 1))
         stop("The color specification  is out of range.", call. = FALSE)
       
     } else if (length(x) != 4) {

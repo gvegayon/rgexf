@@ -1,5 +1,5 @@
 ---
-title: 'rgexf: Build, Import and Export GEXF Graph Files'
+title: 'Building, Importing and Export GEXF Graph Files with rgexf'
 authors:
 - affiliation: 1
   name: George G Vega Yon
@@ -15,6 +15,7 @@ tags:
 - graph visualization
 - data visualization
 - data management
+- r programming
 affiliations:
 - index: 1
   name: Department of Preventive Medicine, University of Southern California
@@ -22,22 +23,42 @@ affiliations:
 
 # Summary
 
-Markov Chain Monte Carlo (MCMC) is used in a variety of statistical and computational venues such as: statistical inference, Markov quadrature (also known as Monte Carlo integration), stochastic optimization, among others. The **fmcmc** R [@R] package provides a flexible framework for implementing MCMC methods that use the Metropolis-Hastings algorithm [@hastings1970; @metropolis1953]. **fmcmc** provides the following out-of-the-box features that can be valuable for both practitioners of MCMC and educators:
+First introduced in 2012, the rgexf package for the R programming language was the first effort to make the Graph Exchange XML Format (@heymann2009gexf) specification available to the R world. With more than 500,000 downloads (https://cranlogs.r-pkg.org/), it is one of the most popular ways to incorporate GEXF files into the R programming language environment.
 
-*  Seamless efficient multiple-chain sampling using parallel computing,
+Developed by the Gephi Core Group (@bastian2009gephi), the GEXF specification is a flexible and widely used format to describe graphs. Although it has not been updated since 2009, the GEXF format has been introduced to several tools and programming environments. A few examples include:
 
-*  User-defined transition kernels, and
+- The python library `networkx` (@hagberg2008exploring) 
 
-*  Automatic stop using convergence monitoring.
+- The stand-alone software `Cytoscape` (@smoot2011cytoscape)
 
-In the case of transition kernels, users can either use one of the transition kernels shipped with the package (e.g. the Gaussian kernel and its bounded version, the Gaussian kernel with reflective boundaries), this allows a degree of flexibility that is not possible with existing MCMC packages.
+- The JavaScript library `sigma.js` (https://simga.js)
 
-The main function automatically checks convergence during execution, and stop the MCMC run once convergence has been reached, rather than having to pre-determine a fixed number of iterations. Users can either use one of the convergence monitoring checking functions that are part of the package, for example: The Gelman and Rubin's [@Gelman1992], Geweke's [@Geweke1991], etc. Or build their own to be used within the framework.
+- The java library `gexf4j` (https://github.com/francesco-ficarola/gexf4j) 
 
-While there are several other R packages that either implement MCMC algorithms or provide wrappers for implementations in other languages [see for example: @Sturtz2005; @Morey2009; @Stan2018; @Stan2017; @Geyer2019; @Scheidegger2019; @Martin2011], to our knowledge, the `fmcmc` package is the first one to provide a framework as flexible as the one described here and to be implemented fully within R.
+- The JavaScript library `gexf-js` (https://github.com/raphv/gexf-js)
 
-# Funding and Support
+Besides the rgexf package, other R packages provide functions that interact with GEXF files:
 
-This work is supported by the National Cancer Institute (NCI), Award Number 5P01CA196569.
+- `sigmajs`: Interface to 'Sigma.js' Graph Visualization Library (@Coene2018)
 
-# References
+- `vkR`: Access to VK API via R (@vkR)
+
+- `microeco`: Microbial Community Ecology Data Analysis (@microeco) 
+
+- `netCoin`: Interactive Analytic Networks (@netCoin)
+
+Nevertheless, the rgexf package continues to be the de-facto tool to interact with GEXF files in R.
+
+# Features
+
+Beyond reading and writing GEXF files from within R, the rgexf R package has various other features that can help to create beautiful network visualizations, in particular:
+
+- Using gexf objects--the main class implemented in rgexf--users can create GEXF objects from scratch, adding and removing nodes and edges--including features--as needed.
+
+- Users of the igraph package can directly convert objects between gexf and igraph classes.
+
+- Thanks to the gexf-js javascript library, users can immediately visualize their network objects in the web browser.
+
+Because of these and other reasons, the rgexf package has been featured in many scientific papers (@Starr2017, @Kauffman2018, @Leclerc2018, and @Alsaedi2016, among others), stating the great utility that this R package has provided to the community. The rgexf package is available in the Comprehensive R Archive Network (CRAN) and the project repository at https://github.com/gvegayon/rgexf.
+
+# References 

@@ -1,3 +1,11 @@
+# Changes in rgexf version 0.16.1 (2021-06-12)
+
+## Bug fixes
+
+* Passing colors with four values (alpha) no longer fails during checks.
+  (reported by @IsabelFE).
+  
+
 # Changes in rgexf version 0.16.0 (2018-02-05)
 
 ## New features and changes
