@@ -1,5 +1,3 @@
-rgexf: Build, Import and Export GEXF Graph Files
-================
 
 [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/rgexf)](https://cran.r-project.org/package=rgexf)
 [![Downloads](http://cranlogs.r-pkg.org/badges/rgexf?color=brightgreen)](https://cran.r-project.org/package=rgexf)
@@ -11,6 +9,8 @@ Status](https://ci.appveyor.com/api/projects/status/github/gvegayon/rgexf?branch
 [![Coverage
 Status](https://img.shields.io/codecov/c/github/gvegayon/rgexf/master.svg)](https://codecov.io/github/gvegayon/rgexf?branch=master)
 [![lifecycle](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://www.tidyverse.org/lifecycle/#stable)
+
+# rgexf: Build, Import and Export GEXF Graph Files <img src="man/figures/logo.png" align="right" height="140"/>
 
 The first R package to work with GEXF graph files (used in Gephi and
 others). Using XML library, it allows the user to easily build/read
@@ -24,25 +24,25 @@ the igraph package.
 
 ## News
 
--   \[2020-06-12\] Please refer to \[NEWS.md\] for more news.
--   \[2020-02-11\] Getting ready to put the package on CRAN again (was
+  - \[2020-06-12\] Please refer to \[NEWS.md\] for more news.
+  - \[2020-02-11\] Getting ready to put the package on CRAN again (was
     taken out in the last version).
--   \[2016-11-08\] Restarting the project.
--   \[2015-02-03\] Version 0.15.2.3 of rgexf is on CRAN. Just updating
+  - \[2016-11-08\] Restarting the project.
+  - \[2015-02-03\] Version 0.15.2.3 of rgexf is on CRAN. Just updating
     emails…
--   \[2014-03-10\] Version 0.14.9 of rgexf is on CRAN! solves issues
+  - \[2014-03-10\] Version 0.14.9 of rgexf is on CRAN\! solves issues
     15-18. Thanks =).
--   \[2013-08-07\] Version 0.13.8 of rgexf is on CRAN! New plot.gexf
+  - \[2013-08-07\] Version 0.13.8 of rgexf is on CRAN\! New plot.gexf
     method and igraph integration working =).
--   \[2013-05-09\] Version 0.13.05 of rgexf (transitory) solves issues N
+  - \[2013-05-09\] Version 0.13.05 of rgexf (transitory) solves issues N
     9 & 10. Looking forward for the next CRAN version.
--   \[2013-03-14\] Version 0.13.03 of rgexf is on its way to CRAN. It
-    now supports working with spells!
--   \[2013-01-04\] Version 0.13.01 of rgexf is on its way to CRAN.
-    Significant improvements and new features!
--   \[2012-06-19\] Version 0.12.06 of rgexf is on CRAN! Now it can be
+  - \[2013-03-14\] Version 0.13.03 of rgexf is on its way to CRAN. It
+    now supports working with spells\!
+  - \[2013-01-04\] Version 0.13.01 of rgexf is on its way to CRAN.
+    Significant improvements and new features\!
+  - \[2012-06-19\] Version 0.12.06 of rgexf is on CRAN\! Now it can be
     directly download from R.
--   \[2012-03-29\] Version 0.12.03.29 of rgexf has been released
+  - \[2012-03-29\] Version 0.12.03.29 of rgexf has been released
     including many bug fixes. Please download the latest version to
     check it out.
 
@@ -97,7 +97,7 @@ write.gexf(people, relations)
 
     ## <?xml version="1.0" encoding="UTF-8"?>
     ## <gexf xmlns="http://www.gexf.net/1.3" xmlns:viz="http://www.gexf.net/1.3/viz" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.3 http://www.gexf.net/1.3/gexf.xsd" version="1.3">
-    ##   <meta lastmodifieddate="2021-06-12">
+    ##   <meta lastmodifieddate="2021-06-13">
     ##     <creator>NodosChile</creator>
     ##     <description>A GEXF file written in R with "rgexf"</description>
     ##     <keywords>GEXF, NodosChile, R, rgexf, Gephi</keywords>
@@ -106,22 +106,22 @@ write.gexf(people, relations)
     ##     <nodes>
     ##       <node id="1" label="juan">
     ##         <viz:color r="255" g="99" b="71" a="1"/>
-    ##         <viz:position x="-42.5230418865091" y="-100" z="0"/>
+    ##         <viz:position x="-65.0016831187602" y="55.9173210259355" z="0"/>
     ##         <viz:size value="10"/>
     ##       </node>
     ##       <node id="2" label="pedro">
     ##         <viz:color r="255" g="99" b="71" a="1"/>
-    ##         <viz:position x="-100" y="100" z="0"/>
+    ##         <viz:position x="43.6713922188763" y="100" z="0"/>
     ##         <viz:size value="10"/>
     ##       </node>
     ##       <node id="3" label="matthew">
     ##         <viz:color r="255" g="99" b="71" a="1"/>
-    ##         <viz:position x="100" y="47.0437896285413" z="0"/>
+    ##         <viz:position x="100" y="20.7577658492397" z="0"/>
     ##         <viz:size value="10"/>
     ##       </node>
     ##       <node id="4" label="carlos">
     ##         <viz:color r="255" g="99" b="71" a="1"/>
-    ##         <viz:position x="-20.6677145392133" y="-39.8790195546646" z="0"/>
+    ##         <viz:position x="-100" y="-100" z="0"/>
     ##         <viz:size value="10"/>
     ##       </node>
     ##     </nodes>
@@ -157,7 +157,7 @@ write.gexf(people, relations, nodeDynamic=time)
 
     ## <?xml version="1.0" encoding="UTF-8"?>
     ## <gexf xmlns="http://www.gexf.net/1.3" xmlns:viz="http://www.gexf.net/1.3/viz" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.3 http://www.gexf.net/1.3/gexf.xsd" version="1.3">
-    ##   <meta lastmodifieddate="2021-06-12">
+    ##   <meta lastmodifieddate="2021-06-13">
     ##     <creator>NodosChile</creator>
     ##     <description>A GEXF file written in R with "rgexf"</description>
     ##     <keywords>GEXF, NodosChile, R, rgexf, Gephi</keywords>
@@ -166,22 +166,22 @@ write.gexf(people, relations, nodeDynamic=time)
     ##     <nodes>
     ##       <node id="1" label="juan" start="10" end="12">
     ##         <viz:color r="255" g="99" b="71" a="1"/>
-    ##         <viz:position x="-85.4300764333749" y="-100" z="0"/>
+    ##         <viz:position x="-100" y="44.9214243006872" z="0"/>
     ##         <viz:size value="10"/>
     ##       </node>
     ##       <node id="2" label="pedro" start="13" end="2">
     ##         <viz:color r="255" g="99" b="71" a="1"/>
-    ##         <viz:position x="100" y="-13.7046851339557" z="0"/>
+    ##         <viz:position x="48.6187223801086" y="94.1511929601243" z="0"/>
     ##         <viz:size value="10"/>
     ##       </node>
     ##       <node id="3" label="matthew" start="2" end="2">
     ##         <viz:color r="255" g="99" b="71" a="1"/>
-    ##         <viz:position x="-100" y="-97.6979964004401" z="0"/>
+    ##         <viz:position x="96.2462787088023" y="100" z="0"/>
     ##         <viz:size value="10"/>
     ##       </node>
     ##       <node id="4" label="carlos" start="2" end="2">
     ##         <viz:color r="255" g="99" b="71" a="1"/>
-    ##         <viz:position x="28.8462681017672" y="100" z="0"/>
+    ##         <viz:position x="100" y="-100" z="0"/>
     ##         <viz:size value="10"/>
     ##       </node>
     ##     </nodes>
@@ -259,7 +259,7 @@ write.gexf(nodes=people, edges=relations, edgeDynamic=time.edges,
 
     ## <?xml version="1.0" encoding="UTF-8"?>
     ## <gexf xmlns="http://www.gexf.net/1.3" xmlns:viz="http://www.gexf.net/1.3/viz" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.3 http://www.gexf.net/1.3/gexf.xsd" version="1.3">
-    ##   <meta lastmodifieddate="2021-06-12">
+    ##   <meta lastmodifieddate="2021-06-13">
     ##     <creator>NodosChile</creator>
     ##     <description>A GEXF file written in R with "rgexf"</description>
     ##     <keywords>GEXF, NodosChile, R, rgexf, Gephi</keywords>
@@ -280,7 +280,7 @@ write.gexf(nodes=people, edges=relations, edgeDynamic=time.edges,
     ##           <attvalue for="att2" value="1"/>
     ##         </attvalues>
     ##         <viz:color r="255" g="99" b="71" a="1"/>
-    ##         <viz:position x="-100" y="-88.2678458617526" z="0"/>
+    ##         <viz:position x="-33.7779794357261" y="100" z="0"/>
     ##         <viz:size value="10"/>
     ##       </node>
     ##       <node id="2" label="pedro" start="13" end="5">
@@ -289,7 +289,7 @@ write.gexf(nodes=people, edges=relations, edgeDynamic=time.edges,
     ##           <attvalue for="att2" value="2"/>
     ##         </attvalues>
     ##         <viz:color r="255" g="99" b="71" a="1"/>
-    ##         <viz:position x="-8.0093284633947" y="-100" z="0"/>
+    ##         <viz:position x="-100" y="-100" z="0"/>
     ##         <viz:size value="10"/>
     ##       </node>
     ##       <node id="3" label="matthew" start="2" end="5">
@@ -298,7 +298,7 @@ write.gexf(nodes=people, edges=relations, edgeDynamic=time.edges,
     ##           <attvalue for="att2" value="3"/>
     ##         </attvalues>
     ##         <viz:color r="255" g="99" b="71" a="1"/>
-    ##         <viz:position x="100" y="51.177154701598" z="0"/>
+    ##         <viz:position x="-97.6322963864401" y="4.42255672927685" z="0"/>
     ##         <viz:size value="10"/>
     ##       </node>
     ##       <node id="4" label="carlos" start="2" end="5">
@@ -307,7 +307,7 @@ write.gexf(nodes=people, edges=relations, edgeDynamic=time.edges,
     ##           <attvalue for="att2" value="4"/>
     ##         </attvalues>
     ##         <viz:color r="255" g="99" b="71" a="1"/>
-    ##         <viz:position x="-99.8109744366585" y="100" z="0"/>
+    ##         <viz:position x="100" y="-15.1577150540121" z="0"/>
     ##         <viz:size value="10"/>
     ##       </node>
     ##     </nodes>
@@ -368,7 +368,7 @@ devtools::session_info()
     ##  collate  en_US.UTF-8                 
     ##  ctype    en_US.UTF-8                 
     ##  tz       America/Los_Angeles         
-    ##  date     2021-06-12                  
+    ##  date     2021-06-13                  
     ## 
     ## ─ Packages ───────────────────────────────────────────────────────────────────
     ##  package     * version  date       lib source        
