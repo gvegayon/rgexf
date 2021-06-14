@@ -23,7 +23,7 @@ affiliations:
 
 # Summary
 
-First introduced in 2012, the **rgexf** package for the R programming language was the first effort to make the Graph Exchange XML Format [@heymann2009gexf] specification available to the R world. With more than 500,000 downloads[^cranlogs], it is one of the most popular ways to incorporate GEXF files into the R programming language environment.
+First introduced in 2012, the **rgexf** package for the R programming language was the first effort to make the Graph Exchange XML Format (GEXF) [@heymann2009gexf] specification available to the **R** world. With more than 500,000 downloads[^cranlogs], it is one of the most popular ways to incorporate GEXF files into the R programming language environment.
 
 [^cranlogs]: According to the [https://cranlogs.r-pkg.org/](https://cranlogs.r-pkg.org/) website, as of June 14, 2021.
 
@@ -49,7 +49,7 @@ Besides the **rgexf** package, other R packages provide functions that interact 
 
 - **netCoin**: Interactive Analytic Networks [@netCoin]
 
-Nevertheless, the **rgexf** package continues to be the de-facto tool to interact with GEXF files in R.
+Nevertheless, the **rgexf** package continues to be the de-facto tool to interact with GEXF files in **R**.
 
 # Statement of Need
 
@@ -58,10 +58,12 @@ This R package has been serving the scientific community for many years now. Sci
 # Features
 
 Beyond reading and writing GEXF files from within R, the **rgexf** R package has various other features that can help to create beautiful network visualizations, in particular:
-Using gexf objects--the main class implemented in rgexf--users can create GEXF objects from scratch, adding and removing nodes and edges--including features--as needed.
 
-Users of the **igraph** package can directly convert objects between `gexf` and `igraph` classes.
-Thanks to the **gexf-js** javascript library, users can immediately visualize their network objects in the web browser.
+- Using gexf objects--the main class implemented in rgexf--users can create GEXF objects from scratch, adding and removing nodes and edges--including features--as needed.
+
+- Users of the **igraph** package can directly convert objects between `gexf` and `igraph` classes.
+
+- Thanks to the **gexf-js** javascript library, users can immediately visualize their network objects in the web browser.
 
 Because of these and other reasons, the **rgexf** package has been featured in many scientific papers, stating the great utility that this R package has provided to the community. The **rgexf** package is available in the Comprehensive R Archive Network (CRAN) and the project repository at [https://github.com/gvegayon/rgexf](https://github.com/gvegayon/rgexf).
 
