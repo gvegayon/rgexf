@@ -38,3 +38,7 @@ man: R/*
 
 docker:
 	docker run -v$(pwd):/pkg/ -w/pkg --rm -i uscbiostats/fmcmc:latest make check
+
+paper/paper.pdf: paper/paper.md paper/paper.bib
+	docker run --rm -v$(pwd)/paper:/data --user $(id -u):$(id -g) --env JOURNAL=joss openjournals/paperdraft
+
