@@ -30,3 +30,4 @@ inst/htmlwidgets
 ^docker$
 ^\.github.*
 ^paper$
+^CODE_OF_CONDUCT\.md$

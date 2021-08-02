@@ -115,10 +115,13 @@ write.gexf(nodes=people, edges=relations, edgeDynamic=time.edges,
            edgesAtt=edge.att, nodeDynamic=time.nodes, nodesAtt=node.att)
 ```
 
+# Code of Conduct
+  
+Please note that the rgexf project is released with a [Contributor Code of Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms
+
+
 # Session info
 
 ```{r}
 devtools::session_info()
 ```
-
-

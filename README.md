@@ -97,7 +97,7 @@ write.gexf(people, relations)
 
     ## <?xml version="1.0" encoding="UTF-8"?>
     ## <gexf xmlns="http://www.gexf.net/1.3" xmlns:viz="http://www.gexf.net/1.3/viz" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.3 http://www.gexf.net/1.3/gexf.xsd" version="1.3">
-    ##   <meta lastmodifieddate="2021-06-13">
+    ##   <meta lastmodifieddate="2021-08-01">
     ##     <creator>NodosChile</creator>
     ##     <description>A GEXF file written in R with "rgexf"</description>
     ##     <keywords>GEXF, NodosChile, R, rgexf, Gephi</keywords>
@@ -106,22 +106,22 @@ write.gexf(people, relations)
     ##     <nodes>
     ##       <node id="1" label="juan">
     ##         <viz:color r="255" g="99" b="71" a="1"/>
-    ##         <viz:position x="-94.9591185968857" y="-100" z="0"/>
+    ##         <viz:position x="-31.6922406049103" y="-100" z="0"/>
     ##         <viz:size value="10"/>
     ##       </node>
     ##       <node id="2" label="pedro">
     ##         <viz:color r="255" g="99" b="71" a="1"/>
-    ##         <viz:position x="-100" y="46.0826743556705" z="0"/>
+    ##         <viz:position x="100" y="100" z="0"/>
     ##         <viz:size value="10"/>
     ##       </node>
     ##       <node id="3" label="matthew">
     ##         <viz:color r="255" g="99" b="71" a="1"/>
-    ##         <viz:position x="23.8647662870158" y="96.9051340252578" z="0"/>
+    ##         <viz:position x="-100" y="-85.9572491253503" z="0"/>
     ##         <viz:size value="10"/>
     ##       </node>
     ##       <node id="4" label="carlos">
     ##         <viz:color r="255" g="99" b="71" a="1"/>
-    ##         <viz:position x="100" y="100" z="0"/>
+    ##         <viz:position x="-25.2597210689133" y="-76.0810991001836" z="0"/>
     ##         <viz:size value="10"/>
     ##       </node>
     ##     </nodes>
@@ -157,7 +157,7 @@ write.gexf(people, relations, nodeDynamic=time)
 
     ## <?xml version="1.0" encoding="UTF-8"?>
     ## <gexf xmlns="http://www.gexf.net/1.3" xmlns:viz="http://www.gexf.net/1.3/viz" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.3 http://www.gexf.net/1.3/gexf.xsd" version="1.3">
-    ##   <meta lastmodifieddate="2021-06-13">
+    ##   <meta lastmodifieddate="2021-08-01">
     ##     <creator>NodosChile</creator>
     ##     <description>A GEXF file written in R with "rgexf"</description>
     ##     <keywords>GEXF, NodosChile, R, rgexf, Gephi</keywords>
@@ -166,22 +166,22 @@ write.gexf(people, relations, nodeDynamic=time)
     ##     <nodes>
     ##       <node id="1" label="juan" start="10" end="12">
     ##         <viz:color r="255" g="99" b="71" a="1"/>
-    ##         <viz:position x="100" y="-100" z="0"/>
+    ##         <viz:position x="-80.4188804956527" y="-25.1963893996261" z="0"/>
     ##         <viz:size value="10"/>
     ##       </node>
     ##       <node id="2" label="pedro" start="13" end="2">
     ##         <viz:color r="255" g="99" b="71" a="1"/>
-    ##         <viz:position x="-19.3500467608754" y="-74.6672521656976" z="0"/>
+    ##         <viz:position x="-100" y="21.6522917318509" z="0"/>
     ##         <viz:size value="10"/>
     ##       </node>
     ##       <node id="3" label="matthew" start="2" end="2">
     ##         <viz:color r="255" g="99" b="71" a="1"/>
-    ##         <viz:position x="-100" y="100" z="0"/>
+    ##         <viz:position x="100" y="100" z="0"/>
     ##         <viz:size value="10"/>
     ##       </node>
     ##       <node id="4" label="carlos" start="2" end="2">
     ##         <viz:color r="255" g="99" b="71" a="1"/>
-    ##         <viz:position x="-70.0800701960264" y="-13.5772745940554" z="0"/>
+    ##         <viz:position x="43.0398638622201" y="-100" z="0"/>
     ##         <viz:size value="10"/>
     ##       </node>
     ##     </nodes>
@@ -259,7 +259,7 @@ write.gexf(nodes=people, edges=relations, edgeDynamic=time.edges,
 
     ## <?xml version="1.0" encoding="UTF-8"?>
     ## <gexf xmlns="http://www.gexf.net/1.3" xmlns:viz="http://www.gexf.net/1.3/viz" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.3 http://www.gexf.net/1.3/gexf.xsd" version="1.3">
-    ##   <meta lastmodifieddate="2021-06-13">
+    ##   <meta lastmodifieddate="2021-08-01">
     ##     <creator>NodosChile</creator>
     ##     <description>A GEXF file written in R with "rgexf"</description>
     ##     <keywords>GEXF, NodosChile, R, rgexf, Gephi</keywords>
@@ -280,7 +280,7 @@ write.gexf(nodes=people, edges=relations, edgeDynamic=time.edges,
     ##           <attvalue for="att2" value="1"/>
     ##         </attvalues>
     ##         <viz:color r="255" g="99" b="71" a="1"/>
-    ##         <viz:position x="100" y="81.1081592078988" z="0"/>
+    ##         <viz:position x="-42.0510770991229" y="11.3290328422708" z="0"/>
     ##         <viz:size value="10"/>
     ##       </node>
     ##       <node id="2" label="pedro" start="13" end="5">
@@ -289,7 +289,7 @@ write.gexf(nodes=people, edges=relations, edgeDynamic=time.edges,
     ##           <attvalue for="att2" value="2"/>
     ##         </attvalues>
     ##         <viz:color r="255" g="99" b="71" a="1"/>
-    ##         <viz:position x="-100" y="-100" z="0"/>
+    ##         <viz:position x="-100" y="67.3890817808593" z="0"/>
     ##         <viz:size value="10"/>
     ##       </node>
     ##       <node id="3" label="matthew" start="2" end="5">
@@ -298,7 +298,7 @@ write.gexf(nodes=people, edges=relations, edgeDynamic=time.edges,
     ##           <attvalue for="att2" value="3"/>
     ##         </attvalues>
     ##         <viz:color r="255" g="99" b="71" a="1"/>
-    ##         <viz:position x="99.3920588156637" y="100" z="0"/>
+    ##         <viz:position x="68.5463113315598" y="-100" z="0"/>
     ##         <viz:size value="10"/>
     ##       </node>
     ##       <node id="4" label="carlos" start="2" end="5">
@@ -307,7 +307,7 @@ write.gexf(nodes=people, edges=relations, edgeDynamic=time.edges,
     ##           <attvalue for="att2" value="4"/>
     ##         </attvalues>
     ##         <viz:color r="255" g="99" b="71" a="1"/>
-    ##         <viz:position x="97.0013444404504" y="-39.2128266101758" z="0"/>
+    ##         <viz:position x="100" y="100" z="0"/>
     ##         <viz:size value="10"/>
     ##       </node>
     ##     </nodes>
@@ -352,6 +352,13 @@ write.gexf(nodes=people, edges=relations, edgeDynamic=time.edges,
     ##   </graph>
     ## </gexf>
 
+# Code of Conduct
+
+Please note that the rgexf project is released with a [Contributor Code
+of
+Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html).
+By contributing to this project, you agree to abide by its terms
+
 # Session info
 
 ``` r
@@ -368,19 +375,21 @@ devtools::session_info()
     ##  collate  en_US.UTF-8                 
     ##  ctype    en_US.UTF-8                 
     ##  tz       America/Los_Angeles         
-    ##  date     2021-06-13                  
+    ##  date     2021-08-01                  
     ## 
     ## ─ Packages ───────────────────────────────────────────────────────────────────
     ##  package     * version  date       lib source        
     ##  cachem        1.0.5    2021-05-15 [1] CRAN (R 4.1.0)
     ##  callr         3.7.0    2021-04-20 [1] CRAN (R 4.1.0)
-    ##  cli           2.5.0    2021-04-26 [1] CRAN (R 4.1.0)
+    ##  cli           3.0.0    2021-06-30 [1] CRAN (R 4.1.0)
+    ##  clipr         0.7.1    2020-10-08 [1] CRAN (R 4.1.0)
     ##  crayon        1.4.1    2021-02-08 [1] CRAN (R 4.1.0)
     ##  desc          1.3.0    2021-03-05 [1] CRAN (R 4.1.0)
     ##  devtools      2.4.2    2021-06-07 [1] CRAN (R 4.1.0)
     ##  digest        0.6.27   2020-10-24 [1] CRAN (R 4.1.0)
     ##  ellipsis      0.3.2    2021-04-29 [1] CRAN (R 4.1.0)
     ##  evaluate      0.14     2019-05-28 [1] CRAN (R 4.1.0)
+    ##  fansi         0.5.0    2021-05-25 [1] CRAN (R 4.1.0)
     ##  fastmap       1.1.0    2021-01-25 [1] CRAN (R 4.1.0)
     ##  fs            1.5.0    2020-07-31 [1] CRAN (R 4.1.0)
     ##  glue          1.4.2    2020-08-27 [1] CRAN (R 4.1.0)
@@ -393,6 +402,7 @@ devtools::session_info()
     ##  lifecycle     1.0.0    2021-02-15 [1] CRAN (R 4.1.0)
     ##  magrittr      2.0.1    2020-11-17 [1] CRAN (R 4.1.0)
     ##  memoise       2.0.0    2021-01-26 [1] CRAN (R 4.1.0)
+    ##  pillar        1.6.1    2021-05-16 [1] CRAN (R 4.1.0)
     ##  pkgbuild      1.2.0    2020-12-15 [1] CRAN (R 4.1.0)
     ##  pkgconfig     2.0.3    2019-09-22 [1] CRAN (R 4.1.0)
     ##  pkgload       1.2.1    2021-04-06 [1] CRAN (R 4.1.0)
@@ -408,12 +418,17 @@ devtools::session_info()
     ##  rlang         0.4.11   2021-04-30 [1] CRAN (R 4.1.0)
     ##  rmarkdown     2.8      2021-05-07 [1] CRAN (R 4.1.0)
     ##  rprojroot     2.0.2    2020-11-15 [1] CRAN (R 4.1.0)
+    ##  rstudioapi    0.13     2020-11-12 [1] CRAN (R 4.1.0)
     ##  servr         0.22     2021-04-14 [1] CRAN (R 4.1.0)
     ##  sessioninfo   1.1.1    2018-11-05 [1] CRAN (R 4.1.0)
     ##  stringi       1.6.2    2021-05-17 [1] CRAN (R 4.1.0)
     ##  stringr       1.4.0    2019-02-10 [1] CRAN (R 4.1.0)
     ##  testthat      3.0.2    2021-02-14 [1] CRAN (R 4.1.0)
+    ##  tibble        3.1.2    2021-05-16 [1] CRAN (R 4.1.0)
     ##  usethis       2.0.1    2021-02-10 [1] CRAN (R 4.1.0)
+    ##  utf8          1.2.1    2021-03-12 [1] CRAN (R 4.1.0)
+    ##  vctrs         0.3.8    2021-04-29 [1] CRAN (R 4.1.0)
+    ##  whisker       0.4      2019-08-28 [1] CRAN (R 4.1.0)
     ##  withr         2.4.2    2021-04-18 [1] CRAN (R 4.1.0)
     ##  xfun          0.23     2021-05-15 [1] CRAN (R 4.1.0)
     ##  XML           3.99-0.6 2021-03-16 [1] CRAN (R 4.1.0)
