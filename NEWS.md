@@ -1,9 +1,22 @@
 # Changes in rgexf version 0.16.1 (2021-06-12)
 
+## New features and changes
+
+* We now have a hex sticker!
+
+* Users can now cite properly `rgexf` with JOSS (see `citation(package="rgexf")`).
+
+* Added a few extra breaks across the examples (suggested by @corneliusfritz).
+
+* Improved documentation regarding spells and dynamic graphs.
+
+
 ## Bug fixes
 
 * Passing colors with four values (alpha) no longer fails during checks.
   (reported by @IsabelFE).
+
+* The summary function prints nodes' attributes as expected.
   
 
 # Changes in rgexf version 0.16.0 (2018-02-05)
@@ -15,13 +28,13 @@
   
 * `plot.gexf` method now uses `gexf-js` instead of `sigma.js`.
 
-* Now `igraph.to.gexf` passes arguments to `gexf`. Before it was only passing
+* Now `igraph.to.gexf` passes arguments to `gexf`. Before, it was only passing
   `position`. This way users have more flexibility specifying attributes.
 
-* `gexf`'s `nodesVizAtt` now has defaults for color, size and position. This is
+* `gexf`'s `nodesVizAtt` now has defaults for color, size, and position; this is
   a requirement of `gexf-js`.
 
-* `gexf`'s `nodesVizAtt` color and size now support passing a default for all
+* `gexf` 's `nodesVizAtt` color and size now support passing a default for all
   the nodes. Also, color can be specified as a character scalar (name of the)
   color, or as an integer (number in `colors()`).
 
@@ -29,7 +42,7 @@
   `size` vector in `nodesVizAtt` is rescaled such that when calling the plot
   method the largest node spans roughly 5% of the plot.
   
-* `read.gexf` now parses viz attributes (color, position and size).
+* `read.gexf` now parses viz attributes (color, position, and size).
 
 * `igraph.to.gexf` and vice versa now pass viz attributes and layout.
 
@@ -37,7 +50,8 @@
 
 * The function `gexf` has been introduced as an eventual replacement of
   `write.gexf` since it makes more sense. `write.gexf` should only be for
-  writing the gexf file on the disk. This will be effective starting vers 0.17.0
+  writing the gexf file on the disk (effective starting vers 0.17.0).
+
 
 ## Misc changes
 
@@ -59,7 +73,7 @@
 
 ## New features and changes
 
--   New option -digits- in several functions allow to control for
+-   New option -digits- in several functions allows controlling for
     printing precision (reported in issue 16, thanks Nico!).
 
 -   Function -igraph.to.gexf- now imports attributes.
@@ -80,7 +94,7 @@
 
 -   Option -keepFactors- default is now in -FALSE- (used to be
     in -TRUE-). When set to -TRUE- and there are factors, a warning
-    message will appear (reported in issue 18, thanks Tim Smith!).
+    message will appear (reported in issue 18, thanks to Tim Smith!).
 
 # Changes in rgexf version 0.13.11 (2013-11-27)
 
@@ -90,9 +104,9 @@
     Samuel Finegold).
 
 -   `write.gexf` does not fails when dynamics different from `double`
-    are passed (thank you Samuel Finegold!).
+    are passed (thank you, Samuel Finegold!).
 
--   Passing weights from igraph to gexf as now been fix (thank you
+-   Passing weights from igraph to gexf has now been fix (thank you
     Roberto Brunelli!).
 
 -   Fixing encoding issues thanks to Yong Cha's suggestion (thank you!).
@@ -152,7 +166,7 @@
 -   Edges thickness viz att XML representation (`viz:thickness`) was
     replaced by `viz:size` (as it should be).
 
--   “Library” replaced by “Package” everywhere (`ups!`)
+- "Library" replaced by "Package" everywhere (`ups!`)
 
 ## Development
 
@@ -160,7 +174,7 @@
     them with very high speedups) (Thanks to Duncan Temple Lang,
     RXML author)
 
--   Several code routines have been extracted from “bigger functions”
+-   Several code routines have been extracted from "bigger functions"
     and written as functions themselves.
 
 # Changes in rgexf version 0.13.01 (2013-01-04)

@@ -22,8 +22,6 @@ people
 relations <- data.frame(matrix(c(1,4,1,2,1,3,2,3,3,4,4,2,2,4,4,1,4,1), 
                                ncol=2, byrow=T))
 relations
-
-pause()
 ################################################################################
 # Basic network
 # you create a .gexf archive by adding the expression:
@@ -32,7 +30,7 @@ pause()
 #
 # before the last closing 
 # parenthesis in the following function
-
+pause()
 gexf(nodes=people, edges=relations)
 
 ################################################################################  
