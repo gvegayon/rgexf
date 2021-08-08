@@ -23,7 +23,7 @@ Description: Create, read and write 'GEXF' (Graph Exchange 'XML' Format) graph
     'javascript' library) and interact with the 'igraph' package.
 URL: https://gvegayon.github.io/rgexf
 BugReports: http://github.com/gvegayon/rgexf/issues
-Imports:
+Imports: 
     XML,
     igraph,
     grDevices,
@@ -34,8 +34,7 @@ LazyLoad: yes
 RoxygenNote: 7.0.2
 Suggests: knitr,
     rmarkdown,
-    testthat,
-    covr
+    tinytest,
+    covr, tinytest
 VignetteBuilder: knitr
 Roxygen: list(markdown = TRUE)
-
