@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Reads gexf (.gexf) file — read.gexf • rgexf</title>
+<title>head method for gexf objects — head.gexf • rgexf</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,9 +46,8 @@
 
 
 
-<meta property="og:title" content="Reads gexf (.gexf) file — read.gexf" />
-<meta property="og:description" content="read.gexf reads gexf graph files and imports its elements as a
-gexf class object" />
+<meta property="og:title" content="head method for gexf objects — head.gexf" />
+<meta property="og:description" content="List the first n_nodes and n_edges of the gexf file." />
 <meta property="og:image" content="/logo.svg" />
 
 
@@ -123,47 +122,103 @@ gexf class object" />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Reads gexf (.gexf) file</h1>
-    <small class="dont-index">Source: <a href='http://github.com/gvegayon/rgexf/blob/master/R/read.gexf.R'><code>R/read.gexf.R</code></a></small>
-    <div class="hidden name"><code>read.gexf.Rd</code></div>
+    <h1><code>head</code> method for gexf objects</h1>
+    <small class="dont-index">Source: <a href='http://github.com/gvegayon/rgexf/blob/master/R/methods.R'><code>R/methods.R</code></a></small>
+    <div class="hidden name"><code>head.gexf.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><code>read.gexf</code> reads gexf graph files and imports its elements as a
-<code>gexf</code> class object</p>
+    <p>List the first <code>n_nodes</code> and <code>n_edges</code> of the <a href='gexf-class.html'>gexf</a> file.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>read.gexf</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='co'># S3 method for gexf</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>x</span>, n_nodes <span class='op'>=</span> <span class='fl'>6L</span>, n_edges <span class='op'>=</span> <span class='va'>n_nodes</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>String. Path to the gexf file.</p></td>
+      <td><p>An object of class <a href='gexf-class.html'>gexf</a>.</p></td>
+    </tr>
+    <tr>
+      <th>n_nodes, n_edges</th>
+      <td><p>Integers. Number of nodes and edges to print</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Ignored</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>A <code>gexf</code> object.</p>
-    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
-
-    <p>By the time attributes and viz-attributes aren't supported.</p>
-    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
-
-    <p>The GEXF project website: http://gexf.net</p>
-    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
-
-    <p>George Vega Yon</p>
-<p>Jorge Fabrega Lacoa</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-  <span class='va'>fn</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"gexf-graphs/lesmiserables.gexf"</span>, package <span class='op'>=</span> <span class='st'>"rgexf"</span><span class='op'>)</span>
-  <span class='va'>mygraph</span> <span class='op'>&lt;-</span> <span class='fu'>read.gexf</span><span class='op'>(</span><span class='va'>fn</span><span class='op'>)</span>
-
-</div></pre>
+    <pre class="examples"><div class='input'><span class='va'>fn</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"gexf-graphs/lesmiserables.gexf"</span>, package <span class='op'>=</span> <span class='st'>"rgexf"</span><span class='op'>)</span>
+<span class='va'>g</span>  <span class='op'>&lt;-</span> <span class='fu'><a href='read.gexf.html'>read.gexf</a></span><span class='op'>(</span><span class='va'>fn</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>g</span>, n_nodes <span class='op'>=</span> <span class='fl'>5</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+#&gt; &lt;gexf xmlns="http://www.gexf.net/1.3" xmlns:viz="http://www.gexf.net/1.3/viz" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.3" xsi:schemaLocation="http://www.gexf.net/1.3 http://www.gexf.net/1.3/gexf.xsd"&gt;
+#&gt;   &lt;meta lastmodifieddate="2016-11-09"&gt;
+#&gt;     &lt;creator&gt;Gephi 0.9&lt;/creator&gt;
+#&gt;     &lt;description/&gt;
+#&gt;   &lt;/meta&gt;
+#&gt;   &lt;graph defaultedgetype="undirected" mode="static"&gt;
+#&gt;     &lt;attributes class="node" mode="static"&gt;
+#&gt;       &lt;attribute id="modularity_class" title="Modularity Class" type="integer"/&gt;
+#&gt;     &lt;/attributes&gt;
+#&gt;     &lt;nodes&gt;
+#&gt;       &lt;node id="11" label="Valjean"&gt;
+#&gt;         &lt;attvalues&gt;
+#&gt;           &lt;attvalue for="modularity_class" value="1"/&gt;
+#&gt;         &lt;/attvalues&gt;
+#&gt;         &lt;viz:size value="100.0"/&gt;
+#&gt;         &lt;viz:position x="-87.93029" y="6.8120565"/&gt;
+#&gt;         &lt;viz:color r="245" g="91" b="91"/&gt;
+#&gt;       &lt;/node&gt;
+#&gt;       &lt;node id="48" label="Gavroche"&gt;
+#&gt;         &lt;attvalues&gt;
+#&gt;           &lt;attvalue for="modularity_class" value="8"/&gt;
+#&gt;         &lt;/attvalues&gt;
+#&gt;         &lt;viz:size value="61.600006"/&gt;
+#&gt;         &lt;viz:position x="387.89572" y="-110.462326"/&gt;
+#&gt;         &lt;viz:color r="91" g="245" b="91"/&gt;
+#&gt;       &lt;/node&gt;
+#&gt;       &lt;node id="55" label="Marius"&gt;
+#&gt;         &lt;attvalues&gt;
+#&gt;           &lt;attvalue for="modularity_class" value="6"/&gt;
+#&gt;         &lt;/attvalues&gt;
+#&gt;         &lt;viz:size value="53.37143"/&gt;
+#&gt;         &lt;viz:position x="206.44687" y="13.805411"/&gt;
+#&gt;         &lt;viz:color r="194" g="91" b="245"/&gt;
+#&gt;       &lt;/node&gt;
+#&gt;       &lt;node id="27" label="Javert"&gt;
+#&gt;         &lt;attvalues&gt;
+#&gt;           &lt;attvalue for="modularity_class" value="7"/&gt;
+#&gt;         &lt;/attvalues&gt;
+#&gt;         &lt;viz:size value="47.88571"/&gt;
+#&gt;         &lt;viz:position x="-81.46074" y="204.20204"/&gt;
+#&gt;         &lt;viz:color r="91" g="245" b="194"/&gt;
+#&gt;       &lt;/node&gt;
+#&gt;       &lt;node id="25" label="Thenardier"&gt;
+#&gt;         &lt;attvalues&gt;
+#&gt;           &lt;attvalue for="modularity_class" value="7"/&gt;
+#&gt;         &lt;/attvalues&gt;
+#&gt;         &lt;viz:size value="45.142853"/&gt;
+#&gt;         &lt;viz:position x="82.80825" y="203.1144"/&gt;
+#&gt;         &lt;viz:color r="91" g="245" b="194"/&gt;
+#&gt;       &lt;/node&gt;
+#&gt; 			...
+#&gt;      &lt;/nodes&gt;
+#&gt;     &lt;edges&gt;
+#&gt;       &lt;edge id="0" source="1" target="0"/&gt;
+#&gt;       &lt;edge id="1" source="2" target="0" weight="8.0"/&gt;
+#&gt;       &lt;edge id="2" source="3" target="0" weight="10.0"/&gt;
+#&gt;       &lt;edge id="3" source="3" target="2" weight="6.0"/&gt;
+#&gt;       &lt;edge id="4" source="4" target="0"/&gt;
+#&gt; 			...
+#&gt;      &lt;/edges&gt;
+#&gt;   &lt;/graph&gt;
+#&gt; &lt;/gexf&gt;</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -8,6 +8,13 @@
 
 <title>Visualizing GEXF graph files using gexf-js — gexf_js_config • rgexf</title>
 
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
@@ -44,6 +51,7 @@
 visualize your GEXF on the browser. The function essentially copies a template
 website, the GEXF file, and sets up a configuration file. By default, the
 function then starts a webserver using the servr R package." />
+<meta property="og:image" content="/logo.svg" />
 
 
 
@@ -75,7 +83,7 @@ function then starts a webserver using the servr R package." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rgexf</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.16.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.16.2</span>
       </span>
     </div>
 
@@ -83,7 +91,7 @@ function then starts a webserver using the servr R package." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -100,7 +108,7 @@ function then starts a webserver using the servr R package." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="http://github.com/gvegayon/rgexf/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -118,7 +126,7 @@ function then starts a webserver using the servr R package." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Visualizing GEXF graph files using gexf-js</h1>
-    <small class="dont-index">Source: <a href='http://github.com/gvegayon/rgexf/blob/master/R/gexf-js.R'><code>R/gexf-js.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/gvegayon/rgexf/blob/master/R/plot.R'><code>R/plot.R</code></a></small>
     <div class="hidden name"><code>plot.gexf.Rd</code></div>
     </div>
 
@@ -129,38 +137,38 @@ website, the GEXF file, and sets up a configuration file. By default, the
 function then starts a webserver using the <code>servr</code> R package.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>gexf_js_config</span>(
-  <span class='no'>dir</span>,
-  <span class='kw'>graphFile</span> <span class='kw'>=</span> <span class='st'>"network.gexf"</span>,
-  <span class='kw'>showEdges</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>useLens</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>zoomLevel</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>curvedEdges</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>edgeWidthFactor</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>minEdgeWidth</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>maxEdgeWidth</span> <span class='kw'>=</span> <span class='fl'>2</span>,
-  <span class='kw'>textDisplayThreshold</span> <span class='kw'>=</span> <span class='fl'>9</span>,
-  <span class='kw'>nodeSizeFactor</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>replaceUrls</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>showEdgeWeight</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>showEdgeLabel</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>sortNodeAttributes</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>showId</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>showEdgeArrow</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>language</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
-)
+    <pre class="usage"><span class='fu'>gexf_js_config</span><span class='op'>(</span>
+  <span class='va'>dir</span>,
+  graphFile <span class='op'>=</span> <span class='st'>"network.gexf"</span>,
+  showEdges <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  useLens <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  zoomLevel <span class='op'>=</span> <span class='fl'>0</span>,
+  curvedEdges <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  edgeWidthFactor <span class='op'>=</span> <span class='fl'>1</span>,
+  minEdgeWidth <span class='op'>=</span> <span class='fl'>1</span>,
+  maxEdgeWidth <span class='op'>=</span> <span class='fl'>2</span>,
+  textDisplayThreshold <span class='op'>=</span> <span class='fl'>9</span>,
+  nodeSizeFactor <span class='op'>=</span> <span class='fl'>1</span>,
+  replaceUrls <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  showEdgeWeight <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  showEdgeLabel <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  sortNodeAttributes <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  showId <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  showEdgeArrow <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  language <span class='op'>=</span> <span class='cn'>FALSE</span>
+<span class='op'>)</span>
 
 <span class='co'># S3 method for gexf</span>
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(
-  <span class='no'>x</span>,
-  <span class='kw'>y</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>graphFile</span> <span class='kw'>=</span> <span class='st'>"network.gexf"</span>,
-  <span class='kw'>dir</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span>(),
-  <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>httd.args</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(),
-  <span class='kw'>copy.only</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='no'>...</span>
-)</pre>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  y <span class='op'>=</span> <span class='cn'>NULL</span>,
+  graphFile <span class='op'>=</span> <span class='st'>"network.gexf"</span>,
+  dir <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span>,
+  overwrite <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  httd.args <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='op'>)</span>,
+  copy.only <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -285,30 +293,33 @@ German (de), English (en), French (fr), Spanish (es), Italian (it), Finnish (fi)
 only works if there are <code>viz</code> attributes, this is, color, size, and position.
 If the <a href='gexf-class.html'>gexf</a> object's XML document does not have viz attributes, users can
 use the following hack:</p><pre><span class='co'># Turn the object ot igraph and go back</span>
-<span class='no'>x</span> <span class='kw'>&amp;</span><span class='no'>lt</span>;- <span class='fu'><a href='igraph.to.gexf.html'>igraph.to.gexf</a></span>(<span class='fu'><a href='igraph.to.gexf.html'>gexf.to.igraph</a></span>(<span class='no'>x</span>))
+<span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='igraph.to.gexf.html'>igraph.to.gexf</a></span><span class='op'>(</span><span class='fu'><a href='igraph.to.gexf.html'>gexf.to.igraph</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='op'>)</span>
 
 <span class='co'># And you are ready to plot!</span>
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>x</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
+</pre>
 
 <p>More details on this in the <a href='igraph.to.gexf.html'>igraph.to.gexf</a> function.</p>
 <p>The files are copied directly from
-/home/travis/R/Library/rgexf/gexf-js
+/tmp/RtmpxDaptj/temp_libpath11229fddb/rgexf/gexf-js
 . And the
 parameters are set up by modifying the following template file:</p>
-<p>/home/travis/R/Library/rgexf/gexf-js/config.js.template</p>
+<p>/tmp/RtmpxDaptj/temp_libpath11229fddb/rgexf/gexf-js/config.js.template</p>
 <p>The server is lunched if and only if <code>interactive() == TRUE</code>.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>gexf-js project website https://github.com/raphv/gexf-js.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>()) {
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
 
-<span class='no'>path</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"gexf-graphs/lesmiserables.gexf"</span>, <span class='kw'>package</span><span class='kw'>=</span><span class='st'>"rgexf"</span>)
-<span class='no'>graph</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='read.gexf.html'>read.gexf</a></span>(<span class='no'>path</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>graph</span>)
+<span class='va'>path</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"gexf-graphs/lesmiserables.gexf"</span>, package<span class='op'>=</span><span class='st'>"rgexf"</span><span class='op'>)</span>
+<span class='va'>graph</span> <span class='op'>&lt;-</span> <span class='fu'><a href='read.gexf.html'>read.gexf</a></span><span class='op'>(</span><span class='va'>path</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>graph</span><span class='op'>)</span>
 
-}</div></pre>
+<span class='op'>}</span>
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -324,7 +335,7 @@ parameters are set up by modifying the following template file:</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

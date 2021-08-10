@@ -6,6 +6,12 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Build, Import and Export GEXF Graph Files • rgexf</title>
+<!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="apple-touch-icon.png">
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="apple-touch-icon-60x60.png">
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="bootstrap-toc.css">
 <script src="bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
@@ -19,6 +25,7 @@
     edge weighting. Users can build/handle graphs element-by-element or massively
     through data-frames, visualize the graph on a web browser through gexf-js (a
     javascript library) and interact with the igraph package.">
+<meta property="og:image" content="/logo.svg">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -37,7 +44,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">rgexf</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.16.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.16.2</span>
       </span>
     </div>
 
@@ -45,7 +52,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -62,7 +69,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="http://github.com/gvegayon/rgexf/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -79,15 +86,18 @@
       </header><div class="row">
   <div class="contents col-md-9">
 
-<div id="rgexf-build-import-and-export-gexf-graph-files" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#rgexf-build-import-and-export-gexf-graph-files" class="anchor"></a>rgexf: Build, Import and Export GEXF Graph Files</h1></div>
 
+<div id="rgexf-build-import-and-export-gexf-graph-files-" class="section level1">
+<div class="page-header"><h1 class="hasAnchor">
+<a href="#rgexf-build-import-and-export-gexf-graph-files-" class="anchor"></a>rgexf: Build, Import and Export GEXF Graph Files <img src="reference/figures/logo.svg" align="right" height="200">
+</h1></div>
 <p>The first R package to work with GEXF graph files (used in Gephi and others). Using XML library, it allows the user to easily build/read graph files including attributes, GEXF viz attributes (such as color, size, and position), network dynamics (for both edges and nodes, including spells) and edges weighting. Users can build/handle graphs element-by-element or massively through data-frames, visualize the graph on a web browser through <del>sigmajs javascript</del> <a href="https://github.com/raphv/gexf-js">gexf-js</a> library and interact with the igraph package.</p>
 <div id="news" class="section level2">
 <h2 class="hasAnchor">
 <a href="#news" class="anchor"></a>News</h2>
 <ul>
+<li>
+<br><span class="math display">2020 − 06 − 12</span><br> Please refer to <br><span class="math display"><em>N</em><em>E</em><em>W</em><em>S</em>.<em>m</em><em>d</em></span><br> for more news.</li>
 <li>
 <br><span class="math display">2020 − 02 − 11</span><br> Getting ready to put the package on CRAN again (was taken out in the last version).</li>
 <li>
@@ -114,337 +124,457 @@
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>To install the latest version of <code>rgexf</code> you can use <code>devtools</code></p>
-<div class="sourceCode" id="cb1"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">devtools</span>)
-<span class="fu">install_github</span>(<span class="st">"gvegayon/rgexf"</span>)</pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">devtools</span><span class="op">)</span>
+<span class="fu">install_github</span><span class="op">(</span><span class="st">"gvegayon/rgexf"</span><span class="op">)</span></code></pre></div>
 <p>The more stable (but old) version of <code>rgexf</code> can be found on CRAN too:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">install.packages</span>(<span class="st">"rgexf"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="kw">install.packages</span>(<span class="st">"rgexf"</span>)</span></code></pre></div>
 </div>
 <div id="example-1-static-net" class="section level2">
 <h2 class="hasAnchor">
 <a href="#example-1-static-net" class="anchor"></a>Example 1: Static net</h2>
-<div class="sourceCode" id="cb3"><pre class="r"><span class="co"># Loading the package</span>
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">rgexf</span>)
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Loading the package</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://gvegayon.github.io/rgexf">rgexf</a></span><span class="op">)</span>
 
 <span class="co"># Creating a group of individuals and their relations</span>
-<span class="no">people</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>:<span class="fl">4</span>, <span class="st">'juan'</span>, <span class="st">'pedro'</span>, <span class="st">'matthew'</span>, <span class="st">'carlos'</span>),<span class="kw">ncol</span><span class="kw">=</span><span class="fl">2</span>))
-<span class="no">people</span></pre></div>
-<div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">##   X1      X2</a>
-<a class="sourceLine" id="cb4-2" data-line-number="2">## 1  1    juan</a>
-<a class="sourceLine" id="cb4-3" data-line-number="3">## 2  2   pedro</a>
-<a class="sourceLine" id="cb4-4" data-line-number="4">## 3  3 matthew</a>
-<a class="sourceLine" id="cb4-5" data-line-number="5">## 4  4  carlos</a></code></pre></div>
-<div class="sourceCode" id="cb5"><pre class="r"><span class="co"># Defining the relations structure</span>
-<span class="no">relations</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>,<span class="fl">4</span>,<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">1</span>,<span class="fl">3</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">3</span>,<span class="fl">4</span>,<span class="fl">4</span>,<span class="fl">2</span>), <span class="kw">ncol</span><span class="kw">=</span><span class="fl">2</span>, <span class="kw">byrow</span><span class="kw">=</span><span class="no">T</span>))
-<span class="no">relations</span></pre></div>
-<div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">##   X1 X2</a>
-<a class="sourceLine" id="cb6-2" data-line-number="2">## 1  1  4</a>
-<a class="sourceLine" id="cb6-3" data-line-number="3">## 2  1  2</a>
-<a class="sourceLine" id="cb6-4" data-line-number="4">## 3  1  3</a>
-<a class="sourceLine" id="cb6-5" data-line-number="5">## 4  2  3</a>
-<a class="sourceLine" id="cb6-6" data-line-number="6">## 5  3  4</a>
-<a class="sourceLine" id="cb6-7" data-line-number="7">## 6  4  2</a></code></pre></div>
-<div class="sourceCode" id="cb7"><pre class="r"><span class="co"># Getting things done</span>
-<span class="fu"><a href="reference/gexf-class.html">write.gexf</a></span>(<span class="no">people</span>, <span class="no">relations</span>)</pre></div>
-<div class="sourceCode" id="cb8"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">## &lt;?xml version="1.0" encoding="UTF-8"?&gt;</a>
-<a class="sourceLine" id="cb8-2" data-line-number="2">## &lt;gexf xmlns="http://www.gexf.net/1.3" xmlns:viz="http://www.gexf.net/1.3/viz" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.3 http://www.gexf.net/1.3/gexf.xsd" version="1.3"&gt;</a>
-<a class="sourceLine" id="cb8-3" data-line-number="3">##   &lt;meta lastmodifieddate="2020-02-12"&gt;</a>
-<a class="sourceLine" id="cb8-4" data-line-number="4">##     &lt;creator&gt;NodosChile&lt;/creator&gt;</a>
-<a class="sourceLine" id="cb8-5" data-line-number="5">##     &lt;description&gt;A GEXF file written in R with "rgexf"&lt;/description&gt;</a>
-<a class="sourceLine" id="cb8-6" data-line-number="6">##     &lt;keywords&gt;GEXF, NodosChile, R, rgexf, Gephi&lt;/keywords&gt;</a>
-<a class="sourceLine" id="cb8-7" data-line-number="7">##   &lt;/meta&gt;</a>
-<a class="sourceLine" id="cb8-8" data-line-number="8">##   &lt;graph mode="static" defaultedgetype="undirected"&gt;</a>
-<a class="sourceLine" id="cb8-9" data-line-number="9">##     &lt;nodes&gt;</a>
-<a class="sourceLine" id="cb8-10" data-line-number="10">##       &lt;node id="1" label="juan"&gt;</a>
-<a class="sourceLine" id="cb8-11" data-line-number="11">##         &lt;viz:color r="255" g="99" b="71" a="1"/&gt;</a>
-<a class="sourceLine" id="cb8-12" data-line-number="12">##         &lt;viz:position x="100" y="10.8967793559009" z="0"/&gt;</a>
-<a class="sourceLine" id="cb8-13" data-line-number="13">##         &lt;viz:size value="10"/&gt;</a>
-<a class="sourceLine" id="cb8-14" data-line-number="14">##       &lt;/node&gt;</a>
-<a class="sourceLine" id="cb8-15" data-line-number="15">##       &lt;node id="2" label="pedro"&gt;</a>
-<a class="sourceLine" id="cb8-16" data-line-number="16">##         &lt;viz:color r="255" g="99" b="71" a="1"/&gt;</a>
-<a class="sourceLine" id="cb8-17" data-line-number="17">##         &lt;viz:position x="42.1494909704439" y="-18.4734031409117" z="0"/&gt;</a>
-<a class="sourceLine" id="cb8-18" data-line-number="18">##         &lt;viz:size value="10"/&gt;</a>
-<a class="sourceLine" id="cb8-19" data-line-number="19">##       &lt;/node&gt;</a>
-<a class="sourceLine" id="cb8-20" data-line-number="20">##       &lt;node id="3" label="matthew"&gt;</a>
-<a class="sourceLine" id="cb8-21" data-line-number="21">##         &lt;viz:color r="255" g="99" b="71" a="1"/&gt;</a>
-<a class="sourceLine" id="cb8-22" data-line-number="22">##         &lt;viz:position x="-92.2784635381173" y="-100" z="0"/&gt;</a>
-<a class="sourceLine" id="cb8-23" data-line-number="23">##         &lt;viz:size value="10"/&gt;</a>
-<a class="sourceLine" id="cb8-24" data-line-number="24">##       &lt;/node&gt;</a>
-<a class="sourceLine" id="cb8-25" data-line-number="25">##       &lt;node id="4" label="carlos"&gt;</a>
-<a class="sourceLine" id="cb8-26" data-line-number="26">##         &lt;viz:color r="255" g="99" b="71" a="1"/&gt;</a>
-<a class="sourceLine" id="cb8-27" data-line-number="27">##         &lt;viz:position x="-100" y="100" z="0"/&gt;</a>
-<a class="sourceLine" id="cb8-28" data-line-number="28">##         &lt;viz:size value="10"/&gt;</a>
-<a class="sourceLine" id="cb8-29" data-line-number="29">##       &lt;/node&gt;</a>
-<a class="sourceLine" id="cb8-30" data-line-number="30">##     &lt;/nodes&gt;</a>
-<a class="sourceLine" id="cb8-31" data-line-number="31">##     &lt;edges&gt;</a>
-<a class="sourceLine" id="cb8-32" data-line-number="32">##       &lt;edge id="0" source="1" target="4" weight="1"/&gt;</a>
-<a class="sourceLine" id="cb8-33" data-line-number="33">##       &lt;edge id="1" source="1" target="2" weight="1"/&gt;</a>
-<a class="sourceLine" id="cb8-34" data-line-number="34">##       &lt;edge id="2" source="1" target="3" weight="1"/&gt;</a>
-<a class="sourceLine" id="cb8-35" data-line-number="35">##       &lt;edge id="3" source="2" target="3" weight="1"/&gt;</a>
-<a class="sourceLine" id="cb8-36" data-line-number="36">##       &lt;edge id="4" source="3" target="4" weight="1"/&gt;</a>
-<a class="sourceLine" id="cb8-37" data-line-number="37">##       &lt;edge id="5" source="4" target="2" weight="1"/&gt;</a>
-<a class="sourceLine" id="cb8-38" data-line-number="38">##     &lt;/edges&gt;</a>
-<a class="sourceLine" id="cb8-39" data-line-number="39">##   &lt;/graph&gt;</a>
-<a class="sourceLine" id="cb8-40" data-line-number="40">## &lt;/gexf&gt;</a></code></pre></div>
+<span class="va">people</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span>, <span class="st">'juan'</span>, <span class="st">'pedro'</span>, <span class="st">'matthew'</span>, <span class="st">'carlos'</span><span class="op">)</span>,ncol<span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span>
+<span class="va">people</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a><span class="co">##   X1      X2</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true"></a><span class="co">## 1  1    juan</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true"></a><span class="co">## 2  2   pedro</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true"></a><span class="co">## 3  3 matthew</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true"></a><span class="co">## 4  4  carlos</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Defining the relations structure</span>
+<span class="va">relations</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">4</span>,<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">1</span>,<span class="fl">3</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">3</span>,<span class="fl">4</span>,<span class="fl">4</span>,<span class="fl">2</span><span class="op">)</span>, ncol<span class="op">=</span><span class="fl">2</span>, byrow<span class="op">=</span><span class="cn">T</span><span class="op">)</span><span class="op">)</span>
+<span class="va">relations</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true"></a><span class="co">##   X1 X2</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true"></a><span class="co">## 1  1  4</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true"></a><span class="co">## 2  1  2</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true"></a><span class="co">## 3  1  3</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true"></a><span class="co">## 4  2  3</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true"></a><span class="co">## 5  3  4</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true"></a><span class="co">## 6  4  2</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Getting things done</span>
+<span class="fu"><a href="reference/gexf-class.html">write.gexf</a></span><span class="op">(</span><span class="va">people</span>, <span class="va">relations</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true"></a><span class="co">## &lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true"></a><span class="co">## &lt;gexf xmlns="http://www.gexf.net/1.3" xmlns:viz="http://www.gexf.net/1.3/viz" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.3 http://www.gexf.net/1.3/gexf.xsd" version="1.3"&gt;</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true"></a><span class="co">##   &lt;meta lastmodifieddate="2021-08-10"&gt;</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true"></a><span class="co">##     &lt;creator&gt;NodosChile&lt;/creator&gt;</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true"></a><span class="co">##     &lt;description&gt;A GEXF file written in R with "rgexf"&lt;/description&gt;</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true"></a><span class="co">##     &lt;keywords&gt;GEXF, NodosChile, R, rgexf, Gephi&lt;/keywords&gt;</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true"></a><span class="co">##   &lt;/meta&gt;</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true"></a><span class="co">##   &lt;graph mode="static" defaultedgetype="undirected"&gt;</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true"></a><span class="co">##     &lt;nodes&gt;</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true"></a><span class="co">##       &lt;node id="1" label="juan"&gt;</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true"></a><span class="co">##         &lt;viz:color r="255" g="99" b="71" a="1"/&gt;</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true"></a><span class="co">##         &lt;viz:position x="100" y="51.0986544575574" z="0"/&gt;</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true"></a><span class="co">##         &lt;viz:size value="10"/&gt;</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true"></a><span class="co">##       &lt;/node&gt;</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true"></a><span class="co">##       &lt;node id="2" label="pedro"&gt;</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true"></a><span class="co">##         &lt;viz:color r="255" g="99" b="71" a="1"/&gt;</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true"></a><span class="co">##         &lt;viz:position x="-100" y="100" z="0"/&gt;</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true"></a><span class="co">##         &lt;viz:size value="10"/&gt;</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true"></a><span class="co">##       &lt;/node&gt;</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true"></a><span class="co">##       &lt;node id="3" label="matthew"&gt;</span></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true"></a><span class="co">##         &lt;viz:color r="255" g="99" b="71" a="1"/&gt;</span></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true"></a><span class="co">##         &lt;viz:position x="-14.2129423502891" y="83.9680923396099" z="0"/&gt;</span></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true"></a><span class="co">##         &lt;viz:size value="10"/&gt;</span></span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true"></a><span class="co">##       &lt;/node&gt;</span></span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true"></a><span class="co">##       &lt;node id="4" label="carlos"&gt;</span></span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true"></a><span class="co">##         &lt;viz:color r="255" g="99" b="71" a="1"/&gt;</span></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true"></a><span class="co">##         &lt;viz:position x="66.396171662381" y="-100" z="0"/&gt;</span></span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true"></a><span class="co">##         &lt;viz:size value="10"/&gt;</span></span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true"></a><span class="co">##       &lt;/node&gt;</span></span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true"></a><span class="co">##     &lt;/nodes&gt;</span></span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true"></a><span class="co">##     &lt;edges&gt;</span></span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true"></a><span class="co">##       &lt;edge id="0" source="1" target="4" weight="1"/&gt;</span></span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true"></a><span class="co">##       &lt;edge id="1" source="1" target="2" weight="1"/&gt;</span></span>
+<span id="cb8-34"><a href="#cb8-34" aria-hidden="true"></a><span class="co">##       &lt;edge id="2" source="1" target="3" weight="1"/&gt;</span></span>
+<span id="cb8-35"><a href="#cb8-35" aria-hidden="true"></a><span class="co">##       &lt;edge id="3" source="2" target="3" weight="1"/&gt;</span></span>
+<span id="cb8-36"><a href="#cb8-36" aria-hidden="true"></a><span class="co">##       &lt;edge id="4" source="3" target="4" weight="1"/&gt;</span></span>
+<span id="cb8-37"><a href="#cb8-37" aria-hidden="true"></a><span class="co">##       &lt;edge id="5" source="4" target="2" weight="1"/&gt;</span></span>
+<span id="cb8-38"><a href="#cb8-38" aria-hidden="true"></a><span class="co">##     &lt;/edges&gt;</span></span>
+<span id="cb8-39"><a href="#cb8-39" aria-hidden="true"></a><span class="co">##   &lt;/graph&gt;</span></span>
+<span id="cb8-40"><a href="#cb8-40" aria-hidden="true"></a><span class="co">## &lt;/gexf&gt;</span></span>
+<span id="cb8-41"><a href="#cb8-41" aria-hidden="true"></a><span class="co">## </span></span></code></pre></div>
 </div>
 <div id="example-2-dynamic-net" class="section level2">
 <h2 class="hasAnchor">
 <a href="#example-2-dynamic-net" class="anchor"></a>Example 2: Dynamic net</h2>
-<div class="sourceCode" id="cb9"><pre class="r"><span class="co"># Defining the dynamic structure, note that there are some nodes that have NA at the end.</span>
-<span class="no">time</span><span class="kw">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">10.0</span>,<span class="fl">13.0</span>,<span class="fl">2.0</span>,<span class="fl">2.0</span>,<span class="fl">12.0</span>,<span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="fl">NA</span>,<span class="fl">3</span>)), <span class="kw">nrow</span><span class="kw">=</span><span class="fl">4</span>, <span class="kw">ncol</span><span class="kw">=</span><span class="fl">2</span>)
-<span class="no">time</span></pre></div>
-<div class="sourceCode" id="cb10"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">##      [,1] [,2]</a>
-<a class="sourceLine" id="cb10-2" data-line-number="2">## [1,]   10   12</a>
-<a class="sourceLine" id="cb10-3" data-line-number="3">## [2,]   13   NA</a>
-<a class="sourceLine" id="cb10-4" data-line-number="4">## [3,]    2   NA</a>
-<a class="sourceLine" id="cb10-5" data-line-number="5">## [4,]    2   NA</a></code></pre></div>
-<div class="sourceCode" id="cb11"><pre class="r"><span class="co"># Getting things done</span>
-<span class="fu"><a href="reference/gexf-class.html">write.gexf</a></span>(<span class="no">people</span>, <span class="no">relations</span>, <span class="kw">nodeDynamic</span><span class="kw">=</span><span class="no">time</span>)</pre></div>
-<div class="sourceCode" id="cb12"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">## &lt;?xml version="1.0" encoding="UTF-8"?&gt;</a>
-<a class="sourceLine" id="cb12-2" data-line-number="2">## &lt;gexf xmlns="http://www.gexf.net/1.3" xmlns:viz="http://www.gexf.net/1.3/viz" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.3 http://www.gexf.net/1.3/gexf.xsd" version="1.3"&gt;</a>
-<a class="sourceLine" id="cb12-3" data-line-number="3">##   &lt;meta lastmodifieddate="2020-02-12"&gt;</a>
-<a class="sourceLine" id="cb12-4" data-line-number="4">##     &lt;creator&gt;NodosChile&lt;/creator&gt;</a>
-<a class="sourceLine" id="cb12-5" data-line-number="5">##     &lt;description&gt;A GEXF file written in R with "rgexf"&lt;/description&gt;</a>
-<a class="sourceLine" id="cb12-6" data-line-number="6">##     &lt;keywords&gt;GEXF, NodosChile, R, rgexf, Gephi&lt;/keywords&gt;</a>
-<a class="sourceLine" id="cb12-7" data-line-number="7">##   &lt;/meta&gt;</a>
-<a class="sourceLine" id="cb12-8" data-line-number="8">##   &lt;graph mode="dynamic" start="10" end="2" timeformat="double" defaultedgetype="undirected"&gt;</a>
-<a class="sourceLine" id="cb12-9" data-line-number="9">##     &lt;nodes&gt;</a>
-<a class="sourceLine" id="cb12-10" data-line-number="10">##       &lt;node id="1" label="juan" start="10" end="12"&gt;</a>
-<a class="sourceLine" id="cb12-11" data-line-number="11">##         &lt;viz:color r="255" g="99" b="71" a="1"/&gt;</a>
-<a class="sourceLine" id="cb12-12" data-line-number="12">##         &lt;viz:position x="-56.8765496496629" y="-100" z="0"/&gt;</a>
-<a class="sourceLine" id="cb12-13" data-line-number="13">##         &lt;viz:size value="10"/&gt;</a>
-<a class="sourceLine" id="cb12-14" data-line-number="14">##       &lt;/node&gt;</a>
-<a class="sourceLine" id="cb12-15" data-line-number="15">##       &lt;node id="2" label="pedro" start="13" end="2"&gt;</a>
-<a class="sourceLine" id="cb12-16" data-line-number="16">##         &lt;viz:color r="255" g="99" b="71" a="1"/&gt;</a>
-<a class="sourceLine" id="cb12-17" data-line-number="17">##         &lt;viz:position x="-100" y="66.0679533091687" z="0"/&gt;</a>
-<a class="sourceLine" id="cb12-18" data-line-number="18">##         &lt;viz:size value="10"/&gt;</a>
-<a class="sourceLine" id="cb12-19" data-line-number="19">##       &lt;/node&gt;</a>
-<a class="sourceLine" id="cb12-20" data-line-number="20">##       &lt;node id="3" label="matthew" start="2" end="2"&gt;</a>
-<a class="sourceLine" id="cb12-21" data-line-number="21">##         &lt;viz:color r="255" g="99" b="71" a="1"/&gt;</a>
-<a class="sourceLine" id="cb12-22" data-line-number="22">##         &lt;viz:position x="100" y="-90.1720346528232" z="0"/&gt;</a>
-<a class="sourceLine" id="cb12-23" data-line-number="23">##         &lt;viz:size value="10"/&gt;</a>
-<a class="sourceLine" id="cb12-24" data-line-number="24">##       &lt;/node&gt;</a>
-<a class="sourceLine" id="cb12-25" data-line-number="25">##       &lt;node id="4" label="carlos" start="2" end="2"&gt;</a>
-<a class="sourceLine" id="cb12-26" data-line-number="26">##         &lt;viz:color r="255" g="99" b="71" a="1"/&gt;</a>
-<a class="sourceLine" id="cb12-27" data-line-number="27">##         &lt;viz:position x="5.12273513809573" y="100" z="0"/&gt;</a>
-<a class="sourceLine" id="cb12-28" data-line-number="28">##         &lt;viz:size value="10"/&gt;</a>
-<a class="sourceLine" id="cb12-29" data-line-number="29">##       &lt;/node&gt;</a>
-<a class="sourceLine" id="cb12-30" data-line-number="30">##     &lt;/nodes&gt;</a>
-<a class="sourceLine" id="cb12-31" data-line-number="31">##     &lt;edges&gt;</a>
-<a class="sourceLine" id="cb12-32" data-line-number="32">##       &lt;edge id="0" source="1" target="4" weight="1"/&gt;</a>
-<a class="sourceLine" id="cb12-33" data-line-number="33">##       &lt;edge id="1" source="1" target="2" weight="1"/&gt;</a>
-<a class="sourceLine" id="cb12-34" data-line-number="34">##       &lt;edge id="2" source="1" target="3" weight="1"/&gt;</a>
-<a class="sourceLine" id="cb12-35" data-line-number="35">##       &lt;edge id="3" source="2" target="3" weight="1"/&gt;</a>
-<a class="sourceLine" id="cb12-36" data-line-number="36">##       &lt;edge id="4" source="3" target="4" weight="1"/&gt;</a>
-<a class="sourceLine" id="cb12-37" data-line-number="37">##       &lt;edge id="5" source="4" target="2" weight="1"/&gt;</a>
-<a class="sourceLine" id="cb12-38" data-line-number="38">##     &lt;/edges&gt;</a>
-<a class="sourceLine" id="cb12-39" data-line-number="39">##   &lt;/graph&gt;</a>
-<a class="sourceLine" id="cb12-40" data-line-number="40">## &lt;/gexf&gt;</a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Defining the dynamic structure, note that there are some nodes that have NA at the end.</span>
+<span class="va">time</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">10.0</span>,<span class="fl">13.0</span>,<span class="fl">2.0</span>,<span class="fl">2.0</span>,<span class="fl">12.0</span>,<span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="cn">NA</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span>, nrow<span class="op">=</span><span class="fl">4</span>, ncol<span class="op">=</span><span class="fl">2</span><span class="op">)</span>
+<span class="va">time</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true"></a><span class="co">##      [,1] [,2]</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true"></a><span class="co">## [1,]   10   12</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true"></a><span class="co">## [2,]   13   NA</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true"></a><span class="co">## [3,]    2   NA</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true"></a><span class="co">## [4,]    2   NA</span></span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Getting things done</span>
+<span class="fu"><a href="reference/gexf-class.html">write.gexf</a></span><span class="op">(</span><span class="va">people</span>, <span class="va">relations</span>, nodeDynamic<span class="op">=</span><span class="va">time</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true"></a><span class="co">## &lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true"></a><span class="co">## &lt;gexf xmlns="http://www.gexf.net/1.3" xmlns:viz="http://www.gexf.net/1.3/viz" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.3 http://www.gexf.net/1.3/gexf.xsd" version="1.3"&gt;</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true"></a><span class="co">##   &lt;meta lastmodifieddate="2021-08-10"&gt;</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true"></a><span class="co">##     &lt;creator&gt;NodosChile&lt;/creator&gt;</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true"></a><span class="co">##     &lt;description&gt;A GEXF file written in R with "rgexf"&lt;/description&gt;</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true"></a><span class="co">##     &lt;keywords&gt;GEXF, NodosChile, R, rgexf, Gephi&lt;/keywords&gt;</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true"></a><span class="co">##   &lt;/meta&gt;</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true"></a><span class="co">##   &lt;graph mode="dynamic" start="2" end="13" timeformat="double" defaultedgetype="undirected"&gt;</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true"></a><span class="co">##     &lt;nodes&gt;</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true"></a><span class="co">##       &lt;node id="1" label="juan" start="10" end="12"&gt;</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true"></a><span class="co">##         &lt;viz:color r="255" g="99" b="71" a="1"/&gt;</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true"></a><span class="co">##         &lt;viz:position x="100" y="-66.7395710811224" z="0"/&gt;</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true"></a><span class="co">##         &lt;viz:size value="10"/&gt;</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true"></a><span class="co">##       &lt;/node&gt;</span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true"></a><span class="co">##       &lt;node id="2" label="pedro" start="13" end="13"&gt;</span></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true"></a><span class="co">##         &lt;viz:color r="255" g="99" b="71" a="1"/&gt;</span></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true"></a><span class="co">##         &lt;viz:position x="13.4431787806887" y="61.4550911958847" z="0"/&gt;</span></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true"></a><span class="co">##         &lt;viz:size value="10"/&gt;</span></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true"></a><span class="co">##       &lt;/node&gt;</span></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true"></a><span class="co">##       &lt;node id="3" label="matthew" start="2" end="13"&gt;</span></span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true"></a><span class="co">##         &lt;viz:color r="255" g="99" b="71" a="1"/&gt;</span></span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true"></a><span class="co">##         &lt;viz:position x="-100" y="100" z="0"/&gt;</span></span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true"></a><span class="co">##         &lt;viz:size value="10"/&gt;</span></span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true"></a><span class="co">##       &lt;/node&gt;</span></span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true"></a><span class="co">##       &lt;node id="4" label="carlos" start="2" end="13"&gt;</span></span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true"></a><span class="co">##         &lt;viz:color r="255" g="99" b="71" a="1"/&gt;</span></span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true"></a><span class="co">##         &lt;viz:position x="-79.4152158871745" y="-100" z="0"/&gt;</span></span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true"></a><span class="co">##         &lt;viz:size value="10"/&gt;</span></span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true"></a><span class="co">##       &lt;/node&gt;</span></span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true"></a><span class="co">##     &lt;/nodes&gt;</span></span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true"></a><span class="co">##     &lt;edges&gt;</span></span>
+<span id="cb12-32"><a href="#cb12-32" aria-hidden="true"></a><span class="co">##       &lt;edge id="0" source="1" target="4" weight="1"/&gt;</span></span>
+<span id="cb12-33"><a href="#cb12-33" aria-hidden="true"></a><span class="co">##       &lt;edge id="1" source="1" target="2" weight="1"/&gt;</span></span>
+<span id="cb12-34"><a href="#cb12-34" aria-hidden="true"></a><span class="co">##       &lt;edge id="2" source="1" target="3" weight="1"/&gt;</span></span>
+<span id="cb12-35"><a href="#cb12-35" aria-hidden="true"></a><span class="co">##       &lt;edge id="3" source="2" target="3" weight="1"/&gt;</span></span>
+<span id="cb12-36"><a href="#cb12-36" aria-hidden="true"></a><span class="co">##       &lt;edge id="4" source="3" target="4" weight="1"/&gt;</span></span>
+<span id="cb12-37"><a href="#cb12-37" aria-hidden="true"></a><span class="co">##       &lt;edge id="5" source="4" target="2" weight="1"/&gt;</span></span>
+<span id="cb12-38"><a href="#cb12-38" aria-hidden="true"></a><span class="co">##     &lt;/edges&gt;</span></span>
+<span id="cb12-39"><a href="#cb12-39" aria-hidden="true"></a><span class="co">##   &lt;/graph&gt;</span></span>
+<span id="cb12-40"><a href="#cb12-40" aria-hidden="true"></a><span class="co">## &lt;/gexf&gt;</span></span>
+<span id="cb12-41"><a href="#cb12-41" aria-hidden="true"></a><span class="co">## </span></span></code></pre></div>
 </div>
 <div id="example-3-more-complex-dynamic-graph-with-attributes-both-for-nodes-and-edges" class="section level2">
 <h2 class="hasAnchor">
 <a href="#example-3-more-complex-dynamic-graph-with-attributes-both-for-nodes-and-edges" class="anchor"></a>Example 3: More complex… Dynamic graph with attributes both for nodes and edges</h2>
 <p>First we define dynamics</p>
-<div class="sourceCode" id="cb13"><pre class="r"><span class="no">time.nodes</span><span class="kw">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">10.0</span>,<span class="fl">13.0</span>,<span class="fl">2.0</span>,<span class="fl">2.0</span>,<span class="fl">12.0</span>,<span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="fl">NA</span>,<span class="fl">3</span>)), <span class="kw">nrow</span><span class="kw">=</span><span class="fl">4</span>, <span class="kw">ncol</span><span class="kw">=</span><span class="fl">2</span>)
-<span class="no">time.nodes</span></pre></div>
-<div class="sourceCode" id="cb14"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1">##      [,1] [,2]</a>
-<a class="sourceLine" id="cb14-2" data-line-number="2">## [1,]   10   12</a>
-<a class="sourceLine" id="cb14-3" data-line-number="3">## [2,]   13   NA</a>
-<a class="sourceLine" id="cb14-4" data-line-number="4">## [3,]    2   NA</a>
-<a class="sourceLine" id="cb14-5" data-line-number="5">## [4,]    2   NA</a></code></pre></div>
-<div class="sourceCode" id="cb15"><pre class="r"><span class="no">time.edges</span><span class="kw">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">10.0</span>,<span class="fl">13.0</span>,<span class="fl">2.0</span>,<span class="fl">2.0</span>,<span class="fl">12.0</span>,<span class="fl">1</span>,<span class="fl">5</span>,<span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="fl">NA</span>,<span class="fl">5</span>)), <span class="kw">nrow</span><span class="kw">=</span><span class="fl">6</span>, <span class="kw">ncol</span><span class="kw">=</span><span class="fl">2</span>)
-<span class="no">time.edges</span></pre></div>
-<div class="sourceCode" id="cb16"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1">##      [,1] [,2]</a>
-<a class="sourceLine" id="cb16-2" data-line-number="2">## [1,]   10    5</a>
-<a class="sourceLine" id="cb16-3" data-line-number="3">## [2,]   13   NA</a>
-<a class="sourceLine" id="cb16-4" data-line-number="4">## [3,]    2   NA</a>
-<a class="sourceLine" id="cb16-5" data-line-number="5">## [4,]    2   NA</a>
-<a class="sourceLine" id="cb16-6" data-line-number="6">## [5,]   12   NA</a>
-<a class="sourceLine" id="cb16-7" data-line-number="7">## [6,]    1   NA</a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">time.nodes</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">10.0</span>,<span class="fl">13.0</span>,<span class="fl">2.0</span>,<span class="fl">2.0</span>,<span class="fl">12.0</span>,<span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="cn">NA</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span>, nrow<span class="op">=</span><span class="fl">4</span>, ncol<span class="op">=</span><span class="fl">2</span><span class="op">)</span>
+<span class="va">time.nodes</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true"></a><span class="co">##      [,1] [,2]</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true"></a><span class="co">## [1,]   10   12</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true"></a><span class="co">## [2,]   13   NA</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true"></a><span class="co">## [3,]    2   NA</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true"></a><span class="co">## [4,]    2   NA</span></span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">time.edges</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">10.0</span>,<span class="fl">13.0</span>,<span class="fl">2.0</span>,<span class="fl">2.0</span>,<span class="fl">12.0</span>,<span class="fl">1</span>,<span class="fl">5</span>,<span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="cn">NA</span>,<span class="fl">5</span><span class="op">)</span><span class="op">)</span>, nrow<span class="op">=</span><span class="fl">6</span>, ncol<span class="op">=</span><span class="fl">2</span><span class="op">)</span>
+<span class="va">time.edges</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true"></a><span class="co">##      [,1] [,2]</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true"></a><span class="co">## [1,]   10    5</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true"></a><span class="co">## [2,]   13   NA</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true"></a><span class="co">## [3,]    2   NA</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true"></a><span class="co">## [4,]    2   NA</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true"></a><span class="co">## [5,]   12   NA</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true"></a><span class="co">## [6,]    1   NA</span></span></code></pre></div>
 <p>Now we define the attribute values</p>
-<div class="sourceCode" id="cb17"><pre class="r"><span class="co"># Defining a data frame of attributes for nodes and edges</span>
-<span class="no">node.att</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="kw">letrafavorita</span><span class="kw">=</span><span class="no">letters</span>[<span class="fl">1</span>:<span class="fl">4</span>], <span class="kw">numbers</span><span class="kw">=</span><span class="fl">1</span>:<span class="fl">4</span>, <span class="kw">stringsAsFactors</span><span class="kw">=</span><span class="no">F</span>)
-<span class="no">node.att</span></pre></div>
-<div class="sourceCode" id="cb18"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1">##   letrafavorita numbers</a>
-<a class="sourceLine" id="cb18-2" data-line-number="2">## 1             a       1</a>
-<a class="sourceLine" id="cb18-3" data-line-number="3">## 2             b       2</a>
-<a class="sourceLine" id="cb18-4" data-line-number="4">## 3             c       3</a>
-<a class="sourceLine" id="cb18-5" data-line-number="5">## 4             d       4</a></code></pre></div>
-<div class="sourceCode" id="cb19"><pre class="r"><span class="no">edge.att</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="kw">letrafavorita</span><span class="kw">=</span><span class="no">letters</span>[<span class="fl">1</span>:<span class="fl">6</span>], <span class="kw">numbers</span><span class="kw">=</span><span class="fl">1</span>:<span class="fl">6</span>, <span class="kw">stringsAsFactors</span><span class="kw">=</span><span class="no">F</span>)
-<span class="no">edge.att</span></pre></div>
-<div class="sourceCode" id="cb20"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1">##   letrafavorita numbers</a>
-<a class="sourceLine" id="cb20-2" data-line-number="2">## 1             a       1</a>
-<a class="sourceLine" id="cb20-3" data-line-number="3">## 2             b       2</a>
-<a class="sourceLine" id="cb20-4" data-line-number="4">## 3             c       3</a>
-<a class="sourceLine" id="cb20-5" data-line-number="5">## 4             d       4</a>
-<a class="sourceLine" id="cb20-6" data-line-number="6">## 5             e       5</a>
-<a class="sourceLine" id="cb20-7" data-line-number="7">## 6             f       6</a></code></pre></div>
-<div class="sourceCode" id="cb21"><pre class="r"><span class="co"># Getting the things done</span>
-<span class="fu"><a href="reference/gexf-class.html">write.gexf</a></span>(<span class="kw">nodes</span><span class="kw">=</span><span class="no">people</span>, <span class="kw">edges</span><span class="kw">=</span><span class="no">relations</span>, <span class="kw">edgeDynamic</span><span class="kw">=</span><span class="no">time.edges</span>,
-           <span class="kw">edgesAtt</span><span class="kw">=</span><span class="no">edge.att</span>, <span class="kw">nodeDynamic</span><span class="kw">=</span><span class="no">time.nodes</span>, <span class="kw">nodesAtt</span><span class="kw">=</span><span class="no">node.att</span>)</pre></div>
-<div class="sourceCode" id="cb22"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1">## &lt;?xml version="1.0" encoding="UTF-8"?&gt;</a>
-<a class="sourceLine" id="cb22-2" data-line-number="2">## &lt;gexf xmlns="http://www.gexf.net/1.3" xmlns:viz="http://www.gexf.net/1.3/viz" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.3 http://www.gexf.net/1.3/gexf.xsd" version="1.3"&gt;</a>
-<a class="sourceLine" id="cb22-3" data-line-number="3">##   &lt;meta lastmodifieddate="2020-02-12"&gt;</a>
-<a class="sourceLine" id="cb22-4" data-line-number="4">##     &lt;creator&gt;NodosChile&lt;/creator&gt;</a>
-<a class="sourceLine" id="cb22-5" data-line-number="5">##     &lt;description&gt;A GEXF file written in R with "rgexf"&lt;/description&gt;</a>
-<a class="sourceLine" id="cb22-6" data-line-number="6">##     &lt;keywords&gt;GEXF, NodosChile, R, rgexf, Gephi&lt;/keywords&gt;</a>
-<a class="sourceLine" id="cb22-7" data-line-number="7">##   &lt;/meta&gt;</a>
-<a class="sourceLine" id="cb22-8" data-line-number="8">##   &lt;graph mode="dynamic" start="1" end="5" timeformat="double" defaultedgetype="undirected"&gt;</a>
-<a class="sourceLine" id="cb22-9" data-line-number="9">##     &lt;attributes class="node" mode="static"&gt;</a>
-<a class="sourceLine" id="cb22-10" data-line-number="10">##       &lt;attribute id="att1" title="letrafavorita" type="string"/&gt;</a>
-<a class="sourceLine" id="cb22-11" data-line-number="11">##       &lt;attribute id="att2" title="numbers" type="integer"/&gt;</a>
-<a class="sourceLine" id="cb22-12" data-line-number="12">##     &lt;/attributes&gt;</a>
-<a class="sourceLine" id="cb22-13" data-line-number="13">##     &lt;attributes class="edge" mode="static"&gt;</a>
-<a class="sourceLine" id="cb22-14" data-line-number="14">##       &lt;attribute id="att1" title="letrafavorita" type="string"/&gt;</a>
-<a class="sourceLine" id="cb22-15" data-line-number="15">##       &lt;attribute id="att2" title="numbers" type="integer"/&gt;</a>
-<a class="sourceLine" id="cb22-16" data-line-number="16">##     &lt;/attributes&gt;</a>
-<a class="sourceLine" id="cb22-17" data-line-number="17">##     &lt;nodes&gt;</a>
-<a class="sourceLine" id="cb22-18" data-line-number="18">##       &lt;node id="1" label="juan" start="10" end="12"&gt;</a>
-<a class="sourceLine" id="cb22-19" data-line-number="19">##         &lt;attvalues&gt;</a>
-<a class="sourceLine" id="cb22-20" data-line-number="20">##           &lt;attvalue for="att1" value="a"/&gt;</a>
-<a class="sourceLine" id="cb22-21" data-line-number="21">##           &lt;attvalue for="att2" value="1"/&gt;</a>
-<a class="sourceLine" id="cb22-22" data-line-number="22">##         &lt;/attvalues&gt;</a>
-<a class="sourceLine" id="cb22-23" data-line-number="23">##         &lt;viz:color r="255" g="99" b="71" a="1"/&gt;</a>
-<a class="sourceLine" id="cb22-24" data-line-number="24">##         &lt;viz:position x="100" y="-100" z="0"/&gt;</a>
-<a class="sourceLine" id="cb22-25" data-line-number="25">##         &lt;viz:size value="10"/&gt;</a>
-<a class="sourceLine" id="cb22-26" data-line-number="26">##       &lt;/node&gt;</a>
-<a class="sourceLine" id="cb22-27" data-line-number="27">##       &lt;node id="2" label="pedro" start="13" end="5"&gt;</a>
-<a class="sourceLine" id="cb22-28" data-line-number="28">##         &lt;attvalues&gt;</a>
-<a class="sourceLine" id="cb22-29" data-line-number="29">##           &lt;attvalue for="att1" value="b"/&gt;</a>
-<a class="sourceLine" id="cb22-30" data-line-number="30">##           &lt;attvalue for="att2" value="2"/&gt;</a>
-<a class="sourceLine" id="cb22-31" data-line-number="31">##         &lt;/attvalues&gt;</a>
-<a class="sourceLine" id="cb22-32" data-line-number="32">##         &lt;viz:color r="255" g="99" b="71" a="1"/&gt;</a>
-<a class="sourceLine" id="cb22-33" data-line-number="33">##         &lt;viz:position x="-4.51394960773801" y="100" z="0"/&gt;</a>
-<a class="sourceLine" id="cb22-34" data-line-number="34">##         &lt;viz:size value="10"/&gt;</a>
-<a class="sourceLine" id="cb22-35" data-line-number="35">##       &lt;/node&gt;</a>
-<a class="sourceLine" id="cb22-36" data-line-number="36">##       &lt;node id="3" label="matthew" start="2" end="5"&gt;</a>
-<a class="sourceLine" id="cb22-37" data-line-number="37">##         &lt;attvalues&gt;</a>
-<a class="sourceLine" id="cb22-38" data-line-number="38">##           &lt;attvalue for="att1" value="c"/&gt;</a>
-<a class="sourceLine" id="cb22-39" data-line-number="39">##           &lt;attvalue for="att2" value="3"/&gt;</a>
-<a class="sourceLine" id="cb22-40" data-line-number="40">##         &lt;/attvalues&gt;</a>
-<a class="sourceLine" id="cb22-41" data-line-number="41">##         &lt;viz:color r="255" g="99" b="71" a="1"/&gt;</a>
-<a class="sourceLine" id="cb22-42" data-line-number="42">##         &lt;viz:position x="-16.642426934078" y="44.7219195580091" z="0"/&gt;</a>
-<a class="sourceLine" id="cb22-43" data-line-number="43">##         &lt;viz:size value="10"/&gt;</a>
-<a class="sourceLine" id="cb22-44" data-line-number="44">##       &lt;/node&gt;</a>
-<a class="sourceLine" id="cb22-45" data-line-number="45">##       &lt;node id="4" label="carlos" start="2" end="5"&gt;</a>
-<a class="sourceLine" id="cb22-46" data-line-number="46">##         &lt;attvalues&gt;</a>
-<a class="sourceLine" id="cb22-47" data-line-number="47">##           &lt;attvalue for="att1" value="d"/&gt;</a>
-<a class="sourceLine" id="cb22-48" data-line-number="48">##           &lt;attvalue for="att2" value="4"/&gt;</a>
-<a class="sourceLine" id="cb22-49" data-line-number="49">##         &lt;/attvalues&gt;</a>
-<a class="sourceLine" id="cb22-50" data-line-number="50">##         &lt;viz:color r="255" g="99" b="71" a="1"/&gt;</a>
-<a class="sourceLine" id="cb22-51" data-line-number="51">##         &lt;viz:position x="-100" y="34.6122794421364" z="0"/&gt;</a>
-<a class="sourceLine" id="cb22-52" data-line-number="52">##         &lt;viz:size value="10"/&gt;</a>
-<a class="sourceLine" id="cb22-53" data-line-number="53">##       &lt;/node&gt;</a>
-<a class="sourceLine" id="cb22-54" data-line-number="54">##     &lt;/nodes&gt;</a>
-<a class="sourceLine" id="cb22-55" data-line-number="55">##     &lt;edges&gt;</a>
-<a class="sourceLine" id="cb22-56" data-line-number="56">##       &lt;edge id="0" source="1" target="4" start="10" end="5" weight="1"&gt;</a>
-<a class="sourceLine" id="cb22-57" data-line-number="57">##         &lt;attvalues&gt;</a>
-<a class="sourceLine" id="cb22-58" data-line-number="58">##           &lt;attvalue for="att1" value="a"/&gt;</a>
-<a class="sourceLine" id="cb22-59" data-line-number="59">##           &lt;attvalue for="att2" value="1"/&gt;</a>
-<a class="sourceLine" id="cb22-60" data-line-number="60">##         &lt;/attvalues&gt;</a>
-<a class="sourceLine" id="cb22-61" data-line-number="61">##       &lt;/edge&gt;</a>
-<a class="sourceLine" id="cb22-62" data-line-number="62">##       &lt;edge id="1" source="1" target="2" start="13" end="5" weight="1"&gt;</a>
-<a class="sourceLine" id="cb22-63" data-line-number="63">##         &lt;attvalues&gt;</a>
-<a class="sourceLine" id="cb22-64" data-line-number="64">##           &lt;attvalue for="att1" value="b"/&gt;</a>
-<a class="sourceLine" id="cb22-65" data-line-number="65">##           &lt;attvalue for="att2" value="2"/&gt;</a>
-<a class="sourceLine" id="cb22-66" data-line-number="66">##         &lt;/attvalues&gt;</a>
-<a class="sourceLine" id="cb22-67" data-line-number="67">##       &lt;/edge&gt;</a>
-<a class="sourceLine" id="cb22-68" data-line-number="68">##       &lt;edge id="2" source="1" target="3" start="2" end="5" weight="1"&gt;</a>
-<a class="sourceLine" id="cb22-69" data-line-number="69">##         &lt;attvalues&gt;</a>
-<a class="sourceLine" id="cb22-70" data-line-number="70">##           &lt;attvalue for="att1" value="c"/&gt;</a>
-<a class="sourceLine" id="cb22-71" data-line-number="71">##           &lt;attvalue for="att2" value="3"/&gt;</a>
-<a class="sourceLine" id="cb22-72" data-line-number="72">##         &lt;/attvalues&gt;</a>
-<a class="sourceLine" id="cb22-73" data-line-number="73">##       &lt;/edge&gt;</a>
-<a class="sourceLine" id="cb22-74" data-line-number="74">##       &lt;edge id="3" source="2" target="3" start="2" end="5" weight="1"&gt;</a>
-<a class="sourceLine" id="cb22-75" data-line-number="75">##         &lt;attvalues&gt;</a>
-<a class="sourceLine" id="cb22-76" data-line-number="76">##           &lt;attvalue for="att1" value="d"/&gt;</a>
-<a class="sourceLine" id="cb22-77" data-line-number="77">##           &lt;attvalue for="att2" value="4"/&gt;</a>
-<a class="sourceLine" id="cb22-78" data-line-number="78">##         &lt;/attvalues&gt;</a>
-<a class="sourceLine" id="cb22-79" data-line-number="79">##       &lt;/edge&gt;</a>
-<a class="sourceLine" id="cb22-80" data-line-number="80">##       &lt;edge id="4" source="3" target="4" start="12" end="5" weight="1"&gt;</a>
-<a class="sourceLine" id="cb22-81" data-line-number="81">##         &lt;attvalues&gt;</a>
-<a class="sourceLine" id="cb22-82" data-line-number="82">##           &lt;attvalue for="att1" value="e"/&gt;</a>
-<a class="sourceLine" id="cb22-83" data-line-number="83">##           &lt;attvalue for="att2" value="5"/&gt;</a>
-<a class="sourceLine" id="cb22-84" data-line-number="84">##         &lt;/attvalues&gt;</a>
-<a class="sourceLine" id="cb22-85" data-line-number="85">##       &lt;/edge&gt;</a>
-<a class="sourceLine" id="cb22-86" data-line-number="86">##       &lt;edge id="5" source="4" target="2" start="1" end="5" weight="1"&gt;</a>
-<a class="sourceLine" id="cb22-87" data-line-number="87">##         &lt;attvalues&gt;</a>
-<a class="sourceLine" id="cb22-88" data-line-number="88">##           &lt;attvalue for="att1" value="f"/&gt;</a>
-<a class="sourceLine" id="cb22-89" data-line-number="89">##           &lt;attvalue for="att2" value="6"/&gt;</a>
-<a class="sourceLine" id="cb22-90" data-line-number="90">##         &lt;/attvalues&gt;</a>
-<a class="sourceLine" id="cb22-91" data-line-number="91">##       &lt;/edge&gt;</a>
-<a class="sourceLine" id="cb22-92" data-line-number="92">##     &lt;/edges&gt;</a>
-<a class="sourceLine" id="cb22-93" data-line-number="93">##   &lt;/graph&gt;</a>
-<a class="sourceLine" id="cb22-94" data-line-number="94">## &lt;/gexf&gt;</a></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Defining a data frame of attributes for nodes and edges</span>
+<span class="va">node.att</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>letrafavorita<span class="op">=</span><span class="va">letters</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span>, numbers<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span>, stringsAsFactors<span class="op">=</span><span class="cn">F</span><span class="op">)</span>
+<span class="va">node.att</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true"></a><span class="co">##   letrafavorita numbers</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true"></a><span class="co">## 1             a       1</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true"></a><span class="co">## 2             b       2</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true"></a><span class="co">## 3             c       3</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true"></a><span class="co">## 4             d       4</span></span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">edge.att</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>letrafavorita<span class="op">=</span><span class="va">letters</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">6</span><span class="op">]</span>, numbers<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">6</span>, stringsAsFactors<span class="op">=</span><span class="cn">F</span><span class="op">)</span>
+<span class="va">edge.att</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true"></a><span class="co">##   letrafavorita numbers</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true"></a><span class="co">## 1             a       1</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true"></a><span class="co">## 2             b       2</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true"></a><span class="co">## 3             c       3</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true"></a><span class="co">## 4             d       4</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true"></a><span class="co">## 5             e       5</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true"></a><span class="co">## 6             f       6</span></span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Getting the things done</span>
+<span class="fu"><a href="reference/gexf-class.html">write.gexf</a></span><span class="op">(</span>nodes<span class="op">=</span><span class="va">people</span>, edges<span class="op">=</span><span class="va">relations</span>, edgeDynamic<span class="op">=</span><span class="va">time.edges</span>,
+           edgesAtt<span class="op">=</span><span class="va">edge.att</span>, nodeDynamic<span class="op">=</span><span class="va">time.nodes</span>, nodesAtt<span class="op">=</span><span class="va">node.att</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true"></a><span class="co">## &lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true"></a><span class="co">## &lt;gexf xmlns="http://www.gexf.net/1.3" xmlns:viz="http://www.gexf.net/1.3/viz" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.3 http://www.gexf.net/1.3/gexf.xsd" version="1.3"&gt;</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true"></a><span class="co">##   &lt;meta lastmodifieddate="2021-08-10"&gt;</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true"></a><span class="co">##     &lt;creator&gt;NodosChile&lt;/creator&gt;</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true"></a><span class="co">##     &lt;description&gt;A GEXF file written in R with "rgexf"&lt;/description&gt;</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true"></a><span class="co">##     &lt;keywords&gt;GEXF, NodosChile, R, rgexf, Gephi&lt;/keywords&gt;</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true"></a><span class="co">##   &lt;/meta&gt;</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true"></a><span class="co">##   &lt;graph mode="dynamic" start="1" end="13" timeformat="double" defaultedgetype="undirected"&gt;</span></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true"></a><span class="co">##     &lt;attributes class="node" mode="static"&gt;</span></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true"></a><span class="co">##       &lt;attribute id="att1" title="letrafavorita" type="string"/&gt;</span></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true"></a><span class="co">##       &lt;attribute id="att2" title="numbers" type="integer"/&gt;</span></span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true"></a><span class="co">##     &lt;/attributes&gt;</span></span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true"></a><span class="co">##     &lt;attributes class="edge" mode="static"&gt;</span></span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true"></a><span class="co">##       &lt;attribute id="att1" title="letrafavorita" type="string"/&gt;</span></span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true"></a><span class="co">##       &lt;attribute id="att2" title="numbers" type="integer"/&gt;</span></span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true"></a><span class="co">##     &lt;/attributes&gt;</span></span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true"></a><span class="co">##     &lt;nodes&gt;</span></span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true"></a><span class="co">##       &lt;node id="1" label="juan" start="10" end="12"&gt;</span></span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true"></a><span class="co">##         &lt;attvalues&gt;</span></span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true"></a><span class="co">##           &lt;attvalue for="att1" value="a"/&gt;</span></span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true"></a><span class="co">##           &lt;attvalue for="att2" value="1"/&gt;</span></span>
+<span id="cb22-22"><a href="#cb22-22" aria-hidden="true"></a><span class="co">##         &lt;/attvalues&gt;</span></span>
+<span id="cb22-23"><a href="#cb22-23" aria-hidden="true"></a><span class="co">##         &lt;viz:color r="255" g="99" b="71" a="1"/&gt;</span></span>
+<span id="cb22-24"><a href="#cb22-24" aria-hidden="true"></a><span class="co">##         &lt;viz:position x="-100" y="100" z="0"/&gt;</span></span>
+<span id="cb22-25"><a href="#cb22-25" aria-hidden="true"></a><span class="co">##         &lt;viz:size value="10"/&gt;</span></span>
+<span id="cb22-26"><a href="#cb22-26" aria-hidden="true"></a><span class="co">##       &lt;/node&gt;</span></span>
+<span id="cb22-27"><a href="#cb22-27" aria-hidden="true"></a><span class="co">##       &lt;node id="2" label="pedro" start="13" end="13"&gt;</span></span>
+<span id="cb22-28"><a href="#cb22-28" aria-hidden="true"></a><span class="co">##         &lt;attvalues&gt;</span></span>
+<span id="cb22-29"><a href="#cb22-29" aria-hidden="true"></a><span class="co">##           &lt;attvalue for="att1" value="b"/&gt;</span></span>
+<span id="cb22-30"><a href="#cb22-30" aria-hidden="true"></a><span class="co">##           &lt;attvalue for="att2" value="2"/&gt;</span></span>
+<span id="cb22-31"><a href="#cb22-31" aria-hidden="true"></a><span class="co">##         &lt;/attvalues&gt;</span></span>
+<span id="cb22-32"><a href="#cb22-32" aria-hidden="true"></a><span class="co">##         &lt;viz:color r="255" g="99" b="71" a="1"/&gt;</span></span>
+<span id="cb22-33"><a href="#cb22-33" aria-hidden="true"></a><span class="co">##         &lt;viz:position x="94.9185288504935" y="-48.6249157132907" z="0"/&gt;</span></span>
+<span id="cb22-34"><a href="#cb22-34" aria-hidden="true"></a><span class="co">##         &lt;viz:size value="10"/&gt;</span></span>
+<span id="cb22-35"><a href="#cb22-35" aria-hidden="true"></a><span class="co">##       &lt;/node&gt;</span></span>
+<span id="cb22-36"><a href="#cb22-36" aria-hidden="true"></a><span class="co">##       &lt;node id="3" label="matthew" start="2" end="13"&gt;</span></span>
+<span id="cb22-37"><a href="#cb22-37" aria-hidden="true"></a><span class="co">##         &lt;attvalues&gt;</span></span>
+<span id="cb22-38"><a href="#cb22-38" aria-hidden="true"></a><span class="co">##           &lt;attvalue for="att1" value="c"/&gt;</span></span>
+<span id="cb22-39"><a href="#cb22-39" aria-hidden="true"></a><span class="co">##           &lt;attvalue for="att2" value="3"/&gt;</span></span>
+<span id="cb22-40"><a href="#cb22-40" aria-hidden="true"></a><span class="co">##         &lt;/attvalues&gt;</span></span>
+<span id="cb22-41"><a href="#cb22-41" aria-hidden="true"></a><span class="co">##         &lt;viz:color r="255" g="99" b="71" a="1"/&gt;</span></span>
+<span id="cb22-42"><a href="#cb22-42" aria-hidden="true"></a><span class="co">##         &lt;viz:position x="32.196939799762" y="-100" z="0"/&gt;</span></span>
+<span id="cb22-43"><a href="#cb22-43" aria-hidden="true"></a><span class="co">##         &lt;viz:size value="10"/&gt;</span></span>
+<span id="cb22-44"><a href="#cb22-44" aria-hidden="true"></a><span class="co">##       &lt;/node&gt;</span></span>
+<span id="cb22-45"><a href="#cb22-45" aria-hidden="true"></a><span class="co">##       &lt;node id="4" label="carlos" start="2" end="13"&gt;</span></span>
+<span id="cb22-46"><a href="#cb22-46" aria-hidden="true"></a><span class="co">##         &lt;attvalues&gt;</span></span>
+<span id="cb22-47"><a href="#cb22-47" aria-hidden="true"></a><span class="co">##           &lt;attvalue for="att1" value="d"/&gt;</span></span>
+<span id="cb22-48"><a href="#cb22-48" aria-hidden="true"></a><span class="co">##           &lt;attvalue for="att2" value="4"/&gt;</span></span>
+<span id="cb22-49"><a href="#cb22-49" aria-hidden="true"></a><span class="co">##         &lt;/attvalues&gt;</span></span>
+<span id="cb22-50"><a href="#cb22-50" aria-hidden="true"></a><span class="co">##         &lt;viz:color r="255" g="99" b="71" a="1"/&gt;</span></span>
+<span id="cb22-51"><a href="#cb22-51" aria-hidden="true"></a><span class="co">##         &lt;viz:position x="100" y="-51.6585495191186" z="0"/&gt;</span></span>
+<span id="cb22-52"><a href="#cb22-52" aria-hidden="true"></a><span class="co">##         &lt;viz:size value="10"/&gt;</span></span>
+<span id="cb22-53"><a href="#cb22-53" aria-hidden="true"></a><span class="co">##       &lt;/node&gt;</span></span>
+<span id="cb22-54"><a href="#cb22-54" aria-hidden="true"></a><span class="co">##     &lt;/nodes&gt;</span></span>
+<span id="cb22-55"><a href="#cb22-55" aria-hidden="true"></a><span class="co">##     &lt;edges&gt;</span></span>
+<span id="cb22-56"><a href="#cb22-56" aria-hidden="true"></a><span class="co">##       &lt;edge id="0" source="1" target="4" start="10" end="5" weight="1"&gt;</span></span>
+<span id="cb22-57"><a href="#cb22-57" aria-hidden="true"></a><span class="co">##         &lt;attvalues&gt;</span></span>
+<span id="cb22-58"><a href="#cb22-58" aria-hidden="true"></a><span class="co">##           &lt;attvalue for="att1" value="a"/&gt;</span></span>
+<span id="cb22-59"><a href="#cb22-59" aria-hidden="true"></a><span class="co">##           &lt;attvalue for="att2" value="1"/&gt;</span></span>
+<span id="cb22-60"><a href="#cb22-60" aria-hidden="true"></a><span class="co">##         &lt;/attvalues&gt;</span></span>
+<span id="cb22-61"><a href="#cb22-61" aria-hidden="true"></a><span class="co">##       &lt;/edge&gt;</span></span>
+<span id="cb22-62"><a href="#cb22-62" aria-hidden="true"></a><span class="co">##       &lt;edge id="1" source="1" target="2" start="13" end="13" weight="1"&gt;</span></span>
+<span id="cb22-63"><a href="#cb22-63" aria-hidden="true"></a><span class="co">##         &lt;attvalues&gt;</span></span>
+<span id="cb22-64"><a href="#cb22-64" aria-hidden="true"></a><span class="co">##           &lt;attvalue for="att1" value="b"/&gt;</span></span>
+<span id="cb22-65"><a href="#cb22-65" aria-hidden="true"></a><span class="co">##           &lt;attvalue for="att2" value="2"/&gt;</span></span>
+<span id="cb22-66"><a href="#cb22-66" aria-hidden="true"></a><span class="co">##         &lt;/attvalues&gt;</span></span>
+<span id="cb22-67"><a href="#cb22-67" aria-hidden="true"></a><span class="co">##       &lt;/edge&gt;</span></span>
+<span id="cb22-68"><a href="#cb22-68" aria-hidden="true"></a><span class="co">##       &lt;edge id="2" source="1" target="3" start="2" end="13" weight="1"&gt;</span></span>
+<span id="cb22-69"><a href="#cb22-69" aria-hidden="true"></a><span class="co">##         &lt;attvalues&gt;</span></span>
+<span id="cb22-70"><a href="#cb22-70" aria-hidden="true"></a><span class="co">##           &lt;attvalue for="att1" value="c"/&gt;</span></span>
+<span id="cb22-71"><a href="#cb22-71" aria-hidden="true"></a><span class="co">##           &lt;attvalue for="att2" value="3"/&gt;</span></span>
+<span id="cb22-72"><a href="#cb22-72" aria-hidden="true"></a><span class="co">##         &lt;/attvalues&gt;</span></span>
+<span id="cb22-73"><a href="#cb22-73" aria-hidden="true"></a><span class="co">##       &lt;/edge&gt;</span></span>
+<span id="cb22-74"><a href="#cb22-74" aria-hidden="true"></a><span class="co">##       &lt;edge id="3" source="2" target="3" start="2" end="13" weight="1"&gt;</span></span>
+<span id="cb22-75"><a href="#cb22-75" aria-hidden="true"></a><span class="co">##         &lt;attvalues&gt;</span></span>
+<span id="cb22-76"><a href="#cb22-76" aria-hidden="true"></a><span class="co">##           &lt;attvalue for="att1" value="d"/&gt;</span></span>
+<span id="cb22-77"><a href="#cb22-77" aria-hidden="true"></a><span class="co">##           &lt;attvalue for="att2" value="4"/&gt;</span></span>
+<span id="cb22-78"><a href="#cb22-78" aria-hidden="true"></a><span class="co">##         &lt;/attvalues&gt;</span></span>
+<span id="cb22-79"><a href="#cb22-79" aria-hidden="true"></a><span class="co">##       &lt;/edge&gt;</span></span>
+<span id="cb22-80"><a href="#cb22-80" aria-hidden="true"></a><span class="co">##       &lt;edge id="4" source="3" target="4" start="12" end="13" weight="1"&gt;</span></span>
+<span id="cb22-81"><a href="#cb22-81" aria-hidden="true"></a><span class="co">##         &lt;attvalues&gt;</span></span>
+<span id="cb22-82"><a href="#cb22-82" aria-hidden="true"></a><span class="co">##           &lt;attvalue for="att1" value="e"/&gt;</span></span>
+<span id="cb22-83"><a href="#cb22-83" aria-hidden="true"></a><span class="co">##           &lt;attvalue for="att2" value="5"/&gt;</span></span>
+<span id="cb22-84"><a href="#cb22-84" aria-hidden="true"></a><span class="co">##         &lt;/attvalues&gt;</span></span>
+<span id="cb22-85"><a href="#cb22-85" aria-hidden="true"></a><span class="co">##       &lt;/edge&gt;</span></span>
+<span id="cb22-86"><a href="#cb22-86" aria-hidden="true"></a><span class="co">##       &lt;edge id="5" source="4" target="2" start="1" end="13" weight="1"&gt;</span></span>
+<span id="cb22-87"><a href="#cb22-87" aria-hidden="true"></a><span class="co">##         &lt;attvalues&gt;</span></span>
+<span id="cb22-88"><a href="#cb22-88" aria-hidden="true"></a><span class="co">##           &lt;attvalue for="att1" value="f"/&gt;</span></span>
+<span id="cb22-89"><a href="#cb22-89" aria-hidden="true"></a><span class="co">##           &lt;attvalue for="att2" value="6"/&gt;</span></span>
+<span id="cb22-90"><a href="#cb22-90" aria-hidden="true"></a><span class="co">##         &lt;/attvalues&gt;</span></span>
+<span id="cb22-91"><a href="#cb22-91" aria-hidden="true"></a><span class="co">##       &lt;/edge&gt;</span></span>
+<span id="cb22-92"><a href="#cb22-92" aria-hidden="true"></a><span class="co">##     &lt;/edges&gt;</span></span>
+<span id="cb22-93"><a href="#cb22-93" aria-hidden="true"></a><span class="co">##   &lt;/graph&gt;</span></span>
+<span id="cb22-94"><a href="#cb22-94" aria-hidden="true"></a><span class="co">## &lt;/gexf&gt;</span></span>
+<span id="cb22-95"><a href="#cb22-95" aria-hidden="true"></a><span class="co">## </span></span></code></pre></div>
 </div>
+<div id="example-4-importing-gexf-files" class="section level2">
+<h2 class="hasAnchor">
+<a href="#example-4-importing-gexf-files" class="anchor"></a>Example 4: Importing GEXF files</h2>
+<p>We can use the <code>read.gexf</code> function to read GEXF files into R:</p>
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"gexf-graphs/lesmiserables.gexf"</span>, package<span class="op">=</span><span class="st">"rgexf"</span><span class="op">)</span>
+<span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/read.gexf.html">read.gexf</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span> <span class="co"># Taking a look at the first handful</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true"></a><span class="co">## &lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true"></a><span class="co">## &lt;gexf xmlns="http://www.gexf.net/1.3" xmlns:viz="http://www.gexf.net/1.3/viz" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.3" xsi:schemaLocation="http://www.gexf.net/1.3 http://www.gexf.net/1.3/gexf.xsd"&gt;</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true"></a><span class="co">##   &lt;meta lastmodifieddate="2016-11-09"&gt;</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true"></a><span class="co">##     &lt;creator&gt;Gephi 0.9&lt;/creator&gt;</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true"></a><span class="co">##     &lt;description/&gt;</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true"></a><span class="co">##   &lt;/meta&gt;</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true"></a><span class="co">##   &lt;graph defaultedgetype="undirected" mode="static"&gt;</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true"></a><span class="co">##     &lt;attributes class="node" mode="static"&gt;</span></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true"></a><span class="co">##       &lt;attribute id="modularity_class" title="Modularity Class" type="integer"/&gt;</span></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true"></a><span class="co">##     &lt;/attributes&gt;</span></span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true"></a><span class="co">##     &lt;nodes&gt;</span></span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true"></a><span class="co">##       &lt;node id="11" label="Valjean"&gt;</span></span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true"></a><span class="co">##         &lt;attvalues&gt;</span></span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true"></a><span class="co">##           &lt;attvalue for="modularity_class" value="1"/&gt;</span></span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true"></a><span class="co">##         &lt;/attvalues&gt;</span></span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true"></a><span class="co">##         &lt;viz:size value="100.0"/&gt;</span></span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true"></a><span class="co">##         &lt;viz:position x="-87.93029" y="6.8120565"/&gt;</span></span>
+<span id="cb24-18"><a href="#cb24-18" aria-hidden="true"></a><span class="co">##         &lt;viz:color r="245" g="91" b="91"/&gt;</span></span>
+<span id="cb24-19"><a href="#cb24-19" aria-hidden="true"></a><span class="co">##       &lt;/node&gt;</span></span>
+<span id="cb24-20"><a href="#cb24-20" aria-hidden="true"></a><span class="co">##       &lt;node id="48" label="Gavroche"&gt;</span></span>
+<span id="cb24-21"><a href="#cb24-21" aria-hidden="true"></a><span class="co">##         &lt;attvalues&gt;</span></span>
+<span id="cb24-22"><a href="#cb24-22" aria-hidden="true"></a><span class="co">##           &lt;attvalue for="modularity_class" value="8"/&gt;</span></span>
+<span id="cb24-23"><a href="#cb24-23" aria-hidden="true"></a><span class="co">##         &lt;/attvalues&gt;</span></span>
+<span id="cb24-24"><a href="#cb24-24" aria-hidden="true"></a><span class="co">##         &lt;viz:size value="61.600006"/&gt;</span></span>
+<span id="cb24-25"><a href="#cb24-25" aria-hidden="true"></a><span class="co">##         &lt;viz:position x="387.89572" y="-110.462326"/&gt;</span></span>
+<span id="cb24-26"><a href="#cb24-26" aria-hidden="true"></a><span class="co">##         &lt;viz:color r="91" g="245" b="91"/&gt;</span></span>
+<span id="cb24-27"><a href="#cb24-27" aria-hidden="true"></a><span class="co">##       &lt;/node&gt;</span></span>
+<span id="cb24-28"><a href="#cb24-28" aria-hidden="true"></a><span class="co">##       &lt;node id="55" label="Marius"&gt;</span></span>
+<span id="cb24-29"><a href="#cb24-29" aria-hidden="true"></a><span class="co">##         &lt;attvalues&gt;</span></span>
+<span id="cb24-30"><a href="#cb24-30" aria-hidden="true"></a><span class="co">##           &lt;attvalue for="modularity_class" value="6"/&gt;</span></span>
+<span id="cb24-31"><a href="#cb24-31" aria-hidden="true"></a><span class="co">##         &lt;/attvalues&gt;</span></span>
+<span id="cb24-32"><a href="#cb24-32" aria-hidden="true"></a><span class="co">##         &lt;viz:size value="53.37143"/&gt;</span></span>
+<span id="cb24-33"><a href="#cb24-33" aria-hidden="true"></a><span class="co">##         &lt;viz:position x="206.44687" y="13.805411"/&gt;</span></span>
+<span id="cb24-34"><a href="#cb24-34" aria-hidden="true"></a><span class="co">##         &lt;viz:color r="194" g="91" b="245"/&gt;</span></span>
+<span id="cb24-35"><a href="#cb24-35" aria-hidden="true"></a><span class="co">##       &lt;/node&gt;</span></span>
+<span id="cb24-36"><a href="#cb24-36" aria-hidden="true"></a><span class="co">##       &lt;node id="27" label="Javert"&gt;</span></span>
+<span id="cb24-37"><a href="#cb24-37" aria-hidden="true"></a><span class="co">##         &lt;attvalues&gt;</span></span>
+<span id="cb24-38"><a href="#cb24-38" aria-hidden="true"></a><span class="co">##           &lt;attvalue for="modularity_class" value="7"/&gt;</span></span>
+<span id="cb24-39"><a href="#cb24-39" aria-hidden="true"></a><span class="co">##         &lt;/attvalues&gt;</span></span>
+<span id="cb24-40"><a href="#cb24-40" aria-hidden="true"></a><span class="co">##         &lt;viz:size value="47.88571"/&gt;</span></span>
+<span id="cb24-41"><a href="#cb24-41" aria-hidden="true"></a><span class="co">##         &lt;viz:position x="-81.46074" y="204.20204"/&gt;</span></span>
+<span id="cb24-42"><a href="#cb24-42" aria-hidden="true"></a><span class="co">##         &lt;viz:color r="91" g="245" b="194"/&gt;</span></span>
+<span id="cb24-43"><a href="#cb24-43" aria-hidden="true"></a><span class="co">##       &lt;/node&gt;</span></span>
+<span id="cb24-44"><a href="#cb24-44" aria-hidden="true"></a><span class="co">##       &lt;node id="25" label="Thenardier"&gt;</span></span>
+<span id="cb24-45"><a href="#cb24-45" aria-hidden="true"></a><span class="co">##         &lt;attvalues&gt;</span></span>
+<span id="cb24-46"><a href="#cb24-46" aria-hidden="true"></a><span class="co">##           &lt;attvalue for="modularity_class" value="7"/&gt;</span></span>
+<span id="cb24-47"><a href="#cb24-47" aria-hidden="true"></a><span class="co">##         &lt;/attvalues&gt;</span></span>
+<span id="cb24-48"><a href="#cb24-48" aria-hidden="true"></a><span class="co">##         &lt;viz:size value="45.142853"/&gt;</span></span>
+<span id="cb24-49"><a href="#cb24-49" aria-hidden="true"></a><span class="co">##         &lt;viz:position x="82.80825" y="203.1144"/&gt;</span></span>
+<span id="cb24-50"><a href="#cb24-50" aria-hidden="true"></a><span class="co">##         &lt;viz:color r="91" g="245" b="194"/&gt;</span></span>
+<span id="cb24-51"><a href="#cb24-51" aria-hidden="true"></a><span class="co">##       &lt;/node&gt;</span></span>
+<span id="cb24-52"><a href="#cb24-52" aria-hidden="true"></a><span class="co">##       &lt;node id="23" label="Fantine"&gt;</span></span>
+<span id="cb24-53"><a href="#cb24-53" aria-hidden="true"></a><span class="co">##         &lt;attvalues&gt;</span></span>
+<span id="cb24-54"><a href="#cb24-54" aria-hidden="true"></a><span class="co">##           &lt;attvalue for="modularity_class" value="2"/&gt;</span></span>
+<span id="cb24-55"><a href="#cb24-55" aria-hidden="true"></a><span class="co">##         &lt;/attvalues&gt;</span></span>
+<span id="cb24-56"><a href="#cb24-56" aria-hidden="true"></a><span class="co">##         &lt;viz:size value="42.4"/&gt;</span></span>
+<span id="cb24-57"><a href="#cb24-57" aria-hidden="true"></a><span class="co">##         &lt;viz:position x="-313.42786" y="289.44803"/&gt;</span></span>
+<span id="cb24-58"><a href="#cb24-58" aria-hidden="true"></a><span class="co">##         &lt;viz:color r="91" g="194" b="245"/&gt;</span></span>
+<span id="cb24-59"><a href="#cb24-59" aria-hidden="true"></a><span class="co">##       &lt;/node&gt;</span></span>
+<span id="cb24-60"><a href="#cb24-60" aria-hidden="true"></a><span class="co">##          ...</span></span>
+<span id="cb24-61"><a href="#cb24-61" aria-hidden="true"></a><span class="co">##      &lt;/nodes&gt;</span></span>
+<span id="cb24-62"><a href="#cb24-62" aria-hidden="true"></a><span class="co">##     &lt;edges&gt;</span></span>
+<span id="cb24-63"><a href="#cb24-63" aria-hidden="true"></a><span class="co">##       &lt;edge id="0" source="1" target="0"/&gt;</span></span>
+<span id="cb24-64"><a href="#cb24-64" aria-hidden="true"></a><span class="co">##       &lt;edge id="1" source="2" target="0" weight="8.0"/&gt;</span></span>
+<span id="cb24-65"><a href="#cb24-65" aria-hidden="true"></a><span class="co">##       &lt;edge id="2" source="3" target="0" weight="10.0"/&gt;</span></span>
+<span id="cb24-66"><a href="#cb24-66" aria-hidden="true"></a><span class="co">##       &lt;edge id="3" source="3" target="2" weight="6.0"/&gt;</span></span>
+<span id="cb24-67"><a href="#cb24-67" aria-hidden="true"></a><span class="co">##       &lt;edge id="4" source="4" target="0"/&gt;</span></span>
+<span id="cb24-68"><a href="#cb24-68" aria-hidden="true"></a><span class="co">##       &lt;edge id="5" source="5" target="0"/&gt;</span></span>
+<span id="cb24-69"><a href="#cb24-69" aria-hidden="true"></a><span class="co">##          ...</span></span>
+<span id="cb24-70"><a href="#cb24-70" aria-hidden="true"></a><span class="co">##      &lt;/edges&gt;</span></span>
+<span id="cb24-71"><a href="#cb24-71" aria-hidden="true"></a><span class="co">##   &lt;/graph&gt;</span></span>
+<span id="cb24-72"><a href="#cb24-72" aria-hidden="true"></a><span class="co">## &lt;/gexf&gt;</span></span></code></pre></div>
+<p>Moreover, we can use the <code><a href="reference/igraph.to.gexf.html">gexf.to.igraph()</a></code> function to convert the <code>gexf</code> object into an <code>igraph</code> object:</p>
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://igraph.org">igraph</a></span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true"></a><span class="co">## </span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true"></a><span class="co">## Attaching package: 'igraph'</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true"></a></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true"></a><span class="co">## The following objects are masked from 'package:stats':</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true"></a><span class="co">## </span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true"></a><span class="co">##     decompose, spectrum</span></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true"></a></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true"></a><span class="co">## The following object is masked from 'package:base':</span></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true"></a><span class="co">## </span></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true"></a><span class="co">##     union</span></span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">ig</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/igraph.to.gexf.html">gexf.to.igraph</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">ig</span><span class="op">)</span></code></pre></div>
+<p><img src="README_files/figure-gfm/igraph-1.png"><!-- --></p>
+</div>
+</div>
+<div id="code-of-conduct" class="section level1">
+<h1 class="hasAnchor">
+<a href="#code-of-conduct" class="anchor"></a>Code of Conduct</h1>
+<p>Please note that the rgexf project is released with a <a href="https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms</p>
 </div>
 <div id="session-info" class="section level1">
 <h1 class="hasAnchor">
 <a href="#session-info" class="anchor"></a>Session info</h1>
-<div class="sourceCode" id="cb23"><pre class="r"><span class="kw pkg">devtools</span><span class="kw ns">::</span><span class="fu">session_info</span>()</pre></div>
-<div class="sourceCode" id="cb24"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" data-line-number="1">## ─ Session info ───────────────────────────────────────────────────────────────</a>
-<a class="sourceLine" id="cb24-2" data-line-number="2">##  setting  value                       </a>
-<a class="sourceLine" id="cb24-3" data-line-number="3">##  version  R version 3.6.2 (2019-12-12)</a>
-<a class="sourceLine" id="cb24-4" data-line-number="4">##  os       Ubuntu 18.04.4 LTS          </a>
-<a class="sourceLine" id="cb24-5" data-line-number="5">##  system   x86_64, linux-gnu           </a>
-<a class="sourceLine" id="cb24-6" data-line-number="6">##  ui       X11                         </a>
-<a class="sourceLine" id="cb24-7" data-line-number="7">##  language (EN)                        </a>
-<a class="sourceLine" id="cb24-8" data-line-number="8">##  collate  en_US.UTF-8                 </a>
-<a class="sourceLine" id="cb24-9" data-line-number="9">##  ctype    en_US.UTF-8                 </a>
-<a class="sourceLine" id="cb24-10" data-line-number="10">##  tz       America/Los_Angeles         </a>
-<a class="sourceLine" id="cb24-11" data-line-number="11">##  date     2020-02-12                  </a>
-<a class="sourceLine" id="cb24-12" data-line-number="12">## </a>
-<a class="sourceLine" id="cb24-13" data-line-number="13">## ─ Packages ───────────────────────────────────────────────────────────────────</a>
-<a class="sourceLine" id="cb24-14" data-line-number="14">##  package     * version  date       lib source        </a>
-<a class="sourceLine" id="cb24-15" data-line-number="15">##  assertthat    0.2.1    2019-03-21 [1] CRAN (R 3.6.1)</a>
-<a class="sourceLine" id="cb24-16" data-line-number="16">##  backports     1.1.5    2019-10-02 [1] CRAN (R 3.6.1)</a>
-<a class="sourceLine" id="cb24-17" data-line-number="17">##  callr         3.4.1    2020-01-24 [1] CRAN (R 3.6.2)</a>
-<a class="sourceLine" id="cb24-18" data-line-number="18">##  cli           2.0.1    2020-01-08 [1] CRAN (R 3.6.2)</a>
-<a class="sourceLine" id="cb24-19" data-line-number="19">##  crayon        1.3.4    2017-09-16 [1] CRAN (R 3.6.1)</a>
-<a class="sourceLine" id="cb24-20" data-line-number="20">##  desc          1.2.0    2018-05-01 [1] CRAN (R 3.6.1)</a>
-<a class="sourceLine" id="cb24-21" data-line-number="21">##  devtools      2.2.1    2019-09-24 [1] CRAN (R 3.6.1)</a>
-<a class="sourceLine" id="cb24-22" data-line-number="22">##  digest        0.6.23   2019-11-23 [1] CRAN (R 3.6.1)</a>
-<a class="sourceLine" id="cb24-23" data-line-number="23">##  ellipsis      0.3.0    2019-09-20 [1] CRAN (R 3.6.1)</a>
-<a class="sourceLine" id="cb24-24" data-line-number="24">##  evaluate      0.14     2019-05-28 [1] CRAN (R 3.6.1)</a>
-<a class="sourceLine" id="cb24-25" data-line-number="25">##  fansi         0.4.1    2020-01-08 [1] CRAN (R 3.6.2)</a>
-<a class="sourceLine" id="cb24-26" data-line-number="26">##  fs            1.3.1    2019-05-06 [1] CRAN (R 3.6.1)</a>
-<a class="sourceLine" id="cb24-27" data-line-number="27">##  glue          1.3.1    2019-03-12 [1] CRAN (R 3.6.1)</a>
-<a class="sourceLine" id="cb24-28" data-line-number="28">##  htmltools     0.4.0    2019-10-04 [1] CRAN (R 3.6.1)</a>
-<a class="sourceLine" id="cb24-29" data-line-number="29">##  httpuv        1.5.2    2019-09-11 [1] CRAN (R 3.6.1)</a>
-<a class="sourceLine" id="cb24-30" data-line-number="30">##  igraph        1.2.4.2  2019-11-27 [1] CRAN (R 3.6.1)</a>
-<a class="sourceLine" id="cb24-31" data-line-number="31">##  jsonlite      1.6      2018-12-07 [1] CRAN (R 3.6.1)</a>
-<a class="sourceLine" id="cb24-32" data-line-number="32">##  knitr         1.27     2020-01-16 [1] CRAN (R 3.6.2)</a>
-<a class="sourceLine" id="cb24-33" data-line-number="33">##  later         1.0.0    2019-10-04 [1] CRAN (R 3.6.1)</a>
-<a class="sourceLine" id="cb24-34" data-line-number="34">##  magrittr      1.5      2014-11-22 [1] CRAN (R 3.6.1)</a>
-<a class="sourceLine" id="cb24-35" data-line-number="35">##  memoise       1.1.0    2017-04-21 [1] CRAN (R 3.6.1)</a>
-<a class="sourceLine" id="cb24-36" data-line-number="36">##  pkgbuild      1.0.6    2019-10-09 [1] CRAN (R 3.6.1)</a>
-<a class="sourceLine" id="cb24-37" data-line-number="37">##  pkgconfig     2.0.3    2019-09-22 [1] CRAN (R 3.6.1)</a>
-<a class="sourceLine" id="cb24-38" data-line-number="38">##  pkgload       1.0.2    2018-10-29 [1] CRAN (R 3.6.1)</a>
-<a class="sourceLine" id="cb24-39" data-line-number="39">##  prettyunits   1.1.1    2020-01-24 [1] CRAN (R 3.6.2)</a>
-<a class="sourceLine" id="cb24-40" data-line-number="40">##  processx      3.4.1    2019-07-18 [1] CRAN (R 3.6.1)</a>
-<a class="sourceLine" id="cb24-41" data-line-number="41">##  promises      1.1.0    2019-10-04 [1] CRAN (R 3.6.1)</a>
-<a class="sourceLine" id="cb24-42" data-line-number="42">##  ps            1.3.0    2018-12-21 [1] CRAN (R 3.6.1)</a>
-<a class="sourceLine" id="cb24-43" data-line-number="43">##  R6            2.4.1    2019-11-12 [1] CRAN (R 3.6.1)</a>
-<a class="sourceLine" id="cb24-44" data-line-number="44">##  Rcpp          1.0.3    2019-11-08 [1] CRAN (R 3.6.1)</a>
-<a class="sourceLine" id="cb24-45" data-line-number="45">##  remotes       2.1.0    2019-06-24 [1] CRAN (R 3.6.1)</a>
-<a class="sourceLine" id="cb24-46" data-line-number="46">##  rgexf       * 0.15.999 2020-01-31 [1] local         </a>
-<a class="sourceLine" id="cb24-47" data-line-number="47">##  rlang         0.4.4    2020-01-28 [1] CRAN (R 3.6.2)</a>
-<a class="sourceLine" id="cb24-48" data-line-number="48">##  rmarkdown     2.1      2020-01-20 [1] CRAN (R 3.6.2)</a>
-<a class="sourceLine" id="cb24-49" data-line-number="49">##  rprojroot     1.3-2    2018-01-03 [1] CRAN (R 3.6.1)</a>
-<a class="sourceLine" id="cb24-50" data-line-number="50">##  servr         0.15     2019-08-07 [1] CRAN (R 3.6.1)</a>
-<a class="sourceLine" id="cb24-51" data-line-number="51">##  sessioninfo   1.1.1    2018-11-05 [1] CRAN (R 3.6.1)</a>
-<a class="sourceLine" id="cb24-52" data-line-number="52">##  stringi       1.4.5    2020-01-11 [1] CRAN (R 3.6.2)</a>
-<a class="sourceLine" id="cb24-53" data-line-number="53">##  stringr       1.4.0    2019-02-10 [1] CRAN (R 3.6.1)</a>
-<a class="sourceLine" id="cb24-54" data-line-number="54">##  testthat      2.3.1    2019-12-01 [1] CRAN (R 3.6.1)</a>
-<a class="sourceLine" id="cb24-55" data-line-number="55">##  usethis       1.5.1    2019-07-04 [1] CRAN (R 3.6.1)</a>
-<a class="sourceLine" id="cb24-56" data-line-number="56">##  withr         2.1.2    2018-03-15 [1] CRAN (R 3.6.1)</a>
-<a class="sourceLine" id="cb24-57" data-line-number="57">##  xfun          0.12     2020-01-13 [1] CRAN (R 3.6.2)</a>
-<a class="sourceLine" id="cb24-58" data-line-number="58">##  XML           3.99-0.3 2020-01-20 [1] CRAN (R 3.6.2)</a>
-<a class="sourceLine" id="cb24-59" data-line-number="59">##  yaml          2.2.0    2018-07-25 [1] CRAN (R 3.6.1)</a>
-<a class="sourceLine" id="cb24-60" data-line-number="60">## </a>
-<a class="sourceLine" id="cb24-61" data-line-number="61">## [1] /home/george/R/x86_64-pc-linux-gnu-library/3.6</a>
-<a class="sourceLine" id="cb24-62" data-line-number="62">## [2] /usr/local/lib/R/site-library</a>
-<a class="sourceLine" id="cb24-63" data-line-number="63">## [3] /usr/lib/R/site-library</a>
-<a class="sourceLine" id="cb24-64" data-line-number="64">## [4] /usr/lib/R/library</a></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">devtools</span><span class="fu">::</span><span class="fu">session_info</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true"></a><span class="co">## ─ Session info ───────────────────────────────────────────────────────────────</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true"></a><span class="co">##  setting  value                       </span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true"></a><span class="co">##  version  R version 4.1.0 (2021-05-18)</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true"></a><span class="co">##  os       Ubuntu 18.04.5 LTS          </span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true"></a><span class="co">##  system   x86_64, linux-gnu           </span></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true"></a><span class="co">##  ui       X11                         </span></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true"></a><span class="co">##  language en_US:en                    </span></span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true"></a><span class="co">##  collate  en_US.UTF-8                 </span></span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true"></a><span class="co">##  ctype    en_US.UTF-8                 </span></span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true"></a><span class="co">##  tz       America/Los_Angeles         </span></span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true"></a><span class="co">##  date     2021-08-10                  </span></span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true"></a><span class="co">## </span></span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true"></a><span class="co">## ─ Packages ───────────────────────────────────────────────────────────────────</span></span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true"></a><span class="co">##  package     * version  date       lib source        </span></span>
+<span id="cb29-15"><a href="#cb29-15" aria-hidden="true"></a><span class="co">##  cachem        1.0.5    2021-05-15 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb29-16"><a href="#cb29-16" aria-hidden="true"></a><span class="co">##  callr         3.7.0    2021-04-20 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb29-17"><a href="#cb29-17" aria-hidden="true"></a><span class="co">##  cli           3.0.0    2021-06-30 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb29-18"><a href="#cb29-18" aria-hidden="true"></a><span class="co">##  crayon        1.4.1    2021-02-08 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb29-19"><a href="#cb29-19" aria-hidden="true"></a><span class="co">##  desc          1.3.0    2021-03-05 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb29-20"><a href="#cb29-20" aria-hidden="true"></a><span class="co">##  devtools      2.4.2    2021-06-07 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb29-21"><a href="#cb29-21" aria-hidden="true"></a><span class="co">##  digest        0.6.27   2020-10-24 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb29-22"><a href="#cb29-22" aria-hidden="true"></a><span class="co">##  ellipsis      0.3.2    2021-04-29 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb29-23"><a href="#cb29-23" aria-hidden="true"></a><span class="co">##  evaluate      0.14     2019-05-28 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb29-24"><a href="#cb29-24" aria-hidden="true"></a><span class="co">##  fastmap       1.1.0    2021-01-25 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb29-25"><a href="#cb29-25" aria-hidden="true"></a><span class="co">##  fs            1.5.0    2020-07-31 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb29-26"><a href="#cb29-26" aria-hidden="true"></a><span class="co">##  glue          1.4.2    2020-08-27 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb29-27"><a href="#cb29-27" aria-hidden="true"></a><span class="co">##  highr         0.9      2021-04-16 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb29-28"><a href="#cb29-28" aria-hidden="true"></a><span class="co">##  htmltools     0.5.1.1  2021-01-22 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb29-29"><a href="#cb29-29" aria-hidden="true"></a><span class="co">##  httpuv        1.6.1    2021-05-07 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb29-30"><a href="#cb29-30" aria-hidden="true"></a><span class="co">##  igraph      * 1.2.6    2020-10-06 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb29-31"><a href="#cb29-31" aria-hidden="true"></a><span class="co">##  jsonlite      1.7.2    2020-12-09 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb29-32"><a href="#cb29-32" aria-hidden="true"></a><span class="co">##  knitr         1.33     2021-04-24 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb29-33"><a href="#cb29-33" aria-hidden="true"></a><span class="co">##  later         1.2.0    2021-04-23 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb29-34"><a href="#cb29-34" aria-hidden="true"></a><span class="co">##  lifecycle     1.0.0    2021-02-15 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb29-35"><a href="#cb29-35" aria-hidden="true"></a><span class="co">##  magrittr      2.0.1    2020-11-17 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb29-36"><a href="#cb29-36" aria-hidden="true"></a><span class="co">##  memoise       2.0.0    2021-01-26 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb29-37"><a href="#cb29-37" aria-hidden="true"></a><span class="co">##  pkgbuild      1.2.0    2020-12-15 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb29-38"><a href="#cb29-38" aria-hidden="true"></a><span class="co">##  pkgconfig     2.0.3    2019-09-22 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb29-39"><a href="#cb29-39" aria-hidden="true"></a><span class="co">##  pkgload       1.2.1    2021-04-06 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb29-40"><a href="#cb29-40" aria-hidden="true"></a><span class="co">##  prettyunits   1.1.1    2020-01-24 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb29-41"><a href="#cb29-41" aria-hidden="true"></a><span class="co">##  processx      3.5.2    2021-04-30 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb29-42"><a href="#cb29-42" aria-hidden="true"></a><span class="co">##  promises      1.2.0.1  2021-02-11 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb29-43"><a href="#cb29-43" aria-hidden="true"></a><span class="co">##  ps            1.6.0    2021-02-28 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb29-44"><a href="#cb29-44" aria-hidden="true"></a><span class="co">##  purrr         0.3.4    2020-04-17 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb29-45"><a href="#cb29-45" aria-hidden="true"></a><span class="co">##  R6            2.5.0    2020-10-28 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb29-46"><a href="#cb29-46" aria-hidden="true"></a><span class="co">##  Rcpp          1.0.6    2021-01-15 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb29-47"><a href="#cb29-47" aria-hidden="true"></a><span class="co">##  remotes       2.3.0    2021-04-01 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb29-48"><a href="#cb29-48" aria-hidden="true"></a><span class="co">##  rgexf       * 0.16.1   2021-08-10 [1] local         </span></span>
+<span id="cb29-49"><a href="#cb29-49" aria-hidden="true"></a><span class="co">##  rlang         0.4.11   2021-04-30 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb29-50"><a href="#cb29-50" aria-hidden="true"></a><span class="co">##  rmarkdown     2.8      2021-05-07 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb29-51"><a href="#cb29-51" aria-hidden="true"></a><span class="co">##  rprojroot     2.0.2    2020-11-15 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb29-52"><a href="#cb29-52" aria-hidden="true"></a><span class="co">##  servr         0.22     2021-04-14 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb29-53"><a href="#cb29-53" aria-hidden="true"></a><span class="co">##  sessioninfo   1.1.1    2018-11-05 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb29-54"><a href="#cb29-54" aria-hidden="true"></a><span class="co">##  stringi       1.6.2    2021-05-17 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb29-55"><a href="#cb29-55" aria-hidden="true"></a><span class="co">##  stringr       1.4.0    2019-02-10 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb29-56"><a href="#cb29-56" aria-hidden="true"></a><span class="co">##  testthat      3.0.2    2021-02-14 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb29-57"><a href="#cb29-57" aria-hidden="true"></a><span class="co">##  usethis       2.0.1    2021-02-10 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb29-58"><a href="#cb29-58" aria-hidden="true"></a><span class="co">##  withr         2.4.2    2021-04-18 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb29-59"><a href="#cb29-59" aria-hidden="true"></a><span class="co">##  xfun          0.23     2021-05-15 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb29-60"><a href="#cb29-60" aria-hidden="true"></a><span class="co">##  XML           3.99-0.6 2021-03-16 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb29-61"><a href="#cb29-61" aria-hidden="true"></a><span class="co">##  yaml          2.2.1    2020-02-01 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb29-62"><a href="#cb29-62" aria-hidden="true"></a><span class="co">## </span></span>
+<span id="cb29-63"><a href="#cb29-63" aria-hidden="true"></a><span class="co">## [1] /home/george/R/x86_64-pc-linux-gnu-library/4.1</span></span>
+<span id="cb29-64"><a href="#cb29-64" aria-hidden="true"></a><span class="co">## [2] /usr/local/lib/R/site-library</span></span>
+<span id="cb29-65"><a href="#cb29-65" aria-hidden="true"></a><span class="co">## [3] /usr/lib/R/site-library</span></span>
+<span id="cb29-66"><a href="#cb29-66" aria-hidden="true"></a><span class="co">## [4] /usr/lib/R/library</span></span></code></pre></div>
 </div>
 
   </div>
@@ -468,6 +598,12 @@
 <li><small><a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
 </ul>
 </div>
+<div class="community">
+<h2>Community</h2>
+<ul class="list-unstyled">
+<li><a href="CODE_OF_CONDUCT.html">Code of conduct</a></li>
+</ul>
+</div>
 <div class="developers">
 <h2>Developers</h2>
 <ul class="list-unstyled">
@@ -480,8 +616,8 @@
 <h2>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://cran.r-project.org/package=rgexf"><img src="http://www.r-pkg.org/badges/version/rgexf" alt="CRAN_Status_Badge"></a></li>
-<li><a href="http://cran.r-project.org/package=rgexf"><img src="http://cranlogs.r-pkg.org/badges/rgexf?color=brightgreen" alt="Downloads"></a></li>
-<li><a href="http://cran.r-project.org/package=rgexf"><img src="https://cranlogs.r-pkg.org/badges/grand-total/rgexf" alt="Downloads"></a></li>
+<li><a href="https://cran.r-project.org/package=rgexf"><img src="http://cranlogs.r-pkg.org/badges/rgexf?color=brightgreen" alt="Downloads"></a></li>
+<li><a href="https://cran.r-project.org/package=rgexf"><img src="https://cranlogs.r-pkg.org/badges/grand-total/rgexf" alt="Downloads"></a></li>
 <li><a href="https://travis-ci.org/gvegayon/rgexf"><img src="https://travis-ci.org/gvegayon/rgexf.svg?branch=master" alt="Travis-CI Build Status"></a></li>
 <li><a href="https://ci.appveyor.com/project/gvegayon/rgexf"><img src="https://ci.appveyor.com/api/projects/status/github/gvegayon/rgexf?branch=master&amp;svg=true" alt="AppVeyor Build Status"></a></li>
 <li><a href="https://codecov.io/github/gvegayon/rgexf?branch=master"><img src="https://img.shields.io/codecov/c/github/gvegayon/rgexf/master.svg" alt="Coverage Status"></a></li>
@@ -497,7 +633,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
