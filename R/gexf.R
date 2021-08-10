@@ -349,7 +349,7 @@ gexf <- function(
   XML::newXMLNode(name = "description", meta$description, parent = xmlMeta)
   XML::newXMLNode(name = "keywords", meta$keywords, parent = xmlMeta)
   
-  xmlGraph <- XML::newXMLNode(name="graph", parent=gexf)
+  xmlGraph <- XML::newXMLNode(name = "graph", parent = gexf)
   if (mode == "dynamic") {
     
     # Checking times
@@ -393,13 +393,6 @@ gexf <- function(
       }
       
     }
-    
-    strTime <- c(unlist(nodeDynamic),unlist(edgeDynamic))
-    endTime <- strTime
-    
-    # Checking start and ends
-    strTime <- min(strTime, na.rm = TRUE)
-    endTime <- max(endTime, na.rm = TRUE)
     
     XML::xmlAttrs(xmlGraph) <- c(
       mode            = mode,

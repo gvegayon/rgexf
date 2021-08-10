@@ -56,23 +56,28 @@ check_and_map_color <- function(x) {
     if (is.numeric(x)) {
       
       if (x < 1)
-        stop("When specified as number, colors cannot be negative!", call. = FALSE)
+        stop(
+          "When specified as number, colors cannot be negative!",
+          call. = FALSE
+          )
       
       x <- grDevices::colors()[x]
+      
     }
       
     
     # Coercing to RGBA
-    x <- t(grDevices::col2rgb(x, alpha=TRUE))
+    x <- t(grDevices::col2rgb(x, alpha = TRUE))
     
     # Rescaling the alpha
     x[4] <- x[4]/255
     
   } else if (length(x) > 1) {
     
-    if (!is.numeric(x))
-      stop("When specified as a matrix, colors should be passed as a numeric ",
-           "matrix.", call. = FALSE)
+    x <- as.numeric(x)
+    
+    if (any(is.na(x)))
+      stop("Some numbers in the color matrix are NA.", call. = FALSE)
     
     # If only three columns
     if (length(x) == 3) {

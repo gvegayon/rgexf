@@ -113,7 +113,7 @@ read.gexf <- function(x) {
   nodesVizAtt$color <- lapply(node.vizattr, function(a) {
     
     if (length(a$color)) 
-      return(check_and_map_color(as.numeric(a$color)))
+      return(check_and_map_color(a$color))
     
     check_and_map_color(default_nodeVizAtt$color())
     

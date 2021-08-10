@@ -106,22 +106,22 @@ write.gexf(people, relations)
     ##     <nodes>
     ##       <node id="1" label="juan">
     ##         <viz:color r="255" g="99" b="71" a="1"/>
-    ##         <viz:position x="84.4622068841045" y="-100" z="0"/>
+    ##         <viz:position x="100" y="51.0986544575574" z="0"/>
     ##         <viz:size value="10"/>
     ##       </node>
     ##       <node id="2" label="pedro">
     ##         <viz:color r="255" g="99" b="71" a="1"/>
-    ##         <viz:position x="100" y="100" z="0"/>
+    ##         <viz:position x="-100" y="100" z="0"/>
     ##         <viz:size value="10"/>
     ##       </node>
     ##       <node id="3" label="matthew">
     ##         <viz:color r="255" g="99" b="71" a="1"/>
-    ##         <viz:position x="13.6250760243742" y="7.95768386709403" z="0"/>
+    ##         <viz:position x="-14.2129423502891" y="83.9680923396099" z="0"/>
     ##         <viz:size value="10"/>
     ##       </node>
     ##       <node id="4" label="carlos">
     ##         <viz:color r="255" g="99" b="71" a="1"/>
-    ##         <viz:position x="-100" y="78.79797591046" z="0"/>
+    ##         <viz:position x="66.396171662381" y="-100" z="0"/>
     ##         <viz:size value="10"/>
     ##       </node>
     ##     </nodes>
@@ -163,26 +163,26 @@ write.gexf(people, relations, nodeDynamic=time)
     ##     <description>A GEXF file written in R with "rgexf"</description>
     ##     <keywords>GEXF, NodosChile, R, rgexf, Gephi</keywords>
     ##   </meta>
-    ##   <graph mode="dynamic" start="10" end="2" timeformat="double" defaultedgetype="undirected">
+    ##   <graph mode="dynamic" start="2" end="13" timeformat="double" defaultedgetype="undirected">
     ##     <nodes>
     ##       <node id="1" label="juan" start="10" end="12">
     ##         <viz:color r="255" g="99" b="71" a="1"/>
-    ##         <viz:position x="69.6983538631002" y="-69.8983985366003" z="0"/>
+    ##         <viz:position x="100" y="-66.7395710811224" z="0"/>
     ##         <viz:size value="10"/>
     ##       </node>
-    ##       <node id="2" label="pedro" start="13" end="2">
+    ##       <node id="2" label="pedro" start="13" end="13">
     ##         <viz:color r="255" g="99" b="71" a="1"/>
-    ##         <viz:position x="100" y="-100" z="0"/>
+    ##         <viz:position x="13.4431787806887" y="61.4550911958847" z="0"/>
     ##         <viz:size value="10"/>
     ##       </node>
-    ##       <node id="3" label="matthew" start="2" end="2">
-    ##         <viz:color r="255" g="99" b="71" a="1"/>
-    ##         <viz:position x="-73.6968091913099" y="54.8684641665018" z="0"/>
-    ##         <viz:size value="10"/>
-    ##       </node>
-    ##       <node id="4" label="carlos" start="2" end="2">
+    ##       <node id="3" label="matthew" start="2" end="13">
     ##         <viz:color r="255" g="99" b="71" a="1"/>
     ##         <viz:position x="-100" y="100" z="0"/>
+    ##         <viz:size value="10"/>
+    ##       </node>
+    ##       <node id="4" label="carlos" start="2" end="13">
+    ##         <viz:color r="255" g="99" b="71" a="1"/>
+    ##         <viz:position x="-79.4152158871745" y="-100" z="0"/>
     ##         <viz:size value="10"/>
     ##       </node>
     ##     </nodes>
@@ -266,7 +266,7 @@ write.gexf(nodes=people, edges=relations, edgeDynamic=time.edges,
     ##     <description>A GEXF file written in R with "rgexf"</description>
     ##     <keywords>GEXF, NodosChile, R, rgexf, Gephi</keywords>
     ##   </meta>
-    ##   <graph mode="dynamic" start="1" end="5" timeformat="double" defaultedgetype="undirected">
+    ##   <graph mode="dynamic" start="1" end="13" timeformat="double" defaultedgetype="undirected">
     ##     <attributes class="node" mode="static">
     ##       <attribute id="att1" title="letrafavorita" type="string"/>
     ##       <attribute id="att2" title="numbers" type="integer"/>
@@ -282,34 +282,34 @@ write.gexf(nodes=people, edges=relations, edgeDynamic=time.edges,
     ##           <attvalue for="att2" value="1"/>
     ##         </attvalues>
     ##         <viz:color r="255" g="99" b="71" a="1"/>
-    ##         <viz:position x="-100" y="22.3484537111185" z="0"/>
+    ##         <viz:position x="-100" y="100" z="0"/>
     ##         <viz:size value="10"/>
     ##       </node>
-    ##       <node id="2" label="pedro" start="13" end="5">
+    ##       <node id="2" label="pedro" start="13" end="13">
     ##         <attvalues>
     ##           <attvalue for="att1" value="b"/>
     ##           <attvalue for="att2" value="2"/>
     ##         </attvalues>
     ##         <viz:color r="255" g="99" b="71" a="1"/>
-    ##         <viz:position x="-20.0983376724955" y="-29.6283049340924" z="0"/>
+    ##         <viz:position x="94.9185288504935" y="-48.6249157132907" z="0"/>
     ##         <viz:size value="10"/>
     ##       </node>
-    ##       <node id="3" label="matthew" start="2" end="5">
+    ##       <node id="3" label="matthew" start="2" end="13">
     ##         <attvalues>
     ##           <attvalue for="att1" value="c"/>
     ##           <attvalue for="att2" value="3"/>
     ##         </attvalues>
     ##         <viz:color r="255" g="99" b="71" a="1"/>
-    ##         <viz:position x="27.0739982499173" y="100" z="0"/>
+    ##         <viz:position x="32.196939799762" y="-100" z="0"/>
     ##         <viz:size value="10"/>
     ##       </node>
-    ##       <node id="4" label="carlos" start="2" end="5">
+    ##       <node id="4" label="carlos" start="2" end="13">
     ##         <attvalues>
     ##           <attvalue for="att1" value="d"/>
     ##           <attvalue for="att2" value="4"/>
     ##         </attvalues>
     ##         <viz:color r="255" g="99" b="71" a="1"/>
-    ##         <viz:position x="100" y="-100" z="0"/>
+    ##         <viz:position x="100" y="-51.6585495191186" z="0"/>
     ##         <viz:size value="10"/>
     ##       </node>
     ##     </nodes>
@@ -320,31 +320,31 @@ write.gexf(nodes=people, edges=relations, edgeDynamic=time.edges,
     ##           <attvalue for="att2" value="1"/>
     ##         </attvalues>
     ##       </edge>
-    ##       <edge id="1" source="1" target="2" start="13" end="5" weight="1">
+    ##       <edge id="1" source="1" target="2" start="13" end="13" weight="1">
     ##         <attvalues>
     ##           <attvalue for="att1" value="b"/>
     ##           <attvalue for="att2" value="2"/>
     ##         </attvalues>
     ##       </edge>
-    ##       <edge id="2" source="1" target="3" start="2" end="5" weight="1">
+    ##       <edge id="2" source="1" target="3" start="2" end="13" weight="1">
     ##         <attvalues>
     ##           <attvalue for="att1" value="c"/>
     ##           <attvalue for="att2" value="3"/>
     ##         </attvalues>
     ##       </edge>
-    ##       <edge id="3" source="2" target="3" start="2" end="5" weight="1">
+    ##       <edge id="3" source="2" target="3" start="2" end="13" weight="1">
     ##         <attvalues>
     ##           <attvalue for="att1" value="d"/>
     ##           <attvalue for="att2" value="4"/>
     ##         </attvalues>
     ##       </edge>
-    ##       <edge id="4" source="3" target="4" start="12" end="5" weight="1">
+    ##       <edge id="4" source="3" target="4" start="12" end="13" weight="1">
     ##         <attvalues>
     ##           <attvalue for="att1" value="e"/>
     ##           <attvalue for="att2" value="5"/>
     ##         </attvalues>
     ##       </edge>
-    ##       <edge id="5" source="4" target="2" start="1" end="5" weight="1">
+    ##       <edge id="5" source="4" target="2" start="1" end="13" weight="1">
     ##         <attvalues>
     ##           <attvalue for="att1" value="f"/>
     ##           <attvalue for="att2" value="6"/>
@@ -443,6 +443,20 @@ Moreover, we can use the `gexf.to.igraph()` function to convert the
 
 ``` r
 library(igraph)
+```
+
+    ## 
+    ## Attaching package: 'igraph'
+
+    ## The following objects are masked from 'package:stats':
+    ## 
+    ##     decompose, spectrum
+
+    ## The following object is masked from 'package:base':
+    ## 
+    ##     union
+
+``` r
 ig <- gexf.to.igraph(g)
 plot(ig)
 ```

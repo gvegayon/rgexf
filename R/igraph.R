@@ -57,19 +57,19 @@ igraph.to.gexf <- function(igraph.obj, ...) {
 
   edges$source <- rownames(nodes)[match(edges$from, rownames(nodes))]
   edges$target <- rownames(nodes)[match(edges$to, rownames(nodes))]
-  edges <- edges[, c('source', 'target')]
+  #edges <- edges[, c("source", "target")]
   
   # Nodes Attributes
   x <- igraph::list.vertex.attributes(g)
-  x <- x[!(x %in% c("label","color","size", "name"))]
+  x <- x[!(x %in% c("label", "color", "size", "name"))]
   if (length(x))
-    dots$nodesAtt <- subset(nodes, select=x)
+    dots$nodesAtt <- subset(nodes, select = x)
   
   # Edges Attributes
   x <- igraph::list.edge.attributes(g)
   x <- x[!(x %in% c("weight","color","edgesLabel","width"))]
   if (length(x)) 
-    dots$edgesAtt <- subset(edges, select=x)
+    dots$edgesAtt <- subset(edges, select = x)
   
   # Edges Weights
   if (!length(dots$edgesWeight) && length(igraph::E(g)$weight))

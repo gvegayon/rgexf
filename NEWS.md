@@ -1,4 +1,4 @@
-# Changes in rgexf version 0.16.1 (2021-06-12)
+# Changes in rgexf version 0.16.2 (2021-08-10)
 
 ## New features and changes
 
@@ -12,13 +12,19 @@
 
 * New `head()` function allows a glimpse of the `n` first nodes/edges.
 
-
 ## Bug fixes
 
 * Passing colors with four values (alpha) no longer fails during checks.
   (reported by @IsabelFE).
 
 * The summary function prints nodes' attributes as expected.
+
+* Hex colors now work (#41 reported by @milnus).
+
+* `gexf.to.igraph` correctly processes edge attributes (#38 reported by @balachia).
+
+* Time range is now correctly computed (#19).
+
   
 
 # Changes in rgexf version 0.16.0 (2018-02-05)

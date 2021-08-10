@@ -1,6 +1,6 @@
 
 
-CHANGES IN RGEXF VERSION 0.16.1 (2021-06-12)
+CHANGES IN RGEXF VERSION 0.16.2 (2021-08-10)
 
 
 New features and changes
@@ -24,6 +24,13 @@ Bug fixes
     checks. (reported by @IsabelFE).
 
 -   The summary function prints nodes’ attributes as expected.
+
+-   Hex colors now work (#41 reported by @milnus).
+
+-   gexf.to.igraph correctly processes edge attributes (#38 reported by
+    @balachia).
+
+-   Time range is now correctly computed (#19).
 
 
 
