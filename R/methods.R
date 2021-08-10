@@ -25,44 +25,55 @@ summary.gexf <- function(object, ...) {
 }
 
 build.and.validate.gexf <- function(
-  meta=list(creator="NodosChile", description="A graph file writing in R using \'rgexf\'",keywords="gexf graph, NodosChile, R, rgexf"),
-  mode=list(defaultedgetype="undirected", mode="static"),
-  atts.definitions=list(nodes = NULL, edges = NULL),
-  nodesVizAtt=NULL,
-  edgesVizAtt=NULL,
+  meta = list(
+    creator     = "NodosChile",
+    description = "A graph file writing in R using \'rgexf\'",
+    keywords    = "gexf graph, NodosChile, R, rgexf"
+    ),
+  mode = list(
+    defaultedgetype = "undirected",
+    mode            = "static"
+    ),
+  atts.definitions = list(
+    nodes = NULL,
+    edges = NULL
+    ),
+  nodesVizAtt = NULL,
+  edgesVizAtt = NULL,
   nodes,
   edges,
   graph
   ) {
   
   # Shorcuts
-  .c <- function(x,s) {
+  .c <- function(x, s) {
       if (NROW(x)) !all(colnames(x) %in% s)
       else return(FALSE)
   }
-  .n <- function(x,s) !all(names(x) %in% s)
+  .n <- function(x, s) !all(names(x) %in% s)
   
   # Check meta-data
-  if (.n(meta,c("creator", "description","keywords")))
+  if (.n(meta, c("creator", "description", "keywords")))
     stop("Invalid meta: Check names")
   else {
     for (i in meta) {
-      if (!inherits(i,"character")) stop("Invalid meta: only character allowed")
+      if (!inherits(i, "character"))
+        stop("Invalid meta: only character allowed")
     }
   }
   
   # Check mode
-  
   if (.n(mode, c("defaultedgetype", "mode")))
     stop("Invalid mode: Check names")
   else {
     for (i in mode) {
-      if (!inherits(i,"character")) stop("Invalid mode: only character allowed")
+      if (!inherits(i, "character"))
+        stop("Invalid mode: only character allowed")
     }
   }
   
   # Checking atts definition
-  if (.n(atts.definitions, c("nodes","edges"))) 
+  if (.n(atts.definitions, c("nodes", "edges"))) 
     stop("Invalid atts.definitions: Check names")
   else {
     for (i in atts.definitions) {
@@ -70,18 +81,19 @@ build.and.validate.gexf <- function(
       # If its empty, then continue
       if (!length(i)) next
       
-      if (!inherits(i,"data.frame")) stop("Invalid atts.definitions: only data-frames allowed")
+      if (!inherits(i, "data.frame"))
+        stop("Invalid atts.definitions: only data-frames allowed")
       else {
-        if (.c(atts.definitions$nodes, c("id","title","type")))
+        if (.c(atts.definitions$nodes, c("id", "title", "type")))
           stop("Invalid atts.definitions: Check -nodes- colnames")
-        if (.c(atts.definitions$edges, c("id","title","type")))
+        if (.c(atts.definitions$edges, c("id", "title", "type")))
           stop("Invalid atts.definitions: Check -nodes- colnames")
       }
     }
   }
   
   # Checking nodesVizAtt definition
-  if (.n(nodesVizAtt, c("color","position","size","shape", "image")))
+  if (.n(nodesVizAtt, c("color", "position", "size", "shape", "image")))
     stop("Invalid nodesVizAtt: Check names")
   else {    
     for (i in names(nodesVizAtt)) {
@@ -99,11 +111,11 @@ build.and.validate.gexf <- function(
   }
   
   # Checking edgesVizAtt definition
-  if (.n(edgesVizAtt, c("color","size","shape")))
+  if (.n(edgesVizAtt, c("color", "size", "shape")))
     stop("Invalid edgesVizAtt: Check names")
   else {
     for (i in names(edgesVizAtt)) {
-      if (i == "color" & .c(edgesVizAtt[["i"]], c("r","g","b","a"))) 
+      if (i == "color" & .c(edgesVizAtt[["i"]], c("r", "g", "b", "a"))) 
         stop("Invalid edgesVizAtt: Check -color- colnames")
       else if (i == "size" & .c(edgesVizAtt[["i"]], "value"))
         stop("Invalid edgesVizAtt: Check -size- colnames")
@@ -117,8 +129,8 @@ build.and.validate.gexf <- function(
     if (!all(c("id", "label") %in% colnames(nodes)))
       stop("Invalid nodes: Check colnames")
     else {
-      nodes <- nodes[,unique(c("id","label",colnames(nodes)))]
-      nodes <- nodes[,!grepl("^viz\\.[a-z]*\\.",colnames(nodes))]
+      nodes <- nodes[,unique(c("id", "label", colnames(nodes)))]
+      nodes <- nodes[,!grepl("^viz\\.[a-z]*\\.", colnames(nodes))]
     }
   }
   
@@ -128,7 +140,7 @@ build.and.validate.gexf <- function(
       stop("Invalid edges: Check colnames")
     else {
       edges <- edges[,unique(c("id", "source", "target", "weight",colnames(edges)))]
-      edges <- edges[,!grepl("^viz\\.[a-z]*\\.",colnames(edges))]
+      edges <- edges[, !grepl("^viz\\.[a-z]*\\.", colnames(edges))]
     }
   }  
   

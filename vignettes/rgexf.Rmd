@@ -1,7 +1,7 @@
 ---
-title: "rgexf"
+title: "Getting started with rgexf"
 author: "George G. Vega Yon"
-date: "Nov 9, 2016"
+date: "August 11, 2021"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{rgexf}
@@ -9,69 +9,160 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r}
+```{r setup, echo=FALSE}
+knitr::opts_chunk$set(fig.width = 7)
+```
+
+# Introduction
+
+The `rgexf` package provides a way to interact with [GEXF files](https://gephi.org/gexf/format/).
+The GEXF standard was developed by the [Gephi](http://gephi.org/)--"Like Photoshop for graphs"--core team, 
+and can be used to save static and dynamic networks.
+
+With the `rgexf` package, users can create `gexf` (R) objects from scratch,
+import GEXF files, coerce `gexf` objects into `igraph` objects, and
+visualize graphs using the [`gexf-js` JavaScript library](https://github.com/raphv/gexf-js).
+In this vignette, we will illustrate how can we (a) import a GEXF file into R
+and visualize it with `igraph,` and (b) create a `gexf` object from scratch.
+
+# Reading GEXF files
+
+The `rgexf` package comes with a network from Les Misérables, which is
+featured in Gephi. To read GEXF files, we can use the `read.gexf` function:
+
+```{r read-gexf}
+# Loading rgexf
 library(rgexf)
 
+# Accessing the path of the file
+fn    <- system.file(
+  "gexf-graphs/lesmiserables.gexf", package = "rgexf"
+  )
+lesmi <- read.gexf(fn)
+
+# Taking a look at the first handful of nodes and edges
+head(lesmi)
+```
+
+Moreover, we can directly plot the graph using the `plot.gexf` method--through
+the `gexf-js` library--or coercing it into an `igraph` object and use
+igraph's plotting engine:
+
+```{r igraph-plot}
+lesmi_ig <- gexf.to.igraph(lesmi)
+lesmi_ig
+
+op <- par(mai = rep(0, 4)) # For extra space
+plot(lesmi_ig)
+par(op)
+```
+
+We can also go back:
+
+```{r go-back}
+head(igraph.to.gexf(lesmi_ig))
+```
+
+# Creating GEXF files
+
+This example was extracted directly from the demo "gexfrandom." Here
+we create three networks with the same set of vertices and layout,
+we color them and finalize plotting it with igraph.
+
+```{r}
 # Random graph demo
 set.seed(11)
+```
 
+Creating the vertices:
+
+```{r}
 # Vertex
 n <- 30
 prb <- .3
-vertex1 <- data.frame(id=1:n,label=1:n)
-vertex2 <- data.frame(id=(n+1):(2*n),label=(n+1):(2*n))
-vertex3 <- data.frame(id=(2*n+1):(3*n),label=(2*n+1):(3*n))
+vertex1 <- data.frame(id = 1:n, label = 1:n)
+vertex2 <- data.frame(id = (n + 1):(2 * n), label = (n + 1):(2 * n))
+vertex3 <- data.frame(
+  id = (2 * n + 1):(3 * n), label = (2 * n + 1):(3 * n)
+  )
+```
 
+Building edges:
+
+```{r}
 # Edges
-edges1 <- combn(vertex1$label,2)
-edges1 <- edges1[,which(runif(ncol(edges1)) > (1-prb))]
-edges1 <- data.frame(source=edges1[1,],target=edges1[2,])
+edges1 <- combn(vertex1$label, 2)
+edges1 <- edges1[, which(runif(ncol(edges1)) > (1 - prb))]
+edges1 <- data.frame(source = edges1[1, ], target = edges1[2, ])
 
-edges2 <- combn(vertex2$label,2)
-edges2 <- edges2[,which(runif(ncol(edges2)) > (1-prb))]
-edges2 <- data.frame(source=edges2[1,],target=edges2[2,])
+edges2 <- combn(vertex2$label, 2)
+edges2 <- edges2[, which(runif(ncol(edges2)) > (1 - prb))]
+edges2 <- data.frame(source = edges2[1, ], target = edges2[2, ])
 
-edges3 <- combn(vertex3$label,2)
-edges3 <- edges3[,which(runif(ncol(edges3)) > (1-prb))]
-edges3 <- data.frame(source=edges3[1,],target=edges3[2,])
+edges3 <- combn(vertex3$label, 2)
+edges3 <- edges3[, which(runif(ncol(edges3)) > (1 - prb))]
+edges3 <- data.frame(source = edges3[1, ], target = edges3[2, ])
+```
 
+We can and add visual attributes:
+
+```{r}
 # Visual attributes
-size <- runif(n,max=100)
+size <- runif(n, max = 100)
 color <- terrain.colors(n)
 color <- color[order(runif(n))][1:n]
-color <- cbind(t(col2rgb(color)),1)
+color <- cbind(t(col2rgb(color)), 1)
 
 color2 <- heat.colors(n)
 color2 <- color2[order(runif(n))][1:n]
-color2 <- cbind(t(col2rgb(color2)),1)
+color2 <- cbind(t(col2rgb(color2)), 1)
 
 color3 <- topo.colors(n)
-color3<- color3[order(runif(n))][1:n]
-color3 <- cbind(t(col2rgb(color3)),1)
+color3 <- color3[order(runif(n))][1:n]
+color3 <- cbind(t(col2rgb(color3)), 1)
+```
 
+Generating a layout:
+
+```{r}
 # Nice layout
-pos <- matrix(0, nrow=n, ncol=3)
+pos <- matrix(0, nrow = n, ncol = 3)
 
 for (i in 2:n) {
-  pos[i,1] <- pos[i-1,1] + cos(2*pi*(i*1.7-1)/n)
-  pos[i,2] <- pos[i-1,2] + sin(2*pi*(i-1)/n)
+  pos[i, 1] <- pos[i - 1, 1] + cos(2 * pi * (i * 1.7 - 1) / n)
+  pos[i, 2] <- pos[i - 1, 2] + sin(2 * pi * (i - 1) / n)
 }
 
-pos <- pos/(max(pos)-min(pos))
+pos <- pos / (max(pos) - min(pos))
 pos2 <- pos
-pos2[,1] <- pos2[,1] + max(pos2[,1])-min(pos[,1])
+pos2[, 1] <- pos2[, 1] + max(pos2[, 1]) - min(pos[, 1])
 pos3 <- pos
-pos3[,1] <- pos3[,1] + max(pos2[,1])-min(pos[,1])
+pos3[, 1] <- pos3[, 1] + max(pos2[, 1]) - min(pos[, 1])
+```
 
-# Plotting
+And finally, we can build the `gexf` object:
+
+```{r}
 graph <- gexf(
-  rbind(vertex1,vertex2,vertex3), 
-  rbind(edges1, edges2,edges3), 
-  nodesVizAtt=list(
-    size=c(size,size,size),
-    color=rbind(color,color2,color3),
-    position=rbind(pos,pos2,pos3))
+  rbind(vertex1, vertex2, vertex3),
+  rbind(edges1, edges2, edges3),
+  nodesVizAtt = list(
+    size = c(size, size, size),
+    color = rbind(color, color2, color3),
+    position = rbind(pos, pos2, pos3)
   )
+)
 
-graph
+# Taking a quick look
+head(graph)
+```
+
+As before, we can either directly call the plot function
+for `gexf` objects, or coerce it into an `igraph` object:
+
+```{r igraph-plot-2}
+# plot(graph) 
+op <- par(mai = rep(0, 4)) # For extra space
+plot(gexf.to.igraph(graph))
+par(op)
 ```

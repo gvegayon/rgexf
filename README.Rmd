@@ -4,6 +4,10 @@ output:
     html_preview: false
 ---
 
+```{r include=FALSE}
+knitr::opts_chunk$set(fig.path = "man/figures/", warning = FALSE)
+```
+
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/rgexf)](https://cran.r-project.org/package=rgexf)
 [![Downloads](http://cranlogs.r-pkg.org/badges/rgexf?color=brightgreen)](https://cran.r-project.org/package=rgexf)
 [![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/rgexf)](https://cran.r-project.org/package=rgexf)
@@ -14,29 +18,32 @@ output:
 
 # rgexf: Build, Import and Export GEXF Graph Files <img src="man/figures/logo.svg" align="right" height="200"/>
 
-The first R package to work with GEXF graph files (used in Gephi and others). Using XML library, it allows the user to easily build/read graph files including attributes, GEXF viz attributes (such as color, size, and position), network dynamics (for both edges and nodes, including spells) and edges weighting. Users can build/handle graphs element-by-element or massively through data-frames, visualize the graph on a web browser through ~~sigmajs javascript~~ [gexf-js](https://github.com/raphv/gexf-js) library and interact with the igraph package.
+The first R package to work with GEXF graph files (used in Gephi and
+others). `rgexf` allows the user to quickly build/read graph files, including:
 
-## News ##
+a. Nodes/edges attributes,
 
-- [2020-06-12] Please refer to [NEWS.md] for more news.
-- [2020-02-11] Getting ready to put the package on CRAN again (was taken out in the last version).
-- [2016-11-08] Restarting the project.
-- [2015-02-03] Version 0.15.2.3 of rgexf is on CRAN. Just updating emails...
-- [2014-03-10] Version 0.14.9 of rgexf is on CRAN! solves issues 15-18. Thanks =).
-- [2013-08-07] Version 0.13.8 of rgexf is on CRAN! New plot.gexf method and igraph
-  integration working =).
-- [2013-05-09] Version 0.13.05 of rgexf (transitory) solves issues N 9 & 10. Looking
-  forward for the next CRAN version.
-- [2013-03-14] Version 0.13.03 of rgexf is on its way to CRAN. It now supports
-  working with spells!
-- [2013-01-04] Version 0.13.01 of rgexf is on its way to CRAN. Significant
-  improvements and new features!
-- [2012-06-19] Version 0.12.06 of rgexf is on CRAN! Now it can be directly download
-  from R.
-- [2012-03-29] Version 0.12.03.29 of rgexf has been released including many bug
-  fixes. Please download the latest version to check it out.
+b. GEXF viz attributes (such as color, size, and position),
 
-## Installation
+c. Network dynamics (for both edges and nodes, including spells), and
+
+d. Edges weighting.
+
+Users can build/handle graphs element-by-element or through data-frames,
+visualize the graph on a web browser through ~~sigmajs javascript~~
+[gexf-js](https://github.com/raphv/gexf-js) library and interact with
+the igraph package.
+
+```{r news, echo = FALSE, results='asis'}
+x <- readLines("NEWS.md")
+ids <- which(grepl("^#\\s*[a-zA-Z]",x))
+ids <- ids[1:2] - c(0, 1)
+cat(x[ids[1]:ids[2]], sep = "\n")
+```
+
+More in the [NEWS.md](NEWS.md) file.
+
+# Installation
 
 To install the latest version of `rgexf` you can use `devtools`
 
@@ -50,6 +57,8 @@ The more stable (but old) version of `rgexf` can be found on CRAN too:
 ```
 install.packages("rgexf")
 ```
+
+# Examples
 
 ## Example 1: Static net ##
 ```{r}
@@ -131,7 +140,10 @@ Moreover, we can use the `gexf.to.igraph()` function to convert the
 ```{r igraph}
 library(igraph)
 ig <- gexf.to.igraph(g)
+
+op <- par(mai = rep(0, 4)) # Making room
 plot(ig)
+par(op)
 ```
 
 # Code of Conduct

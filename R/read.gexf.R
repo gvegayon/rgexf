@@ -73,18 +73,25 @@ read.gexf <- function(x) {
     }
   }
   
-  graph$mode <- XML::xmlAttrs(XML::getNodeSet(gfile,"/r:gexf/r:graph", c(r=ns))[[1]])
+  graph$mode <- XML::xmlAttrs(
+    XML::getNodeSet(gfile, "/r:gexf/r:graph", c(r = ns))[[1L]]
+    )
   
   # Nodes
-  nodes <- XML::getNodeSet(gfile,"/r:gexf/r:graph/r:nodes/r:node", c(r=ns))
-  ids <- sapply(nodes, XML::xmlGetAttr, name="id")
-  labels <- lapply(nodes, XML::xmlGetAttr, name="label")
+  nodes  <- XML::getNodeSet(gfile, "/r:gexf/r:graph/r:nodes/r:node", c(r = ns))
+  ids    <- sapply(nodes, XML::xmlGetAttr, name = "id")
+  labels <- lapply(nodes, XML::xmlGetAttr, name = "label")
   labels <- sapply(labels, function(x) if (is.null(x)) "" else x)
-  if (all(labels == "")) labels <- ids
+
+  if (all(labels == ""))
+    labels <- ids
+
   graph$nodes <- data.frame(
-    id=ids, 
-    label=labels, 
-    stringsAsFactors=F)
+    id               = ids, 
+    label            = labels, 
+    stringsAsFactors = F
+    )
+
   rm(nodes)
   rm(ids)
   rm(labels)
@@ -95,13 +102,15 @@ read.gexf <- function(x) {
   
   # Extracting attributes
   node.vizattr <- XML::xpathApply(
-    gfile, "/r:gexf/r:graph/r:nodes/r:node", namespaces = c(r=ns, v="viz"),
+    gfile, "/r:gexf/r:graph/r:nodes/r:node", namespaces = c(r = ns, v = "viz"),
     fun=XML::xmlChildren
     )
   
   node.attr <- XML::xpathApply(
-    gfile, "/r:gexf/r:graph/r:nodes/r:node/r:attvalues", namespaces = c(r=ns),
-    fun=XML::xmlChildren
+    gfile,
+    "/r:gexf/r:graph/r:nodes/r:node/r:attvalues",
+    namespaces = c(r = ns),
+    fun        = XML::xmlChildren
   )
   
   node.attr <- lapply(node.attr, lapply, XML::xmlAttrs)
@@ -159,29 +168,37 @@ read.gexf <- function(x) {
   
   
   # Edges
-  edges <- XML::getNodeSet(gfile,"/r:gexf/r:graph/r:edges/r:edge", c(r=ns))
+  edges <- XML::getNodeSet(gfile, "/r:gexf/r:graph/r:edges/r:edge", c(r = ns))
 
   graph$edges <- data.frame(
-    id=sapply(edges, XML::xmlGetAttr, name="id", default=NA),
-    source=sapply(edges, XML::xmlGetAttr, name="source"), 
-    target=sapply(edges, XML::xmlGetAttr, name="target"), 
-    weight=as.numeric(sapply(edges, XML::xmlGetAttr, name="weight", default="1.0")),
-    stringsAsFactors=F)
+    id     = sapply(edges, XML::xmlGetAttr, name = "id", default = NA),
+    source = sapply(edges, XML::xmlGetAttr, name = "source"), 
+    target = sapply(edges, XML::xmlGetAttr, name = "target"), 
+    weight = as.numeric(
+      sapply(edges, XML::xmlGetAttr, name = "weight", default = "1.0")
+      ),
+    stringsAsFactors = FALSE
+    )
 
-  if (any(is.na(graph$edges[,1]))) graph$edges[,1] <- 1:NROW(graph$edges)
+  if (any(is.na(graph$edges[, 1L])))
+    graph$edges[, 1] <- 1L:NROW(graph$edges)
+
   rm(edges)
 
-  graph$graph <- XML::saveXML(gfile, encoding="UTF-8")
+  graph$graph <- XML::saveXML(gfile, encoding = "UTF-8")
 
   class(graph) <- "gexf"
 
-  order <- order(as.integer(graph$nodes$id))
+  order <- if (inherits(graph$nodes$id, "character"))
+    order(as.integer(as.factor(graph$nodes$id)))
+  else
+    order(as.integer(graph$nodes$id))
   
   build.and.validate.gexf(
-    nodes            = graph$nodes[order, , drop=FALSE],
+    nodes            = graph$nodes[order, , drop = FALSE],
     edges            = graph$edges,
     atts.definitions = graph$atts.definitions,
-    nodesVizAtt      = lapply(nodesVizAtt, "[", i=order, j=, drop=FALSE),
+    nodesVizAtt      = lapply(nodesVizAtt, "[", i = order, j =, drop = FALSE),
     edgesVizAtt      = edgesVizAtt,
     graph            = graph$graph
     )

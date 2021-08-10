@@ -32,6 +32,8 @@ Bug fixes
 
 -   Time range is now correctly computed (#19).
 
+-   Non-integer ids were incorrectly processed when reading GEXF files.
+
 
 
 CHANGES IN RGEXF VERSION 0.16.0 (2018-02-05)

@@ -13,40 +13,57 @@ Status](https://img.shields.io/codecov/c/github/gvegayon/rgexf/master.svg)](http
 # rgexf: Build, Import and Export GEXF Graph Files <img src="man/figures/logo.svg" align="right" height="200"/>
 
 The first R package to work with GEXF graph files (used in Gephi and
-others). Using XML library, it allows the user to easily build/read
-graph files including attributes, GEXF viz attributes (such as color,
-size, and position), network dynamics (for both edges and nodes,
-including spells) and edges weighting. Users can build/handle graphs
-element-by-element or massively through data-frames, visualize the graph
-on a web browser through ~~sigmajs javascript~~
+others). `rgexf` allows the user to quickly build/read graph files,
+including:
+
+1.  Nodes/edges attributes,
+
+2.  GEXF viz attributes (such as color, size, and position),
+
+3.  Network dynamics (for both edges and nodes, including spells), and
+
+4.  Edges weighting.
+
+Users can build/handle graphs element-by-element or through data-frames,
+visualize the graph on a web browser through ~~sigmajs javascript~~
 [gexf-js](https://github.com/raphv/gexf-js) library and interact with
 the igraph package.
 
-## News
+# Changes in rgexf version 0.16.2 (2021-08-10)
 
-  - \[2020-06-12\] Please refer to \[NEWS.md\] for more news.
-  - \[2020-02-11\] Getting ready to put the package on CRAN again (was
-    taken out in the last version).
-  - \[2016-11-08\] Restarting the project.
-  - \[2015-02-03\] Version 0.15.2.3 of rgexf is on CRAN. Just updating
-    emails…
-  - \[2014-03-10\] Version 0.14.9 of rgexf is on CRAN\! solves issues
-    15-18. Thanks =).
-  - \[2013-08-07\] Version 0.13.8 of rgexf is on CRAN\! New plot.gexf
-    method and igraph integration working =).
-  - \[2013-05-09\] Version 0.13.05 of rgexf (transitory) solves issues N
-    9 & 10. Looking forward for the next CRAN version.
-  - \[2013-03-14\] Version 0.13.03 of rgexf is on its way to CRAN. It
-    now supports working with spells\!
-  - \[2013-01-04\] Version 0.13.01 of rgexf is on its way to CRAN.
-    Significant improvements and new features\!
-  - \[2012-06-19\] Version 0.12.06 of rgexf is on CRAN\! Now it can be
-    directly download from R.
-  - \[2012-03-29\] Version 0.12.03.29 of rgexf has been released
-    including many bug fixes. Please download the latest version to
-    check it out.
+## New features and changes
 
-## Installation
+  - We now have a hex sticker\!
+
+  - Users can now cite properly `rgexf` with JOSS (see
+    `citation(package="rgexf")`).
+
+  - Added a few extra breaks across the examples (suggested by
+    @corneliusfritz).
+
+  - Improved documentation regarding spells and dynamic graphs.
+
+  - New `head()` function allows a glimpse of the `n` first nodes/edges.
+
+## Bug fixes
+
+  - Passing colors with four values (alpha) no longer fails during
+    checks. (reported by @IsabelFE).
+
+  - The summary function prints nodes’ attributes as expected.
+
+  - Hex colors now work (\#41 reported by @milnus).
+
+  - `gexf.to.igraph` correctly processes edge attributes (\#38 reported
+    by @balachia).
+
+  - Time range is now correctly computed (\#19).
+
+  - Non-integer ids were incorrectly processed when reading GEXF files.
+
+More in the [NEWS.md](NEWS.md) file.
+
+# Installation
 
 To install the latest version of `rgexf` you can use `devtools`
 
@@ -58,6 +75,8 @@ install_github("gvegayon/rgexf")
 The more stable (but old) version of `rgexf` can be found on CRAN too:
 
     install.packages("rgexf")
+
+# Examples
 
 ## Example 1: Static net
 
@@ -106,22 +125,22 @@ write.gexf(people, relations)
     ##     <nodes>
     ##       <node id="1" label="juan">
     ##         <viz:color r="255" g="99" b="71" a="1"/>
-    ##         <viz:position x="100" y="51.0986544575574" z="0"/>
+    ##         <viz:position x="94.404659820788" y="-94.1345053626487" z="0"/>
     ##         <viz:size value="10"/>
     ##       </node>
     ##       <node id="2" label="pedro">
     ##         <viz:color r="255" g="99" b="71" a="1"/>
-    ##         <viz:position x="-100" y="100" z="0"/>
+    ##         <viz:position x="37.464163645166" y="-100" z="0"/>
     ##         <viz:size value="10"/>
     ##       </node>
     ##       <node id="3" label="matthew">
     ##         <viz:color r="255" g="99" b="71" a="1"/>
-    ##         <viz:position x="-14.2129423502891" y="83.9680923396099" z="0"/>
+    ##         <viz:position x="100" y="100" z="0"/>
     ##         <viz:size value="10"/>
     ##       </node>
     ##       <node id="4" label="carlos">
     ##         <viz:color r="255" g="99" b="71" a="1"/>
-    ##         <viz:position x="66.396171662381" y="-100" z="0"/>
+    ##         <viz:position x="-100" y="-37.5843527569673" z="0"/>
     ##         <viz:size value="10"/>
     ##       </node>
     ##     </nodes>
@@ -167,22 +186,22 @@ write.gexf(people, relations, nodeDynamic=time)
     ##     <nodes>
     ##       <node id="1" label="juan" start="10" end="12">
     ##         <viz:color r="255" g="99" b="71" a="1"/>
-    ##         <viz:position x="100" y="-66.7395710811224" z="0"/>
+    ##         <viz:position x="-100" y="100" z="0"/>
     ##         <viz:size value="10"/>
     ##       </node>
     ##       <node id="2" label="pedro" start="13" end="13">
     ##         <viz:color r="255" g="99" b="71" a="1"/>
-    ##         <viz:position x="13.4431787806887" y="61.4550911958847" z="0"/>
+    ##         <viz:position x="100" y="72.3799682029933" z="0"/>
     ##         <viz:size value="10"/>
     ##       </node>
     ##       <node id="3" label="matthew" start="2" end="13">
     ##         <viz:color r="255" g="99" b="71" a="1"/>
-    ##         <viz:position x="-100" y="100" z="0"/>
+    ##         <viz:position x="0.466489099207365" y="-100" z="0"/>
     ##         <viz:size value="10"/>
     ##       </node>
     ##       <node id="4" label="carlos" start="2" end="13">
     ##         <viz:color r="255" g="99" b="71" a="1"/>
-    ##         <viz:position x="-79.4152158871745" y="-100" z="0"/>
+    ##         <viz:position x="89.1193831534432" y="9.31784801786497" z="0"/>
     ##         <viz:size value="10"/>
     ##       </node>
     ##     </nodes>
@@ -282,7 +301,7 @@ write.gexf(nodes=people, edges=relations, edgeDynamic=time.edges,
     ##           <attvalue for="att2" value="1"/>
     ##         </attvalues>
     ##         <viz:color r="255" g="99" b="71" a="1"/>
-    ##         <viz:position x="-100" y="100" z="0"/>
+    ##         <viz:position x="82.864631757955" y="-0.646295488635658" z="0"/>
     ##         <viz:size value="10"/>
     ##       </node>
     ##       <node id="2" label="pedro" start="13" end="13">
@@ -291,7 +310,7 @@ write.gexf(nodes=people, edges=relations, edgeDynamic=time.edges,
     ##           <attvalue for="att2" value="2"/>
     ##         </attvalues>
     ##         <viz:color r="255" g="99" b="71" a="1"/>
-    ##         <viz:position x="94.9185288504935" y="-48.6249157132907" z="0"/>
+    ##         <viz:position x="-85.6160835891587" y="100" z="0"/>
     ##         <viz:size value="10"/>
     ##       </node>
     ##       <node id="3" label="matthew" start="2" end="13">
@@ -300,7 +319,7 @@ write.gexf(nodes=people, edges=relations, edgeDynamic=time.edges,
     ##           <attvalue for="att2" value="3"/>
     ##         </attvalues>
     ##         <viz:color r="255" g="99" b="71" a="1"/>
-    ##         <viz:position x="32.196939799762" y="-100" z="0"/>
+    ##         <viz:position x="-100" y="-43.3754984826992" z="0"/>
     ##         <viz:size value="10"/>
     ##       </node>
     ##       <node id="4" label="carlos" start="2" end="13">
@@ -309,7 +328,7 @@ write.gexf(nodes=people, edges=relations, edgeDynamic=time.edges,
     ##           <attvalue for="att2" value="4"/>
     ##         </attvalues>
     ##         <viz:color r="255" g="99" b="71" a="1"/>
-    ##         <viz:position x="100" y="-51.6585495191186" z="0"/>
+    ##         <viz:position x="100" y="-100" z="0"/>
     ##         <viz:size value="10"/>
     ##       </node>
     ##     </nodes>
@@ -443,25 +462,17 @@ Moreover, we can use the `gexf.to.igraph()` function to convert the
 
 ``` r
 library(igraph)
-```
-
-    ## 
-    ## Attaching package: 'igraph'
-
-    ## The following objects are masked from 'package:stats':
-    ## 
-    ##     decompose, spectrum
-
-    ## The following object is masked from 'package:base':
-    ## 
-    ##     union
-
-``` r
 ig <- gexf.to.igraph(g)
+
+op <- par(mai = rep(0, 4)) # Making room
 plot(ig)
 ```
 
-![](README_files/figure-gfm/igraph-1.png)<!-- -->
+![](man/figures/igraph-1.png)<!-- -->
+
+``` r
+par(op)
+```
 
 # Code of Conduct
 
@@ -490,6 +501,7 @@ devtools::session_info()
     ## 
     ## ─ Packages ───────────────────────────────────────────────────────────────────
     ##  package     * version  date       lib source        
+    ##  bslib         0.2.5.1  2021-05-18 [1] CRAN (R 4.1.0)
     ##  cachem        1.0.5    2021-05-15 [1] CRAN (R 4.1.0)
     ##  callr         3.7.0    2021-04-20 [1] CRAN (R 4.1.0)
     ##  cli           3.0.0    2021-06-30 [1] CRAN (R 4.1.0)
@@ -506,6 +518,7 @@ devtools::session_info()
     ##  htmltools     0.5.1.1  2021-01-22 [1] CRAN (R 4.1.0)
     ##  httpuv        1.6.1    2021-05-07 [1] CRAN (R 4.1.0)
     ##  igraph      * 1.2.6    2020-10-06 [1] CRAN (R 4.1.0)
+    ##  jquerylib     0.1.4    2021-04-26 [1] CRAN (R 4.1.0)
     ##  jsonlite      1.7.2    2020-12-09 [1] CRAN (R 4.1.0)
     ##  knitr         1.33     2021-04-24 [1] CRAN (R 4.1.0)
     ##  later         1.2.0    2021-04-23 [1] CRAN (R 4.1.0)
@@ -523,10 +536,11 @@ devtools::session_info()
     ##  R6            2.5.0    2020-10-28 [1] CRAN (R 4.1.0)
     ##  Rcpp          1.0.6    2021-01-15 [1] CRAN (R 4.1.0)
     ##  remotes       2.3.0    2021-04-01 [1] CRAN (R 4.1.0)
-    ##  rgexf       * 0.16.1   2021-08-10 [1] local         
+    ##  rgexf       * 0.16.2   2021-08-10 [1] local         
     ##  rlang         0.4.11   2021-04-30 [1] CRAN (R 4.1.0)
     ##  rmarkdown     2.8      2021-05-07 [1] CRAN (R 4.1.0)
     ##  rprojroot     2.0.2    2020-11-15 [1] CRAN (R 4.1.0)
+    ##  sass          0.4.0    2021-05-12 [1] CRAN (R 4.1.0)
     ##  servr         0.22     2021-04-14 [1] CRAN (R 4.1.0)
     ##  sessioninfo   1.1.1    2018-11-05 [1] CRAN (R 4.1.0)
     ##  stringi       1.6.2    2021-05-17 [1] CRAN (R 4.1.0)

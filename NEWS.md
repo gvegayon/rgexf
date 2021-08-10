@@ -12,6 +12,7 @@
 
 * New `head()` function allows a glimpse of the `n` first nodes/edges.
 
+
 ## Bug fixes
 
 * Passing colors with four values (alpha) no longer fails during checks.
@@ -24,6 +25,8 @@
 * `gexf.to.igraph` correctly processes edge attributes (#38 reported by @balachia).
 
 * Time range is now correctly computed (#19).
+
+* Non-integer ids were incorrectly processed when reading GEXF files.
 
   
 
