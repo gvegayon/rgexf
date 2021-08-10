@@ -11,7 +11,7 @@ name: R CI
 on: [push, pull_request]
 
 env:
-  REPO: uscbiostats/aphylo
+  REPO: gvegayon/rgexf
 
 
 jobs:
@@ -22,11 +22,7 @@ jobs:
         include:
         - name: release
           cmd : R
-          cntr: ${REPO}:release
- 
-        - name: dev
-          cmd : R
-          cntr: ${REPO}:devel
+          cntr: ${REPO}:latest
 
     steps:
       - uses: actions/checkout@v2
@@ -41,5 +37,5 @@ jobs:
         run: docker run --rm -i -v ${PWD}:/mnt -w /mnt ${{ matrix.cntr }} ${{ matrix.cmd }} CMD build --no-build-vignettes --no-manual .
 
       - name: Check
-        run: docker run --rm -i -v ${PWD}:/mnt -w /mnt -e CI=true ${{ matrix.cntr }} ${{ matrix.cmd }} CMD check --no-vignettes --no-manual aphylo_*.tar.gz
+        run: docker run --rm -i -v ${PWD}:/mnt -w /mnt -e CI=true ${{ matrix.cntr }} ${{ matrix.cmd }} CMD check --no-vignettes --no-manual rgexf_*.tar.gz
 
