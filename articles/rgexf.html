@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>rgexf • rgexf</title>
+<title>Getting started with rgexf • rgexf</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
@@ -17,7 +17,7 @@
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="rgexf">
+<script src="../pkgdown.js"></script><meta property="og:title" content="Getting started with rgexf">
 <meta property="og:description" content="rgexf">
 <meta property="og:image" content="/logo.svg">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -80,10 +80,10 @@
       </header><script src="rgexf_files/header-attrs-2.6/header-attrs.js"></script><script src="rgexf_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>rgexf</h1>
+      <h1 data-toc-skip>Getting started with rgexf</h1>
                         <h4 class="author">George G. Vega Yon</h4>
             
-            <h4 class="date">Nov 9, 2016</h4>
+            <h4 class="date">August 11, 2021</h4>
       
       <small class="dont-index">Source: <a href="http://github.com/gvegayon/rgexf/blob/master/vignettes/rgexf.Rmd"><code>vignettes/rgexf.Rmd</code></a></small>
       <div class="hidden name"><code>rgexf.Rmd</code></div>
@@ -92,71 +92,253 @@
 
     
     
+<div id="introduction" class="section level1">
+<h1 class="hasAnchor">
+<a href="#introduction" class="anchor"></a>Introduction</h1>
+<p>The <code>rgexf</code> package provides a way to interact with <a href="https://gephi.org/gexf/format/">GEXF files</a>. The GEXF standard was developed by the <a href="http://gephi.org/">Gephi</a>–“Like Photoshop for graphs”–core team, and can be used to save static and dynamic networks.</p>
+<p>With the <code>rgexf</code> package, users can create <code>gexf</code> (R) objects from scratch, import GEXF files, coerce <code>gexf</code> objects into <code>igraph</code> objects, and visualize graphs using the <a href="https://github.com/raphv/gexf-js"><code>gexf-js</code> JavaScript library</a>. In this vignette, we will illustrate how can we (a) import a GEXF file into R and visualize it with <code>igraph,</code> and (b) create a <code>gexf</code> object from scratch.</p>
+</div>
+<div id="reading-gexf-files" class="section level1">
+<h1 class="hasAnchor">
+<a href="#reading-gexf-files" class="anchor"></a>Reading GEXF files</h1>
+<p>The <code>rgexf</code> package comes with a network from Les Misérables, which is featured in Gephi. To read GEXF files, we can use the <code>read.gexf</code> function:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://gvegayon.github.io/rgexf">rgexf</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="co"># Loading rgexf</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://gvegayon.github.io/rgexf">rgexf</a></span><span class="op">)</span>
 
-<span class="co"># Random graph demo</span>
-<span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">11</span><span class="op">)</span>
+<span class="co"># Accessing the path of the file</span>
+<span class="va">fn</span>    <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span>
+  <span class="st">"gexf-graphs/lesmiserables.gexf"</span>, package <span class="op">=</span> <span class="st">"rgexf"</span>
+  <span class="op">)</span>
+<span class="va">lesmi</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read.gexf.html">read.gexf</a></span><span class="op">(</span><span class="va">fn</span><span class="op">)</span>
 
-<span class="co"># Vertex</span>
+<span class="co"># Taking a look at the first handful of nodes and edges</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">lesmi</span><span class="op">)</span></code></pre></div>
+<pre><code>## &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+## &lt;gexf xmlns="http://www.gexf.net/1.3" xmlns:viz="http://www.gexf.net/1.3/viz" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.3" xsi:schemaLocation="http://www.gexf.net/1.3 http://www.gexf.net/1.3/gexf.xsd"&gt;
+##   &lt;meta lastmodifieddate="2016-11-09"&gt;
+##     &lt;creator&gt;Gephi 0.9&lt;/creator&gt;
+##     &lt;description/&gt;
+##   &lt;/meta&gt;
+##   &lt;graph defaultedgetype="undirected" mode="static"&gt;
+##     &lt;attributes class="node" mode="static"&gt;
+##       &lt;attribute id="modularity_class" title="Modularity Class" type="integer"/&gt;
+##     &lt;/attributes&gt;
+##     &lt;nodes&gt;
+##       &lt;node id="11" label="Valjean"&gt;
+##         &lt;attvalues&gt;
+##           &lt;attvalue for="modularity_class" value="1"/&gt;
+##         &lt;/attvalues&gt;
+##         &lt;viz:size value="100.0"/&gt;
+##         &lt;viz:position x="-87.93029" y="6.8120565"/&gt;
+##         &lt;viz:color r="245" g="91" b="91"/&gt;
+##       &lt;/node&gt;
+##       &lt;node id="48" label="Gavroche"&gt;
+##         &lt;attvalues&gt;
+##           &lt;attvalue for="modularity_class" value="8"/&gt;
+##         &lt;/attvalues&gt;
+##         &lt;viz:size value="61.600006"/&gt;
+##         &lt;viz:position x="387.89572" y="-110.462326"/&gt;
+##         &lt;viz:color r="91" g="245" b="91"/&gt;
+##       &lt;/node&gt;
+##       &lt;node id="55" label="Marius"&gt;
+##         &lt;attvalues&gt;
+##           &lt;attvalue for="modularity_class" value="6"/&gt;
+##         &lt;/attvalues&gt;
+##         &lt;viz:size value="53.37143"/&gt;
+##         &lt;viz:position x="206.44687" y="13.805411"/&gt;
+##         &lt;viz:color r="194" g="91" b="245"/&gt;
+##       &lt;/node&gt;
+##       &lt;node id="27" label="Javert"&gt;
+##         &lt;attvalues&gt;
+##           &lt;attvalue for="modularity_class" value="7"/&gt;
+##         &lt;/attvalues&gt;
+##         &lt;viz:size value="47.88571"/&gt;
+##         &lt;viz:position x="-81.46074" y="204.20204"/&gt;
+##         &lt;viz:color r="91" g="245" b="194"/&gt;
+##       &lt;/node&gt;
+##       &lt;node id="25" label="Thenardier"&gt;
+##         &lt;attvalues&gt;
+##           &lt;attvalue for="modularity_class" value="7"/&gt;
+##         &lt;/attvalues&gt;
+##         &lt;viz:size value="45.142853"/&gt;
+##         &lt;viz:position x="82.80825" y="203.1144"/&gt;
+##         &lt;viz:color r="91" g="245" b="194"/&gt;
+##       &lt;/node&gt;
+##       &lt;node id="23" label="Fantine"&gt;
+##         &lt;attvalues&gt;
+##           &lt;attvalue for="modularity_class" value="2"/&gt;
+##         &lt;/attvalues&gt;
+##         &lt;viz:size value="42.4"/&gt;
+##         &lt;viz:position x="-313.42786" y="289.44803"/&gt;
+##         &lt;viz:color r="91" g="194" b="245"/&gt;
+##       &lt;/node&gt;
+##          ...
+##      &lt;/nodes&gt;
+##     &lt;edges&gt;
+##       &lt;edge id="0" source="1" target="0"/&gt;
+##       &lt;edge id="1" source="2" target="0" weight="8.0"/&gt;
+##       &lt;edge id="2" source="3" target="0" weight="10.0"/&gt;
+##       &lt;edge id="3" source="3" target="2" weight="6.0"/&gt;
+##       &lt;edge id="4" source="4" target="0"/&gt;
+##       &lt;edge id="5" source="5" target="0"/&gt;
+##          ...
+##      &lt;/edges&gt;
+##   &lt;/graph&gt;
+## &lt;/gexf&gt;</code></pre>
+<p>Moreover, we can directly plot the graph using the <code>plot.gexf</code> method–through the <code>gexf-js</code> library–or coercing it into an <code>igraph</code> object and use igraph’s plotting engine:</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">lesmi_ig</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/igraph.to.gexf.html">gexf.to.igraph</a></span><span class="op">(</span><span class="va">lesmi</span><span class="op">)</span>
+<span class="va">lesmi_ig</span></code></pre></div>
+<pre><code>## IGRAPH dd14d29 UNW- 77 254 -- 
+## + attr: layout (g/n), name (v/c), color (v/c), size (v/n), weight (e/n)
+## + edges from dd14d29 (vertex names):
+##  [1] Myriel        --Napoleon       Myriel        --MlleBaptistine
+##  [3] Myriel        --MmeMagloire    MlleBaptistine--MmeMagloire   
+##  [5] Myriel        --CountessDeLo   Myriel        --Geborand      
+##  [7] Myriel        --Champtercier   Myriel        --Cravatte      
+##  [9] Myriel        --Count          Myriel        --OldMan        
+## [11] Myriel        --Valjean        Valjean       --MlleBaptistine
+## [13] Valjean       --MmeMagloire    Labarre       --Valjean       
+## [15] Valjean       --Marguerite     Valjean       --MmeDeR        
+## + ... omitted several edges</code></pre>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">op</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mai <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span> <span class="co"># For extra space</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">lesmi_ig</span><span class="op">)</span></code></pre></div>
+<p><img src="rgexf_files/figure-html/igraph-plot-1.png" width="672"></p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span><span class="va">op</span><span class="op">)</span></code></pre></div>
+<p>We can also go back:</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fu"><a href="../reference/igraph.to.gexf.html">igraph.to.gexf</a></span><span class="op">(</span><span class="va">lesmi_ig</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<pre><code>## &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+## &lt;gexf xmlns="http://www.gexf.net/1.3" xmlns:viz="http://www.gexf.net/1.3/viz" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.3 http://www.gexf.net/1.3/gexf.xsd" version="1.3"&gt;
+##   &lt;meta lastmodifieddate="2021-08-10"&gt;
+##     &lt;creator&gt;NodosChile&lt;/creator&gt;
+##     &lt;description&gt;A GEXF file written in R with "rgexf"&lt;/description&gt;
+##     &lt;keywords&gt;GEXF, NodosChile, R, rgexf, Gephi&lt;/keywords&gt;
+##   &lt;/meta&gt;
+##   &lt;graph mode="static" defaultedgetype="undirected"&gt;
+##     &lt;nodes&gt;
+##       &lt;node id="Myriel" label="Myriel"&gt;
+##         &lt;viz:color r="91" g="91" b="245" a="1"/&gt;
+##         &lt;viz:position x="-59.3517589858971" y="-56.1581638991552" z="0"/&gt;
+##         &lt;viz:size value="2.8685715"/&gt;
+##       &lt;/node&gt;
+##       &lt;node id="Napoleon" label="Napoleon"&gt;
+##         &lt;viz:color r="91" g="91" b="245" a="1"/&gt;
+##         &lt;viz:position x="-83.9713511303431" y="-85.1340358664038" z="0"/&gt;
+##         &lt;viz:size value="0.4"/&gt;
+##       &lt;/node&gt;
+##       &lt;node id="Labarre" label="Labarre"&gt;
+##         &lt;viz:color r="245" g="91" b="91" a="1"/&gt;
+##         &lt;viz:position x="-30.4625964839155" y="-43.3372506578706" z="0"/&gt;
+##         &lt;viz:size value="0.4"/&gt;
+##       &lt;/node&gt;
+##       &lt;node id="Valjean" label="Valjean"&gt;
+##         &lt;viz:color r="245" g="91" b="91" a="1"/&gt;
+##         &lt;viz:position x="-30.2329665737823" y="4.17800221251834" z="0"/&gt;
+##         &lt;viz:size value="10"/&gt;
+##       &lt;/node&gt;
+##       &lt;node id="Marguerite" label="Marguerite"&gt;
+##         &lt;viz:color r="245" g="91" b="91" a="1"/&gt;
+##         &lt;viz:position x="-71.2259031158826" y="39.194220798322" z="0"/&gt;
+##         &lt;viz:size value="0.6742859"/&gt;
+##       &lt;/node&gt;
+##       &lt;node id="MmeDeR" label="MmeDeR"&gt;
+##         &lt;viz:color r="245" g="91" b="91" a="1"/&gt;
+##         &lt;viz:position x="-47.5486940358376" y="-32.3118111852591" z="0"/&gt;
+##         &lt;viz:size value="0.4"/&gt;
+##       &lt;/node&gt;
+##          ...
+##      &lt;/nodes&gt;
+##     &lt;edges&gt;
+##       &lt;edge id="0" source="Myriel" target="Napoleon" weight="1"/&gt;
+##       &lt;edge id="1" source="Myriel" target="MlleBaptistine" weight="8"/&gt;
+##       &lt;edge id="2" source="Myriel" target="MmeMagloire" weight="10"/&gt;
+##       &lt;edge id="3" source="MlleBaptistine" target="MmeMagloire" weight="6"/&gt;
+##       &lt;edge id="4" source="Myriel" target="CountessDeLo" weight="1"/&gt;
+##       &lt;edge id="5" source="Myriel" target="Geborand" weight="1"/&gt;
+##          ...
+##      &lt;/edges&gt;
+##   &lt;/graph&gt;
+## &lt;/gexf&gt;</code></pre>
+</div>
+<div id="creating-gexf-files" class="section level1">
+<h1 class="hasAnchor">
+<a href="#creating-gexf-files" class="anchor"></a>Creating GEXF files</h1>
+<p>This example was extracted directly from the demo “gexfrandom.” Here we create three networks with the same set of vertices and layout, we color them and finalize plotting it with igraph.</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Random graph demo</span>
+<span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">11</span><span class="op">)</span></code></pre></div>
+<p>Creating the vertices:</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Vertex</span>
 <span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">30</span>
 <span class="va">prb</span> <span class="op">&lt;-</span> <span class="fl">.3</span>
-<span class="va">vertex1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>id<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="va">n</span>,label<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="va">n</span><span class="op">)</span>
-<span class="va">vertex2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>id<span class="op">=</span><span class="op">(</span><span class="va">n</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span><span class="op">:</span><span class="op">(</span><span class="fl">2</span><span class="op">*</span><span class="va">n</span><span class="op">)</span>,label<span class="op">=</span><span class="op">(</span><span class="va">n</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span><span class="op">:</span><span class="op">(</span><span class="fl">2</span><span class="op">*</span><span class="va">n</span><span class="op">)</span><span class="op">)</span>
-<span class="va">vertex3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>id<span class="op">=</span><span class="op">(</span><span class="fl">2</span><span class="op">*</span><span class="va">n</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span><span class="op">:</span><span class="op">(</span><span class="fl">3</span><span class="op">*</span><span class="va">n</span><span class="op">)</span>,label<span class="op">=</span><span class="op">(</span><span class="fl">2</span><span class="op">*</span><span class="va">n</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span><span class="op">:</span><span class="op">(</span><span class="fl">3</span><span class="op">*</span><span class="va">n</span><span class="op">)</span><span class="op">)</span>
+<span class="va">vertex1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>id <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="va">n</span>, label <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="va">n</span><span class="op">)</span>
+<span class="va">vertex2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>id <span class="op">=</span> <span class="op">(</span><span class="va">n</span> <span class="op">+</span> <span class="fl">1</span><span class="op">)</span><span class="op">:</span><span class="op">(</span><span class="fl">2</span> <span class="op">*</span> <span class="va">n</span><span class="op">)</span>, label <span class="op">=</span> <span class="op">(</span><span class="va">n</span> <span class="op">+</span> <span class="fl">1</span><span class="op">)</span><span class="op">:</span><span class="op">(</span><span class="fl">2</span> <span class="op">*</span> <span class="va">n</span><span class="op">)</span><span class="op">)</span>
+<span class="va">vertex3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>
+  id <span class="op">=</span> <span class="op">(</span><span class="fl">2</span> <span class="op">*</span> <span class="va">n</span> <span class="op">+</span> <span class="fl">1</span><span class="op">)</span><span class="op">:</span><span class="op">(</span><span class="fl">3</span> <span class="op">*</span> <span class="va">n</span><span class="op">)</span>, label <span class="op">=</span> <span class="op">(</span><span class="fl">2</span> <span class="op">*</span> <span class="va">n</span> <span class="op">+</span> <span class="fl">1</span><span class="op">)</span><span class="op">:</span><span class="op">(</span><span class="fl">3</span> <span class="op">*</span> <span class="va">n</span><span class="op">)</span>
+  <span class="op">)</span></code></pre></div>
+<p>Building edges:</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Edges</span>
+<span class="va">edges1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/combn.html">combn</a></span><span class="op">(</span><span class="va">vertex1</span><span class="op">$</span><span class="va">label</span>, <span class="fl">2</span><span class="op">)</span>
+<span class="va">edges1</span> <span class="op">&lt;-</span> <span class="va">edges1</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">edges1</span><span class="op">)</span><span class="op">)</span> <span class="op">&gt;</span> <span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="va">prb</span><span class="op">)</span><span class="op">)</span><span class="op">]</span>
+<span class="va">edges1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>source <span class="op">=</span> <span class="va">edges1</span><span class="op">[</span><span class="fl">1</span>, <span class="op">]</span>, target <span class="op">=</span> <span class="va">edges1</span><span class="op">[</span><span class="fl">2</span>, <span class="op">]</span><span class="op">)</span>
 
-<span class="co"># Edges</span>
-<span class="va">edges1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/combn.html">combn</a></span><span class="op">(</span><span class="va">vertex1</span><span class="op">$</span><span class="va">label</span>,<span class="fl">2</span><span class="op">)</span>
-<span class="va">edges1</span> <span class="op">&lt;-</span> <span class="va">edges1</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">edges1</span><span class="op">)</span><span class="op">)</span> <span class="op">&gt;</span> <span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">prb</span><span class="op">)</span><span class="op">)</span><span class="op">]</span>
-<span class="va">edges1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>source<span class="op">=</span><span class="va">edges1</span><span class="op">[</span><span class="fl">1</span>,<span class="op">]</span>,target<span class="op">=</span><span class="va">edges1</span><span class="op">[</span><span class="fl">2</span>,<span class="op">]</span><span class="op">)</span>
+<span class="va">edges2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/combn.html">combn</a></span><span class="op">(</span><span class="va">vertex2</span><span class="op">$</span><span class="va">label</span>, <span class="fl">2</span><span class="op">)</span>
+<span class="va">edges2</span> <span class="op">&lt;-</span> <span class="va">edges2</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">edges2</span><span class="op">)</span><span class="op">)</span> <span class="op">&gt;</span> <span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="va">prb</span><span class="op">)</span><span class="op">)</span><span class="op">]</span>
+<span class="va">edges2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>source <span class="op">=</span> <span class="va">edges2</span><span class="op">[</span><span class="fl">1</span>, <span class="op">]</span>, target <span class="op">=</span> <span class="va">edges2</span><span class="op">[</span><span class="fl">2</span>, <span class="op">]</span><span class="op">)</span>
 
-<span class="va">edges2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/combn.html">combn</a></span><span class="op">(</span><span class="va">vertex2</span><span class="op">$</span><span class="va">label</span>,<span class="fl">2</span><span class="op">)</span>
-<span class="va">edges2</span> <span class="op">&lt;-</span> <span class="va">edges2</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">edges2</span><span class="op">)</span><span class="op">)</span> <span class="op">&gt;</span> <span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">prb</span><span class="op">)</span><span class="op">)</span><span class="op">]</span>
-<span class="va">edges2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>source<span class="op">=</span><span class="va">edges2</span><span class="op">[</span><span class="fl">1</span>,<span class="op">]</span>,target<span class="op">=</span><span class="va">edges2</span><span class="op">[</span><span class="fl">2</span>,<span class="op">]</span><span class="op">)</span>
-
-<span class="va">edges3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/combn.html">combn</a></span><span class="op">(</span><span class="va">vertex3</span><span class="op">$</span><span class="va">label</span>,<span class="fl">2</span><span class="op">)</span>
-<span class="va">edges3</span> <span class="op">&lt;-</span> <span class="va">edges3</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">edges3</span><span class="op">)</span><span class="op">)</span> <span class="op">&gt;</span> <span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">prb</span><span class="op">)</span><span class="op">)</span><span class="op">]</span>
-<span class="va">edges3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>source<span class="op">=</span><span class="va">edges3</span><span class="op">[</span><span class="fl">1</span>,<span class="op">]</span>,target<span class="op">=</span><span class="va">edges3</span><span class="op">[</span><span class="fl">2</span>,<span class="op">]</span><span class="op">)</span>
-
-<span class="co"># Visual attributes</span>
-<span class="va">size</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="va">n</span>,max<span class="op">=</span><span class="fl">100</span><span class="op">)</span>
+<span class="va">edges3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/combn.html">combn</a></span><span class="op">(</span><span class="va">vertex3</span><span class="op">$</span><span class="va">label</span>, <span class="fl">2</span><span class="op">)</span>
+<span class="va">edges3</span> <span class="op">&lt;-</span> <span class="va">edges3</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">edges3</span><span class="op">)</span><span class="op">)</span> <span class="op">&gt;</span> <span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="va">prb</span><span class="op">)</span><span class="op">)</span><span class="op">]</span>
+<span class="va">edges3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>source <span class="op">=</span> <span class="va">edges3</span><span class="op">[</span><span class="fl">1</span>, <span class="op">]</span>, target <span class="op">=</span> <span class="va">edges3</span><span class="op">[</span><span class="fl">2</span>, <span class="op">]</span><span class="op">)</span></code></pre></div>
+<p>We can and add visual attributes:</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Visual attributes</span>
+<span class="va">size</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="va">n</span>, max <span class="op">=</span> <span class="fl">100</span><span class="op">)</span>
 <span class="va">color</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/palettes.html">terrain.colors</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span>
 <span class="va">color</span> <span class="op">&lt;-</span> <span class="va">color</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html">order</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span><span class="op">]</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="va">n</span><span class="op">]</span>
-<span class="va">color</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/grDevices/col2rgb.html">col2rgb</a></span><span class="op">(</span><span class="va">color</span><span class="op">)</span><span class="op">)</span>,<span class="fl">1</span><span class="op">)</span>
+<span class="va">color</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/grDevices/col2rgb.html">col2rgb</a></span><span class="op">(</span><span class="va">color</span><span class="op">)</span><span class="op">)</span>, <span class="fl">1</span><span class="op">)</span>
 
 <span class="va">color2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/palettes.html">heat.colors</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span>
 <span class="va">color2</span> <span class="op">&lt;-</span> <span class="va">color2</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html">order</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span><span class="op">]</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="va">n</span><span class="op">]</span>
-<span class="va">color2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/grDevices/col2rgb.html">col2rgb</a></span><span class="op">(</span><span class="va">color2</span><span class="op">)</span><span class="op">)</span>,<span class="fl">1</span><span class="op">)</span>
+<span class="va">color2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/grDevices/col2rgb.html">col2rgb</a></span><span class="op">(</span><span class="va">color2</span><span class="op">)</span><span class="op">)</span>, <span class="fl">1</span><span class="op">)</span>
 
 <span class="va">color3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/palettes.html">topo.colors</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span>
-<span class="va">color3</span><span class="op">&lt;-</span> <span class="va">color3</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html">order</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span><span class="op">]</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="va">n</span><span class="op">]</span>
-<span class="va">color3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/grDevices/col2rgb.html">col2rgb</a></span><span class="op">(</span><span class="va">color3</span><span class="op">)</span><span class="op">)</span>,<span class="fl">1</span><span class="op">)</span>
-
-<span class="co"># Nice layout</span>
-<span class="va">pos</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fl">0</span>, nrow<span class="op">=</span><span class="va">n</span>, ncol<span class="op">=</span><span class="fl">3</span><span class="op">)</span>
+<span class="va">color3</span> <span class="op">&lt;-</span> <span class="va">color3</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html">order</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span><span class="op">]</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="va">n</span><span class="op">]</span>
+<span class="va">color3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/grDevices/col2rgb.html">col2rgb</a></span><span class="op">(</span><span class="va">color3</span><span class="op">)</span><span class="op">)</span>, <span class="fl">1</span><span class="op">)</span></code></pre></div>
+<p>Generating a layout:</p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Nice layout</span>
+<span class="va">pos</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fl">0</span>, nrow <span class="op">=</span> <span class="va">n</span>, ncol <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>
 
 <span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">2</span><span class="op">:</span><span class="va">n</span><span class="op">)</span> <span class="op">{</span>
-  <span class="va">pos</span><span class="op">[</span><span class="va">i</span>,<span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">pos</span><span class="op">[</span><span class="va">i</span><span class="op">-</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">]</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/Trig.html">cos</a></span><span class="op">(</span><span class="fl">2</span><span class="op">*</span><span class="va">pi</span><span class="op">*</span><span class="op">(</span><span class="va">i</span><span class="op">*</span><span class="fl">1.7</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span><span class="op">/</span><span class="va">n</span><span class="op">)</span>
-  <span class="va">pos</span><span class="op">[</span><span class="va">i</span>,<span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">pos</span><span class="op">[</span><span class="va">i</span><span class="op">-</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">]</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/Trig.html">sin</a></span><span class="op">(</span><span class="fl">2</span><span class="op">*</span><span class="va">pi</span><span class="op">*</span><span class="op">(</span><span class="va">i</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span><span class="op">/</span><span class="va">n</span><span class="op">)</span>
+  <span class="va">pos</span><span class="op">[</span><span class="va">i</span>, <span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">pos</span><span class="op">[</span><span class="va">i</span> <span class="op">-</span> <span class="fl">1</span>, <span class="fl">1</span><span class="op">]</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/Trig.html">cos</a></span><span class="op">(</span><span class="fl">2</span> <span class="op">*</span> <span class="va">pi</span> <span class="op">*</span> <span class="op">(</span><span class="va">i</span> <span class="op">*</span> <span class="fl">1.7</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span> <span class="op">/</span> <span class="va">n</span><span class="op">)</span>
+  <span class="va">pos</span><span class="op">[</span><span class="va">i</span>, <span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">pos</span><span class="op">[</span><span class="va">i</span> <span class="op">-</span> <span class="fl">1</span>, <span class="fl">2</span><span class="op">]</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/Trig.html">sin</a></span><span class="op">(</span><span class="fl">2</span> <span class="op">*</span> <span class="va">pi</span> <span class="op">*</span> <span class="op">(</span><span class="va">i</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span> <span class="op">/</span> <span class="va">n</span><span class="op">)</span>
 <span class="op">}</span>
 
-<span class="va">pos</span> <span class="op">&lt;-</span> <span class="va">pos</span><span class="op">/</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">pos</span><span class="op">)</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">pos</span><span class="op">)</span><span class="op">)</span>
+<span class="va">pos</span> <span class="op">&lt;-</span> <span class="va">pos</span> <span class="op">/</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">pos</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">pos</span><span class="op">)</span><span class="op">)</span>
 <span class="va">pos2</span> <span class="op">&lt;-</span> <span class="va">pos</span>
-<span class="va">pos2</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">pos2</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">pos2</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">pos</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span><span class="op">)</span>
+<span class="va">pos2</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">pos2</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">pos2</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">pos</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span><span class="op">)</span>
 <span class="va">pos3</span> <span class="op">&lt;-</span> <span class="va">pos</span>
-<span class="va">pos3</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">pos3</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">pos2</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">pos</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span><span class="op">)</span>
-
-<span class="co"># Plotting</span>
-<span class="va">graph</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gexf-class.html">gexf</a></span><span class="op">(</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span><span class="va">vertex1</span>,<span class="va">vertex2</span>,<span class="va">vertex3</span><span class="op">)</span>, 
-  <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span><span class="va">edges1</span>, <span class="va">edges2</span>,<span class="va">edges3</span><span class="op">)</span>, 
-  nodesVizAtt<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
-    size<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">size</span>,<span class="va">size</span>,<span class="va">size</span><span class="op">)</span>,
-    color<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span><span class="va">color</span>,<span class="va">color2</span>,<span class="va">color3</span><span class="op">)</span>,
-    position<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span><span class="va">pos</span>,<span class="va">pos2</span>,<span class="va">pos3</span><span class="op">)</span><span class="op">)</span>
+<span class="va">pos3</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">pos3</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">pos2</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">pos</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span><span class="op">)</span></code></pre></div>
+<p>And finally, we can build the <code>gexf</code> object:</p>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">graph</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gexf-class.html">gexf</a></span><span class="op">(</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span><span class="va">vertex1</span>, <span class="va">vertex2</span>, <span class="va">vertex3</span><span class="op">)</span>,
+  <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span><span class="va">edges1</span>, <span class="va">edges2</span>, <span class="va">edges3</span><span class="op">)</span>,
+  nodesVizAtt <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
+    size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">size</span>, <span class="va">size</span>, <span class="va">size</span><span class="op">)</span>,
+    color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span><span class="va">color</span>, <span class="va">color2</span>, <span class="va">color3</span><span class="op">)</span>,
+    position <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span><span class="va">pos</span>, <span class="va">pos2</span>, <span class="va">pos3</span><span class="op">)</span>
   <span class="op">)</span>
+<span class="op">)</span>
 
-<span class="va">graph</span></code></pre></div>
+<span class="co"># Taking a quick look</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">graph</span><span class="op">)</span></code></pre></div>
 <pre><code>## &lt;?xml version="1.0" encoding="UTF-8"?&gt;
 ## &lt;gexf xmlns="http://www.gexf.net/1.3" xmlns:viz="http://www.gexf.net/1.3/viz" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.3 http://www.gexf.net/1.3/gexf.xsd" version="1.3"&gt;
 ##   &lt;meta lastmodifieddate="2021-08-10"&gt;
@@ -196,427 +378,8 @@
 ##         &lt;viz:position x="-37.9480370990221" y="-40.8977062214588" z="0"/&gt;
 ##         &lt;viz:size value="0.687453831889737"/&gt;
 ##       &lt;/node&gt;
-##       &lt;node id="7" label="7"&gt;
-##         &lt;viz:color r="241" g="213" b="208" a="1"/&gt;
-##         &lt;viz:position x="-45.6930628255776" y="-20.9056926535307" z="0"/&gt;
-##         &lt;viz:size value="0.455076139846233"/&gt;
-##       &lt;/node&gt;
-##       &lt;node id="8" label="8"&gt;
-##         &lt;viz:color r="231" g="204" b="31" a="1"/&gt;
-##         &lt;viz:position x="-56.0799678907797" y="2.8421709430404e-14" z="0"/&gt;
-##         &lt;viz:size value="4.89084131189134"/&gt;
-##       &lt;/node&gt;
-##       &lt;node id="9" label="9"&gt;
-##         &lt;viz:color r="0" g="166" b="0" a="1"/&gt;
-##         &lt;viz:position x="-67.8058602525761" y="20.9056926535307" z="0"/&gt;
-##         &lt;viz:size value="1.06425286547868"/&gt;
-##       &lt;/node&gt;
-##       &lt;node id="10" label="10"&gt;
-##         &lt;viz:color r="238" g="185" b="159" a="1"/&gt;
-##         &lt;viz:position x="-79.3998906302386" y="40.8977062214588" z="0"/&gt;
-##         &lt;viz:size value="8.23218872775807"/&gt;
-##       &lt;/node&gt;
-##       &lt;node id="11" label="11"&gt;
-##         &lt;viz:color r="237" g="180" b="142" a="1"/&gt;
-##         &lt;viz:position x="-89.4077499856522" y="59.1022937785412" z="0"/&gt;
-##         &lt;viz:size value="0.927991462051857"/&gt;
-##       &lt;/node&gt;
-##       &lt;node id="12" label="12"&gt;
-##         &lt;viz:color r="67" g="189" b="0" a="1"/&gt;
-##         &lt;viz:position x="-96.5740922623839" y="74.7238274932305" z="0"/&gt;
-##         &lt;viz:size value="9.14136338078235"/&gt;
-##       &lt;/node&gt;
-##       &lt;node id="13" label="13"&gt;
-##         &lt;viz:color r="189" g="220" b="0" a="1"/&gt;
-##         &lt;viz:position x="-100" y="87.0795713817591" z="0"/&gt;
-##         &lt;viz:size value="3.53316979659489"/&gt;
-##       &lt;/node&gt;
-##       &lt;node id="14" label="14"&gt;
-##         &lt;viz:color r="53" g="184" b="0" a="1"/&gt;
-##         &lt;viz:position x="-99.2557409635254" y="95.6295201467611" z="0"/&gt;
-##         &lt;viz:size value="8.61869378280028"/&gt;
-##       &lt;/node&gt;
-##       &lt;node id="15" label="15"&gt;
-##         &lt;viz:color r="234" g="182" b="78" a="1"/&gt;
-##         &lt;viz:position x="-94.4346720451008" y="100" z="0"/&gt;
-##         &lt;viz:size value="1.2610242647795"/&gt;
-##       &lt;/node&gt;
-##       &lt;node id="16" label="16"&gt;
-##         &lt;viz:color r="241" g="226" b="225" a="1"/&gt;
-##         &lt;viz:position x="-86.1415289468984" y="100" z="0"/&gt;
-##         &lt;viz:size value="0.0143591545667925"/&gt;
-##       &lt;/node&gt;
-##       &lt;node id="17" label="17"&gt;
-##         &lt;viz:color r="230" g="230" b="0" a="1"/&gt;
-##         &lt;viz:position x="-75.4165705408747" y="95.6295201467611" z="0"/&gt;
-##         &lt;viz:size value="7.10052109910721"/&gt;
-##       &lt;/node&gt;
-##       &lt;node id="18" label="18"&gt;
-##         &lt;viz:color r="99" g="198" b="0" a="1"/&gt;
-##         &lt;viz:position x="-63.6050929350459" y="87.079571381759" z="0"/&gt;
-##         &lt;viz:size value="8.88278382787005"/&gt;
-##       &lt;/node&gt;
-##       &lt;node id="19" label="19"&gt;
-##         &lt;viz:color r="12" g="170" b="0" a="1"/&gt;
-##         &lt;viz:position x="-52.1886808826091" y="74.7238274932304" z="0"/&gt;
-##         &lt;viz:size value="7.90328376463875"/&gt;
-##       &lt;/node&gt;
-##       &lt;node id="20" label="20"&gt;
-##         &lt;viz:color r="25" g="175" b="0" a="1"/&gt;
-##         &lt;viz:position x="-42.5993636857037" y="59.1022937785412" z="0"/&gt;
-##         &lt;viz:size value="6.49842174340273"/&gt;
-##       &lt;/node&gt;
-##       &lt;node id="21" label="21"&gt;
-##         &lt;viz:color r="230" g="216" b="15" a="1"/&gt;
-##         &lt;viz:position x="-36.0399871377719" y="40.8977062214588" z="0"/&gt;
-##         &lt;viz:size value="2.80070855776688"/&gt;
-##       &lt;/node&gt;
-##       &lt;node id="22" label="22"&gt;
-##         &lt;viz:color r="235" g="177" b="110" a="1"/&gt;
-##         &lt;viz:position x="-33.3333333333333" y="20.9056926535307" z="0"/&gt;
-##         &lt;viz:size value="8.00671317602126"/&gt;
-##       &lt;/node&gt;
-##       &lt;node id="23" label="23"&gt;
-##         &lt;viz:color r="83" g="193" b="0" a="1"/&gt;
-##         &lt;viz:position x="-34.8189141558852" y="0" z="0"/&gt;
-##         &lt;viz:size value="1.51473391848222"/&gt;
-##       &lt;/node&gt;
-##       &lt;node id="24" label="24"&gt;
-##         &lt;viz:color r="133" g="207" b="0" a="1"/&gt;
-##         &lt;viz:position x="-40.3103842581485" y="-20.9056926535307" z="0"/&gt;
-##         &lt;viz:size value="6.96516852279887"/&gt;
-##       &lt;/node&gt;
-##       &lt;node id="25" label="25"&gt;
-##         &lt;viz:color r="236" g="177" b="126" a="1"/&gt;
-##         &lt;viz:position x="-49.1189154809659" y="-40.8977062214588" z="0"/&gt;
-##         &lt;viz:size value="3.1046634512359"/&gt;
-##       &lt;/node&gt;
-##       &lt;node id="26" label="26"&gt;
-##         &lt;viz:color r="170" g="216" b="0" a="1"/&gt;
-##         &lt;viz:position x="-60.1396007167501" y="-59.1022937785412" z="0"/&gt;
-##         &lt;viz:size value="2.14767305400611"/&gt;
-##       &lt;/node&gt;
-##       &lt;node id="27" label="27"&gt;
-##         &lt;viz:color r="38" g="179" b="0" a="1"/&gt;
-##         &lt;viz:position x="-71.990049060652" y="-74.7238274932304" z="0"/&gt;
-##         &lt;viz:size value="3.94154096664591"/&gt;
-##       &lt;/node&gt;
-##       &lt;node id="28" label="28"&gt;
-##         &lt;viz:color r="116" g="202" b="0" a="1"/&gt;
-##         &lt;viz:position x="-83.1837874251545" y="-87.0795713817591" z="0"/&gt;
-##         &lt;viz:size value="3.1921026392795"/&gt;
-##       &lt;/node&gt;
-##       &lt;node id="29" label="29"&gt;
-##         &lt;viz:color r="239" g="192" b="175" a="1"/&gt;
-##         &lt;viz:position x="-92.3167178095178" y="-95.6295201467611" z="0"/&gt;
-##         &lt;viz:size value="4.63972049757445"/&gt;
-##       &lt;/node&gt;
-##       &lt;node id="30" label="30"&gt;
-##         &lt;viz:color r="209" g="225" b="0" a="1"/&gt;
-##         &lt;viz:position x="-98.2432417661092" y="-100" z="0"/&gt;
-##         &lt;viz:size value="4.4760543474487"/&gt;
-##       &lt;/node&gt;
-##       &lt;node id="31" label="31"&gt;
-##         &lt;viz:color r="255" g="139" b="0" a="1"/&gt;
-##         &lt;viz:position x="10.586698775887" y="-100" z="0"/&gt;
-##         &lt;viz:size value="10"/&gt;
-##       &lt;/node&gt;
-##       &lt;node id="32" label="32"&gt;
-##         &lt;viz:color r="255" g="232" b="0" a="1"/&gt;
-##         &lt;viz:position x="20.973603841089" y="-95.6295201467611" z="0"/&gt;
-##         &lt;viz:size value="4.95748278927415"/&gt;
-##       &lt;/node&gt;
-##       &lt;node id="33" label="33"&gt;
-##         &lt;viz:color r="255" g="0" b="0" a="1"/&gt;
-##         &lt;viz:position x="28.7186295676446" y="-87.079571381759" z="0"/&gt;
-##         &lt;viz:size value="0.337997611829421"/&gt;
-##       &lt;/node&gt;
-##       &lt;node id="34" label="34"&gt;
-##         &lt;viz:color r="255" g="104" b="0" a="1"/&gt;
-##         &lt;viz:position x="32.8502707457463" y="-74.7238274932304" z="0"/&gt;
-##         &lt;viz:size value="5.50694120090748"/&gt;
-##       &lt;/node&gt;
-##       &lt;node id="35" label="35"&gt;
-##         &lt;viz:color r="255" g="162" b="0" a="1"/&gt;
-##         &lt;viz:position x="32.8502707457463" y="-59.1022937785412" z="0"/&gt;
-##         &lt;viz:size value="3.43443007471073"/&gt;
-##       &lt;/node&gt;
-##       &lt;node id="36" label="36"&gt;
-##         &lt;viz:color r="255" g="81" b="0" a="1"/&gt;
-##         &lt;viz:position x="28.7186295676446" y="-40.8977062214588" z="0"/&gt;
-##         &lt;viz:size value="0.687453831889737"/&gt;
-##       &lt;/node&gt;
-##       &lt;node id="37" label="37"&gt;
-##         &lt;viz:color r="255" g="209" b="0" a="1"/&gt;
-##         &lt;viz:position x="20.973603841089" y="-20.9056926535307" z="0"/&gt;
-##         &lt;viz:size value="0.455076139846233"/&gt;
-##       &lt;/node&gt;
-##       &lt;node id="38" label="38"&gt;
-##         &lt;viz:color r="255" g="35" b="0" a="1"/&gt;
-##         &lt;viz:position x="10.586698775887" y="2.8421709430404e-14" z="0"/&gt;
-##         &lt;viz:size value="4.89084131189134"/&gt;
-##       &lt;/node&gt;
-##       &lt;node id="39" label="39"&gt;
-##         &lt;viz:color r="255" g="46" b="0" a="1"/&gt;
-##         &lt;viz:position x="-1.13919358590941" y="20.9056926535307" z="0"/&gt;
-##         &lt;viz:size value="1.06425286547868"/&gt;
-##       &lt;/node&gt;
-##       &lt;node id="40" label="40"&gt;
-##         &lt;viz:color r="255" g="255" b="55" a="1"/&gt;
-##         &lt;viz:position x="-12.733223963572" y="40.8977062214588" z="0"/&gt;
-##         &lt;viz:size value="8.23218872775807"/&gt;
-##       &lt;/node&gt;
-##       &lt;node id="41" label="41"&gt;
-##         &lt;viz:color r="255" g="174" b="0" a="1"/&gt;
-##         &lt;viz:position x="-22.7410833189856" y="59.1022937785412" z="0"/&gt;
-##         &lt;viz:size value="0.927991462051857"/&gt;
-##       &lt;/node&gt;
-##       &lt;node id="42" label="42"&gt;
-##         &lt;viz:color r="255" g="58" b="0" a="1"/&gt;
-##         &lt;viz:position x="-29.9074255957172" y="74.7238274932305" z="0"/&gt;
-##         &lt;viz:size value="9.14136338078235"/&gt;
-##       &lt;/node&gt;
-##       &lt;node id="43" label="43"&gt;
-##         &lt;viz:color r="255" g="23" b="0" a="1"/&gt;
-##         &lt;viz:position x="-33.3333333333333" y="87.0795713817591" z="0"/&gt;
-##         &lt;viz:size value="3.53316979659489"/&gt;
-##       &lt;/node&gt;
-##       &lt;node id="44" label="44"&gt;
-##         &lt;viz:color r="255" g="70" b="0" a="1"/&gt;
-##         &lt;viz:position x="-32.5890742968587" y="95.6295201467611" z="0"/&gt;
-##         &lt;viz:size value="8.61869378280028"/&gt;
-##       &lt;/node&gt;
-##       &lt;node id="45" label="45"&gt;
-##         &lt;viz:color r="255" g="255" b="0" a="1"/&gt;
-##         &lt;viz:position x="-27.7680053784342" y="100" z="0"/&gt;
-##         &lt;viz:size value="1.2610242647795"/&gt;
-##       &lt;/node&gt;
-##       &lt;node id="46" label="46"&gt;
-##         &lt;viz:color r="255" g="151" b="0" a="1"/&gt;
-##         &lt;viz:position x="-19.4748622802317" y="100" z="0"/&gt;
-##         &lt;viz:size value="0.0143591545667925"/&gt;
-##       &lt;/node&gt;
-##       &lt;node id="47" label="47"&gt;
-##         &lt;viz:color r="255" g="255" b="164" a="1"/&gt;
-##         &lt;viz:position x="-8.74990387420806" y="95.6295201467611" z="0"/&gt;
-##         &lt;viz:size value="7.10052109910721"/&gt;
-##       &lt;/node&gt;
-##       &lt;node id="48" label="48"&gt;
-##         &lt;viz:color r="255" g="12" b="0" a="1"/&gt;
-##         &lt;viz:position x="3.0615737316208" y="87.079571381759" z="0"/&gt;
-##         &lt;viz:size value="8.88278382787005"/&gt;
-##       &lt;/node&gt;
-##       &lt;node id="49" label="49"&gt;
-##         &lt;viz:color r="255" g="255" b="200" a="1"/&gt;
-##         &lt;viz:position x="14.4779857840576" y="74.7238274932304" z="0"/&gt;
-##         &lt;viz:size value="7.90328376463875"/&gt;
-##       &lt;/node&gt;
-##       &lt;node id="50" label="50"&gt;
-##         &lt;viz:color r="255" g="255" b="18" a="1"/&gt;
-##         &lt;viz:position x="24.0673029809629" y="59.1022937785412" z="0"/&gt;
-##         &lt;viz:size value="6.49842174340273"/&gt;
-##       &lt;/node&gt;
-##       &lt;node id="51" label="51"&gt;
-##         &lt;viz:color r="255" g="255" b="91" a="1"/&gt;
-##         &lt;viz:position x="30.6266795288947" y="40.8977062214588" z="0"/&gt;
-##         &lt;viz:size value="2.80070855776688"/&gt;
-##       &lt;/node&gt;
-##       &lt;node id="52" label="52"&gt;
-##         &lt;viz:color r="255" g="220" b="0" a="1"/&gt;
-##         &lt;viz:position x="33.3333333333333" y="20.9056926535307" z="0"/&gt;
-##         &lt;viz:size value="8.00671317602126"/&gt;
-##       &lt;/node&gt;
-##       &lt;node id="53" label="53"&gt;
-##         &lt;viz:color r="255" g="197" b="0" a="1"/&gt;
-##         &lt;viz:position x="31.8477525107815" y="0" z="0"/&gt;
-##         &lt;viz:size value="1.51473391848222"/&gt;
-##       &lt;/node&gt;
-##       &lt;node id="54" label="54"&gt;
-##         &lt;viz:color r="255" g="128" b="0" a="1"/&gt;
-##         &lt;viz:position x="26.3562824085182" y="-20.9056926535307" z="0"/&gt;
-##         &lt;viz:size value="6.96516852279887"/&gt;
-##       &lt;/node&gt;
-##       &lt;node id="55" label="55"&gt;
-##         &lt;viz:color r="255" g="185" b="0" a="1"/&gt;
-##         &lt;viz:position x="17.5477511857008" y="-40.8977062214588" z="0"/&gt;
-##         &lt;viz:size value="3.1046634512359"/&gt;
-##       &lt;/node&gt;
-##       &lt;node id="56" label="56"&gt;
-##         &lt;viz:color r="255" g="243" b="0" a="1"/&gt;
-##         &lt;viz:position x="6.5270659499166" y="-59.1022937785412" z="0"/&gt;
-##         &lt;viz:size value="2.14767305400611"/&gt;
-##       &lt;/node&gt;
-##       &lt;node id="57" label="57"&gt;
-##         &lt;viz:color r="255" g="93" b="0" a="1"/&gt;
-##         &lt;viz:position x="-5.32338239398536" y="-74.7238274932304" z="0"/&gt;
-##         &lt;viz:size value="3.94154096664591"/&gt;
-##       &lt;/node&gt;
-##       &lt;node id="58" label="58"&gt;
-##         &lt;viz:color r="255" g="255" b="128" a="1"/&gt;
-##         &lt;viz:position x="-16.5171207584878" y="-87.0795713817591" z="0"/&gt;
-##         &lt;viz:size value="3.1921026392795"/&gt;
-##       &lt;/node&gt;
-##       &lt;node id="59" label="59"&gt;
-##         &lt;viz:color r="255" g="116" b="0" a="1"/&gt;
-##         &lt;viz:position x="-25.6500511428511" y="-95.6295201467611" z="0"/&gt;
-##         &lt;viz:size value="4.63972049757445"/&gt;
-##       &lt;/node&gt;
-##       &lt;node id="60" label="60"&gt;
-##         &lt;viz:color r="255" g="255" b="237" a="1"/&gt;
-##         &lt;viz:position x="-31.5765750994425" y="-100" z="0"/&gt;
-##         &lt;viz:size value="4.4760543474487"/&gt;
-##       &lt;/node&gt;
-##       &lt;node id="61" label="61"&gt;
-##         &lt;viz:color r="0" g="128" b="255" a="1"/&gt;
-##         &lt;viz:position x="77.2533654425537" y="-100" z="0"/&gt;
-##         &lt;viz:size value="10"/&gt;
-##       &lt;/node&gt;
-##       &lt;node id="62" label="62"&gt;
-##         &lt;viz:color r="60" g="255" b="0" a="1"/&gt;
-##         &lt;viz:position x="87.6402705077557" y="-95.6295201467611" z="0"/&gt;
-##         &lt;viz:size value="4.95748278927415"/&gt;
-##       &lt;/node&gt;
-##       &lt;node id="63" label="63"&gt;
-##         &lt;viz:color r="255" g="221" b="159" a="1"/&gt;
-##         &lt;viz:position x="95.3852962343113" y="-87.079571381759" z="0"/&gt;
-##         &lt;viz:size value="0.337997611829421"/&gt;
-##       &lt;/node&gt;
-##       &lt;node id="64" label="64"&gt;
-##         &lt;viz:color r="0" g="162" b="255" a="1"/&gt;
-##         &lt;viz:position x="99.5169374124129" y="-74.7238274932304" z="0"/&gt;
-##         &lt;viz:size value="5.50694120090748"/&gt;
-##       &lt;/node&gt;
-##       &lt;node id="65" label="65"&gt;
-##         &lt;viz:color r="255" g="236" b="40" a="1"/&gt;
-##         &lt;viz:position x="99.5169374124129" y="-59.1022937785412" z="0"/&gt;
-##         &lt;viz:size value="3.43443007471073"/&gt;
-##       &lt;/node&gt;
-##       &lt;node id="66" label="66"&gt;
-##         &lt;viz:color r="128" g="255" b="0" a="1"/&gt;
-##         &lt;viz:position x="95.3852962343113" y="-40.8977062214588" z="0"/&gt;
-##         &lt;viz:size value="0.687453831889737"/&gt;
-##       &lt;/node&gt;
-##       &lt;node id="67" label="67"&gt;
-##         &lt;viz:color r="255" g="245" b="20" a="1"/&gt;
-##         &lt;viz:position x="87.6402705077557" y="-20.9056926535307" z="0"/&gt;
-##         &lt;viz:size value="0.455076139846233"/&gt;
-##       &lt;/node&gt;
-##       &lt;node id="68" label="68"&gt;
-##         &lt;viz:color r="26" g="255" b="0" a="1"/&gt;
-##         &lt;viz:position x="77.2533654425537" y="2.8421709430404e-14" z="0"/&gt;
-##         &lt;viz:size value="4.89084131189134"/&gt;
-##       &lt;/node&gt;
-##       &lt;node id="69" label="69"&gt;
-##         &lt;viz:color r="0" g="229" b="255" a="1"/&gt;
-##         &lt;viz:position x="65.5274730807573" y="20.9056926535307" z="0"/&gt;
-##         &lt;viz:size value="1.06425286547868"/&gt;
-##       &lt;/node&gt;
-##       &lt;node id="70" label="70"&gt;
-##         &lt;viz:color r="0" g="25" b="255" a="1"/&gt;
-##         &lt;viz:position x="53.9334427030947" y="40.8977062214588" z="0"/&gt;
-##         &lt;viz:size value="8.23218872775807"/&gt;
-##       &lt;/node&gt;
-##       &lt;node id="71" label="71"&gt;
-##         &lt;viz:color r="255" g="219" b="139" a="1"/&gt;
-##         &lt;viz:position x="43.9255833476811" y="59.1022937785412" z="0"/&gt;
-##         &lt;viz:size value="0.927991462051857"/&gt;
-##       &lt;/node&gt;
-##       &lt;node id="72" label="72"&gt;
-##         &lt;viz:color r="195" g="255" b="0" a="1"/&gt;
-##         &lt;viz:position x="36.7592410709495" y="74.7238274932305" z="0"/&gt;
-##         &lt;viz:size value="9.14136338078235"/&gt;
-##       &lt;/node&gt;
-##       &lt;node id="73" label="73"&gt;
-##         &lt;viz:color r="0" g="93" b="255" a="1"/&gt;
-##         &lt;viz:position x="33.3333333333333" y="87.0795713817591" z="0"/&gt;
-##         &lt;viz:size value="3.53316979659489"/&gt;
-##       &lt;/node&gt;
-##       &lt;node id="74" label="74"&gt;
-##         &lt;viz:color r="93" g="255" b="0" a="1"/&gt;
-##         &lt;viz:position x="34.0775923698079" y="95.6295201467611" z="0"/&gt;
-##         &lt;viz:size value="8.61869378280028"/&gt;
-##       &lt;/node&gt;
-##       &lt;node id="75" label="75"&gt;
-##         &lt;viz:color r="255" g="219" b="119" a="1"/&gt;
-##         &lt;viz:position x="38.8986612882325" y="100" z="0"/&gt;
-##         &lt;viz:size value="1.2610242647795"/&gt;
-##       &lt;/node&gt;
-##       &lt;node id="76" label="76"&gt;
-##         &lt;viz:color r="0" g="60" b="255" a="1"/&gt;
-##         &lt;viz:position x="47.1918043864349" y="100" z="0"/&gt;
-##         &lt;viz:size value="0.0143591545667925"/&gt;
-##       &lt;/node&gt;
-##       &lt;node id="77" label="77"&gt;
-##         &lt;viz:color r="255" g="224" b="79" a="1"/&gt;
-##         &lt;viz:position x="57.9167627924586" y="95.6295201467611" z="0"/&gt;
-##         &lt;viz:size value="7.10052109910721"/&gt;
-##       &lt;/node&gt;
-##       &lt;node id="78" label="78"&gt;
-##         &lt;viz:color r="8" g="0" b="255" a="1"/&gt;
-##         &lt;viz:position x="69.7282403982875" y="87.079571381759" z="0"/&gt;
-##         &lt;viz:size value="8.88278382787005"/&gt;
-##       &lt;/node&gt;
-##       &lt;node id="79" label="79"&gt;
-##         &lt;viz:color r="255" g="224" b="179" a="1"/&gt;
-##         &lt;viz:position x="81.1446524507242" y="74.7238274932304" z="0"/&gt;
-##         &lt;viz:size value="7.90328376463875"/&gt;
-##       &lt;/node&gt;
-##       &lt;node id="80" label="80"&gt;
-##         &lt;viz:color r="162" g="255" b="0" a="1"/&gt;
-##         &lt;viz:position x="90.7339696476296" y="59.1022937785412" z="0"/&gt;
-##         &lt;viz:size value="6.49842174340273"/&gt;
-##       &lt;/node&gt;
-##       &lt;node id="81" label="81"&gt;
-##         &lt;viz:color r="76" g="0" b="255" a="1"/&gt;
-##         &lt;viz:position x="97.2933461955614" y="40.8977062214588" z="0"/&gt;
-##         &lt;viz:size value="2.80070855776688"/&gt;
-##       &lt;/node&gt;
-##       &lt;node id="82" label="82"&gt;
-##         &lt;viz:color r="0" g="195" b="255" a="1"/&gt;
-##         &lt;viz:position x="100" y="20.9056926535307" z="0"/&gt;
-##         &lt;viz:size value="8.00671317602126"/&gt;
-##       &lt;/node&gt;
-##       &lt;node id="83" label="83"&gt;
-##         &lt;viz:color r="230" g="255" b="0" a="1"/&gt;
-##         &lt;viz:position x="98.5144191774482" y="0" z="0"/&gt;
-##         &lt;viz:size value="1.51473391848222"/&gt;
-##       &lt;/node&gt;
-##       &lt;node id="84" label="84"&gt;
-##         &lt;viz:color r="0" g="255" b="8" a="1"/&gt;
-##         &lt;viz:position x="93.0229490751848" y="-20.9056926535307" z="0"/&gt;
-##         &lt;viz:size value="6.96516852279887"/&gt;
-##       &lt;/node&gt;
-##       &lt;node id="85" label="85"&gt;
-##         &lt;viz:color r="42" g="0" b="255" a="1"/&gt;
-##         &lt;viz:position x="84.2144178523674" y="-40.8977062214588" z="0"/&gt;
-##         &lt;viz:size value="3.1046634512359"/&gt;
-##       &lt;/node&gt;
-##       &lt;node id="86" label="86"&gt;
-##         &lt;viz:color r="0" g="255" b="43" a="1"/&gt;
-##         &lt;viz:position x="73.1937326165833" y="-59.1022937785412" z="0"/&gt;
-##         &lt;viz:size value="2.14767305400611"/&gt;
-##       &lt;/node&gt;
-##       &lt;node id="87" label="87"&gt;
-##         &lt;viz:color r="255" g="220" b="99" a="1"/&gt;
-##         &lt;viz:position x="61.3432842726813" y="-74.7238274932304" z="0"/&gt;
-##         &lt;viz:size value="3.94154096664591"/&gt;
-##       &lt;/node&gt;
-##       &lt;node id="88" label="88"&gt;
-##         &lt;viz:color r="255" g="229" b="60" a="1"/&gt;
-##         &lt;viz:position x="50.1495459081788" y="-87.0795713817591" z="0"/&gt;
-##         &lt;viz:size value="3.1921026392795"/&gt;
-##       &lt;/node&gt;
-##       &lt;node id="89" label="89"&gt;
-##         &lt;viz:color r="255" g="255" b="0" a="1"/&gt;
-##         &lt;viz:position x="41.0166155238155" y="-95.6295201467611" z="0"/&gt;
-##         &lt;viz:size value="4.63972049757445"/&gt;
-##       &lt;/node&gt;
-##       &lt;node id="90" label="90"&gt;
-##         &lt;viz:color r="0" g="255" b="77" a="1"/&gt;
-##         &lt;viz:position x="35.0900915672242" y="-100" z="0"/&gt;
-##         &lt;viz:size value="4.4760543474487"/&gt;
-##       &lt;/node&gt;
-##     &lt;/nodes&gt;
+##          ...
+##      &lt;/nodes&gt;
 ##     &lt;edges&gt;
 ##       &lt;edge id="0" source="1" target="7" weight="1"/&gt;
 ##       &lt;edge id="1" source="1" target="10" weight="1"/&gt;
@@ -624,414 +387,26 @@
 ##       &lt;edge id="3" source="1" target="15" weight="1"/&gt;
 ##       &lt;edge id="4" source="1" target="16" weight="1"/&gt;
 ##       &lt;edge id="5" source="2" target="8" weight="1"/&gt;
-##       &lt;edge id="6" source="2" target="19" weight="1"/&gt;
-##       &lt;edge id="7" source="2" target="23" weight="1"/&gt;
-##       &lt;edge id="8" source="3" target="4" weight="1"/&gt;
-##       &lt;edge id="9" source="3" target="8" weight="1"/&gt;
-##       &lt;edge id="10" source="3" target="11" weight="1"/&gt;
-##       &lt;edge id="11" source="3" target="21" weight="1"/&gt;
-##       &lt;edge id="12" source="4" target="5" weight="1"/&gt;
-##       &lt;edge id="13" source="4" target="9" weight="1"/&gt;
-##       &lt;edge id="14" source="4" target="12" weight="1"/&gt;
-##       &lt;edge id="15" source="4" target="15" weight="1"/&gt;
-##       &lt;edge id="16" source="4" target="17" weight="1"/&gt;
-##       &lt;edge id="17" source="4" target="21" weight="1"/&gt;
-##       &lt;edge id="18" source="4" target="28" weight="1"/&gt;
-##       &lt;edge id="19" source="5" target="6" weight="1"/&gt;
-##       &lt;edge id="20" source="5" target="9" weight="1"/&gt;
-##       &lt;edge id="21" source="5" target="12" weight="1"/&gt;
-##       &lt;edge id="22" source="5" target="18" weight="1"/&gt;
-##       &lt;edge id="23" source="5" target="23" weight="1"/&gt;
-##       &lt;edge id="24" source="5" target="24" weight="1"/&gt;
-##       &lt;edge id="25" source="5" target="26" weight="1"/&gt;
-##       &lt;edge id="26" source="6" target="9" weight="1"/&gt;
-##       &lt;edge id="27" source="6" target="10" weight="1"/&gt;
-##       &lt;edge id="28" source="6" target="11" weight="1"/&gt;
-##       &lt;edge id="29" source="6" target="20" weight="1"/&gt;
-##       &lt;edge id="30" source="6" target="23" weight="1"/&gt;
-##       &lt;edge id="31" source="6" target="25" weight="1"/&gt;
-##       &lt;edge id="32" source="7" target="14" weight="1"/&gt;
-##       &lt;edge id="33" source="7" target="17" weight="1"/&gt;
-##       &lt;edge id="34" source="7" target="20" weight="1"/&gt;
-##       &lt;edge id="35" source="7" target="22" weight="1"/&gt;
-##       &lt;edge id="36" source="7" target="26" weight="1"/&gt;
-##       &lt;edge id="37" source="7" target="29" weight="1"/&gt;
-##       &lt;edge id="38" source="8" target="11" weight="1"/&gt;
-##       &lt;edge id="39" source="8" target="16" weight="1"/&gt;
-##       &lt;edge id="40" source="8" target="19" weight="1"/&gt;
-##       &lt;edge id="41" source="8" target="20" weight="1"/&gt;
-##       &lt;edge id="42" source="8" target="22" weight="1"/&gt;
-##       &lt;edge id="43" source="8" target="23" weight="1"/&gt;
-##       &lt;edge id="44" source="8" target="26" weight="1"/&gt;
-##       &lt;edge id="45" source="9" target="10" weight="1"/&gt;
-##       &lt;edge id="46" source="9" target="11" weight="1"/&gt;
-##       &lt;edge id="47" source="9" target="16" weight="1"/&gt;
-##       &lt;edge id="48" source="9" target="17" weight="1"/&gt;
-##       &lt;edge id="49" source="9" target="21" weight="1"/&gt;
-##       &lt;edge id="50" source="9" target="22" weight="1"/&gt;
-##       &lt;edge id="51" source="9" target="24" weight="1"/&gt;
-##       &lt;edge id="52" source="9" target="25" weight="1"/&gt;
-##       &lt;edge id="53" source="9" target="26" weight="1"/&gt;
-##       &lt;edge id="54" source="9" target="27" weight="1"/&gt;
-##       &lt;edge id="55" source="9" target="28" weight="1"/&gt;
-##       &lt;edge id="56" source="9" target="29" weight="1"/&gt;
-##       &lt;edge id="57" source="10" target="11" weight="1"/&gt;
-##       &lt;edge id="58" source="10" target="23" weight="1"/&gt;
-##       &lt;edge id="59" source="10" target="26" weight="1"/&gt;
-##       &lt;edge id="60" source="10" target="29" weight="1"/&gt;
-##       &lt;edge id="61" source="10" target="30" weight="1"/&gt;
-##       &lt;edge id="62" source="11" target="13" weight="1"/&gt;
-##       &lt;edge id="63" source="11" target="14" weight="1"/&gt;
-##       &lt;edge id="64" source="11" target="17" weight="1"/&gt;
-##       &lt;edge id="65" source="11" target="19" weight="1"/&gt;
-##       &lt;edge id="66" source="11" target="21" weight="1"/&gt;
-##       &lt;edge id="67" source="11" target="23" weight="1"/&gt;
-##       &lt;edge id="68" source="11" target="26" weight="1"/&gt;
-##       &lt;edge id="69" source="12" target="22" weight="1"/&gt;
-##       &lt;edge id="70" source="12" target="24" weight="1"/&gt;
-##       &lt;edge id="71" source="12" target="30" weight="1"/&gt;
-##       &lt;edge id="72" source="13" target="14" weight="1"/&gt;
-##       &lt;edge id="73" source="13" target="19" weight="1"/&gt;
-##       &lt;edge id="74" source="13" target="26" weight="1"/&gt;
-##       &lt;edge id="75" source="14" target="18" weight="1"/&gt;
-##       &lt;edge id="76" source="14" target="22" weight="1"/&gt;
-##       &lt;edge id="77" source="14" target="26" weight="1"/&gt;
-##       &lt;edge id="78" source="14" target="28" weight="1"/&gt;
-##       &lt;edge id="79" source="14" target="30" weight="1"/&gt;
-##       &lt;edge id="80" source="15" target="20" weight="1"/&gt;
-##       &lt;edge id="81" source="15" target="24" weight="1"/&gt;
-##       &lt;edge id="82" source="15" target="25" weight="1"/&gt;
-##       &lt;edge id="83" source="16" target="20" weight="1"/&gt;
-##       &lt;edge id="84" source="16" target="22" weight="1"/&gt;
-##       &lt;edge id="85" source="16" target="26" weight="1"/&gt;
-##       &lt;edge id="86" source="16" target="28" weight="1"/&gt;
-##       &lt;edge id="87" source="17" target="18" weight="1"/&gt;
-##       &lt;edge id="88" source="17" target="19" weight="1"/&gt;
-##       &lt;edge id="89" source="17" target="24" weight="1"/&gt;
-##       &lt;edge id="90" source="17" target="25" weight="1"/&gt;
-##       &lt;edge id="91" source="17" target="27" weight="1"/&gt;
-##       &lt;edge id="92" source="17" target="28" weight="1"/&gt;
-##       &lt;edge id="93" source="17" target="30" weight="1"/&gt;
-##       &lt;edge id="94" source="18" target="19" weight="1"/&gt;
-##       &lt;edge id="95" source="18" target="20" weight="1"/&gt;
-##       &lt;edge id="96" source="18" target="26" weight="1"/&gt;
-##       &lt;edge id="97" source="18" target="30" weight="1"/&gt;
-##       &lt;edge id="98" source="20" target="24" weight="1"/&gt;
-##       &lt;edge id="99" source="20" target="25" weight="1"/&gt;
-##       &lt;edge id="100" source="20" target="26" weight="1"/&gt;
-##       &lt;edge id="101" source="21" target="22" weight="1"/&gt;
-##       &lt;edge id="102" source="21" target="23" weight="1"/&gt;
-##       &lt;edge id="103" source="21" target="24" weight="1"/&gt;
-##       &lt;edge id="104" source="21" target="25" weight="1"/&gt;
-##       &lt;edge id="105" source="21" target="29" weight="1"/&gt;
-##       &lt;edge id="106" source="21" target="30" weight="1"/&gt;
-##       &lt;edge id="107" source="22" target="24" weight="1"/&gt;
-##       &lt;edge id="108" source="22" target="25" weight="1"/&gt;
-##       &lt;edge id="109" source="22" target="26" weight="1"/&gt;
-##       &lt;edge id="110" source="22" target="30" weight="1"/&gt;
-##       &lt;edge id="111" source="23" target="25" weight="1"/&gt;
-##       &lt;edge id="112" source="24" target="28" weight="1"/&gt;
-##       &lt;edge id="113" source="25" target="26" weight="1"/&gt;
-##       &lt;edge id="114" source="25" target="27" weight="1"/&gt;
-##       &lt;edge id="115" source="25" target="28" weight="1"/&gt;
-##       &lt;edge id="116" source="26" target="27" weight="1"/&gt;
-##       &lt;edge id="117" source="26" target="30" weight="1"/&gt;
-##       &lt;edge id="118" source="27" target="28" weight="1"/&gt;
-##       &lt;edge id="119" source="27" target="30" weight="1"/&gt;
-##       &lt;edge id="120" source="29" target="30" weight="1"/&gt;
-##       &lt;edge id="121" source="31" target="51" weight="1"/&gt;
-##       &lt;edge id="122" source="31" target="52" weight="1"/&gt;
-##       &lt;edge id="123" source="31" target="56" weight="1"/&gt;
-##       &lt;edge id="124" source="31" target="57" weight="1"/&gt;
-##       &lt;edge id="125" source="32" target="40" weight="1"/&gt;
-##       &lt;edge id="126" source="32" target="42" weight="1"/&gt;
-##       &lt;edge id="127" source="32" target="43" weight="1"/&gt;
-##       &lt;edge id="128" source="32" target="47" weight="1"/&gt;
-##       &lt;edge id="129" source="32" target="49" weight="1"/&gt;
-##       &lt;edge id="130" source="32" target="51" weight="1"/&gt;
-##       &lt;edge id="131" source="32" target="52" weight="1"/&gt;
-##       &lt;edge id="132" source="32" target="53" weight="1"/&gt;
-##       &lt;edge id="133" source="32" target="55" weight="1"/&gt;
-##       &lt;edge id="134" source="32" target="57" weight="1"/&gt;
-##       &lt;edge id="135" source="32" target="58" weight="1"/&gt;
-##       &lt;edge id="136" source="33" target="35" weight="1"/&gt;
-##       &lt;edge id="137" source="33" target="39" weight="1"/&gt;
-##       &lt;edge id="138" source="33" target="41" weight="1"/&gt;
-##       &lt;edge id="139" source="33" target="46" weight="1"/&gt;
-##       &lt;edge id="140" source="33" target="47" weight="1"/&gt;
-##       &lt;edge id="141" source="33" target="48" weight="1"/&gt;
-##       &lt;edge id="142" source="33" target="53" weight="1"/&gt;
-##       &lt;edge id="143" source="33" target="54" weight="1"/&gt;
-##       &lt;edge id="144" source="33" target="55" weight="1"/&gt;
-##       &lt;edge id="145" source="33" target="57" weight="1"/&gt;
-##       &lt;edge id="146" source="34" target="46" weight="1"/&gt;
-##       &lt;edge id="147" source="34" target="47" weight="1"/&gt;
-##       &lt;edge id="148" source="34" target="54" weight="1"/&gt;
-##       &lt;edge id="149" source="34" target="60" weight="1"/&gt;
-##       &lt;edge id="150" source="35" target="36" weight="1"/&gt;
-##       &lt;edge id="151" source="35" target="37" weight="1"/&gt;
-##       &lt;edge id="152" source="35" target="44" weight="1"/&gt;
-##       &lt;edge id="153" source="35" target="47" weight="1"/&gt;
-##       &lt;edge id="154" source="35" target="56" weight="1"/&gt;
-##       &lt;edge id="155" source="35" target="60" weight="1"/&gt;
-##       &lt;edge id="156" source="36" target="37" weight="1"/&gt;
-##       &lt;edge id="157" source="36" target="40" weight="1"/&gt;
-##       &lt;edge id="158" source="36" target="41" weight="1"/&gt;
-##       &lt;edge id="159" source="36" target="44" weight="1"/&gt;
-##       &lt;edge id="160" source="36" target="46" weight="1"/&gt;
-##       &lt;edge id="161" source="36" target="50" weight="1"/&gt;
-##       &lt;edge id="162" source="36" target="52" weight="1"/&gt;
-##       &lt;edge id="163" source="36" target="53" weight="1"/&gt;
-##       &lt;edge id="164" source="36" target="56" weight="1"/&gt;
-##       &lt;edge id="165" source="36" target="57" weight="1"/&gt;
-##       &lt;edge id="166" source="36" target="58" weight="1"/&gt;
-##       &lt;edge id="167" source="36" target="60" weight="1"/&gt;
-##       &lt;edge id="168" source="37" target="39" weight="1"/&gt;
-##       &lt;edge id="169" source="37" target="41" weight="1"/&gt;
-##       &lt;edge id="170" source="37" target="50" weight="1"/&gt;
-##       &lt;edge id="171" source="37" target="51" weight="1"/&gt;
-##       &lt;edge id="172" source="37" target="52" weight="1"/&gt;
-##       &lt;edge id="173" source="37" target="53" weight="1"/&gt;
-##       &lt;edge id="174" source="37" target="54" weight="1"/&gt;
-##       &lt;edge id="175" source="37" target="55" weight="1"/&gt;
-##       &lt;edge id="176" source="37" target="60" weight="1"/&gt;
-##       &lt;edge id="177" source="38" target="39" weight="1"/&gt;
-##       &lt;edge id="178" source="38" target="43" weight="1"/&gt;
-##       &lt;edge id="179" source="38" target="45" weight="1"/&gt;
-##       &lt;edge id="180" source="38" target="49" weight="1"/&gt;
-##       &lt;edge id="181" source="38" target="50" weight="1"/&gt;
-##       &lt;edge id="182" source="38" target="53" weight="1"/&gt;
-##       &lt;edge id="183" source="38" target="56" weight="1"/&gt;
-##       &lt;edge id="184" source="38" target="57" weight="1"/&gt;
-##       &lt;edge id="185" source="39" target="40" weight="1"/&gt;
-##       &lt;edge id="186" source="39" target="52" weight="1"/&gt;
-##       &lt;edge id="187" source="39" target="54" weight="1"/&gt;
-##       &lt;edge id="188" source="39" target="55" weight="1"/&gt;
-##       &lt;edge id="189" source="39" target="58" weight="1"/&gt;
-##       &lt;edge id="190" source="40" target="42" weight="1"/&gt;
-##       &lt;edge id="191" source="40" target="44" weight="1"/&gt;
-##       &lt;edge id="192" source="40" target="51" weight="1"/&gt;
-##       &lt;edge id="193" source="40" target="52" weight="1"/&gt;
-##       &lt;edge id="194" source="40" target="54" weight="1"/&gt;
-##       &lt;edge id="195" source="40" target="57" weight="1"/&gt;
-##       &lt;edge id="196" source="41" target="44" weight="1"/&gt;
-##       &lt;edge id="197" source="41" target="45" weight="1"/&gt;
-##       &lt;edge id="198" source="41" target="50" weight="1"/&gt;
-##       &lt;edge id="199" source="41" target="59" weight="1"/&gt;
-##       &lt;edge id="200" source="42" target="43" weight="1"/&gt;
-##       &lt;edge id="201" source="42" target="48" weight="1"/&gt;
-##       &lt;edge id="202" source="42" target="55" weight="1"/&gt;
-##       &lt;edge id="203" source="42" target="56" weight="1"/&gt;
-##       &lt;edge id="204" source="43" target="44" weight="1"/&gt;
-##       &lt;edge id="205" source="43" target="46" weight="1"/&gt;
-##       &lt;edge id="206" source="43" target="48" weight="1"/&gt;
-##       &lt;edge id="207" source="43" target="49" weight="1"/&gt;
-##       &lt;edge id="208" source="43" target="51" weight="1"/&gt;
-##       &lt;edge id="209" source="43" target="52" weight="1"/&gt;
-##       &lt;edge id="210" source="43" target="53" weight="1"/&gt;
-##       &lt;edge id="211" source="43" target="58" weight="1"/&gt;
-##       &lt;edge id="212" source="44" target="45" weight="1"/&gt;
-##       &lt;edge id="213" source="44" target="46" weight="1"/&gt;
-##       &lt;edge id="214" source="44" target="48" weight="1"/&gt;
-##       &lt;edge id="215" source="44" target="51" weight="1"/&gt;
-##       &lt;edge id="216" source="44" target="53" weight="1"/&gt;
-##       &lt;edge id="217" source="44" target="58" weight="1"/&gt;
-##       &lt;edge id="218" source="44" target="59" weight="1"/&gt;
-##       &lt;edge id="219" source="45" target="48" weight="1"/&gt;
-##       &lt;edge id="220" source="45" target="53" weight="1"/&gt;
-##       &lt;edge id="221" source="45" target="59" weight="1"/&gt;
-##       &lt;edge id="222" source="45" target="60" weight="1"/&gt;
-##       &lt;edge id="223" source="46" target="47" weight="1"/&gt;
-##       &lt;edge id="224" source="46" target="48" weight="1"/&gt;
-##       &lt;edge id="225" source="46" target="49" weight="1"/&gt;
-##       &lt;edge id="226" source="46" target="52" weight="1"/&gt;
-##       &lt;edge id="227" source="46" target="54" weight="1"/&gt;
-##       &lt;edge id="228" source="46" target="56" weight="1"/&gt;
-##       &lt;edge id="229" source="46" target="60" weight="1"/&gt;
-##       &lt;edge id="230" source="47" target="49" weight="1"/&gt;
-##       &lt;edge id="231" source="47" target="51" weight="1"/&gt;
-##       &lt;edge id="232" source="47" target="55" weight="1"/&gt;
-##       &lt;edge id="233" source="48" target="52" weight="1"/&gt;
-##       &lt;edge id="234" source="48" target="57" weight="1"/&gt;
-##       &lt;edge id="235" source="49" target="50" weight="1"/&gt;
-##       &lt;edge id="236" source="49" target="51" weight="1"/&gt;
-##       &lt;edge id="237" source="49" target="54" weight="1"/&gt;
-##       &lt;edge id="238" source="49" target="55" weight="1"/&gt;
-##       &lt;edge id="239" source="49" target="58" weight="1"/&gt;
-##       &lt;edge id="240" source="49" target="59" weight="1"/&gt;
-##       &lt;edge id="241" source="50" target="53" weight="1"/&gt;
-##       &lt;edge id="242" source="50" target="54" weight="1"/&gt;
-##       &lt;edge id="243" source="50" target="58" weight="1"/&gt;
-##       &lt;edge id="244" source="50" target="59" weight="1"/&gt;
-##       &lt;edge id="245" source="50" target="60" weight="1"/&gt;
-##       &lt;edge id="246" source="51" target="52" weight="1"/&gt;
-##       &lt;edge id="247" source="51" target="53" weight="1"/&gt;
-##       &lt;edge id="248" source="51" target="56" weight="1"/&gt;
-##       &lt;edge id="249" source="51" target="58" weight="1"/&gt;
-##       &lt;edge id="250" source="52" target="57" weight="1"/&gt;
-##       &lt;edge id="251" source="53" target="54" weight="1"/&gt;
-##       &lt;edge id="252" source="53" target="58" weight="1"/&gt;
-##       &lt;edge id="253" source="53" target="59" weight="1"/&gt;
-##       &lt;edge id="254" source="53" target="60" weight="1"/&gt;
-##       &lt;edge id="255" source="54" target="55" weight="1"/&gt;
-##       &lt;edge id="256" source="55" target="58" weight="1"/&gt;
-##       &lt;edge id="257" source="55" target="60" weight="1"/&gt;
-##       &lt;edge id="258" source="56" target="59" weight="1"/&gt;
-##       &lt;edge id="259" source="56" target="60" weight="1"/&gt;
-##       &lt;edge id="260" source="57" target="58" weight="1"/&gt;
-##       &lt;edge id="261" source="57" target="59" weight="1"/&gt;
-##       &lt;edge id="262" source="58" target="59" weight="1"/&gt;
-##       &lt;edge id="263" source="58" target="60" weight="1"/&gt;
-##       &lt;edge id="264" source="61" target="65" weight="1"/&gt;
-##       &lt;edge id="265" source="61" target="69" weight="1"/&gt;
-##       &lt;edge id="266" source="61" target="71" weight="1"/&gt;
-##       &lt;edge id="267" source="61" target="73" weight="1"/&gt;
-##       &lt;edge id="268" source="61" target="74" weight="1"/&gt;
-##       &lt;edge id="269" source="61" target="75" weight="1"/&gt;
-##       &lt;edge id="270" source="61" target="76" weight="1"/&gt;
-##       &lt;edge id="271" source="61" target="77" weight="1"/&gt;
-##       &lt;edge id="272" source="61" target="80" weight="1"/&gt;
-##       &lt;edge id="273" source="61" target="82" weight="1"/&gt;
-##       &lt;edge id="274" source="61" target="86" weight="1"/&gt;
-##       &lt;edge id="275" source="61" target="89" weight="1"/&gt;
-##       &lt;edge id="276" source="62" target="66" weight="1"/&gt;
-##       &lt;edge id="277" source="62" target="70" weight="1"/&gt;
-##       &lt;edge id="278" source="62" target="72" weight="1"/&gt;
-##       &lt;edge id="279" source="62" target="73" weight="1"/&gt;
-##       &lt;edge id="280" source="62" target="79" weight="1"/&gt;
-##       &lt;edge id="281" source="62" target="84" weight="1"/&gt;
-##       &lt;edge id="282" source="63" target="80" weight="1"/&gt;
-##       &lt;edge id="283" source="63" target="86" weight="1"/&gt;
-##       &lt;edge id="284" source="63" target="89" weight="1"/&gt;
-##       &lt;edge id="285" source="63" target="90" weight="1"/&gt;
-##       &lt;edge id="286" source="64" target="65" weight="1"/&gt;
-##       &lt;edge id="287" source="64" target="72" weight="1"/&gt;
-##       &lt;edge id="288" source="64" target="73" weight="1"/&gt;
-##       &lt;edge id="289" source="64" target="79" weight="1"/&gt;
-##       &lt;edge id="290" source="64" target="81" weight="1"/&gt;
-##       &lt;edge id="291" source="64" target="83" weight="1"/&gt;
-##       &lt;edge id="292" source="64" target="88" weight="1"/&gt;
-##       &lt;edge id="293" source="65" target="78" weight="1"/&gt;
-##       &lt;edge id="294" source="65" target="80" weight="1"/&gt;
-##       &lt;edge id="295" source="65" target="82" weight="1"/&gt;
-##       &lt;edge id="296" source="65" target="83" weight="1"/&gt;
-##       &lt;edge id="297" source="65" target="84" weight="1"/&gt;
-##       &lt;edge id="298" source="65" target="86" weight="1"/&gt;
-##       &lt;edge id="299" source="65" target="87" weight="1"/&gt;
-##       &lt;edge id="300" source="65" target="89" weight="1"/&gt;
-##       &lt;edge id="301" source="66" target="67" weight="1"/&gt;
-##       &lt;edge id="302" source="66" target="68" weight="1"/&gt;
-##       &lt;edge id="303" source="66" target="69" weight="1"/&gt;
-##       &lt;edge id="304" source="66" target="71" weight="1"/&gt;
-##       &lt;edge id="305" source="66" target="72" weight="1"/&gt;
-##       &lt;edge id="306" source="66" target="73" weight="1"/&gt;
-##       &lt;edge id="307" source="66" target="75" weight="1"/&gt;
-##       &lt;edge id="308" source="66" target="77" weight="1"/&gt;
-##       &lt;edge id="309" source="66" target="79" weight="1"/&gt;
-##       &lt;edge id="310" source="66" target="82" weight="1"/&gt;
-##       &lt;edge id="311" source="66" target="83" weight="1"/&gt;
-##       &lt;edge id="312" source="66" target="84" weight="1"/&gt;
-##       &lt;edge id="313" source="66" target="87" weight="1"/&gt;
-##       &lt;edge id="314" source="67" target="71" weight="1"/&gt;
-##       &lt;edge id="315" source="67" target="72" weight="1"/&gt;
-##       &lt;edge id="316" source="67" target="74" weight="1"/&gt;
-##       &lt;edge id="317" source="67" target="76" weight="1"/&gt;
-##       &lt;edge id="318" source="67" target="80" weight="1"/&gt;
-##       &lt;edge id="319" source="67" target="83" weight="1"/&gt;
-##       &lt;edge id="320" source="67" target="87" weight="1"/&gt;
-##       &lt;edge id="321" source="67" target="88" weight="1"/&gt;
-##       &lt;edge id="322" source="67" target="89" weight="1"/&gt;
-##       &lt;edge id="323" source="67" target="90" weight="1"/&gt;
-##       &lt;edge id="324" source="68" target="71" weight="1"/&gt;
-##       &lt;edge id="325" source="68" target="74" weight="1"/&gt;
-##       &lt;edge id="326" source="68" target="80" weight="1"/&gt;
-##       &lt;edge id="327" source="68" target="82" weight="1"/&gt;
-##       &lt;edge id="328" source="68" target="86" weight="1"/&gt;
-##       &lt;edge id="329" source="68" target="88" weight="1"/&gt;
-##       &lt;edge id="330" source="69" target="70" weight="1"/&gt;
-##       &lt;edge id="331" source="69" target="78" weight="1"/&gt;
-##       &lt;edge id="332" source="69" target="81" weight="1"/&gt;
-##       &lt;edge id="333" source="69" target="90" weight="1"/&gt;
-##       &lt;edge id="334" source="70" target="72" weight="1"/&gt;
-##       &lt;edge id="335" source="70" target="74" weight="1"/&gt;
-##       &lt;edge id="336" source="70" target="77" weight="1"/&gt;
-##       &lt;edge id="337" source="70" target="79" weight="1"/&gt;
-##       &lt;edge id="338" source="70" target="80" weight="1"/&gt;
-##       &lt;edge id="339" source="70" target="83" weight="1"/&gt;
-##       &lt;edge id="340" source="70" target="85" weight="1"/&gt;
-##       &lt;edge id="341" source="70" target="87" weight="1"/&gt;
-##       &lt;edge id="342" source="70" target="90" weight="1"/&gt;
-##       &lt;edge id="343" source="71" target="73" weight="1"/&gt;
-##       &lt;edge id="344" source="71" target="79" weight="1"/&gt;
-##       &lt;edge id="345" source="71" target="82" weight="1"/&gt;
-##       &lt;edge id="346" source="71" target="86" weight="1"/&gt;
-##       &lt;edge id="347" source="71" target="89" weight="1"/&gt;
-##       &lt;edge id="348" source="72" target="73" weight="1"/&gt;
-##       &lt;edge id="349" source="72" target="87" weight="1"/&gt;
-##       &lt;edge id="350" source="72" target="88" weight="1"/&gt;
-##       &lt;edge id="351" source="73" target="74" weight="1"/&gt;
-##       &lt;edge id="352" source="73" target="81" weight="1"/&gt;
-##       &lt;edge id="353" source="73" target="83" weight="1"/&gt;
-##       &lt;edge id="354" source="73" target="85" weight="1"/&gt;
-##       &lt;edge id="355" source="73" target="87" weight="1"/&gt;
-##       &lt;edge id="356" source="74" target="79" weight="1"/&gt;
-##       &lt;edge id="357" source="74" target="80" weight="1"/&gt;
-##       &lt;edge id="358" source="74" target="84" weight="1"/&gt;
-##       &lt;edge id="359" source="74" target="86" weight="1"/&gt;
-##       &lt;edge id="360" source="74" target="88" weight="1"/&gt;
-##       &lt;edge id="361" source="75" target="77" weight="1"/&gt;
-##       &lt;edge id="362" source="75" target="78" weight="1"/&gt;
-##       &lt;edge id="363" source="75" target="79" weight="1"/&gt;
-##       &lt;edge id="364" source="75" target="80" weight="1"/&gt;
-##       &lt;edge id="365" source="75" target="83" weight="1"/&gt;
-##       &lt;edge id="366" source="76" target="82" weight="1"/&gt;
-##       &lt;edge id="367" source="76" target="86" weight="1"/&gt;
-##       &lt;edge id="368" source="76" target="89" weight="1"/&gt;
-##       &lt;edge id="369" source="76" target="90" weight="1"/&gt;
-##       &lt;edge id="370" source="77" target="78" weight="1"/&gt;
-##       &lt;edge id="371" source="77" target="82" weight="1"/&gt;
-##       &lt;edge id="372" source="77" target="86" weight="1"/&gt;
-##       &lt;edge id="373" source="78" target="79" weight="1"/&gt;
-##       &lt;edge id="374" source="78" target="84" weight="1"/&gt;
-##       &lt;edge id="375" source="78" target="85" weight="1"/&gt;
-##       &lt;edge id="376" source="79" target="80" weight="1"/&gt;
-##       &lt;edge id="377" source="79" target="81" weight="1"/&gt;
-##       &lt;edge id="378" source="79" target="83" weight="1"/&gt;
-##       &lt;edge id="379" source="79" target="84" weight="1"/&gt;
-##       &lt;edge id="380" source="79" target="88" weight="1"/&gt;
-##       &lt;edge id="381" source="80" target="84" weight="1"/&gt;
-##       &lt;edge id="382" source="80" target="85" weight="1"/&gt;
-##       &lt;edge id="383" source="80" target="87" weight="1"/&gt;
-##       &lt;edge id="384" source="81" target="82" weight="1"/&gt;
-##       &lt;edge id="385" source="81" target="86" weight="1"/&gt;
-##       &lt;edge id="386" source="81" target="87" weight="1"/&gt;
-##       &lt;edge id="387" source="81" target="88" weight="1"/&gt;
-##       &lt;edge id="388" source="81" target="89" weight="1"/&gt;
-##       &lt;edge id="389" source="82" target="87" weight="1"/&gt;
-##       &lt;edge id="390" source="82" target="88" weight="1"/&gt;
-##       &lt;edge id="391" source="82" target="90" weight="1"/&gt;
-##       &lt;edge id="392" source="84" target="85" weight="1"/&gt;
-##       &lt;edge id="393" source="84" target="86" weight="1"/&gt;
-##       &lt;edge id="394" source="84" target="88" weight="1"/&gt;
-##       &lt;edge id="395" source="84" target="89" weight="1"/&gt;
-##       &lt;edge id="396" source="85" target="86" weight="1"/&gt;
-##       &lt;edge id="397" source="85" target="87" weight="1"/&gt;
-##       &lt;edge id="398" source="85" target="88" weight="1"/&gt;
-##       &lt;edge id="399" source="85" target="89" weight="1"/&gt;
-##       &lt;edge id="400" source="85" target="90" weight="1"/&gt;
-##       &lt;edge id="401" source="86" target="87" weight="1"/&gt;
-##       &lt;edge id="402" source="87" target="88" weight="1"/&gt;
-##       &lt;edge id="403" source="87" target="89" weight="1"/&gt;
-##       &lt;edge id="404" source="89" target="90" weight="1"/&gt;
-##     &lt;/edges&gt;
+##          ...
+##      &lt;/edges&gt;
 ##   &lt;/graph&gt;
-## &lt;/gexf&gt;
-## </code></pre>
+## &lt;/gexf&gt;</code></pre>
+<p>As before, we can either directly call the plot function for <code>gexf</code> objects, or coerce it into an <code>igraph</code> object:</p>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># plot(graph) </span>
+<span class="va">op</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mai <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span> <span class="co"># For extra space</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="../reference/igraph.to.gexf.html">gexf.to.igraph</a></span><span class="op">(</span><span class="va">graph</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<p><img src="rgexf_files/figure-html/igraph-plot-2-1.png" width="672"></p>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span><span class="va">op</span><span class="op">)</span></code></pre></div>
+</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
 
-      </div>
+        <nav id="toc" data-toggle="toc"><h2 data-toc-skip>Contents</h2>
+    </nav>
+</div>
 
 </div>
 

@@ -91,38 +91,46 @@
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#rgexf-build-import-and-export-gexf-graph-files-" class="anchor"></a>rgexf: Build, Import and Export GEXF Graph Files <img src="reference/figures/logo.svg" align="right" height="200">
 </h1></div>
-<p>The first R package to work with GEXF graph files (used in Gephi and others). Using XML library, it allows the user to easily build/read graph files including attributes, GEXF viz attributes (such as color, size, and position), network dynamics (for both edges and nodes, including spells) and edges weighting. Users can build/handle graphs element-by-element or massively through data-frames, visualize the graph on a web browser through <del>sigmajs javascript</del> <a href="https://github.com/raphv/gexf-js">gexf-js</a> library and interact with the igraph package.</p>
-<div id="news" class="section level2">
+<p>The first R package to work with GEXF graph files (used in Gephi and others). <code>rgexf</code> allows the user to quickly build/read graph files, including:</p>
+<ol>
+<li><p>Nodes/edges attributes,</p></li>
+<li><p>GEXF viz attributes (such as color, size, and position),</p></li>
+<li><p>Network dynamics (for both edges and nodes, including spells), and</p></li>
+<li><p>Edges weighting.</p></li>
+</ol>
+<p>Users can build/handle graphs element-by-element or through data-frames, visualize the graph on a web browser through <del>sigmajs javascript</del> <a href="https://github.com/raphv/gexf-js">gexf-js</a> library and interact with the igraph package.</p>
+</div>
+<div id="changes-in-rgexf-version-0162-2021-08-10" class="section level1">
+<h1 class="hasAnchor">
+<a href="#changes-in-rgexf-version-0162-2021-08-10" class="anchor"></a>Changes in rgexf version 0.16.2 (2021-08-10)</h1>
+<div id="new-features-and-changes" class="section level2">
 <h2 class="hasAnchor">
-<a href="#news" class="anchor"></a>News</h2>
+<a href="#new-features-and-changes" class="anchor"></a>New features and changes</h2>
 <ul>
-<li>
-<br><span class="math display">2020 − 06 − 12</span><br> Please refer to <br><span class="math display"><em>N</em><em>E</em><em>W</em><em>S</em>.<em>m</em><em>d</em></span><br> for more news.</li>
-<li>
-<br><span class="math display">2020 − 02 − 11</span><br> Getting ready to put the package on CRAN again (was taken out in the last version).</li>
-<li>
-<br><span class="math display">2016 − 11 − 08</span><br> Restarting the project.</li>
-<li>
-<br><span class="math display">2015 − 02 − 03</span><br> Version 0.15.2.3 of rgexf is on CRAN. Just updating emails…</li>
-<li>
-<br><span class="math display">2014 − 03 − 10</span><br> Version 0.14.9 of rgexf is on CRAN! solves issues 15-18. Thanks =).</li>
-<li>
-<br><span class="math display">2013 − 08 − 07</span><br> Version 0.13.8 of rgexf is on CRAN! New plot.gexf method and igraph integration working =).</li>
-<li>
-<br><span class="math display">2013 − 05 − 09</span><br> Version 0.13.05 of rgexf (transitory) solves issues N 9 &amp; 10. Looking forward for the next CRAN version.</li>
-<li>
-<br><span class="math display">2013 − 03 − 14</span><br> Version 0.13.03 of rgexf is on its way to CRAN. It now supports working with spells!</li>
-<li>
-<br><span class="math display">2013 − 01 − 04</span><br> Version 0.13.01 of rgexf is on its way to CRAN. Significant improvements and new features!</li>
-<li>
-<br><span class="math display">2012 − 06 − 19</span><br> Version 0.12.06 of rgexf is on CRAN! Now it can be directly download from R.</li>
-<li>
-<br><span class="math display">2012 − 03 − 29</span><br> Version 0.12.03.29 of rgexf has been released including many bug fixes. Please download the latest version to check it out.</li>
+<li><p>We now have a hex sticker!</p></li>
+<li><p>Users can now cite properly <code>rgexf</code> with JOSS (see <code><a href="https://rdrr.io/r/utils/citation.html">citation(package="rgexf")</a></code>).</p></li>
+<li><p>Added a few extra breaks across the examples (suggested by @corneliusfritz).</p></li>
+<li><p>Improved documentation regarding spells and dynamic graphs.</p></li>
+<li><p>New <code><a href="https://rdrr.io/r/utils/head.html">head()</a></code> function allows a glimpse of the <code>n</code> first nodes/edges.</p></li>
 </ul>
 </div>
-<div id="installation" class="section level2">
+<div id="bug-fixes" class="section level2">
 <h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
+<a href="#bug-fixes" class="anchor"></a>Bug fixes</h2>
+<ul>
+<li><p>Passing colors with four values (alpha) no longer fails during checks. (reported by @IsabelFE).</p></li>
+<li><p>The summary function prints nodes’ attributes as expected.</p></li>
+<li><p>Hex colors now work (#41 reported by @milnus).</p></li>
+<li><p><code>gexf.to.igraph</code> correctly processes edge attributes (#38 reported by @balachia).</p></li>
+<li><p>Time range is now correctly computed (#19).</p></li>
+<li><p>Non-integer ids were incorrectly processed when reading GEXF files.</p></li>
+</ul>
+<p>More in the <a href="NEWS.html">NEWS.md</a> file.</p>
+</div>
+</div>
+<div id="installation" class="section level1">
+<h1 class="hasAnchor">
+<a href="#installation" class="anchor"></a>Installation</h1>
 <p>To install the latest version of <code>rgexf</code> you can use <code>devtools</code></p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">devtools</span><span class="op">)</span>
@@ -130,6 +138,9 @@
 <p>The more stable (but old) version of <code>rgexf</code> can be found on CRAN too:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="kw">install.packages</span>(<span class="st">"rgexf"</span>)</span></code></pre></div>
 </div>
+<div id="examples" class="section level1">
+<h1 class="hasAnchor">
+<a href="#examples" class="anchor"></a>Examples</h1>
 <div id="example-1-static-net" class="section level2">
 <h2 class="hasAnchor">
 <a href="#example-1-static-net" class="anchor"></a>Example 1: Static net</h2>
@@ -170,22 +181,22 @@
 <span id="cb8-9"><a href="#cb8-9" aria-hidden="true"></a><span class="co">##     &lt;nodes&gt;</span></span>
 <span id="cb8-10"><a href="#cb8-10" aria-hidden="true"></a><span class="co">##       &lt;node id="1" label="juan"&gt;</span></span>
 <span id="cb8-11"><a href="#cb8-11" aria-hidden="true"></a><span class="co">##         &lt;viz:color r="255" g="99" b="71" a="1"/&gt;</span></span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true"></a><span class="co">##         &lt;viz:position x="100" y="51.0986544575574" z="0"/&gt;</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true"></a><span class="co">##         &lt;viz:position x="94.404659820788" y="-94.1345053626487" z="0"/&gt;</span></span>
 <span id="cb8-13"><a href="#cb8-13" aria-hidden="true"></a><span class="co">##         &lt;viz:size value="10"/&gt;</span></span>
 <span id="cb8-14"><a href="#cb8-14" aria-hidden="true"></a><span class="co">##       &lt;/node&gt;</span></span>
 <span id="cb8-15"><a href="#cb8-15" aria-hidden="true"></a><span class="co">##       &lt;node id="2" label="pedro"&gt;</span></span>
 <span id="cb8-16"><a href="#cb8-16" aria-hidden="true"></a><span class="co">##         &lt;viz:color r="255" g="99" b="71" a="1"/&gt;</span></span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true"></a><span class="co">##         &lt;viz:position x="-100" y="100" z="0"/&gt;</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true"></a><span class="co">##         &lt;viz:position x="37.464163645166" y="-100" z="0"/&gt;</span></span>
 <span id="cb8-18"><a href="#cb8-18" aria-hidden="true"></a><span class="co">##         &lt;viz:size value="10"/&gt;</span></span>
 <span id="cb8-19"><a href="#cb8-19" aria-hidden="true"></a><span class="co">##       &lt;/node&gt;</span></span>
 <span id="cb8-20"><a href="#cb8-20" aria-hidden="true"></a><span class="co">##       &lt;node id="3" label="matthew"&gt;</span></span>
 <span id="cb8-21"><a href="#cb8-21" aria-hidden="true"></a><span class="co">##         &lt;viz:color r="255" g="99" b="71" a="1"/&gt;</span></span>
-<span id="cb8-22"><a href="#cb8-22" aria-hidden="true"></a><span class="co">##         &lt;viz:position x="-14.2129423502891" y="83.9680923396099" z="0"/&gt;</span></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true"></a><span class="co">##         &lt;viz:position x="100" y="100" z="0"/&gt;</span></span>
 <span id="cb8-23"><a href="#cb8-23" aria-hidden="true"></a><span class="co">##         &lt;viz:size value="10"/&gt;</span></span>
 <span id="cb8-24"><a href="#cb8-24" aria-hidden="true"></a><span class="co">##       &lt;/node&gt;</span></span>
 <span id="cb8-25"><a href="#cb8-25" aria-hidden="true"></a><span class="co">##       &lt;node id="4" label="carlos"&gt;</span></span>
 <span id="cb8-26"><a href="#cb8-26" aria-hidden="true"></a><span class="co">##         &lt;viz:color r="255" g="99" b="71" a="1"/&gt;</span></span>
-<span id="cb8-27"><a href="#cb8-27" aria-hidden="true"></a><span class="co">##         &lt;viz:position x="66.396171662381" y="-100" z="0"/&gt;</span></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true"></a><span class="co">##         &lt;viz:position x="-100" y="-37.5843527569673" z="0"/&gt;</span></span>
 <span id="cb8-28"><a href="#cb8-28" aria-hidden="true"></a><span class="co">##         &lt;viz:size value="10"/&gt;</span></span>
 <span id="cb8-29"><a href="#cb8-29" aria-hidden="true"></a><span class="co">##       &lt;/node&gt;</span></span>
 <span id="cb8-30"><a href="#cb8-30" aria-hidden="true"></a><span class="co">##     &lt;/nodes&gt;</span></span>
@@ -227,22 +238,22 @@
 <span id="cb12-9"><a href="#cb12-9" aria-hidden="true"></a><span class="co">##     &lt;nodes&gt;</span></span>
 <span id="cb12-10"><a href="#cb12-10" aria-hidden="true"></a><span class="co">##       &lt;node id="1" label="juan" start="10" end="12"&gt;</span></span>
 <span id="cb12-11"><a href="#cb12-11" aria-hidden="true"></a><span class="co">##         &lt;viz:color r="255" g="99" b="71" a="1"/&gt;</span></span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true"></a><span class="co">##         &lt;viz:position x="100" y="-66.7395710811224" z="0"/&gt;</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true"></a><span class="co">##         &lt;viz:position x="-100" y="100" z="0"/&gt;</span></span>
 <span id="cb12-13"><a href="#cb12-13" aria-hidden="true"></a><span class="co">##         &lt;viz:size value="10"/&gt;</span></span>
 <span id="cb12-14"><a href="#cb12-14" aria-hidden="true"></a><span class="co">##       &lt;/node&gt;</span></span>
 <span id="cb12-15"><a href="#cb12-15" aria-hidden="true"></a><span class="co">##       &lt;node id="2" label="pedro" start="13" end="13"&gt;</span></span>
 <span id="cb12-16"><a href="#cb12-16" aria-hidden="true"></a><span class="co">##         &lt;viz:color r="255" g="99" b="71" a="1"/&gt;</span></span>
-<span id="cb12-17"><a href="#cb12-17" aria-hidden="true"></a><span class="co">##         &lt;viz:position x="13.4431787806887" y="61.4550911958847" z="0"/&gt;</span></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true"></a><span class="co">##         &lt;viz:position x="100" y="72.3799682029933" z="0"/&gt;</span></span>
 <span id="cb12-18"><a href="#cb12-18" aria-hidden="true"></a><span class="co">##         &lt;viz:size value="10"/&gt;</span></span>
 <span id="cb12-19"><a href="#cb12-19" aria-hidden="true"></a><span class="co">##       &lt;/node&gt;</span></span>
 <span id="cb12-20"><a href="#cb12-20" aria-hidden="true"></a><span class="co">##       &lt;node id="3" label="matthew" start="2" end="13"&gt;</span></span>
 <span id="cb12-21"><a href="#cb12-21" aria-hidden="true"></a><span class="co">##         &lt;viz:color r="255" g="99" b="71" a="1"/&gt;</span></span>
-<span id="cb12-22"><a href="#cb12-22" aria-hidden="true"></a><span class="co">##         &lt;viz:position x="-100" y="100" z="0"/&gt;</span></span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true"></a><span class="co">##         &lt;viz:position x="0.466489099207365" y="-100" z="0"/&gt;</span></span>
 <span id="cb12-23"><a href="#cb12-23" aria-hidden="true"></a><span class="co">##         &lt;viz:size value="10"/&gt;</span></span>
 <span id="cb12-24"><a href="#cb12-24" aria-hidden="true"></a><span class="co">##       &lt;/node&gt;</span></span>
 <span id="cb12-25"><a href="#cb12-25" aria-hidden="true"></a><span class="co">##       &lt;node id="4" label="carlos" start="2" end="13"&gt;</span></span>
 <span id="cb12-26"><a href="#cb12-26" aria-hidden="true"></a><span class="co">##         &lt;viz:color r="255" g="99" b="71" a="1"/&gt;</span></span>
-<span id="cb12-27"><a href="#cb12-27" aria-hidden="true"></a><span class="co">##         &lt;viz:position x="-79.4152158871745" y="-100" z="0"/&gt;</span></span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true"></a><span class="co">##         &lt;viz:position x="89.1193831534432" y="9.31784801786497" z="0"/&gt;</span></span>
 <span id="cb12-28"><a href="#cb12-28" aria-hidden="true"></a><span class="co">##         &lt;viz:size value="10"/&gt;</span></span>
 <span id="cb12-29"><a href="#cb12-29" aria-hidden="true"></a><span class="co">##       &lt;/node&gt;</span></span>
 <span id="cb12-30"><a href="#cb12-30" aria-hidden="true"></a><span class="co">##     &lt;/nodes&gt;</span></span>
@@ -327,7 +338,7 @@
 <span id="cb22-21"><a href="#cb22-21" aria-hidden="true"></a><span class="co">##           &lt;attvalue for="att2" value="1"/&gt;</span></span>
 <span id="cb22-22"><a href="#cb22-22" aria-hidden="true"></a><span class="co">##         &lt;/attvalues&gt;</span></span>
 <span id="cb22-23"><a href="#cb22-23" aria-hidden="true"></a><span class="co">##         &lt;viz:color r="255" g="99" b="71" a="1"/&gt;</span></span>
-<span id="cb22-24"><a href="#cb22-24" aria-hidden="true"></a><span class="co">##         &lt;viz:position x="-100" y="100" z="0"/&gt;</span></span>
+<span id="cb22-24"><a href="#cb22-24" aria-hidden="true"></a><span class="co">##         &lt;viz:position x="82.864631757955" y="-0.646295488635658" z="0"/&gt;</span></span>
 <span id="cb22-25"><a href="#cb22-25" aria-hidden="true"></a><span class="co">##         &lt;viz:size value="10"/&gt;</span></span>
 <span id="cb22-26"><a href="#cb22-26" aria-hidden="true"></a><span class="co">##       &lt;/node&gt;</span></span>
 <span id="cb22-27"><a href="#cb22-27" aria-hidden="true"></a><span class="co">##       &lt;node id="2" label="pedro" start="13" end="13"&gt;</span></span>
@@ -336,7 +347,7 @@
 <span id="cb22-30"><a href="#cb22-30" aria-hidden="true"></a><span class="co">##           &lt;attvalue for="att2" value="2"/&gt;</span></span>
 <span id="cb22-31"><a href="#cb22-31" aria-hidden="true"></a><span class="co">##         &lt;/attvalues&gt;</span></span>
 <span id="cb22-32"><a href="#cb22-32" aria-hidden="true"></a><span class="co">##         &lt;viz:color r="255" g="99" b="71" a="1"/&gt;</span></span>
-<span id="cb22-33"><a href="#cb22-33" aria-hidden="true"></a><span class="co">##         &lt;viz:position x="94.9185288504935" y="-48.6249157132907" z="0"/&gt;</span></span>
+<span id="cb22-33"><a href="#cb22-33" aria-hidden="true"></a><span class="co">##         &lt;viz:position x="-85.6160835891587" y="100" z="0"/&gt;</span></span>
 <span id="cb22-34"><a href="#cb22-34" aria-hidden="true"></a><span class="co">##         &lt;viz:size value="10"/&gt;</span></span>
 <span id="cb22-35"><a href="#cb22-35" aria-hidden="true"></a><span class="co">##       &lt;/node&gt;</span></span>
 <span id="cb22-36"><a href="#cb22-36" aria-hidden="true"></a><span class="co">##       &lt;node id="3" label="matthew" start="2" end="13"&gt;</span></span>
@@ -345,7 +356,7 @@
 <span id="cb22-39"><a href="#cb22-39" aria-hidden="true"></a><span class="co">##           &lt;attvalue for="att2" value="3"/&gt;</span></span>
 <span id="cb22-40"><a href="#cb22-40" aria-hidden="true"></a><span class="co">##         &lt;/attvalues&gt;</span></span>
 <span id="cb22-41"><a href="#cb22-41" aria-hidden="true"></a><span class="co">##         &lt;viz:color r="255" g="99" b="71" a="1"/&gt;</span></span>
-<span id="cb22-42"><a href="#cb22-42" aria-hidden="true"></a><span class="co">##         &lt;viz:position x="32.196939799762" y="-100" z="0"/&gt;</span></span>
+<span id="cb22-42"><a href="#cb22-42" aria-hidden="true"></a><span class="co">##         &lt;viz:position x="-100" y="-43.3754984826992" z="0"/&gt;</span></span>
 <span id="cb22-43"><a href="#cb22-43" aria-hidden="true"></a><span class="co">##         &lt;viz:size value="10"/&gt;</span></span>
 <span id="cb22-44"><a href="#cb22-44" aria-hidden="true"></a><span class="co">##       &lt;/node&gt;</span></span>
 <span id="cb22-45"><a href="#cb22-45" aria-hidden="true"></a><span class="co">##       &lt;node id="4" label="carlos" start="2" end="13"&gt;</span></span>
@@ -354,7 +365,7 @@
 <span id="cb22-48"><a href="#cb22-48" aria-hidden="true"></a><span class="co">##           &lt;attvalue for="att2" value="4"/&gt;</span></span>
 <span id="cb22-49"><a href="#cb22-49" aria-hidden="true"></a><span class="co">##         &lt;/attvalues&gt;</span></span>
 <span id="cb22-50"><a href="#cb22-50" aria-hidden="true"></a><span class="co">##         &lt;viz:color r="255" g="99" b="71" a="1"/&gt;</span></span>
-<span id="cb22-51"><a href="#cb22-51" aria-hidden="true"></a><span class="co">##         &lt;viz:position x="100" y="-51.6585495191186" z="0"/&gt;</span></span>
+<span id="cb22-51"><a href="#cb22-51" aria-hidden="true"></a><span class="co">##         &lt;viz:position x="100" y="-100" z="0"/&gt;</span></span>
 <span id="cb22-52"><a href="#cb22-52" aria-hidden="true"></a><span class="co">##         &lt;viz:size value="10"/&gt;</span></span>
 <span id="cb22-53"><a href="#cb22-53" aria-hidden="true"></a><span class="co">##       &lt;/node&gt;</span></span>
 <span id="cb22-54"><a href="#cb22-54" aria-hidden="true"></a><span class="co">##     &lt;/nodes&gt;</span></span>
@@ -482,21 +493,14 @@
 <span id="cb24-72"><a href="#cb24-72" aria-hidden="true"></a><span class="co">## &lt;/gexf&gt;</span></span></code></pre></div>
 <p>Moreover, we can use the <code><a href="reference/igraph.to.gexf.html">gexf.to.igraph()</a></code> function to convert the <code>gexf</code> object into an <code>igraph</code> object:</p>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://igraph.org">igraph</a></span><span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb26"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true"></a><span class="co">## </span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true"></a><span class="co">## Attaching package: 'igraph'</span></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true"></a></span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true"></a><span class="co">## The following objects are masked from 'package:stats':</span></span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true"></a><span class="co">## </span></span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true"></a><span class="co">##     decompose, spectrum</span></span>
-<span id="cb26-7"><a href="#cb26-7" aria-hidden="true"></a></span>
-<span id="cb26-8"><a href="#cb26-8" aria-hidden="true"></a><span class="co">## The following object is masked from 'package:base':</span></span>
-<span id="cb26-9"><a href="#cb26-9" aria-hidden="true"></a><span class="co">## </span></span>
-<span id="cb26-10"><a href="#cb26-10" aria-hidden="true"></a><span class="co">##     union</span></span></code></pre></div>
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">ig</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/igraph.to.gexf.html">gexf.to.igraph</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://igraph.org">igraph</a></span><span class="op">)</span>
+<span class="va">ig</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/igraph.to.gexf.html">gexf.to.igraph</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span>
+
+<span class="va">op</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mai <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span> <span class="co"># Making room</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">ig</span><span class="op">)</span></code></pre></div>
-<p><img src="README_files/figure-gfm/igraph-1.png"><!-- --></p>
+<p><img src="reference/figures/igraph-1.png"><!-- --></p>
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span><span class="va">op</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
 <div id="code-of-conduct" class="section level1">
@@ -507,74 +511,77 @@
 <div id="session-info" class="section level1">
 <h1 class="hasAnchor">
 <a href="#session-info" class="anchor"></a>Session info</h1>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">devtools</span><span class="fu">::</span><span class="fu">session_info</span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb29"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true"></a><span class="co">## ─ Session info ───────────────────────────────────────────────────────────────</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true"></a><span class="co">##  setting  value                       </span></span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true"></a><span class="co">##  version  R version 4.1.0 (2021-05-18)</span></span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true"></a><span class="co">##  os       Ubuntu 18.04.5 LTS          </span></span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true"></a><span class="co">##  system   x86_64, linux-gnu           </span></span>
-<span id="cb29-6"><a href="#cb29-6" aria-hidden="true"></a><span class="co">##  ui       X11                         </span></span>
-<span id="cb29-7"><a href="#cb29-7" aria-hidden="true"></a><span class="co">##  language en_US:en                    </span></span>
-<span id="cb29-8"><a href="#cb29-8" aria-hidden="true"></a><span class="co">##  collate  en_US.UTF-8                 </span></span>
-<span id="cb29-9"><a href="#cb29-9" aria-hidden="true"></a><span class="co">##  ctype    en_US.UTF-8                 </span></span>
-<span id="cb29-10"><a href="#cb29-10" aria-hidden="true"></a><span class="co">##  tz       America/Los_Angeles         </span></span>
-<span id="cb29-11"><a href="#cb29-11" aria-hidden="true"></a><span class="co">##  date     2021-08-10                  </span></span>
-<span id="cb29-12"><a href="#cb29-12" aria-hidden="true"></a><span class="co">## </span></span>
-<span id="cb29-13"><a href="#cb29-13" aria-hidden="true"></a><span class="co">## ─ Packages ───────────────────────────────────────────────────────────────────</span></span>
-<span id="cb29-14"><a href="#cb29-14" aria-hidden="true"></a><span class="co">##  package     * version  date       lib source        </span></span>
-<span id="cb29-15"><a href="#cb29-15" aria-hidden="true"></a><span class="co">##  cachem        1.0.5    2021-05-15 [1] CRAN (R 4.1.0)</span></span>
-<span id="cb29-16"><a href="#cb29-16" aria-hidden="true"></a><span class="co">##  callr         3.7.0    2021-04-20 [1] CRAN (R 4.1.0)</span></span>
-<span id="cb29-17"><a href="#cb29-17" aria-hidden="true"></a><span class="co">##  cli           3.0.0    2021-06-30 [1] CRAN (R 4.1.0)</span></span>
-<span id="cb29-18"><a href="#cb29-18" aria-hidden="true"></a><span class="co">##  crayon        1.4.1    2021-02-08 [1] CRAN (R 4.1.0)</span></span>
-<span id="cb29-19"><a href="#cb29-19" aria-hidden="true"></a><span class="co">##  desc          1.3.0    2021-03-05 [1] CRAN (R 4.1.0)</span></span>
-<span id="cb29-20"><a href="#cb29-20" aria-hidden="true"></a><span class="co">##  devtools      2.4.2    2021-06-07 [1] CRAN (R 4.1.0)</span></span>
-<span id="cb29-21"><a href="#cb29-21" aria-hidden="true"></a><span class="co">##  digest        0.6.27   2020-10-24 [1] CRAN (R 4.1.0)</span></span>
-<span id="cb29-22"><a href="#cb29-22" aria-hidden="true"></a><span class="co">##  ellipsis      0.3.2    2021-04-29 [1] CRAN (R 4.1.0)</span></span>
-<span id="cb29-23"><a href="#cb29-23" aria-hidden="true"></a><span class="co">##  evaluate      0.14     2019-05-28 [1] CRAN (R 4.1.0)</span></span>
-<span id="cb29-24"><a href="#cb29-24" aria-hidden="true"></a><span class="co">##  fastmap       1.1.0    2021-01-25 [1] CRAN (R 4.1.0)</span></span>
-<span id="cb29-25"><a href="#cb29-25" aria-hidden="true"></a><span class="co">##  fs            1.5.0    2020-07-31 [1] CRAN (R 4.1.0)</span></span>
-<span id="cb29-26"><a href="#cb29-26" aria-hidden="true"></a><span class="co">##  glue          1.4.2    2020-08-27 [1] CRAN (R 4.1.0)</span></span>
-<span id="cb29-27"><a href="#cb29-27" aria-hidden="true"></a><span class="co">##  highr         0.9      2021-04-16 [1] CRAN (R 4.1.0)</span></span>
-<span id="cb29-28"><a href="#cb29-28" aria-hidden="true"></a><span class="co">##  htmltools     0.5.1.1  2021-01-22 [1] CRAN (R 4.1.0)</span></span>
-<span id="cb29-29"><a href="#cb29-29" aria-hidden="true"></a><span class="co">##  httpuv        1.6.1    2021-05-07 [1] CRAN (R 4.1.0)</span></span>
-<span id="cb29-30"><a href="#cb29-30" aria-hidden="true"></a><span class="co">##  igraph      * 1.2.6    2020-10-06 [1] CRAN (R 4.1.0)</span></span>
-<span id="cb29-31"><a href="#cb29-31" aria-hidden="true"></a><span class="co">##  jsonlite      1.7.2    2020-12-09 [1] CRAN (R 4.1.0)</span></span>
-<span id="cb29-32"><a href="#cb29-32" aria-hidden="true"></a><span class="co">##  knitr         1.33     2021-04-24 [1] CRAN (R 4.1.0)</span></span>
-<span id="cb29-33"><a href="#cb29-33" aria-hidden="true"></a><span class="co">##  later         1.2.0    2021-04-23 [1] CRAN (R 4.1.0)</span></span>
-<span id="cb29-34"><a href="#cb29-34" aria-hidden="true"></a><span class="co">##  lifecycle     1.0.0    2021-02-15 [1] CRAN (R 4.1.0)</span></span>
-<span id="cb29-35"><a href="#cb29-35" aria-hidden="true"></a><span class="co">##  magrittr      2.0.1    2020-11-17 [1] CRAN (R 4.1.0)</span></span>
-<span id="cb29-36"><a href="#cb29-36" aria-hidden="true"></a><span class="co">##  memoise       2.0.0    2021-01-26 [1] CRAN (R 4.1.0)</span></span>
-<span id="cb29-37"><a href="#cb29-37" aria-hidden="true"></a><span class="co">##  pkgbuild      1.2.0    2020-12-15 [1] CRAN (R 4.1.0)</span></span>
-<span id="cb29-38"><a href="#cb29-38" aria-hidden="true"></a><span class="co">##  pkgconfig     2.0.3    2019-09-22 [1] CRAN (R 4.1.0)</span></span>
-<span id="cb29-39"><a href="#cb29-39" aria-hidden="true"></a><span class="co">##  pkgload       1.2.1    2021-04-06 [1] CRAN (R 4.1.0)</span></span>
-<span id="cb29-40"><a href="#cb29-40" aria-hidden="true"></a><span class="co">##  prettyunits   1.1.1    2020-01-24 [1] CRAN (R 4.1.0)</span></span>
-<span id="cb29-41"><a href="#cb29-41" aria-hidden="true"></a><span class="co">##  processx      3.5.2    2021-04-30 [1] CRAN (R 4.1.0)</span></span>
-<span id="cb29-42"><a href="#cb29-42" aria-hidden="true"></a><span class="co">##  promises      1.2.0.1  2021-02-11 [1] CRAN (R 4.1.0)</span></span>
-<span id="cb29-43"><a href="#cb29-43" aria-hidden="true"></a><span class="co">##  ps            1.6.0    2021-02-28 [1] CRAN (R 4.1.0)</span></span>
-<span id="cb29-44"><a href="#cb29-44" aria-hidden="true"></a><span class="co">##  purrr         0.3.4    2020-04-17 [1] CRAN (R 4.1.0)</span></span>
-<span id="cb29-45"><a href="#cb29-45" aria-hidden="true"></a><span class="co">##  R6            2.5.0    2020-10-28 [1] CRAN (R 4.1.0)</span></span>
-<span id="cb29-46"><a href="#cb29-46" aria-hidden="true"></a><span class="co">##  Rcpp          1.0.6    2021-01-15 [1] CRAN (R 4.1.0)</span></span>
-<span id="cb29-47"><a href="#cb29-47" aria-hidden="true"></a><span class="co">##  remotes       2.3.0    2021-04-01 [1] CRAN (R 4.1.0)</span></span>
-<span id="cb29-48"><a href="#cb29-48" aria-hidden="true"></a><span class="co">##  rgexf       * 0.16.1   2021-08-10 [1] local         </span></span>
-<span id="cb29-49"><a href="#cb29-49" aria-hidden="true"></a><span class="co">##  rlang         0.4.11   2021-04-30 [1] CRAN (R 4.1.0)</span></span>
-<span id="cb29-50"><a href="#cb29-50" aria-hidden="true"></a><span class="co">##  rmarkdown     2.8      2021-05-07 [1] CRAN (R 4.1.0)</span></span>
-<span id="cb29-51"><a href="#cb29-51" aria-hidden="true"></a><span class="co">##  rprojroot     2.0.2    2020-11-15 [1] CRAN (R 4.1.0)</span></span>
-<span id="cb29-52"><a href="#cb29-52" aria-hidden="true"></a><span class="co">##  servr         0.22     2021-04-14 [1] CRAN (R 4.1.0)</span></span>
-<span id="cb29-53"><a href="#cb29-53" aria-hidden="true"></a><span class="co">##  sessioninfo   1.1.1    2018-11-05 [1] CRAN (R 4.1.0)</span></span>
-<span id="cb29-54"><a href="#cb29-54" aria-hidden="true"></a><span class="co">##  stringi       1.6.2    2021-05-17 [1] CRAN (R 4.1.0)</span></span>
-<span id="cb29-55"><a href="#cb29-55" aria-hidden="true"></a><span class="co">##  stringr       1.4.0    2019-02-10 [1] CRAN (R 4.1.0)</span></span>
-<span id="cb29-56"><a href="#cb29-56" aria-hidden="true"></a><span class="co">##  testthat      3.0.2    2021-02-14 [1] CRAN (R 4.1.0)</span></span>
-<span id="cb29-57"><a href="#cb29-57" aria-hidden="true"></a><span class="co">##  usethis       2.0.1    2021-02-10 [1] CRAN (R 4.1.0)</span></span>
-<span id="cb29-58"><a href="#cb29-58" aria-hidden="true"></a><span class="co">##  withr         2.4.2    2021-04-18 [1] CRAN (R 4.1.0)</span></span>
-<span id="cb29-59"><a href="#cb29-59" aria-hidden="true"></a><span class="co">##  xfun          0.23     2021-05-15 [1] CRAN (R 4.1.0)</span></span>
-<span id="cb29-60"><a href="#cb29-60" aria-hidden="true"></a><span class="co">##  XML           3.99-0.6 2021-03-16 [1] CRAN (R 4.1.0)</span></span>
-<span id="cb29-61"><a href="#cb29-61" aria-hidden="true"></a><span class="co">##  yaml          2.2.1    2020-02-01 [1] CRAN (R 4.1.0)</span></span>
-<span id="cb29-62"><a href="#cb29-62" aria-hidden="true"></a><span class="co">## </span></span>
-<span id="cb29-63"><a href="#cb29-63" aria-hidden="true"></a><span class="co">## [1] /home/george/R/x86_64-pc-linux-gnu-library/4.1</span></span>
-<span id="cb29-64"><a href="#cb29-64" aria-hidden="true"></a><span class="co">## [2] /usr/local/lib/R/site-library</span></span>
-<span id="cb29-65"><a href="#cb29-65" aria-hidden="true"></a><span class="co">## [3] /usr/lib/R/site-library</span></span>
-<span id="cb29-66"><a href="#cb29-66" aria-hidden="true"></a><span class="co">## [4] /usr/lib/R/library</span></span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true"></a><span class="co">## ─ Session info ───────────────────────────────────────────────────────────────</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true"></a><span class="co">##  setting  value                       </span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true"></a><span class="co">##  version  R version 4.1.0 (2021-05-18)</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true"></a><span class="co">##  os       Ubuntu 18.04.5 LTS          </span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true"></a><span class="co">##  system   x86_64, linux-gnu           </span></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true"></a><span class="co">##  ui       X11                         </span></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true"></a><span class="co">##  language en_US:en                    </span></span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true"></a><span class="co">##  collate  en_US.UTF-8                 </span></span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true"></a><span class="co">##  ctype    en_US.UTF-8                 </span></span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true"></a><span class="co">##  tz       America/Los_Angeles         </span></span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true"></a><span class="co">##  date     2021-08-10                  </span></span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true"></a><span class="co">## </span></span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true"></a><span class="co">## ─ Packages ───────────────────────────────────────────────────────────────────</span></span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true"></a><span class="co">##  package     * version  date       lib source        </span></span>
+<span id="cb28-15"><a href="#cb28-15" aria-hidden="true"></a><span class="co">##  bslib         0.2.5.1  2021-05-18 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb28-16"><a href="#cb28-16" aria-hidden="true"></a><span class="co">##  cachem        1.0.5    2021-05-15 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb28-17"><a href="#cb28-17" aria-hidden="true"></a><span class="co">##  callr         3.7.0    2021-04-20 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb28-18"><a href="#cb28-18" aria-hidden="true"></a><span class="co">##  cli           3.0.0    2021-06-30 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb28-19"><a href="#cb28-19" aria-hidden="true"></a><span class="co">##  crayon        1.4.1    2021-02-08 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb28-20"><a href="#cb28-20" aria-hidden="true"></a><span class="co">##  desc          1.3.0    2021-03-05 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb28-21"><a href="#cb28-21" aria-hidden="true"></a><span class="co">##  devtools      2.4.2    2021-06-07 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb28-22"><a href="#cb28-22" aria-hidden="true"></a><span class="co">##  digest        0.6.27   2020-10-24 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb28-23"><a href="#cb28-23" aria-hidden="true"></a><span class="co">##  ellipsis      0.3.2    2021-04-29 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb28-24"><a href="#cb28-24" aria-hidden="true"></a><span class="co">##  evaluate      0.14     2019-05-28 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb28-25"><a href="#cb28-25" aria-hidden="true"></a><span class="co">##  fastmap       1.1.0    2021-01-25 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb28-26"><a href="#cb28-26" aria-hidden="true"></a><span class="co">##  fs            1.5.0    2020-07-31 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb28-27"><a href="#cb28-27" aria-hidden="true"></a><span class="co">##  glue          1.4.2    2020-08-27 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb28-28"><a href="#cb28-28" aria-hidden="true"></a><span class="co">##  highr         0.9      2021-04-16 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb28-29"><a href="#cb28-29" aria-hidden="true"></a><span class="co">##  htmltools     0.5.1.1  2021-01-22 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb28-30"><a href="#cb28-30" aria-hidden="true"></a><span class="co">##  httpuv        1.6.1    2021-05-07 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb28-31"><a href="#cb28-31" aria-hidden="true"></a><span class="co">##  igraph      * 1.2.6    2020-10-06 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb28-32"><a href="#cb28-32" aria-hidden="true"></a><span class="co">##  jquerylib     0.1.4    2021-04-26 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb28-33"><a href="#cb28-33" aria-hidden="true"></a><span class="co">##  jsonlite      1.7.2    2020-12-09 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb28-34"><a href="#cb28-34" aria-hidden="true"></a><span class="co">##  knitr         1.33     2021-04-24 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb28-35"><a href="#cb28-35" aria-hidden="true"></a><span class="co">##  later         1.2.0    2021-04-23 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb28-36"><a href="#cb28-36" aria-hidden="true"></a><span class="co">##  lifecycle     1.0.0    2021-02-15 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb28-37"><a href="#cb28-37" aria-hidden="true"></a><span class="co">##  magrittr      2.0.1    2020-11-17 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb28-38"><a href="#cb28-38" aria-hidden="true"></a><span class="co">##  memoise       2.0.0    2021-01-26 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb28-39"><a href="#cb28-39" aria-hidden="true"></a><span class="co">##  pkgbuild      1.2.0    2020-12-15 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb28-40"><a href="#cb28-40" aria-hidden="true"></a><span class="co">##  pkgconfig     2.0.3    2019-09-22 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb28-41"><a href="#cb28-41" aria-hidden="true"></a><span class="co">##  pkgload       1.2.1    2021-04-06 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb28-42"><a href="#cb28-42" aria-hidden="true"></a><span class="co">##  prettyunits   1.1.1    2020-01-24 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb28-43"><a href="#cb28-43" aria-hidden="true"></a><span class="co">##  processx      3.5.2    2021-04-30 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb28-44"><a href="#cb28-44" aria-hidden="true"></a><span class="co">##  promises      1.2.0.1  2021-02-11 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb28-45"><a href="#cb28-45" aria-hidden="true"></a><span class="co">##  ps            1.6.0    2021-02-28 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb28-46"><a href="#cb28-46" aria-hidden="true"></a><span class="co">##  purrr         0.3.4    2020-04-17 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb28-47"><a href="#cb28-47" aria-hidden="true"></a><span class="co">##  R6            2.5.0    2020-10-28 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb28-48"><a href="#cb28-48" aria-hidden="true"></a><span class="co">##  Rcpp          1.0.6    2021-01-15 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb28-49"><a href="#cb28-49" aria-hidden="true"></a><span class="co">##  remotes       2.3.0    2021-04-01 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb28-50"><a href="#cb28-50" aria-hidden="true"></a><span class="co">##  rgexf       * 0.16.2   2021-08-10 [1] local         </span></span>
+<span id="cb28-51"><a href="#cb28-51" aria-hidden="true"></a><span class="co">##  rlang         0.4.11   2021-04-30 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb28-52"><a href="#cb28-52" aria-hidden="true"></a><span class="co">##  rmarkdown     2.8      2021-05-07 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb28-53"><a href="#cb28-53" aria-hidden="true"></a><span class="co">##  rprojroot     2.0.2    2020-11-15 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb28-54"><a href="#cb28-54" aria-hidden="true"></a><span class="co">##  sass          0.4.0    2021-05-12 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb28-55"><a href="#cb28-55" aria-hidden="true"></a><span class="co">##  servr         0.22     2021-04-14 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb28-56"><a href="#cb28-56" aria-hidden="true"></a><span class="co">##  sessioninfo   1.1.1    2018-11-05 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb28-57"><a href="#cb28-57" aria-hidden="true"></a><span class="co">##  stringi       1.6.2    2021-05-17 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb28-58"><a href="#cb28-58" aria-hidden="true"></a><span class="co">##  stringr       1.4.0    2019-02-10 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb28-59"><a href="#cb28-59" aria-hidden="true"></a><span class="co">##  testthat      3.0.2    2021-02-14 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb28-60"><a href="#cb28-60" aria-hidden="true"></a><span class="co">##  usethis       2.0.1    2021-02-10 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb28-61"><a href="#cb28-61" aria-hidden="true"></a><span class="co">##  withr         2.4.2    2021-04-18 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb28-62"><a href="#cb28-62" aria-hidden="true"></a><span class="co">##  xfun          0.23     2021-05-15 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb28-63"><a href="#cb28-63" aria-hidden="true"></a><span class="co">##  XML           3.99-0.6 2021-03-16 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb28-64"><a href="#cb28-64" aria-hidden="true"></a><span class="co">##  yaml          2.2.1    2020-02-01 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb28-65"><a href="#cb28-65" aria-hidden="true"></a><span class="co">## </span></span>
+<span id="cb28-66"><a href="#cb28-66" aria-hidden="true"></a><span class="co">## [1] /home/george/R/x86_64-pc-linux-gnu-library/4.1</span></span>
+<span id="cb28-67"><a href="#cb28-67" aria-hidden="true"></a><span class="co">## [2] /usr/local/lib/R/site-library</span></span>
+<span id="cb28-68"><a href="#cb28-68" aria-hidden="true"></a><span class="co">## [3] /usr/lib/R/site-library</span></span>
+<span id="cb28-69"><a href="#cb28-69" aria-hidden="true"></a><span class="co">## [4] /usr/lib/R/library</span></span></code></pre></div>
 </div>
 
   </div>
