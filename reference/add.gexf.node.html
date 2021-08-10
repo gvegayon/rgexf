@@ -304,7 +304,36 @@ nodes to which you want to add spells should already exist.</p>
 <span class='va'>g</span> <span class='op'>&lt;-</span> <span class='fu'>add.edge.spell</span><span class='op'>(</span><span class='va'>g</span>, <span class='fl'>1</span>, start <span class='op'>=</span> <span class='fl'>1</span>, end <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
 <span class='va'>g</span> <span class='op'>&lt;-</span> <span class='fu'>add.edge.spell</span><span class='op'>(</span><span class='va'>g</span>, <span class='fl'>1</span>, start <span class='op'>=</span> <span class='fl'>3.5</span><span class='op'>)</span>
 
-
+<span class='va'>g</span>
+</div><div class='output co'>#&gt; &lt;?xml version="1.0"?&gt;
+#&gt; &lt;gexf schemaLocation="http://www.gexf.net/1.2draft http://www.gexf.net/1.2draft/gexf.xsd" version="1.2" xmlns="http://www.gexf.net/1.2draft" xmlns:viz="http://www.gexf.net/1.1draft/viz" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;
+#&gt;  &lt;meta lastmodifieddate="2021-08-10"&gt;
+#&gt;   &lt;creator&gt;NodosChile&lt;/creator&gt;
+#&gt;   &lt;description&gt;A graph file writing in R using &amp;apos;rgexf&amp;apos;&lt;/description&gt;
+#&gt;   &lt;keywords&gt;gexf graph, NodosChile, R, rgexf&lt;/keywords&gt;
+#&gt;  &lt;/meta&gt;
+#&gt;  &lt;graph mode="static"&gt;
+#&gt;   &lt;nodes&gt;
+#&gt;    &lt;node id="0" label="A"&gt;
+#&gt;     &lt;spells&gt;
+#&gt;      &lt;spell start="1" end="2"/&gt;
+#&gt;      &lt;spell start="3"/&gt;
+#&gt;     &lt;/spells&gt;
+#&gt;    &lt;/node&gt;
+#&gt;    &lt;node id="1" label="B"/&gt;
+#&gt;    &lt;node id="2" label="C"/&gt;
+#&gt;   &lt;/nodes&gt;
+#&gt;   &lt;edges&gt;
+#&gt;    &lt;edge id="1" source="0" target="1" weight="1"&gt;
+#&gt;     &lt;spells&gt;
+#&gt;      &lt;spell start="1" end="2"/&gt;
+#&gt;      &lt;spell start="3.5"/&gt;
+#&gt;     &lt;/spells&gt;
+#&gt;    &lt;/edge&gt;
+#&gt;    &lt;edge id="2" source="0" target="2" weight="1"/&gt;
+#&gt;   &lt;/edges&gt;
+#&gt;  &lt;/graph&gt;
+#&gt; &lt;/gexf&gt; </div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
