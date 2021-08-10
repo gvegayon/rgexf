@@ -2,8 +2,10 @@
 [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/rgexf)](https://cran.r-project.org/package=rgexf)
 [![Downloads](http://cranlogs.r-pkg.org/badges/rgexf?color=brightgreen)](https://cran.r-project.org/package=rgexf)
 [![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/rgexf)](https://cran.r-project.org/package=rgexf)
-[![Travis-CI Build
-Status](https://travis-ci.org/gvegayon/rgexf.svg?branch=master)](https://travis-ci.org/gvegayon/rgexf)
+[![R
+CI](https://github.com/gvegayon/rgexf/actions/workflows/ci.yml/badge.svg)](https://github.com/gvegayon/rgexf/actions/workflows/ci.yml)
+[![rgexf
+website](https://github.com/gvegayon/rgexf/actions/workflows/website.yml/badge.svg)](https://github.com/gvegayon/rgexf/actions/workflows/website.yml)
 [![AppVeyor Build
 Status](https://ci.appveyor.com/api/projects/status/github/gvegayon/rgexf?branch=master&svg=true)](https://ci.appveyor.com/project/gvegayon/rgexf)
 [![Coverage
@@ -125,22 +127,22 @@ write.gexf(people, relations)
     ##     <nodes>
     ##       <node id="1" label="juan">
     ##         <viz:color r="255" g="99" b="71" a="1"/>
-    ##         <viz:position x="100" y="-100" z="0"/>
+    ##         <viz:position x="-100" y="-83.9578418284886" z="0"/>
     ##         <viz:size value="10"/>
     ##       </node>
     ##       <node id="2" label="pedro">
     ##         <viz:color r="255" g="99" b="71" a="1"/>
-    ##         <viz:position x="-100" y="1.09117487212021" z="0"/>
+    ##         <viz:position x="-89.7969192207545" y="-100" z="0"/>
     ##         <viz:size value="10"/>
     ##       </node>
     ##       <node id="3" label="matthew">
     ##         <viz:color r="255" g="99" b="71" a="1"/>
-    ##         <viz:position x="42.7044550323626" y="97.7256340941133" z="0"/>
+    ##         <viz:position x="100" y="100" z="0"/>
     ##         <viz:size value="10"/>
     ##       </node>
     ##       <node id="4" label="carlos">
     ##         <viz:color r="255" g="99" b="71" a="1"/>
-    ##         <viz:position x="-27.5196702171076" y="100" z="0"/>
+    ##         <viz:position x="89.0832390117297" y="-45.6465865243531" z="0"/>
     ##         <viz:size value="10"/>
     ##       </node>
     ##     </nodes>
@@ -186,22 +188,22 @@ write.gexf(people, relations, nodeDynamic=time)
     ##     <nodes>
     ##       <node id="1" label="juan" start="10" end="12">
     ##         <viz:color r="255" g="99" b="71" a="1"/>
-    ##         <viz:position x="-100" y="-100" z="0"/>
+    ##         <viz:position x="-100" y="-31.4740979442695" z="0"/>
     ##         <viz:size value="10"/>
     ##       </node>
     ##       <node id="2" label="pedro" start="13" end="13">
     ##         <viz:color r="255" g="99" b="71" a="1"/>
-    ##         <viz:position x="22.6374399618484" y="100" z="0"/>
+    ##         <viz:position x="-20.056226237035" y="-100" z="0"/>
     ##         <viz:size value="10"/>
     ##       </node>
     ##       <node id="3" label="matthew" start="2" end="13">
     ##         <viz:color r="255" g="99" b="71" a="1"/>
-    ##         <viz:position x="-34.9806187367583" y="39.1811236108626" z="0"/>
+    ##         <viz:position x="19.4048337948484" y="-16.4595639751927" z="0"/>
     ##         <viz:size value="10"/>
     ##       </node>
     ##       <node id="4" label="carlos" start="2" end="13">
     ##         <viz:color r="255" g="99" b="71" a="1"/>
-    ##         <viz:position x="100" y="-83.0389199084837" z="0"/>
+    ##         <viz:position x="100" y="100" z="0"/>
     ##         <viz:size value="10"/>
     ##       </node>
     ##     </nodes>
@@ -301,7 +303,7 @@ write.gexf(nodes=people, edges=relations, edgeDynamic=time.edges,
     ##           <attvalue for="att2" value="1"/>
     ##         </attvalues>
     ##         <viz:color r="255" g="99" b="71" a="1"/>
-    ##         <viz:position x="100" y="100" z="0"/>
+    ##         <viz:position x="67.5376043874963" y="100" z="0"/>
     ##         <viz:size value="10"/>
     ##       </node>
     ##       <node id="2" label="pedro" start="13" end="13">
@@ -310,7 +312,7 @@ write.gexf(nodes=people, edges=relations, edgeDynamic=time.edges,
     ##           <attvalue for="att2" value="2"/>
     ##         </attvalues>
     ##         <viz:color r="255" g="99" b="71" a="1"/>
-    ##         <viz:position x="49.0003320799315" y="-32.4623144706873" z="0"/>
+    ##         <viz:position x="89.7154179636199" y="-87.7577646430334" z="0"/>
     ##         <viz:size value="10"/>
     ##       </node>
     ##       <node id="3" label="matthew" start="2" end="13">
@@ -319,7 +321,7 @@ write.gexf(nodes=people, edges=relations, edgeDynamic=time.edges,
     ##           <attvalue for="att2" value="3"/>
     ##         </attvalues>
     ##         <viz:color r="255" g="99" b="71" a="1"/>
-    ##         <viz:position x="-100" y="-100" z="0"/>
+    ##         <viz:position x="-100" y="91.9036253379552" z="0"/>
     ##         <viz:size value="10"/>
     ##       </node>
     ##       <node id="4" label="carlos" start="2" end="13">
@@ -328,7 +330,7 @@ write.gexf(nodes=people, edges=relations, edgeDynamic=time.edges,
     ##           <attvalue for="att2" value="4"/>
     ##         </attvalues>
     ##         <viz:color r="255" g="99" b="71" a="1"/>
-    ##         <viz:position x="86.316665305298" y="83.9200729789382" z="0"/>
+    ##         <viz:position x="100" y="-100" z="0"/>
     ##         <viz:size value="10"/>
     ##       </node>
     ##     </nodes>
@@ -462,6 +464,20 @@ Moreover, we can use the `gexf.to.igraph()` function to convert the
 
 ``` r
 library(igraph)
+```
+
+    ## 
+    ## Attaching package: 'igraph'
+
+    ## The following objects are masked from 'package:stats':
+    ## 
+    ##     decompose, spectrum
+
+    ## The following object is masked from 'package:base':
+    ## 
+    ##     union
+
+``` r
 ig <- gexf.to.igraph(g)
 
 op <- par(mai = rep(0, 4)) # Making room
@@ -507,7 +523,6 @@ devtools::session_info()
     ## 
     ## ─ Packages ───────────────────────────────────────────────────────────────────
     ##  package     * version  date       lib source        
-    ##  bslib         0.2.5.1  2021-05-18 [1] CRAN (R 4.1.0)
     ##  cachem        1.0.5    2021-05-15 [1] CRAN (R 4.1.0)
     ##  callr         3.7.0    2021-04-20 [1] CRAN (R 4.1.0)
     ##  cli           3.0.0    2021-06-30 [1] CRAN (R 4.1.0)
@@ -524,7 +539,6 @@ devtools::session_info()
     ##  htmltools     0.5.1.1  2021-01-22 [1] CRAN (R 4.1.0)
     ##  httpuv        1.6.1    2021-05-07 [1] CRAN (R 4.1.0)
     ##  igraph      * 1.2.6    2020-10-06 [1] CRAN (R 4.1.0)
-    ##  jquerylib     0.1.4    2021-04-26 [1] CRAN (R 4.1.0)
     ##  jsonlite      1.7.2    2020-12-09 [1] CRAN (R 4.1.0)
     ##  knitr         1.33     2021-04-24 [1] CRAN (R 4.1.0)
     ##  later         1.2.0    2021-04-23 [1] CRAN (R 4.1.0)
@@ -546,7 +560,6 @@ devtools::session_info()
     ##  rlang         0.4.11   2021-04-30 [1] CRAN (R 4.1.0)
     ##  rmarkdown     2.8      2021-05-07 [1] CRAN (R 4.1.0)
     ##  rprojroot     2.0.2    2020-11-15 [1] CRAN (R 4.1.0)
-    ##  sass          0.4.0    2021-05-12 [1] CRAN (R 4.1.0)
     ##  servr         0.22     2021-04-14 [1] CRAN (R 4.1.0)
     ##  sessioninfo   1.1.1    2018-11-05 [1] CRAN (R 4.1.0)
     ##  stringi       1.6.2    2021-05-17 [1] CRAN (R 4.1.0)
