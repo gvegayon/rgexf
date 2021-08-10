@@ -97,7 +97,7 @@ write.gexf(people, relations)
 
     ## <?xml version="1.0" encoding="UTF-8"?>
     ## <gexf xmlns="http://www.gexf.net/1.3" xmlns:viz="http://www.gexf.net/1.3/viz" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.3 http://www.gexf.net/1.3/gexf.xsd" version="1.3">
-    ##   <meta lastmodifieddate="2021-08-07">
+    ##   <meta lastmodifieddate="2021-08-10">
     ##     <creator>NodosChile</creator>
     ##     <description>A GEXF file written in R with "rgexf"</description>
     ##     <keywords>GEXF, NodosChile, R, rgexf, Gephi</keywords>
@@ -106,22 +106,22 @@ write.gexf(people, relations)
     ##     <nodes>
     ##       <node id="1" label="juan">
     ##         <viz:color r="255" g="99" b="71" a="1"/>
-    ##         <viz:position x="-66.3685474076803" y="77.3154555537601" z="0"/>
+    ##         <viz:position x="84.4622068841045" y="-100" z="0"/>
     ##         <viz:size value="10"/>
     ##       </node>
     ##       <node id="2" label="pedro">
     ##         <viz:color r="255" g="99" b="71" a="1"/>
-    ##         <viz:position x="-100" y="-58.9712363275538" z="0"/>
+    ##         <viz:position x="100" y="100" z="0"/>
     ##         <viz:size value="10"/>
     ##       </node>
     ##       <node id="3" label="matthew">
     ##         <viz:color r="255" g="99" b="71" a="1"/>
-    ##         <viz:position x="47.2239471567239" y="100" z="0"/>
+    ##         <viz:position x="13.6250760243742" y="7.95768386709403" z="0"/>
     ##         <viz:size value="10"/>
     ##       </node>
     ##       <node id="4" label="carlos">
     ##         <viz:color r="255" g="99" b="71" a="1"/>
-    ##         <viz:position x="100" y="-100" z="0"/>
+    ##         <viz:position x="-100" y="78.79797591046" z="0"/>
     ##         <viz:size value="10"/>
     ##       </node>
     ##     </nodes>
@@ -135,6 +135,7 @@ write.gexf(people, relations)
     ##     </edges>
     ##   </graph>
     ## </gexf>
+    ## 
 
 ## Example 2: Dynamic net
 
@@ -157,7 +158,7 @@ write.gexf(people, relations, nodeDynamic=time)
 
     ## <?xml version="1.0" encoding="UTF-8"?>
     ## <gexf xmlns="http://www.gexf.net/1.3" xmlns:viz="http://www.gexf.net/1.3/viz" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.3 http://www.gexf.net/1.3/gexf.xsd" version="1.3">
-    ##   <meta lastmodifieddate="2021-08-07">
+    ##   <meta lastmodifieddate="2021-08-10">
     ##     <creator>NodosChile</creator>
     ##     <description>A GEXF file written in R with "rgexf"</description>
     ##     <keywords>GEXF, NodosChile, R, rgexf, Gephi</keywords>
@@ -166,22 +167,22 @@ write.gexf(people, relations, nodeDynamic=time)
     ##     <nodes>
     ##       <node id="1" label="juan" start="10" end="12">
     ##         <viz:color r="255" g="99" b="71" a="1"/>
-    ##         <viz:position x="-82.7323250984103" y="-72.6460507213555" z="0"/>
+    ##         <viz:position x="69.6983538631002" y="-69.8983985366003" z="0"/>
     ##         <viz:size value="10"/>
     ##       </node>
     ##       <node id="2" label="pedro" start="13" end="2">
     ##         <viz:color r="255" g="99" b="71" a="1"/>
-    ##         <viz:position x="-2.81473718741643" y="-100" z="0"/>
+    ##         <viz:position x="100" y="-100" z="0"/>
     ##         <viz:size value="10"/>
     ##       </node>
     ##       <node id="3" label="matthew" start="2" end="2">
     ##         <viz:color r="255" g="99" b="71" a="1"/>
-    ##         <viz:position x="-100" y="67.6497079734066" z="0"/>
+    ##         <viz:position x="-73.6968091913099" y="54.8684641665018" z="0"/>
     ##         <viz:size value="10"/>
     ##       </node>
     ##       <node id="4" label="carlos" start="2" end="2">
     ##         <viz:color r="255" g="99" b="71" a="1"/>
-    ##         <viz:position x="100" y="100" z="0"/>
+    ##         <viz:position x="-100" y="100" z="0"/>
     ##         <viz:size value="10"/>
     ##       </node>
     ##     </nodes>
@@ -195,6 +196,7 @@ write.gexf(people, relations, nodeDynamic=time)
     ##     </edges>
     ##   </graph>
     ## </gexf>
+    ## 
 
 ## Example 3: More complex… Dynamic graph with attributes both for nodes and edges
 
@@ -259,7 +261,7 @@ write.gexf(nodes=people, edges=relations, edgeDynamic=time.edges,
 
     ## <?xml version="1.0" encoding="UTF-8"?>
     ## <gexf xmlns="http://www.gexf.net/1.3" xmlns:viz="http://www.gexf.net/1.3/viz" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.3 http://www.gexf.net/1.3/gexf.xsd" version="1.3">
-    ##   <meta lastmodifieddate="2021-08-07">
+    ##   <meta lastmodifieddate="2021-08-10">
     ##     <creator>NodosChile</creator>
     ##     <description>A GEXF file written in R with "rgexf"</description>
     ##     <keywords>GEXF, NodosChile, R, rgexf, Gephi</keywords>
@@ -280,7 +282,7 @@ write.gexf(nodes=people, edges=relations, edgeDynamic=time.edges,
     ##           <attvalue for="att2" value="1"/>
     ##         </attvalues>
     ##         <viz:color r="255" g="99" b="71" a="1"/>
-    ##         <viz:position x="-100" y="-100" z="0"/>
+    ##         <viz:position x="-100" y="22.3484537111185" z="0"/>
     ##         <viz:size value="10"/>
     ##       </node>
     ##       <node id="2" label="pedro" start="13" end="5">
@@ -289,7 +291,7 @@ write.gexf(nodes=people, edges=relations, edgeDynamic=time.edges,
     ##           <attvalue for="att2" value="2"/>
     ##         </attvalues>
     ##         <viz:color r="255" g="99" b="71" a="1"/>
-    ##         <viz:position x="100" y="14.7022740324666" z="0"/>
+    ##         <viz:position x="-20.0983376724955" y="-29.6283049340924" z="0"/>
     ##         <viz:size value="10"/>
     ##       </node>
     ##       <node id="3" label="matthew" start="2" end="5">
@@ -298,7 +300,7 @@ write.gexf(nodes=people, edges=relations, edgeDynamic=time.edges,
     ##           <attvalue for="att2" value="3"/>
     ##         </attvalues>
     ##         <viz:color r="255" g="99" b="71" a="1"/>
-    ##         <viz:position x="-94.8082920264842" y="-13.8699555077828" z="0"/>
+    ##         <viz:position x="27.0739982499173" y="100" z="0"/>
     ##         <viz:size value="10"/>
     ##       </node>
     ##       <node id="4" label="carlos" start="2" end="5">
@@ -307,7 +309,7 @@ write.gexf(nodes=people, edges=relations, edgeDynamic=time.edges,
     ##           <attvalue for="att2" value="4"/>
     ##         </attvalues>
     ##         <viz:color r="255" g="99" b="71" a="1"/>
-    ##         <viz:position x="99.7470301382166" y="100" z="0"/>
+    ##         <viz:position x="100" y="-100" z="0"/>
     ##         <viz:size value="10"/>
     ##       </node>
     ##     </nodes>
@@ -351,6 +353,101 @@ write.gexf(nodes=people, edges=relations, edgeDynamic=time.edges,
     ##     </edges>
     ##   </graph>
     ## </gexf>
+    ## 
+
+## Example 4: Importing GEXF files
+
+We can use the `read.gexf` function to read GEXF files into R:
+
+``` r
+g <- system.file("gexf-graphs/lesmiserables.gexf", package="rgexf")
+g <- read.gexf(g)
+head(g) # Taking a look at the first handful
+```
+
+    ## <?xml version="1.0" encoding="UTF-8"?>
+    ## <gexf xmlns="http://www.gexf.net/1.3" xmlns:viz="http://www.gexf.net/1.3/viz" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.3" xsi:schemaLocation="http://www.gexf.net/1.3 http://www.gexf.net/1.3/gexf.xsd">
+    ##   <meta lastmodifieddate="2016-11-09">
+    ##     <creator>Gephi 0.9</creator>
+    ##     <description/>
+    ##   </meta>
+    ##   <graph defaultedgetype="undirected" mode="static">
+    ##     <attributes class="node" mode="static">
+    ##       <attribute id="modularity_class" title="Modularity Class" type="integer"/>
+    ##     </attributes>
+    ##     <nodes>
+    ##       <node id="11" label="Valjean">
+    ##         <attvalues>
+    ##           <attvalue for="modularity_class" value="1"/>
+    ##         </attvalues>
+    ##         <viz:size value="100.0"/>
+    ##         <viz:position x="-87.93029" y="6.8120565"/>
+    ##         <viz:color r="245" g="91" b="91"/>
+    ##       </node>
+    ##       <node id="48" label="Gavroche">
+    ##         <attvalues>
+    ##           <attvalue for="modularity_class" value="8"/>
+    ##         </attvalues>
+    ##         <viz:size value="61.600006"/>
+    ##         <viz:position x="387.89572" y="-110.462326"/>
+    ##         <viz:color r="91" g="245" b="91"/>
+    ##       </node>
+    ##       <node id="55" label="Marius">
+    ##         <attvalues>
+    ##           <attvalue for="modularity_class" value="6"/>
+    ##         </attvalues>
+    ##         <viz:size value="53.37143"/>
+    ##         <viz:position x="206.44687" y="13.805411"/>
+    ##         <viz:color r="194" g="91" b="245"/>
+    ##       </node>
+    ##       <node id="27" label="Javert">
+    ##         <attvalues>
+    ##           <attvalue for="modularity_class" value="7"/>
+    ##         </attvalues>
+    ##         <viz:size value="47.88571"/>
+    ##         <viz:position x="-81.46074" y="204.20204"/>
+    ##         <viz:color r="91" g="245" b="194"/>
+    ##       </node>
+    ##       <node id="25" label="Thenardier">
+    ##         <attvalues>
+    ##           <attvalue for="modularity_class" value="7"/>
+    ##         </attvalues>
+    ##         <viz:size value="45.142853"/>
+    ##         <viz:position x="82.80825" y="203.1144"/>
+    ##         <viz:color r="91" g="245" b="194"/>
+    ##       </node>
+    ##       <node id="23" label="Fantine">
+    ##         <attvalues>
+    ##           <attvalue for="modularity_class" value="2"/>
+    ##         </attvalues>
+    ##         <viz:size value="42.4"/>
+    ##         <viz:position x="-313.42786" y="289.44803"/>
+    ##         <viz:color r="91" g="194" b="245"/>
+    ##       </node>
+    ##          ...
+    ##      </nodes>
+    ##     <edges>
+    ##       <edge id="0" source="1" target="0"/>
+    ##       <edge id="1" source="2" target="0" weight="8.0"/>
+    ##       <edge id="2" source="3" target="0" weight="10.0"/>
+    ##       <edge id="3" source="3" target="2" weight="6.0"/>
+    ##       <edge id="4" source="4" target="0"/>
+    ##       <edge id="5" source="5" target="0"/>
+    ##          ...
+    ##      </edges>
+    ##   </graph>
+    ## </gexf>
+
+Moreover, we can use the `gexf.to.igraph()` function to convert the
+`gexf` object into an `igraph` object:
+
+``` r
+library(igraph)
+ig <- gexf.to.igraph(g)
+plot(ig)
+```
+
+![](README_files/figure-gfm/igraph-1.png)<!-- -->
 
 # Code of Conduct
 
@@ -375,7 +472,7 @@ devtools::session_info()
     ##  collate  en_US.UTF-8                 
     ##  ctype    en_US.UTF-8                 
     ##  tz       America/Los_Angeles         
-    ##  date     2021-08-07                  
+    ##  date     2021-08-10                  
     ## 
     ## ─ Packages ───────────────────────────────────────────────────────────────────
     ##  package     * version  date       lib source        
@@ -391,9 +488,10 @@ devtools::session_info()
     ##  fastmap       1.1.0    2021-01-25 [1] CRAN (R 4.1.0)
     ##  fs            1.5.0    2020-07-31 [1] CRAN (R 4.1.0)
     ##  glue          1.4.2    2020-08-27 [1] CRAN (R 4.1.0)
+    ##  highr         0.9      2021-04-16 [1] CRAN (R 4.1.0)
     ##  htmltools     0.5.1.1  2021-01-22 [1] CRAN (R 4.1.0)
     ##  httpuv        1.6.1    2021-05-07 [1] CRAN (R 4.1.0)
-    ##  igraph        1.2.6    2020-10-06 [1] CRAN (R 4.1.0)
+    ##  igraph      * 1.2.6    2020-10-06 [1] CRAN (R 4.1.0)
     ##  jsonlite      1.7.2    2020-12-09 [1] CRAN (R 4.1.0)
     ##  knitr         1.33     2021-04-24 [1] CRAN (R 4.1.0)
     ##  later         1.2.0    2021-04-23 [1] CRAN (R 4.1.0)
@@ -411,7 +509,7 @@ devtools::session_info()
     ##  R6            2.5.0    2020-10-28 [1] CRAN (R 4.1.0)
     ##  Rcpp          1.0.6    2021-01-15 [1] CRAN (R 4.1.0)
     ##  remotes       2.3.0    2021-04-01 [1] CRAN (R 4.1.0)
-    ##  rgexf       * 0.16.0   2021-06-13 [1] local         
+    ##  rgexf       * 0.16.1   2021-08-10 [1] local         
     ##  rlang         0.4.11   2021-04-30 [1] CRAN (R 4.1.0)
     ##  rmarkdown     2.8      2021-05-07 [1] CRAN (R 4.1.0)
     ##  rprojroot     2.0.2    2020-11-15 [1] CRAN (R 4.1.0)

@@ -1,27 +1,21 @@
 #' @name gexf-methods
 #' @export
 print.gexf <- function(x, file = NA, replace = F, ...) {
-################################################################################
-# Printing method
-################################################################################
-  cat(x$graph)
-  
+
+  cat(x$graph, "\n")
   invisible(x)
-  
+
 }
 
 #' @name gexf-methods
 #' @export
 summary.gexf <- function(object, ...) {
 
-  ################################################################################
-  # Printing method
-  ################################################################################
   result <- list(
-    "N of nodes"=NROW(object$nodes), 
-    "N of edges"=NROW(object$edges),
-    "Node Attrs"=utils::head(object$atts.definitions$nodes),
-    "Edge Attrs"=utils::head(object$atts.definitions$edges)
+    "N of nodes" = NROW(object$nodes), 
+    "N of edges" = NROW(object$edges),
+    "Node Attrs" = utils::head(object$atts.definitions$nodes),
+    "Edge Attrs" = utils::head(object$atts.definitions$edges)
   )
   
   #class(result) <- "table"
@@ -187,8 +181,6 @@ head.gexf <- function(x, n_nodes = 6L, n_edges = n_nodes, ...) {
     ids <- ids:nodes_end
   }
   
-  
-  
   # Checking edges now
   edges_start <- which(grepl("^\\s*(<edge[^>]*>)", txt))
   n_edges     <- min(length(edges_start), n_edges)
@@ -221,13 +213,6 @@ head.gexf <- function(x, n_nodes = 6L, n_edges = n_nodes, ...) {
   }
   
   cat(txt, sep = "\n")
-  
-  # cat(txt[1:(nodes_start_end[1L] + n - 1L)], sep = "\n")
-  # cat("...\n")
-  # cat(txt[nodes_start_end[2]:edges_start_end[1L]], sep = "\n")
-  # cat(txt[(edges_start_end[1L] + 1):(edges_start_end[1L] + n - 1L)], sep = "\n")
-  # cat("...\n")
-  # cat(txt[edges_start_end[2]:length(txt)], "\n")
   # 
   invisible(x)
   

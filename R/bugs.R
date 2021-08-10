@@ -18,10 +18,7 @@
 #'   checkTimes("2012-02-01T00:00:00", "dateTime")
 #' @export
 checkTimes <- function(x, format='date') {
-  ################################################################################
-  # A a function of format, checks that all data has the correct format
-  ################################################################################
-  
+    
   # Defining regular expressions to match
   if (format=='date') {
     match <- '^[0-9]{4}[-]{1}[01-12]{2}[-]{1}[01-31]{2}$'
@@ -456,5 +453,6 @@ parseVectors <- function(x, n, attr.name) {
   if (type == "character") return("string")
   else if (type == "double") return("float")
   else if (type == "logical") return("boolean")
-  else return(type)        
+  else return(type)
+  
 }

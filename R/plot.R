@@ -205,6 +205,10 @@ plot.gexf <- function(
   ...
   ) {
   
+  # Step 0: Check for viz attributes
+  if (any(grepl("^\\s*<viz:position", x$graph)))
+    warning("No position viz attribute found. The graph may not be drawn (see ?plot.gexf.)")
+
   # Step 1: Copy the files
   write.gexf(x, output = paste(dir, graphFile, sep="/"))
   gexf_js_install(dir, overwrite = overwrite)

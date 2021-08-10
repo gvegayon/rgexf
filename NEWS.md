@@ -10,6 +10,8 @@
 
 * Improved documentation regarding spells and dynamic graphs.
 
+* New `head()` function allows a glimpse of the `n` first nodes/edges.
+
 
 ## Bug fixes
 

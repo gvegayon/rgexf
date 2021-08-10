@@ -31,3 +31,5 @@ inst/htmlwidgets
 ^\.github.*
 ^paper$
 ^CODE_OF_CONDUCT\.md$
+\.vscode
+README\.html
