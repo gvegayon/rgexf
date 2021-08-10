@@ -23,7 +23,7 @@ check: $(PKGNAME)_$(VERSION).tar.gz
 	R CMD check --no-vignettes --no-manual $(PKGNAME)_$(VERSION).tar.gz
 
 checkfull: R/*.R inst/NEWS README.md
-	R CMD build . \&& 
+	R CMD build . && \
 		R CMD check --as-cran $(PKGNAME)_$(VERSION).tar.gz
 
 checkv: $(PKGNAME)_$(VERSION).tar.gz

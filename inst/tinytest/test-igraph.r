@@ -1,6 +1,6 @@
-context("igraph back and forth")
-
-test_that("viz attributes are kept", {
+# context("igraph back and forth")
+# 
+# test_that("viz attributes are kept", {
   
   set.seed(1)
   net <- igraph::barabasi.game(10)
@@ -41,4 +41,4 @@ test_that("viz attributes are kept", {
   expect_equal(layout[, 1:2], layout2[, 1:2])
   
     
-})
+# })

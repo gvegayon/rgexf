@@ -11,8 +11,8 @@ Authors@R: c(
   person("Joshua", "Kunst", role=c("ctb")),
   person("Raphaël", "Velt", role=c("cph"), comment="gexf-js library"),
   person(family="Gephi Consortium", role=c("cph"), comment="GEXF language"),
-  person("Cornelius", "Fritz", role = "rev", comment = c(what = "JOSS reviewer", ORCID = "")),
-  person("Jonathan", "Cardoso Silva", role = "rev", comment = c(what = "JOSS reviewer", ORCID = ""))
+  person("Cornelius", "Fritz", role = "rev", comment = c(what = "JOSS reviewer")),
+  person("Jonathan", "Cardoso Silva", role = "rev", comment = c(what = "JOSS reviewer"))
   )
 Description: Create, read and write 'GEXF' (Graph Exchange 'XML' Format) graph
     files (used in 'Gephi' and others). Using the 'XML' package, it allows the user to
@@ -31,10 +31,10 @@ Imports:
     servr
 License: MIT + file LICENSE
 LazyLoad: yes
-RoxygenNote: 7.0.2
+RoxygenNote: 7.1.1
 Suggests: knitr,
     rmarkdown,
     tinytest,
-    covr, tinytest
+    covr
 VignetteBuilder: knitr
 Roxygen: list(markdown = TRUE)

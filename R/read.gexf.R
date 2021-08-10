@@ -499,14 +499,30 @@ new.gexf.graph <- function(
   # Return  
   
   build.and.validate.gexf(
-    meta=meta,
-    mode=list(defaultedgetype=defaultedgetype, mode=mode),
-    atts.definitions = list(nodes = NULL, edges = NULL),
+    meta        = meta,
+    mode        = list(
+      defaultedgetype = defaultedgetype,
+      mode            = mode
+      ),
+    atts.definitions = list(
+      nodes = NULL,
+      edges = NULL
+      ),
     nodesVizAtt = NULL,
     edgesVizAtt = NULL,
-    nodes=data.frame(id=NULL, label=NULL, row.names=NULL),
-    edges=data.frame(id=NULL, source=NULL,target=NULL, weight=NULL, row.names=NULL),
-    graph=XML::saveXML(xmlFile, encoding="UTF-8")
+    nodes = data.frame(
+      id        = NULL,
+      label     = NULL, 
+      row.names = NULL)
+    ,
+    edges = data.frame(
+      id        = NULL,
+      source    = NULL,
+      target    = NULL,
+      weight    = NULL,
+      row.names = NULL
+      ),
+    graph       = XML::saveXML(xmlFile, encoding="UTF-8")
     )
     
 }

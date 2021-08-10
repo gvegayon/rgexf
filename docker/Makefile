@@ -1,4 +1,4 @@
 build:
-	docker build -t gvegayon/rgexf:release -f Dockerfile . 
+	docker build -t gvegayon/rgexf:latest -f Dockerfile . 
 push: build
-	docker push gvegayon/rgexf:release 
+	docker push gvegayon/rgexf:latest

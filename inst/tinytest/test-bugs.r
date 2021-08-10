@@ -1,6 +1,6 @@
-context("Checking functions")
+# context("Checking functions")
 
-test_that("check_and_map_colors", {
+# test_that("check_and_map_colors", {
   set.seed(11)
   net <- igraph::barabasi.game(20)
   
@@ -9,4 +9,4 @@ test_that("check_and_map_colors", {
   col[1,1] <- -1
   expect_error(igraph.to.gexf(net, nodesVizAtt = list(color=col)), "range")
   
-})
+# })

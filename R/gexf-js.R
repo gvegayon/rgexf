@@ -197,7 +197,7 @@ gexf_js_config <- function(
 plot.gexf <- function(
   x, 
   y         = NULL,
-  graphFile    = "network.gexf",
+  graphFile = "network.gexf",
   dir       = tempdir(),
   overwrite = TRUE,
   httd.args = list(),

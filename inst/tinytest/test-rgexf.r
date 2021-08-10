@@ -1,7 +1,7 @@
-context("gexf function")
-
-# ------------------------------------------------------------------------------
-test_that("data.frame or matrix work OK", {
+# context("gexf function")
+# 
+# # ------------------------------------------------------------------------------
+# test_that("data.frame or matrix work OK", {
 
   nodes <- cbind(a=1:10, b=letters[1:10])
   edges <- matrix(sample(1:10, 20, TRUE), ncol=2)
@@ -10,10 +10,10 @@ test_that("data.frame or matrix work OK", {
   set.seed(1);ans1 <- gexf(nodes, edges)
   
   expect_equal(ans0,ans1)
-})
+# })
 
 # ------------------------------------------------------------------------------
-test_that("errors", {
+# test_that("errors", {
   nodes <- cbind(a=1:10, b=letters[1:10])
   edges <- matrix(sample(1:10, 20, TRUE), ncol=2)
   
@@ -33,4 +33,4 @@ test_that("errors", {
   expect_error(gexf(nodes, edges, nodeDynamic = list(1)),"should be a ")
   expect_error(gexf(nodes, edges, edgeDynamic = list(1)),"should be a ")
   
-})
+# })

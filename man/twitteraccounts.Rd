@@ -4,7 +4,9 @@
 \name{twitteraccounts}
 \alias{twitteraccounts}
 \title{Twitter accounts of Chilean Politicians and Journalists (sample)}
-\format{A data frame containing 148 observations.}
+\format{
+A data frame containing 148 observations.
+}
 \source{
 Fabrega and Paredes (2012): \dQuote{La politica en 140 caracteres}
 en Intermedios: medios de comunicacion y democracia en Chile. Ediciones UDP

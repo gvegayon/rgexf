@@ -151,3 +151,84 @@ build.and.validate.gexf <- function(
     ), class = "gexf")
 }
 
+
+#' `head` method for gexf objects
+#' 
+#' List the first `n_nodes` and `n_edges` of the [gexf] file.
+#' 
+#' @param x An object of class [gexf].
+#' @param n_nodes,n_edges Integers. Number of nodes and edges to print
+#' @param ... Ignored
+#' @examples 
+#' fn <- system.file("gexf-graphs/lesmiserables.gexf", package = "rgexf")
+#' g  <- read.gexf(fn)
+#' head(g, n_nodes = 5)
+#' @export
+head.gexf <- function(x, n_nodes = 6L, n_edges = n_nodes, ...) {
+  
+  if (n_nodes == 0L | n_edges == 0L)
+    stop("n_nodes and n_edges should be a positive integer.")
+  
+  # Splitting the XML
+  txt <- strsplit(x$graph, split = "\n")[[1L]]
+  ids <- 1L
+  
+  # Finding the start and end point of nodes and edges
+  # nodes_start <- which(grepl("^\\s*<node[^>]*>", txt))
+  nodes_end <- which(grepl("^\\s*</node[^>]*>", txt))
+  n_nodes   <- min(length(nodes_end), n_nodes)
+  
+  # Extending
+  if (n_nodes) {
+    ids <- ids:nodes_end[n_nodes]
+    nodes_end <- which(grepl("\\s*</nodes>", txt))
+  } else {
+    nodes_end <- which(grepl("\\s*<nodes/>", txt))
+    ids <- ids:nodes_end
+  }
+  
+  
+  
+  # Checking edges now
+  edges_start <- which(grepl("^\\s*(<edge[^>]*>)", txt))
+  n_edges     <- min(length(edges_start), n_edges)
+  
+  if (n_edges) {
+    
+    if (n_edges > 1L)
+      edges_end <- c(edges_start[-1L], which(grepl("^\\s*</edges>", txt)))
+    else
+      edges_end <- edges_start
+    
+    ids <- c(ids, nodes_end:edges_end[n_edges])
+    ids <- c(ids, edges_end[length(edges_end)]:length(txt))
+    
+  } else 
+    ids <- c(ids, nodes_end:length(txt))
+  
+  ids <- sort(unique(ids))
+  
+  # Figuring out the print
+  txt <- txt[ids]
+  if (n_nodes && nrow(x$nodes) > n_nodes) {
+    where <- grepl("^\\s*</nodes>", txt)
+    txt[where] <- paste("\t\t\t...\n", txt[where])
+  }
+  
+  if (n_edges && nrow(x$edges) > n_edges) {
+    where <- grepl("^\\s*</edges>", txt)
+    txt[where] <- paste("\t\t\t...\n", txt[where])
+  }
+  
+  cat(txt, sep = "\n")
+  
+  # cat(txt[1:(nodes_start_end[1L] + n - 1L)], sep = "\n")
+  # cat("...\n")
+  # cat(txt[nodes_start_end[2]:edges_start_end[1L]], sep = "\n")
+  # cat(txt[(edges_start_end[1L] + 1):(edges_start_end[1L] + n - 1L)], sep = "\n")
+  # cat("...\n")
+  # cat(txt[edges_start_end[2]:length(txt)], "\n")
+  # 
+  invisible(x)
+  
+}
