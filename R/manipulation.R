@@ -478,6 +478,7 @@ rm.gexf.edge <- function(
 #' g <- add.edge.spell(g, 1, start = 1, end = 2)
 #' g <- add.edge.spell(g, 1, start = 3.5)
 #' 
+#' g
 #' 
 add.node.spell <- function(
   graph, 
