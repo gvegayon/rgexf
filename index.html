@@ -68,7 +68,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="http://github.com/gvegayon/rgexf/">
+  <a href="https://github.com/gvegayon/rgexf/">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -146,7 +146,7 @@
 <a href="#example-1-static-net" class="anchor"></a>Example 1: Static net</h2>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Loading the package</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://gvegayon.github.io/rgexf">rgexf</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://gvegayon.github.io/rgexf/">rgexf</a></span><span class="op">)</span>
 
 <span class="co"># Creating a group of individuals and their relations</span>
 <span class="va">people</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span>, <span class="st">'juan'</span>, <span class="st">'pedro'</span>, <span class="st">'matthew'</span>, <span class="st">'carlos'</span><span class="op">)</span>,ncol<span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span>
@@ -172,7 +172,7 @@
 <span class="fu"><a href="reference/gexf-class.html">write.gexf</a></span><span class="op">(</span><span class="va">people</span>, <span class="va">relations</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb8"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true"></a><span class="co">## &lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true"></a><span class="co">## &lt;gexf xmlns="http://www.gexf.net/1.3" xmlns:viz="http://www.gexf.net/1.3/viz" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.3 http://www.gexf.net/1.3/gexf.xsd" version="1.3"&gt;</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true"></a><span class="co">##   &lt;meta lastmodifieddate="2021-08-10"&gt;</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true"></a><span class="co">##   &lt;meta lastmodifieddate="2021-08-11"&gt;</span></span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true"></a><span class="co">##     &lt;creator&gt;NodosChile&lt;/creator&gt;</span></span>
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true"></a><span class="co">##     &lt;description&gt;A GEXF file written in R with "rgexf"&lt;/description&gt;</span></span>
 <span id="cb8-6"><a href="#cb8-6" aria-hidden="true"></a><span class="co">##     &lt;keywords&gt;GEXF, NodosChile, R, rgexf, Gephi&lt;/keywords&gt;</span></span>
@@ -181,22 +181,22 @@
 <span id="cb8-9"><a href="#cb8-9" aria-hidden="true"></a><span class="co">##     &lt;nodes&gt;</span></span>
 <span id="cb8-10"><a href="#cb8-10" aria-hidden="true"></a><span class="co">##       &lt;node id="1" label="juan"&gt;</span></span>
 <span id="cb8-11"><a href="#cb8-11" aria-hidden="true"></a><span class="co">##         &lt;viz:color r="255" g="99" b="71" a="1"/&gt;</span></span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true"></a><span class="co">##         &lt;viz:position x="-100" y="-83.9578418284886" z="0"/&gt;</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true"></a><span class="co">##         &lt;viz:position x="-100" y="-100" z="0"/&gt;</span></span>
 <span id="cb8-13"><a href="#cb8-13" aria-hidden="true"></a><span class="co">##         &lt;viz:size value="10"/&gt;</span></span>
 <span id="cb8-14"><a href="#cb8-14" aria-hidden="true"></a><span class="co">##       &lt;/node&gt;</span></span>
 <span id="cb8-15"><a href="#cb8-15" aria-hidden="true"></a><span class="co">##       &lt;node id="2" label="pedro"&gt;</span></span>
 <span id="cb8-16"><a href="#cb8-16" aria-hidden="true"></a><span class="co">##         &lt;viz:color r="255" g="99" b="71" a="1"/&gt;</span></span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true"></a><span class="co">##         &lt;viz:position x="-89.7969192207545" y="-100" z="0"/&gt;</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true"></a><span class="co">##         &lt;viz:position x="100" y="-65.3946140492644" z="0"/&gt;</span></span>
 <span id="cb8-18"><a href="#cb8-18" aria-hidden="true"></a><span class="co">##         &lt;viz:size value="10"/&gt;</span></span>
 <span id="cb8-19"><a href="#cb8-19" aria-hidden="true"></a><span class="co">##       &lt;/node&gt;</span></span>
 <span id="cb8-20"><a href="#cb8-20" aria-hidden="true"></a><span class="co">##       &lt;node id="3" label="matthew"&gt;</span></span>
 <span id="cb8-21"><a href="#cb8-21" aria-hidden="true"></a><span class="co">##         &lt;viz:color r="255" g="99" b="71" a="1"/&gt;</span></span>
-<span id="cb8-22"><a href="#cb8-22" aria-hidden="true"></a><span class="co">##         &lt;viz:position x="100" y="100" z="0"/&gt;</span></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true"></a><span class="co">##         &lt;viz:position x="-40.0113975061148" y="-51.4331427129478" z="0"/&gt;</span></span>
 <span id="cb8-23"><a href="#cb8-23" aria-hidden="true"></a><span class="co">##         &lt;viz:size value="10"/&gt;</span></span>
 <span id="cb8-24"><a href="#cb8-24" aria-hidden="true"></a><span class="co">##       &lt;/node&gt;</span></span>
 <span id="cb8-25"><a href="#cb8-25" aria-hidden="true"></a><span class="co">##       &lt;node id="4" label="carlos"&gt;</span></span>
 <span id="cb8-26"><a href="#cb8-26" aria-hidden="true"></a><span class="co">##         &lt;viz:color r="255" g="99" b="71" a="1"/&gt;</span></span>
-<span id="cb8-27"><a href="#cb8-27" aria-hidden="true"></a><span class="co">##         &lt;viz:position x="89.0832390117297" y="-45.6465865243531" z="0"/&gt;</span></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true"></a><span class="co">##         &lt;viz:position x="87.5704873488851" y="100" z="0"/&gt;</span></span>
 <span id="cb8-28"><a href="#cb8-28" aria-hidden="true"></a><span class="co">##         &lt;viz:size value="10"/&gt;</span></span>
 <span id="cb8-29"><a href="#cb8-29" aria-hidden="true"></a><span class="co">##       &lt;/node&gt;</span></span>
 <span id="cb8-30"><a href="#cb8-30" aria-hidden="true"></a><span class="co">##     &lt;/nodes&gt;</span></span>
@@ -229,7 +229,7 @@
 <span class="fu"><a href="reference/gexf-class.html">write.gexf</a></span><span class="op">(</span><span class="va">people</span>, <span class="va">relations</span>, nodeDynamic<span class="op">=</span><span class="va">time</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb12"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true"></a><span class="co">## &lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true"></a><span class="co">## &lt;gexf xmlns="http://www.gexf.net/1.3" xmlns:viz="http://www.gexf.net/1.3/viz" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.3 http://www.gexf.net/1.3/gexf.xsd" version="1.3"&gt;</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true"></a><span class="co">##   &lt;meta lastmodifieddate="2021-08-10"&gt;</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true"></a><span class="co">##   &lt;meta lastmodifieddate="2021-08-11"&gt;</span></span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true"></a><span class="co">##     &lt;creator&gt;NodosChile&lt;/creator&gt;</span></span>
 <span id="cb12-5"><a href="#cb12-5" aria-hidden="true"></a><span class="co">##     &lt;description&gt;A GEXF file written in R with "rgexf"&lt;/description&gt;</span></span>
 <span id="cb12-6"><a href="#cb12-6" aria-hidden="true"></a><span class="co">##     &lt;keywords&gt;GEXF, NodosChile, R, rgexf, Gephi&lt;/keywords&gt;</span></span>
@@ -238,22 +238,22 @@
 <span id="cb12-9"><a href="#cb12-9" aria-hidden="true"></a><span class="co">##     &lt;nodes&gt;</span></span>
 <span id="cb12-10"><a href="#cb12-10" aria-hidden="true"></a><span class="co">##       &lt;node id="1" label="juan" start="10" end="12"&gt;</span></span>
 <span id="cb12-11"><a href="#cb12-11" aria-hidden="true"></a><span class="co">##         &lt;viz:color r="255" g="99" b="71" a="1"/&gt;</span></span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true"></a><span class="co">##         &lt;viz:position x="-100" y="-31.4740979442695" z="0"/&gt;</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true"></a><span class="co">##         &lt;viz:position x="100" y="-84.9268891908072" z="0"/&gt;</span></span>
 <span id="cb12-13"><a href="#cb12-13" aria-hidden="true"></a><span class="co">##         &lt;viz:size value="10"/&gt;</span></span>
 <span id="cb12-14"><a href="#cb12-14" aria-hidden="true"></a><span class="co">##       &lt;/node&gt;</span></span>
 <span id="cb12-15"><a href="#cb12-15" aria-hidden="true"></a><span class="co">##       &lt;node id="2" label="pedro" start="13" end="13"&gt;</span></span>
 <span id="cb12-16"><a href="#cb12-16" aria-hidden="true"></a><span class="co">##         &lt;viz:color r="255" g="99" b="71" a="1"/&gt;</span></span>
-<span id="cb12-17"><a href="#cb12-17" aria-hidden="true"></a><span class="co">##         &lt;viz:position x="-20.056226237035" y="-100" z="0"/&gt;</span></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true"></a><span class="co">##         &lt;viz:position x="-34.6297151463634" y="72.9256806501316" z="0"/&gt;</span></span>
 <span id="cb12-18"><a href="#cb12-18" aria-hidden="true"></a><span class="co">##         &lt;viz:size value="10"/&gt;</span></span>
 <span id="cb12-19"><a href="#cb12-19" aria-hidden="true"></a><span class="co">##       &lt;/node&gt;</span></span>
 <span id="cb12-20"><a href="#cb12-20" aria-hidden="true"></a><span class="co">##       &lt;node id="3" label="matthew" start="2" end="13"&gt;</span></span>
 <span id="cb12-21"><a href="#cb12-21" aria-hidden="true"></a><span class="co">##         &lt;viz:color r="255" g="99" b="71" a="1"/&gt;</span></span>
-<span id="cb12-22"><a href="#cb12-22" aria-hidden="true"></a><span class="co">##         &lt;viz:position x="19.4048337948484" y="-16.4595639751927" z="0"/&gt;</span></span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true"></a><span class="co">##         &lt;viz:position x="25.4091608205188" y="-100" z="0"/&gt;</span></span>
 <span id="cb12-23"><a href="#cb12-23" aria-hidden="true"></a><span class="co">##         &lt;viz:size value="10"/&gt;</span></span>
 <span id="cb12-24"><a href="#cb12-24" aria-hidden="true"></a><span class="co">##       &lt;/node&gt;</span></span>
 <span id="cb12-25"><a href="#cb12-25" aria-hidden="true"></a><span class="co">##       &lt;node id="4" label="carlos" start="2" end="13"&gt;</span></span>
 <span id="cb12-26"><a href="#cb12-26" aria-hidden="true"></a><span class="co">##         &lt;viz:color r="255" g="99" b="71" a="1"/&gt;</span></span>
-<span id="cb12-27"><a href="#cb12-27" aria-hidden="true"></a><span class="co">##         &lt;viz:position x="100" y="100" z="0"/&gt;</span></span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true"></a><span class="co">##         &lt;viz:position x="-100" y="100" z="0"/&gt;</span></span>
 <span id="cb12-28"><a href="#cb12-28" aria-hidden="true"></a><span class="co">##         &lt;viz:size value="10"/&gt;</span></span>
 <span id="cb12-29"><a href="#cb12-29" aria-hidden="true"></a><span class="co">##       &lt;/node&gt;</span></span>
 <span id="cb12-30"><a href="#cb12-30" aria-hidden="true"></a><span class="co">##     &lt;/nodes&gt;</span></span>
@@ -317,7 +317,7 @@
            edgesAtt<span class="op">=</span><span class="va">edge.att</span>, nodeDynamic<span class="op">=</span><span class="va">time.nodes</span>, nodesAtt<span class="op">=</span><span class="va">node.att</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb22"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true"></a><span class="co">## &lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true"></a><span class="co">## &lt;gexf xmlns="http://www.gexf.net/1.3" xmlns:viz="http://www.gexf.net/1.3/viz" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.3 http://www.gexf.net/1.3/gexf.xsd" version="1.3"&gt;</span></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true"></a><span class="co">##   &lt;meta lastmodifieddate="2021-08-10"&gt;</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true"></a><span class="co">##   &lt;meta lastmodifieddate="2021-08-11"&gt;</span></span>
 <span id="cb22-4"><a href="#cb22-4" aria-hidden="true"></a><span class="co">##     &lt;creator&gt;NodosChile&lt;/creator&gt;</span></span>
 <span id="cb22-5"><a href="#cb22-5" aria-hidden="true"></a><span class="co">##     &lt;description&gt;A GEXF file written in R with "rgexf"&lt;/description&gt;</span></span>
 <span id="cb22-6"><a href="#cb22-6" aria-hidden="true"></a><span class="co">##     &lt;keywords&gt;GEXF, NodosChile, R, rgexf, Gephi&lt;/keywords&gt;</span></span>
@@ -338,7 +338,7 @@
 <span id="cb22-21"><a href="#cb22-21" aria-hidden="true"></a><span class="co">##           &lt;attvalue for="att2" value="1"/&gt;</span></span>
 <span id="cb22-22"><a href="#cb22-22" aria-hidden="true"></a><span class="co">##         &lt;/attvalues&gt;</span></span>
 <span id="cb22-23"><a href="#cb22-23" aria-hidden="true"></a><span class="co">##         &lt;viz:color r="255" g="99" b="71" a="1"/&gt;</span></span>
-<span id="cb22-24"><a href="#cb22-24" aria-hidden="true"></a><span class="co">##         &lt;viz:position x="67.5376043874963" y="100" z="0"/&gt;</span></span>
+<span id="cb22-24"><a href="#cb22-24" aria-hidden="true"></a><span class="co">##         &lt;viz:position x="100" y="-100" z="0"/&gt;</span></span>
 <span id="cb22-25"><a href="#cb22-25" aria-hidden="true"></a><span class="co">##         &lt;viz:size value="10"/&gt;</span></span>
 <span id="cb22-26"><a href="#cb22-26" aria-hidden="true"></a><span class="co">##       &lt;/node&gt;</span></span>
 <span id="cb22-27"><a href="#cb22-27" aria-hidden="true"></a><span class="co">##       &lt;node id="2" label="pedro" start="13" end="13"&gt;</span></span>
@@ -347,7 +347,7 @@
 <span id="cb22-30"><a href="#cb22-30" aria-hidden="true"></a><span class="co">##           &lt;attvalue for="att2" value="2"/&gt;</span></span>
 <span id="cb22-31"><a href="#cb22-31" aria-hidden="true"></a><span class="co">##         &lt;/attvalues&gt;</span></span>
 <span id="cb22-32"><a href="#cb22-32" aria-hidden="true"></a><span class="co">##         &lt;viz:color r="255" g="99" b="71" a="1"/&gt;</span></span>
-<span id="cb22-33"><a href="#cb22-33" aria-hidden="true"></a><span class="co">##         &lt;viz:position x="89.7154179636199" y="-87.7577646430334" z="0"/&gt;</span></span>
+<span id="cb22-33"><a href="#cb22-33" aria-hidden="true"></a><span class="co">##         &lt;viz:position x="96.5330017736988" y="18.7339163893404" z="0"/&gt;</span></span>
 <span id="cb22-34"><a href="#cb22-34" aria-hidden="true"></a><span class="co">##         &lt;viz:size value="10"/&gt;</span></span>
 <span id="cb22-35"><a href="#cb22-35" aria-hidden="true"></a><span class="co">##       &lt;/node&gt;</span></span>
 <span id="cb22-36"><a href="#cb22-36" aria-hidden="true"></a><span class="co">##       &lt;node id="3" label="matthew" start="2" end="13"&gt;</span></span>
@@ -356,7 +356,7 @@
 <span id="cb22-39"><a href="#cb22-39" aria-hidden="true"></a><span class="co">##           &lt;attvalue for="att2" value="3"/&gt;</span></span>
 <span id="cb22-40"><a href="#cb22-40" aria-hidden="true"></a><span class="co">##         &lt;/attvalues&gt;</span></span>
 <span id="cb22-41"><a href="#cb22-41" aria-hidden="true"></a><span class="co">##         &lt;viz:color r="255" g="99" b="71" a="1"/&gt;</span></span>
-<span id="cb22-42"><a href="#cb22-42" aria-hidden="true"></a><span class="co">##         &lt;viz:position x="-100" y="91.9036253379552" z="0"/&gt;</span></span>
+<span id="cb22-42"><a href="#cb22-42" aria-hidden="true"></a><span class="co">##         &lt;viz:position x="-43.9305005474343" y="27.8398539438333" z="0"/&gt;</span></span>
 <span id="cb22-43"><a href="#cb22-43" aria-hidden="true"></a><span class="co">##         &lt;viz:size value="10"/&gt;</span></span>
 <span id="cb22-44"><a href="#cb22-44" aria-hidden="true"></a><span class="co">##       &lt;/node&gt;</span></span>
 <span id="cb22-45"><a href="#cb22-45" aria-hidden="true"></a><span class="co">##       &lt;node id="4" label="carlos" start="2" end="13"&gt;</span></span>
@@ -365,7 +365,7 @@
 <span id="cb22-48"><a href="#cb22-48" aria-hidden="true"></a><span class="co">##           &lt;attvalue for="att2" value="4"/&gt;</span></span>
 <span id="cb22-49"><a href="#cb22-49" aria-hidden="true"></a><span class="co">##         &lt;/attvalues&gt;</span></span>
 <span id="cb22-50"><a href="#cb22-50" aria-hidden="true"></a><span class="co">##         &lt;viz:color r="255" g="99" b="71" a="1"/&gt;</span></span>
-<span id="cb22-51"><a href="#cb22-51" aria-hidden="true"></a><span class="co">##         &lt;viz:position x="100" y="-100" z="0"/&gt;</span></span>
+<span id="cb22-51"><a href="#cb22-51" aria-hidden="true"></a><span class="co">##         &lt;viz:position x="-100" y="100" z="0"/&gt;</span></span>
 <span id="cb22-52"><a href="#cb22-52" aria-hidden="true"></a><span class="co">##         &lt;viz:size value="10"/&gt;</span></span>
 <span id="cb22-53"><a href="#cb22-53" aria-hidden="true"></a><span class="co">##       &lt;/node&gt;</span></span>
 <span id="cb22-54"><a href="#cb22-54" aria-hidden="true"></a><span class="co">##     &lt;/nodes&gt;</span></span>
@@ -535,7 +535,7 @@
 <span id="cb30-8"><a href="#cb30-8" aria-hidden="true"></a><span class="co">##  collate  en_US.UTF-8                 </span></span>
 <span id="cb30-9"><a href="#cb30-9" aria-hidden="true"></a><span class="co">##  ctype    en_US.UTF-8                 </span></span>
 <span id="cb30-10"><a href="#cb30-10" aria-hidden="true"></a><span class="co">##  tz       America/Los_Angeles         </span></span>
-<span id="cb30-11"><a href="#cb30-11" aria-hidden="true"></a><span class="co">##  date     2021-08-10                  </span></span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true"></a><span class="co">##  date     2021-08-11                  </span></span>
 <span id="cb30-12"><a href="#cb30-12" aria-hidden="true"></a><span class="co">## </span></span>
 <span id="cb30-13"><a href="#cb30-13" aria-hidden="true"></a><span class="co">## ─ Packages ───────────────────────────────────────────────────────────────────</span></span>
 <span id="cb30-14"><a href="#cb30-14" aria-hidden="true"></a><span class="co">##  package     * version  date       lib source        </span></span>
@@ -601,9 +601,9 @@
 <ul class="list-unstyled">
 <li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=rgexf">https://​cloud.r-project.org/​package=rgexf</a>
 </li>
-<li>Browse source code at <br><a href="http://github.com/gvegayon/rgexf/">http://​github.com/​gvegayon/​rgexf/​</a>
+<li>Browse source code at <br><a href="https://github.com/gvegayon/rgexf/">https://​github.com/​gvegayon/​rgexf/​</a>
 </li>
-<li>Report a bug at <br><a href="http://github.com/gvegayon/rgexf/issues">http://​github.com/​gvegayon/​rgexf/​issues</a>
+<li>Report a bug at <br><a href="https://github.com/gvegayon/rgexf/issues">https://​github.com/​gvegayon/​rgexf/​issues</a>
 </li>
 </ul>
 </div>
@@ -638,7 +638,6 @@
 <li><a href="https://github.com/gvegayon/rgexf/actions/workflows/website.yml"><img src="https://github.com/gvegayon/rgexf/actions/workflows/website.yml/badge.svg" alt="rgexf website"></a></li>
 <li><a href="https://ci.appveyor.com/project/gvegayon/rgexf"><img src="https://ci.appveyor.com/api/projects/status/github/gvegayon/rgexf?branch=master&amp;svg=true" alt="AppVeyor Build Status"></a></li>
 <li><a href="https://codecov.io/github/gvegayon/rgexf?branch=master"><img src="https://img.shields.io/codecov/c/github/gvegayon/rgexf/master.svg" alt="Coverage Status"></a></li>
-<li><a href="https://www.tidyverse.org/lifecycle/#stable"><img src="https://img.shields.io/badge/lifecycle-stable-brightgreen.svg" alt="lifecycle"></a></li>
 </ul>
 </div>
 </div>
