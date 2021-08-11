@@ -21,8 +21,8 @@ Description: Create, read and write 'GEXF' (Graph Exchange 'XML' Format) graph
     edge weighting. Users can build/handle graphs element-by-element or massively
     through data-frames, visualize the graph on a web browser through 'gexf-js' (a
     'javascript' library) and interact with the 'igraph' package.
-URL: https://gvegayon.github.io/rgexf
-BugReports: http://github.com/gvegayon/rgexf/issues
+URL: https://gvegayon.github.io/rgexf/
+BugReports: https://github.com/gvegayon/rgexf/issues
 Imports: 
     XML,
     igraph,

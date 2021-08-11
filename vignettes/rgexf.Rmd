@@ -16,7 +16,7 @@ knitr::opts_chunk$set(fig.width = 7)
 # Introduction
 
 The `rgexf` package provides a way to interact with [GEXF files](https://gephi.org/gexf/format/).
-The GEXF standard was developed by the [Gephi](http://gephi.org/)--"Like Photoshop for graphs"--core team, 
+The GEXF standard was developed by the [Gephi](https://gephi.org/)--"Like Photoshop for graphs"--core team, 
 and can be used to save static and dynamic networks.
 
 With the `rgexf` package, users can create `gexf` (R) objects from scratch,

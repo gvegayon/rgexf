@@ -35,7 +35,7 @@
 #' @author George Vega Yon 
 #' 
 #' Jorge Fabrega Lacoa 
-#' @references The GEXF project website: http://gexf.net
+#' @references The GEXF project website: https://gephi.org/gexf/format/
 #' @keywords manip
 #' @examples
 #'
@@ -244,7 +244,7 @@ add.gexf.edge <- function(
 #' @author George Vega Yon 
 #' 
 #' Jorge Fabrega Lacoa 
-#' @references The GEXF project website: http://gexf.net
+#' @references The GEXF project website: https://gephi.org/gexf/format/
 #' @keywords manip
 #' @examples
 #' 

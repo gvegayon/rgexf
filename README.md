@@ -10,7 +10,6 @@ website](https://github.com/gvegayon/rgexf/actions/workflows/website.yml/badge.s
 Status](https://ci.appveyor.com/api/projects/status/github/gvegayon/rgexf?branch=master&svg=true)](https://ci.appveyor.com/project/gvegayon/rgexf)
 [![Coverage
 Status](https://img.shields.io/codecov/c/github/gvegayon/rgexf/master.svg)](https://codecov.io/github/gvegayon/rgexf?branch=master)
-[![lifecycle](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://www.tidyverse.org/lifecycle/#stable)
 
 # rgexf: Build, Import and Export GEXF Graph Files <img src="man/figures/logo.svg" align="right" height="200"/>
 
@@ -35,33 +34,33 @@ the igraph package.
 
 ## New features and changes
 
-  - We now have a hex sticker\!
+-   We now have a hex sticker!
 
-  - Users can now cite properly `rgexf` with JOSS (see
+-   Users can now cite properly `rgexf` with JOSS (see
     `citation(package="rgexf")`).
 
-  - Added a few extra breaks across the examples (suggested by
+-   Added a few extra breaks across the examples (suggested by
     @corneliusfritz).
 
-  - Improved documentation regarding spells and dynamic graphs.
+-   Improved documentation regarding spells and dynamic graphs.
 
-  - New `head()` function allows a glimpse of the `n` first nodes/edges.
+-   New `head()` function allows a glimpse of the `n` first nodes/edges.
 
 ## Bug fixes
 
-  - Passing colors with four values (alpha) no longer fails during
+-   Passing colors with four values (alpha) no longer fails during
     checks. (reported by @IsabelFE).
 
-  - The summary function prints nodes’ attributes as expected.
+-   The summary function prints nodes’ attributes as expected.
 
-  - Hex colors now work (\#41 reported by @milnus).
+-   Hex colors now work (\#41 reported by @milnus).
 
-  - `gexf.to.igraph` correctly processes edge attributes (\#38 reported
+-   `gexf.to.igraph` correctly processes edge attributes (\#38 reported
     by @balachia).
 
-  - Time range is now correctly computed (\#19).
+-   Time range is now correctly computed (\#19).
 
-  - Non-integer ids were incorrectly processed when reading GEXF files.
+-   Non-integer ids were incorrectly processed when reading GEXF files.
 
 More in the [NEWS.md](NEWS.md) file.
 
@@ -118,7 +117,7 @@ write.gexf(people, relations)
 
     ## <?xml version="1.0" encoding="UTF-8"?>
     ## <gexf xmlns="http://www.gexf.net/1.3" xmlns:viz="http://www.gexf.net/1.3/viz" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.3 http://www.gexf.net/1.3/gexf.xsd" version="1.3">
-    ##   <meta lastmodifieddate="2021-08-10">
+    ##   <meta lastmodifieddate="2021-08-11">
     ##     <creator>NodosChile</creator>
     ##     <description>A GEXF file written in R with "rgexf"</description>
     ##     <keywords>GEXF, NodosChile, R, rgexf, Gephi</keywords>
@@ -127,22 +126,22 @@ write.gexf(people, relations)
     ##     <nodes>
     ##       <node id="1" label="juan">
     ##         <viz:color r="255" g="99" b="71" a="1"/>
-    ##         <viz:position x="-100" y="-83.9578418284886" z="0"/>
+    ##         <viz:position x="-100" y="-100" z="0"/>
     ##         <viz:size value="10"/>
     ##       </node>
     ##       <node id="2" label="pedro">
     ##         <viz:color r="255" g="99" b="71" a="1"/>
-    ##         <viz:position x="-89.7969192207545" y="-100" z="0"/>
+    ##         <viz:position x="100" y="-65.3946140492644" z="0"/>
     ##         <viz:size value="10"/>
     ##       </node>
     ##       <node id="3" label="matthew">
     ##         <viz:color r="255" g="99" b="71" a="1"/>
-    ##         <viz:position x="100" y="100" z="0"/>
+    ##         <viz:position x="-40.0113975061148" y="-51.4331427129478" z="0"/>
     ##         <viz:size value="10"/>
     ##       </node>
     ##       <node id="4" label="carlos">
     ##         <viz:color r="255" g="99" b="71" a="1"/>
-    ##         <viz:position x="89.0832390117297" y="-45.6465865243531" z="0"/>
+    ##         <viz:position x="87.5704873488851" y="100" z="0"/>
     ##         <viz:size value="10"/>
     ##       </node>
     ##     </nodes>
@@ -179,7 +178,7 @@ write.gexf(people, relations, nodeDynamic=time)
 
     ## <?xml version="1.0" encoding="UTF-8"?>
     ## <gexf xmlns="http://www.gexf.net/1.3" xmlns:viz="http://www.gexf.net/1.3/viz" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.3 http://www.gexf.net/1.3/gexf.xsd" version="1.3">
-    ##   <meta lastmodifieddate="2021-08-10">
+    ##   <meta lastmodifieddate="2021-08-11">
     ##     <creator>NodosChile</creator>
     ##     <description>A GEXF file written in R with "rgexf"</description>
     ##     <keywords>GEXF, NodosChile, R, rgexf, Gephi</keywords>
@@ -188,22 +187,22 @@ write.gexf(people, relations, nodeDynamic=time)
     ##     <nodes>
     ##       <node id="1" label="juan" start="10" end="12">
     ##         <viz:color r="255" g="99" b="71" a="1"/>
-    ##         <viz:position x="-100" y="-31.4740979442695" z="0"/>
+    ##         <viz:position x="100" y="-84.9268891908072" z="0"/>
     ##         <viz:size value="10"/>
     ##       </node>
     ##       <node id="2" label="pedro" start="13" end="13">
     ##         <viz:color r="255" g="99" b="71" a="1"/>
-    ##         <viz:position x="-20.056226237035" y="-100" z="0"/>
+    ##         <viz:position x="-34.6297151463634" y="72.9256806501316" z="0"/>
     ##         <viz:size value="10"/>
     ##       </node>
     ##       <node id="3" label="matthew" start="2" end="13">
     ##         <viz:color r="255" g="99" b="71" a="1"/>
-    ##         <viz:position x="19.4048337948484" y="-16.4595639751927" z="0"/>
+    ##         <viz:position x="25.4091608205188" y="-100" z="0"/>
     ##         <viz:size value="10"/>
     ##       </node>
     ##       <node id="4" label="carlos" start="2" end="13">
     ##         <viz:color r="255" g="99" b="71" a="1"/>
-    ##         <viz:position x="100" y="100" z="0"/>
+    ##         <viz:position x="-100" y="100" z="0"/>
     ##         <viz:size value="10"/>
     ##       </node>
     ##     </nodes>
@@ -282,7 +281,7 @@ write.gexf(nodes=people, edges=relations, edgeDynamic=time.edges,
 
     ## <?xml version="1.0" encoding="UTF-8"?>
     ## <gexf xmlns="http://www.gexf.net/1.3" xmlns:viz="http://www.gexf.net/1.3/viz" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.3 http://www.gexf.net/1.3/gexf.xsd" version="1.3">
-    ##   <meta lastmodifieddate="2021-08-10">
+    ##   <meta lastmodifieddate="2021-08-11">
     ##     <creator>NodosChile</creator>
     ##     <description>A GEXF file written in R with "rgexf"</description>
     ##     <keywords>GEXF, NodosChile, R, rgexf, Gephi</keywords>
@@ -303,7 +302,7 @@ write.gexf(nodes=people, edges=relations, edgeDynamic=time.edges,
     ##           <attvalue for="att2" value="1"/>
     ##         </attvalues>
     ##         <viz:color r="255" g="99" b="71" a="1"/>
-    ##         <viz:position x="67.5376043874963" y="100" z="0"/>
+    ##         <viz:position x="100" y="-100" z="0"/>
     ##         <viz:size value="10"/>
     ##       </node>
     ##       <node id="2" label="pedro" start="13" end="13">
@@ -312,7 +311,7 @@ write.gexf(nodes=people, edges=relations, edgeDynamic=time.edges,
     ##           <attvalue for="att2" value="2"/>
     ##         </attvalues>
     ##         <viz:color r="255" g="99" b="71" a="1"/>
-    ##         <viz:position x="89.7154179636199" y="-87.7577646430334" z="0"/>
+    ##         <viz:position x="96.5330017736988" y="18.7339163893404" z="0"/>
     ##         <viz:size value="10"/>
     ##       </node>
     ##       <node id="3" label="matthew" start="2" end="13">
@@ -321,7 +320,7 @@ write.gexf(nodes=people, edges=relations, edgeDynamic=time.edges,
     ##           <attvalue for="att2" value="3"/>
     ##         </attvalues>
     ##         <viz:color r="255" g="99" b="71" a="1"/>
-    ##         <viz:position x="-100" y="91.9036253379552" z="0"/>
+    ##         <viz:position x="-43.9305005474343" y="27.8398539438333" z="0"/>
     ##         <viz:size value="10"/>
     ##       </node>
     ##       <node id="4" label="carlos" start="2" end="13">
@@ -330,7 +329,7 @@ write.gexf(nodes=people, edges=relations, edgeDynamic=time.edges,
     ##           <attvalue for="att2" value="4"/>
     ##         </attvalues>
     ##         <viz:color r="255" g="99" b="71" a="1"/>
-    ##         <viz:position x="100" y="-100" z="0"/>
+    ##         <viz:position x="-100" y="100" z="0"/>
     ##         <viz:size value="10"/>
     ##       </node>
     ##     </nodes>
@@ -519,7 +518,7 @@ devtools::session_info()
     ##  collate  en_US.UTF-8                 
     ##  ctype    en_US.UTF-8                 
     ##  tz       America/Los_Angeles         
-    ##  date     2021-08-10                  
+    ##  date     2021-08-11                  
     ## 
     ## ─ Packages ───────────────────────────────────────────────────────────────────
     ##  package     * version  date       lib source        

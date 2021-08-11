@@ -172,7 +172,7 @@ if (interactive()) {
 
 }
 \references{
-The GEXF project website: http://gexf.net
+The GEXF project website: https://gephi.org/gexf/format/
 }
 \seealso{
 \code{\link[=new.gexf.graph]{new.gexf.graph()}}

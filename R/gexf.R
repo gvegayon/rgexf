@@ -99,7 +99,7 @@
 #' 
 #' Jorge Fabrega Lacoa 
 #' @seealso [new.gexf.graph()]
-#' @references The GEXF project website: http://gexf.net
+#' @references The GEXF project website: https://gephi.org/gexf/format/
 #' @keywords IO
 #' @examples
 #' 
