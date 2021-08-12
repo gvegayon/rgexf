@@ -33,3 +33,4 @@ inst/htmlwidgets
 ^CODE_OF_CONDUCT\.md$
 \.vscode
 README\.html
+^lesmiserables/

@@ -63,6 +63,8 @@ We can also go back:
 head(igraph.to.gexf(lesmi_ig))
 ```
 
+An example of the plot method using the `gexf-js` JavaScript library is available [here](https://gvegayon.github.io/rgexf/lesmiserables)
+
 # Creating GEXF files
 
 This example was extracted directly from the demo "gexfrandom." Here
@@ -166,3 +168,5 @@ op <- par(mai = rep(0, 4)) # For extra space
 plot(gexf.to.igraph(graph))
 par(op)
 ```
+
+

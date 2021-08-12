@@ -154,6 +154,8 @@ plot(ig)
 par(op)
 ```
 
+An example of the plot method using the `gexf-js` JavaScript library is available [here](https://gvegayon.github.io/rgexf/lesmiserables)
+
 # Code of Conduct
   
 We welcome contributions to `rgexf`. Whether reporting a bug, starting a
