@@ -63,7 +63,19 @@ We can also go back:
 head(igraph.to.gexf(lesmi_ig))
 ```
 
-An example of the plot method using the `gexf-js` JavaScript library is available [here](https://gvegayon.github.io/rgexf/lesmiserables)
+
+Using the `plot.gexf` method--which uses the `gexf-js` JavaScript library--results
+in a Web visualization of the graph, like this:
+
+```r
+plot(g)
+```
+
+```{r gexf-js, echo = FALSE}
+knitr::include_graphics(path = system.file("gexf-graphs/lesmiserables.png", package="rgexf"))
+```
+
+An live version of the figure is available [here](https://gvegayon.github.io/rgexf/lesmiserables).
 
 # Creating GEXF files
 

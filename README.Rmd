@@ -68,11 +68,44 @@ citation(package="rgexf")
 
 # Examples
 
-## Example 1: Static net ##
-```{r}
+## Example 1: Importing GEXF files
+
+We can use the `read.gexf` function to read GEXF files into R:
+
+```{r read-lesmiserables}
 # Loading the package
 library(rgexf)
 
+g <- system.file("gexf-graphs/lesmiserables.gexf", package="rgexf")
+g <- read.gexf(g)
+head(g) # Taking a look at the first handful
+```
+
+Moreover, we can use the `gexf.to.igraph()` function to convert the 
+`gexf` object into an `igraph` object:
+
+```{r igraph}
+library(igraph)
+ig <- gexf.to.igraph(g)
+
+op <- par(mai = rep(0, 4)) # Making room
+plot(ig)
+par(op)
+```
+
+
+Using the `plot.gexf` method--which uses the `gexf-js` JavaScript library--results
+in a Web visualization of the graph, like this:
+
+```r
+plot(g)
+```
+![](inst/gexf-graphs/lesmiserables.png)
+
+An live version of the figure is available [here](https://gvegayon.github.io/rgexf/lesmiserables).
+
+## Example 2: Static net ##
+```{r}
 # Creating a group of individuals and their relations
 people <- data.frame(matrix(c(1:4, 'juan', 'pedro', 'matthew', 'carlos'),ncol=2))
 people
@@ -90,7 +123,7 @@ write.gexf(people, relations)
 ```
 
 
-## Example 2: Dynamic net ##
+## Example 3: Dynamic net ##
 
 ```{r}
 # Defining the dynamic structure, note that there are some nodes that have NA at the end.
@@ -105,7 +138,7 @@ write.gexf(people, relations, nodeDynamic=time)
 
 
 
-## Example 3: More complex... Dynamic graph with attributes both for nodes and edges##
+## Example 4: More complex... Dynamic graph with attributes both for nodes and edges##
 
 First we define dynamics
 
@@ -132,29 +165,8 @@ write.gexf(nodes=people, edges=relations, edgeDynamic=time.edges,
            edgesAtt=edge.att, nodeDynamic=time.nodes, nodesAtt=node.att)
 ```
 
-## Example 4: Importing GEXF files
 
-We can use the `read.gexf` function to read GEXF files into R:
 
-```{r read-lesmiserables}
-g <- system.file("gexf-graphs/lesmiserables.gexf", package="rgexf")
-g <- read.gexf(g)
-head(g) # Taking a look at the first handful
-```
-
-Moreover, we can use the `gexf.to.igraph()` function to convert the 
-`gexf` object into an `igraph` object:
-
-```{r igraph}
-library(igraph)
-ig <- gexf.to.igraph(g)
-
-op <- par(mai = rep(0, 4)) # Making room
-plot(ig)
-par(op)
-```
-
-An example of the plot method using the `gexf-js` JavaScript library is available [here](https://gvegayon.github.io/rgexf/lesmiserables)
 
 # Code of Conduct
   
