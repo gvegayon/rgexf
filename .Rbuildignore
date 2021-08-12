@@ -7,7 +7,6 @@
 ^playground$
 .*~
 ^\.git
-.*\.png
 ^.*\.Rproj$
 R/zzz\.R
 demo/gexfplot\.R
@@ -33,4 +32,4 @@ inst/htmlwidgets
 ^CODE_OF_CONDUCT\.md$
 \.vscode
 README\.html
-^lesmiserables/
+^lesmiserables$

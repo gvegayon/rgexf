@@ -75,7 +75,7 @@ plot(g)
 knitr::include_graphics(path = system.file("gexf-graphs/lesmiserables.png", package="rgexf"))
 ```
 
-An live version of the figure is available [here](https://gvegayon.github.io/rgexf/lesmiserables).
+An live version of the figure is available [here](https://gvegayon.github.io/rgexf/lesmiserables/).
 
 # Creating GEXF files
 

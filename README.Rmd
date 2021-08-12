@@ -102,7 +102,7 @@ plot(g)
 ```
 ![](inst/gexf-graphs/lesmiserables.png)
 
-An live version of the figure is available [here](https://gvegayon.github.io/rgexf/lesmiserables).
+An live version of the figure is available [here](https://gvegayon.github.io/rgexf/lesmiserables/).
 
 ## Example 2: Static net ##
 ```{r}
