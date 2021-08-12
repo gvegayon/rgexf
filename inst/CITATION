@@ -1,0 +1,35 @@
+year <- sub("-.*", "", meta$Date)
+note <- sprintf("R package version %s", meta$Version)
+
+citHeader("To cite rgexf in publications use the following paper:")
+
+citEntry(
+  entry  = "Article",
+  title = "Building, Importing, and Exporting GEXF Graph Files with rgexf",
+  author = c(
+    person("George", "Vega Yon")
+    ),
+  journal = "Journal of Open Source Software",
+  year    = "2021",
+  month   = "jun",
+  volume  = 6,
+  doi     = "10.21105/joss.03456",
+  url     = "https://doi.org/10.21105/joss.03456",
+  pages   = "3456",
+ textVersion = "Vega Yon, G. G., (2021). Building, Importing, and Exporting GEXF Graph Files with rgexf. Journal of Open Source Software, 6(64), 3456, https://doi.org/10.21105/joss.03456"
+)
+
+bibentry(bibtype = "Manual",
+         title = "{{netdiffuseR: Build, Import and Export GEXF Graph Files}}",
+         author = c(
+          person("George", "Vega Yon", email="g.vegayon@gmail.com", role=c("aut", "cre"),
+            comment = structure("0000-0002-3171-0844", .Names = "ORCID")),
+          person("Jorge", "Fábrega Lacoa", role=c("ctb")),
+          person("Joshua", "Kunst", role=c("ctb"))
+          ),
+         year = year,
+         note = note,
+         url = "https://github.com/gvegayon/rgexf",
+         doi = "10.5281/zenodo.5182708", 
+         header = "And the actual R package:")
+

@@ -1,7 +1,4 @@
-
-
-CHANGES IN RGEXF VERSION 0.16.2 (2021-08-10)
-
+Changes in rgexf version 0.16.2 (2021-08-10)
 
 New features and changes
 
@@ -11,33 +8,31 @@ New features and changes
     citation(package="rgexf")).
 
 -   Added a few extra breaks across the examples (suggested by
-    @corneliusfritz).
+    [@corneliusfritz](https://github.com/corneliusfritz)).
 
--   Improved documentation regarding spells and dynamic graphs.
+-   Improved documentation regarding spells and dynamic graphs
+    (suggested by [@jonjoncardoso](https://github.com/jonjoncardoso)).
 
 -   New head() function allows a glimpse of the n first nodes/edges.
-
 
 Bug fixes
 
 -   Passing colors with four values (alpha) no longer fails during
-    checks. (reported by @IsabelFE).
+    checks. (reported by [@IsabelFE](https://github.com/IsabelFE)).
 
 -   The summary function prints nodes’ attributes as expected.
 
--   Hex colors now work (#41 reported by @milnus).
+-   Hex colors now work (#41 reported by
+    [@milnus](https://github.com/milnus)).
 
 -   gexf.to.igraph correctly processes edge attributes (#38 reported by
-    @balachia).
+    [@balachia](https://github.com/balachia)).
 
 -   Time range is now correctly computed (#19).
 
 -   Non-integer ids were incorrectly processed when reading GEXF files.
 
-
-
-CHANGES IN RGEXF VERSION 0.16.0 (2018-02-05)
-
+Changes in rgexf version 0.16.0 (2018-02-05)
 
 New features and changes
 
@@ -65,13 +60,11 @@ New features and changes
 
 -   igraph.to.gexf and vice versa now pass viz attributes and layout.
 
-
 New functions
 
 -   The function gexf has been introduced as an eventual replacement of
     write.gexf since it makes more sense. write.gexf should only be for
     writing the gexf file on the disk (effective starting vers 0.17.0).
-
 
 Misc changes
 
@@ -83,17 +76,11 @@ Misc changes
 
 -   Some data management functions were fully ported to R.
 
-
-
-CHANGES IN RGEXF VERSION 0.15.3 (2015-03-24)
-
+Changes in rgexf version 0.15.3 (2015-03-24)
 
 -   Updating emails.
 
-
-
-CHANGES IN RGEXF VERSION 0.14.3 (2014-03-09)
-
+Changes in rgexf version 0.14.3 (2014-03-09)
 
 New features and changes
 
@@ -101,7 +88,6 @@ New features and changes
     printing precision (reported in issue 16, thanks Nico!).
 
 -   Function -igraph.to.gexf- now imports attributes.
-
 
 Bug fixes
 
@@ -115,17 +101,13 @@ Bug fixes
 -   Correcting errors in -plot.gexf- method, now visual attributes are
     imported correctly.
 
-
 Development
 
 -   Option -keepFactors- default is now in -FALSE- (used to be in
     -TRUE-). When set to -TRUE- and there are factors, a warning message
     will appear (reported in issue 18, thanks to Tim Smith!).
 
-
-
-CHANGES IN RGEXF VERSION 0.13.11 (2013-11-27)
-
+Changes in rgexf version 0.13.11 (2013-11-27)
 
 Bug fixes
 
@@ -140,10 +122,7 @@ Bug fixes
 
 -   Fixing encoding issues thanks to Yong Cha’s suggestion (thank you!).
 
-
-
-CHANGES IN RGEXF VERSION 0.13.8 (2013-08-06)
-
+Changes in rgexf version 0.13.8 (2013-08-06)
 
 New features and changes
 
@@ -154,7 +133,6 @@ New features and changes
     between igraph and gexf classes. Colors and attributes are
     preserved.
 
-
 Development
 
 -   Improving general documentation.
@@ -162,10 +140,7 @@ Development
 -   Just starting to add new options to add.gexf.node/edge, more
     precisely, passing attributes.
 
-
-
-CHANGES IN RGEXF VERSION 0.13.05 (2013-05-09)
-
+Changes in rgexf version 0.13.05 (2013-05-09)
 
 Bug fixes
 
@@ -175,10 +150,7 @@ Bug fixes
 -   in .addNodesEdges, add support to case “!attributes &&
     vizattributes” (issue 9).
 
-
-
-CHANGES IN RGEXF VERSION 0.13.03 (2013-03-14)
-
+Changes in rgexf version 0.13.03 (2013-03-14)
 
 New features and changes
 
@@ -198,7 +170,6 @@ New features and changes
 
 -   Edges support id assignment and labeling.
 
-
 Bug fixes
 
 -   Small bug detected in viz attributes fixed.
@@ -207,7 +178,6 @@ Bug fixes
     replaced by viz:size (as it should be).
 
 -   “Library” replaced by “Package” everywhere (ups!)
-
 
 Development
 
@@ -218,10 +188,7 @@ Development
 -   Several code routines have been extracted from “bigger functions”
     and written as functions themselves.
 
-
-
-CHANGES IN RGEXF VERSION 0.13.01 (2013-01-04)
-
+Changes in rgexf version 0.13.01 (2013-01-04)
 
 New features and changes
 
@@ -246,7 +213,6 @@ New features and changes
 
 -   New methods for gexf objects: print.gexf and summary.gexf.
 
-
 Development
 
 -   gexf class objects are now a standard.
@@ -259,10 +225,7 @@ Development
 
 -   Cleaner code.
 
-
-
-CHANGES IN RGEXF VERSION 0.12.03.29 (2012-03-29)
-
+Changes in rgexf version 0.12.03.29 (2012-03-29)
 
 Bug fixes
 
@@ -272,15 +235,11 @@ Bug fixes
 -   Fixing problem with XML value printing: Leading spaces where removed
     from XML values at ids, source, target, etc.
 
-
-
-CHANGES IN RGEXF VERSION 0.12.03 (2012-03-05)
-
+Changes in rgexf version 0.12.03 (2012-03-05)
 
 New features and changes
 
 -   Including a manual of the functions
-
 
 Development
 

@@ -15,6 +15,7 @@ knitr::opts_chunk$set(fig.path = "man/figures/", warning = FALSE)
 [![rgexf website](https://github.com/gvegayon/rgexf/actions/workflows/website.yml/badge.svg)](https://github.com/gvegayon/rgexf/actions/workflows/website.yml)
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/gvegayon/rgexf?branch=master&svg=true)](https://ci.appveyor.com/project/gvegayon/rgexf)
 [![Coverage Status](https://img.shields.io/codecov/c/github/gvegayon/rgexf/master.svg)](https://codecov.io/github/gvegayon/rgexf?branch=master)
+[![DOI](https://joss.theoj.org/papers/10.21105/joss.03456/status.svg)](https://doi.org/10.21105/joss.03456)
 
 # rgexf: Build, Import and Export GEXF Graph Files <img src="man/figures/logo.svg" align="right" height="200"/>
 
@@ -57,6 +58,13 @@ The more stable (but old) version of `rgexf` can be found on CRAN too:
 ```
 install.packages("rgexf")
 ```
+
+# Citation
+
+```{r, comment=""}
+citation(package="rgexf")
+```
+
 
 # Examples
 

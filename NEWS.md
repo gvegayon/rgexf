@@ -4,11 +4,11 @@
 
 * We now have a hex sticker!
 
-* Users can now cite properly `rgexf` with JOSS (see `citation(package="rgexf")`).
+* Users can now cite properly `rgexf` with [JOSS](https://joss.theoj.org/papers/10.21105/joss.03456) (see `citation(package="rgexf")`).
 
-* Added a few extra breaks across the examples (suggested by @corneliusfritz).
+* Added a few extra breaks across the examples (suggested by [@corneliusfritz](https://github.com/corneliusfritz)).
 
-* Improved documentation regarding spells and dynamic graphs.
+* Improved documentation regarding spells and dynamic graphs (suggested by [@jonjoncardoso](https://github.com/jonjoncardoso)).
 
 * New `head()` function allows a glimpse of the `n` first nodes/edges.
 
@@ -16,13 +16,13 @@
 ## Bug fixes
 
 * Passing colors with four values (alpha) no longer fails during checks.
-  (reported by @IsabelFE).
+  (reported by [@IsabelFE](https://github.com/IsabelFE)).
 
 * The summary function prints nodes' attributes as expected.
 
-* Hex colors now work (#41 reported by @milnus).
+* Hex colors now work (#41 reported by [@milnus](https://github.com/milnus)).
 
-* `gexf.to.igraph` correctly processes edge attributes (#38 reported by @balachia).
+* `gexf.to.igraph` correctly processes edge attributes (#38 reported by [@balachia](https://github.com/balachia)).
 
 * Time range is now correctly computed (#19).
 
