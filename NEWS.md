@@ -6,9 +6,9 @@
 
 * Users can now cite properly `rgexf` with [JOSS](https://joss.theoj.org/papers/10.21105/joss.03456) (see `citation(package="rgexf")`).
 
-* Added a few extra breaks across the examples (suggested by [@corneliusfritz](https://github.com/corneliusfritz)).
+* Added a few extra breaks across the examples (suggested by <a href="https://github.com/corneliusfritz">@corneliusfritz</a>).
 
-* Improved documentation regarding spells and dynamic graphs (suggested by [@jonjoncardoso](https://github.com/jonjoncardoso)).
+* Improved documentation regarding spells and dynamic graphs (suggested by <a href="https://github.com/jonjoncardoso">@jonjoncardoso</a>).
 
 * New `head()` function allows a glimpse of the `n` first nodes/edges.
 
@@ -16,13 +16,13 @@
 ## Bug fixes
 
 * Passing colors with four values (alpha) no longer fails during checks.
-  (reported by [@IsabelFE](https://github.com/IsabelFE)).
+  (reported by <a href="https://github.com/IsabelFE">@IsabelFE</a>).
 
 * The summary function prints nodes' attributes as expected.
 
-* Hex colors now work (#41 reported by [@milnus](https://github.com/milnus)).
+* Hex colors now work (#41 reported by <a href="https://github.com/milnus">@milnus</a>).
 
-* `gexf.to.igraph` correctly processes edge attributes (#38 reported by [@balachia](https://github.com/balachia)).
+* `gexf.to.igraph` correctly processes edge attributes (#38 reported by <a href="https://github.com/balachia">@balachia</a>).
 
 * Time range is now correctly computed (#19).
 

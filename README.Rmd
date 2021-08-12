@@ -35,7 +35,7 @@ visualize the graph on a web browser through ~~sigmajs javascript~~
 [gexf-js](https://github.com/raphv/gexf-js) library and interact with
 the igraph package.
 
-```{r news, echo = FALSE, results='asis'}
+```{r news, echo = FALSE, results='asis', }
 x <- readLines("NEWS.md")
 ids <- which(grepl("^#\\s*[a-zA-Z]",x))
 ids <- ids[1:2] - c(0, 1)
