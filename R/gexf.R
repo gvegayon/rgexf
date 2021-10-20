@@ -80,6 +80,9 @@
 #' @param encoding Encoding of the graph.
 #' @param vers Character scalar. Version of the GEXF format to generate.
 #' By default `"1.3"`.
+#' @param relsize Numeric scalar. Relative size of the largest node in terms
+#' of the layout.
+#' @param radius Numeric scalar. Radius of the plotting area.
 #' @param ... Passed to `gexf`.
 #' @param rescale.node.size Logical scalar. When `TRUE` it rescales the 
 #' size of the vertices such that the largest one is about \%5 of the plotting
@@ -121,7 +124,7 @@ NULL
 
 default_nodeVizAtt <- list(
   size     = function() 8.0,
-  position = function() structure(c(runif(2, -200, 200), 0), names = c("x", "y", "z")),
+  position = function() structure(c(runif(2, -500, 500), 0), names = c("x", "y", "z")),
   color    = function() "tomato"
 )
 
@@ -175,7 +178,9 @@ gexf <- function(
   keepFactors       = FALSE,
   encoding          = "UTF-8",
   vers              = "1.3",
-  rescale.node.size = TRUE
+  rescale.node.size = TRUE,
+  relsize           = max(0.01, 1.0/nrow(nodes)),
+  radius            = 500
 ) {
   
   ##############################################################################
@@ -242,13 +247,12 @@ gexf <- function(
         next
       
       nodesVizAtt$position[, i] <- ((nodesVizAtt$position[, i] - pran[1])/
-        (pran[2] - pran[1]))*200 - 100
+        (pran[2] - pran[1]))*radius - radius/2
       
     }
       
     # Getting ranges
-    sscale <- 200*.05
-    
+    sscale <- radius * relsize
     nodesVizAtt$size <- nodesVizAtt$size/max(nodesVizAtt$size)*sscale
     
   }
