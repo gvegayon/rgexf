@@ -190,9 +190,9 @@
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">lesmi_ig</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/igraph.to.gexf.html">gexf.to.igraph</a></span><span class="op">(</span><span class="va">lesmi</span><span class="op">)</span>
 <span class="va">lesmi_ig</span></code></pre></div>
-<pre><code>## IGRAPH 505a855 UNW- 77 254 -- 
+<pre><code>## IGRAPH 29518de UNW- 77 254 -- 
 ## + attr: layout (g/n), name (v/c), color (v/c), size (v/n), weight (e/n)
-## + edges from 505a855 (vertex names):
+## + edges from 29518de (vertex names):
 ##  [1] Myriel        --Napoleon       Myriel        --MlleBaptistine
 ##  [3] Myriel        --MmeMagloire    MlleBaptistine--MmeMagloire   
 ##  [5] Myriel        --CountessDeLo   Myriel        --Geborand      
@@ -213,7 +213,7 @@
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fu"><a href="../reference/igraph.to.gexf.html">igraph.to.gexf</a></span><span class="op">(</span><span class="va">lesmi_ig</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## &lt;?xml version="1.0" encoding="UTF-8"?&gt;
 ## &lt;gexf xmlns="http://www.gexf.net/1.3" xmlns:viz="http://www.gexf.net/1.3/viz" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.3 http://www.gexf.net/1.3/gexf.xsd" version="1.3"&gt;
-##   &lt;meta lastmodifieddate="2021-08-12"&gt;
+##   &lt;meta lastmodifieddate="2021-10-20"&gt;
 ##     &lt;creator&gt;NodosChile&lt;/creator&gt;
 ##     &lt;description&gt;A GEXF file written in R with "rgexf"&lt;/description&gt;
 ##     &lt;keywords&gt;GEXF, NodosChile, R, rgexf, Gephi&lt;/keywords&gt;
@@ -222,33 +222,33 @@
 ##     &lt;nodes&gt;
 ##       &lt;node id="Myriel" label="Myriel"&gt;
 ##         &lt;viz:color r="91" g="91" b="245" a="1"/&gt;
-##         &lt;viz:position x="-59.3517589858971" y="-56.1581638991552" z="0"/&gt;
-##         &lt;viz:size value="2.8685715"/&gt;
+##         &lt;viz:position x="-148.379397464743" y="-140.395409747888" z="0"/&gt;
+##         &lt;viz:size value="1.86270876623377"/&gt;
 ##       &lt;/node&gt;
 ##       &lt;node id="Napoleon" label="Napoleon"&gt;
 ##         &lt;viz:color r="91" g="91" b="245" a="1"/&gt;
-##         &lt;viz:position x="-83.9713511303431" y="-85.1340358664038" z="0"/&gt;
-##         &lt;viz:size value="0.4"/&gt;
+##         &lt;viz:position x="-209.928377825858" y="-212.835089666009" z="0"/&gt;
+##         &lt;viz:size value="0.25974025974026"/&gt;
 ##       &lt;/node&gt;
 ##       &lt;node id="Labarre" label="Labarre"&gt;
 ##         &lt;viz:color r="245" g="91" b="91" a="1"/&gt;
-##         &lt;viz:position x="-30.4625964839155" y="-43.3372506578706" z="0"/&gt;
-##         &lt;viz:size value="0.4"/&gt;
+##         &lt;viz:position x="-76.1564912097887" y="-108.343126644676" z="0"/&gt;
+##         &lt;viz:size value="0.25974025974026"/&gt;
 ##       &lt;/node&gt;
 ##       &lt;node id="Valjean" label="Valjean"&gt;
 ##         &lt;viz:color r="245" g="91" b="91" a="1"/&gt;
-##         &lt;viz:position x="-30.2329665737823" y="4.17800221251834" z="0"/&gt;
-##         &lt;viz:size value="10"/&gt;
+##         &lt;viz:position x="-75.5824164344556" y="10.4450055312959" z="0"/&gt;
+##         &lt;viz:size value="6.49350649350649"/&gt;
 ##       &lt;/node&gt;
 ##       &lt;node id="Marguerite" label="Marguerite"&gt;
 ##         &lt;viz:color r="245" g="91" b="91" a="1"/&gt;
-##         &lt;viz:position x="-71.2259031158826" y="39.194220798322" z="0"/&gt;
-##         &lt;viz:size value="0.6742859"/&gt;
+##         &lt;viz:position x="-178.064757789707" y="97.9855519958049" z="0"/&gt;
+##         &lt;viz:size value="0.437847987012987"/&gt;
 ##       &lt;/node&gt;
 ##       &lt;node id="MmeDeR" label="MmeDeR"&gt;
 ##         &lt;viz:color r="245" g="91" b="91" a="1"/&gt;
-##         &lt;viz:position x="-47.5486940358376" y="-32.3118111852591" z="0"/&gt;
-##         &lt;viz:size value="0.4"/&gt;
+##         &lt;viz:position x="-118.871735089594" y="-80.7795279631479" z="0"/&gt;
+##         &lt;viz:size value="0.25974025974026"/&gt;
 ##       &lt;/node&gt;
 ##          ...
 ##      &lt;/nodes&gt;
@@ -266,7 +266,7 @@
 <p>Using the <code>plot.gexf</code> method–which uses the <code>gexf-js</code> JavaScript library–results in a Web visualization of the graph, like this:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span></code></pre></div>
-<p><img src="../../../tmp/Rtmp8rbKqh/temp_libpath17b6980f2/rgexf/gexf-graphs/lesmiserables.png"><!-- --></p>
+<p><img src="../../../tmp/Rtmp5s1nBi/temp_libpath137345a2/rgexf/gexf-graphs/lesmiserables.png"><!-- --></p>
 <p>An live version of the figure is available <a href="https://gvegayon.github.io/rgexf/lesmiserables/">here</a>.</p>
 </div>
 <div id="creating-gexf-files" class="section level1">
@@ -346,7 +346,7 @@
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">graph</span><span class="op">)</span></code></pre></div>
 <pre><code>## &lt;?xml version="1.0" encoding="UTF-8"?&gt;
 ## &lt;gexf xmlns="http://www.gexf.net/1.3" xmlns:viz="http://www.gexf.net/1.3/viz" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.3 http://www.gexf.net/1.3/gexf.xsd" version="1.3"&gt;
-##   &lt;meta lastmodifieddate="2021-08-12"&gt;
+##   &lt;meta lastmodifieddate="2021-10-20"&gt;
 ##     &lt;creator&gt;NodosChile&lt;/creator&gt;
 ##     &lt;description&gt;A GEXF file written in R with "rgexf"&lt;/description&gt;
 ##     &lt;keywords&gt;GEXF, NodosChile, R, rgexf, Gephi&lt;/keywords&gt;
@@ -355,33 +355,33 @@
 ##     &lt;nodes&gt;
 ##       &lt;node id="1" label="1"&gt;
 ##         &lt;viz:color r="233" g="187" b="62" a="1"/&gt;
-##         &lt;viz:position x="-56.0799678907797" y="-100" z="0"/&gt;
-##         &lt;viz:size value="10"/&gt;
+##         &lt;viz:position x="-140.199919726949" y="-250" z="0"/&gt;
+##         &lt;viz:size value="5.55555555555556"/&gt;
 ##       &lt;/node&gt;
 ##       &lt;node id="2" label="2"&gt;
 ##         &lt;viz:color r="235" g="178" b="94" a="1"/&gt;
-##         &lt;viz:position x="-45.6930628255776" y="-95.6295201467611" z="0"/&gt;
-##         &lt;viz:size value="4.95748278927415"/&gt;
+##         &lt;viz:position x="-114.232657063944" y="-239.073800366903" z="0"/&gt;
+##         &lt;viz:size value="2.75415710515231"/&gt;
 ##       &lt;/node&gt;
 ##       &lt;node id="3" label="3"&gt;
 ##         &lt;viz:color r="242" g="242" b="242" a="1"/&gt;
-##         &lt;viz:position x="-37.9480370990221" y="-87.079571381759" z="0"/&gt;
-##         &lt;viz:size value="0.337997611829421"/&gt;
+##         &lt;viz:position x="-94.8700927475552" y="-217.698928454398" z="0"/&gt;
+##         &lt;viz:size value="0.187776451016345"/&gt;
 ##       &lt;/node&gt;
 ##       &lt;node id="4" label="4"&gt;
 ##         &lt;viz:color r="240" g="201" b="192" a="1"/&gt;
-##         &lt;viz:position x="-33.8163959209204" y="-74.7238274932304" z="0"/&gt;
-##         &lt;viz:size value="5.50694120090748"/&gt;
+##         &lt;viz:position x="-84.540989802301" y="-186.809568733076" z="0"/&gt;
+##         &lt;viz:size value="3.05941177828193"/&gt;
 ##       &lt;/node&gt;
 ##       &lt;node id="5" label="5"&gt;
 ##         &lt;viz:color r="151" g="211" b="0" a="1"/&gt;
-##         &lt;viz:position x="-33.8163959209204" y="-59.1022937785412" z="0"/&gt;
-##         &lt;viz:size value="3.43443007471073"/&gt;
+##         &lt;viz:position x="-84.540989802301" y="-147.755734446353" z="0"/&gt;
+##         &lt;viz:size value="1.90801670817263"/&gt;
 ##       &lt;/node&gt;
 ##       &lt;node id="6" label="6"&gt;
 ##         &lt;viz:color r="232" g="195" b="46" a="1"/&gt;
-##         &lt;viz:position x="-37.9480370990221" y="-40.8977062214588" z="0"/&gt;
-##         &lt;viz:size value="0.687453831889737"/&gt;
+##         &lt;viz:position x="-94.8700927475552" y="-102.244265553647" z="0"/&gt;
+##         &lt;viz:size value="0.381918795494298"/&gt;
 ##       &lt;/node&gt;
 ##          ...
 ##      &lt;/nodes&gt;
