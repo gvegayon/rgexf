@@ -56,7 +56,8 @@ gexf_js_install <- function(path, overwrite = FALSE) {
 #' 
 #' @details 
 #' Currently, the only languages supported are: 
-#' \Sexpr{paste(names(rgexf:::gexf_js_languages), " (", rgexf:::gexf_js_languages, ")", sep="", collapse=", ")}.
+#' German (de), English (en), French (fr), Spanish (es), Italian (it),
+#' Finnish (fi), Turkish (tr), Greek (el), Dutch (nl)
 #'  
 gexf_js_config <- function(
   dir,
@@ -173,11 +174,12 @@ gexf_js_config <- function(
 #' 
 #' More details on this in the [igraph.to.gexf] function.
 #' 
-#' The files are copied directly from
-#' \Sexpr{system.file("gexf-js", package="rgexf")}. And the 
-#' parameters are set up by modifying the following template file:
-#' 
-#' \Sexpr{system.file("gexf-js/config.js.template", package="rgexf")}
+#' The files are copied directly from the path indicated by
+#' `system.file("gexf-js", package="rgexf")`. And the 
+#' parameters are set up by modifying the following template file stored under
+#' the `gexf-js/config.js.template` (see the output from 
+#' `system.file("gexf-js/config.js.template", package="rgexf")` to see the
+#' path to the template file).
 #' 
 #' The server is lunched if and only if `interactive() == TRUE`.
 #' 
@@ -204,7 +206,7 @@ plot.gexf <- function(
   copy.only = FALSE,
   ...
   ) {
-  
+
   # Step 0: Check for viz attributes
   if (any(grepl("^\\s*<viz:position", x$graph)))
     warning("No position viz attribute found. The graph may not be drawn (see ?plot.gexf.)")
