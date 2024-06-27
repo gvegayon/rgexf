@@ -79,7 +79,520 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-Create, read, and write 'GEXF' (Graph Exchange 'XML' Format) graph files (used in 'Gephi' and others). Using the 'XML' package, rgexf allows reading and writing GEXF files, including attributes, 'GEXF' visual attributes (such as color, size, and position), network dynamics (for both edges and nodes), and edges' weights. Users can build/handle graphs element-by-element or massively through data frames, visualize the graph on a web browser through 'gexf-js' (a 'javascript' library), and interact with the 'igraph' package.
+
+
+<div id="rgexf-build-import-and-export-gexf-graph-files-" class="section level1">
+<div class="page-header"><h1 class="hasAnchor">
+<a href="#rgexf-build-import-and-export-gexf-graph-files-" class="anchor"></a>rgexf: Build, Import and Export GEXF Graph Files <img src="reference/figures/logo.svg" align="right" height="200">
+</h1></div>
+<p>The first R package to work with GEXF graph files (used in Gephi and others). <code>rgexf</code> allows reading and writing graph files, including:</p>
+<ol>
+<li><p>Nodes/edges attributes,</p></li>
+<li><p>GEXF viz attributes (such as color, size, and position),</p></li>
+<li><p>Network dynamics (for both edges and nodes, including spells) and</p></li>
+<li><p>Edges weighting.</p></li>
+</ol>
+<p>Users can build/handle graphs element-by-element or through data-frames, visualize the graph on a web browser through <del>sigmajs javascript</del> <a href="https://github.com/raphv/gexf-js">gexf-js</a> library and interact with the igraph package.</p>
+</div>
+<div id="changes-in-rgexf-version-0163-2024-06-27" class="section level1">
+<h1 class="hasAnchor">
+<a href="#changes-in-rgexf-version-0163-2024-06-27" class="anchor"></a>Changes in rgexf version 0.16.3 (2024-06-27)</h1>
+<ul>
+<li>Dynamically loaded components in the Rd files were removed to comply with new CRAN policies.</li>
+</ul>
+<p>More in the <a href="NEWS.html">NEWS.md</a> file.</p>
+</div>
+<div id="installation" class="section level1">
+<h1 class="hasAnchor">
+<a href="#installation" class="anchor"></a>Installation</h1>
+<p>To install the latest version of <code>rgexf</code>, you can use <code>devtools</code></p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">devtools</span><span class="op">)</span>
+<span class="fu">install_github</span><span class="op">(</span><span class="st">"gvegayon/rgexf"</span><span class="op">)</span></code></pre></div>
+<p>The more stable (but old) version of <code>rgexf</code> can be found on CRAN too:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="kw">install.packages</span>(<span class="st">"rgexf"</span>)</span></code></pre></div>
+</div>
+<div id="citation" class="section level1">
+<h1 class="hasAnchor">
+<a href="#citation" class="anchor"></a>Citation</h1>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/citation.html">citation</a></span><span class="op">(</span>package<span class="op">=</span><span class="st">"rgexf"</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a>To cite rgexf <span class="cf">in</span> publications use the following paper<span class="op">:</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true"></a><span class="st">  </span>Vega Yon, G. G., (<span class="dv">2021</span>). Building, Importing, and Exporting GEXF</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true"></a>  Graph Files with rgexf. Journal of Open Source Software, <span class="dv">6</span>(<span class="dv">64</span>), <span class="dv">3456</span>,</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true"></a>  https<span class="op">:</span><span class="er">//</span>doi.org<span class="op">/</span><span class="fl">10.21105</span><span class="op">/</span>joss<span class="fl">.03456</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true"></a>And the actual R package<span class="op">:</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true"></a><span class="st">  </span>Vega Yon G, Fábrega Lacoa J, Kunst <span class="kw">J</span> (<span class="dv">2024</span>). _netdiffuseR<span class="op">:</span><span class="st"> </span>Build,</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true"></a>  Import and Export GEXF Graph Files_. doi<span class="op">:</span><span class="fl">10.5281</span><span class="op">/</span>zenodo<span class="fl">.5182708</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true"></a>  <span class="op">&lt;</span>https<span class="op">:</span><span class="er">//</span>doi.org<span class="op">/</span><span class="fl">10.5281</span><span class="op">/</span>zenodo<span class="fl">.5182708</span><span class="op">&gt;</span>, R package version <span class="dv">0</span>.<span class="fl">17.0</span>,</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true"></a>  <span class="op">&lt;</span>https<span class="op">:</span><span class="er">//</span>github.com<span class="op">/</span>gvegayon<span class="op">/</span>rgexf<span class="op">&gt;</span>.</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true"></a></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true"></a>To see these entries <span class="cf">in</span> BibTeX format, use <span class="st">'print(&lt;citation&gt;,</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true"></a><span class="st">bibtex=TRUE)'</span>, <span class="st">'toBibtex(.)'</span>, or set</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true"></a><span class="st">'options(citation.bibtex.max=999)'</span>.</span></code></pre></div>
+</div>
+<div id="examples" class="section level1">
+<h1 class="hasAnchor">
+<a href="#examples" class="anchor"></a>Examples</h1>
+<div id="example-1-importing-gexf-files" class="section level2">
+<h2 class="hasAnchor">
+<a href="#example-1-importing-gexf-files" class="anchor"></a>Example 1: Importing GEXF files</h2>
+<p>We can use the <code>read.gexf</code> function to read GEXF files into R:</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Loading the package</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://gvegayon.github.io/rgexf/">rgexf</a></span><span class="op">)</span>
+
+<span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"gexf-graphs/lesmiserables.gexf"</span>, package<span class="op">=</span><span class="st">"rgexf"</span><span class="op">)</span>
+<span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/read.gexf.html">read.gexf</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span> <span class="co"># Taking a look at the first handful</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true"></a><span class="op">&lt;</span>?xml version=<span class="st">"1.0"</span> encoding=<span class="st">"UTF-8"</span>?<span class="op">&gt;</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true"></a><span class="er">&lt;</span>gexf xmlns=<span class="st">"http://www.gexf.net/1.3"</span> xmlns<span class="op">:</span>viz=<span class="st">"http://www.gexf.net/1.3/viz"</span> xmlns<span class="op">:</span>xsi=<span class="st">"http://www.w3.org/2001/XMLSchema-instance"</span> version=<span class="st">"1.3"</span> xsi<span class="op">:</span>schemaLocation=<span class="st">"http://www.gexf.net/1.3 http://www.gexf.net/1.3/gexf.xsd"</span><span class="op">&gt;</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true"></a><span class="st">  </span><span class="er">&lt;</span>meta lastmodifieddate=<span class="st">"2016-11-09"</span><span class="op">&gt;</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true"></a><span class="st">    </span><span class="er">&lt;</span>creator<span class="op">&gt;</span>Gephi <span class="fl">0.9</span><span class="op">&lt;</span><span class="er">/</span>creator<span class="op">&gt;</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true"></a><span class="st">    </span><span class="er">&lt;</span>description<span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true"></a><span class="st">  </span><span class="er">&lt;/</span>meta<span class="op">&gt;</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true"></a><span class="st">  </span><span class="er">&lt;</span>graph defaultedgetype=<span class="st">"undirected"</span> mode=<span class="st">"static"</span><span class="op">&gt;</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true"></a><span class="st">    </span><span class="er">&lt;</span>attributes class=<span class="st">"node"</span> mode=<span class="st">"static"</span><span class="op">&gt;</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true"></a><span class="st">      </span><span class="er">&lt;</span>attribute id=<span class="st">"modularity_class"</span> title=<span class="st">"Modularity Class"</span> type=<span class="st">"integer"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true"></a><span class="st">    </span><span class="er">&lt;/</span>attributes<span class="op">&gt;</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true"></a><span class="st">    </span><span class="er">&lt;</span>nodes<span class="op">&gt;</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true"></a><span class="st">      </span><span class="er">&lt;</span>node id=<span class="st">"11"</span> label=<span class="st">"Valjean"</span><span class="op">&gt;</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true"></a><span class="st">        </span><span class="er">&lt;</span>attvalues<span class="op">&gt;</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true"></a><span class="st">          </span><span class="er">&lt;</span>attvalue <span class="cf">for</span>=<span class="st">"modularity_class"</span> value=<span class="st">"1"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true"></a><span class="st">        </span><span class="er">&lt;/</span>attvalues<span class="op">&gt;</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true"></a><span class="st">        </span><span class="er">&lt;</span>viz<span class="op">:</span>size value=<span class="st">"100.0"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true"></a><span class="st">        </span><span class="er">&lt;</span>viz<span class="op">:</span>position x=<span class="st">"-87.93029"</span> y=<span class="st">"6.8120565"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true"></a><span class="st">        </span><span class="er">&lt;</span>viz<span class="op">:</span>color r=<span class="st">"245"</span> g=<span class="st">"91"</span> b=<span class="st">"91"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true"></a><span class="st">      </span><span class="er">&lt;/</span>node<span class="op">&gt;</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true"></a><span class="st">      </span><span class="er">&lt;</span>node id=<span class="st">"48"</span> label=<span class="st">"Gavroche"</span><span class="op">&gt;</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true"></a><span class="st">        </span><span class="er">&lt;</span>attvalues<span class="op">&gt;</span></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true"></a><span class="st">          </span><span class="er">&lt;</span>attvalue <span class="cf">for</span>=<span class="st">"modularity_class"</span> value=<span class="st">"8"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true"></a><span class="st">        </span><span class="er">&lt;/</span>attvalues<span class="op">&gt;</span></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true"></a><span class="st">        </span><span class="er">&lt;</span>viz<span class="op">:</span>size value=<span class="st">"61.600006"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true"></a><span class="st">        </span><span class="er">&lt;</span>viz<span class="op">:</span>position x=<span class="st">"387.89572"</span> y=<span class="st">"-110.462326"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true"></a><span class="st">        </span><span class="er">&lt;</span>viz<span class="op">:</span>color r=<span class="st">"91"</span> g=<span class="st">"245"</span> b=<span class="st">"91"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true"></a><span class="st">      </span><span class="er">&lt;/</span>node<span class="op">&gt;</span></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true"></a><span class="st">      </span><span class="er">&lt;</span>node id=<span class="st">"55"</span> label=<span class="st">"Marius"</span><span class="op">&gt;</span></span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true"></a><span class="st">        </span><span class="er">&lt;</span>attvalues<span class="op">&gt;</span></span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true"></a><span class="st">          </span><span class="er">&lt;</span>attvalue <span class="cf">for</span>=<span class="st">"modularity_class"</span> value=<span class="st">"6"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true"></a><span class="st">        </span><span class="er">&lt;/</span>attvalues<span class="op">&gt;</span></span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true"></a><span class="st">        </span><span class="er">&lt;</span>viz<span class="op">:</span>size value=<span class="st">"53.37143"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true"></a><span class="st">        </span><span class="er">&lt;</span>viz<span class="op">:</span>position x=<span class="st">"206.44687"</span> y=<span class="st">"13.805411"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true"></a><span class="st">        </span><span class="er">&lt;</span>viz<span class="op">:</span>color r=<span class="st">"194"</span> g=<span class="st">"91"</span> b=<span class="st">"245"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true"></a><span class="st">      </span><span class="er">&lt;/</span>node<span class="op">&gt;</span></span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true"></a><span class="st">      </span><span class="er">&lt;</span>node id=<span class="st">"27"</span> label=<span class="st">"Javert"</span><span class="op">&gt;</span></span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true"></a><span class="st">        </span><span class="er">&lt;</span>attvalues<span class="op">&gt;</span></span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true"></a><span class="st">          </span><span class="er">&lt;</span>attvalue <span class="cf">for</span>=<span class="st">"modularity_class"</span> value=<span class="st">"7"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb6-39"><a href="#cb6-39" aria-hidden="true"></a><span class="st">        </span><span class="er">&lt;/</span>attvalues<span class="op">&gt;</span></span>
+<span id="cb6-40"><a href="#cb6-40" aria-hidden="true"></a><span class="st">        </span><span class="er">&lt;</span>viz<span class="op">:</span>size value=<span class="st">"47.88571"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb6-41"><a href="#cb6-41" aria-hidden="true"></a><span class="st">        </span><span class="er">&lt;</span>viz<span class="op">:</span>position x=<span class="st">"-81.46074"</span> y=<span class="st">"204.20204"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb6-42"><a href="#cb6-42" aria-hidden="true"></a><span class="st">        </span><span class="er">&lt;</span>viz<span class="op">:</span>color r=<span class="st">"91"</span> g=<span class="st">"245"</span> b=<span class="st">"194"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb6-43"><a href="#cb6-43" aria-hidden="true"></a><span class="st">      </span><span class="er">&lt;/</span>node<span class="op">&gt;</span></span>
+<span id="cb6-44"><a href="#cb6-44" aria-hidden="true"></a><span class="st">      </span><span class="er">&lt;</span>node id=<span class="st">"25"</span> label=<span class="st">"Thenardier"</span><span class="op">&gt;</span></span>
+<span id="cb6-45"><a href="#cb6-45" aria-hidden="true"></a><span class="st">        </span><span class="er">&lt;</span>attvalues<span class="op">&gt;</span></span>
+<span id="cb6-46"><a href="#cb6-46" aria-hidden="true"></a><span class="st">          </span><span class="er">&lt;</span>attvalue <span class="cf">for</span>=<span class="st">"modularity_class"</span> value=<span class="st">"7"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb6-47"><a href="#cb6-47" aria-hidden="true"></a><span class="st">        </span><span class="er">&lt;/</span>attvalues<span class="op">&gt;</span></span>
+<span id="cb6-48"><a href="#cb6-48" aria-hidden="true"></a><span class="st">        </span><span class="er">&lt;</span>viz<span class="op">:</span>size value=<span class="st">"45.142853"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb6-49"><a href="#cb6-49" aria-hidden="true"></a><span class="st">        </span><span class="er">&lt;</span>viz<span class="op">:</span>position x=<span class="st">"82.80825"</span> y=<span class="st">"203.1144"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb6-50"><a href="#cb6-50" aria-hidden="true"></a><span class="st">        </span><span class="er">&lt;</span>viz<span class="op">:</span>color r=<span class="st">"91"</span> g=<span class="st">"245"</span> b=<span class="st">"194"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb6-51"><a href="#cb6-51" aria-hidden="true"></a><span class="st">      </span><span class="er">&lt;/</span>node<span class="op">&gt;</span></span>
+<span id="cb6-52"><a href="#cb6-52" aria-hidden="true"></a><span class="st">      </span><span class="er">&lt;</span>node id=<span class="st">"23"</span> label=<span class="st">"Fantine"</span><span class="op">&gt;</span></span>
+<span id="cb6-53"><a href="#cb6-53" aria-hidden="true"></a><span class="st">        </span><span class="er">&lt;</span>attvalues<span class="op">&gt;</span></span>
+<span id="cb6-54"><a href="#cb6-54" aria-hidden="true"></a><span class="st">          </span><span class="er">&lt;</span>attvalue <span class="cf">for</span>=<span class="st">"modularity_class"</span> value=<span class="st">"2"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb6-55"><a href="#cb6-55" aria-hidden="true"></a><span class="st">        </span><span class="er">&lt;/</span>attvalues<span class="op">&gt;</span></span>
+<span id="cb6-56"><a href="#cb6-56" aria-hidden="true"></a><span class="st">        </span><span class="er">&lt;</span>viz<span class="op">:</span>size value=<span class="st">"42.4"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb6-57"><a href="#cb6-57" aria-hidden="true"></a><span class="st">        </span><span class="er">&lt;</span>viz<span class="op">:</span>position x=<span class="st">"-313.42786"</span> y=<span class="st">"289.44803"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb6-58"><a href="#cb6-58" aria-hidden="true"></a><span class="st">        </span><span class="er">&lt;</span>viz<span class="op">:</span>color r=<span class="st">"91"</span> g=<span class="st">"194"</span> b=<span class="st">"245"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb6-59"><a href="#cb6-59" aria-hidden="true"></a><span class="st">      </span><span class="er">&lt;/</span>node<span class="op">&gt;</span></span>
+<span id="cb6-60"><a href="#cb6-60" aria-hidden="true"></a><span class="st">            </span>...</span>
+<span id="cb6-61"><a href="#cb6-61" aria-hidden="true"></a>     <span class="op">&lt;</span><span class="er">/</span>nodes<span class="op">&gt;</span></span>
+<span id="cb6-62"><a href="#cb6-62" aria-hidden="true"></a><span class="st">    </span><span class="er">&lt;</span>edges<span class="op">&gt;</span></span>
+<span id="cb6-63"><a href="#cb6-63" aria-hidden="true"></a><span class="st">      </span><span class="er">&lt;</span>edge id=<span class="st">"0"</span> source=<span class="st">"1"</span> target=<span class="st">"0"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb6-64"><a href="#cb6-64" aria-hidden="true"></a><span class="st">      </span><span class="er">&lt;</span>edge id=<span class="st">"1"</span> source=<span class="st">"2"</span> target=<span class="st">"0"</span> weight=<span class="st">"8.0"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb6-65"><a href="#cb6-65" aria-hidden="true"></a><span class="st">      </span><span class="er">&lt;</span>edge id=<span class="st">"2"</span> source=<span class="st">"3"</span> target=<span class="st">"0"</span> weight=<span class="st">"10.0"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb6-66"><a href="#cb6-66" aria-hidden="true"></a><span class="st">      </span><span class="er">&lt;</span>edge id=<span class="st">"3"</span> source=<span class="st">"3"</span> target=<span class="st">"2"</span> weight=<span class="st">"6.0"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb6-67"><a href="#cb6-67" aria-hidden="true"></a><span class="st">      </span><span class="er">&lt;</span>edge id=<span class="st">"4"</span> source=<span class="st">"4"</span> target=<span class="st">"0"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb6-68"><a href="#cb6-68" aria-hidden="true"></a><span class="st">      </span><span class="er">&lt;</span>edge id=<span class="st">"5"</span> source=<span class="st">"5"</span> target=<span class="st">"0"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb6-69"><a href="#cb6-69" aria-hidden="true"></a><span class="st">            </span>...</span>
+<span id="cb6-70"><a href="#cb6-70" aria-hidden="true"></a>     <span class="op">&lt;</span><span class="er">/</span>edges<span class="op">&gt;</span></span>
+<span id="cb6-71"><a href="#cb6-71" aria-hidden="true"></a><span class="st">  </span><span class="er">&lt;/</span>graph<span class="op">&gt;</span></span>
+<span id="cb6-72"><a href="#cb6-72" aria-hidden="true"></a><span class="er">&lt;/</span>gexf<span class="op">&gt;</span></span></code></pre></div>
+<p>Moreover, we can use the <code><a href="reference/igraph.to.gexf.html">gexf.to.igraph()</a></code> function to convert the <code>gexf</code> object into an <code>igraph</code> object:</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://igraph.org">igraph</a></span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true"></a>Attaching package<span class="op">:</span><span class="st"> 'igraph'</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true"></a>The following objects are masked from <span class="st">'package:stats'</span><span class="op">:</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true"></a><span class="st">    </span>decompose, spectrum</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true"></a>The following object is masked from <span class="st">'package:base'</span><span class="op">:</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true"></a><span class="st">    </span>union</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">ig</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/igraph.to.gexf.html">gexf.to.igraph</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span>
+
+<span class="va">op</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mai <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span> <span class="co"># Making room</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">ig</span><span class="op">)</span></code></pre></div>
+<p><img src="reference/figures/igraph-1.png"></p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span><span class="va">op</span><span class="op">)</span></code></pre></div>
+<p>Using the <code>plot.gexf</code> method–which uses the <code>gexf-js</code> JavaScript library–results in a Web visualization of the graph, like this:</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span></code></pre></div>
+<p><img src="inst/gexf-graphs/lesmiserables.png"></p>
+<p>A live version of the figure is available <a href="https://gvegayon.github.io/rgexf/lesmiserables/">here</a>.</p>
+</div>
+<div id="example-2-static-net" class="section level2">
+<h2 class="hasAnchor">
+<a href="#example-2-static-net" class="anchor"></a>Example 2: Static net</h2>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Creating a group of individuals and their relations</span>
+<span class="va">people</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span>, <span class="st">'juan'</span>, <span class="st">'pedro'</span>, <span class="st">'matthew'</span>, <span class="st">'carlos'</span><span class="op">)</span>,ncol<span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span>
+<span class="va">people</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true"></a>  X1      X2</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true"></a><span class="dv">1</span>  <span class="dv">1</span>    juan</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true"></a><span class="dv">2</span>  <span class="dv">2</span>   pedro</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true"></a><span class="dv">3</span>  <span class="dv">3</span> matthew</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true"></a><span class="dv">4</span>  <span class="dv">4</span>  carlos</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Defining the relations structure</span>
+<span class="va">relations</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">4</span>,<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">1</span>,<span class="fl">3</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">3</span>,<span class="fl">4</span>,<span class="fl">4</span>,<span class="fl">2</span><span class="op">)</span>, ncol<span class="op">=</span><span class="fl">2</span>, byrow<span class="op">=</span><span class="cn">T</span><span class="op">)</span><span class="op">)</span>
+<span class="va">relations</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true"></a>  X1 X2</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true"></a><span class="dv">1</span>  <span class="dv">1</span>  <span class="dv">4</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true"></a><span class="dv">2</span>  <span class="dv">1</span>  <span class="dv">2</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true"></a><span class="dv">3</span>  <span class="dv">1</span>  <span class="dv">3</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true"></a><span class="dv">4</span>  <span class="dv">2</span>  <span class="dv">3</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true"></a><span class="dv">5</span>  <span class="dv">3</span>  <span class="dv">4</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true"></a><span class="dv">6</span>  <span class="dv">4</span>  <span class="dv">2</span></span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Getting things done</span>
+<span class="fu"><a href="reference/gexf-class.html">write.gexf</a></span><span class="op">(</span><span class="va">people</span>, <span class="va">relations</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true"></a><span class="op">&lt;</span>?xml version=<span class="st">"1.0"</span> encoding=<span class="st">"UTF-8"</span>?<span class="op">&gt;</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true"></a><span class="er">&lt;</span>gexf xmlns=<span class="st">"http://www.gexf.net/1.3"</span> xmlns<span class="op">:</span>viz=<span class="st">"http://www.gexf.net/1.3/viz"</span> xmlns<span class="op">:</span>xsi=<span class="st">"http://www.w3.org/2001/XMLSchema-instance"</span> xsi<span class="op">:</span>schemaLocation=<span class="st">"http://www.gexf.net/1.3 http://www.gexf.net/1.3/gexf.xsd"</span> version=<span class="st">"1.3"</span><span class="op">&gt;</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true"></a><span class="st">  </span><span class="er">&lt;</span>meta lastmodifieddate=<span class="st">"2024-06-27"</span><span class="op">&gt;</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true"></a><span class="st">    </span><span class="er">&lt;</span>creator<span class="op">&gt;</span>NodosChile<span class="op">&lt;</span><span class="er">/</span>creator<span class="op">&gt;</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true"></a><span class="st">    </span><span class="er">&lt;</span>description<span class="op">&gt;</span>A GEXF file written <span class="cf">in</span> R with <span class="st">"rgexf"</span><span class="op">&lt;</span><span class="er">/</span>description<span class="op">&gt;</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true"></a><span class="st">    </span><span class="er">&lt;</span>keywords<span class="op">&gt;</span>GEXF, NodosChile, R, rgexf, Gephi<span class="op">&lt;</span><span class="er">/</span>keywords<span class="op">&gt;</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true"></a><span class="st">  </span><span class="er">&lt;/</span>meta<span class="op">&gt;</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true"></a><span class="st">  </span><span class="er">&lt;</span>graph mode=<span class="st">"static"</span> defaultedgetype=<span class="st">"undirected"</span><span class="op">&gt;</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true"></a><span class="st">    </span><span class="er">&lt;</span>nodes<span class="op">&gt;</span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true"></a><span class="st">      </span><span class="er">&lt;</span>node id=<span class="st">"1"</span> label=<span class="st">"juan"</span><span class="op">&gt;</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true"></a><span class="st">        </span><span class="er">&lt;</span>viz<span class="op">:</span>color r=<span class="st">"255"</span> g=<span class="st">"99"</span> b=<span class="st">"71"</span> a=<span class="st">"1"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true"></a><span class="st">        </span><span class="er">&lt;</span>viz<span class="op">:</span>position x=<span class="st">"207.823406044901"</span> y=<span class="st">"-250"</span> z=<span class="st">"0"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true"></a><span class="st">        </span><span class="er">&lt;</span>viz<span class="op">:</span>size value=<span class="st">"125"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true"></a><span class="st">      </span><span class="er">&lt;/</span>node<span class="op">&gt;</span></span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true"></a><span class="st">      </span><span class="er">&lt;</span>node id=<span class="st">"2"</span> label=<span class="st">"pedro"</span><span class="op">&gt;</span></span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true"></a><span class="st">        </span><span class="er">&lt;</span>viz<span class="op">:</span>color r=<span class="st">"255"</span> g=<span class="st">"99"</span> b=<span class="st">"71"</span> a=<span class="st">"1"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true"></a><span class="st">        </span><span class="er">&lt;</span>viz<span class="op">:</span>position x=<span class="st">"27.58936735975"</span> y=<span class="st">"-79.259204816163"</span> z=<span class="st">"0"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true"></a><span class="st">        </span><span class="er">&lt;</span>viz<span class="op">:</span>size value=<span class="st">"125"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true"></a><span class="st">      </span><span class="er">&lt;/</span>node<span class="op">&gt;</span></span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true"></a><span class="st">      </span><span class="er">&lt;</span>node id=<span class="st">"3"</span> label=<span class="st">"matthew"</span><span class="op">&gt;</span></span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true"></a><span class="st">        </span><span class="er">&lt;</span>viz<span class="op">:</span>color r=<span class="st">"255"</span> g=<span class="st">"99"</span> b=<span class="st">"71"</span> a=<span class="st">"1"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb17-22"><a href="#cb17-22" aria-hidden="true"></a><span class="st">        </span><span class="er">&lt;</span>viz<span class="op">:</span>position x=<span class="st">"-250"</span> y=<span class="st">"250"</span> z=<span class="st">"0"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb17-23"><a href="#cb17-23" aria-hidden="true"></a><span class="st">        </span><span class="er">&lt;</span>viz<span class="op">:</span>size value=<span class="st">"125"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb17-24"><a href="#cb17-24" aria-hidden="true"></a><span class="st">      </span><span class="er">&lt;/</span>node<span class="op">&gt;</span></span>
+<span id="cb17-25"><a href="#cb17-25" aria-hidden="true"></a><span class="st">      </span><span class="er">&lt;</span>node id=<span class="st">"4"</span> label=<span class="st">"carlos"</span><span class="op">&gt;</span></span>
+<span id="cb17-26"><a href="#cb17-26" aria-hidden="true"></a><span class="st">        </span><span class="er">&lt;</span>viz<span class="op">:</span>color r=<span class="st">"255"</span> g=<span class="st">"99"</span> b=<span class="st">"71"</span> a=<span class="st">"1"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb17-27"><a href="#cb17-27" aria-hidden="true"></a><span class="st">        </span><span class="er">&lt;</span>viz<span class="op">:</span>position x=<span class="st">"250"</span> y=<span class="st">"-77.7281354571419"</span> z=<span class="st">"0"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb17-28"><a href="#cb17-28" aria-hidden="true"></a><span class="st">        </span><span class="er">&lt;</span>viz<span class="op">:</span>size value=<span class="st">"125"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb17-29"><a href="#cb17-29" aria-hidden="true"></a><span class="st">      </span><span class="er">&lt;/</span>node<span class="op">&gt;</span></span>
+<span id="cb17-30"><a href="#cb17-30" aria-hidden="true"></a><span class="st">    </span><span class="er">&lt;/</span>nodes<span class="op">&gt;</span></span>
+<span id="cb17-31"><a href="#cb17-31" aria-hidden="true"></a><span class="st">    </span><span class="er">&lt;</span>edges<span class="op">&gt;</span></span>
+<span id="cb17-32"><a href="#cb17-32" aria-hidden="true"></a><span class="st">      </span><span class="er">&lt;</span>edge id=<span class="st">"0"</span> source=<span class="st">"1"</span> target=<span class="st">"4"</span> weight=<span class="st">"1"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb17-33"><a href="#cb17-33" aria-hidden="true"></a><span class="st">      </span><span class="er">&lt;</span>edge id=<span class="st">"1"</span> source=<span class="st">"1"</span> target=<span class="st">"2"</span> weight=<span class="st">"1"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb17-34"><a href="#cb17-34" aria-hidden="true"></a><span class="st">      </span><span class="er">&lt;</span>edge id=<span class="st">"2"</span> source=<span class="st">"1"</span> target=<span class="st">"3"</span> weight=<span class="st">"1"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb17-35"><a href="#cb17-35" aria-hidden="true"></a><span class="st">      </span><span class="er">&lt;</span>edge id=<span class="st">"3"</span> source=<span class="st">"2"</span> target=<span class="st">"3"</span> weight=<span class="st">"1"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb17-36"><a href="#cb17-36" aria-hidden="true"></a><span class="st">      </span><span class="er">&lt;</span>edge id=<span class="st">"4"</span> source=<span class="st">"3"</span> target=<span class="st">"4"</span> weight=<span class="st">"1"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb17-37"><a href="#cb17-37" aria-hidden="true"></a><span class="st">      </span><span class="er">&lt;</span>edge id=<span class="st">"5"</span> source=<span class="st">"4"</span> target=<span class="st">"2"</span> weight=<span class="st">"1"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb17-38"><a href="#cb17-38" aria-hidden="true"></a><span class="st">    </span><span class="er">&lt;/</span>edges<span class="op">&gt;</span></span>
+<span id="cb17-39"><a href="#cb17-39" aria-hidden="true"></a><span class="st">  </span><span class="er">&lt;/</span>graph<span class="op">&gt;</span></span>
+<span id="cb17-40"><a href="#cb17-40" aria-hidden="true"></a><span class="er">&lt;/</span>gexf<span class="op">&gt;</span></span>
+<span id="cb17-41"><a href="#cb17-41" aria-hidden="true"></a><span class="st"> </span></span></code></pre></div>
+</div>
+<div id="example-3-dynamic-net" class="section level2">
+<h2 class="hasAnchor">
+<a href="#example-3-dynamic-net" class="anchor"></a>Example 3: Dynamic net</h2>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Defining the dynamic structure, note that there are some nodes that have NA at the end.</span>
+<span class="va">time</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">10.0</span>,<span class="fl">13.0</span>,<span class="fl">2.0</span>,<span class="fl">2.0</span>,<span class="fl">12.0</span>,<span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="cn">NA</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span>, nrow<span class="op">=</span><span class="fl">4</span>, ncol<span class="op">=</span><span class="fl">2</span><span class="op">)</span>
+<span class="va">time</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true"></a>     [,<span class="dv">1</span>] [,<span class="dv">2</span>]</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true"></a>[<span class="dv">1</span>,]   <span class="dv">10</span>   <span class="dv">12</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true"></a>[<span class="dv">2</span>,]   <span class="dv">13</span>   <span class="ot">NA</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true"></a>[<span class="dv">3</span>,]    <span class="dv">2</span>   <span class="ot">NA</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true"></a>[<span class="dv">4</span>,]    <span class="dv">2</span>   <span class="ot">NA</span></span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Getting things done</span>
+<span class="fu"><a href="reference/gexf-class.html">write.gexf</a></span><span class="op">(</span><span class="va">people</span>, <span class="va">relations</span>, nodeDynamic<span class="op">=</span><span class="va">time</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true"></a><span class="op">&lt;</span>?xml version=<span class="st">"1.0"</span> encoding=<span class="st">"UTF-8"</span>?<span class="op">&gt;</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true"></a><span class="er">&lt;</span>gexf xmlns=<span class="st">"http://www.gexf.net/1.3"</span> xmlns<span class="op">:</span>viz=<span class="st">"http://www.gexf.net/1.3/viz"</span> xmlns<span class="op">:</span>xsi=<span class="st">"http://www.w3.org/2001/XMLSchema-instance"</span> xsi<span class="op">:</span>schemaLocation=<span class="st">"http://www.gexf.net/1.3 http://www.gexf.net/1.3/gexf.xsd"</span> version=<span class="st">"1.3"</span><span class="op">&gt;</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true"></a><span class="st">  </span><span class="er">&lt;</span>meta lastmodifieddate=<span class="st">"2024-06-27"</span><span class="op">&gt;</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true"></a><span class="st">    </span><span class="er">&lt;</span>creator<span class="op">&gt;</span>NodosChile<span class="op">&lt;</span><span class="er">/</span>creator<span class="op">&gt;</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true"></a><span class="st">    </span><span class="er">&lt;</span>description<span class="op">&gt;</span>A GEXF file written <span class="cf">in</span> R with <span class="st">"rgexf"</span><span class="op">&lt;</span><span class="er">/</span>description<span class="op">&gt;</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true"></a><span class="st">    </span><span class="er">&lt;</span>keywords<span class="op">&gt;</span>GEXF, NodosChile, R, rgexf, Gephi<span class="op">&lt;</span><span class="er">/</span>keywords<span class="op">&gt;</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true"></a><span class="st">  </span><span class="er">&lt;/</span>meta<span class="op">&gt;</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true"></a><span class="st">  </span><span class="er">&lt;</span>graph mode=<span class="st">"dynamic"</span> start=<span class="st">"2"</span> end=<span class="st">"13"</span> timeformat=<span class="st">"double"</span> defaultedgetype=<span class="st">"undirected"</span><span class="op">&gt;</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true"></a><span class="st">    </span><span class="er">&lt;</span>nodes<span class="op">&gt;</span></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true"></a><span class="st">      </span><span class="er">&lt;</span>node id=<span class="st">"1"</span> label=<span class="st">"juan"</span> start=<span class="st">"10"</span> end=<span class="st">"12"</span><span class="op">&gt;</span></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true"></a><span class="st">        </span><span class="er">&lt;</span>viz<span class="op">:</span>color r=<span class="st">"255"</span> g=<span class="st">"99"</span> b=<span class="st">"71"</span> a=<span class="st">"1"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true"></a><span class="st">        </span><span class="er">&lt;</span>viz<span class="op">:</span>position x=<span class="st">"250"</span> y=<span class="st">"161.355451223666"</span> z=<span class="st">"0"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true"></a><span class="st">        </span><span class="er">&lt;</span>viz<span class="op">:</span>size value=<span class="st">"125"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true"></a><span class="st">      </span><span class="er">&lt;/</span>node<span class="op">&gt;</span></span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true"></a><span class="st">      </span><span class="er">&lt;</span>node id=<span class="st">"2"</span> label=<span class="st">"pedro"</span> start=<span class="st">"13"</span> end=<span class="st">"13"</span><span class="op">&gt;</span></span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true"></a><span class="st">        </span><span class="er">&lt;</span>viz<span class="op">:</span>color r=<span class="st">"255"</span> g=<span class="st">"99"</span> b=<span class="st">"71"</span> a=<span class="st">"1"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true"></a><span class="st">        </span><span class="er">&lt;</span>viz<span class="op">:</span>position x=<span class="st">"-250"</span> y=<span class="st">"-250"</span> z=<span class="st">"0"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb21-18"><a href="#cb21-18" aria-hidden="true"></a><span class="st">        </span><span class="er">&lt;</span>viz<span class="op">:</span>size value=<span class="st">"125"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb21-19"><a href="#cb21-19" aria-hidden="true"></a><span class="st">      </span><span class="er">&lt;/</span>node<span class="op">&gt;</span></span>
+<span id="cb21-20"><a href="#cb21-20" aria-hidden="true"></a><span class="st">      </span><span class="er">&lt;</span>node id=<span class="st">"3"</span> label=<span class="st">"matthew"</span> start=<span class="st">"2"</span> end=<span class="st">"13"</span><span class="op">&gt;</span></span>
+<span id="cb21-21"><a href="#cb21-21" aria-hidden="true"></a><span class="st">        </span><span class="er">&lt;</span>viz<span class="op">:</span>color r=<span class="st">"255"</span> g=<span class="st">"99"</span> b=<span class="st">"71"</span> a=<span class="st">"1"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb21-22"><a href="#cb21-22" aria-hidden="true"></a><span class="st">        </span><span class="er">&lt;</span>viz<span class="op">:</span>position x=<span class="st">"146.732254519786"</span> y=<span class="st">"250"</span> z=<span class="st">"0"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb21-23"><a href="#cb21-23" aria-hidden="true"></a><span class="st">        </span><span class="er">&lt;</span>viz<span class="op">:</span>size value=<span class="st">"125"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb21-24"><a href="#cb21-24" aria-hidden="true"></a><span class="st">      </span><span class="er">&lt;/</span>node<span class="op">&gt;</span></span>
+<span id="cb21-25"><a href="#cb21-25" aria-hidden="true"></a><span class="st">      </span><span class="er">&lt;</span>node id=<span class="st">"4"</span> label=<span class="st">"carlos"</span> start=<span class="st">"2"</span> end=<span class="st">"13"</span><span class="op">&gt;</span></span>
+<span id="cb21-26"><a href="#cb21-26" aria-hidden="true"></a><span class="st">        </span><span class="er">&lt;</span>viz<span class="op">:</span>color r=<span class="st">"255"</span> g=<span class="st">"99"</span> b=<span class="st">"71"</span> a=<span class="st">"1"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb21-27"><a href="#cb21-27" aria-hidden="true"></a><span class="st">        </span><span class="er">&lt;</span>viz<span class="op">:</span>position x=<span class="st">"-68.9283783197972"</span> y=<span class="st">"-33.586965271704"</span> z=<span class="st">"0"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb21-28"><a href="#cb21-28" aria-hidden="true"></a><span class="st">        </span><span class="er">&lt;</span>viz<span class="op">:</span>size value=<span class="st">"125"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb21-29"><a href="#cb21-29" aria-hidden="true"></a><span class="st">      </span><span class="er">&lt;/</span>node<span class="op">&gt;</span></span>
+<span id="cb21-30"><a href="#cb21-30" aria-hidden="true"></a><span class="st">    </span><span class="er">&lt;/</span>nodes<span class="op">&gt;</span></span>
+<span id="cb21-31"><a href="#cb21-31" aria-hidden="true"></a><span class="st">    </span><span class="er">&lt;</span>edges<span class="op">&gt;</span></span>
+<span id="cb21-32"><a href="#cb21-32" aria-hidden="true"></a><span class="st">      </span><span class="er">&lt;</span>edge id=<span class="st">"0"</span> source=<span class="st">"1"</span> target=<span class="st">"4"</span> weight=<span class="st">"1"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb21-33"><a href="#cb21-33" aria-hidden="true"></a><span class="st">      </span><span class="er">&lt;</span>edge id=<span class="st">"1"</span> source=<span class="st">"1"</span> target=<span class="st">"2"</span> weight=<span class="st">"1"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb21-34"><a href="#cb21-34" aria-hidden="true"></a><span class="st">      </span><span class="er">&lt;</span>edge id=<span class="st">"2"</span> source=<span class="st">"1"</span> target=<span class="st">"3"</span> weight=<span class="st">"1"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb21-35"><a href="#cb21-35" aria-hidden="true"></a><span class="st">      </span><span class="er">&lt;</span>edge id=<span class="st">"3"</span> source=<span class="st">"2"</span> target=<span class="st">"3"</span> weight=<span class="st">"1"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb21-36"><a href="#cb21-36" aria-hidden="true"></a><span class="st">      </span><span class="er">&lt;</span>edge id=<span class="st">"4"</span> source=<span class="st">"3"</span> target=<span class="st">"4"</span> weight=<span class="st">"1"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb21-37"><a href="#cb21-37" aria-hidden="true"></a><span class="st">      </span><span class="er">&lt;</span>edge id=<span class="st">"5"</span> source=<span class="st">"4"</span> target=<span class="st">"2"</span> weight=<span class="st">"1"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb21-38"><a href="#cb21-38" aria-hidden="true"></a><span class="st">    </span><span class="er">&lt;/</span>edges<span class="op">&gt;</span></span>
+<span id="cb21-39"><a href="#cb21-39" aria-hidden="true"></a><span class="st">  </span><span class="er">&lt;/</span>graph<span class="op">&gt;</span></span>
+<span id="cb21-40"><a href="#cb21-40" aria-hidden="true"></a><span class="er">&lt;/</span>gexf<span class="op">&gt;</span></span>
+<span id="cb21-41"><a href="#cb21-41" aria-hidden="true"></a><span class="st"> </span></span></code></pre></div>
+</div>
+<div id="example-4-more-complex-dynamic-graph-with-attributes-both-for-nodes-and-edges" class="section level2">
+<h2 class="hasAnchor">
+<a href="#example-4-more-complex-dynamic-graph-with-attributes-both-for-nodes-and-edges" class="anchor"></a>Example 4: More complex… Dynamic graph with attributes both for nodes and edges</h2>
+<p>First, we define dynamics</p>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">time.nodes</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">10.0</span>,<span class="fl">13.0</span>,<span class="fl">2.0</span>,<span class="fl">2.0</span>,<span class="fl">12.0</span>,<span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="cn">NA</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span>, nrow<span class="op">=</span><span class="fl">4</span>, ncol<span class="op">=</span><span class="fl">2</span><span class="op">)</span>
+<span class="va">time.nodes</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true"></a>     [,<span class="dv">1</span>] [,<span class="dv">2</span>]</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true"></a>[<span class="dv">1</span>,]   <span class="dv">10</span>   <span class="dv">12</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true"></a>[<span class="dv">2</span>,]   <span class="dv">13</span>   <span class="ot">NA</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true"></a>[<span class="dv">3</span>,]    <span class="dv">2</span>   <span class="ot">NA</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true"></a>[<span class="dv">4</span>,]    <span class="dv">2</span>   <span class="ot">NA</span></span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">time.edges</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">10.0</span>,<span class="fl">13.0</span>,<span class="fl">2.0</span>,<span class="fl">2.0</span>,<span class="fl">12.0</span>,<span class="fl">1</span>,<span class="fl">5</span>,<span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="cn">NA</span>,<span class="fl">5</span><span class="op">)</span><span class="op">)</span>, nrow<span class="op">=</span><span class="fl">6</span>, ncol<span class="op">=</span><span class="fl">2</span><span class="op">)</span>
+<span class="va">time.edges</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true"></a>     [,<span class="dv">1</span>] [,<span class="dv">2</span>]</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true"></a>[<span class="dv">1</span>,]   <span class="dv">10</span>    <span class="dv">5</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true"></a>[<span class="dv">2</span>,]   <span class="dv">13</span>   <span class="ot">NA</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true"></a>[<span class="dv">3</span>,]    <span class="dv">2</span>   <span class="ot">NA</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true"></a>[<span class="dv">4</span>,]    <span class="dv">2</span>   <span class="ot">NA</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true"></a>[<span class="dv">5</span>,]   <span class="dv">12</span>   <span class="ot">NA</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true"></a>[<span class="dv">6</span>,]    <span class="dv">1</span>   <span class="ot">NA</span></span></code></pre></div>
+<p>Now we define the attribute values</p>
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Defining a data frame of attributes for nodes and edges</span>
+<span class="va">node.att</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>letrafavorita<span class="op">=</span><span class="va">letters</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span>, numbers<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span>, stringsAsFactors<span class="op">=</span><span class="cn">F</span><span class="op">)</span>
+<span class="va">node.att</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true"></a>  letrafavorita numbers</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true"></a><span class="dv">1</span>             a       <span class="dv">1</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true"></a><span class="dv">2</span>             b       <span class="dv">2</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true"></a><span class="dv">3</span>             c       <span class="dv">3</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true"></a><span class="dv">4</span>             d       <span class="dv">4</span></span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">edge.att</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>letrafavorita<span class="op">=</span><span class="va">letters</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">6</span><span class="op">]</span>, numbers<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">6</span>, stringsAsFactors<span class="op">=</span><span class="cn">F</span><span class="op">)</span>
+<span class="va">edge.att</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true"></a>  letrafavorita numbers</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true"></a><span class="dv">1</span>             a       <span class="dv">1</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true"></a><span class="dv">2</span>             b       <span class="dv">2</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true"></a><span class="dv">3</span>             c       <span class="dv">3</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true"></a><span class="dv">4</span>             d       <span class="dv">4</span></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true"></a><span class="dv">5</span>             e       <span class="dv">5</span></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true"></a><span class="dv">6</span>             f       <span class="dv">6</span></span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Getting the things done</span>
+<span class="fu"><a href="reference/gexf-class.html">write.gexf</a></span><span class="op">(</span>nodes<span class="op">=</span><span class="va">people</span>, edges<span class="op">=</span><span class="va">relations</span>, edgeDynamic<span class="op">=</span><span class="va">time.edges</span>,
+           edgesAtt<span class="op">=</span><span class="va">edge.att</span>, nodeDynamic<span class="op">=</span><span class="va">time.nodes</span>, nodesAtt<span class="op">=</span><span class="va">node.att</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true"></a><span class="op">&lt;</span>?xml version=<span class="st">"1.0"</span> encoding=<span class="st">"UTF-8"</span>?<span class="op">&gt;</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true"></a><span class="er">&lt;</span>gexf xmlns=<span class="st">"http://www.gexf.net/1.3"</span> xmlns<span class="op">:</span>viz=<span class="st">"http://www.gexf.net/1.3/viz"</span> xmlns<span class="op">:</span>xsi=<span class="st">"http://www.w3.org/2001/XMLSchema-instance"</span> xsi<span class="op">:</span>schemaLocation=<span class="st">"http://www.gexf.net/1.3 http://www.gexf.net/1.3/gexf.xsd"</span> version=<span class="st">"1.3"</span><span class="op">&gt;</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true"></a><span class="st">  </span><span class="er">&lt;</span>meta lastmodifieddate=<span class="st">"2024-06-27"</span><span class="op">&gt;</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true"></a><span class="st">    </span><span class="er">&lt;</span>creator<span class="op">&gt;</span>NodosChile<span class="op">&lt;</span><span class="er">/</span>creator<span class="op">&gt;</span></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true"></a><span class="st">    </span><span class="er">&lt;</span>description<span class="op">&gt;</span>A GEXF file written <span class="cf">in</span> R with <span class="st">"rgexf"</span><span class="op">&lt;</span><span class="er">/</span>description<span class="op">&gt;</span></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true"></a><span class="st">    </span><span class="er">&lt;</span>keywords<span class="op">&gt;</span>GEXF, NodosChile, R, rgexf, Gephi<span class="op">&lt;</span><span class="er">/</span>keywords<span class="op">&gt;</span></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true"></a><span class="st">  </span><span class="er">&lt;/</span>meta<span class="op">&gt;</span></span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true"></a><span class="st">  </span><span class="er">&lt;</span>graph mode=<span class="st">"dynamic"</span> start=<span class="st">"1"</span> end=<span class="st">"13"</span> timeformat=<span class="st">"double"</span> defaultedgetype=<span class="st">"undirected"</span><span class="op">&gt;</span></span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true"></a><span class="st">    </span><span class="er">&lt;</span>attributes class=<span class="st">"node"</span> mode=<span class="st">"static"</span><span class="op">&gt;</span></span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true"></a><span class="st">      </span><span class="er">&lt;</span>attribute id=<span class="st">"att1"</span> title=<span class="st">"letrafavorita"</span> type=<span class="st">"string"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true"></a><span class="st">      </span><span class="er">&lt;</span>attribute id=<span class="st">"att2"</span> title=<span class="st">"numbers"</span> type=<span class="st">"integer"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true"></a><span class="st">    </span><span class="er">&lt;/</span>attributes<span class="op">&gt;</span></span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true"></a><span class="st">    </span><span class="er">&lt;</span>attributes class=<span class="st">"edge"</span> mode=<span class="st">"static"</span><span class="op">&gt;</span></span>
+<span id="cb31-14"><a href="#cb31-14" aria-hidden="true"></a><span class="st">      </span><span class="er">&lt;</span>attribute id=<span class="st">"att1"</span> title=<span class="st">"letrafavorita"</span> type=<span class="st">"string"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb31-15"><a href="#cb31-15" aria-hidden="true"></a><span class="st">      </span><span class="er">&lt;</span>attribute id=<span class="st">"att2"</span> title=<span class="st">"numbers"</span> type=<span class="st">"integer"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb31-16"><a href="#cb31-16" aria-hidden="true"></a><span class="st">    </span><span class="er">&lt;/</span>attributes<span class="op">&gt;</span></span>
+<span id="cb31-17"><a href="#cb31-17" aria-hidden="true"></a><span class="st">    </span><span class="er">&lt;</span>nodes<span class="op">&gt;</span></span>
+<span id="cb31-18"><a href="#cb31-18" aria-hidden="true"></a><span class="st">      </span><span class="er">&lt;</span>node id=<span class="st">"1"</span> label=<span class="st">"juan"</span> start=<span class="st">"10"</span> end=<span class="st">"12"</span><span class="op">&gt;</span></span>
+<span id="cb31-19"><a href="#cb31-19" aria-hidden="true"></a><span class="st">        </span><span class="er">&lt;</span>attvalues<span class="op">&gt;</span></span>
+<span id="cb31-20"><a href="#cb31-20" aria-hidden="true"></a><span class="st">          </span><span class="er">&lt;</span>attvalue <span class="cf">for</span>=<span class="st">"att1"</span> value=<span class="st">"a"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb31-21"><a href="#cb31-21" aria-hidden="true"></a><span class="st">          </span><span class="er">&lt;</span>attvalue <span class="cf">for</span>=<span class="st">"att2"</span> value=<span class="st">"1"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb31-22"><a href="#cb31-22" aria-hidden="true"></a><span class="st">        </span><span class="er">&lt;/</span>attvalues<span class="op">&gt;</span></span>
+<span id="cb31-23"><a href="#cb31-23" aria-hidden="true"></a><span class="st">        </span><span class="er">&lt;</span>viz<span class="op">:</span>color r=<span class="st">"255"</span> g=<span class="st">"99"</span> b=<span class="st">"71"</span> a=<span class="st">"1"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb31-24"><a href="#cb31-24" aria-hidden="true"></a><span class="st">        </span><span class="er">&lt;</span>viz<span class="op">:</span>position x=<span class="st">"21.5062608125025"</span> y=<span class="st">"250"</span> z=<span class="st">"0"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb31-25"><a href="#cb31-25" aria-hidden="true"></a><span class="st">        </span><span class="er">&lt;</span>viz<span class="op">:</span>size value=<span class="st">"125"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb31-26"><a href="#cb31-26" aria-hidden="true"></a><span class="st">      </span><span class="er">&lt;/</span>node<span class="op">&gt;</span></span>
+<span id="cb31-27"><a href="#cb31-27" aria-hidden="true"></a><span class="st">      </span><span class="er">&lt;</span>node id=<span class="st">"2"</span> label=<span class="st">"pedro"</span> start=<span class="st">"13"</span> end=<span class="st">"13"</span><span class="op">&gt;</span></span>
+<span id="cb31-28"><a href="#cb31-28" aria-hidden="true"></a><span class="st">        </span><span class="er">&lt;</span>attvalues<span class="op">&gt;</span></span>
+<span id="cb31-29"><a href="#cb31-29" aria-hidden="true"></a><span class="st">          </span><span class="er">&lt;</span>attvalue <span class="cf">for</span>=<span class="st">"att1"</span> value=<span class="st">"b"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb31-30"><a href="#cb31-30" aria-hidden="true"></a><span class="st">          </span><span class="er">&lt;</span>attvalue <span class="cf">for</span>=<span class="st">"att2"</span> value=<span class="st">"2"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb31-31"><a href="#cb31-31" aria-hidden="true"></a><span class="st">        </span><span class="er">&lt;/</span>attvalues<span class="op">&gt;</span></span>
+<span id="cb31-32"><a href="#cb31-32" aria-hidden="true"></a><span class="st">        </span><span class="er">&lt;</span>viz<span class="op">:</span>color r=<span class="st">"255"</span> g=<span class="st">"99"</span> b=<span class="st">"71"</span> a=<span class="st">"1"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb31-33"><a href="#cb31-33" aria-hidden="true"></a><span class="st">        </span><span class="er">&lt;</span>viz<span class="op">:</span>position x=<span class="st">"-61.8592293154941"</span> y=<span class="st">"18.6486560670276"</span> z=<span class="st">"0"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb31-34"><a href="#cb31-34" aria-hidden="true"></a><span class="st">        </span><span class="er">&lt;</span>viz<span class="op">:</span>size value=<span class="st">"125"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb31-35"><a href="#cb31-35" aria-hidden="true"></a><span class="st">      </span><span class="er">&lt;/</span>node<span class="op">&gt;</span></span>
+<span id="cb31-36"><a href="#cb31-36" aria-hidden="true"></a><span class="st">      </span><span class="er">&lt;</span>node id=<span class="st">"3"</span> label=<span class="st">"matthew"</span> start=<span class="st">"2"</span> end=<span class="st">"13"</span><span class="op">&gt;</span></span>
+<span id="cb31-37"><a href="#cb31-37" aria-hidden="true"></a><span class="st">        </span><span class="er">&lt;</span>attvalues<span class="op">&gt;</span></span>
+<span id="cb31-38"><a href="#cb31-38" aria-hidden="true"></a><span class="st">          </span><span class="er">&lt;</span>attvalue <span class="cf">for</span>=<span class="st">"att1"</span> value=<span class="st">"c"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb31-39"><a href="#cb31-39" aria-hidden="true"></a><span class="st">          </span><span class="er">&lt;</span>attvalue <span class="cf">for</span>=<span class="st">"att2"</span> value=<span class="st">"3"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb31-40"><a href="#cb31-40" aria-hidden="true"></a><span class="st">        </span><span class="er">&lt;/</span>attvalues<span class="op">&gt;</span></span>
+<span id="cb31-41"><a href="#cb31-41" aria-hidden="true"></a><span class="st">        </span><span class="er">&lt;</span>viz<span class="op">:</span>color r=<span class="st">"255"</span> g=<span class="st">"99"</span> b=<span class="st">"71"</span> a=<span class="st">"1"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb31-42"><a href="#cb31-42" aria-hidden="true"></a><span class="st">        </span><span class="er">&lt;</span>viz<span class="op">:</span>position x=<span class="st">"-250"</span> y=<span class="st">"-32.3882596227201"</span> z=<span class="st">"0"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb31-43"><a href="#cb31-43" aria-hidden="true"></a><span class="st">        </span><span class="er">&lt;</span>viz<span class="op">:</span>size value=<span class="st">"125"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb31-44"><a href="#cb31-44" aria-hidden="true"></a><span class="st">      </span><span class="er">&lt;/</span>node<span class="op">&gt;</span></span>
+<span id="cb31-45"><a href="#cb31-45" aria-hidden="true"></a><span class="st">      </span><span class="er">&lt;</span>node id=<span class="st">"4"</span> label=<span class="st">"carlos"</span> start=<span class="st">"2"</span> end=<span class="st">"13"</span><span class="op">&gt;</span></span>
+<span id="cb31-46"><a href="#cb31-46" aria-hidden="true"></a><span class="st">        </span><span class="er">&lt;</span>attvalues<span class="op">&gt;</span></span>
+<span id="cb31-47"><a href="#cb31-47" aria-hidden="true"></a><span class="st">          </span><span class="er">&lt;</span>attvalue <span class="cf">for</span>=<span class="st">"att1"</span> value=<span class="st">"d"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb31-48"><a href="#cb31-48" aria-hidden="true"></a><span class="st">          </span><span class="er">&lt;</span>attvalue <span class="cf">for</span>=<span class="st">"att2"</span> value=<span class="st">"4"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb31-49"><a href="#cb31-49" aria-hidden="true"></a><span class="st">        </span><span class="er">&lt;/</span>attvalues<span class="op">&gt;</span></span>
+<span id="cb31-50"><a href="#cb31-50" aria-hidden="true"></a><span class="st">        </span><span class="er">&lt;</span>viz<span class="op">:</span>color r=<span class="st">"255"</span> g=<span class="st">"99"</span> b=<span class="st">"71"</span> a=<span class="st">"1"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb31-51"><a href="#cb31-51" aria-hidden="true"></a><span class="st">        </span><span class="er">&lt;</span>viz<span class="op">:</span>position x=<span class="st">"250"</span> y=<span class="st">"-250"</span> z=<span class="st">"0"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb31-52"><a href="#cb31-52" aria-hidden="true"></a><span class="st">        </span><span class="er">&lt;</span>viz<span class="op">:</span>size value=<span class="st">"125"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb31-53"><a href="#cb31-53" aria-hidden="true"></a><span class="st">      </span><span class="er">&lt;/</span>node<span class="op">&gt;</span></span>
+<span id="cb31-54"><a href="#cb31-54" aria-hidden="true"></a><span class="st">    </span><span class="er">&lt;/</span>nodes<span class="op">&gt;</span></span>
+<span id="cb31-55"><a href="#cb31-55" aria-hidden="true"></a><span class="st">    </span><span class="er">&lt;</span>edges<span class="op">&gt;</span></span>
+<span id="cb31-56"><a href="#cb31-56" aria-hidden="true"></a><span class="st">      </span><span class="er">&lt;</span>edge id=<span class="st">"0"</span> source=<span class="st">"1"</span> target=<span class="st">"4"</span> start=<span class="st">"10"</span> end=<span class="st">"5"</span> weight=<span class="st">"1"</span><span class="op">&gt;</span></span>
+<span id="cb31-57"><a href="#cb31-57" aria-hidden="true"></a><span class="st">        </span><span class="er">&lt;</span>attvalues<span class="op">&gt;</span></span>
+<span id="cb31-58"><a href="#cb31-58" aria-hidden="true"></a><span class="st">          </span><span class="er">&lt;</span>attvalue <span class="cf">for</span>=<span class="st">"att1"</span> value=<span class="st">"a"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb31-59"><a href="#cb31-59" aria-hidden="true"></a><span class="st">          </span><span class="er">&lt;</span>attvalue <span class="cf">for</span>=<span class="st">"att2"</span> value=<span class="st">"1"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb31-60"><a href="#cb31-60" aria-hidden="true"></a><span class="st">        </span><span class="er">&lt;/</span>attvalues<span class="op">&gt;</span></span>
+<span id="cb31-61"><a href="#cb31-61" aria-hidden="true"></a><span class="st">      </span><span class="er">&lt;/</span>edge<span class="op">&gt;</span></span>
+<span id="cb31-62"><a href="#cb31-62" aria-hidden="true"></a><span class="st">      </span><span class="er">&lt;</span>edge id=<span class="st">"1"</span> source=<span class="st">"1"</span> target=<span class="st">"2"</span> start=<span class="st">"13"</span> end=<span class="st">"13"</span> weight=<span class="st">"1"</span><span class="op">&gt;</span></span>
+<span id="cb31-63"><a href="#cb31-63" aria-hidden="true"></a><span class="st">        </span><span class="er">&lt;</span>attvalues<span class="op">&gt;</span></span>
+<span id="cb31-64"><a href="#cb31-64" aria-hidden="true"></a><span class="st">          </span><span class="er">&lt;</span>attvalue <span class="cf">for</span>=<span class="st">"att1"</span> value=<span class="st">"b"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb31-65"><a href="#cb31-65" aria-hidden="true"></a><span class="st">          </span><span class="er">&lt;</span>attvalue <span class="cf">for</span>=<span class="st">"att2"</span> value=<span class="st">"2"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb31-66"><a href="#cb31-66" aria-hidden="true"></a><span class="st">        </span><span class="er">&lt;/</span>attvalues<span class="op">&gt;</span></span>
+<span id="cb31-67"><a href="#cb31-67" aria-hidden="true"></a><span class="st">      </span><span class="er">&lt;/</span>edge<span class="op">&gt;</span></span>
+<span id="cb31-68"><a href="#cb31-68" aria-hidden="true"></a><span class="st">      </span><span class="er">&lt;</span>edge id=<span class="st">"2"</span> source=<span class="st">"1"</span> target=<span class="st">"3"</span> start=<span class="st">"2"</span> end=<span class="st">"13"</span> weight=<span class="st">"1"</span><span class="op">&gt;</span></span>
+<span id="cb31-69"><a href="#cb31-69" aria-hidden="true"></a><span class="st">        </span><span class="er">&lt;</span>attvalues<span class="op">&gt;</span></span>
+<span id="cb31-70"><a href="#cb31-70" aria-hidden="true"></a><span class="st">          </span><span class="er">&lt;</span>attvalue <span class="cf">for</span>=<span class="st">"att1"</span> value=<span class="st">"c"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb31-71"><a href="#cb31-71" aria-hidden="true"></a><span class="st">          </span><span class="er">&lt;</span>attvalue <span class="cf">for</span>=<span class="st">"att2"</span> value=<span class="st">"3"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb31-72"><a href="#cb31-72" aria-hidden="true"></a><span class="st">        </span><span class="er">&lt;/</span>attvalues<span class="op">&gt;</span></span>
+<span id="cb31-73"><a href="#cb31-73" aria-hidden="true"></a><span class="st">      </span><span class="er">&lt;/</span>edge<span class="op">&gt;</span></span>
+<span id="cb31-74"><a href="#cb31-74" aria-hidden="true"></a><span class="st">      </span><span class="er">&lt;</span>edge id=<span class="st">"3"</span> source=<span class="st">"2"</span> target=<span class="st">"3"</span> start=<span class="st">"2"</span> end=<span class="st">"13"</span> weight=<span class="st">"1"</span><span class="op">&gt;</span></span>
+<span id="cb31-75"><a href="#cb31-75" aria-hidden="true"></a><span class="st">        </span><span class="er">&lt;</span>attvalues<span class="op">&gt;</span></span>
+<span id="cb31-76"><a href="#cb31-76" aria-hidden="true"></a><span class="st">          </span><span class="er">&lt;</span>attvalue <span class="cf">for</span>=<span class="st">"att1"</span> value=<span class="st">"d"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb31-77"><a href="#cb31-77" aria-hidden="true"></a><span class="st">          </span><span class="er">&lt;</span>attvalue <span class="cf">for</span>=<span class="st">"att2"</span> value=<span class="st">"4"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb31-78"><a href="#cb31-78" aria-hidden="true"></a><span class="st">        </span><span class="er">&lt;/</span>attvalues<span class="op">&gt;</span></span>
+<span id="cb31-79"><a href="#cb31-79" aria-hidden="true"></a><span class="st">      </span><span class="er">&lt;/</span>edge<span class="op">&gt;</span></span>
+<span id="cb31-80"><a href="#cb31-80" aria-hidden="true"></a><span class="st">      </span><span class="er">&lt;</span>edge id=<span class="st">"4"</span> source=<span class="st">"3"</span> target=<span class="st">"4"</span> start=<span class="st">"12"</span> end=<span class="st">"13"</span> weight=<span class="st">"1"</span><span class="op">&gt;</span></span>
+<span id="cb31-81"><a href="#cb31-81" aria-hidden="true"></a><span class="st">        </span><span class="er">&lt;</span>attvalues<span class="op">&gt;</span></span>
+<span id="cb31-82"><a href="#cb31-82" aria-hidden="true"></a><span class="st">          </span><span class="er">&lt;</span>attvalue <span class="cf">for</span>=<span class="st">"att1"</span> value=<span class="st">"e"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb31-83"><a href="#cb31-83" aria-hidden="true"></a><span class="st">          </span><span class="er">&lt;</span>attvalue <span class="cf">for</span>=<span class="st">"att2"</span> value=<span class="st">"5"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb31-84"><a href="#cb31-84" aria-hidden="true"></a><span class="st">        </span><span class="er">&lt;/</span>attvalues<span class="op">&gt;</span></span>
+<span id="cb31-85"><a href="#cb31-85" aria-hidden="true"></a><span class="st">      </span><span class="er">&lt;/</span>edge<span class="op">&gt;</span></span>
+<span id="cb31-86"><a href="#cb31-86" aria-hidden="true"></a><span class="st">      </span><span class="er">&lt;</span>edge id=<span class="st">"5"</span> source=<span class="st">"4"</span> target=<span class="st">"2"</span> start=<span class="st">"1"</span> end=<span class="st">"13"</span> weight=<span class="st">"1"</span><span class="op">&gt;</span></span>
+<span id="cb31-87"><a href="#cb31-87" aria-hidden="true"></a><span class="st">        </span><span class="er">&lt;</span>attvalues<span class="op">&gt;</span></span>
+<span id="cb31-88"><a href="#cb31-88" aria-hidden="true"></a><span class="st">          </span><span class="er">&lt;</span>attvalue <span class="cf">for</span>=<span class="st">"att1"</span> value=<span class="st">"f"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb31-89"><a href="#cb31-89" aria-hidden="true"></a><span class="st">          </span><span class="er">&lt;</span>attvalue <span class="cf">for</span>=<span class="st">"att2"</span> value=<span class="st">"6"</span><span class="op">/</span><span class="er">&gt;</span></span>
+<span id="cb31-90"><a href="#cb31-90" aria-hidden="true"></a><span class="st">        </span><span class="er">&lt;/</span>attvalues<span class="op">&gt;</span></span>
+<span id="cb31-91"><a href="#cb31-91" aria-hidden="true"></a><span class="st">      </span><span class="er">&lt;/</span>edge<span class="op">&gt;</span></span>
+<span id="cb31-92"><a href="#cb31-92" aria-hidden="true"></a><span class="st">    </span><span class="er">&lt;/</span>edges<span class="op">&gt;</span></span>
+<span id="cb31-93"><a href="#cb31-93" aria-hidden="true"></a><span class="st">  </span><span class="er">&lt;/</span>graph<span class="op">&gt;</span></span>
+<span id="cb31-94"><a href="#cb31-94" aria-hidden="true"></a><span class="er">&lt;/</span>gexf<span class="op">&gt;</span></span>
+<span id="cb31-95"><a href="#cb31-95" aria-hidden="true"></a><span class="st"> </span></span></code></pre></div>
+</div>
+</div>
+<div id="code-of-conduct" class="section level1">
+<h1 class="hasAnchor">
+<a href="#code-of-conduct" class="anchor"></a>Code of Conduct</h1>
+<p>We welcome contributions to <code>rgexf</code>. Whether reporting a bug, starting a discussion by asking a question, or proposing/requesting a new feature, please go by creating a new issue <a href="https://github.com/gvegayon/rgexf/issues">here</a> so that we can talk about it.</p>
+<p>Please note that the rgexf project is released with a <a href="https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms</p>
+</div>
+<div id="session-info" class="section level1">
+<h1 class="hasAnchor">
+<a href="#session-info" class="anchor"></a>Session info</h1>
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">devtools</span><span class="fu">::</span><span class="fu">session_info</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true"></a>─ Session info ───────────────────────────────────────────────────────────────</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true"></a> setting  value</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true"></a> version  R version <span class="dv">4</span>.<span class="fl">4.0</span> (<span class="dv">2024-04-24</span>)</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true"></a> os       Ubuntu <span class="dv">22</span>.<span class="fl">04.4</span> LTS</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true"></a> system   x86_<span class="dv">64</span>, linux<span class="op">-</span>gnu</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true"></a> ui       X11</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true"></a> <span class="kw">language</span> (EN)</span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true"></a> collate  en_US.UTF<span class="dv">-8</span></span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true"></a> ctype    en_US.UTF<span class="dv">-8</span></span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true"></a> tz       America<span class="op">/</span>Denver</span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true"></a> date     <span class="dv">2024-06-27</span></span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true"></a> pandoc   <span class="dv">3</span>.<span class="fl">1.1</span> <span class="op">@</span><span class="st"> </span><span class="er">/</span>usr<span class="op">/</span>bin<span class="op">/</span><span class="st"> </span>(via rmarkdown)</span>
+<span id="cb33-13"><a href="#cb33-13" aria-hidden="true"></a></span>
+<span id="cb33-14"><a href="#cb33-14" aria-hidden="true"></a>─ Packages ───────────────────────────────────────────────────────────────────</span>
+<span id="cb33-15"><a href="#cb33-15" aria-hidden="true"></a> package     <span class="op">*</span><span class="st"> </span>version     <span class="kw">date</span> (UTC) lib source</span>
+<span id="cb33-16"><a href="#cb33-16" aria-hidden="true"></a> cachem        <span class="dv">1</span>.<span class="fl">1.0</span>       <span class="dv">2024-05-16</span> [<span class="dv">2</span>] <span class="kw">RSPM</span> (R <span class="dv">4</span>.<span class="fl">4.0</span>)</span>
+<span id="cb33-17"><a href="#cb33-17" aria-hidden="true"></a> cli           <span class="dv">3</span>.<span class="fl">6.2</span>       <span class="dv">2023-12-11</span> [<span class="dv">2</span>] <span class="kw">RSPM</span> (R <span class="dv">4</span>.<span class="fl">3.0</span>)</span>
+<span id="cb33-18"><a href="#cb33-18" aria-hidden="true"></a> devtools      <span class="dv">2</span>.<span class="fl">4.5</span>       <span class="dv">2022-10-11</span> [<span class="dv">2</span>] <span class="kw">RSPM</span> (R <span class="dv">4</span>.<span class="fl">2.0</span>)</span>
+<span id="cb33-19"><a href="#cb33-19" aria-hidden="true"></a> digest        <span class="dv">0</span>.<span class="fl">6.35</span>      <span class="dv">2024-03-11</span> [<span class="dv">2</span>] <span class="kw">RSPM</span> (R <span class="dv">4</span>.<span class="fl">3.0</span>)</span>
+<span id="cb33-20"><a href="#cb33-20" aria-hidden="true"></a> ellipsis      <span class="dv">0</span>.<span class="fl">3.2</span>       <span class="dv">2021-04-29</span> [<span class="dv">2</span>] <span class="kw">CRAN</span> (R <span class="dv">4</span>.<span class="fl">1.1</span>)</span>
+<span id="cb33-21"><a href="#cb33-21" aria-hidden="true"></a> evaluate      <span class="fl">0.23</span>        <span class="dv">2023-11-01</span> [<span class="dv">2</span>] <span class="kw">RSPM</span> (R <span class="dv">4</span>.<span class="fl">3.0</span>)</span>
+<span id="cb33-22"><a href="#cb33-22" aria-hidden="true"></a> fastmap       <span class="dv">1</span>.<span class="fl">2.0</span>       <span class="dv">2024-05-15</span> [<span class="dv">2</span>] <span class="kw">RSPM</span> (R <span class="dv">4</span>.<span class="fl">4.0</span>)</span>
+<span id="cb33-23"><a href="#cb33-23" aria-hidden="true"></a> fs            <span class="dv">1</span>.<span class="fl">6.4</span>       <span class="dv">2024-04-25</span> [<span class="dv">2</span>] <span class="kw">RSPM</span> (R <span class="dv">4</span>.<span class="fl">3.0</span>)</span>
+<span id="cb33-24"><a href="#cb33-24" aria-hidden="true"></a> glue          <span class="dv">1</span>.<span class="fl">7.0</span>       <span class="dv">2024-01-09</span> [<span class="dv">2</span>] <span class="kw">RSPM</span> (R <span class="dv">4</span>.<span class="fl">3.0</span>)</span>
+<span id="cb33-25"><a href="#cb33-25" aria-hidden="true"></a> htmltools     <span class="dv">0</span>.<span class="dv">5</span>.<span class="fl">8.1</span>     <span class="dv">2024-04-04</span> [<span class="dv">2</span>] <span class="kw">RSPM</span> (R <span class="dv">4</span>.<span class="fl">3.0</span>)</span>
+<span id="cb33-26"><a href="#cb33-26" aria-hidden="true"></a> htmlwidgets   <span class="dv">1</span>.<span class="fl">6.4</span>       <span class="dv">2023-12-06</span> [<span class="dv">2</span>] <span class="kw">RSPM</span> (R <span class="dv">4</span>.<span class="fl">3.0</span>)</span>
+<span id="cb33-27"><a href="#cb33-27" aria-hidden="true"></a> httpuv        <span class="dv">1</span>.<span class="fl">6.15</span>      <span class="dv">2024-03-26</span> [<span class="dv">2</span>] <span class="kw">RSPM</span> (R <span class="dv">4</span>.<span class="fl">3.0</span>)</span>
+<span id="cb33-28"><a href="#cb33-28" aria-hidden="true"></a> igraph      <span class="op">*</span><span class="st"> </span><span class="dv">2</span>.<span class="fl">0.3</span>       <span class="dv">2024-03-13</span> [<span class="dv">1</span>] <span class="kw">CRAN</span> (R <span class="dv">4</span>.<span class="fl">4.0</span>)</span>
+<span id="cb33-29"><a href="#cb33-29" aria-hidden="true"></a> jsonlite      <span class="dv">1</span>.<span class="fl">8.8</span>       <span class="dv">2023-12-04</span> [<span class="dv">2</span>] <span class="kw">RSPM</span> (R <span class="dv">4</span>.<span class="fl">3.0</span>)</span>
+<span id="cb33-30"><a href="#cb33-30" aria-hidden="true"></a> knitr         <span class="fl">1.47</span>        <span class="dv">2024-05-29</span> [<span class="dv">2</span>] <span class="kw">RSPM</span> (R <span class="dv">4</span>.<span class="fl">4.0</span>)</span>
+<span id="cb33-31"><a href="#cb33-31" aria-hidden="true"></a> later         <span class="dv">1</span>.<span class="fl">3.2</span>       <span class="dv">2023-12-06</span> [<span class="dv">2</span>] <span class="kw">RSPM</span> (R <span class="dv">4</span>.<span class="fl">3.0</span>)</span>
+<span id="cb33-32"><a href="#cb33-32" aria-hidden="true"></a> lifecycle     <span class="dv">1</span>.<span class="fl">0.4</span>       <span class="dv">2023-11-07</span> [<span class="dv">2</span>] <span class="kw">RSPM</span> (R <span class="dv">4</span>.<span class="fl">3.0</span>)</span>
+<span id="cb33-33"><a href="#cb33-33" aria-hidden="true"></a> magrittr      <span class="dv">2</span>.<span class="fl">0.3</span>       <span class="dv">2022-03-30</span> [<span class="dv">2</span>] <span class="kw">RSPM</span> (R <span class="dv">4</span>.<span class="fl">2.0</span>)</span>
+<span id="cb33-34"><a href="#cb33-34" aria-hidden="true"></a> memoise       <span class="dv">2</span>.<span class="fl">0.1</span>       <span class="dv">2021-11-26</span> [<span class="dv">2</span>] <span class="kw">RSPM</span> (R <span class="dv">4</span>.<span class="fl">2.0</span>)</span>
+<span id="cb33-35"><a href="#cb33-35" aria-hidden="true"></a> mime          <span class="fl">0.12</span>        <span class="dv">2021-09-28</span> [<span class="dv">2</span>] <span class="kw">RSPM</span> (R <span class="dv">4</span>.<span class="fl">2.0</span>)</span>
+<span id="cb33-36"><a href="#cb33-36" aria-hidden="true"></a> miniUI        <span class="dv">0</span>.<span class="dv">1</span>.<span class="fl">1.1</span>     <span class="dv">2018-05-18</span> [<span class="dv">2</span>] <span class="kw">CRAN</span> (R <span class="dv">4</span>.<span class="fl">0.1</span>)</span>
+<span id="cb33-37"><a href="#cb33-37" aria-hidden="true"></a> pkgbuild      <span class="dv">1</span>.<span class="fl">4.4</span>       <span class="dv">2024-03-17</span> [<span class="dv">2</span>] <span class="kw">RSPM</span> (R <span class="dv">4</span>.<span class="fl">3.0</span>)</span>
+<span id="cb33-38"><a href="#cb33-38" aria-hidden="true"></a> pkgconfig     <span class="dv">2</span>.<span class="fl">0.3</span>       <span class="dv">2019-09-22</span> [<span class="dv">2</span>] <span class="kw">CRAN</span> (R <span class="dv">4</span>.<span class="fl">0.1</span>)</span>
+<span id="cb33-39"><a href="#cb33-39" aria-hidden="true"></a> pkgload       <span class="dv">1</span>.<span class="fl">3.4</span>       <span class="dv">2024-01-16</span> [<span class="dv">2</span>] <span class="kw">RSPM</span> (R <span class="dv">4</span>.<span class="fl">3.2</span>)</span>
+<span id="cb33-40"><a href="#cb33-40" aria-hidden="true"></a> profvis       <span class="dv">0</span>.<span class="fl">3.8</span>       <span class="dv">2023-05-02</span> [<span class="dv">2</span>] <span class="kw">RSPM</span> (R <span class="dv">4</span>.<span class="fl">2.0</span>)</span>
+<span id="cb33-41"><a href="#cb33-41" aria-hidden="true"></a> promises      <span class="dv">1</span>.<span class="fl">3.0</span>       <span class="dv">2024-04-05</span> [<span class="dv">2</span>] <span class="kw">RSPM</span> (R <span class="dv">4</span>.<span class="fl">3.0</span>)</span>
+<span id="cb33-42"><a href="#cb33-42" aria-hidden="true"></a> purrr         <span class="dv">1</span>.<span class="fl">0.2</span>       <span class="dv">2023-08-10</span> [<span class="dv">2</span>] <span class="kw">RSPM</span> (R <span class="dv">4</span>.<span class="fl">2.0</span>)</span>
+<span id="cb33-43"><a href="#cb33-43" aria-hidden="true"></a> R6            <span class="dv">2</span>.<span class="fl">5.1</span>       <span class="dv">2021-08-19</span> [<span class="dv">2</span>] <span class="kw">RSPM</span> (R <span class="dv">4</span>.<span class="fl">2.0</span>)</span>
+<span id="cb33-44"><a href="#cb33-44" aria-hidden="true"></a> Rcpp          <span class="dv">1</span>.<span class="fl">0.12</span>      <span class="dv">2024-01-09</span> [<span class="dv">2</span>] <span class="kw">RSPM</span> (R <span class="dv">4</span>.<span class="fl">3.0</span>)</span>
+<span id="cb33-45"><a href="#cb33-45" aria-hidden="true"></a> remotes       <span class="dv">2</span>.<span class="fl">5.0</span>       <span class="dv">2024-03-17</span> [<span class="dv">2</span>] <span class="kw">RSPM</span> (R <span class="dv">4</span>.<span class="fl">3.0</span>)</span>
+<span id="cb33-46"><a href="#cb33-46" aria-hidden="true"></a> rgexf       <span class="op">*</span><span class="st"> </span><span class="dv">0</span>.<span class="fl">17.0</span>      <span class="dv">2024-06-27</span> [<span class="dv">1</span>] local</span>
+<span id="cb33-47"><a href="#cb33-47" aria-hidden="true"></a> rlang         <span class="dv">1</span>.<span class="fl">1.3</span>       <span class="dv">2024-01-10</span> [<span class="dv">2</span>] <span class="kw">RSPM</span> (R <span class="dv">4</span>.<span class="fl">3.0</span>)</span>
+<span id="cb33-48"><a href="#cb33-48" aria-hidden="true"></a> rmarkdown     <span class="fl">2.27</span>        <span class="dv">2024-05-17</span> [<span class="dv">2</span>] <span class="kw">RSPM</span> (R <span class="dv">4</span>.<span class="fl">4.0</span>)</span>
+<span id="cb33-49"><a href="#cb33-49" aria-hidden="true"></a> servr         <span class="fl">0.30</span>        <span class="dv">2024-03-23</span> [<span class="dv">2</span>] <span class="kw">RSPM</span> (R <span class="dv">4</span>.<span class="fl">3.0</span>)</span>
+<span id="cb33-50"><a href="#cb33-50" aria-hidden="true"></a> sessioninfo   <span class="dv">1</span>.<span class="fl">2.2</span>       <span class="dv">2021-12-06</span> [<span class="dv">2</span>] <span class="kw">RSPM</span> (R <span class="dv">4</span>.<span class="fl">2.0</span>)</span>
+<span id="cb33-51"><a href="#cb33-51" aria-hidden="true"></a> shiny         <span class="dv">1</span>.<span class="dv">8</span>.<span class="fl">1.1</span>     <span class="dv">2024-04-02</span> [<span class="dv">2</span>] <span class="kw">RSPM</span> (R <span class="dv">4</span>.<span class="fl">3.0</span>)</span>
+<span id="cb33-52"><a href="#cb33-52" aria-hidden="true"></a> stringi       <span class="dv">1</span>.<span class="fl">8.4</span>       <span class="dv">2024-05-06</span> [<span class="dv">2</span>] <span class="kw">RSPM</span> (R <span class="dv">4</span>.<span class="fl">4.0</span>)</span>
+<span id="cb33-53"><a href="#cb33-53" aria-hidden="true"></a> stringr       <span class="dv">1</span>.<span class="fl">5.1</span>       <span class="dv">2023-11-14</span> [<span class="dv">2</span>] <span class="kw">RSPM</span> (R <span class="dv">4</span>.<span class="fl">3.0</span>)</span>
+<span id="cb33-54"><a href="#cb33-54" aria-hidden="true"></a> urlchecker    <span class="dv">1</span>.<span class="fl">0.1</span>       <span class="dv">2021-11-30</span> [<span class="dv">2</span>] <span class="kw">RSPM</span> (R <span class="dv">4</span>.<span class="fl">2.0</span>)</span>
+<span id="cb33-55"><a href="#cb33-55" aria-hidden="true"></a> usethis       <span class="dv">2</span>.<span class="fl">2.3</span>       <span class="dv">2024-02-19</span> [<span class="dv">2</span>] <span class="kw">RSPM</span> (R <span class="dv">4</span>.<span class="fl">3.0</span>)</span>
+<span id="cb33-56"><a href="#cb33-56" aria-hidden="true"></a> vctrs         <span class="dv">0</span>.<span class="fl">6.5</span>       <span class="dv">2023-12-01</span> [<span class="dv">2</span>] <span class="kw">RSPM</span> (R <span class="dv">4</span>.<span class="fl">3.0</span>)</span>
+<span id="cb33-57"><a href="#cb33-57" aria-hidden="true"></a> xfun          <span class="fl">0.44</span>        <span class="dv">2024-05-15</span> [<span class="dv">2</span>] <span class="kw">RSPM</span> (R <span class="dv">4</span>.<span class="fl">4.0</span>)</span>
+<span id="cb33-58"><a href="#cb33-58" aria-hidden="true"></a> XML           <span class="fl">3.99</span><span class="dv">-0</span>.<span class="fl">16.1</span> <span class="dv">2024-01-22</span> [<span class="dv">2</span>] <span class="kw">RSPM</span> (R <span class="dv">4</span>.<span class="fl">3.0</span>)</span>
+<span id="cb33-59"><a href="#cb33-59" aria-hidden="true"></a> xtable        <span class="fl">1.8</span><span class="dv">-4</span>       <span class="dv">2019-04-21</span> [<span class="dv">2</span>] <span class="kw">CRAN</span> (R <span class="dv">4</span>.<span class="fl">0.1</span>)</span>
+<span id="cb33-60"><a href="#cb33-60" aria-hidden="true"></a> yaml          <span class="dv">2</span>.<span class="fl">3.8</span>       <span class="dv">2023-12-11</span> [<span class="dv">2</span>] <span class="kw">RSPM</span> (R <span class="dv">4</span>.<span class="fl">3.0</span>)</span>
+<span id="cb33-61"><a href="#cb33-61" aria-hidden="true"></a></span>
+<span id="cb33-62"><a href="#cb33-62" aria-hidden="true"></a> [<span class="dv">1</span>] <span class="op">/</span>usr<span class="op">/</span>local<span class="op">/</span>lib<span class="op">/</span>R<span class="op">/</span>site<span class="op">-</span>library</span>
+<span id="cb33-63"><a href="#cb33-63" aria-hidden="true"></a> [<span class="dv">2</span>] <span class="op">/</span>usr<span class="op">/</span>lib<span class="op">/</span>R<span class="op">/</span>site<span class="op">-</span>library</span>
+<span id="cb33-64"><a href="#cb33-64" aria-hidden="true"></a> [<span class="dv">3</span>] <span class="op">/</span>usr<span class="op">/</span>lib<span class="op">/</span>R<span class="op">/</span>library</span>
+<span id="cb33-65"><a href="#cb33-65" aria-hidden="true"></a></span>
+<span id="cb33-66"><a href="#cb33-66" aria-hidden="true"></a>──────────────────────────────────────────────────────────────────────────────</span></code></pre></div>
+</div>
+
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -121,7 +634,21 @@ Create, read, and write 'GEXF' (Graph Exchange 'XML' Format) graph files (used i
 </ul>
 </div>
 
-  </div>
+  <div class="dev-status">
+<h2>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://cran.r-project.org/package=rgexf"><img src="http://www.r-pkg.org/badges/version/rgexf.png" alt="CRAN_Status_Badge"></a></li>
+<li><a href="https://cran.r-project.org/package=rgexf"><img src="http://cranlogs.r-pkg.org/badges/rgexf?color=brightgreen.png" alt="Downloads"></a></li>
+<li><a href="https://cran.r-project.org/package=rgexf"><img src="https://cranlogs.r-pkg.org/badges/grand-total/rgexf.png" alt="Downloads"></a></li>
+<li><a href="https://github.com/gvegayon/rgexf/actions/workflows/ci.yml"><img src="https://github.com/gvegayon/rgexf/actions/workflows/ci.yml/badge.svg" alt="R CI"></a></li>
+<li><a href="https://github.com/gvegayon/rgexf/actions/workflows/website.yml"><img src="https://github.com/gvegayon/rgexf/actions/workflows/website.yml/badge.svg" alt="rgexf website"></a></li>
+<li><a href="https://ci.appveyor.com/project/gvegayon/rgexf"><img src="https://ci.appveyor.com/api/projects/status/github/gvegayon/rgexf?branch=master&amp;svg=true.png" alt="AppVeyor Build Status"></a></li>
+<li><a href="https://codecov.io/github/gvegayon/rgexf?branch=master"><img src="https://img.shields.io/codecov/c/github/gvegayon/rgexf/master.svg" alt="Coverage Status"></a></li>
+<li><a href="https://doi.org/10.21105/joss.03456"><img src="https://joss.theoj.org/papers/10.21105/joss.03456/status.svg" alt="DOI"></a></li>
+<li><a href="https://github.com/sponsors/gvegayon"><img src="https://img.shields.io/badge/-Sponsor-fafbfc?logo=GitHub%20Sponsors.png" alt="Sponsor"></a></li>
+</ul>
+</div>
+</div>
 </div>
 
 
