@@ -83,7 +83,7 @@ function then starts a webserver using the servr R package." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rgexf</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.17.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.16.3</span>
       </span>
     </div>
 
@@ -287,8 +287,8 @@ will make a call to <code><a href='https://rdrr.io/pkg/servr/man/httd.html'>serv
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Currently, the only languages supported are:
-German (de), English (en), French (fr), Spanish (es), Italian (it), Finnish (fi), Turkish (tr), Greek (el), Dutch (nl)
-.</p>
+German (de), English (en), French (fr), Spanish (es), Italian (it),
+Finnish (fi), Turkish (tr), Greek (el), Dutch (nl)</p>
 <p>An important thing for the user to consider is the fact that the function
 only works if there are <code>viz</code> attributes, this is, color, size, and position.
 If the <a href='gexf-class.html'>gexf</a> object's XML document does not have viz attributes, users can
@@ -300,11 +300,12 @@ use the following hack:</p>
 <span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 </pre><p></div></p>
 <p>More details on this in the <a href='igraph.to.gexf.html'>igraph.to.gexf</a> function.</p>
-<p>The files are copied directly from
-/tmp/Rtmpuc5KMi/temp_libpath17d60007f/rgexf/gexf-js
-. And the
-parameters are set up by modifying the following template file:</p>
-<p>/tmp/Rtmpuc5KMi/temp_libpath17d60007f/rgexf/gexf-js/config.js.template</p>
+<p>The files are copied directly from the path indicated by
+<code><a href='https://rdrr.io/r/base/system.file.html'>system.file("gexf-js", package="rgexf")</a></code>. And the
+parameters are set up by modifying the following template file stored under
+the <code>gexf-js/config.js.template</code> (see the output from
+<code><a href='https://rdrr.io/r/base/system.file.html'>system.file("gexf-js/config.js.template", package="rgexf")</a></code> to see the
+path to the template file).</p>
 <p>The server is lunched if and only if <code>interactive() == TRUE</code>.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
