@@ -1,7 +1,5 @@
 ---
-output:
-  github_document:
-    html_preview: false
+format: gfm
 ---
 
 ```{r include=FALSE}
@@ -21,13 +19,13 @@ knitr::opts_chunk$set(fig.path = "man/figures/", warning = FALSE)
 # rgexf: Build, Import and Export GEXF Graph Files <img src="man/figures/logo.svg" align="right" height="200"/>
 
 The first R package to work with GEXF graph files (used in Gephi and
-others). `rgexf` allows the user to quickly build/read graph files, including:
+others). `rgexf` allows reading and writing graph files, including:
 
 a. Nodes/edges attributes,
 
 b. GEXF viz attributes (such as color, size, and position),
 
-c. Network dynamics (for both edges and nodes, including spells), and
+c. Network dynamics (for both edges and nodes, including spells) and
 
 d. Edges weighting.
 
@@ -47,7 +45,7 @@ More in the [NEWS.md](NEWS.md) file.
 
 # Installation
 
-To install the latest version of `rgexf` you can use `devtools`
+To install the latest version of `rgexf`, you can use `devtools`
 
 ```r
 library(devtools)
@@ -95,15 +93,14 @@ par(op)
 ```
 
 
-Using the `plot.gexf` method--which uses the `gexf-js` JavaScript library--results
-in a Web visualization of the graph, like this:
+Using the `plot.gexf` method--which uses the `gexf-js` JavaScript library--results in a Web visualization of the graph, like this:
 
 ```r
 plot(g)
 ```
 ![](inst/gexf-graphs/lesmiserables.png)
 
-An live version of the figure is available [here](https://gvegayon.github.io/rgexf/lesmiserables/).
+A live version of the figure is available [here](https://gvegayon.github.io/rgexf/lesmiserables/).
 
 ## Example 2: Static net ##
 ```{r}
@@ -141,7 +138,7 @@ write.gexf(people, relations, nodeDynamic=time)
 
 ## Example 4: More complex... Dynamic graph with attributes both for nodes and edges##
 
-First we define dynamics
+First, we define dynamics
 
 ```{r}
 time.nodes<-matrix(c(10.0,13.0,2.0,2.0,12.0,rep(NA,3)), nrow=4, ncol=2)

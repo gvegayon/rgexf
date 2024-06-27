@@ -30,7 +30,7 @@ gexf(
   encoding = "UTF-8",
   vers = "1.3",
   rescale.node.size = TRUE,
-  relsize = max(0.005, 2/nrow(nodes)),
+  relsize = max(0.01, 1/nrow(nodes)),
   radius = 500
 )
 

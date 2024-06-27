@@ -14,7 +14,7 @@ Authors@R: c(
   person("Cornelius", "Fritz", role = "rev", comment = c(what = "JOSS reviewer")),
   person("Jonathan", "Cardoso Silva", role = "rev", comment = c(what = "JOSS reviewer"))
   )
-Description: Create, read, and write 'GEXF' (Graph Exchange 'XML' Format) graph files (used in 'Gephi' and others). Using the 'XML' package, rgexf allows easily build and read graph files, including attributes, 'GEXF' visual attributes (such as color, size, and position), network dynamics (for both edges and nodes), and edges' weights. Users can build/handle graphs element-by-element or massively through data frames, visualize the graph on a web browser through 'gexf-js' (a 'javascript' library), and interact with the 'igraph' package.
+Description: Create, read, and write 'GEXF' (Graph Exchange 'XML' Format) graph files (used in 'Gephi' and others). Using the 'XML' package, rgexf allows reading and writing GEXF files, including attributes, 'GEXF' visual attributes (such as color, size, and position), network dynamics (for both edges and nodes), and edges' weights. Users can build/handle graphs element-by-element or massively through data frames, visualize the graph on a web browser through 'gexf-js' (a 'javascript' library), and interact with the 'igraph' package.
 URL: https://gvegayon.github.io/rgexf/
 BugReports: https://github.com/gvegayon/rgexf/issues
 Imports: 
@@ -25,7 +25,7 @@ Imports:
     servr
 License: MIT + file LICENSE
 LazyLoad: yes
-RoxygenNote: 7.1.1
+RoxygenNote: 7.3.1
 Suggests: knitr,
     rmarkdown,
     tinytest,

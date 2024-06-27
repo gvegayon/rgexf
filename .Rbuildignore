@@ -15,7 +15,7 @@ demo/gexfplot\.R
 ^\.travis\.yml$
 ^appveyor\.yml$
 ^codecov\.yml$
-^README\.Rmd$
+^README\.qmd$
 ^dependencies$
 ^Makefile$
 ^LICENSE\.md$

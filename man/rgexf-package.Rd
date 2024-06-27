@@ -55,4 +55,26 @@ if (interactive()) {
 \item Sigmasj project site: \url{http://sigmajs.org/}
 }
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://gvegayon.github.io/rgexf/}
+  \item Report bugs at \url{https://github.com/gvegayon/rgexf/issues}
+}
+
+}
+\author{
+\strong{Maintainer}: George Vega Yon \email{g.vegayon@gmail.com} (\href{https://orcid.org/0000-0002-3171-0844}{ORCID})
+
+Other contributors:
+\itemize{
+  \item Jorge Fábrega Lacoa [contributor]
+  \item Joshua Kunst [contributor]
+  \item Raphaël Velt (gexf-js library) [copyright holder]
+  \item  Gephi Consortium (GEXF language) [copyright holder]
+  \item Cornelius Fritz (JOSS reviewer) [reviewer]
+  \item Jonathan Cardoso Silva (JOSS reviewer) [reviewer]
+}
+
+}
 \keyword{package}

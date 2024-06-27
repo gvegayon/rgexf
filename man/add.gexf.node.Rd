@@ -113,9 +113,11 @@ time.
 
 We can use spells to indicate windows during which the element is present
 or not. For example, a node that shows up from time 1 to time two and
-re-appears after time four can have two spells:\preformatted{<spell start="1.0" end="2.0">
+re-appears after time four can have two spells:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{<spell start="1.0" end="2.0">
 <spell start="4.0">
-}
+}\if{html}{\out{</div>}}
 
 In the case of the functions \code{add.edge.spell} and \code{add.node.spell}, edges and
 nodes to which you want to add spells should already exist.

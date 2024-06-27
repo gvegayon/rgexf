@@ -604,7 +604,7 @@ gexf <- function(
     
     for (i in colnames(edges)) {
       
-      if (class(edges[[i]]) == "factor")
+      if (inherits(edges[[i]], "factor"))
         edges[[i]] <- as.numeric(edges[[i]])
       
     }
@@ -613,7 +613,7 @@ gexf <- function(
     
     for (i in colnames(edges)) {
       
-      if (class(edges[[i]]) == "factor")
+      if (inherits(edges[[i]], "factor"))
         edges[[i]] <- as.character(edges[[i]])
       
     } 

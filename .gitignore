@@ -16,3 +16,5 @@
 .Rproj.user
 inst/doc
 docs/
+
+/.quarto/

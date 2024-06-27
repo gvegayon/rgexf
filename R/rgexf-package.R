@@ -139,7 +139,6 @@ NULL
 #' 
 #' @name rgexf-package
 #' @aliases rgexf-package rgexf gephi
-#' @docType package
 #' @note See the GEXF primer for details on the GEXF graph format:
 #' \url{https://gephi.org/gexf/1.2draft/gexf-12draft-primer.pdf}
 #' @references \itemize{ \item rgexf project site:
@@ -165,7 +164,7 @@ NULL
 #'     demo(gexfrandom) # A nice routine creating a good looking graph
 #' }
 #' 
-NULL
+"_PACKAGE"
 
 
 
