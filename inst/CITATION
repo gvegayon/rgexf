@@ -1,10 +1,8 @@
 year <- sub("-.*", "", meta$Date)
 note <- sprintf("R package version %s", meta$Version)
 
-citHeader("To cite rgexf in publications use the following paper:")
-
-citEntry(
-  entry  = "Article",
+bibentry(
+  bibtype = "Article",
   title = "Building, Importing, and Exporting GEXF Graph Files with rgexf",
   author = c(
     person("George", "Vega Yon")
@@ -16,7 +14,7 @@ citEntry(
   doi     = "10.21105/joss.03456",
   url     = "https://doi.org/10.21105/joss.03456",
   pages   = "3456",
- textVersion = "Vega Yon, G. G., (2021). Building, Importing, and Exporting GEXF Graph Files with rgexf. Journal of Open Source Software, 6(64), 3456, https://doi.org/10.21105/joss.03456"
+  header  = "To cite rgexf in publications use the following paper:"
 )
 
 bibentry(bibtype = "Manual",

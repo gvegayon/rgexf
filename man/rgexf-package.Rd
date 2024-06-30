@@ -28,7 +28,7 @@ Please visit the project home for more information:
 }
 \note{
 See the GEXF primer for details on the GEXF graph format:
-\url{https://gephi.org/gexf/1.2draft/gexf-12draft-primer.pdf}
+\url{http://gexf.net/1.2draft/gexf-12draft-primer.pdf}
 }
 \examples{
 
@@ -50,9 +50,9 @@ if (interactive()) {
 \references{
 \itemize{ \item rgexf project site:
 \url{https://github.com/gvegayon/rgexf} \item Gephi project site:
-\url{https://gephi.org/} \item GEXF project site: \url{https://gephi.org/gexf/format//}
+\url{https://gephi.org/} \item GEXF project site: \url{http://gexf.net/format//}
 \item gexf-js project website: \url{https://github.com/raphv/gexf-js}
-\item Sigmasj project site: \url{http://sigmajs.org/}
+\item Sigmasj project site: \url{https://www.sigmajs.org/}
 }
 }
 \seealso{

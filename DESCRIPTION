@@ -3,7 +3,6 @@ Type: Package
 Encoding: UTF-8
 Title: Build, Import, and Export GEXF Graph Files
 Version: 0.16.3
-Date: 2024-06-27
 Authors@R: c(
   person("George", "Vega Yon", email="g.vegayon@gmail.com", role=c("aut", "cre"),
   comment = structure("0000-0002-3171-0844", .Names = "ORCID")),
