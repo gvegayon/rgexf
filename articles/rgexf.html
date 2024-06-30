@@ -95,7 +95,7 @@
 <div id="introduction" class="section level1">
 <h1 class="hasAnchor">
 <a href="#introduction" class="anchor"></a>Introduction</h1>
-<p>The <code>rgexf</code> package provides a way to interact with <a href="https://gephi.org/gexf/format/">GEXF files</a>. The GEXF standard was developed by the <a href="https://gephi.org/">Gephi</a>–“Like Photoshop for graphs”–core team, and can be used to save static and dynamic networks.</p>
+<p>The <code>rgexf</code> package provides a way to interact with <a href="http://gexf.net/format/">GEXF files</a>. The GEXF standard was developed by the <a href="https://gephi.org/">Gephi</a>–“Like Photoshop for graphs”–core team, and can be used to save static and dynamic networks.</p>
 <p>With the <code>rgexf</code> package, users can create <code>gexf</code> (R) objects from scratch, import GEXF files, coerce <code>gexf</code> objects into <code>igraph</code> objects, and visualize graphs using the <a href="https://github.com/raphv/gexf-js"><code>gexf-js</code> JavaScript library</a>. In this vignette, we will illustrate how can we (a) import a GEXF file into R and visualize it with <code>igraph,</code> and (b) create a <code>gexf</code> object from scratch.</p>
 </div>
 <div id="reading-gexf-files" class="section level1">
@@ -190,9 +190,9 @@
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">lesmi_ig</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/igraph.to.gexf.html">gexf.to.igraph</a></span><span class="op">(</span><span class="va">lesmi</span><span class="op">)</span>
 <span class="va">lesmi_ig</span></code></pre></div>
-<pre><code>## IGRAPH c04fee4 UNW- 77 254 -- 
+<pre><code>## IGRAPH 1edaa3d UNW- 77 254 -- 
 ## + attr: layout (g/n), name (v/c), color (v/c), size (v/n), weight (e/n)
-## + edges from c04fee4 (vertex names):
+## + edges from 1edaa3d (vertex names):
 ##  [1] Myriel        --Napoleon       Myriel        --MlleBaptistine
 ##  [3] Myriel        --MmeMagloire    MlleBaptistine--MmeMagloire   
 ##  [5] Myriel        --CountessDeLo   Myriel        --Geborand      
@@ -213,7 +213,7 @@
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fu"><a href="../reference/igraph.to.gexf.html">igraph.to.gexf</a></span><span class="op">(</span><span class="va">lesmi_ig</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## &lt;?xml version="1.0" encoding="UTF-8"?&gt;
 ## &lt;gexf xmlns="http://www.gexf.net/1.3" xmlns:viz="http://www.gexf.net/1.3/viz" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.3 http://www.gexf.net/1.3/gexf.xsd" version="1.3"&gt;
-##   &lt;meta lastmodifieddate="2024-06-27"&gt;
+##   &lt;meta lastmodifieddate="2024-06-30"&gt;
 ##     &lt;creator&gt;NodosChile&lt;/creator&gt;
 ##     &lt;description&gt;A GEXF file written in R with "rgexf"&lt;/description&gt;
 ##     &lt;keywords&gt;GEXF, NodosChile, R, rgexf, Gephi&lt;/keywords&gt;
@@ -266,7 +266,7 @@
 <p>Using the <code>plot.gexf</code> method–which uses the <code>gexf-js</code> JavaScript library–results in a Web visualization of the graph, like this:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span></code></pre></div>
-<p><img src="../../../tmp/RtmpfVUJZi/temp_libpath15587f00e/rgexf/gexf-graphs/lesmiserables.png"><!-- --></p>
+<p><img src="../../../tmp/RtmpA9GTai/temp_libpath1830f85a/rgexf/gexf-graphs/lesmiserables.png"><!-- --></p>
 <p>An live version of the figure is available <a href="https://gvegayon.github.io/rgexf/lesmiserables/">here</a>.</p>
 </div>
 <div id="creating-gexf-files" class="section level1">
@@ -346,7 +346,7 @@
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">graph</span><span class="op">)</span></code></pre></div>
 <pre><code>## &lt;?xml version="1.0" encoding="UTF-8"?&gt;
 ## &lt;gexf xmlns="http://www.gexf.net/1.3" xmlns:viz="http://www.gexf.net/1.3/viz" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.3 http://www.gexf.net/1.3/gexf.xsd" version="1.3"&gt;
-##   &lt;meta lastmodifieddate="2024-06-27"&gt;
+##   &lt;meta lastmodifieddate="2024-06-30"&gt;
 ##     &lt;creator&gt;NodosChile&lt;/creator&gt;
 ##     &lt;description&gt;A GEXF file written in R with "rgexf"&lt;/description&gt;
 ##     &lt;keywords&gt;GEXF, NodosChile, R, rgexf, Gephi&lt;/keywords&gt;
