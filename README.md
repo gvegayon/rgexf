@@ -1,14 +1,12 @@
 
 
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/rgexf.png)](https://cran.r-project.org/package=rgexf)
-[![Downloads](http://cranlogs.r-pkg.org/badges/rgexf?color=brightgreen.png)](https://cran.r-project.org/package=rgexf)
+[![Downloads](http://cranlogs.r-pkg.org/badges/rgexf.png)](https://cran.r-project.org/package=rgexf)
 [![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/rgexf.png)](https://cran.r-project.org/package=rgexf)
 [![R
 CI](https://github.com/gvegayon/rgexf/actions/workflows/ci.yml/badge.svg)](https://github.com/gvegayon/rgexf/actions/workflows/ci.yml)
 [![rgexf
 website](https://github.com/gvegayon/rgexf/actions/workflows/website.yml/badge.svg)](https://github.com/gvegayon/rgexf/actions/workflows/website.yml)
-[![AppVeyor Build
-Status](https://ci.appveyor.com/api/projects/status/github/gvegayon/rgexf?branch=master&svg=true.png)](https://ci.appveyor.com/project/gvegayon/rgexf)
 [![Coverage
 Status](https://img.shields.io/codecov/c/github/gvegayon/rgexf/master.svg)](https://app.codecov.io/github/gvegayon/rgexf?branch=master)
 [![DOI](https://joss.theoj.org/papers/10.21105/joss.03456/status.svg)](https://doi.org/10.21105/joss.03456)
@@ -34,8 +32,8 @@ the igraph package.
 
 # Changes in rgexf version 0.16.3 (2024-06-27)
 
--   Dynamically loaded components in the Rd files were removed to comply
-    with new CRAN policies.
+- Dynamically loaded components in the Rd files were removed to comply
+  with new CRAN policies.
 
 More in the [NEWS.md](NEWS.md) file.
 
@@ -60,15 +58,16 @@ citation(package="rgexf")
 
     To cite rgexf in publications use the following paper:
 
-      Vega Yon, G. G., (2021). Building, Importing, and Exporting GEXF
-      Graph Files with rgexf. Journal of Open Source Software, 6(64), 3456,
-      https://doi.org/10.21105/joss.03456
+      Vega Yon G (2021). "Building, Importing, and Exporting GEXF Graph
+      Files with rgexf." _Journal of Open Source Software_, *6*, 3456.
+      doi:10.21105/joss.03456 <https://doi.org/10.21105/joss.03456>,
+      <https://doi.org/10.21105/joss.03456>.
 
     And the actual R package:
 
-      Vega Yon G, Fábrega Lacoa J, Kunst J (2024). _netdiffuseR: Build,
+      Vega Yon G, Fábrega Lacoa J, Kunst J (????). _netdiffuseR: Build,
       Import and Export GEXF Graph Files_. doi:10.5281/zenodo.5182708
-      <https://doi.org/10.5281/zenodo.5182708>, R package version 0.17.0,
+      <https://doi.org/10.5281/zenodo.5182708>, R package version 0.16.3,
       <https://github.com/gvegayon/rgexf>.
 
     To see these entries in BibTeX format, use 'print(<citation>,
@@ -241,7 +240,7 @@ write.gexf(people, relations)
 
     <?xml version="1.0" encoding="UTF-8"?>
     <gexf xmlns="http://www.gexf.net/1.3" xmlns:viz="http://www.gexf.net/1.3/viz" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.3 http://www.gexf.net/1.3/gexf.xsd" version="1.3">
-      <meta lastmodifieddate="2024-06-30">
+      <meta lastmodifieddate="2024-10-18">
         <creator>NodosChile</creator>
         <description>A GEXF file written in R with "rgexf"</description>
         <keywords>GEXF, NodosChile, R, rgexf, Gephi</keywords>
@@ -250,22 +249,22 @@ write.gexf(people, relations)
         <nodes>
           <node id="1" label="juan">
             <viz:color r="255" g="99" b="71" a="1"/>
-            <viz:position x="79.2065507374859" y="-250" z="0"/>
+            <viz:position x="250" y="250" z="0"/>
             <viz:size value="125"/>
           </node>
           <node id="2" label="pedro">
             <viz:color r="255" g="99" b="71" a="1"/>
-            <viz:position x="250" y="91.9438021126364" z="0"/>
+            <viz:position x="-186.698836260964" y="-250" z="0"/>
             <viz:size value="125"/>
           </node>
           <node id="3" label="matthew">
             <viz:color r="255" g="99" b="71" a="1"/>
-            <viz:position x="-79.815764224491" y="250" z="0"/>
+            <viz:position x="58.6345969641703" y="21.0570796040237" z="0"/>
             <viz:size value="125"/>
           </node>
           <node id="4" label="carlos">
             <viz:color r="255" g="99" b="71" a="1"/>
-            <viz:position x="-250" y="194.911331255884" z="0"/>
+            <viz:position x="-250" y="52.1739476510533" z="0"/>
             <viz:size value="125"/>
           </node>
         </nodes>
@@ -302,7 +301,7 @@ write.gexf(people, relations, nodeDynamic=time)
 
     <?xml version="1.0" encoding="UTF-8"?>
     <gexf xmlns="http://www.gexf.net/1.3" xmlns:viz="http://www.gexf.net/1.3/viz" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.3 http://www.gexf.net/1.3/gexf.xsd" version="1.3">
-      <meta lastmodifieddate="2024-06-30">
+      <meta lastmodifieddate="2024-10-18">
         <creator>NodosChile</creator>
         <description>A GEXF file written in R with "rgexf"</description>
         <keywords>GEXF, NodosChile, R, rgexf, Gephi</keywords>
@@ -311,22 +310,22 @@ write.gexf(people, relations, nodeDynamic=time)
         <nodes>
           <node id="1" label="juan" start="10" end="12">
             <viz:color r="255" g="99" b="71" a="1"/>
-            <viz:position x="250" y="250" z="0"/>
+            <viz:position x="170.83225378951" y="250" z="0"/>
             <viz:size value="125"/>
           </node>
           <node id="2" label="pedro" start="13" end="13">
             <viz:color r="255" g="99" b="71" a="1"/>
-            <viz:position x="-250" y="-250" z="0"/>
+            <viz:position x="-185.575718708292" y="99.4676000305198" z="0"/>
             <viz:size value="125"/>
           </node>
           <node id="3" label="matthew" start="2" end="13">
             <viz:color r="255" g="99" b="71" a="1"/>
-            <viz:position x="23.8452238193327" y="113.652288092202" z="0"/>
+            <viz:position x="-250" y="-250" z="0"/>
             <viz:size value="125"/>
           </node>
           <node id="4" label="carlos" start="2" end="13">
             <viz:color r="255" g="99" b="71" a="1"/>
-            <viz:position x="77.7158886485609" y="-219.373757312507" z="0"/>
+            <viz:position x="250" y="223.447267948248" z="0"/>
             <viz:size value="125"/>
           </node>
         </nodes>
@@ -405,7 +404,7 @@ write.gexf(nodes=people, edges=relations, edgeDynamic=time.edges,
 
     <?xml version="1.0" encoding="UTF-8"?>
     <gexf xmlns="http://www.gexf.net/1.3" xmlns:viz="http://www.gexf.net/1.3/viz" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.3 http://www.gexf.net/1.3/gexf.xsd" version="1.3">
-      <meta lastmodifieddate="2024-06-30">
+      <meta lastmodifieddate="2024-10-18">
         <creator>NodosChile</creator>
         <description>A GEXF file written in R with "rgexf"</description>
         <keywords>GEXF, NodosChile, R, rgexf, Gephi</keywords>
@@ -426,7 +425,7 @@ write.gexf(nodes=people, edges=relations, edgeDynamic=time.edges,
               <attvalue for="att2" value="1"/>
             </attvalues>
             <viz:color r="255" g="99" b="71" a="1"/>
-            <viz:position x="250" y="116.263539042396" z="0"/>
+            <viz:position x="54.5768870712791" y="-82.6024016050223" z="0"/>
             <viz:size value="125"/>
           </node>
           <node id="2" label="pedro" start="13" end="13">
@@ -435,7 +434,7 @@ write.gexf(nodes=people, edges=relations, edgeDynamic=time.edges,
               <attvalue for="att2" value="2"/>
             </attvalues>
             <viz:color r="255" g="99" b="71" a="1"/>
-            <viz:position x="-162.569255531004" y="250" z="0"/>
+            <viz:position x="68.6545049832694" y="-19.5303942478532" z="0"/>
             <viz:size value="125"/>
           </node>
           <node id="3" label="matthew" start="2" end="13">
@@ -444,7 +443,7 @@ write.gexf(nodes=people, edges=relations, edgeDynamic=time.edges,
               <attvalue for="att2" value="3"/>
             </attvalues>
             <viz:color r="255" g="99" b="71" a="1"/>
-            <viz:position x="-250" y="-250" z="0"/>
+            <viz:position x="250" y="250" z="0"/>
             <viz:size value="125"/>
           </node>
           <node id="4" label="carlos" start="2" end="13">
@@ -453,7 +452,7 @@ write.gexf(nodes=people, edges=relations, edgeDynamic=time.edges,
               <attvalue for="att2" value="4"/>
             </attvalues>
             <viz:color r="255" g="99" b="71" a="1"/>
-            <viz:position x="142.556872059596" y="89.0845907381178" z="0"/>
+            <viz:position x="-250" y="-250" z="0"/>
             <viz:size value="125"/>
           </node>
         </nodes>
@@ -520,67 +519,66 @@ devtools::session_info()
 
     ─ Session info ───────────────────────────────────────────────────────────────
      setting  value
-     version  R version 4.4.0 (2024-04-24)
-     os       Ubuntu 22.04.4 LTS
-     system   x86_64, linux-gnu
-     ui       X11
+     version  R version 4.4.1 (2024-06-14)
+     os       macOS 15.0.1
+     system   aarch64, darwin23.4.0
+     ui       unknown
      language (EN)
      collate  en_US.UTF-8
      ctype    en_US.UTF-8
      tz       America/Denver
-     date     2024-06-30
-     pandoc   3.1.1 @ /usr/bin/ (via rmarkdown)
+     date     2024-10-18
+     pandoc   3.2.1 @ /opt/homebrew/bin/ (via rmarkdown)
 
     ─ Packages ───────────────────────────────────────────────────────────────────
-     package     * version     date (UTC) lib source
-     cachem        1.1.0       2024-05-16 [2] RSPM (R 4.4.0)
-     cli           3.6.2       2023-12-11 [2] RSPM (R 4.3.0)
-     devtools      2.4.5       2022-10-11 [2] RSPM (R 4.2.0)
-     digest        0.6.35      2024-03-11 [2] RSPM (R 4.3.0)
-     ellipsis      0.3.2       2021-04-29 [2] CRAN (R 4.1.1)
-     evaluate      0.23        2023-11-01 [2] RSPM (R 4.3.0)
-     fastmap       1.2.0       2024-05-15 [2] RSPM (R 4.4.0)
-     fs            1.6.4       2024-04-25 [2] RSPM (R 4.3.0)
-     glue          1.7.0       2024-01-09 [2] RSPM (R 4.3.0)
-     htmltools     0.5.8.1     2024-04-04 [2] RSPM (R 4.3.0)
-     htmlwidgets   1.6.4       2023-12-06 [2] RSPM (R 4.3.0)
-     httpuv        1.6.15      2024-03-26 [2] RSPM (R 4.3.0)
-     igraph      * 2.0.3       2024-03-13 [1] CRAN (R 4.4.0)
-     jsonlite      1.8.8       2023-12-04 [2] RSPM (R 4.3.0)
-     knitr         1.47        2024-05-29 [2] RSPM (R 4.4.0)
-     later         1.3.2       2023-12-06 [2] RSPM (R 4.3.0)
-     lifecycle     1.0.4       2023-11-07 [2] RSPM (R 4.3.0)
-     magrittr      2.0.3       2022-03-30 [2] RSPM (R 4.2.0)
-     memoise       2.0.1       2021-11-26 [2] RSPM (R 4.2.0)
-     mime          0.12        2021-09-28 [2] RSPM (R 4.2.0)
-     miniUI        0.1.1.1     2018-05-18 [2] CRAN (R 4.0.1)
-     pkgbuild      1.4.4       2024-03-17 [2] RSPM (R 4.3.0)
-     pkgconfig     2.0.3       2019-09-22 [2] CRAN (R 4.0.1)
-     pkgload       1.3.4       2024-01-16 [2] RSPM (R 4.3.2)
-     profvis       0.3.8       2023-05-02 [2] RSPM (R 4.2.0)
-     promises      1.3.0       2024-04-05 [2] RSPM (R 4.3.0)
-     purrr         1.0.2       2023-08-10 [2] RSPM (R 4.2.0)
-     R6            2.5.1       2021-08-19 [2] RSPM (R 4.2.0)
-     Rcpp          1.0.12      2024-01-09 [2] RSPM (R 4.3.0)
-     remotes       2.5.0       2024-03-17 [2] RSPM (R 4.3.0)
-     rgexf       * 0.17.0      2024-06-27 [1] local
-     rlang         1.1.3       2024-01-10 [2] RSPM (R 4.3.0)
-     rmarkdown     2.27        2024-05-17 [2] RSPM (R 4.4.0)
-     servr         0.30        2024-03-23 [2] RSPM (R 4.3.0)
-     sessioninfo   1.2.2       2021-12-06 [2] RSPM (R 4.2.0)
-     shiny         1.8.1.1     2024-04-02 [2] RSPM (R 4.3.0)
-     stringi       1.8.4       2024-05-06 [2] RSPM (R 4.4.0)
-     stringr       1.5.1       2023-11-14 [2] RSPM (R 4.3.0)
-     urlchecker    1.0.1       2021-11-30 [2] RSPM (R 4.2.0)
-     usethis       2.2.3       2024-02-19 [2] RSPM (R 4.3.0)
-     vctrs         0.6.5       2023-12-01 [2] RSPM (R 4.3.0)
-     xfun          0.44        2024-05-15 [2] RSPM (R 4.4.0)
-     XML           3.99-0.16.1 2024-01-22 [2] RSPM (R 4.3.0)
-     xtable        1.8-4       2019-04-21 [2] CRAN (R 4.0.1)
-     yaml          2.3.8       2023-12-11 [2] RSPM (R 4.3.0)
+     package     * version   date (UTC) lib source
+     cachem        1.1.0     2024-05-16 [1] CRAN (R 4.4.1)
+     cli           3.6.3     2024-06-21 [1] CRAN (R 4.4.1)
+     devtools      2.4.5     2022-10-11 [1] CRAN (R 4.4.1)
+     digest        0.6.37    2024-08-19 [1] RSPM (R 4.4.1)
+     ellipsis      0.3.2     2021-04-29 [1] CRAN (R 4.4.1)
+     evaluate      1.0.0     2024-09-17 [1] RSPM (R 4.4.1)
+     fastmap       1.2.0     2024-05-15 [1] CRAN (R 4.4.1)
+     fs            1.6.4     2024-04-25 [1] CRAN (R 4.4.1)
+     glue          1.7.0     2024-01-09 [1] CRAN (R 4.4.1)
+     htmltools     0.5.8.1   2024-04-04 [1] CRAN (R 4.4.1)
+     htmlwidgets   1.6.4     2023-12-06 [1] CRAN (R 4.4.1)
+     httpuv        1.6.15    2024-03-26 [1] CRAN (R 4.4.1)
+     igraph      * 2.0.3     2024-03-13 [1] RSPM (R 4.4.1)
+     jsonlite      1.8.9     2024-09-20 [1] RSPM (R 4.4.1)
+     knitr         1.47      2024-05-29 [1] CRAN (R 4.4.1)
+     later         1.3.2     2023-12-06 [1] CRAN (R 4.4.1)
+     lifecycle     1.0.4     2023-11-07 [1] CRAN (R 4.4.1)
+     magrittr      2.0.3     2022-03-30 [1] CRAN (R 4.4.1)
+     memoise       2.0.1     2021-11-26 [1] CRAN (R 4.4.1)
+     mime          0.12      2021-09-28 [1] CRAN (R 4.4.1)
+     miniUI        0.1.1.1   2018-05-18 [1] CRAN (R 4.4.1)
+     pkgbuild      1.4.4     2024-03-17 [1] CRAN (R 4.4.1)
+     pkgconfig     2.0.3     2019-09-22 [1] CRAN (R 4.4.1)
+     pkgload       1.4.0     2024-06-28 [1] CRAN (R 4.4.1)
+     profvis       0.3.8     2023-05-02 [1] CRAN (R 4.4.1)
+     promises      1.3.0     2024-04-05 [1] CRAN (R 4.4.1)
+     purrr         1.0.2     2023-08-10 [1] CRAN (R 4.4.1)
+     R6            2.5.1     2021-08-19 [1] CRAN (R 4.4.1)
+     Rcpp          1.0.13    2024-07-17 [1] RSPM (R 4.4.1)
+     remotes       2.5.0     2024-03-17 [1] CRAN (R 4.4.1)
+     rgexf       * 0.16.3    2024-10-18 [1] local
+     rlang         1.1.4     2024-06-04 [1] CRAN (R 4.4.1)
+     rmarkdown     2.27      2024-05-17 [1] CRAN (R 4.4.1)
+     servr         0.30      2024-03-23 [1] CRAN (R 4.4.1)
+     sessioninfo   1.2.2     2021-12-06 [1] CRAN (R 4.4.1)
+     shiny         1.8.1.1   2024-04-02 [1] CRAN (R 4.4.1)
+     stringi       1.8.4     2024-05-06 [1] CRAN (R 4.4.1)
+     stringr       1.5.1     2023-11-14 [1] CRAN (R 4.4.1)
+     urlchecker    1.0.1     2021-11-30 [1] CRAN (R 4.4.1)
+     usethis       2.2.3     2024-02-19 [1] CRAN (R 4.4.1)
+     vctrs         0.6.5     2023-12-01 [1] CRAN (R 4.4.1)
+     xfun          0.45      2024-06-16 [1] CRAN (R 4.4.1)
+     XML           3.99-0.17 2024-06-25 [1] CRAN (R 4.4.1)
+     xtable        1.8-4     2019-04-21 [1] CRAN (R 4.4.1)
+     yaml          2.3.8     2023-12-11 [1] CRAN (R 4.4.1)
 
-     [1] /usr/local/lib/R/site-library
-     [2] /usr/lib/R/site-library
-     [3] /usr/lib/R/library
+     [1] /opt/homebrew/lib/R/4.4/site-library
+     [2] /opt/homebrew/Cellar/r/4.4.1/lib/R/library
 
     ──────────────────────────────────────────────────────────────────────────────
