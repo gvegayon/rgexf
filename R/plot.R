@@ -257,12 +257,12 @@ gexfjs <- function(
 
 #' @export
 gexfjsOutput <- function(outputId, width = "100%", height = "400px") {
-  shinyWidgetOutput(outputId, "gexfjs", width, height, package = "rgexf")
+  htmlwidgets::shinyWidgetOutput(outputId, "gexfjs", width, height, package = "rgexf")
 }
 #' @export
-gexfjsSigma <- function(expr, env = parent.frame(), quoted = FALSE) {
+renderGexfjs <- function(expr, env = parent.frame(), quoted = FALSE) {
   if (!quoted) { expr <- substitute(expr) } # force quoted
-  shinyRenderWidget(expr, sigmaOutput, env, quoted = TRUE)
+  htmlwidgets::shinyRenderWidget(expr, gexfjsOutput, env, quoted = TRUE)
 }
 
 #' @import htmlwidgets
@@ -292,10 +292,10 @@ test1 <- function(width=NULL, height=NULL) {
 
 #' @export
 test1Output <- function(outputId, width = "100%", height = "400px") {
-  shinyWidgetOutput(outputId, "test1", width, height, package = "rgexf")
+  htmlwidgets::shinyWidgetOutput(outputId, "test1", width, height, package = "rgexf")
 }
 #' @export
 renderTest1 <- function(expr, env = parent.frame(), quoted = FALSE) {
   if (!quoted) { expr <- substitute(expr) } # force quoted
-  shinyRenderWidget(expr, test1Output, env, quoted = TRUE)
+  htmlwidgets::shinyRenderWidget(expr, test1Output, env, quoted = TRUE)
 }
