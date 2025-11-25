@@ -1,9 +1,17 @@
-*.(R|r)proj.user
-*.(R|r)history
-*.(R|r)Data
-*.(R|r)proj
-*.(R|r)buildignore
-.(R|r)proj.user
+*.Rproj.user
+*.rproj.user
+*.Rhistory
+*.rhistory
+.Rhistory
+.rhistory
+*.RData
+*.rdata
+*.Rproj
+*.rproj
+*.Rbuildignore
+*.rbuildignore
+.Rproj.user
+.rproj.user
 *~
 *.gexf
 *.html
@@ -11,7 +19,8 @@
 *.rds
 *.o
 
-*.(R|r)html
+*.Rhtml
+*.rhtml
 *.pdf
 .Rproj.user
 inst/doc
