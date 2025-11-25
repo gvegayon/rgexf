@@ -22,7 +22,6 @@
 *.Rhtml
 *.rhtml
 *.pdf
-.Rproj.user
 inst/doc
 docs/
 
