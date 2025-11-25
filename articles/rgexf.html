@@ -104,12 +104,9 @@
 <p>The <code>rgexf</code> package comes with a network from Les Misérables, which is featured in Gephi. To read GEXF files, we can use the <code>read.gexf</code> function:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Loading rgexf</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://gvegayon.github.io/rgexf/">rgexf</a></span><span class="op">)</span></code></pre></div>
-<pre><code>## Thank you for using rgexf! Please consider citing it in your work.
-## You can find the citation information by running
-##   citation("rgexf")</code></pre>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># Accessing the path of the file</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://gvegayon.github.io/rgexf/">rgexf</a></span><span class="op">)</span>
+
+<span class="co"># Accessing the path of the file</span>
 <span class="va">fn</span>    <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span>
   <span class="st">"gexf-graphs/lesmiserables.gexf"</span>, package <span class="op">=</span> <span class="st">"rgexf"</span>
   <span class="op">)</span>
@@ -190,12 +187,12 @@
 ##   &lt;/graph&gt;
 ## &lt;/gexf&gt;</code></pre>
 <p>Moreover, we can directly plot the graph using the <code>plot.gexf</code> method–through the <code>gexf-js</code> library–or coercing it into an <code>igraph</code> object and use igraph’s plotting engine:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">lesmi_ig</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/igraph.to.gexf.html">gexf.to.igraph</a></span><span class="op">(</span><span class="va">lesmi</span><span class="op">)</span>
 <span class="va">lesmi_ig</span></code></pre></div>
-<pre><code>## IGRAPH cda6190 UNW- 77 254 -- 
+<pre><code>## IGRAPH 80bceee UNW- 77 254 -- 
 ## + attr: layout (g/n), name (v/c), color (v/c), size (v/n), weight (e/n)
-## + edges from cda6190 (vertex names):
+## + edges from 80bceee (vertex names):
 ##  [1] Myriel        --Napoleon       Myriel        --MlleBaptistine
 ##  [3] Myriel        --MmeMagloire    MlleBaptistine--MmeMagloire   
 ##  [5] Myriel        --CountessDeLo   Myriel        --Geborand      
@@ -205,18 +202,18 @@
 ## [13] Valjean       --MmeMagloire    Labarre       --Valjean       
 ## [15] Valjean       --Marguerite     Valjean       --MmeDeR        
 ## + ... omitted several edges</code></pre>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">op</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mai <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span> <span class="co"># For extra space</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">lesmi_ig</span><span class="op">)</span></code></pre></div>
 <p><img src="rgexf_files/figure-html/igraph-plot-1.png" width="672"></p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span><span class="va">op</span><span class="op">)</span></code></pre></div>
 <p>We can also go back:</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fu"><a href="../reference/igraph.to.gexf.html">igraph.to.gexf</a></span><span class="op">(</span><span class="va">lesmi_ig</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## &lt;?xml version="1.0" encoding="UTF-8"?&gt;
 ## &lt;gexf xmlns="http://www.gexf.net/1.3" xmlns:viz="http://www.gexf.net/1.3/viz" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.3 http://www.gexf.net/1.3/gexf.xsd" version="1.3"&gt;
-##   &lt;meta lastmodifieddate="2025-06-09"&gt;
+##   &lt;meta lastmodifieddate="2025-11-25"&gt;
 ##     &lt;creator&gt;NodosChile&lt;/creator&gt;
 ##     &lt;description&gt;A GEXF file written in R with "rgexf"&lt;/description&gt;
 ##     &lt;keywords&gt;GEXF, NodosChile, R, rgexf, Gephi&lt;/keywords&gt;
@@ -267,20 +264,20 @@
 ##   &lt;/graph&gt;
 ## &lt;/gexf&gt;</code></pre>
 <p>Using the <code>plot.gexf</code> method–which uses the <code>gexf-js</code> JavaScript library–results in a Web visualization of the graph, like this:</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span></code></pre></div>
-<p><img src="../../../tmp/RtmpaZ7wPh/temp_libpath17f7b9cb9/rgexf/gexf-graphs/lesmiserables.png"><!-- --></p>
+<p><img src="../../../tmp/Rtmp09ahhh/temp_libpath14ae36fb0/rgexf/gexf-graphs/lesmiserables.png"><!-- --></p>
 <p>An live version of the figure is available <a href="https://gvegayon.github.io/rgexf/lesmiserables/">here</a>.</p>
 </div>
 <div id="creating-gexf-files" class="section level1">
 <h1 class="hasAnchor">
 <a href="#creating-gexf-files" class="anchor"></a>Creating GEXF files</h1>
 <p>This example was extracted directly from the demo “gexfrandom.” Here we create three networks with the same set of vertices and layout, we color them and finalize plotting it with igraph.</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Random graph demo</span>
 <span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">11</span><span class="op">)</span></code></pre></div>
 <p>Creating the vertices:</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Vertex</span>
 <span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">30</span>
 <span class="va">prb</span> <span class="op">&lt;-</span> <span class="fl">.3</span>
@@ -290,7 +287,7 @@
   id <span class="op">=</span> <span class="op">(</span><span class="fl">2</span> <span class="op">*</span> <span class="va">n</span> <span class="op">+</span> <span class="fl">1</span><span class="op">)</span><span class="op">:</span><span class="op">(</span><span class="fl">3</span> <span class="op">*</span> <span class="va">n</span><span class="op">)</span>, label <span class="op">=</span> <span class="op">(</span><span class="fl">2</span> <span class="op">*</span> <span class="va">n</span> <span class="op">+</span> <span class="fl">1</span><span class="op">)</span><span class="op">:</span><span class="op">(</span><span class="fl">3</span> <span class="op">*</span> <span class="va">n</span><span class="op">)</span>
   <span class="op">)</span></code></pre></div>
 <p>Building edges:</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Edges</span>
 <span class="va">edges1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/combn.html">combn</a></span><span class="op">(</span><span class="va">vertex1</span><span class="op">$</span><span class="va">label</span>, <span class="fl">2</span><span class="op">)</span>
 <span class="va">edges1</span> <span class="op">&lt;-</span> <span class="va">edges1</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">edges1</span><span class="op">)</span><span class="op">)</span> <span class="op">&gt;</span> <span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="va">prb</span><span class="op">)</span><span class="op">)</span><span class="op">]</span>
@@ -304,7 +301,7 @@
 <span class="va">edges3</span> <span class="op">&lt;-</span> <span class="va">edges3</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">edges3</span><span class="op">)</span><span class="op">)</span> <span class="op">&gt;</span> <span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="va">prb</span><span class="op">)</span><span class="op">)</span><span class="op">]</span>
 <span class="va">edges3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>source <span class="op">=</span> <span class="va">edges3</span><span class="op">[</span><span class="fl">1</span>, <span class="op">]</span>, target <span class="op">=</span> <span class="va">edges3</span><span class="op">[</span><span class="fl">2</span>, <span class="op">]</span><span class="op">)</span></code></pre></div>
 <p>We can and add visual attributes:</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Visual attributes</span>
 <span class="va">size</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="va">n</span>, max <span class="op">=</span> <span class="fl">100</span><span class="op">)</span>
 <span class="va">color</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/palettes.html">terrain.colors</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span>
@@ -319,7 +316,7 @@
 <span class="va">color3</span> <span class="op">&lt;-</span> <span class="va">color3</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html">order</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span><span class="op">]</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="va">n</span><span class="op">]</span>
 <span class="va">color3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/grDevices/col2rgb.html">col2rgb</a></span><span class="op">(</span><span class="va">color3</span><span class="op">)</span><span class="op">)</span>, <span class="fl">1</span><span class="op">)</span></code></pre></div>
 <p>Generating a layout:</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Nice layout</span>
 <span class="va">pos</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fl">0</span>, nrow <span class="op">=</span> <span class="va">n</span>, ncol <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>
 
@@ -334,7 +331,7 @@
 <span class="va">pos3</span> <span class="op">&lt;-</span> <span class="va">pos</span>
 <span class="va">pos3</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">pos3</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">pos2</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">pos</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span><span class="op">)</span></code></pre></div>
 <p>And finally, we can build the <code>gexf</code> object:</p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">graph</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gexf-class.html">gexf</a></span><span class="op">(</span>
   <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span><span class="va">vertex1</span>, <span class="va">vertex2</span>, <span class="va">vertex3</span><span class="op">)</span>,
   <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span><span class="va">edges1</span>, <span class="va">edges2</span>, <span class="va">edges3</span><span class="op">)</span>,
@@ -349,7 +346,7 @@
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">graph</span><span class="op">)</span></code></pre></div>
 <pre><code>## &lt;?xml version="1.0" encoding="UTF-8"?&gt;
 ## &lt;gexf xmlns="http://www.gexf.net/1.3" xmlns:viz="http://www.gexf.net/1.3/viz" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.3 http://www.gexf.net/1.3/gexf.xsd" version="1.3"&gt;
-##   &lt;meta lastmodifieddate="2025-06-09"&gt;
+##   &lt;meta lastmodifieddate="2025-11-25"&gt;
 ##     &lt;creator&gt;NodosChile&lt;/creator&gt;
 ##     &lt;description&gt;A GEXF file written in R with "rgexf"&lt;/description&gt;
 ##     &lt;keywords&gt;GEXF, NodosChile, R, rgexf, Gephi&lt;/keywords&gt;
@@ -400,12 +397,12 @@
 ##   &lt;/graph&gt;
 ## &lt;/gexf&gt;</code></pre>
 <p>As before, we can either directly call the plot function for <code>gexf</code> objects, or coerce it into an <code>igraph</code> object:</p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># plot(graph) </span>
 <span class="va">op</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mai <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span> <span class="co"># For extra space</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="../reference/igraph.to.gexf.html">gexf.to.igraph</a></span><span class="op">(</span><span class="va">graph</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="rgexf_files/figure-html/igraph-plot-2-1.png" width="672"></p>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span><span class="va">op</span><span class="op">)</span></code></pre></div>
 </div>
   </div>
