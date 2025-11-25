@@ -91,6 +91,8 @@ colnames(edgecolors) <- c("r", "b", "g", "a")
 nodetruefalse <- data.frame(nodetrue=rnorm(NROW(people)) > 0)
 edgetruefalse <- data.frame(edgetrue=rnorm(NROW(relations)) > 0)
 
+# We now create the graph object
+pause()
 grafo <- gexf(nodes=people, edges=relations, 
               nodesAtt=cbind(imagee,nodetruefalse),
               nodesVizAtt=list(
@@ -106,4 +108,5 @@ grafo <- gexf(nodes=people, edges=relations,
                 ), 
               edgesAtt=edgetruefalse)
 
+# And print it
 grafo
