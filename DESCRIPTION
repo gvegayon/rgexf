@@ -21,7 +21,8 @@ Imports:
     igraph,
     grDevices,
     utils,
-    servr
+    servr,
+    htmlwidgets
 License: MIT + file LICENSE
 LazyLoad: yes
 RoxygenNote: 7.3.1
