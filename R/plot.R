@@ -56,8 +56,7 @@ gexf_js_install <- function(path, overwrite = FALSE) {
 #' 
 #' @details 
 #' Currently, the only languages supported are: 
-#' German (de), English (en), French (fr), Spanish (es), Italian (it),
-#' Finnish (fi), Turkish (tr), Greek (el), Dutch (nl)
+#' \Sexpr{paste(names(rgexf:::gexf_js_languages), " (", rgexf:::gexf_js_languages, ")", sep="", collapse=", ")}.
 #'  
 gexf_js_config <- function(
   dir,
