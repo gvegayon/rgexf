@@ -69,8 +69,9 @@ jobs:
           error-on: '"warning"'
 
       # Upload the built package as an artifact
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v4
         if: ${{ matrix.config.os == 'ubuntu-latest' && matrix.config.r == 'release' }}
         with:
           name: ${{ matrix.config.os }}-pkg
           path: ${{ github.workspace }}/*.tar.gz
+

@@ -1,0 +1,11 @@
+FROM rocker/tidyverse:4.5.1
+
+# Adding R packages for development
+RUN install2.r --error roxygen2 tinytest devtools covr rmarkdown knitr
+
+RUN install2.r --error languageserver && \
+  installGithub.r nx10/httpgd
+
+RUN install2.r --error XML igraph servr htmlwidgets
+
+CMD ["bash"]
