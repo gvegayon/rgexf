@@ -1,0 +1,183 @@
+---
+format: gfm
+---
+
+```{r include=FALSE}
+knitr::opts_chunk$set(fig.path = "man/figures/", warning = FALSE)
+```
+
+[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/rgexf)](https://cran.r-project.org/package=rgexf)
+[![Downloads](https://cranlogs.r-pkg.org/badges/rgexf)](https://cran.r-project.org/package=rgexf)
+[![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/rgexf)](https://cran.r-project.org/package=rgexf)
+[![R CI](https://github.com/gvegayon/rgexf/actions/workflows/ci.yml/badge.svg)](https://github.com/gvegayon/rgexf/actions/workflows/ci.yml)
+[![rgexf website](https://github.com/gvegayon/rgexf/actions/workflows/website.yml/badge.svg)](https://github.com/gvegayon/rgexf/actions/workflows/website.yml)
+[![Coverage Status](https://img.shields.io/codecov/c/github/gvegayon/rgexf/master.svg)](https://app.codecov.io/github/gvegayon/rgexf?branch=master)
+[![DOI](https://joss.theoj.org/papers/10.21105/joss.03456/status.svg)](https://doi.org/10.21105/joss.03456)
+[![Sponsor](https://img.shields.io/badge/-Sponsor-fafbfc?logo=GitHub%20Sponsors)](https://github.com/sponsors/gvegayon)
+
+# rgexf: Build, Import and Export GEXF Graph Files <img src="man/figures/logo.svg" align="right" height="200"/>
+
+The first R package to work with GEXF graph files (used in Gephi and
+others). `rgexf` allows reading and writing graph files, including:
+
+a. Nodes/edges attributes,
+
+b. GEXF viz attributes (such as color, size, and position),
+
+c. Network dynamics (for both edges and nodes, including spells) and
+
+d. Edges weighting.
+
+Users can build/handle graphs element-by-element or through data-frames,
+visualize the graph on a web browser through ~~sigmajs javascript~~
+[gexf-js](https://github.com/raphv/gexf-js) library and interact with
+the igraph package.
+
+```{r news, echo = FALSE, results='asis', }
+x <- readLines("NEWS.md")
+ids <- which(grepl("^#\\s*[a-zA-Z]",x))
+ids <- ids[1:2] - c(0, 1)
+cat(x[ids[1]:ids[2]], sep = "\n")
+```
+
+More in the [NEWS.md](NEWS.md) file.
+
+# Installation
+
+To install the latest version of `rgexf`, you can use `devtools`
+
+```r
+library(devtools)
+install_github("gvegayon/rgexf")
+```
+
+The more stable (but old) version of `rgexf` can be found on CRAN too:
+
+```
+install.packages("rgexf")
+```
+
+# Citation
+
+```{r, comment=""}
+citation(package="rgexf")
+```
+
+
+# Examples
+
+## Example 1: Importing GEXF files
+
+We can use the `read.gexf` function to read GEXF files into R:
+
+```{r read-lesmiserables}
+# Loading the package
+library(rgexf)
+
+g <- system.file("gexf-graphs/lesmiserables.gexf", package="rgexf")
+g <- read.gexf(g)
+head(g) # Taking a look at the first handful
+```
+
+Moreover, we can use the `gexf.to.igraph()` function to convert the 
+`gexf` object into an `igraph` object:
+
+```{r igraph}
+library(igraph)
+ig <- gexf.to.igraph(g)
+
+op <- par(mai = rep(0, 4)) # Making room
+plot(ig)
+par(op)
+```
+
+
+Using the `plot.gexf` method--which uses the `gexf-js` JavaScript library--results in a Web visualization of the graph, like this:
+
+```r
+plot(g)
+```
+![](inst/gexf-graphs/lesmiserables.png)
+
+A live version of the figure is available [here](https://gvegayon.github.io/rgexf/lesmiserables/).
+
+## Example 2: Static net ##
+```{r}
+# Creating a group of individuals and their relations
+people <- data.frame(matrix(c(1:4, 'juan', 'pedro', 'matthew', 'carlos'),ncol=2))
+people
+```
+
+```{r}
+# Defining the relations structure
+relations <- data.frame(matrix(c(1,4,1,2,1,3,2,3,3,4,4,2), ncol=2, byrow=T))
+relations
+```
+
+```{r}
+# Getting things done
+write.gexf(people, relations)
+```
+
+
+## Example 3: Dynamic net ##
+
+```{r}
+# Defining the dynamic structure, note that there are some nodes that have NA at the end.
+time<-matrix(c(10.0,13.0,2.0,2.0,12.0,rep(NA,3)), nrow=4, ncol=2)
+time
+```
+
+```{r}
+# Getting things done
+write.gexf(people, relations, nodeDynamic=time)
+```
+
+
+
+## Example 4: More complex... Dynamic graph with attributes both for nodes and edges##
+
+First, we define dynamics
+
+```{r}
+time.nodes<-matrix(c(10.0,13.0,2.0,2.0,12.0,rep(NA,3)), nrow=4, ncol=2)
+time.nodes
+
+time.edges<-matrix(c(10.0,13.0,2.0,2.0,12.0,1,5,rep(NA,5)), nrow=6, ncol=2)
+time.edges
+```
+
+Now we define the attribute values
+
+```{r}
+# Defining a data frame of attributes for nodes and edges
+node.att <- data.frame(letrafavorita=letters[1:4], numbers=1:4, stringsAsFactors=F)
+node.att
+
+edge.att <- data.frame(letrafavorita=letters[1:6], numbers=1:6, stringsAsFactors=F)
+edge.att
+
+# Getting the things done
+write.gexf(nodes=people, edges=relations, edgeDynamic=time.edges,
+           edgesAtt=edge.att, nodeDynamic=time.nodes, nodesAtt=node.att)
+```
+
+
+
+
+# Code of Conduct
+  
+We welcome contributions to `rgexf`. Whether reporting a bug, starting a
+discussion by asking a question, or proposing/requesting a new feature,
+please go by creating a new issue
+[here](https://github.com/gvegayon/rgexf/issues) so that we can talk
+about it.
+
+Please note that the rgexf project is released with a [Contributor Code of Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms
+
+
+# Session info
+
+```{r}
+devtools::session_info()
+```
