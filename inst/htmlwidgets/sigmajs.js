@@ -37,7 +37,7 @@ HTMLWidgets.widget({
         el.style.height = ((height > 0 ? height : el.offsetHeight) || 500) + "px";
 
         var borderColor = (x.borderColor && x.borderColor !== "transparent") ? x.borderColor : null;
-        var borderSize  = (typeof x.borderSize === "number") ? x.borderSize : 0.15;
+        var borderSize  = (typeof x.borderSize === "number") ? Math.max(0, Math.min(1, x.borderSize)) : 0.15;
 
         // ── Parse GEXF ──────────────────────────────────────────────────────
         var parser = new DOMParser();
@@ -46,6 +46,13 @@ HTMLWidgets.widget({
           xmlDoc = parser.parseFromString(x.data, "application/xml");
         } catch (e) {
           el.textContent = "sigmajs: failed to parse GEXF XML – " + e.message;
+          return;
+        }
+
+        // DOMParser does not throw on invalid XML; check for a <parsererror> element.
+        var parseError = xmlDoc.querySelector("parsererror");
+        if (parseError) {
+          el.textContent = "sigmajs: failed to parse GEXF XML – " + parseError.textContent;
           return;
         }
 
@@ -141,7 +148,7 @@ HTMLWidgets.widget({
           var weight  = parseFloat(edgeEl.getAttribute("weight") || 1);
 
           try {
-            if (id !== null) {
+            if (id && id.length > 0) {
               graph.addEdgeWithKey(id, source, target, { color: color, size: Math.max(0.5, weight) });
             } else {
               graph.addEdge(source, target, { color: color, size: Math.max(0.5, weight) });

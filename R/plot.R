@@ -145,7 +145,8 @@ gexf_js_config <- function(
 #' @param x An object of class `gexf`.
 #' @param y Ignored.
 #' @param width,height Widget dimensions in pixels (or `NULL` for automatic).
-#' @param ... Ignored (kept for S3 compatibility).
+#' @param ... Additional arguments forwarded to [sigmajs()] (e.g.
+#'   `borderColor`, `borderSize`).
 #'
 #' @details
 #' `plot.gexf` delegates to [sigmajs], which produces an htmlwidget powered by
@@ -330,7 +331,6 @@ gexfjs <- function(
   if (grepl("^[a-zA-Z]+://", gexf))
     stop("URLs are not allowed for 'gexf' argument")
 
-  # Restrict gexf to a known safe directory
   path <- normalizePath(gexf, mustWork = TRUE)
 
   # Read GEXF content to inline in the widget

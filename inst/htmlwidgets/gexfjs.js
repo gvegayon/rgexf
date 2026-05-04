@@ -41,7 +41,9 @@ HTMLWidgets.widget({
           // 5. Set graphFile param before ready fires
           '<script>',
           '  var blob = new Blob([', gexfDataJS, '], {type: "application/xml"});',
-          '  GexfJS.setParams({graphFile: URL.createObjectURL(blob)});',
+          '  var blobUrl = URL.createObjectURL(blob);',
+          '  GexfJS.setParams({graphFile: blobUrl});',
+          '  $(document).one("ajaxComplete", function() { URL.revokeObjectURL(blobUrl); });',
           '<\/script>',
           '</body></html>'
         ].join('');

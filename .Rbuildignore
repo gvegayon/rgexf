@@ -33,3 +33,4 @@ demo/gexfplot\.R
 \.vscode
 README\.html
 ^lesmiserables$
+^inst/htmlwidgets/lib/gexfjs/\.project$

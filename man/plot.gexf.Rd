@@ -13,7 +13,8 @@
 
 \item{width, height}{Widget dimensions in pixels (or \code{NULL} for automatic).}
 
-\item{...}{Ignored (kept for S3 compatibility).}
+\item{...}{Additional arguments forwarded to \code{\link[=sigmajs]{sigmajs()}} (e.g.
+\code{borderColor}, \code{borderSize}).}
 }
 \description{
 \code{plot.gexf} renders a \code{gexf} object as an interactive sigma.js htmlwidget.
