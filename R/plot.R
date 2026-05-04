@@ -291,17 +291,33 @@ sigmajs <- function(
   )
 }
 
+#' @rdname sigmajs
+#' @param outputId Shiny output ID.
 #' @export
 sigmajsOutput <- function(outputId, width = "100%", height = "400px") {
   htmlwidgets::shinyWidgetOutput(outputId, "sigmajs", width, height, package = "rgexf")
 }
 
+#' @rdname sigmajs
+#' @param expr An expression that returns a `sigmajs` widget.
+#' @param env The environment in which to evaluate `expr`.
+#' @param quoted Logical scalar. Is `expr` a quoted expression?
 #' @export
 renderSigmajs <- function(expr, env = parent.frame(), quoted = FALSE) {
   if (!quoted) { expr <- substitute(expr) }
   htmlwidgets::shinyRenderWidget(expr, sigmajsOutput, env, quoted = TRUE)
 }
 
+#' Interactive graph viewer powered by gexf-js
+#'
+#' Creates an htmlwidget that renders a GEXF file using the bundled gexf-js
+#' library.
+#'
+#' @param gexf Path to a `.gexf` file. Defaults to the bundled Les Miserables
+#'   example.
+#' @param width,height Widget dimensions in pixels (`NULL` for automatic).
+#'
+#' @return An htmlwidget object.
 #' @import htmlwidgets
 #' @export
 gexfjs <- function(
@@ -343,16 +359,29 @@ gexfjs <- function(
 
 }
 
+#' @rdname gexfjs
+#' @param outputId Shiny output ID.
 #' @export
 gexfjsOutput <- function(outputId, width = "100%", height = "400px") {
   htmlwidgets::shinyWidgetOutput(outputId, "gexfjs", width, height, package = "rgexf")
 }
+#' @rdname gexfjs
+#' @param expr An expression that returns a `gexfjs` widget.
+#' @param env The environment in which to evaluate `expr`.
+#' @param quoted Logical scalar. Is `expr` a quoted expression?
 #' @export
 renderGexfjs <- function(expr, env = parent.frame(), quoted = FALSE) {
   if (!quoted) { expr <- substitute(expr) } # force quoted
   htmlwidgets::shinyRenderWidget(expr, gexfjsOutput, env, quoted = TRUE)
 }
 
+#' Minimal htmlwidget test fixture
+#'
+#' Creates the bundled `test1` htmlwidget fixture.
+#'
+#' @param width,height Widget dimensions in pixels (`NULL` for automatic).
+#'
+#' @return An htmlwidget object.
 #' @import htmlwidgets
 #' @export
 test1 <- function(width=NULL, height=NULL) {
@@ -378,10 +407,16 @@ test1 <- function(width=NULL, height=NULL) {
 }
 
 
+#' @rdname test1
+#' @param outputId Shiny output ID.
 #' @export
 test1Output <- function(outputId, width = "100%", height = "400px") {
   htmlwidgets::shinyWidgetOutput(outputId, "test1", width, height, package = "rgexf")
 }
+#' @rdname test1
+#' @param expr An expression that returns a `test1` widget.
+#' @param env The environment in which to evaluate `expr`.
+#' @param quoted Logical scalar. Is `expr` a quoted expression?
 #' @export
 renderTest1 <- function(expr, env = parent.frame(), quoted = FALSE) {
   if (!quoted) { expr <- substitute(expr) } # force quoted

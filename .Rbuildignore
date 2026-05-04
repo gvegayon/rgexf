@@ -27,6 +27,7 @@ demo/gexfplot\.R
 ^cran-comments\.md$
 ^docker$
 ^\.github.*
+^\.devcontainer$
 ^paper$
 ^CODE_OF_CONDUCT\.md$
 \.vscode

@@ -2,6 +2,8 @@
 % Please edit documentation in R/plot.R
 \name{sigmajs}
 \alias{sigmajs}
+\alias{sigmajsOutput}
+\alias{renderSigmajs}
 \title{Interactive graph viewer powered by sigma.js}
 \usage{
 sigmajs(
@@ -11,6 +13,10 @@ sigmajs(
   borderColor = NULL,
   borderSize = 0.15
 )
+
+sigmajsOutput(outputId, width = "100\%", height = "400px")
+
+renderSigmajs(expr, env = parent.frame(), quoted = FALSE)
 }
 \arguments{
 \item{gexf}{Either a \code{gexf} object, or a path to a \code{.gexf} file.  Defaults
@@ -24,6 +30,14 @@ a colour such as \code{"#ffffff"} to add a ring.}
 
 \item{borderSize}{Border ring thickness as a fraction of the node radius
 (0–1).  Only used when \code{borderColor} is set.  Defaults to \code{0.15} (15 \%).}
+
+\item{outputId}{Shiny output ID.}
+
+\item{expr}{An expression that returns a \code{sigmajs} widget.}
+
+\item{env}{The environment in which to evaluate \code{expr}.}
+
+\item{quoted}{Logical scalar. Is \code{expr} a quoted expression?}
 }
 \value{
 An htmlwidget object.
