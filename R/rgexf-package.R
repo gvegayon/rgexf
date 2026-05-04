@@ -74,6 +74,8 @@ NULL
 #' @param file String. Output path where to save the GEXF file.
 #' @param replace Logical. If \code{file} exists, \code{TRUE} would replace the
 #' file.
+#' @param nnodes Integer. Maximum number of nodes to print (default 10).
+#' @param nedges Integer. Maximum number of edges to print (default 10).
 #' @param \dots Ignored
 #' @return \item{list("print.gexf")}{ None (invisible \code{NULL}).}
 #' \item{list("summary.gexf")}{ List containing some \code{gexf} object

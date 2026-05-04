@@ -258,22 +258,22 @@ write.gexf(people, relations)
         <nodes>
           <node id="1" label="juan">
             <viz:color r="255" g="99" b="71" a="1"/>
-            <viz:position x="-250" y="-182.895048115354" z="0"/>
+            <viz:position x="45.0188639490553" y="-197.738092742954" z="0"/>
             <viz:size value="125"/>
           </node>
           <node id="2" label="pedro">
             <viz:color r="255" g="99" b="71" a="1"/>
-            <viz:position x="-88.3095531763029" y="-250" z="0"/>
+            <viz:position x="-250" y="-182.795589413418" z="0"/>
             <viz:size value="125"/>
           </node>
           <node id="3" label="matthew">
             <viz:color r="255" g="99" b="71" a="1"/>
-            <viz:position x="247.312591544414" y="250" z="0"/>
+            <viz:position x="-115.565977206153" y="250" z="0"/>
             <viz:size value="125"/>
           </node>
           <node id="4" label="carlos">
             <viz:color r="255" g="99" b="71" a="1"/>
-            <viz:position x="250" y="220.501439987056" z="0"/>
+            <viz:position x="250" y="-250" z="0"/>
             <viz:size value="125"/>
           </node>
         </nodes>
@@ -287,7 +287,6 @@ write.gexf(people, relations)
         </edges>
       </graph>
     </gexf>
-     
 
 ## Example 3: Dynamic net
 
@@ -319,22 +318,22 @@ write.gexf(people, relations, nodeDynamic=time)
         <nodes>
           <node id="1" label="juan" start="10" end="12">
             <viz:color r="255" g="99" b="71" a="1"/>
-            <viz:position x="207.209262107066" y="250" z="0"/>
+            <viz:position x="250" y="230.732714353721" z="0"/>
             <viz:size value="125"/>
           </node>
           <node id="2" label="pedro" start="13" end="13">
             <viz:color r="255" g="99" b="71" a="1"/>
-            <viz:position x="200.740637775501" y="-59.7265857095511" z="0"/>
+            <viz:position x="-250" y="140.424905668331" z="0"/>
             <viz:size value="125"/>
           </node>
           <node id="3" label="matthew" start="2" end="13">
             <viz:color r="255" g="99" b="71" a="1"/>
-            <viz:position x="-250" y="-250" z="0"/>
+            <viz:position x="-97.9484105932728" y="-250" z="0"/>
             <viz:size value="125"/>
           </node>
           <node id="4" label="carlos" start="2" end="13">
             <viz:color r="255" g="99" b="71" a="1"/>
-            <viz:position x="250" y="204.297413672863" z="0"/>
+            <viz:position x="17.7473411882268" y="250" z="0"/>
             <viz:size value="125"/>
           </node>
         </nodes>
@@ -348,7 +347,6 @@ write.gexf(people, relations, nodeDynamic=time)
         </edges>
       </graph>
     </gexf>
-     
 
 ## Example 4: More complex… Dynamic graph with attributes both for nodes and edges
 
@@ -434,7 +432,7 @@ write.gexf(nodes=people, edges=relations, edgeDynamic=time.edges,
               <attvalue for="att2" value="1"/>
             </attvalues>
             <viz:color r="255" g="99" b="71" a="1"/>
-            <viz:position x="-177.717126853502" y="192.319641298305" z="0"/>
+            <viz:position x="-250" y="250" z="0"/>
             <viz:size value="125"/>
           </node>
           <node id="2" label="pedro" start="13" end="13">
@@ -443,7 +441,7 @@ write.gexf(nodes=people, edges=relations, edgeDynamic=time.edges,
               <attvalue for="att2" value="2"/>
             </attvalues>
             <viz:color r="255" g="99" b="71" a="1"/>
-            <viz:position x="250" y="78.3453363229192" z="0"/>
+            <viz:position x="25.5526540641488" y="-250" z="0"/>
             <viz:size value="125"/>
           </node>
           <node id="3" label="matthew" start="2" end="13">
@@ -452,7 +450,7 @@ write.gexf(nodes=people, edges=relations, edgeDynamic=time.edges,
               <attvalue for="att2" value="3"/>
             </attvalues>
             <viz:color r="255" g="99" b="71" a="1"/>
-            <viz:position x="65.1258902538364" y="-250" z="0"/>
+            <viz:position x="-141.045957798787" y="-33.7792397036793" z="0"/>
             <viz:size value="125"/>
           </node>
           <node id="4" label="carlos" start="2" end="13">
@@ -461,7 +459,7 @@ write.gexf(nodes=people, edges=relations, edgeDynamic=time.edges,
               <attvalue for="att2" value="4"/>
             </attvalues>
             <viz:color r="255" g="99" b="71" a="1"/>
-            <viz:position x="-250" y="250" z="0"/>
+            <viz:position x="250" y="68.7541269386596" z="0"/>
             <viz:size value="125"/>
           </node>
         </nodes>
@@ -505,7 +503,6 @@ write.gexf(nodes=people, edges=relations, edgeDynamic=time.edges,
         </edges>
       </graph>
     </gexf>
-     
 
 # Code of Conduct
 
