@@ -227,24 +227,36 @@ plot.gexf <- function(
 #' @import htmlwidgets
 #' @export
 gexfjs <- function(
-  gexf   = "lib/gexf-1/lesmiserables.gexf" , # This is the only one that is working... for now
+  gexf   = system.file("gexf-graphs/lesmiserables.gexf", package="rgexf") , # This is the only one that is working... for now
   width  = NULL,
   height = NULL
   ) {
   
   # Disallow URL schemes to prevent SSRF
-  if (grepl("^[a-zA-Z]+://", gexf)) stop("URLs are not allowed for 'gexf' argument")
+  if (grepl("^[a-zA-Z]+://", gexf))
+    stop("URLs are not allowed for 'gexf' argument")
+  
   # Restrict gexf to a known safe directory
-  base <- system.file("lib/gexf-1", package = "rgexf")
-  path <- normalizePath(gexf, winslash = "/", mustWork = TRUE)
-  if (!startsWith(path, normalizePath(base, winslash = "/"))) {
-    stop("gexf file must be within the package's lib/gexf-1 directory.")
+  path <- normalizePath(gexf, mustWork = TRUE)
+  
+  # Read GEXF content to inline in the widget
+  gexf_data <- paste(readLines(path, warn = FALSE), collapse = "\n")
+  
+  # Read all GexfJS library files to bundle into the isolated iframe
+  lib <- function(...) {
+    p <- system.file("htmlwidgets/lib/gexfjs", ..., package = "rgexf")
+    paste(readLines(p, warn = FALSE), collapse = "\n")
   }
   
-  # pass only the safe path using 'x'
   x <- list(
-    path = path
-    # settings = settings
+    data   = gexf_data,
+    jquery = lib("js", "jquery-2.0.2.min.js"),
+    jqmw   = lib("js", "jquery.mousewheel.min.js"),
+    jqui   = lib("js", "jquery-ui-1.10.3.custom.min.js"),
+    gexfjs = lib("js", "gexfjs.js"),
+    setup  = lib("setup.js"),
+    css1   = lib("styles", "gexfjs.css"),
+    css2   = lib("styles", "jquery-ui-1.10.3.custom.min.css")
   )
   
   # create the widget

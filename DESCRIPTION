@@ -5,7 +5,7 @@ Title: Build, Import, and Export GEXF Graph Files
 Version: 0.16.3
 Authors@R: c(
   person("George", "Vega Yon", email="g.vegayon@gmail.com", role=c("aut", "cre"),
-  comment = structure("0000-0002-3171-0844", .Names = "ORCID")),
+  comment = c(ORCID = "0000-0002-3171-0844")),
   person("Jorge", "Fábrega Lacoa", role=c("ctb")),
   person("Joshua", "Kunst", role=c("ctb")),
   person("Raphaël", "Velt", role=c("cph"), comment="gexf-js library"),
@@ -25,10 +25,10 @@ Imports:
     htmlwidgets
 License: MIT + file LICENSE
 LazyLoad: yes
-RoxygenNote: 7.3.1
 Suggests: knitr,
     rmarkdown,
     tinytest,
     covr
 VignetteBuilder: knitr
 Roxygen: list(markdown = TRUE)
+Config/roxygen2/version: 8.0.0

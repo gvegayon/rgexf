@@ -11,7 +11,9 @@
 				"reditorsupport.r",
 				"rdebugger.r-debugger",
 				"quarto.quarto",
-				"tianyishi.rmarkdown"
+				"tianyishi.rmarkdown",
+				"github.vscode-github-actions",
+				"ms-vscode.live-server"
 			]
 		}
 	},

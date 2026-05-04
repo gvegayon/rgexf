@@ -1140,7 +1140,7 @@
         }
     }
 
-    $(document).ready(function () {
+    GexfJS.initialize = function () {
 
         var lang = (
             typeof GexfJS.params.language != "undefined" && GexfJS.params.language
@@ -1301,6 +1301,13 @@
             }
             return false;
         });
+    };
+
+    // Auto-initialize only when used as a standalone page (not via htmlwidgets)
+    $(document).ready(function () {
+        if (document.getElementById('carte')) {
+            GexfJS.initialize();
+        }
     });
 
     GexfJS.benchmark = function (iteration_count) {

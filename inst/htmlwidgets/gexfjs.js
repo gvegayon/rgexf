@@ -1,40 +1,68 @@
 HTMLWidgets.widget({
 
   name: "gexfjs",
-  
+
   type: "output",
-  
+
   factory: function(el, width, height) {
-  
-    // create our sigma object and bind it to the element
-    // The GexFJS object is created before hand.
-    // var gf = new GexfJS(el.id);
-    
+
     return {
       renderValue: function(x) {
-          
-        // parse gexf data
-        var parser = new DOMParser();
-        var data = parser.parseFromString(x.data, "application/xml");
-        
-        // Setting parameters
-        GexfJS.setParams({graphFile: x.path});
-        
-        setGexfDoc(el.id, width, height);
+
+        var w = (width  > 0 ? width  : el.offsetWidth)  || 800;
+        var h = (height > 0 ? height : el.offsetHeight) || 500;
+
+        // JSON.stringify safely escapes GEXF content for embedding as a JS literal
+        var gexfDataJS = JSON.stringify(x.data);
+
+        // Build a fully self-contained HTML document for the iframe.
+        // All scripts/styles are inlined so the iframe's CSS cannot leak
+        // into the parent document, and global IDs (#carte, #overview, etc.)
+        // are scoped to the iframe's own document.
+        var srcdoc = [
+          '<!DOCTYPE html><html>',
+          '<head>',
+          '<style>', x.css1, '</style>',
+          '<style>', x.css2, '</style>',
+          '</head>',
+          '<body>',
+          '<div id="gexf-container"></div>',
+          // 1. Load jQuery and plugins
+          '<script>', x.jquery, '<\/script>',
+          '<script>', x.jqmw,   '<\/script>',
+          '<script>', x.jqui,   '<\/script>',
+          // 2. Define setGexfDoc
+          '<script>', x.setup,  '<\/script>',
+          // 3. Build the DOM structure (creates #carte, #overview, etc.)
+          '<script>setGexfDoc("gexf-container", ', w, ', ', h, ');<\/script>',
+          // 4. Load GexfJS library (registers $(document).ready auto-init
+          //    which checks for #carte — created above — so it will fire)
+          '<script>', x.gexfjs, '<\/script>',
+          // 5. Set graphFile param before ready fires
+          '<script>',
+          '  var blob = new Blob([', gexfDataJS, '], {type: "application/xml"});',
+          '  GexfJS.setParams({graphFile: URL.createObjectURL(blob)});',
+          '<\/script>',
+          '</body></html>'
+        ].join('');
+
+        var iframe = document.createElement('iframe');
+        iframe.style.width  = '100%';
+        iframe.style.height = '100%';
+        iframe.style.border = 'none';
+        iframe.srcdoc = srcdoc;
+
+        el.innerHTML = '';
+        el.appendChild(iframe);
       },
-      
-      resize: function(width, height) {
-        
-        // forward resize on to sigma renderers
-        // for (var name in gf.renderers)
-           // gf.renderers[name].resize(width, height);  
-      },
-      
-      // Make the sigma object available as a property on the widget
-      // instance we're returning from factory(). This is generally a
-      // good idea for extensibility--it helps users of this widget
-      // interact directly with sigma, if needed.
-      s: GexfJS
+
+      resize: function(newWidth, newHeight) {
+        var iframe = el.querySelector('iframe');
+        if (iframe) {
+          iframe.style.width  = newWidth  + 'px';
+          iframe.style.height = newHeight + 'px';
+        }
+      }
     };
   }
 });

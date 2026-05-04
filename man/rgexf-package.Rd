@@ -66,14 +66,19 @@ Useful links:
 \author{
 \strong{Maintainer}: George Vega Yon \email{g.vegayon@gmail.com} (\href{https://orcid.org/0000-0002-3171-0844}{ORCID})
 
+Authors:
+\itemize{
+  \item George Vega Yon \email{g.vegayon@gmail.com} (\href{https://orcid.org/0000-0002-3171-0844}{ORCID})
+}
+
 Other contributors:
 \itemize{
   \item Jorge Fábrega Lacoa [contributor]
   \item Joshua Kunst [contributor]
   \item Raphaël Velt (gexf-js library) [copyright holder]
   \item  Gephi Consortium (GEXF language) [copyright holder]
-  \item Cornelius Fritz (JOSS reviewer) [reviewer]
-  \item Jonathan Cardoso Silva (JOSS reviewer) [reviewer]
+  \item Cornelius Fritz (what: JOSS reviewer) [reviewer]
+  \item Jonathan Cardoso Silva (what: JOSS reviewer) [reviewer]
 }
 
 }

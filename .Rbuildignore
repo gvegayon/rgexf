@@ -25,7 +25,6 @@ demo/gexfplot\.R
 ^pkgdown
 .+\.tar\.gz$
 ^cran-comments\.md$
-inst/htmlwidgets
 ^docker$
 ^\.github.*
 ^paper$
