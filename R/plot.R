@@ -227,24 +227,23 @@ plot.gexf <- function(
 #' @import htmlwidgets
 #' @export
 gexfjs <- function(
-  gexf   = "lib/gexf-1/lesmiserables.gexf" , # This is the onlyone that is working... for now
+  gexf   = "lib/gexf-1/lesmiserables.gexf" , # This is the only one that is working... for now
   width  = NULL,
   height = NULL
   ) {
   
-  # read the gexf file
-  data <- paste(tryCatch(readLines(gexf), error = function(e) "e"), collapse="\n")
+  # Disallow URL schemes to prevent SSRF
+  if (grepl("^[a-zA-Z]+://", gexf)) stop("URLs are not allowed for 'gexf' argument")
+  # Restrict gexf to a known safe directory
+  base <- system.file("lib/gexf-1", package = "rgexf")
+  path <- normalizePath(gexf, winslash = "/", mustWork = TRUE)
+  if (!startsWith(path, normalizePath(base, winslash = "/"))) {
+    stop("gexf file must be within the package's lib/gexf-1 directory.")
+  }
   
-  # # create a list that contains the settings
-  # settings <- list(
-  #   drawEdges = drawEdges,
-  #   drawNodes = drawNodes
-  # )
-  
-  # pass the data and settings using 'x'
+  # pass only the safe path using 'x'
   x <- list(
-    path = gexf,
-    data = data#,
+    path = path
     # settings = settings
   )
   
