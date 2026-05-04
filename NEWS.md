@@ -1,3 +1,20 @@
+# Changes in rgexf version 0.16.3.9999 (dev)
+
+## New features and changes
+
+* `plot.gexf()` now renders graphs as an interactive htmlwidget powered by
+  [sigma.js](https://www.sigmajs.org/) v3 and
+  [graphology](https://graphology.github.io/).  Node positions, colours, and
+  sizes are read from the `viz:*` attributes in the GEXF document.
+
+* New `sigmajs()` function creates a sigma.js htmlwidget from a `gexf` object
+  or a path to a `.gexf` file.  Shiny helpers `sigmajsOutput()` and
+  `renderSigmajs()` are also available.
+
+* The legacy gexf-js file-server renderer is preserved as `plot_gexfjs()`.
+  The `gexfjs()` htmlwidget (inline iframe approach) is likewise kept for
+  backward compatibility.
+
 # Changes in rgexf version 0.16.3 (2024-06-27)
 
 * Dynamically loaded components in the Rd files were removed to comply with new 

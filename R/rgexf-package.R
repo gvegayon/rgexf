@@ -32,10 +32,8 @@ gexf_version <- function(vers="1.3") {
   }
 }
 
-#' @importFrom XML xmlTreeParse xmlNode addChildren asXMLNode saveXML newXMLDoc
-#'  newXMLNode newXMLNamespace xmlAttrs parseXMLAndAdd
-#' @importFrom igraph get.data.frame list.vertex.attributes list.edge.attributes
-#'   E is.directed V set.vertex.attribute set.edge.attribute
+#' @importFrom XML xmlTreeParse xmlNode addChildren asXMLNode saveXML newXMLDoc newXMLNode newXMLNamespace xmlAttrs parseXMLAndAdd
+#' @importFrom igraph get.data.frame list.vertex.attributes list.edge.attributes E is.directed V set.vertex.attribute set.edge.attribute
 #' @importFrom grDevices rgb col2rgb colors
 #' @importFrom utils head
 #' @importFrom servr httd

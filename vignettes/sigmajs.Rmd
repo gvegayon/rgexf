@@ -1,0 +1,167 @@
+---
+title: "Visualizing GEXF graphs with sigma.js"
+author: "George G. Vega Yon"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Visualizing GEXF graphs with sigma.js}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, echo=FALSE}
+knitr::opts_chunk$set(comment = "#>")
+```
+
+# Overview
+
+`rgexf` ships with an interactive graph viewer built on top of
+[sigma.js v3](https://www.sigmajs.org/) and
+[graphology](https://graphology.github.io/).  The widget is zero-dependency
+from the user's perspective: the required JavaScript libraries are bundled
+inside the package, so no internet connection is needed at runtime.
+
+The main entry point is `plot()` — the standard R S3 method dispatches to
+the sigma.js widget automatically for `gexf` objects.  The underlying
+`sigmajs()` function is also exported for cases where you need extra
+arguments such as `borderColor` or explicit `width`/`height`.
+
+---
+
+# 1  A simple coloured graph
+
+## 1.1  Creating the graph
+
+We start by building a small three-node graph from scratch.  `rgexf` stores
+visual properties (colour, position, size) through the `nodesVizAtt` argument
+of `gexf()`.
+
+```{r simple-graph}
+library(rgexf)
+
+# Node and edge tables
+nodes <- data.frame(
+  id    = 1:3,
+  label = c("Alice", "Bob", "Carol")
+)
+edges <- data.frame(
+  source = c(1L, 2L, 1L),
+  target = c(2L, 3L, 3L)
+)
+
+# Visual attributes
+node_colors <- data.frame(
+  r = c(220L,  66L,  40L),
+  g = c( 50L, 133L, 167L),
+  b = c( 47L, 244L, 240L),
+  a = c(  1,    1,    1)
+)
+node_positions <- data.frame(
+  x = c(-1,  1,  0),
+  y = c( 0,  0,  1.5),
+  z = c( 0,  0,  0)
+)
+node_sizes <- c(8, 8, 8)
+
+g <- gexf(
+  nodes        = nodes,
+  edges        = edges,
+  nodesVizAtt  = list(
+    color    = node_colors,
+    position = node_positions,
+    size     = node_sizes
+  )
+)
+```
+
+## 1.2  Plotting the graph
+
+Calling `plot()` on a `gexf` object renders the sigma.js widget directly.
+
+```{r simple-plot}
+plot(g)
+```
+
+By default sigma.js renders nodes as plain filled circles — the node's
+`color` fills the entire disc.  You can add an optional border ring by
+passing `borderColor` (any extra arguments are forwarded to `sigmajs()`):
+
+```{r simple-plot-border, eval=FALSE}
+# White border ring (15 % of the node radius)
+plot(g, borderColor = "#ffffff", borderSize = 0.15)
+
+# Dark charcoal border, slightly thicker
+plot(g, borderColor = "#333333", borderSize = 0.2)
+```
+
+---
+
+# 2  The Les Misérables network
+
+The package includes a classic co-occurrence network from Victor Hugo's
+*Les Misérables*, originally prepared for Gephi.  It already contains
+`viz:color`, `viz:position`, and `viz:size` attributes, so the widget picks
+them up automatically.
+
+## 2.1  Reading the file
+
+```{r read-lesmi}
+lesmi_path <- system.file("gexf-graphs/lesmiserables.gexf", package = "rgexf")
+lesmi      <- read.gexf(lesmi_path)
+lesmi
+```
+
+## 2.2  Default plot
+
+```{r lesmi-plot-default}
+plot(lesmi)
+```
+
+The colours come directly from the GEXF file.  Each character group is
+assigned a distinct hue by the original dataset, so the community structure
+is immediately visible.
+
+## 2.3  Adding node borders for contrast
+
+The default rendering is sigma.js's plain filled circle.  If you want to
+separate overlapping nodes or simply add visual polish, pass a `borderColor`.
+A white outer ring works well on light backgrounds:
+
+```{r lesmi-plot-border}
+plot(lesmi, borderColor = "#ffffff", borderSize = 0.15)
+```
+
+The `borderColor` argument accepts any CSS colour string (`"#rrggbb"`,
+`"rgb(r,g,b)"`, named colours such as `"white"`, etc.).  The `borderSize`
+argument is a number between 0 and 1 representing the border width as a
+fraction of the node's radius — `0.15` means the ring takes up 15 % of the
+node radius.
+
+For a dark-themed background, try a darker value:
+
+```{r lesmi-plot-dark, eval=FALSE}
+plot(lesmi, borderColor = "#222222", borderSize = 0.1)
+```
+
+---
+
+# 3  Using the legacy gexf-js viewer
+
+The older `gexf-js`-based viewer is preserved as `plot_gexfjs()` for users
+who need the file-server workflow:
+
+```{r gexfjs-legacy, eval=FALSE}
+plot_gexfjs(lesmi)
+```
+
+This starts a local HTTP server and opens the graph in the default browser,
+which is useful for standalone HTML reports or for users who prefer the
+original gexf-js interface.
+
+---
+
+# Session info
+
+```{r session-info}
+sessionInfo()
+```

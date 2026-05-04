@@ -26,7 +26,7 @@ gexf_js_install <- function(path, overwrite = FALSE) {
 
 
 
-#' @rdname plot.gexf
+#' @rdname plot_gexfjs
 #' @export
 #' @param showEdges Logical scalar. Default state of the "show edges" button (nullable).
 #' @param useLens Logical scalar. Default state of the "use lens" button (nullable).
@@ -137,117 +137,195 @@ gexf_js_config <- function(
   
 }
 
-#' Visualizing GEXF graph files using gexf-js
-#' 
-#' Using the gexf-js, a JavaScript GEXF viewer, this function allows you to
-#' visualize your GEXF on the browser. The function essentially copies a template
-#' website, the GEXF file, and sets up a configuration file. By default, the
-#' function then starts a webserver using the `servr` R package.
-#' 
+#' Visualizing GEXF graphs using sigma.js (default) or gexf-js
+#'
+#' `plot.gexf` renders a `gexf` object as an interactive sigma.js htmlwidget.
+#' For the legacy gexf-js file-server approach, use [plot_gexfjs].
+#'
 #' @param x An object of class `gexf`.
 #' @param y Ignored.
-#' @param graphFile Name of the gexf file.
-#' @param dir Directory where the files will be copied (tempdir() by default).
-#' @param ... Further arguments passed to `gexf_js_config`
-#' @param httd.args Further arguments to be passed to [servr::httd]
-#' from the \CRANpkg{servr} package.
-#' @param copy.only Logical scalar. When FALSE, the default, the function
-#' will make a call to `servr::httd`.
-#' @param overwrite Logical scalar. When `TRUE`, the default, the function
-#' will overwrite all files copied from the template on the destination directory
-#' as specified by `dir`.
-#' 
-#' @details 
-#' 
-#' An important thing for the user to consider is the fact that the function
-#' only works if there are `viz` attributes, this is, color, size, and position.
-#' If the [gexf] object's XML document does not have viz attributes, users can
-#' use the following hack:
-#' 
-#' ```
-#' # Turn the object ot igraph and go back
+#' @param width,height Widget dimensions in pixels (or `NULL` for automatic).
+#' @param ... Ignored (kept for S3 compatibility).
+#'
+#' @details
+#' `plot.gexf` delegates to [sigmajs], which produces an htmlwidget powered by
+#' [sigma.js](https://www.sigmajs.org/).  Node positions, colours, and sizes
+#' are read directly from the GEXF `viz:*` attributes, so the graph must
+#' contain them.  If they are absent you can round-trip through igraph:
+#'
+#' ```r
 #' x <- igraph.to.gexf(gexf.to.igraph(x))
-#' 
-#' # And you are ready to plot!
 #' plot(x)
 #' ```
-#' 
-#' More details on this in the [igraph.to.gexf] function.
-#' 
-#' The files are copied directly from the path indicated by
-#' `system.file("gexf-js", package="rgexf")`. And the 
-#' parameters are set up by modifying the following template file stored under
-#' the `gexf-js/config.js.template` (see the output from 
-#' `system.file("gexf-js/config.js.template", package="rgexf")` to see the
-#' path to the template file).
-#' 
-#' The server is lunched if and only if `interactive() == TRUE`.
-#' 
+#'
 #' @export
-#' @examples 
+#' @examples
 #' if (interactive()) {
-#' 
-#' path <- system.file("gexf-graphs/lesmiserables.gexf", package="rgexf")
-#' graph <- read.gexf(path)
-#' plot(graph)
-#' 
+#'   path <- system.file("gexf-graphs/lesmiserables.gexf", package = "rgexf")
+#'   graph <- read.gexf(path)
+#'   plot(graph)
 #' }
-#' 
+#'
+#' @seealso [sigmajs()], [plot_gexfjs()]
+plot.gexf <- function(x, y = NULL, width = NULL, height = NULL, ...) {
+  sigmajs(x, width = width, height = height, ...)
+}
+
+#' Visualizing GEXF graph files using gexf-js (legacy)
+#'
+#' Uses the gexf-js JavaScript viewer by copying static files to a directory
+#' and optionally launching a local web server via the `servr` package.  For
+#' the modern htmlwidget-based renderer, use [plot.gexf] or [sigmajs].
+#'
+#' @param x An object of class `gexf`.
+#' @param graphFile Name of the GEXF file written to `dir`.
+#' @param dir Directory where files are copied (`tempdir()` by default).
+#' @param overwrite Logical scalar. Overwrite existing files in `dir`.
+#' @param httd.args Further arguments passed to [servr::httd].
+#' @param copy.only Logical. When `TRUE`, skip launching the server.
+#' @param ... Further arguments passed to [gexf_js_config].
+#'
+#' @details
+#' The server is launched only when `interactive() == TRUE` and
+#' `copy.only == FALSE`.
+#'
+#' @export
+#' @examples
+#' if (interactive()) {
+#'   path <- system.file("gexf-graphs/lesmiserables.gexf", package = "rgexf")
+#'   graph <- read.gexf(path)
+#'   plot_gexfjs(graph)
+#' }
+#'
 #' @references
-#' gexf-js project website https://github.com/raphv/gexf-js.
-#' 
-plot.gexf <- function(
-  x, 
-  y         = NULL,
+#' gexf-js project website <https://github.com/raphv/gexf-js>.
+plot_gexfjs <- function(
+  x,
   graphFile = "network.gexf",
   dir       = tempdir(),
   overwrite = TRUE,
   httd.args = list(),
   copy.only = FALSE,
   ...
-  ) {
+) {
 
-  # Step 0: Check for viz attributes
-  if (any(grepl("^\\s*<viz:position", x$graph)))
-    warning("No position viz attribute found. The graph may not be drawn (see ?plot.gexf.)")
+  if (!any(grepl("<viz:position", x$graph)))
+    warning("No viz:position attribute found. The graph may not be drawn (see ?plot_gexfjs).")
 
-  # Step 1: Copy the files
-  write.gexf(x, output = paste(dir, graphFile, sep="/"))
+  write.gexf(x, output = paste(dir, graphFile, sep = "/"))
   gexf_js_install(dir, overwrite = overwrite)
-  
-  # Step 2: Setup file
   gexf_js_config(dir, graphFile, ...)
-  
-  # Step 3: Lunch the server (if needed)
+
   if (interactive() && !copy.only)
     do.call(servr::httd, c(list(dir = dir), httd.args))
-  
+}
+
+#' Interactive graph viewer powered by sigma.js
+#'
+#' Creates an htmlwidget that renders a GEXF graph using
+#' [sigma.js](https://www.sigmajs.org/) v3 and
+#' [graphology](https://graphology.github.io/).  Node positions, colours, and
+#' sizes are read from the `viz:*` attributes embedded in the GEXF document.
+#' Nodes are drawn with a thin border ring whose colour is controlled by
+#' `borderColor`.
+#'
+#' @param gexf Either a `gexf` object, or a path to a `.gexf` file.  Defaults
+#'   to the bundled Les Misérables example.
+#' @param width,height Widget dimensions in pixels (`NULL` for automatic).
+#' @param borderColor A CSS colour string for the node border ring.  Defaults
+#'   to `NULL` (no border — sigma.js's default plain filled circle).  Set to
+#'   a colour such as `"#ffffff"` to add a ring.
+#' @param borderSize Border ring thickness as a fraction of the node radius
+#'   (0–1).  Only used when `borderColor` is set.  Defaults to `0.15` (15 %).
+#'
+#' @return An htmlwidget object.
+#' @export
+#' @import htmlwidgets
+#' @examples
+#' if (interactive()) {
+#'   path <- system.file("gexf-graphs/lesmiserables.gexf", package = "rgexf")
+#'   sigmajs(path)
+#'
+#'   # White border ring
+#'   sigmajs(path, borderColor = "#ffffff", borderSize = 0.15)
+#' }
+sigmajs <- function(
+  gexf        = system.file("gexf-graphs/lesmiserables.gexf", package = "rgexf"),
+  width       = NULL,
+  height      = NULL,
+  borderColor = NULL,
+  borderSize  = 0.15
+) {
+
+  if (inherits(gexf, "gexf")) {
+    gexf_data <- paste(gexf$graph, collapse = "\n")
+  } else {
+    # Disallow URL schemes to prevent SSRF
+    if (grepl("^[a-zA-Z]+://", gexf))
+      stop("URLs are not allowed for the 'gexf' argument")
+    path      <- normalizePath(gexf, mustWork = TRUE)
+    gexf_data <- paste(readLines(path, warn = FALSE), collapse = "\n")
+  }
+
+  if (length(borderColor) && is.na(borderColor)) borderColor <- NULL
+
+  htmlwidgets::createWidget(
+    "sigmajs",
+    list(
+      data        = gexf_data,
+      borderColor = borderColor,
+      borderSize  = borderSize
+    ),
+    width        = width,
+    height       = height,
+    package      = "rgexf",
+    sizingPolicy = htmlwidgets::sizingPolicy(
+      defaultWidth  = "100%",
+      defaultHeight = 450,
+      viewer.fill   = TRUE,
+      browser.fill  = TRUE,
+      knitr.figure  = FALSE,
+      knitr.defaultWidth  = "100%",
+      knitr.defaultHeight = 450
+    )
+  )
+}
+
+#' @export
+sigmajsOutput <- function(outputId, width = "100%", height = "400px") {
+  htmlwidgets::shinyWidgetOutput(outputId, "sigmajs", width, height, package = "rgexf")
+}
+
+#' @export
+renderSigmajs <- function(expr, env = parent.frame(), quoted = FALSE) {
+  if (!quoted) { expr <- substitute(expr) }
+  htmlwidgets::shinyRenderWidget(expr, sigmajsOutput, env, quoted = TRUE)
 }
 
 #' @import htmlwidgets
 #' @export
 gexfjs <- function(
-  gexf   = system.file("gexf-graphs/lesmiserables.gexf", package="rgexf") , # This is the only one that is working... for now
+  gexf   = system.file("gexf-graphs/lesmiserables.gexf", package="rgexf"),
   width  = NULL,
   height = NULL
   ) {
-  
+
   # Disallow URL schemes to prevent SSRF
   if (grepl("^[a-zA-Z]+://", gexf))
     stop("URLs are not allowed for 'gexf' argument")
-  
+
   # Restrict gexf to a known safe directory
   path <- normalizePath(gexf, mustWork = TRUE)
-  
+
   # Read GEXF content to inline in the widget
   gexf_data <- paste(readLines(path, warn = FALSE), collapse = "\n")
-  
+
   # Read all GexfJS library files to bundle into the isolated iframe
   lib <- function(...) {
     p <- system.file("htmlwidgets/lib/gexfjs", ..., package = "rgexf")
     paste(readLines(p, warn = FALSE), collapse = "\n")
   }
-  
+
   x <- list(
     data   = gexf_data,
     jquery = lib("js", "jquery-2.0.2.min.js"),
@@ -258,13 +336,12 @@ gexfjs <- function(
     css1   = lib("styles", "gexfjs.css"),
     css2   = lib("styles", "jquery-ui-1.10.3.custom.min.css")
   )
-  
+
   # create the widget
   htmlwidgets::createWidget(
     "gexfjs", x, width = width, height = height, package="rgexf")
-  
-}
 
+}
 
 #' @export
 gexfjsOutput <- function(outputId, width = "100%", height = "400px") {

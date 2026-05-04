@@ -1,17 +1,27 @@
 ---
-title: "Untitled"
+title: "rgexf sigma.js demo"
 author: "George G. Vega Yon"
-date: "December 6, 2017"
+date: "May 4, 2026"
 format: html
 ---
 
-Hola amigosgexf
+Interactive graph rendering with [sigma.js](https://www.sigmajs.org/).
 
 ```{r}
 library(rgexf)
 ```
 
+Default graph (Les Misérables):
+
 ```{r}
-gexfjs()
+sigmajs()
+```
+
+From a `gexf` object:
+
+```{r}
+path  <- system.file("gexf-graphs/lesmiserables.gexf", package = "rgexf")
+graph <- read.gexf(path)
+plot(graph)
 ```
 

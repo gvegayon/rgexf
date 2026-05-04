@@ -14,7 +14,7 @@
 #' that is been removed will also be removed (`rm.edges = TRUE`).
 #' 
 #' @aliases add.gexf.node add.gexf.edge rm.gexf.node rm.gexf.edge
-#' add.node.spell add.edge.spell
+#' @aliases add.node.spell add.edge.spell
 #' @param graph A gexf-class object.
 #' @param id A node/edge id (normally numeric value).
 #' @param label A node/edge label.

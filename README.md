@@ -27,10 +27,22 @@ visualize the graph on a web browser through ~~sigmajs javascript~~
 [gexf-js](https://github.com/raphv/gexf-js) library and interact with
 the igraph package.
 
-# Changes in rgexf version 0.16.3 (2024-06-27)
+# Changes in rgexf version 0.16.3.9999 (dev)
 
-- Dynamically loaded components in the Rd files were removed to comply
-  with new CRAN policies.
+## New features and changes
+
+- `plot.gexf()` now renders graphs as an interactive htmlwidget powered
+  by [sigma.js](https://www.sigmajs.org/) v3 and
+  [graphology](https://graphology.github.io/). Node positions, colours,
+  and sizes are read from the `viz:*` attributes in the GEXF document.
+
+- New `sigmajs()` function creates a sigma.js htmlwidget from a `gexf`
+  object or a path to a `.gexf` file. Shiny helpers `sigmajsOutput()`
+  and `renderSigmajs()` are also available.
+
+- The legacy gexf-js file-server renderer is preserved as
+  `plot_gexfjs()`. The `gexfjs()` htmlwidget (inline iframe approach) is
+  likewise kept for backward compatibility.
 
 More in the [NEWS.md](NEWS.md) file.
 
@@ -246,22 +258,22 @@ write.gexf(people, relations)
         <nodes>
           <node id="1" label="juan">
             <viz:color r="255" g="99" b="71" a="1"/>
-            <viz:position x="250" y="-250" z="0"/>
+            <viz:position x="-250" y="-182.895048115354" z="0"/>
             <viz:size value="125"/>
           </node>
           <node id="2" label="pedro">
             <viz:color r="255" g="99" b="71" a="1"/>
-            <viz:position x="-250" y="-146.491025433438" z="0"/>
+            <viz:position x="-88.3095531763029" y="-250" z="0"/>
             <viz:size value="125"/>
           </node>
           <node id="3" label="matthew">
             <viz:color r="255" g="99" b="71" a="1"/>
-            <viz:position x="-176.227384973248" y="-248.513857901374" z="0"/>
+            <viz:position x="247.312591544414" y="250" z="0"/>
             <viz:size value="125"/>
           </node>
           <node id="4" label="carlos">
             <viz:color r="255" g="99" b="71" a="1"/>
-            <viz:position x="-101.619819436086" y="250" z="0"/>
+            <viz:position x="250" y="220.501439987056" z="0"/>
             <viz:size value="125"/>
           </node>
         </nodes>
@@ -307,22 +319,22 @@ write.gexf(people, relations, nodeDynamic=time)
         <nodes>
           <node id="1" label="juan" start="10" end="12">
             <viz:color r="255" g="99" b="71" a="1"/>
-            <viz:position x="145.591718400088" y="250" z="0"/>
+            <viz:position x="207.209262107066" y="250" z="0"/>
             <viz:size value="125"/>
           </node>
           <node id="2" label="pedro" start="13" end="13">
             <viz:color r="255" g="99" b="71" a="1"/>
-            <viz:position x="250" y="-250" z="0"/>
+            <viz:position x="200.740637775501" y="-59.7265857095511" z="0"/>
             <viz:size value="125"/>
           </node>
           <node id="3" label="matthew" start="2" end="13">
             <viz:color r="255" g="99" b="71" a="1"/>
-            <viz:position x="-250" y="-80.2379887130927" z="0"/>
+            <viz:position x="-250" y="-250" z="0"/>
             <viz:size value="125"/>
           </node>
           <node id="4" label="carlos" start="2" end="13">
             <viz:color r="255" g="99" b="71" a="1"/>
-            <viz:position x="212.393473368629" y="-113.70354479939" z="0"/>
+            <viz:position x="250" y="204.297413672863" z="0"/>
             <viz:size value="125"/>
           </node>
         </nodes>
@@ -422,7 +434,7 @@ write.gexf(nodes=people, edges=relations, edgeDynamic=time.edges,
               <attvalue for="att2" value="1"/>
             </attvalues>
             <viz:color r="255" g="99" b="71" a="1"/>
-            <viz:position x="250" y="249.9512271592" z="0"/>
+            <viz:position x="-177.717126853502" y="192.319641298305" z="0"/>
             <viz:size value="125"/>
           </node>
           <node id="2" label="pedro" start="13" end="13">
@@ -431,7 +443,7 @@ write.gexf(nodes=people, edges=relations, edgeDynamic=time.edges,
               <attvalue for="att2" value="2"/>
             </attvalues>
             <viz:color r="255" g="99" b="71" a="1"/>
-            <viz:position x="-250" y="147.873503828014" z="0"/>
+            <viz:position x="250" y="78.3453363229192" z="0"/>
             <viz:size value="125"/>
           </node>
           <node id="3" label="matthew" start="2" end="13">
@@ -440,7 +452,7 @@ write.gexf(nodes=people, edges=relations, edgeDynamic=time.edges,
               <attvalue for="att2" value="3"/>
             </attvalues>
             <viz:color r="255" g="99" b="71" a="1"/>
-            <viz:position x="-145.793433094427" y="-250" z="0"/>
+            <viz:position x="65.1258902538364" y="-250" z="0"/>
             <viz:size value="125"/>
           </node>
           <node id="4" label="carlos" start="2" end="13">
@@ -449,7 +461,7 @@ write.gexf(nodes=people, edges=relations, edgeDynamic=time.edges,
               <attvalue for="att2" value="4"/>
             </attvalues>
             <viz:color r="255" g="99" b="71" a="1"/>
-            <viz:position x="188.960802583395" y="250" z="0"/>
+            <viz:position x="-250" y="250" z="0"/>
             <viz:size value="125"/>
           </node>
         </nodes>
