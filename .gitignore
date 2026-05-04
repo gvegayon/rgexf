@@ -26,3 +26,6 @@ inst/doc
 docs/
 
 /.quarto/
+.DS_Store
+*.tar.gz
+.vscode/
