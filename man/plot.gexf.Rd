@@ -11,7 +11,8 @@
 
 \item{y}{Ignored.}
 
-\item{width, height}{Widget dimensions in pixels (or \code{NULL} for automatic).}
+\item{width, height}{Widget dimensions in pixels.  Defaults to \code{NULL}, in
+which case the widget spans the full available width and is 450px tall.}
 
 \item{...}{Additional arguments forwarded to \code{\link[=sigmajs]{sigmajs()}} (e.g.
 \code{borderColor}, \code{borderSize}).}

@@ -12,15 +12,16 @@ gexfjs(
   height = NULL
 )
 
-gexfjsOutput(outputId, width = "100\%", height = "400px")
+gexfjsOutput(outputId, width = "100\%", height = "600px")
 
 renderGexfjs(expr, env = parent.frame(), quoted = FALSE)
 }
 \arguments{
-\item{gexf}{Path to a \code{.gexf} file. Defaults to the bundled Les Miserables
-example.}
+\item{gexf}{Either a \code{gexf} object, or a path to a \code{.gexf} file.  Defaults
+to the bundled Les Miserables example.}
 
-\item{width, height}{Widget dimensions in pixels (\code{NULL} for automatic).}
+\item{width, height}{Widget dimensions in pixels.  Defaults to \code{NULL}, in
+which case the widget spans the full available width and is 600px tall.}
 
 \item{outputId}{Shiny output ID.}
 

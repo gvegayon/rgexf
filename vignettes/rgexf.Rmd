@@ -64,18 +64,17 @@ head(igraph.to.gexf(lesmi_ig))
 ```
 
 
-Using the `plot.gexf` method--which uses the `gexf-js` JavaScript library--results
-in a Web visualization of the graph, like this:
+Using the `plot.gexf` method--which uses the `gexf-js` JavaScript library--results in a Web visualization of the graph, like this:
 
 ```r
-plot(g)
+plot_gexfjs(g)
 ```
 
 ```{r gexf-js, echo = FALSE}
 knitr::include_graphics(path = system.file("gexf-graphs/lesmiserables.png", package="rgexf"))
 ```
 
-An live version of the figure is available [here](https://gvegayon.github.io/rgexf/lesmiserables/).
+An live version of the figure is available [here](https://gvegayon.github.io/rgexf/lesmiserables/). Starting version 0.17.0, the default plot method uses `sigmajs` instead of `gexf-js`. Nonetheless, `gexf-js` is still available and can be embedded in quarto/rmarkdown documents: the last code chunk in this vignette shows how to do it.
 
 # Creating GEXF files
 
@@ -181,4 +180,12 @@ plot(gexf.to.igraph(graph))
 par(op)
 ```
 
+## Embedding `gexf-js` in quarto/rmarkdown documents
 
+To embed `gexf-js` in quarto/rmarkdown documents, we can use the `gexfjs` function. This function takes a `gexf` object and returns an HTML widget that can be rendered in the document:
+
+```{r}
+gexfjs(graph)
+```
+
+Different from the `plot_gexfjs` function, the `gexfjs` inserts the visualization in the document, while `plot_gexfjs` opens it in a new browser window.

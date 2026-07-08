@@ -7,11 +7,12 @@ function setGexfDoc(id, width, height) {
   // Creating zonecentre -------------------------------------------------------
   var zonecentre   = document.createElement("div");
   zonecentre.id    = "zonecentre";
-  
+  zonecentre.setAttribute("class", "gradient");
+
   zonecentre.setAttribute(
       "style",
       "top: 45px; margin:auto; overflow: hidden;" +
-      "width:" + width + "px; height:" + height +"px;"  
+      "width:" + width + "px; height:" + height +"px;"
     );
   
     // Creating canvans
@@ -105,10 +106,15 @@ function setGexfDoc(id, width, height) {
       aUnfold.href  = "#";
       aUnfold.id    = "aUnfold";
       aUnfold.setAttribute("class", "rightarrow");
-      
+
     unfold.appendChild(aUnfold);
-  
+
+    // Node attributes are rendered here by gexfjs.js on node selection
+    var leftcontent = document.createElement("div");
+    leftcontent.id  = "leftcontent";
+
   leftcolumn.appendChild(unfold);
+  leftcolumn.appendChild(leftcontent);
   
   // Creating the title --------------------------------------------------------
   var titlebar = document.createElement("div");
@@ -116,41 +122,56 @@ function setGexfDoc(id, width, height) {
   
     var maintitle = document.createElement("div");
     maintitle.id  = "maintitle";
-    
+
+      var h1title = document.createElement("h1");
+
+        var aTitle    = document.createElement("a");
+        aTitle.href   = "https://gephi.org/";
+        aTitle.target = "_blank";
+        aTitle.title  = "Made with Gephi";
+        aTitle.appendChild(
+          document.createTextNode("Gephi: JavaScript GEXF Viewer")
+        );
+
+      h1title.appendChild(aTitle);
+
+    maintitle.appendChild(h1title);
+
     // -----------
-    var reacherche = document.createElement("form");
-    reacherche.id  = "reacherche";
-    
+    var recherche = document.createElement("form");
+    recherche.id  = "recherche";
+
       var searchinput = document.createElement("input");
-      
+
       searchinput.id = "searchinput";
       searchinput.setAttribute("class", "grey");
       searchinput.setAttribute("autocomplete", "off");
-      
+
       var searchsubmit = document.createElement("input");
-      
+
       searchsubmit.id = "searchsubmit";
       searchsubmit.setAttribute("type", "submit");
-        
-    reacherche.appendChild(searchinput);
-    reacherche.appendChild(searchsubmit);
-    
-    // ----
-    var autocomplete = document.createElement("ul");
-    autocomplete.id = "autocomplete";
-    
+
+    recherche.appendChild(searchinput);
+    recherche.appendChild(searchsubmit);
+
   titlebar.appendChild(maintitle);
-  titlebar.appendChild(reacherche);
-  titlebar.appendChild(autocomplete);
-  
-  
+  titlebar.appendChild(recherche);
+
+  // The autocomplete list lives at body level (as in the upstream
+  // index.html): #titlebar has overflow:hidden and would clip it
+  var autocomplete = document.createElement("ul");
+  autocomplete.id = "autocomplete";
+
+
   // Putting all together ------------------------------------------------------
-  
-  
+
+
   document.getElementById(id).appendChild(zonecentre);
   document.getElementById(id).appendChild(overviewzone);
   document.getElementById(id).appendChild(leftcolumn);
   document.getElementById(id).appendChild(titlebar);
+  document.body.appendChild(autocomplete);
   
   // Updating the CSS
   

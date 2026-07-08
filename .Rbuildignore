@@ -34,3 +34,4 @@ demo/gexfplot\.R
 README\.html
 ^lesmiserables$
 ^inst/htmlwidgets/lib/gexfjs/\.project$
+^\.claude$

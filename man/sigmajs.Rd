@@ -22,7 +22,8 @@ renderSigmajs(expr, env = parent.frame(), quoted = FALSE)
 \item{gexf}{Either a \code{gexf} object, or a path to a \code{.gexf} file.  Defaults
 to the bundled Les Misérables example.}
 
-\item{width, height}{Widget dimensions in pixels (\code{NULL} for automatic).}
+\item{width, height}{Widget dimensions in pixels.  Defaults to \code{NULL}, in
+which case the widget spans the full available width and is 450px tall.}
 
 \item{borderColor}{A CSS colour string for the node border ring.  Defaults
 to \code{NULL} (no border — sigma.js's default plain filled circle).  Set to

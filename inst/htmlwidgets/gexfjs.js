@@ -38,7 +38,11 @@ HTMLWidgets.widget({
           // 4. Load GexfJS library (registers $(document).ready auto-init
           //    which checks for #carte — created above — so it will fire)
           '<script>', x.gexfjs, '<\/script>',
-          // 5. Set graphFile param before ready fires
+          // 5. Apply default params (zoomLevel, showEdges, ...) — without
+          //    these, globalScale = SQRT2^undefined = NaN and the main
+          //    canvas renders nothing
+          '<script>', x.config, '<\/script>',
+          // 6. Set graphFile param before ready fires
           '<script>',
           '  var blob = new Blob([', gexfDataJS, '], {type: "application/xml"});',
           '  var blobUrl = URL.createObjectURL(blob);',

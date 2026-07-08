@@ -144,7 +144,8 @@ gexf_js_config <- function(
 #'
 #' @param x An object of class `gexf`.
 #' @param y Ignored.
-#' @param width,height Widget dimensions in pixels (or `NULL` for automatic).
+#' @param width,height Widget dimensions in pixels.  Defaults to `NULL`, in
+#'   which case the widget spans the full available width and is 450px tall.
 #' @param ... Additional arguments forwarded to [sigmajs()] (e.g.
 #'   `borderColor`, `borderSize`).
 #'
@@ -232,7 +233,8 @@ plot_gexfjs <- function(
 #'
 #' @param gexf Either a `gexf` object, or a path to a `.gexf` file.  Defaults
 #'   to the bundled Les Misérables example.
-#' @param width,height Widget dimensions in pixels (`NULL` for automatic).
+#' @param width,height Widget dimensions in pixels.  Defaults to `NULL`, in
+#'   which case the widget spans the full available width and is 450px tall.
 #' @param borderColor A CSS colour string for the node border ring.  Defaults
 #'   to `NULL` (no border — sigma.js's default plain filled circle).  Set to
 #'   a colour such as `"#ffffff"` to add a ring.
@@ -309,14 +311,48 @@ renderSigmajs <- function(expr, env = parent.frame(), quoted = FALSE) {
   htmlwidgets::shinyRenderWidget(expr, sigmajsOutput, env, quoted = TRUE)
 }
 
+# Replaces relative url(...) image references in CSS with base64 data URIs.
+# Paths are resolved relative to the CSS file's own directory (`cssdir`).
+css_inline_images <- function(css, cssdir) {
+
+  urls <- unique(unlist(regmatches(css, gregexpr("url\\([^)]+\\)", css))))
+
+  for (u in urls) {
+
+    rel <- gsub("^url\\(['\"]?|['\"]?\\)$", "", u)
+    f   <- file.path(cssdir, rel)
+
+    if (!file.exists(f))
+      next
+
+    mime <- if (grepl("\\.gif$", f, ignore.case = TRUE))
+      "image/gif"
+    else
+      "image/png"
+
+    b64 <- gsub("[\r\n]", "", jsonlite::base64_enc(
+      readBin(f, "raw", file.size(f))
+    ))
+
+    css <- gsub(
+      u, paste0("url(data:", mime, ";base64,", b64, ")"), css, fixed = TRUE
+    )
+
+  }
+
+  css
+
+}
+
 #' Interactive graph viewer powered by gexf-js
 #'
 #' Creates an htmlwidget that renders a GEXF file using the bundled gexf-js
 #' library.
 #'
-#' @param gexf Path to a `.gexf` file. Defaults to the bundled Les Miserables
-#'   example.
-#' @param width,height Widget dimensions in pixels (`NULL` for automatic).
+#' @param gexf Either a `gexf` object, or a path to a `.gexf` file.  Defaults
+#'   to the bundled Les Miserables example.
+#' @param width,height Widget dimensions in pixels.  Defaults to `NULL`, in
+#'   which case the widget spans the full available width and is 600px tall.
 #'
 #' @return An htmlwidget object.
 #' @import htmlwidgets
@@ -327,19 +363,34 @@ gexfjs <- function(
   height = NULL
   ) {
 
-  # Disallow URL schemes to prevent SSRF
-  if (grepl("^[a-zA-Z]+://", gexf))
-    stop("URLs are not allowed for 'gexf' argument")
+  if (inherits(gexf, "gexf")) {
+    gexf_data <- paste(gexf$graph, collapse = "\n")
+  } else {
+    # Disallow URL schemes to prevent SSRF
+    if (grepl("^[a-zA-Z]+://", gexf))
+      stop("URLs are not allowed for 'gexf' argument")
 
-  path <- normalizePath(gexf, mustWork = TRUE)
+    path <- normalizePath(gexf, mustWork = TRUE)
 
-  # Read GEXF content to inline in the widget
-  gexf_data <- paste(readLines(path, warn = FALSE), collapse = "\n")
+    # Read GEXF content to inline in the widget
+    gexf_data <- paste(readLines(path, warn = FALSE), collapse = "\n")
+  }
 
   # Read all GexfJS library files to bundle into the isolated iframe
   lib <- function(...) {
     p <- system.file("htmlwidgets/lib/gexfjs", ..., package = "rgexf")
     paste(readLines(p, warn = FALSE), collapse = "\n")
+  }
+
+  # CSS files reference icons via relative url(...) paths, which cannot
+  # resolve inside the iframe (srcdoc has no usable base URL), so images
+  # are inlined as data URIs
+  css <- function(...) {
+    p <- system.file("htmlwidgets/lib/gexfjs", "styles", ..., package = "rgexf")
+    css_inline_images(
+      paste(readLines(p, warn = FALSE), collapse = "\n"),
+      dirname(p)
+    )
   }
 
   x <- list(
@@ -348,21 +399,32 @@ gexfjs <- function(
     jqmw   = lib("js", "jquery.mousewheel.min.js"),
     jqui   = lib("js", "jquery-ui-1.10.3.custom.min.js"),
     gexfjs = lib("js", "gexfjs.js"),
+    config = lib("config.js"),
     setup  = lib("setup.js"),
-    css1   = lib("styles", "gexfjs.css"),
-    css2   = lib("styles", "jquery-ui-1.10.3.custom.min.css")
+    css1   = css("gexfjs.css"),
+    css2   = css("jquery-ui-1.10.3.custom.min.css")
   )
 
   # create the widget
   htmlwidgets::createWidget(
-    "gexfjs", x, width = width, height = height, package="rgexf")
+    "gexfjs", x, width = width, height = height, package="rgexf",
+    sizingPolicy = htmlwidgets::sizingPolicy(
+      defaultWidth  = "100%",
+      defaultHeight = 600,
+      viewer.fill   = TRUE,
+      browser.fill  = TRUE,
+      knitr.figure  = FALSE,
+      knitr.defaultWidth  = "100%",
+      knitr.defaultHeight = 600
+    )
+  )
 
 }
 
 #' @rdname gexfjs
 #' @param outputId Shiny output ID.
 #' @export
-gexfjsOutput <- function(outputId, width = "100%", height = "400px") {
+gexfjsOutput <- function(outputId, width = "100%", height = "600px") {
   htmlwidgets::shinyWidgetOutput(outputId, "gexfjs", width, height, package = "rgexf")
 }
 #' @rdname gexfjs
