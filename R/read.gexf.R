@@ -10,7 +10,7 @@
 #' @author George Vega Yon 
 #' 
 #' Jorge Fabrega Lacoa 
-#' @references The GEXF project website: http://gexf.net/format/
+#' @references The GEXF project website: https://gexf.net/
 #' @keywords IO
 #' @examples
 #' 
