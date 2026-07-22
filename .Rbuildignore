@@ -25,11 +25,13 @@ demo/gexfplot\.R
 ^pkgdown
 .+\.tar\.gz$
 ^cran-comments\.md$
-inst/htmlwidgets
 ^docker$
 ^\.github.*
+^\.devcontainer$
 ^paper$
 ^CODE_OF_CONDUCT\.md$
 \.vscode
 README\.html
 ^lesmiserables$
+^inst/htmlwidgets/lib/gexfjs/\.project$
+^\.claude$

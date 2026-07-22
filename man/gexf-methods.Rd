@@ -7,7 +7,7 @@
 \alias{export-gexf}
 \title{S3 methods for \code{gexf} objects}
 \usage{
-\method{print}{gexf}(x, file = NA, replace = F, ...)
+\method{print}{gexf}(x, file = NA, replace = F, nnodes = 10, nedges = 10, ...)
 
 \method{summary}{gexf}(object, ...)
 }
@@ -18,6 +18,10 @@
 
 \item{replace}{Logical. If \code{file} exists, \code{TRUE} would replace the
 file.}
+
+\item{nnodes}{Integer. Maximum number of nodes to print (default 10).}
+
+\item{nedges}{Integer. Maximum number of edges to print (default 10).}
 
 \item{\dots}{Ignored}
 

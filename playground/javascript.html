@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script>
+    // A simple3 function to get an element ID
+    function myfun() {
+      document.getElementById('id1').innerHTML = 'George';
+    }  
+    
+    function fillValue(id, a, b) {
+      var txt = document.getElementById(id).innerHTML;
+      
+      var x = txt.indexOf(a)
+      
+      if (x != -1) {
+        document.getElementById(id).innerHTML = txt.replace(a, b);
+      } else {
+        document.getElementById(id).innerHTML = txt.replace(b, a);
+      }
+      
+      
+    }
+  </script>
+</head>
+<body>
+  <h1 onmouseover="this.style.color = 'blue';" onmouseout="this.style.color='black';">This is an example of javascript</h1>
+  <p id="date1"></p>
+  <script>
+    // This function returns the current date...
+    function TodayIs() {
+      return new Date();
+    }
+    
+    var bday = new Date(1988, 3, 2);
+    // Notice that month is counted from 0 to 11!
+    bday.setMonth(2);
+    
+    document.getElementById("date1").innerHTML = "Today's date is " +
+      (TodayIs()) + " and I was born on " + (bday).toDateString() + "." + 
+      " This can also be read as the " + (bday.getMonth()) + " month of the " +
+      (bday.getDay()) + " day of " + (bday.getFullYear()) + ".";
+      
+  </script>
+  <p id="id1">
+    Hello
+  </p>
+  <p id="id2">
+    Yuo
+  </p>
+  <script>
+    // Now playing with objects
+    var name = "";
+    var names = {
+      first: "George",
+      last: "Vega Yon"
+    };
+    
+    // Looping and contatenating objects
+    var ans = "";
+    for (v in names) 
+      ans += (" " + names[v]);
+    
+    
+    // Setting the html
+    // THE OBJECT ID MUST EXISTS BEFORE CALLING THE FUNCTION
+    document.getElementById("id2").innerHTML = ans;
+  </script>
+  <button type="button" onclick="myfun()">Click</button>
+  
+  <p id="toreplace">
+    Change me! changeme
+  </p>
+  <button type="button" onclick="fillValue('toreplace', 'changeme', '1')">Change the value</button>
+  
+  <!--- Here is  a new group of code -->
+  <div>
+    <h2>This is a list that was created using arrays</h2>
+    <ul id="arrayme">
+      
+    </ul>
+    <script>
+      // Creating arrays
+      var x = ["a", "b", "c"];
+      var L = new Array(3);
+      
+      
+      for (i = 0; i < 3; i++) {
+        L[i] = document.createElement("li");
+        L[i].innerHTML = x[i];
+        document.getElementById("arrayme").appendChild(L[i]);
+      }
+      
+      // Can we pop it out?
+      x.pop();
+      console.log("What's left: " + (x.toString()))
+      
+      // Is this an array?
+      console.log("Is this an array? " + (Array.isArray(L)));
+    </script>
+  </div>
+  
+</body>
+</html>

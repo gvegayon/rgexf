@@ -1,3 +1,46 @@
+# Changes in rgexf version 0.16.4
+
+## New features and changes
+
+* `plot.gexf()` now renders graphs as an interactive htmlwidget powered by
+  [sigma.js](https://www.sigmajs.org/) v3 and
+  [graphology](https://graphology.github.io/).  Node positions, colours, and
+  sizes are read from the `viz:*` attributes in the GEXF document.
+
+* New `sigmajs()` function creates a sigma.js htmlwidget from a `gexf` object
+  or a path to a `.gexf` file. Shiny helpers `sigmajsOutput()` and
+  `renderSigmajs()` are also available.
+
+* The legacy gexf-js file-server renderer is preserved as `plot_gexfjs()`.
+  The `gexfjs()` htmlwidget (inline iframe approach) is likewise kept for
+  backward compatibility.
+
+* `gexfjs()` now accepts a `gexf` object in addition to a file path,
+  matching `sigmajs()`.
+
+* `gexfjs()` has an explicit sizing policy: the widget now defaults to the
+  full available width and a height of 600px (50% taller than before) in
+  knitr documents, the browser, and Shiny alike.  Both `gexfjs()` and
+  `sigmajs()` honor user-supplied `width`/`height`, and their documented
+  defaults were clarified.
+
+## Bug fixes
+
+* The `gexfjs()` widget rendered an empty main canvas: the bundled
+  `config.js` (which sets `zoomLevel`, `showEdges`, and other gexf-js
+  defaults) was never loaded into the iframe, making every screen
+  coordinate `NaN`.
+
+* Icons and images in the `gexfjs()` widget (zoom, lens, edge buttons,
+  search icon, Gephi logo) did not display: relative `url(...)` references
+  in the CSS cannot resolve inside a `srcdoc` iframe, so images are now
+  inlined as base64 data URIs.
+
+* The `gexfjs()` widget's node-attribute panel was blank and search did
+  not work: the generated DOM was missing the `#leftcontent` element, the
+  search form id had a typo (`reacherche`), and the autocomplete list was
+  clipped by the title bar.
+
 # Changes in rgexf version 0.16.3 (2024-06-27)
 
 * Dynamically loaded components in the Rd files were removed to comply with new 

@@ -38,8 +38,8 @@ the \code{reps} column), the other ones will be assigned an \code{NA} at the
   check.dpl.edges(edges=relations, undirected=TRUE)
 }
 \seealso{
-Other manipulation: 
-\code{\link{switch.edges}()}
+Other manipulation:
+\code{\link[=switch.edges]{switch.edges()}}
 }
 \author{
 George Vega Yon

@@ -29,8 +29,8 @@ and \dQuote{target}) and based on auto-generated nodes' ids.
   switch.edges(relations)
 }
 \seealso{
-Other manipulation: 
-\code{\link{check.dpl.edges}()}
+Other manipulation:
+\code{\link[=check.dpl.edges]{check.dpl.edges()}}
 }
 \author{
 George Vega Yon

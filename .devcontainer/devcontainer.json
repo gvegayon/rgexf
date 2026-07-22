@@ -11,16 +11,22 @@
 				"reditorsupport.r",
 				"rdebugger.r-debugger",
 				"quarto.quarto",
-				"tianyishi.rmarkdown"
+				"tianyishi.rmarkdown",
+				"github.vscode-github-actions",
+				"ms-vscode.live-server"
 			]
 		}
 	},
 	"mounts": [
         // Mount the .vscode configuration into the container
         "source=${localWorkspaceFolder}/.devcontainer/.vscode,target=/workspaces/${localWorkspaceFolderBasename}/.vscode,type=bind,consistency=cached"
-    ]
+    ],
 	// Features to add to the dev container. More info: https://containers.dev/features.
-	// "features": {},
+	"features": {
+			"ghcr.io/devcontainers/features/github-cli:1": {
+					"version": "2.68.1"
+			}
+	},
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],

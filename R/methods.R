@@ -1,8 +1,8 @@
 #' @name gexf-methods
 #' @export
-print.gexf <- function(x, file = NA, replace = F, ...) {
+print.gexf <- function(x, file = NA, replace = F, nnodes = 10, nedges = 10, ...) {
 
-  cat(x$graph, "\n")
+  head.gexf(x, n_nodes = nnodes, n_edges = nedges)
   invisible(x)
 
 }
