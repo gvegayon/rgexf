@@ -351,16 +351,16 @@ css_inline_images <- function(css, cssdir) {
 #'
 #' @param gexf Either a `gexf` object, or a path to a `.gexf` file.  Defaults
 #'   to the bundled Les Miserables example.
-#' @param width,height Widget dimensions in pixels.  Defaults to `NULL`, in
-#'   which case the widget spans the full available width and is 600px tall.
+#' @param width,height Widget dimensions.  Default to `"100%"` width and
+#'   `"400px"` height, so the widget spans the full available width.
 #'
 #' @return An htmlwidget object.
 #' @import htmlwidgets
 #' @export
 gexfjs <- function(
   gexf   = system.file("gexf-graphs/lesmiserables.gexf", package="rgexf"),
-  width  = NULL,
-  height = NULL
+  width  = "100%",
+  height = "400px"
   ) {
 
   if (inherits(gexf, "gexf")) {
@@ -410,12 +410,12 @@ gexfjs <- function(
     "gexfjs", x, width = width, height = height, package="rgexf",
     sizingPolicy = htmlwidgets::sizingPolicy(
       defaultWidth  = "100%",
-      defaultHeight = 600,
+      defaultHeight = 400,
       viewer.fill   = TRUE,
       browser.fill  = TRUE,
       knitr.figure  = FALSE,
       knitr.defaultWidth  = "100%",
-      knitr.defaultHeight = 600
+      knitr.defaultHeight = 400
     )
   )
 
@@ -424,7 +424,7 @@ gexfjs <- function(
 #' @rdname gexfjs
 #' @param outputId Shiny output ID.
 #' @export
-gexfjsOutput <- function(outputId, width = "100%", height = "600px") {
+gexfjsOutput <- function(outputId, width = "100%", height = "400px") {
   htmlwidgets::shinyWidgetOutput(outputId, "gexfjs", width, height, package = "rgexf")
 }
 #' @rdname gexfjs

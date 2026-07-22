@@ -8,11 +8,11 @@
 \usage{
 gexfjs(
   gexf = system.file("gexf-graphs/lesmiserables.gexf", package = "rgexf"),
-  width = NULL,
-  height = NULL
+  width = "100\%",
+  height = "400px"
 )
 
-gexfjsOutput(outputId, width = "100\%", height = "600px")
+gexfjsOutput(outputId, width = "100\%", height = "400px")
 
 renderGexfjs(expr, env = parent.frame(), quoted = FALSE)
 }
@@ -20,8 +20,8 @@ renderGexfjs(expr, env = parent.frame(), quoted = FALSE)
 \item{gexf}{Either a \code{gexf} object, or a path to a \code{.gexf} file.  Defaults
 to the bundled Les Miserables example.}
 
-\item{width, height}{Widget dimensions in pixels.  Defaults to \code{NULL}, in
-which case the widget spans the full available width and is 600px tall.}
+\item{width, height}{Widget dimensions.  Default to \code{"100\%"} width and
+\code{"400px"} height, so the widget spans the full available width.}
 
 \item{outputId}{Shiny output ID.}
 

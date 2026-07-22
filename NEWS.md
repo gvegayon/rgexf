@@ -23,10 +23,10 @@ fixes those issues and returns the package to CRAN.
   matching `sigmajs()`.
 
 * `gexfjs()` has an explicit sizing policy: the widget now defaults to the
-  full available width and a height of 600px (50% taller than before) in
-  knitr documents, the browser, and Shiny alike.  Both `gexfjs()` and
-  `sigmajs()` honor user-supplied `width`/`height`, and their documented
-  defaults were clarified.
+  full available width (`"100%"`) and a height of `"400px"` in knitr
+  documents, the browser, and Shiny alike.  Both `gexfjs()` and `sigmajs()`
+  honor user-supplied `width`/`height`, and their documented defaults were
+  clarified.
 
 ## Bug fixes
 
