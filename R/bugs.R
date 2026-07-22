@@ -102,7 +102,7 @@ check_and_map_color <- function(x) {
   } else
     stop("Invalid color specification.", call. = FALSE)
   
-  structure(x, .Names=c("r", "g", "b", "a"))
+  structure(x, names = c("r", "g", "b", "a"))
   
 }
 
