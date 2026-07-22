@@ -9,7 +9,7 @@
 [![DOI](https://joss.theoj.org/papers/10.21105/joss.03456/status.svg)](https://doi.org/10.21105/joss.03456)
 [![Sponsor](https://img.shields.io/badge/-Sponsor-fafbfc?logo=GitHub%20Sponsors)](https://github.com/sponsors/gvegayon)
 
-# rgexf: Build, Import and Export GEXF Graph Files <img src="man/figures/logo.svg" align="right" height="200"/>
+# rgexf: Build, Import and Export GEXF Graph Files <img src="man/figures/logo.svg" align="right" height="200" alt="rgexf hex sticker logo"/>
 
 The first R package to work with GEXF graph files (used in Gephi and
 others). `rgexf` allows reading and writing graph files, including:
@@ -222,7 +222,7 @@ op <- par(mai = rep(0, 4)) # Making room
 plot(ig)
 ```
 
-![](man/figures/igraph-1.png)
+![Les Misérables network plotted with igraph](man/figures/igraph-1.png)
 
 ``` r
 par(op)
@@ -235,7 +235,7 @@ library–results in a Web visualization of the graph, like this:
 plot(g)
 ```
 
-![](inst/gexf-graphs/lesmiserables.png)
+![Les Misérables network rendered with gexf-js](man/figures/lesmiserables.png)
 
 A live version of the figure is available
 [here](https://gvegayon.github.io/rgexf/lesmiserables/).
@@ -542,75 +542,3 @@ Please note that the rgexf project is released with a [Contributor Code
 of
 Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html).
 By contributing to this project, you agree to abide by its terms
-
-# Session info
-
-``` r
-devtools::session_info()
-```
-
-    ─ Session info ───────────────────────────────────────────────────────────────
-     setting  value
-     version  R version 4.5.1 (2025-06-13)
-     os       macOS Sequoia 15.0.1
-     system   aarch64, darwin20
-     ui       X11
-     language (EN)
-     collate  en_US
-     ctype    en_US
-     tz       America/Denver
-     date     2026-07-08
-     pandoc   3.8.2.1 @ /usr/local/bin/ (via rmarkdown)
-     quarto   1.6.40 @ /usr/local/bin/quarto
-
-    ─ Packages ───────────────────────────────────────────────────────────────────
-     package     * version   date (UTC) lib source
-     cachem        1.1.0     2024-05-16 [1] RSPM (R 4.5.0)
-     cli           3.6.6     2026-04-09 [1] RSPM (R 4.5.0)
-     devtools      2.4.5     2022-10-11 [1] RSPM (R 4.5.0)
-     digest        0.6.39    2025-11-19 [1] RSPM (R 4.5.0)
-     ellipsis      0.3.2     2021-04-29 [1] RSPM (R 4.5.0)
-     evaluate      1.0.5     2025-08-27 [1] CRAN (R 4.5.0)
-     fastmap       1.2.0     2024-05-15 [1] RSPM (R 4.5.0)
-     fs            1.6.6     2025-04-12 [1] RSPM (R 4.5.0)
-     glue          1.8.1     2026-04-17 [1] RSPM (R 4.5.0)
-     htmltools     0.5.9     2025-12-04 [1] RSPM (R 4.5.0)
-     htmlwidgets   1.6.4     2023-12-06 [1] RSPM (R 4.5.0)
-     httpuv        1.6.16    2025-04-16 [1] RSPM (R 4.5.0)
-     igraph      * 2.3.3     2026-06-26 [1] RSPM (R 4.5.0)
-     jsonlite      2.0.0     2025-03-27 [1] RSPM (R 4.5.0)
-     knitr         1.51      2025-12-20 [1] CRAN (R 4.5.2)
-     later         1.4.7     2026-02-24 [1] RSPM (R 4.5.0)
-     lifecycle     1.0.5     2026-01-08 [1] RSPM (R 4.5.0)
-     magrittr      2.0.5     2026-04-04 [1] RSPM (R 4.5.0)
-     memoise       2.0.1     2021-11-26 [1] RSPM (R 4.5.0)
-     mime          0.13      2025-03-17 [1] RSPM (R 4.5.0)
-     miniUI        0.1.2     2025-04-17 [1] RSPM (R 4.5.0)
-     otel          0.2.0     2025-08-29 [1] CRAN (R 4.5.0)
-     pkgbuild      1.4.8     2025-05-26 [1] RSPM (R 4.5.0)
-     pkgconfig     2.0.3     2019-09-22 [1] RSPM (R 4.5.0)
-     pkgload       1.5.2     2026-04-22 [1] CRAN (R 4.5.2)
-     profvis       0.4.0     2024-09-20 [1] RSPM (R 4.5.0)
-     promises      1.5.0     2025-11-01 [1] CRAN (R 4.5.0)
-     purrr         1.2.1     2026-01-09 [1] RSPM (R 4.5.0)
-     R6            2.6.1     2025-02-15 [1] RSPM (R 4.5.0)
-     Rcpp          1.1.2     2026-07-05 [1] CRAN (R 4.5.2)
-     remotes       2.5.0     2024-03-17 [1] RSPM (R 4.5.0)
-     rgexf       * 0.16.4    2026-07-08 [1] local
-     rlang         1.2.0     2026-04-06 [1] RSPM (R 4.5.0)
-     rmarkdown     2.31      2026-03-26 [1] CRAN (R 4.5.2)
-     servr         0.33      2026-06-16 [1] RSPM (R 4.5.0)
-     sessioninfo   1.2.3     2025-02-05 [1] RSPM (R 4.5.0)
-     shiny         1.13.0    2026-02-20 [1] RSPM (R 4.5.0)
-     urlchecker    1.0.1     2021-11-30 [1] RSPM (R 4.5.0)
-     usethis       3.1.0     2024-11-26 [1] RSPM (R 4.5.0)
-     vctrs         0.7.3     2026-04-11 [1] RSPM (R 4.5.0)
-     xfun          0.59      2026-06-19 [1] RSPM (R 4.5.0)
-     XML           3.99-0.23 2026-03-20 [1] RSPM (R 4.5.1)
-     xtable        1.8-8     2026-02-22 [1] RSPM (R 4.5.0)
-     yaml          2.3.12    2025-12-10 [1] RSPM (R 4.5.0)
-
-     [1] /Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library
-     * ── Packages attached to the search path.
-
-    ──────────────────────────────────────────────────────────────────────────────
