@@ -12,8 +12,6 @@ R/zzz\.R
 demo/gexfplot\.R
 .*\.sh
 ^mygraph\.gexf
-^\.travis\.yml$
-^appveyor\.yml$
 ^codecov\.yml$
 ^README\.qmd$
 ^dependencies$
