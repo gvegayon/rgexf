@@ -150,7 +150,7 @@ plot(lesmi, borderColor = "#222222", borderSize = 0.1)
 The older `gexf-js`-based viewer is preserved as `plot_gexfjs()` for users
 who need the file-server workflow:
 
-```{r gexfjs-legacy, eval=FALSE}
+```{r gexfjs-legacy, eval=TRUE}
 plot_gexfjs(lesmi)
 ```
 

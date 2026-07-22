@@ -1,4 +1,4 @@
-# Changes in rgexf version 0.16.4 (2026-07-22)
+# Changes in rgexf version 0.17.0 (2026-07-22)
 
 **rgexf is back on CRAN!** The package was archived on CRAN on 2026-05-18
 because outstanding check issues were not corrected in time. This release

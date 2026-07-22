@@ -2,7 +2,7 @@
 
 This is a resubmission of rgexf. The package was archived on CRAN on
 2026-05-18 because outstanding check issues were not corrected in time.
-This version (0.16.4) fixes those issues.
+This version (0.17.0) fixes those issues.
 
 The package contains no compiled (C/C++) code; all functionality is
 implemented in base R.
