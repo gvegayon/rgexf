@@ -139,7 +139,7 @@ node radius.
 
 For a dark-themed background, try a darker value:
 
-```{r lesmi-plot-dark, eval=FALSE}
+```{r lesmi-plot-dark, eval=TRUE}
 plot(lesmi, borderColor = "#222222", borderSize = 0.1)
 ```
 
@@ -156,7 +156,11 @@ plot_gexfjs(lesmi)
 
 This starts a local HTTP server and opens the graph in the default browser,
 which is useful for standalone HTML reports or for users who prefer the
-original gexf-js interface.
+original gexf-js interface. You can also embed the graph in a Shiny app or R Markdown using the `gexfjs()` function:
+
+```{r gexfjs-embed, eval=TRUE}
+gexfjs(lesmi)
+```
 
 ---
 
