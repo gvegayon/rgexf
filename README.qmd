@@ -101,8 +101,6 @@ plot(g)
 ```
 ![Les Misérables network rendered with gexf-js](man/figures/lesmiserables.png)
 
-A live version of the figure is available [here](https://gvegayon.github.io/rgexf/lesmiserables/).
-
 ## Example 2: Static net ##
 ```{r}
 # Creating a group of individuals and their relations
@@ -176,5 +174,4 @@ please go by creating a new issue
 about it.
 
 Please note that the rgexf project is released with a [Contributor Code of Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms
-
 

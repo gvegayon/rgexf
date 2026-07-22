@@ -74,7 +74,7 @@ plot_gexfjs(g)
 knitr::include_graphics("lesmiserables.png")
 ```
 
-An live version of the figure is available [here](https://gvegayon.github.io/rgexf/lesmiserables/). Starting version 0.17.0, the default plot method uses `sigmajs` instead of `gexf-js`. Nonetheless, `gexf-js` is still available and can be embedded in quarto/rmarkdown documents: the last code chunk in this vignette shows how to do it.
+Starting with version 0.17.0, the default plot method uses `sigmajs` instead of `gexf-js`. Nonetheless, `gexf-js` is still available and can be embedded in Quarto/R Markdown documents: the last code chunk in this vignette shows how to do it.
 
 # Creating GEXF files
 

@@ -4,6 +4,15 @@ This is a resubmission of rgexf. The package was archived on CRAN on
 2026-05-18 because outstanding check issues were not corrected in time.
 This version (0.17.0) fixes those issues.
 
+The current resubmission feedback has also been addressed:
+
+* Deprecated `.Names` arguments in package code and `inst/CITATION` were
+  replaced with `names`.
+* The unavailable Les Misérables demo URL was removed from the README and
+  vignette.
+* `GEXF` is the acronym for Graph Exchange XML Format and `rgexf` is the
+  package name; both are included in `inst/WORDLIST`.
+
 The package contains no compiled (C/C++) code; all functionality is
 implemented in base R.
 

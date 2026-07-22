@@ -237,9 +237,6 @@ plot(g)
 
 ![Les Misérables network rendered with gexf-js](man/figures/lesmiserables.png)
 
-A live version of the figure is available
-[here](https://gvegayon.github.io/rgexf/lesmiserables/).
-
 ## Example 2: Static net
 
 ``` r
