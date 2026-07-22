@@ -139,7 +139,7 @@ node radius.
 
 For a dark-themed background, try a darker value:
 
-```{r lesmi-plot-dark, eval=FALSE}
+```{r lesmi-plot-dark, eval=TRUE}
 plot(lesmi, borderColor = "#222222", borderSize = 0.1)
 ```
 
@@ -150,13 +150,22 @@ plot(lesmi, borderColor = "#222222", borderSize = 0.1)
 The older `gexf-js`-based viewer is preserved as `plot_gexfjs()` for users
 who need the file-server workflow:
 
-```{r gexfjs-legacy, eval=FALSE}
-plot_gexfjs(lesmi)
+```{r gexfjs-legacy, eval=TRUE}
+plot_gexfjs(lesmi, copy.only = TRUE)
 ```
 
-This starts a local HTTP server and opens the graph in the default browser,
-which is useful for standalone HTML reports or for users who prefer the
-original gexf-js interface.
+`plot_gexfjs()` copies the gexf-js viewer files together with the graph to a
+directory (`tempdir()` by default). When called interactively with the
+default `copy.only = FALSE`, it also starts a local HTTP server via
+`servr::httd()` and opens the graph in the default browser -- useful for
+standalone HTML reports or for users who prefer the original gexf-js
+interface. In non-interactive sessions (such as when this vignette is
+built) only the files are copied. You can also embed the graph in a Shiny
+app or R Markdown using the `gexfjs()` function:
+
+```{r gexfjs-embed, eval=TRUE}
+gexfjs(lesmi)
+```
 
 ---
 

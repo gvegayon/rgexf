@@ -143,7 +143,7 @@ NULL
 #' \url{http://gexf.net/1.2draft/gexf-12draft-primer.pdf}
 #' @references \itemize{ \item rgexf project site:
 #' \url{https://github.com/gvegayon/rgexf} \item Gephi project site:
-#' \url{https://gephi.org/} \item GEXF project site: \url{http://gexf.net/format//}
+#' \url{https://gephi.org/} \item GEXF project site: \url{https://gexf.net/}
 #' \item gexf-js project website: \url{https://github.com/raphv/gexf-js} 
 #' \item Sigmasj project site: \url{https://www.sigmajs.org/}
 #' }

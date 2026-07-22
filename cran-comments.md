@@ -1,18 +1,25 @@
+## Resubmission
+
+This is a resubmission of rgexf. The package was archived on CRAN on
+2026-05-18 because outstanding check issues were not corrected in time.
+This version (0.17.0) fixes those issues.
+
+The package contains no compiled (C/C++) code; all functionality is
+implemented in base R.
+
 ## Test environments
 
-* Local: Ubuntu 18.04.4 LTS, R 3.6.2
-* Travis: Ubuntu 16.04.6 LTS, R 3.6.2
-* Travis: Ubuntu 16.04.6 LTS, R Under development (unstable) (2020-02-10 r77788)
-* Travis: macOS Mojave 10.14.4, R 3.6.2
-* AppVeyor: Windows Server 2012 R2 x64, R 3.5.3
-* AppVeyor: Windows Server 2012 R2 x64, R 3.6.2
-* AppVeyor: Windows Server 2012 R2 x64, R Under development (unstable) (2020-02-10 r77789)
+* GitHub Actions (ubuntu-latest): R-oldrel, R-release, R-devel
+* GitHub Actions (macOS-latest): R-release, R-devel
+* GitHub Actions (windows-latest): R-release, R-devel
 
 ## R CMD check results
 
-* This package was taken out of CRAN due to a memleak issue. This issue has been
-  solved, and furthermore, the package contains no C/C++ or any other type of
-  code that needs to be compiled. The functions were re-written using base R.
+0 errors | 0 warnings | 1 note
 
-* No reverse dependencies to be checked.
+The only NOTE reports that this is a new submission of a package that was
+archived on CRAN on 2026-05-18. This is expected on resubmission.
 
+## Reverse dependencies
+
+There are no reverse dependencies to check.

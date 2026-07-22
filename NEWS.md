@@ -1,4 +1,8 @@
-# Changes in rgexf version 0.16.4
+# Changes in rgexf version 0.17.0 (2026-07-22)
+
+**rgexf is back on CRAN!** The package was archived on CRAN on 2026-05-18
+because outstanding check issues were not corrected in time. This release
+fixes those issues and returns the package to CRAN.
 
 ## New features and changes
 
@@ -19,10 +23,10 @@
   matching `sigmajs()`.
 
 * `gexfjs()` has an explicit sizing policy: the widget now defaults to the
-  full available width and a height of 600px (50% taller than before) in
-  knitr documents, the browser, and Shiny alike.  Both `gexfjs()` and
-  `sigmajs()` honor user-supplied `width`/`height`, and their documented
-  defaults were clarified.
+  full available width (`"100%"`) and a height of `"400px"` in knitr
+  documents, the browser, and Shiny alike.  Both `gexfjs()` and `sigmajs()`
+  honor user-supplied `width`/`height`, and their documented defaults were
+  clarified.
 
 ## Bug fixes
 

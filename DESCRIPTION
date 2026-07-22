@@ -2,7 +2,7 @@ Package: rgexf
 Type: Package
 Encoding: UTF-8
 Title: Build, Import, and Export GEXF Graph Files
-Version: 0.16.4
+Version: 0.17.0
 Authors@R: c(
   person("George", "Vega Yon", email="g.vegayon@gmail.com", role=c("aut", "cre"),
   comment = c(ORCID = "0000-0002-3171-0844")),

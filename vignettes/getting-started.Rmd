@@ -4,7 +4,7 @@ author: "George G. Vega Yon"
 date: "August 11, 2021"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{rgexf}
+  %\VignetteIndexEntry{Getting started with rgexf}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -15,7 +15,7 @@ knitr::opts_chunk$set(fig.width = 7)
 
 # Introduction
 
-The `rgexf` package provides a way to interact with [GEXF files](http://gexf.net/format/).
+The `rgexf` package provides a way to interact with [GEXF files](https://gexf.net/).
 The GEXF standard was developed by the [Gephi](https://gephi.org/)--"Like Photoshop for graphs"--core team, 
 and can be used to save static and dynamic networks.
 
@@ -70,8 +70,8 @@ Using the `plot.gexf` method--which uses the `gexf-js` JavaScript library--resul
 plot_gexfjs(g)
 ```
 
-```{r gexf-js, echo = FALSE}
-knitr::include_graphics(path = system.file("gexf-graphs/lesmiserables.png", package="rgexf"))
+```{r gexf-js, echo = FALSE, fig.alt = "Les Misérables network rendered with gexf-js"}
+knitr::include_graphics("lesmiserables.png")
 ```
 
 An live version of the figure is available [here](https://gvegayon.github.io/rgexf/lesmiserables/). Starting version 0.17.0, the default plot method uses `sigmajs` instead of `gexf-js`. Nonetheless, `gexf-js` is still available and can be embedded in quarto/rmarkdown documents: the last code chunk in this vignette shows how to do it.

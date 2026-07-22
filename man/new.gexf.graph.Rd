@@ -31,7 +31,7 @@ if (interactive()) {
 
 }
 \references{
-The GEXF project website: http://gexf.net/format/
+The GEXF project website: https://gexf.net/
 }
 \author{
 George Vega Yon

@@ -26,7 +26,7 @@ By the time attributes and viz-attributes aren't supported.
 
 }
 \references{
-The GEXF project website: http://gexf.net/format/
+The GEXF project website: https://gexf.net/
 }
 \author{
 George Vega Yon

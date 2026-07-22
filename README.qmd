@@ -17,7 +17,7 @@ knitr::opts_chunk$set(fig.path = "man/figures/", warning = FALSE)
 [![Sponsor](https://img.shields.io/badge/-Sponsor-fafbfc?logo=GitHub%20Sponsors)](https://github.com/sponsors/gvegayon)
 ```
 
-# rgexf: Build, Import and Export GEXF Graph Files <img src="man/figures/logo.svg" align="right" height="200"/>
+# rgexf: Build, Import and Export GEXF Graph Files <img src="man/figures/logo.svg" align="right" height="200" alt="rgexf hex sticker logo"/>
 
 The first R package to work with GEXF graph files (used in Gephi and
 others). `rgexf` allows reading and writing graph files, including:
@@ -84,7 +84,7 @@ head(g) # Taking a look at the first handful
 Moreover, we can use the `gexf.to.igraph()` function to convert the 
 `gexf` object into an `igraph` object:
 
-```{r igraph}
+```{r igraph, fig.alt = "Les Misérables network plotted with igraph"}
 library(igraph)
 ig <- gexf.to.igraph(g)
 
@@ -99,7 +99,7 @@ Using the `plot.gexf` method--which uses the `gexf-js` JavaScript library--resul
 ```r
 plot(g)
 ```
-![](inst/gexf-graphs/lesmiserables.png)
+![Les Misérables network rendered with gexf-js](man/figures/lesmiserables.png)
 
 A live version of the figure is available [here](https://gvegayon.github.io/rgexf/lesmiserables/).
 
@@ -178,8 +178,3 @@ about it.
 Please note that the rgexf project is released with a [Contributor Code of Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms
 
 
-# Session info
-
-```{r}
-devtools::session_info()
-```

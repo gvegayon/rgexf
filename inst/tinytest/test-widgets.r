@@ -45,10 +45,10 @@ wgs <- gexfjs(les_mis, width = 300, height = 200)
 expect_equal(wgs$width, 300)
 expect_equal(wgs$height, 200)
 
-# gexfjs() default sizing policy: full width, 600px tall ---------------------
+# gexfjs() default sizing policy: full width, 400px tall ---------------------
 wgd <- gexfjs(les_mis)
-expect_null(wgd$width)
-expect_null(wgd$height)
-expect_equal(wgd$sizingPolicy$defaultHeight, 600)
-expect_equal(wgd$sizingPolicy$knitr$defaultHeight, 600)
+expect_equal(wgd$width, "100%")
+expect_equal(wgd$height, "400px")
+expect_equal(wgd$sizingPolicy$defaultHeight, 400)
+expect_equal(wgd$sizingPolicy$knitr$defaultHeight, 400)
 expect_false(wgd$sizingPolicy$knitr$figure)
