@@ -18,7 +18,7 @@ bibentry(
 )
 
 bibentry(bibtype = "Manual",
-         title = "{{netdiffuseR: Build, Import and Export GEXF Graph Files}}",
+         title = "{{rgexf: Build, Import, and Export GEXF Graph Files}}",
          author = c(
           person("George", "Vega Yon", email="g.vegayon@gmail.com", role=c("aut", "cre"),
             comment = structure("0000-0002-3171-0844", names = "ORCID")),
@@ -28,5 +28,5 @@ bibentry(bibtype = "Manual",
          year = year,
          note = note,
          url = "https://github.com/gvegayon/rgexf",
-         doi = "10.5281/zenodo.5182708", 
+         doi = "10.32614/CRAN.package.rgexf",
          header = "And the actual R package:")
