@@ -11,6 +11,16 @@
 
 # rgexf: Build, Import and Export GEXF Graph Files <img src="man/figures/logo.svg" align="right" height="200" alt="rgexf hex sticker logo"/>
 
+
+<!-- how-to-cite -->
+> [!NOTE]
+> **How to cite rgexf.** If you use **rgexf** in published work, please cite it:
+>
+> Vega Yon GG (2021). Building, Importing, and Exporting GEXF Graph Files with rgexf. *Journal of Open Source Software*, 6(64), 3456. doi:[10.21105/joss.03456](https://doi.org/10.21105/joss.03456)
+>
+> Run `citation("rgexf")` in R for the BibTeX entry.
+<!-- how-to-cite -->
+
 The first R package to work with GEXF graph files (used in Gephi and
 others). `rgexf` allows reading and writing graph files, including:
 

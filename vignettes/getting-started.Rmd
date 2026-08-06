@@ -9,6 +9,11 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
+<!-- how-to-cite -->
+> **How to cite.** If you use **rgexf** in published work, please cite it — run
+> `citation("rgexf")` in R for the full entry.
+<!-- how-to-cite -->
+
 ```{r setup, echo=FALSE}
 knitr::opts_chunk$set(fig.width = 7)
 ```

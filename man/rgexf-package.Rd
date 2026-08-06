@@ -83,3 +83,7 @@ Other contributors:
 
 }
 \keyword{package}
+\section{How to cite}{
+  If you use \pkg{rgexf} in published work, please cite it. Run
+  \code{citation("rgexf")} in R for the full entry.
+}
