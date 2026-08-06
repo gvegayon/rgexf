@@ -164,6 +164,9 @@ NULL
 #'     demo(gexfrandom) # A nice routine creating a good looking graph
 #' }
 #' 
+#' @section How to cite:
+#' If you use \pkg{rgexf} in published work, please cite it. Run
+#' \code{citation("rgexf")} in R for the full entry.
 "_PACKAGE"
 
 
