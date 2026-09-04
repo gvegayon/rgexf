@@ -1,0 +1,13 @@
+version: 1
+groups:
+  rgexf:
+    paths:
+      - R/
+      - inst/
+      - man/
+      - DESCRIPTION
+      - NAMESPACE
+      - NEWS.md
+    rules:
+      - preset: r-package
+      - preset: r-news-changes
