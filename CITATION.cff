@@ -1,0 +1,31 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite the preferred publication below."
+type: software
+title: "rgexf: Build, Import, and Export GEXF Graph Files"
+version: "0.17.0"
+doi: "10.32614/CRAN.package.rgexf"
+authors:
+  - family-names: "Vega Yon"
+    given-names: "George"
+    orcid: "https://orcid.org/0000-0002-3171-0844"
+abstract: "Create, read, and write GEXF graph files for network analysis and visualization."
+license: "MIT"
+repository-code: "https://github.com/gvegayon/rgexf"
+url: "https://gvegayon.github.io/rgexf/"
+keywords:
+  - "GEXF"
+  - "networks"
+  - "R"
+preferred-citation:
+  type: article
+  title: "Building, Importing, and Exporting GEXF Graph Files with rgexf"
+  authors:
+    - family-names: "Vega Yon"
+      given-names: "George"
+      orcid: "https://orcid.org/0000-0002-3171-0844"
+  journal: "Journal of Open Source Software"
+  year: 2021
+  volume: "6"
+  issue: "64"
+  start: "3456"
+  doi: "10.21105/joss.03456"

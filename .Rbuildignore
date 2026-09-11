@@ -31,3 +31,4 @@ demo/gexfplot\.R
 \.vscode
 README\.html
 ^\.claude$
+^CITATION\.cff$
