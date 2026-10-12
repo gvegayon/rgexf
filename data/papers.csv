@@ -1,0 +1,9 @@
+id,kind,title,owner,url,source,usage_class,cites_package,confidence,first_seen
+10679d290b2f,paper,A stage-resolved map of dynamic septin interactions required for infection by the rice blast fungus,"Iris Eisermann, Neha Sahu, Marisela Garduño‐Rosales",https://doi.org/10.64898/2026.04.02.716073,openalex,uses,yes,0.9,2026-10-12
+5b8b8adedbcf,paper,"rgexf: Build, Import, and Export GEXF Graph Files",George G. Vega Yon,https://doi.org/10.32614/cran.package.rgexf,openalex,uses,yes,0.9,2026-10-12
+a09d4d5374d0,paper,Root-associated bacterial and fungal communities of the endangered páramo bromeliad Puya goudotiana,"Nataly Rodríguez-Lugo, Luz Helena Patiño, Tatiana M. Cáceres",https://doi.org/10.1371/journal.pone.0357104,openalex,uses,yes,0.9,2026-10-12
+ae6af2b64d22,paper,Soil microbial community assembly across late Holocene climate shifts in desert dune ecosystems,"Shuai Wu, Yaofei Xu, Aidong Ruan",https://doi.org/10.1016/j.jaridenv.2026.105664,openalex,uses,yes,0.9,2026-10-12
+aea15892fa82,paper,Rhizosphere Microbiome Co-Occurrence Network Analysis across a Tomato Domestication Gradient,"Mary M. Dixon, Antisar Afkairin, Daniel K. Manter",https://doi.org/10.3390/microorganisms12091756,openalex,uses,yes,0.9,2026-10-12
+bb4085abcac5,paper,Insular threat associations within taxa worldwide,"Camille Leclerc, Franck Courchamp, Céline Bellard",https://doi.org/10.1038/s41598-018-24733-0,ecosystems,mentions,no,0.9,2026-10-12
+e72c8153170d,paper,CTIoT: A Cyber Threat Intelligence Tool for IoT,"Saad El Jaouhari, S. Muqtyar Ahmed",https://doi.org/10.1109/iwcmc61514.2024.10592406,openalex,uses,yes,0.9,2026-10-12
+e7c974e26a5e,paper,Crawling Data with Social Network Analysis to Detect Accounts Spreading Phishing on Social Media Indonesia,"Andri Tono Ermawan, Teddy Mantoro, Media Anugerah Ayu",https://doi.org/10.1109/icteca60133.2023.10490879,openalex,uses,yes,0.9,2026-10-12
