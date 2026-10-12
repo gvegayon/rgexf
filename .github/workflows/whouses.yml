@@ -1,0 +1,28 @@
+name: whouses
+
+on:
+  schedule:
+    - cron: "0 6 * * 1"          # every Monday
+  workflow_dispatch: {}
+  # TEMPORARY: lets the setup PR exercise the workflow before it exists on master.
+  # Remove this block before merging.
+  pull_request:
+    paths: [".github/workflows/whouses.yml", ".whouses.yml"]
+
+permissions:
+  contents: write                # data branch
+  pull-requests: write           # review PR
+
+concurrency: whouses             # never two at once (the review branch is shared)
+
+jobs:
+  whouses:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: gvegayon/whouses@v0
+        with:
+          # llm-provider: anthropic
+          # llm-api-key: ${{ secrets.ANTHROPIC_API_KEY }}
+          # search-token: ${{ secrets.WHOUSES_SEARCH_PAT }}   # only if code search rejects the default token
+          dry-run: "false"
