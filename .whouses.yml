@@ -4,6 +4,8 @@ name: rgexf
 repo: gvegayon/rgexf
 doi: [10.21105/joss.03456]        # the JOSS paper; lets whouses tell which papers cite it
 sources: [github, ecosystems, openalex, europepmc]
+data_branch: master               # keep the data in the default branch ...
+data_dir: whouses                 # ... under ./whouses (ignored by R CMD build via .Rbuildignore)
 overrides:
   literature:
     context_terms: [gexf, gephi, R, network]

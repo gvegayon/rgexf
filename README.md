@@ -7,6 +7,7 @@
 [![rgexf website](https://github.com/gvegayon/rgexf/actions/workflows/website.yml/badge.svg)](https://github.com/gvegayon/rgexf/actions/workflows/website.yml)
 [![Coverage Status](https://img.shields.io/codecov/c/github/gvegayon/rgexf/master.svg)](https://app.codecov.io/github/gvegayon/rgexf?branch=master)
 [![DOI](https://joss.theoj.org/papers/10.21105/joss.03456/status.svg)](https://doi.org/10.21105/joss.03456)
+[![used by](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Fgvegayon%2Frgexf%2Fmaster%2Fwhouses%2Fbadge.json)](https://github.com/gvegayon/rgexf/blob/master/whouses/REPORT.md)
 [![Sponsor](https://img.shields.io/badge/-Sponsor-fafbfc?logo=GitHub%20Sponsors)](https://github.com/sponsors/gvegayon)
 
 # rgexf: Build, Import and Export GEXF Graph Files <img src="man/figures/logo.svg" align="right" height="200" alt="rgexf hex sticker logo"/>
