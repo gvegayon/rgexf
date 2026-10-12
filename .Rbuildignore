@@ -32,5 +32,4 @@ demo/gexfplot\.R
 README\.html
 ^\.claude$
 ^CITATION\.cff$
-^\.whouses\.yml$
-^whouses$
+^\.usescout\.yml$

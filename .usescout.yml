@@ -1,0 +1,10 @@
+# usescout: tracks where rgexf is used (code hosts, registries, literature). https://github.com/gvegayon/usescout
+profile: r
+name: rgexf
+repo: gvegayon/rgexf
+doi: [10.21105/joss.03456]        # the JOSS paper; lets usescout tell which papers cite it
+sources: [github, ecosystems, openalex, europepmc]
+data_branch: usescout             # data, report and badge live on this branch, not on master
+overrides:
+  literature:
+    context_terms: [gexf, gephi, R, network]

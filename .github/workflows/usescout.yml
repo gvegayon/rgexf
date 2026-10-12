@@ -1,0 +1,27 @@
+name: usescout
+
+on:
+  schedule:
+    - cron: "0 6 * * 1"          # every Monday
+  workflow_dispatch: {}
+  # Validates the config on PRs that touch it. These runs are dry-runs (see below).
+  pull_request:
+    paths: [".github/workflows/usescout.yml", ".usescout.yml"]
+
+permissions:
+  contents: write                # the usescout branch
+  pull-requests: write           # review PR (usescout-review into usescout)
+
+concurrency: usescout            # never two at once (the review branch is shared)
+
+jobs:
+  usescout:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: gvegayon/usescout@v0
+        with:
+          # llm-provider: anthropic
+          # llm-api-key: ${{ secrets.ANTHROPIC_API_KEY }}
+          # search-token: ${{ secrets.USESCOUT_SEARCH_PAT }}   # only if code search rejects the default token
+          dry-run: ${{ github.event_name == 'pull_request' }}   # PRs only report; schedule/dispatch write
