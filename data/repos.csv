@@ -1,0 +1,2 @@
+id,kind,title,owner,url,source,usage_class,cites_package,confidence,first_seen,where,evidence_url,snippet
+e414c07bc745,package,vkR,Dementiy,https://cran.r-project.org/package=vkR,ecosystems,depends,unknown,0.95,2026-10-12,"declares rgexf as a dependency (cran, via ecosyste.ms)",https://cran.r-project.org/package=vkR,
