@@ -4,13 +4,13 @@ on:
   schedule:
     - cron: "0 6 * * 1"          # every Monday
   workflow_dispatch: {}
-  # TEMPORARY: lets the setup PR exercise the workflow before it exists on master.
-  # Remove this block before merging.
+  # Validates the config on PRs that touch it. These runs are dry-runs (see below):
+  # the data lives on master, so a PR-triggered run must never write anything.
   pull_request:
     paths: [".github/workflows/whouses.yml", ".whouses.yml"]
 
 permissions:
-  contents: write                # data branch
+  contents: write                # data in ./whouses on master
   pull-requests: write           # review PR
 
 concurrency: whouses             # never two at once (the review branch is shared)
@@ -25,4 +25,4 @@ jobs:
           # llm-provider: anthropic
           # llm-api-key: ${{ secrets.ANTHROPIC_API_KEY }}
           # search-token: ${{ secrets.WHOUSES_SEARCH_PAT }}   # only if code search rejects the default token
-          dry-run: "false"
+          dry-run: ${{ github.event_name == 'pull_request' }}   # PRs only report; schedule/dispatch write

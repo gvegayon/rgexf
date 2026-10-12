@@ -33,3 +33,4 @@ README\.html
 ^\.claude$
 ^CITATION\.cff$
 ^\.whouses\.yml$
+^whouses$
