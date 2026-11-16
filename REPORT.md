@@ -16,7 +16,7 @@ Uncertain items are awaiting review in PR #67.
 - [Acquisition of innate odor preference depends on spontaneous and experiential activities during critical period.](https://doi.org/10.7554/elife.60546) — Qiu Q, Wu Y, Ma L, Xu W, Hills M, Ramalingam V, Yu CR.  
   _full text, section “Materials and methods” (4 mentions)_  
   > pheatmap https://rdrr.io/cran/pheatmap/ RRID: SCR_016418 Software and algorithms rgexf https://gvegayon.github.io/rgexf
-- [¿Comunicación ofensiva y de odio o desinformación programada?](https://doi.org/10.7238/idp.v0i37.397192) — Jesús C. Aguerri, Fernando Miró Llinares  
+- [¿Comunicación ofensiva y de odio o desinformación programada? Un análisis de las características y discurso del evento conspiranoico #ExposeBillGates](https://doi.org/10.7238/idp.v0i37.397192) — Jesús C. Aguerri, Fernando Miró Llinares  
   _reported by openalex; no open-access full text found to excerpt_
 - [Desmosomal connectomics of all somatic muscles in an annelid larva.](https://doi.org/10.7554/elife.71231) — Jasek S, Verasztó C, Brodrick E, Shahidi R, Kazimiers T, Kerbl A, Jékely G.  
   _full text, section “Network analyses” (2 mentions)_  
@@ -31,7 +31,7 @@ Uncertain items are awaiting review in PR #67.
 - [Differential aortic aneurysm formation provoked by chemogenetic oxidative stress.](https://doi.org/10.1172/jci188743) — Das AA, Waldeck-Weiermair M, Yadav S, Spyropoulos F, Pandey A, Dutta T, Covington TA, Michel T.  
   _full text, section “Proteomics data analysis.” (1 mention)_  
   > Networks were created with the R package igraph, and degree centrality analysis was carried out with the Gephi-supported R package rgexf. Networks were visualized with Cytoscape and R. The R package go.db was used for GO:BP enrichment anal…
-- [Plant-microbiome interactions suppress Fusarium wilt by enriching beneficial Aspergillus in the tobacco rhizosphere.](https://doi.org/10.1186/s40793-025-00836-w) — Han S, Yang Y, Xiong S, Zheng H, Yan M, Yang Y, Guo S, Liu H, Li J, Yin J, Li R.  
+- [Plant-microbiome interactions suppress Fusarium wilt by enriching beneficial Aspergillus in the tobacco rhizosphere](https://doi.org/10.1186/s40793-025-00836-w) — Shuang Han, Yang Yang, Senqi Xiong  
   _full text, section “Statistical analyses” (1 mention)_  
   > …raph’ package. A Fusarium -centred subnetwork was extracted and visualized, after which the results were exported in GEXF format using the ‘rgexf’ package for further network visualization and analysis by using Gephi software. The followi…
 - [Phosphorus application, nutrient absorption, and endophytic root bacterial communities in maize grown in phosphorus-deficient rocky arid soils, China.](https://doi.org/10.1038/s41598-026-47922-8) — Jia Z, Zhu LF, Wang L, Zhang J, Liu S, Tian F, Yi Y, Wang J, Tang J, Gong J.  
