@@ -1,9 +1,17 @@
 # Who uses rgexf
 
-- Repositories / packages: **112**
-- Papers: **19** (11 appear not to cite the package)
+- Repositories / packages: **116**
+- Papers: **20** (10 appear not to cite the package)
 
 Uncertain items are awaiting review in PR #67.
+
+## New this run
+
+- [ANALISIS HUBUNGAN PROGRAM STUDI TERHADAP TINGKAT KEPUASAN LAYANAN ADMINISTRASI MENGGUNAKAN UJI CHI-SQUARE BERBASIS PYTHON](https://doi.org/10.56459/86q7mv85) (paper, uses)
+- [JusteRaimbault/TransportationEquilibrium](https://github.com/JusteRaimbault/TransportationEquilibrium) (repo, uses)
+- [hrbrmstr/weekly-dmarc-grabber](https://github.com/hrbrmstr/weekly-dmarc-grabber) (repo, uses)
+- [JusteRaimbault/RealEstate](https://github.com/JusteRaimbault/RealEstate) (repo, uses)
+- [Geographie-cites/cybergeo20](https://github.com/Geographie-cites/cybergeo20) (repo, uses)
 
 ## Papers that use it without citing it
 
@@ -22,8 +30,6 @@ Uncertain items are awaiting review in PR #67.
   _full text, section “Network analyses” (2 mentions)_  
   > For force-field-based clustering, we exported the graph in gexf format with rgexf::igraph.to.gexf and imported it into Gephi 0.9. Force-field clustering was carried out with the Force Atlas tool in Gephi (0.9.2) The inertia was set to 0.1,…
 - [Social network analysis reveals the failure of between-farm movement restrictions to reduce Salmonella transmission](https://doi.org/10.3168/jds.2023-24554) — Beate Conrady, Elma Dervić, Peter Klimek  
-  _reported by openalex; no open-access full text found to excerpt_
-- [Microbiome-mediated phosphorus acquisition in wild and domesticated tomatoes](https://doi.org/10.25675/3.025678) — Dixon, Mary, Jorge Vivanco, Daniel K. Manter  
   _reported by openalex; no open-access full text found to excerpt_
 - [Effect of intra- and inter-specific plant interactions on the rhizosphere microbiome of a single target plant at different densities](https://doi.org/10.1371/journal.pone.0316676) — Derek R. Newberger, Heather L. Deel, Daniel K. Manter  
   _full text, section “Network analysis” (2 mentions)_  
